@@ -19,8 +19,9 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
+import haozuo.com.healthdoctor.bean.RequestErrorEnum;
 import haozuo.com.healthdoctor.framework.SysConfig;
-import haozuo.com.healthdoctor.listener.OnAsyncCallbackListener;
+import haozuo.com.healthdoctor.listener.OnHttpCallbackListener;
 
 import static com.android.volley.Request.*;
 
@@ -39,7 +40,7 @@ public class HttpHelper {
         }
     }
 
-    public static void HttpGet(final String url,String tag,final OnAsyncCallbackListener<JSONObject> listener) {
+    public static void HttpGet(final String url,String tag,final OnHttpCallbackListener<JSONObject> listener) {
         if(mRequestQueue==null){
             throw new ExceptionInInitializerError("需要初始化Volly");
         }
@@ -52,11 +53,7 @@ public class HttpHelper {
             }, new com.android.volley.Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError volleyError) {
-                    int statusCode = -1;
-                    if (volleyError.networkResponse != null) {
-                        statusCode = volleyError.networkResponse.statusCode;
-                    }
-                    listener.onError(statusCode, volleyError.getMessage());
+                    listener.onError(RequestErrorEnum.HttpResponseError, volleyError.getMessage());
                 }
             }) {
                 @Override
@@ -85,11 +82,11 @@ public class HttpHelper {
             request.setTag(tag);
             mRequestQueue.add(request);
         } catch (Exception e) {
-            listener.onError(-2, e.getMessage());
+            listener.onError(RequestErrorEnum.HttpException, e.getMessage());
         }
     }
 
-    public static void HttpPost(final String url,final Map<String,Object>params,String tag,final OnAsyncCallbackListener<JSONObject> listener) {
+    public static void HttpPost(final String url,final Map<String,Object>params,String tag,final OnHttpCallbackListener<JSONObject> listener) {
         if(mRequestQueue==null){
             throw new ExceptionInInitializerError("需要初始化Volly");
         }
@@ -105,11 +102,7 @@ public class HttpHelper {
             }, new com.android.volley.Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError volleyError) {
-                    int statusCode = -1;
-                    if (volleyError.networkResponse != null) {
-                        statusCode = volleyError.networkResponse.statusCode;
-                    }
-                    listener.onError(statusCode, volleyError.getMessage());
+                    listener.onError(RequestErrorEnum.HttpResponseError, volleyError.getMessage());
                 }
             }) {
                 @Override
@@ -138,7 +131,7 @@ public class HttpHelper {
             request.setTag(tag);
             mRequestQueue.add(request);
         } catch (Exception e) {
-            listener.onError(-2, e.getMessage());
+            listener.onError(RequestErrorEnum.HttpException, e.getMessage());
         }
     }
 

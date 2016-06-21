@@ -4,31 +4,39 @@ package haozuo.com.healthdoctor.bean;
  * Created by xiongwei1 on 2016/6/2.
  */
 public class GlobalShell<T> {
-    public int Code;
+    public boolean RequestSuccess;
 
-    public String OriginMessage;
+    public boolean LogicSuccess;
+
+    public String Message;
 
     public T Data;
 
-    public String getMessage(){
-        if(OriginMessage!=null && OriginMessage!=""){
-            return OriginMessage;
-        }
-        String msg="系统网络不稳定,请稍后重试!";
-        if(Code==-2){
-            msg="系统异常";
-        }
-        return msg;
-    }
+    public RequestErrorEnum RequestErrorType;
 
-    public GlobalShell(int code, String msg){
-        Code=code;
-        OriginMessage =msg;
-    }
+    public String OriginErrorMessage;
 
-    public GlobalShell(int code, String msg , T data){
-        Code=code;
-        OriginMessage =msg;
+    //http请求成功,逻辑处理成功
+    public GlobalShell( T data){
+        RequestSuccess=true;
+        LogicSuccess=true;
         Data=data;
     }
+
+    //http请求成功,逻辑处理失败
+    public GlobalShell(String logicErrorMessage) {
+        Message = logicErrorMessage;
+        RequestSuccess = true;
+    }
+
+    //http请求失败或者处理过程exception
+    public GlobalShell(RequestErrorEnum errorType,String originErrorMessage){
+        RequestErrorType=errorType;
+        OriginErrorMessage=originErrorMessage;
+        Message="系统异常！";
+        if(errorType==RequestErrorEnum.HttpResponseError || errorType==RequestErrorEnum.HttpException){
+            Message="网络请求不稳定，请稍后重试！";
+        }
+    }
+
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import haozuo.com.healthdoctor.framework.SysConfig;
-import haozuo.com.healthdoctor.listener.OnAsyncCallbackListener;
+import haozuo.com.healthdoctor.listener.OnHttpCallbackListener;
 import haozuo.com.healthdoctor.util.HttpHelper;
 
 /**
@@ -55,22 +55,22 @@ public abstract class BaseModel {
         return url;
     }
 
-    final protected void get(String tag,String actionName,Map<String,Object> paramMap,final OnAsyncCallbackListener<JSONObject> listener){
+    final protected void get(String tag,String actionName,Map<String,Object> paramMap,final OnHttpCallbackListener<JSONObject> listener){
         String url=getApiUrl(actionName, paramMap);
         HttpHelper.HttpGet(url,tag, listener);
     }
 
-    final protected void get(String tag,String actionName,ArrayList<Object> paramArray,final OnAsyncCallbackListener<JSONObject> listener){
+    final protected void get(String tag,String actionName,ArrayList<Object> paramArray,final OnHttpCallbackListener<JSONObject> listener){
         String url=getApiUrl(actionName,paramArray);
         HttpHelper.HttpGet(url,tag,listener);
     }
 
-    final protected void get(String tag,String actionName,String urlParam,final OnAsyncCallbackListener<JSONObject> listener){
+    final protected void get(String tag,String actionName,String urlParam,final OnHttpCallbackListener<JSONObject> listener){
         String url=getApiUrl(actionName,urlParam);
         HttpHelper.HttpGet(url,tag, listener);
     }
 
-    final protected void post(String tag,String actionName,Map<String,Object>postData,final OnAsyncCallbackListener<JSONObject> listener){
+    final protected void post(String tag,String actionName,Map<String,Object>postData,final OnHttpCallbackListener<JSONObject> listener){
         String url=getApiUrl(actionName,"");
         HttpHelper.HttpPost(url, postData,tag, listener);
     }
