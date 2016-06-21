@@ -47,12 +47,12 @@ public class UserDispatcher extends BaseDispatcher {
     //获取验证码
     void getSMSCode(final RequestMessage requestMessage) {
         String mobile = (String) requestMessage.Params.get("mobile");
-        UserModel.createInstance().GetSMSCode(requestMessage.What, mobile, new OnAsyncCallbackListener<GlobalShell<Boolean>>() {
+       /* UserModel.createInstance().GetSMSCode(requestMessage.What, mobile, new OnAsyncCallbackListener<GlobalShell<Boolean>>() {
             @Override
             public void onSuccess(GlobalShell<Boolean> resultData) {
                 int statusCode = resultData.Code;
                 boolean isLogicSuccess = resultData.Data;
-                String message = resultData.Message;
+                String message = resultData.OriginMessage;
                 RequestResult requestResult = new RequestResult(requestMessage);
                 requestResult.Attach(statusCode, true, isLogicSuccess, null, message);
                 handleResponse(requestResult);
@@ -64,18 +64,18 @@ public class UserDispatcher extends BaseDispatcher {
                 requestResult.Attach(code, msg);
                 handleResponse(requestResult);
             }
-        });
+        });*/
     }
 
     //登陆
     void login(final RequestMessage requestMessage) {
-        String mobile = (String) requestMessage.Params.get("Mobile");
+        /*String mobile = (String) requestMessage.Params.get("Mobile");
         int smsCode = Integer.parseInt((String) requestMessage.Params.get("SmsCode"));
         UserModel.createInstance().Login(requestMessage.What, mobile, smsCode, new OnAsyncCallbackListener<GlobalShell<DoctorBean>>() {
             @Override
             public void onSuccess(GlobalShell<DoctorBean> resultData) {
                 int statusCode = resultData.Code;
-                String message = resultData.Message;
+                String message = resultData.OriginMessage;
                 DoctorBean doctorEntity = resultData.Data;
                 RequestResult requestResult = new RequestResult(requestMessage);
                 requestResult.Attach(statusCode, true, resultData.Code > 0, doctorEntity, message);
@@ -88,7 +88,7 @@ public class UserDispatcher extends BaseDispatcher {
                 requestResult.Attach(code, msg);
                 handleResponse(requestResult);
             }
-        });
+        });*/
     }
 
     void scanLogin(final RequestMessage requestMessage) {
@@ -98,7 +98,7 @@ public class UserDispatcher extends BaseDispatcher {
             @Override
             public void onSuccess(GlobalShell<Boolean> resultData) {
                 int statusCode = resultData.Code;
-                String message = resultData.Message;
+                String message = resultData.OriginMessage;
                 RequestResult requestResult = new RequestResult(requestMessage);
                 requestResult.Attach(statusCode, true, statusCode > 0, resultData.Data, message);
                 handleResponse(requestResult);
@@ -119,7 +119,7 @@ public class UserDispatcher extends BaseDispatcher {
             @Override
             public void onSuccess(GlobalShell<List<DoctorGroupBean>> resultData) {
                 int statusCode = resultData.Code;
-                String message = resultData.Message;
+                String message = resultData.OriginMessage;
                 RequestResult requestResult = new RequestResult(requestMessage);
                 requestResult.Attach(statusCode, true, statusCode > 0, resultData.Data, message);
                 handleResponse(requestResult);
@@ -135,7 +135,7 @@ public class UserDispatcher extends BaseDispatcher {
     }
 
     void GetGroupCustInfoList(final RequestMessage requestMessage) {
-        int serviceDeptId = (int) requestMessage.Params.get("serviceDeptId");
+        /*int serviceDeptId = (int) requestMessage.Params.get("serviceDeptId");
         int groupId = (int) requestMessage.Params.get("groupId");
         //String customNameOrId = (String) requestMessage.Params.get("customNameOrId");
         String customNameOrId ="";
@@ -145,7 +145,7 @@ public class UserDispatcher extends BaseDispatcher {
             @Override
             public void onSuccess(GlobalShell<PageBean<GroupCustInfoBean>> resultData) {
                 int statusCode = resultData.Code;
-                String message = resultData.Message;
+                String message = resultData.OriginMessage;
                 RequestResult requestResult = new RequestResult(requestMessage);
                 requestResult.Attach(statusCode, true, statusCode > 0, resultData.Data, message);
                 handleResponse(requestResult);
@@ -157,6 +157,6 @@ public class UserDispatcher extends BaseDispatcher {
                 requestResult.Attach(code, msg);
                 handleResponse(requestResult);
             }
-        });
+        });*/
     }
 }

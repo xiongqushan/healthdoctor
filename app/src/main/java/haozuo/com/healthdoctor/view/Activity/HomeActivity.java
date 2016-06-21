@@ -1,36 +1,46 @@
 package haozuo.com.healthdoctor.view.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTabHost;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.view.Fragment.FragmentTest1;
 import haozuo.com.healthdoctor.view.Fragment.FragmentTest2;
 import haozuo.com.healthdoctor.view.Fragment.FragmentTest3;
+import haozuo.com.healthdoctor.view.Fragment.GroupFragment;
+import haozuo.com.healthdoctor.view.Interface.IHomeActivity;
 
-public class HomeActivity extends FragmentActivity {
+public class HomeActivity extends BaseActivity implements IHomeActivity {
     private FragmentTabHost mTabHost;
 
     //定义一个布局
     private LayoutInflater mLayoutInflater;
 
     //定义数组来存放Fragment界面
-    private Class mFragmentArray[] = {FragmentTest1.class,FragmentTest2.class,FragmentTest3.class};
+    private Class mFragmentArray[] = {GroupFragment.class,FragmentTest2.class,FragmentTest3.class};
 
     //定义数组来存放按钮图片
     private int mImageViewArray[] = {R.drawable.tabhost_home_btn,R.drawable.tabhost_message_btn,R.drawable.tabhost_more_btn};
 
-    private String mTextArray[] = { "首页", "消息", "更多" };
+    private String mTextArray[] = { "主页", "咨询", "我的" };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         initView();
+    }
+
+    @Override
+    protected void onReceiveBroadcast(String filterAction) {
+
     }
 
     private void initView() {
@@ -65,5 +75,25 @@ public class HomeActivity extends FragmentActivity {
         textView.setText(mTextArray[index]);
 
         return view;
+    }
+
+    private long exitTime;
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if ((System.currentTimeMillis() - exitTime) > 2000) {
+                Toast.makeText(HomeActivity.this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                exitTime = System.currentTimeMillis();
+            } else {
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_HOME);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+                System.exit(0);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

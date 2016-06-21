@@ -64,7 +64,7 @@ public abstract class BaseDispatcher {
     }
 
     public void cancelRequest(int tag){
-        HttpHelper.HttpCancel(tag);
+        //HttpHelper.HttpCancel(tag);
     }
 
     protected abstract void dispatchRequest(Message msg);

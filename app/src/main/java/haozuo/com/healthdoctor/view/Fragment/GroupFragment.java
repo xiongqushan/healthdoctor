@@ -1,109 +1,88 @@
 package haozuo.com.healthdoctor.view.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
+import haozuo.com.healthdoctor.bean.DoctorGroupBean;
+import haozuo.com.healthdoctor.bean.GlobalShell;
+import haozuo.com.healthdoctor.manager.UserManager;
+import haozuo.com.healthdoctor.model.IUserModel;
+import haozuo.com.healthdoctor.model.UserModel;
+import haozuo.com.healthdoctor.presenter.GroupPresenterImpl;
+import haozuo.com.healthdoctor.presenter.IGroupPresenter;
+import haozuo.com.healthdoctor.view.Interface.IGroupFragment;
+import haozuo.com.healthdoctor.view.UserInfoActivity;
+import haozuo.com.healthdoctor.view.adapter.GroupAdapter;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link GroupFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link GroupFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class GroupFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+public class GroupFragment extends Fragment implements IGroupFragment {
+    @Bind(R.id.list_doctor_group)GridView list_doctor_group;
 
-    private OnFragmentInteractionListener mListener;
-
+    View rootview;
+    IGroupPresenter mIGroupPresenter;
+    List<DoctorGroupBean> groupList ;
+    GroupAdapter groupAdapter;
     public GroupFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment GroupFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static GroupFragment newInstance(String param1, String param2) {
-        GroupFragment fragment = new GroupFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+        mIGroupPresenter=new GroupPresenterImpl(this);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        View.OnClickListener onGroupItemClickListener =new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Object[]tag=(Object[])view.getTag();
+                int groupId = (int) tag[0];
+                Intent intent=new Intent(getContext(),UserInfoActivity.class);
+                intent.putExtra("GroupId",groupId);
+                startActivity(intent);
+            }
+        };
+        groupList=new ArrayList<>();
+        groupAdapter=new GroupAdapter(getContext(),groupList,onGroupItemClickListener);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_group, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        if(rootview==null) {
+            rootview = inflater.inflate(R.layout.fragment_group, container, false);
+            ButterKnife.bind(this,rootview);
+            list_doctor_group.setAdapter(groupAdapter);
+            mIGroupPresenter.requestGroupList(UserManager.getInstance().getDoctorInfo().Id);
+        }
+        return rootview;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+    @Override
+    public void handlerGetGroupList(GlobalShell<List<DoctorGroupBean>> result) {
+        groupList.clear();
+        groupList.addAll(result.Data);
+        groupAdapter.notifyDataSetChanged();
     }
 }

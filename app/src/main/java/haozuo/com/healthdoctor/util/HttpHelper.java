@@ -85,7 +85,7 @@ public class HttpHelper {
             request.setTag(tag);
             mRequestQueue.add(request);
         } catch (Exception e) {
-            listener.onError(400, e.getMessage());
+            listener.onError(-2, e.getMessage());
         }
     }
 
@@ -138,7 +138,7 @@ public class HttpHelper {
             request.setTag(tag);
             mRequestQueue.add(request);
         } catch (Exception e) {
-            listener.onError(400, e.getMessage());
+            listener.onError(-2, e.getMessage());
         }
     }
 

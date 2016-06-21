@@ -81,11 +81,11 @@ public class LoginActivity extends BaseActivity implements ILoginActivity{
         if(result.Code>0) {
             hideDialog();
             UserManager.getInstance().setDoctorInfo(result.Data);
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, HomeActivity.class);
             startActivity(intent);
         }
         else{
-            hideDialog(result.Message);
+            hideDialog(result.OriginMessage);
         }
     }
 
@@ -95,7 +95,7 @@ public class LoginActivity extends BaseActivity implements ILoginActivity{
             hideDialog("验证码获取成功！");
         }
         else{
-            hideDialog(result.Message);
+            hideDialog(result.OriginMessage);
         }
     }
 }

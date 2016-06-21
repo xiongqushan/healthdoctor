@@ -42,6 +42,7 @@ public class UserModel extends BaseModel implements IUserModel {
                         result = resultData.getBoolean("Data");
                     }
                 } catch (Exception ex) {
+                    code=-2;
                 }
                 GlobalShell<Boolean> entity=new GlobalShell<Boolean>(code,msg,result);
                 callbackListener.onSuccess(entity);
@@ -74,6 +75,7 @@ public class UserModel extends BaseModel implements IUserModel {
                         doctorEntity = new Gson().fromJson(result, DoctorBean.class);
                     }
                 } catch (Exception ex) {
+                    code=-2;
                 }
                 GlobalShell<DoctorBean> entity=new GlobalShell<DoctorBean>(code,msg,doctorEntity);
                 callbackListener.onSuccess(entity);
@@ -106,6 +108,7 @@ public class UserModel extends BaseModel implements IUserModel {
                         result = new Gson().fromJson(dataString, listType);
                     }
                 } catch (Exception ex) {
+                    code=-2;
                 }
                 GlobalShell<List<DoctorGroupBean>> entity=new GlobalShell<List<DoctorGroupBean>>(code,msg,result);
                 callbackListener.onSuccess(entity);
@@ -142,6 +145,7 @@ public class UserModel extends BaseModel implements IUserModel {
                         result = new Gson().fromJson(dataString, listType);
                     }
                 } catch (Exception ex) {
+                    code=-2;
                 }
                 GlobalShell<PageBean<GroupCustInfoBean>> entity=new GlobalShell<PageBean<GroupCustInfoBean>>(code,msg,result);
                 callbackListener.onSuccess(entity);
