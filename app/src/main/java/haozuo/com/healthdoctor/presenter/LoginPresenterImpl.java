@@ -2,7 +2,7 @@ package haozuo.com.healthdoctor.presenter;
 
 import haozuo.com.healthdoctor.bean.DoctorBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
-import haozuo.com.healthdoctor.listener.OnAsyncCallbackListener;
+import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
 import haozuo.com.healthdoctor.model.IBaseModel;
 import haozuo.com.healthdoctor.model.IUserModel;
 import haozuo.com.healthdoctor.model.UserModel;
@@ -23,15 +23,11 @@ public class LoginPresenterImpl extends BasePresenter implements ILoginPresenter
     @Override
     public void requestLoginSMS(String mobile) {
         String tag=createRequestTag();
-        mIUserModel.GetSMSCode(tag,mobile, new OnAsyncCallbackListener<GlobalShell<Boolean>>() {
+        mIUserModel.GetSMSCode(tag,mobile, new OnHandlerResultListener<GlobalShell<Boolean>>() {
+
             @Override
-            public void onSuccess(GlobalShell<Boolean> resultData) {
+            public void handlerResult(GlobalShell<Boolean> resultData) {
                 mILoginActivity.handlerGetSMSCode(resultData);
-            }
-
-            @Override
-            public void onError(int code, String msg) {
-
             }
         });
     }
@@ -39,14 +35,10 @@ public class LoginPresenterImpl extends BasePresenter implements ILoginPresenter
     @Override
     public void requestLoginWithSMSCode(String mobile, int code) {
         String tag=createRequestTag();
-        mIUserModel.Login(tag, mobile, code, new OnAsyncCallbackListener<GlobalShell<DoctorBean>>() {
+        mIUserModel.Login(tag, mobile, code, new OnHandlerResultListener<GlobalShell<DoctorBean>>() {
             @Override
-            public void onSuccess(GlobalShell<DoctorBean> resultData) {
+            public void handlerResult(GlobalShell<DoctorBean> resultData) {
                 mILoginActivity.handlerLogin(resultData);
-            }
-
-            @Override
-            public void onError(int code, String msg) {
             }
         });
     }

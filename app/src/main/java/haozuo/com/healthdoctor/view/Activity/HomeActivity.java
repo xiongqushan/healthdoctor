@@ -6,12 +6,14 @@ import android.support.v4.app.FragmentTabHost;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import haozuo.com.healthdoctor.R;
+import haozuo.com.healthdoctor.manager.UserManager;
 import haozuo.com.healthdoctor.view.Fragment.FragmentTest1;
 import haozuo.com.healthdoctor.view.Fragment.FragmentTest2;
 import haozuo.com.healthdoctor.view.Fragment.FragmentTest3;
@@ -34,7 +36,15 @@ public class HomeActivity extends BaseActivity implements IHomeActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         setContentView(R.layout.activity_home);
+        //getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.title_bar);
+        if(!UserManager.getInstance().exist()){
+            Intent intent=new Intent(this,LoginActivity.class);
+            startActivity(intent);
+            finishThis();
+            return;
+        }
         initView();
     }
 
@@ -89,7 +99,7 @@ public class HomeActivity extends BaseActivity implements IHomeActivity {
                 intent.addCategory(Intent.CATEGORY_HOME);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
-                finish();
+                finishThis();
                 System.exit(0);
             }
             return true;

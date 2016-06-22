@@ -74,28 +74,29 @@ public class LoginActivity extends BaseActivity implements ILoginActivity{
     protected void onStop() {
         super.onStop();
         mILoginPresenter.cancelRequest();
+        hideDialog();
     }
 
     @Override
     public void handlerLogin(GlobalShell<DoctorBean> result) {
-        if(result.Code>0) {
+        if(result.LogicSuccess) {
             hideDialog();
             UserManager.getInstance().setDoctorInfo(result.Data);
             Intent intent = new Intent(this, HomeActivity.class);
             startActivity(intent);
         }
         else{
-            hideDialog(result.OriginMessage);
+            hideDialog(result.Message);
         }
     }
 
     @Override
     public void handlerGetSMSCode(GlobalShell<Boolean> result) {
-        if(result.Code>0 && result.Data) {
+        if(result.LogicSuccess) {
             hideDialog("验证码获取成功！");
         }
         else{
-            hideDialog(result.OriginMessage);
+            hideDialog(result.Message);
         }
     }
 }

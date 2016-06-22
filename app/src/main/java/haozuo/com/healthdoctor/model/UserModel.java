@@ -60,34 +60,38 @@ public class UserModel extends BaseModel implements IUserModel {
         get(tag,"LoginSMSCode",params,onAsyncCallbackListener);
     }
 
-    public void Login(String tag,String mobile,int smsCode, final OnHandlerResultListener<GlobalShell<DoctorBean>> callbackListener){
-        Map<String, Object> params=new HashMap<>();
+    public void Login(String tag,String mobile,int smsCode, final OnHandlerResultListener<GlobalShell<DoctorBean>> callbackListener) {
+        Map<String, Object> params = new HashMap<>();
         params.put("Mobile", mobile);
         params.put("SmsCode", smsCode);
-        OnHttpCallbackListener onAsyncCallbackListener=new OnHttpCallbackListener<JSONObject>(){
+        OnHttpCallbackListener onAsyncCallbackListener = new OnHttpCallbackListener<JSONObject>() {
             @Override
             public void onSuccess(JSONObject resultData) {
-                GlobalShell<DoctorBean> entity=null;
+                GlobalShell<DoctorBean> entity = null;
                 try {
                     int code = resultData.getInt("state");
                     String msg = resultData.getString("message");
-                    if(code>0){
-                        String result=resultData.getString("Data");
-                        entity = new Gson().fromJson(result, DoctorBean.class);
+                    if (code > 0) {
+                        String result = resultData.getString("Data");
+                        DoctorBean doctorBean = new Gson().fromJson(result, DoctorBean.class);
+                        entity = new GlobalShell<DoctorBean>(doctorBean);
+                    }
+                    else{
+                        entity=new GlobalShell<DoctorBean>(msg);
                     }
                 } catch (Exception ex) {
-                    entity=new GlobalShell<DoctorBean>(RequestErrorEnum.LogicException,ex.getMessage());
+                    entity = new GlobalShell<DoctorBean>(RequestErrorEnum.LogicException, ex.getMessage());
                 }
-                callbackListener.onSuccess(entity);
+                callbackListener.handlerResult(entity);
             }
 
             @Override
             public void onError(RequestErrorEnum errorType, String msg) {
-                GlobalShell<Boolean> entity=new GlobalShell<Boolean>(errorType,msg);
+                GlobalShell<DoctorBean> entity = new GlobalShell<DoctorBean>(errorType, msg);
                 callbackListener.handlerResult(entity);
             }
         };
-        post(tag, "Login",params,onAsyncCallbackListener);
+        post(tag, "Login", params, onAsyncCallbackListener);
     }
 
     public void GetGroup(String tag,int doctorId, final OnHandlerResultListener<GlobalShell<List<DoctorGroupBean>>> callbackListener){
@@ -96,29 +100,28 @@ public class UserModel extends BaseModel implements IUserModel {
         OnHttpCallbackListener onAsyncCallbackListener=new OnHttpCallbackListener<JSONObject>(){
             @Override
             public void onSuccess(JSONObject resultData) {
-                int code = -1;
-                String msg = "";
-                List<DoctorGroupBean> result=null;
+                GlobalShell<List<DoctorGroupBean>> entity = null;
                 try {
-                    code = resultData.getInt("state");
-                    msg = resultData.getString("message");
+                    int code = resultData.getInt("state");
+                    String msg = resultData.getString("message");
                     if(code>0) {
                         String dataString = resultData.getString("Data");
-                        Type listType = new TypeToken<List<DoctorGroupBean>>() {
-                        }.getType();
-                        result = new Gson().fromJson(dataString, listType);
+                        Type listType = new TypeToken<List<DoctorGroupBean>>() {}.getType();
+                        List<DoctorGroupBean> result = new Gson().fromJson(dataString, listType);
+                        entity=new GlobalShell<List<DoctorGroupBean>>(result);
+                    }
+                    else{
+                        entity=new GlobalShell<List<DoctorGroupBean>>(msg);
                     }
                 } catch (Exception ex) {
-                    code=-200;
-                    msg=ex.getMessage();
+                    entity = new GlobalShell<List<DoctorGroupBean>>(RequestErrorEnum.LogicException, ex.getMessage());
                 }
-                GlobalShell<List<DoctorGroupBean>> entity=new GlobalShell<List<DoctorGroupBean>>(code,msg,result);
-                callbackListener.onSuccess(entity);
+                callbackListener.handlerResult(entity);
             }
 
             @Override
             public void onError(RequestErrorEnum errorType, String msg) {
-                GlobalShell<Boolean> entity=new GlobalShell<Boolean>(errorType,msg);
+                GlobalShell<List<DoctorGroupBean>> entity=new GlobalShell<List<DoctorGroupBean>>(errorType,msg);
                 callbackListener.handlerResult(entity);
             }
         };
@@ -135,29 +138,28 @@ public class UserModel extends BaseModel implements IUserModel {
         OnHttpCallbackListener onAsyncCallbackListener=new OnHttpCallbackListener<JSONObject>(){
             @Override
             public void onSuccess(JSONObject resultData) {
-                int code = -1;
-                String msg = "";
-                PageBean<GroupCustInfoBean> result=null;
+                GlobalShell<PageBean<GroupCustInfoBean>> entity = null;
                 try {
-                    code = resultData.getInt("state");
-                    msg = resultData.getString("message");
+                    int code = resultData.getInt("state");
+                    String msg = resultData.getString("message");
                     if(code>0) {
                         String dataString = resultData.getString("Data");
-                        Type listType = new TypeToken<PageBean<GroupCustInfoBean>>() {
-                        }.getType();
-                        result = new Gson().fromJson(dataString, listType);
+                        Type listType = new TypeToken<PageBean<GroupCustInfoBean>>() {}.getType();
+                        PageBean<GroupCustInfoBean> result = new Gson().fromJson(dataString, listType);
+                        entity=new GlobalShell<PageBean<GroupCustInfoBean>>(result);
+                    }
+                    else{
+                        entity=new GlobalShell<PageBean<GroupCustInfoBean>>(msg);
                     }
                 } catch (Exception ex) {
-                    code=-200;
-                    msg=ex.getMessage();
+                    entity = new GlobalShell<PageBean<GroupCustInfoBean>>(RequestErrorEnum.LogicException, ex.getMessage());
                 }
-                GlobalShell<PageBean<GroupCustInfoBean>> entity=new GlobalShell<PageBean<GroupCustInfoBean>>(code,msg,result);
-                callbackListener.onSuccess(entity);
+                callbackListener.handlerResult(entity);
             }
 
             @Override
             public void onError(RequestErrorEnum errorType, String msg) {
-                GlobalShell<Boolean> entity=new GlobalShell<Boolean>(errorType,msg);
+                GlobalShell<PageBean<GroupCustInfoBean>> entity=new GlobalShell<PageBean<GroupCustInfoBean>>(errorType,msg);
                 callbackListener.handlerResult(entity);
             }
         };

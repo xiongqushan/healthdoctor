@@ -1,9 +1,12 @@
 package haozuo.com.healthdoctor.view.Activity;
 
+import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ActivityInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -11,6 +14,8 @@ import android.os.Looper;
 import android.os.Message;
 import android.support.v4.app.FragmentActivity;
 import android.view.KeyEvent;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import java.lang.reflect.Constructor;
@@ -21,9 +26,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.util.CustomDialog;
 import haozuo.com.healthdoctor.util.LoadingDialog;
 import haozuo.com.healthdoctor.util.StringUtil;
+import haozuo.com.healthdoctor.util.SystemBarTintUtil;
 
 /**
  * Created by xiongwei on 16/5/7.
@@ -36,6 +43,8 @@ public abstract class BaseActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTranslucentStatus();
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
     public void showDialog() {
@@ -110,6 +119,26 @@ public abstract class BaseActivity extends FragmentActivity {
     }
 
     protected abstract void onReceiveBroadcast(String filterAction) ;
+
+    public void finishThis() {
+        this.finish();
+        //overridePendingTransition(R.anim.to_right_in, R.anim.to_right_out);
+    }
+
+    @TargetApi(19)
+    private void setTranslucentStatus() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Window win = getWindow();
+            WindowManager.LayoutParams winParams = win.getAttributes();
+            final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+            winParams.flags |= bits;
+            win.setAttributes(winParams);
+        }
+        SystemBarTintUtil tintManager = new SystemBarTintUtil(this);
+        tintManager.setStatusBarTintEnabled(true);
+        tintManager.setStatusBarTintResource(R.color.main_color_blue);//状态栏无背景
+    }
+
 
     @Override
     protected void onResume() {

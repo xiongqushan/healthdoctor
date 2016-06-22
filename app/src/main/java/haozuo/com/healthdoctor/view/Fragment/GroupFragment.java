@@ -2,9 +2,7 @@ package haozuo.com.healthdoctor.view.Fragment;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,8 +18,6 @@ import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.DoctorGroupBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.manager.UserManager;
-import haozuo.com.healthdoctor.model.IUserModel;
-import haozuo.com.healthdoctor.model.UserModel;
 import haozuo.com.healthdoctor.presenter.GroupPresenterImpl;
 import haozuo.com.healthdoctor.presenter.IGroupPresenter;
 import haozuo.com.healthdoctor.view.Interface.IGroupFragment;
@@ -29,7 +25,7 @@ import haozuo.com.healthdoctor.view.UserInfoActivity;
 import haozuo.com.healthdoctor.view.adapter.GroupAdapter;
 
 
-public class GroupFragment extends Fragment implements IGroupFragment {
+public class GroupFragment extends BaseFragment implements IGroupFragment {
     @Bind(R.id.list_doctor_group)GridView list_doctor_group;
 
     View rootview;
@@ -63,26 +59,29 @@ public class GroupFragment extends Fragment implements IGroupFragment {
             rootview = inflater.inflate(R.layout.fragment_group, container, false);
             ButterKnife.bind(this,rootview);
             list_doctor_group.setAdapter(groupAdapter);
+            shareCurrentActivity().showDialog();
             mIGroupPresenter.requestGroupList(UserManager.getInstance().getDoctorInfo().Id);
         }
         return rootview;
     }
 
-
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
+    public void onStop() {
+        super.onStop();
+        mIGroupPresenter.cancelRequest();
+        shareCurrentActivity().hideDialog();
     }
 
     @Override
     public void handlerGetGroupList(GlobalShell<List<DoctorGroupBean>> result) {
-        groupList.clear();
-        groupList.addAll(result.Data);
-        groupAdapter.notifyDataSetChanged();
+        if(result.LogicSuccess) {
+            groupList.clear();
+            groupList.addAll(result.Data);
+            groupAdapter.notifyDataSetChanged();
+            shareCurrentActivity().hideDialog();
+        }
+        else{
+            shareCurrentActivity().hideDialog(result.Message);
+        }
     }
 }

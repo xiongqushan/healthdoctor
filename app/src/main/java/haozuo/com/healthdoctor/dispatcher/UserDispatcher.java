@@ -11,7 +11,6 @@ import haozuo.com.healthdoctor.bean.DoctorGroupBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
 import haozuo.com.healthdoctor.bean.PageBean;
-import haozuo.com.healthdoctor.listener.OnAsyncCallbackListener;
 import haozuo.com.healthdoctor.model.UserModel;
 
 /**

@@ -5,7 +5,6 @@ import java.util.List;
 import haozuo.com.healthdoctor.bean.DoctorBean;
 import haozuo.com.healthdoctor.bean.DoctorGroupBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
-import haozuo.com.healthdoctor.listener.OnAsyncCallbackListener;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
 
 /**
