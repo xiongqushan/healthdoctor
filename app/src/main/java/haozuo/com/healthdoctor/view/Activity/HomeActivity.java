@@ -27,7 +27,7 @@ public class HomeActivity extends BaseActivity implements IHomeActivity {
     private LayoutInflater mLayoutInflater;
 
     //定义数组来存放Fragment界面
-    private Class mFragmentArray[] = {GroupFragment.class,FragmentTest2.class,FragmentTest3.class};
+    private Class mFragmentArray[] = {FragmentTest1.class,FragmentTest2.class,FragmentTest3.class};
 
     //定义数组来存放按钮图片
     private int mImageViewArray[] = {R.drawable.tabhost_home_btn,R.drawable.tabhost_message_btn,R.drawable.tabhost_more_btn};
@@ -36,14 +36,13 @@ public class HomeActivity extends BaseActivity implements IHomeActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         setContentView(R.layout.activity_home);
-        //getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.title_bar);
+        getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.title_bar);
         if(!UserManager.getInstance().exist()){
-            Intent intent=new Intent(this,LoginActivity.class);
-            startActivity(intent);
-            finishThis();
-            return;
+            //Intent intent=new Intent(this,LoginActivity.class);
+            //startActivity(intent);
+            //finishThis();
+            //return;
         }
         initView();
     }

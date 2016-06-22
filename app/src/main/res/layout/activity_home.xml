@@ -5,6 +5,11 @@
     android:layout_width="match_parent"
     android:background="@color/white"
     android:orientation="vertical">
+    <include android:layout_width="match_parent"
+        android:layout_height="48dp"
+        layout="@layout/title_bar">
+
+    </include>
     <FrameLayout
         android:id="@+id/frameFragmentContainer"
         android:layout_width="fill_parent"
