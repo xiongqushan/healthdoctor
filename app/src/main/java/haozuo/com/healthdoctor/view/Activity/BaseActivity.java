@@ -16,6 +16,7 @@ import android.support.v4.app.FragmentActivity;
 import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.lang.reflect.Constructor;
@@ -94,6 +95,11 @@ public abstract class BaseActivity extends FragmentActivity {
         comfirmDialog.setContentText(content);
         comfirmDialog.setConfirmText(confirmText);
         comfirmDialog.show();
+    }
+
+    public void setTitleText(String title){
+        TextView textView=(TextView)findViewById(R.id.txt_TitleBar_title);
+        textView.setText(title);
     }
 
     public void registerCustomReceiver(String activeName) {

@@ -19,4 +19,6 @@ public interface IBaseActivity {
     public void showConfirmDialog(String content, String confirmText, String cancelText, CustomDialog.OnDialogListener onConfirmDialogListener) ;
 
     public void showConfirmDialog(String content, String confirmText, CustomDialog.OnDialogListener onConfirmDialogListener);
+
+    public void setTitleText(String title);
 }

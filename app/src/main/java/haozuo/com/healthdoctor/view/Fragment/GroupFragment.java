@@ -3,10 +3,12 @@ package haozuo.com.healthdoctor.view.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTabHost;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +22,7 @@ import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.manager.UserManager;
 import haozuo.com.healthdoctor.presenter.GroupPresenterImpl;
 import haozuo.com.healthdoctor.presenter.IGroupPresenter;
+import haozuo.com.healthdoctor.view.Activity.HomeActivity;
 import haozuo.com.healthdoctor.view.Interface.IGroupFragment;
 import haozuo.com.healthdoctor.view.UserInfoActivity;
 import haozuo.com.healthdoctor.view.adapter.GroupAdapter;
@@ -39,6 +42,7 @@ public class GroupFragment extends BaseFragment implements IGroupFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ((HomeActivity)shareCurrentActivity()).initTitle();
         View.OnClickListener onGroupItemClickListener =new View.OnClickListener() {
             @Override
             public void onClick(View view) {
