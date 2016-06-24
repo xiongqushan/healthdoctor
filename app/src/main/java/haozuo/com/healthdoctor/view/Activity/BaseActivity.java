@@ -97,7 +97,7 @@ public abstract class BaseActivity extends FragmentActivity {
         comfirmDialog.show();
     }
 
-    public void setTitleText(String title){
+    public void setCustomerTitle(String title){
         TextView textView=(TextView)findViewById(R.id.txt_TitleBar_title);
         textView.setText(title);
     }

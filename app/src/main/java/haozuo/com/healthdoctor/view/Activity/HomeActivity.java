@@ -70,10 +70,9 @@ public class HomeActivity extends BaseActivity implements IHomeActivity {
     }
 
     public void initTitle(){
-        TextView textView=(TextView)findViewById(R.id.txt_TitleBar_title);
         int currentTabSpecIndex=mTabHost.getCurrentTab();
         String title=tabSpecTextArray[currentTabSpecIndex];
-        textView.setText(title);
+        setCustomerTitle(title);
     }
 
     /**

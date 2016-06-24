@@ -1,5 +1,7 @@
 package haozuo.com.healthdoctor.bean;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -9,5 +11,6 @@ import java.util.List;
 public class PageBean<T> implements Serializable {
     public int Count;
 
-    public List<T>Data;
+    @SerializedName("Data")
+    public List<T> CurrentPageDataList;
 }

@@ -65,13 +65,13 @@ public class UserInfoActivity extends BaseActivity {
     }
 
     private void handlerGetGroupCustInfoList(Message msg){
-        BaseDispatcher.RequestResult requestResult = (BaseDispatcher.RequestResult) msg.obj;
+        /*BaseDispatcher.RequestResult requestResult = (BaseDispatcher.RequestResult) msg.obj;
         List<GroupCustInfoBean> dataList = ((PageBean<GroupCustInfoBean>) requestResult.ResultData).Data;
         if (requestResult.LogicSuccess && dataList != null){
             custInfoList.clear();
             custInfoList.addAll(dataList);
             groupCustInfoAdapter.notifyDataSetChanged();
-        }
+        }*/
     }
 
     class PullListener implements PullToRefreshLayout.OnRefreshListener {

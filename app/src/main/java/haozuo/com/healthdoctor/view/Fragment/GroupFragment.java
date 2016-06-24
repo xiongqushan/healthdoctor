@@ -22,6 +22,7 @@ import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.manager.UserManager;
 import haozuo.com.healthdoctor.presenter.GroupPresenterImpl;
 import haozuo.com.healthdoctor.presenter.IGroupPresenter;
+import haozuo.com.healthdoctor.view.Activity.GroupCustomListActivity;
 import haozuo.com.healthdoctor.view.Activity.HomeActivity;
 import haozuo.com.healthdoctor.view.Interface.IGroupFragment;
 import haozuo.com.healthdoctor.view.UserInfoActivity;
@@ -48,7 +49,7 @@ public class GroupFragment extends BaseFragment implements IGroupFragment {
             public void onClick(View view) {
                 Object[]tag=(Object[])view.getTag();
                 int groupId = (int) tag[0];
-                Intent intent=new Intent(getContext(),UserInfoActivity.class);
+                Intent intent=new Intent(getContext(),GroupCustomListActivity.class);
                 intent.putExtra("GroupId",groupId);
                 startActivity(intent);
             }
