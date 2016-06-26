@@ -45,6 +45,11 @@ public class HomeActivity extends BaseActivity implements IHomeActivity {
     }
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        //super.onSaveInstanceState(outState);
+    }
+
+    @Override
     protected void onReceiveBroadcast(String filterAction) {
 
     }

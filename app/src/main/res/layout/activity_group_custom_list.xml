@@ -9,26 +9,21 @@
         android:layout_height="48dp"
         layout="@layout/title_bar">
     </include>
-    <ListView
-        android:id="@+id/list_group_customlist"
+    <haozuo.com.healthdoctor.view.custom.PullToRefresh.PullToRefreshLayout
+        android:id="@+id/pull_to_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
-    </ListView>
-    <!--<haozuo.com.healthdoctor.view.custom.PullToRefresh.PullToRefreshLayout
-        android:id="@+id/pull_to_refresh_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
         <include layout="@layout/refresh_head" />
 
         <haozuo.com.healthdoctor.view.custom.PullToRefresh.PullableListView
-            android:id="@+id/lv_main_card"
+            android:id="@+id/list_group_customlist"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:divider="@null"
             android:scrollbars="none" />
 
         <include layout="@layout/load_more" />
-    </haozuo.com.healthdoctor.view.custom.PullToRefresh.PullToRefreshLayout>-->
+    </haozuo.com.healthdoctor.view.custom.PullToRefresh.PullToRefreshLayout>
 </LinearLayout>

@@ -25,7 +25,6 @@ import haozuo.com.healthdoctor.presenter.IGroupPresenter;
 import haozuo.com.healthdoctor.view.Activity.GroupCustomListActivity;
 import haozuo.com.healthdoctor.view.Activity.HomeActivity;
 import haozuo.com.healthdoctor.view.Interface.IGroupFragment;
-import haozuo.com.healthdoctor.view.UserInfoActivity;
 import haozuo.com.healthdoctor.view.adapter.GroupAdapter;
 
 

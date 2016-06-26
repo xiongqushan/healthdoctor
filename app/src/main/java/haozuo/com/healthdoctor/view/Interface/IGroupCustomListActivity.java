@@ -8,5 +8,5 @@ import haozuo.com.healthdoctor.bean.PageBean;
  * Created by Administrator on 2016/6/24.
  */
 public interface IGroupCustomListActivity {
-    void handlerLogin(GlobalShell<PageBean<GroupCustInfoBean>> result);
+    void handleGroupCustInfoList(GlobalShell<PageBean<GroupCustInfoBean>> result);
 }

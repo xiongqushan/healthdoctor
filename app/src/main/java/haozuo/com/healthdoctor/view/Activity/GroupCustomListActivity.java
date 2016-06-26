@@ -20,8 +20,13 @@ import haozuo.com.healthdoctor.view.adapter.GroupCustInfoAdapter;
 import haozuo.com.healthdoctor.view.custom.PullToRefresh.PullToRefreshLayout;
 
 public class GroupCustomListActivity extends BaseActivity implements IGroupCustomListActivity {
+    int PAGE_SIZE = 20;
+    int currentPageIndex = 1;
+    boolean isRefreshing=false;
+    boolean isLoadMore=false;
+
     @Bind(R.id.list_group_customlist)ListView list_group_customlist;
-    //@Bind(R.id.pull_to_refresh_layout)PullToRefreshLayout pull_to_refresh_layout;
+    @Bind(R.id.pull_to_refresh_layout)PullToRefreshLayout pull_to_refresh_layout;
 
     IGroupCustomListPresenter mIGroupCustomListPresenter;
     List<GroupCustInfoBean> dataList;
@@ -39,19 +44,19 @@ public class GroupCustomListActivity extends BaseActivity implements IGroupCusto
         groupCustInfoAdapter=new GroupCustInfoAdapter(GroupCustomListActivity.this,custInfoList);
         list_group_customlist.setAdapter(groupCustInfoAdapter);
 
-        //pull_to_refresh_layout.setOnRefreshListener(new PullListener());
+        pull_to_refresh_layout.setOnRefreshListener(new PullListener());
 
-        requestData();
+        requestData(false);
     }
 
-    void requestData(){
+    void requestData(boolean isLoadmore){
+        isLoadMore=isLoadmore;
         Bundle bundle = getIntent().getExtras();
         int groupId= bundle.getInt("GroupId");
         int serviceDeptId = UserManager.getInstance().getDoctorInfo().ServiceDeptId;
-        int pageIndex = 1;
-        int pageSize = 20;
+
         showDialog();
-        mIGroupCustomListPresenter.RequestGroupCustInfoList(serviceDeptId,groupId,"",pageIndex,pageSize);
+        mIGroupCustomListPresenter.RequestGroupCustInfoList(serviceDeptId,groupId,"", currentPageIndex, PAGE_SIZE);
     }
 
     @Override
@@ -60,15 +65,23 @@ public class GroupCustomListActivity extends BaseActivity implements IGroupCusto
     }
 
     @Override
-    public void handlerLogin(GlobalShell<PageBean<GroupCustInfoBean>> result) {
+    public void handleGroupCustInfoList(GlobalShell<PageBean<GroupCustInfoBean>> result) {
         if(result.LogicSuccess) {
             hideDialog();
-            custInfoList.clear();
+            if(!isLoadMore) {
+                custInfoList.clear();
+            }
             custInfoList.addAll(result.Data.CurrentPageDataList);
             groupCustInfoAdapter.notifyDataSetChanged();
+            if(isRefreshing){
+                pull_to_refresh_layout.refreshFinish(PullToRefreshLayout.SUCCEED);
+            }
         }
         else{
             hideDialog(result.Message);
+            if(isRefreshing){
+                pull_to_refresh_layout.refreshFinish(PullToRefreshLayout.FAIL);
+            }
         }
     }
 
@@ -76,12 +89,14 @@ public class GroupCustomListActivity extends BaseActivity implements IGroupCusto
 
         @Override
         public void onRefresh() {
-            // 下拉刷新操作
+            isRefreshing=true;
+            requestData(false);
         }
 
         @Override
         public void onLoadMore() {
-            //上拉分页
+            currentPageIndex++;
+            requestData(true);
         }
 
     }

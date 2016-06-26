@@ -31,7 +31,7 @@ public class GroupCustomListPresenterImpl extends BasePresenter implements IGrou
         mIUserModel.GetGroupCustInfoList(tag, serviceDeptId, groupId, customNameOrId, pageIndex, pageSize, new OnHandlerResultListener<GlobalShell<PageBean<GroupCustInfoBean>>>() {
             @Override
             public void handlerResult(GlobalShell<PageBean<GroupCustInfoBean>> resultData) {
-                mIGroupCustomListActivity.handlerLogin(resultData);
+                mIGroupCustomListActivity.handleGroupCustInfoList(resultData);
             }
         });
 
