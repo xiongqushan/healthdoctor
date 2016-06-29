@@ -21,6 +21,7 @@ import haozuo.com.healthdoctor.view.Fragment.GroupFragment;
 import haozuo.com.healthdoctor.view.Interface.IHomeActivity;
 
 public class HomeActivity extends BaseActivity implements IHomeActivity {
+
     private FragmentTabHost mTabHost;
 
     //定义一个布局
@@ -39,10 +40,10 @@ public class HomeActivity extends BaseActivity implements IHomeActivity {
         setContentView(R.layout.activity_home);
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.title_bar);
         if(!UserManager.getInstance().exist()){
-            //Intent intent=new Intent(this,LoginActivity.class);
-            //startActivity(intent);
-            //finishThis();
-            //return;
+//            Intent intent=new Intent(this,LoginActivity.class);
+//            startActivity(intent);
+//            finishThis();
+//            return;
         }
         initView();
     }

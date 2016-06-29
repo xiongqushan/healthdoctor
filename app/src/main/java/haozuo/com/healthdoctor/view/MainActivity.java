@@ -33,7 +33,6 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-
         if(!UserManager.getInstance().exist()){
             Intent intent=new Intent(this,LoginActivity.class);
             startActivity(intent);
