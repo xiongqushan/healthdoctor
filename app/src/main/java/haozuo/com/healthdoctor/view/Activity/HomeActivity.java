@@ -18,6 +18,7 @@ import haozuo.com.healthdoctor.view.Fragment.GroupFragment;
 import haozuo.com.healthdoctor.view.Interface.IHomeActivity;
 
 public class HomeActivity extends BaseActivity implements IHomeActivity {
+
     private FragmentTabHost mTabHost;
 
     //定义一个布局
