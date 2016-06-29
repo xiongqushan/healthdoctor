@@ -16,7 +16,6 @@ import haozuo.com.healthdoctor.manager.UserManager;
 import haozuo.com.healthdoctor.presenter.ILoginPresenter;
 import haozuo.com.healthdoctor.presenter.LoginPresenterImpl;
 import haozuo.com.healthdoctor.view.Interface.ILoginActivity;
-import haozuo.com.healthdoctor.view.MainActivity;
 
 /**
  * Created by xiongwei1 on 2016/6/3.
@@ -37,13 +36,14 @@ public class LoginActivity extends BaseActivity implements ILoginActivity{
         edit_mobile.setInputType(EditorInfo.TYPE_CLASS_PHONE);
 
         if(UserManager.getInstance().exist()){
-            Intent intent=new Intent(this,MainActivity.class);
+            Intent intent=new Intent(this,HomeActivity.class);
             startActivity(intent);
         }
         //Intent intent = new Intent(this, CaptureActivity.class);
         //startActivityForResult(intent,CaptureActivity.REQUEST_LOGIN_CODE);
 
-        edit_mobile.setText("15601815186");
+        //edit_mobile.setText("15601815186");
+        edit_mobile.setText("18738170277");
         txt_GetCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,14 +1,21 @@
 package haozuo.com.healthdoctor.view.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
 
@@ -32,16 +39,9 @@ public class GroupCustInfoAdapter extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
         ViewHolder holder = null;
-        if (convertView == null){
-            holder = new ViewHolder();
+        if (convertView == null){;
             convertView = myInflater.inflate(R.layout.group_custinfo_item,parent,false);
-            holder.Cname = (TextView)convertView.findViewById(R.id.Cname);
-            holder.Gender=(TextView) convertView.findViewById(R.id.Gender);
-            holder.NickName=(TextView) convertView.findViewById(R.id.NickName);
-            holder.Age=(TextView) convertView.findViewById(R.id.Age);
-            holder.Birthday=(TextView) convertView.findViewById(R.id.Birthday);
-            holder.CompanyName=(TextView) convertView.findViewById(R.id.CompanyName);
-            holder.DoctorName=(TextView) convertView.findViewById(R.id.DoctorName);
+            holder = new ViewHolder(convertView);
             convertView.setTag(holder);
         }
         else {
@@ -52,21 +52,30 @@ public class GroupCustInfoAdapter extends BaseAdapter{
         holder.Cname.setText(groupCustInfoEntity.Cname);
         holder.Gender.setText(groupCustInfoEntity.Gender);
         holder.NickName.setText(groupCustInfoEntity.NickName);
-        holder.Age.setText(groupCustInfoEntity.Age);
         holder.Birthday.setText(groupCustInfoEntity.Birthday);
-        holder.CompanyName.setText(groupCustInfoEntity.CompanyName);
-//        holder.DoctorName.setText(groupCustInfoEntity.DoctorName);
+        holder.DoctorName.setText(String.valueOf(groupCustInfoEntity.DoctorId));
 
         return convertView;
     }
 
-    public class ViewHolder{
+    static class ViewHolder{
+        @Bind(R.id.txt_Cname)
         public TextView Cname;
+
+        @Bind(R.id.txt_Gender)
         public TextView Gender;
+
+        @Bind(R.id.txt_NickName)
         public TextView NickName;
-        public TextView Age;
+
+        @Bind(R.id.txt_Birthday)
         public TextView Birthday;
-        public TextView CompanyName;
+
+        @Bind(R.id.txt_DoctorName)
         public TextView DoctorName;
+
+        public ViewHolder(View convertView){
+            ButterKnife.bind(this, convertView);
+        }
     }
 }

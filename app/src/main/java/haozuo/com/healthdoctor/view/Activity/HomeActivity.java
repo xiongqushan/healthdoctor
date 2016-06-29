@@ -1,12 +1,10 @@
 package haozuo.com.healthdoctor.view.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTabHost;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -14,7 +12,6 @@ import android.widget.Toast;
 
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.manager.UserManager;
-import haozuo.com.healthdoctor.view.Fragment.FragmentTest1;
 import haozuo.com.healthdoctor.view.Fragment.FragmentTest2;
 import haozuo.com.healthdoctor.view.Fragment.FragmentTest3;
 import haozuo.com.healthdoctor.view.Fragment.GroupFragment;
@@ -28,24 +25,29 @@ public class HomeActivity extends BaseActivity implements IHomeActivity {
     private LayoutInflater mLayoutInflater;
 
     //定义数组来存放Fragment界面
-    private Class mFragmentArray[] = {FragmentTest1.class,FragmentTest2.class,FragmentTest3.class};
+    private Class mFragmentArray[] = {GroupFragment.class,FragmentTest2.class,FragmentTest3.class};
 
     //定义数组来存放按钮图片
     private int mImageViewArray[] = {R.drawable.tabhost_home_btn,R.drawable.tabhost_message_btn,R.drawable.tabhost_more_btn};
 
-    private String mTextArray[] = { "主页", "咨询", "我的" };
+    private String tabSpecTextArray[] = { "主页", "咨询", "我的" };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.title_bar);
         if(!UserManager.getInstance().exist()){
-//            Intent intent=new Intent(this,LoginActivity.class);
-//            startActivity(intent);
-//            finishThis();
-//            return;
+            Intent intent=new Intent(this,LoginActivity.class);
+            startActivity(intent);
+            finishThis();
+            return;
         }
         initView();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        //super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -63,7 +65,7 @@ public class HomeActivity extends BaseActivity implements IHomeActivity {
         int count = mFragmentArray.length;
         for (int i = 0; i < count; i++) {
             // 给每个Tab按钮设置图标、文字和内容
-            TabHost.TabSpec tabSpec = mTabHost.newTabSpec(mTextArray[i])
+            TabHost.TabSpec tabSpec = mTabHost.newTabSpec(tabSpecTextArray[i])
                     .setIndicator(getTabItemView(i));
             // 将Tab按钮添加进Tab选项卡中
             mTabHost.addTab(tabSpec, mFragmentArray[i], null);
@@ -71,6 +73,12 @@ public class HomeActivity extends BaseActivity implements IHomeActivity {
             mTabHost.getTabWidget().getChildAt(i)
                     .setBackgroundResource(R.drawable.tabhost_menu_bg);
         }
+    }
+
+    public void initTitle(){
+        int currentTabSpecIndex=mTabHost.getCurrentTab();
+        String title=tabSpecTextArray[currentTabSpecIndex];
+        setCustomerTitle(title);
     }
 
     /**
@@ -82,8 +90,7 @@ public class HomeActivity extends BaseActivity implements IHomeActivity {
         ImageView imageView = (ImageView) view.findViewById(R.id.imgTabhostMenuIcon);
         imageView.setImageResource(mImageViewArray[index]);
         TextView textView = (TextView) view.findViewById(R.id.txtTabhostMenuDescriptin);
-        textView.setText(mTextArray[index]);
-
+        textView.setText(tabSpecTextArray[index]);
         return view;
     }
 

@@ -5,6 +5,8 @@ import java.util.List;
 import haozuo.com.healthdoctor.bean.DoctorBean;
 import haozuo.com.healthdoctor.bean.DoctorGroupBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
+import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
+import haozuo.com.healthdoctor.bean.PageBean;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
 
 /**
@@ -17,4 +19,6 @@ public interface IUserModel extends IBaseModel{
     public void Login(String tag,String mobile,int smsCode, final OnHandlerResultListener<GlobalShell<DoctorBean>> callbackListener);
 
     public void GetGroup(String tag,int doctorId, final OnHandlerResultListener<GlobalShell<List<DoctorGroupBean>>> callbackListener);
+
+    public void GetGroupCustInfoList(String tag,int serviceDeptId,int groupId,String customNameOrId,int pageIndex,int pageSize, final OnHandlerResultListener<GlobalShell<PageBean<GroupCustInfoBean>>> callbackListener);
 }

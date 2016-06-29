@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import haozuo.com.healthdoctor.R;
+import haozuo.com.healthdoctor.view.Activity.HomeActivity;
+import haozuo.com.healthdoctor.view.Interface.IGroupFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,7 +20,7 @@ import haozuo.com.healthdoctor.R;
  * Use the {@link FragmentTest2#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentTest2 extends Fragment {
+public class FragmentTest2 extends BaseFragment  {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -55,6 +57,7 @@ public class FragmentTest2 extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ((HomeActivity)shareCurrentActivity()).initTitle();
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
