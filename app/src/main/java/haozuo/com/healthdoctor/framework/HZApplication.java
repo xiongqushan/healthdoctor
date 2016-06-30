@@ -3,6 +3,8 @@ package haozuo.com.healthdoctor.framework;
 import android.app.Application;
 import android.content.Context;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+
 import haozuo.com.healthdoctor.util.HttpHelper;
 
 /**
@@ -18,5 +20,6 @@ public class HZApplication extends Application {
         super.onCreate();
         instance=this;
         HttpHelper.Init(this);
+        Fresco.initialize(this);
     }
 }
