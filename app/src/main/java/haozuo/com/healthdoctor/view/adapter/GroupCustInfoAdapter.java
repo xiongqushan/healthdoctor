@@ -25,9 +25,11 @@ import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
 public class GroupCustInfoAdapter extends BaseAdapter{
     LayoutInflater myInflater;
     List<GroupCustInfoBean> dataList;
-    public GroupCustInfoAdapter(Context context, List<GroupCustInfoBean> dataSource){
+    View.OnClickListener clickListener=null;
+    public GroupCustInfoAdapter(Context context, List<GroupCustInfoBean> dataSource, View.OnClickListener onClickListener){
         this.myInflater = LayoutInflater.from(context);
         dataList = dataSource;
+        clickListener=onClickListener;
     }
     @Override
     public int getCount(){return dataList.size();}
@@ -39,7 +41,7 @@ public class GroupCustInfoAdapter extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
         ViewHolder holder = null;
-        if (convertView == null){;
+        if (convertView == null){
             convertView = myInflater.inflate(R.layout.group_custinfo_item,parent,false);
             holder = new ViewHolder(convertView);
             convertView.setTag(holder);
@@ -54,6 +56,9 @@ public class GroupCustInfoAdapter extends BaseAdapter{
         holder.NickName.setText(groupCustInfoEntity.NickName);
         holder.Birthday.setText(groupCustInfoEntity.Birthday);
         holder.DoctorName.setText(String.valueOf(groupCustInfoEntity.DoctorId));
+
+        holder.DoctorName.setTag(new Object[]{groupCustInfoEntity});
+        holder.DoctorName.setOnClickListener(clickListener);
 
         return convertView;
     }

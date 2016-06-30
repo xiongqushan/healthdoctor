@@ -17,4 +17,5 @@ public class GroupCustInfoBean {
     public int ServiceDeptId;// Description: FK: SERVICE_DEPT.ID
     public String ServiceDeptName; // 服务机构名称
     public int GroupInfoId;// Description: FK: GROUP_INFO.ID
+
 }

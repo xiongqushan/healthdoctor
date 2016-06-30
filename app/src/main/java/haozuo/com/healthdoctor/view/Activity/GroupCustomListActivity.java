@@ -1,10 +1,13 @@
 package haozuo.com.healthdoctor.view.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -38,10 +41,29 @@ public class GroupCustomListActivity extends BaseActivity implements IGroupCusto
         setContentView(R.layout.activity_group_custom_list);
         ButterKnife.bind(this);
 
-        setCustomerTitle("分组用户列表1");
+        setCustomerTitle("分组用户列表");
         mIGroupCustomListPresenter=new GroupCustomListPresenterImpl(this);
         custInfoList=new ArrayList<>();
-        groupCustInfoAdapter=new GroupCustInfoAdapter(GroupCustomListActivity.this,custInfoList);
+
+        View.OnClickListener onCustomerItemClickListener =new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Object[]tag=(Object[])view.getTag();
+                int customerId = ((GroupCustInfoBean) tag[0]).CustId;
+                String Cname = ((GroupCustInfoBean) tag[0]).Cname;
+                String NickName = ((GroupCustInfoBean) tag[0]).NickName;
+                //String Cphoto = ((GroupCustInfoBean) tag[0]).CustomerPhoto;
+
+                Intent intent=new Intent(GroupCustomListActivity.this,CustomDetailActivity.class);
+                intent.putExtra("CustomerId", customerId);
+                intent.putExtra("CustomerName", Cname);
+                intent.putExtra("CustomerNickname", NickName);
+                //intent.putExtra("CustomerPhoto", Cphoto);
+                startActivity(intent);
+            }
+        };
+
+        groupCustInfoAdapter=new GroupCustInfoAdapter(GroupCustomListActivity.this,custInfoList,onCustomerItemClickListener);
         list_group_customlist.setAdapter(groupCustInfoAdapter);
 
         pull_to_refresh_layout.setOnRefreshListener(new PullListener());
