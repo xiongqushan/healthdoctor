@@ -30,51 +30,14 @@
             android:gravity="center"
             tools:text="userName" />
     </LinearLayout>
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:id="@+id/detailReport"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" >
+        <android.support.v4.view.PagerTabStrip
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:gravity="center"
-            android:button="@null"
-            android:drawableTop="@mipmap/ic_launcher"
-            android:text="体检报告"/>
-        <RadioButton
-            android:id="@+id/photoReport"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_gravity="center_vertical"
-            android:button="@null"
-            android:drawableTop="@mipmap/ic_launcher"
-            android:text="照片病例"/>
-        <RadioButton
-            android:id="@+id/consult"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_gravity="center_vertical"
-            android:button="@null"
-            android:drawableTop="@mipmap/ic_launcher"
-            android:text="健康咨询"/>
-        <RadioButton
-            android:id="@+id/vitalSign"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_gravity="center_vertical"
-            android:button="@null"
-            android:drawableTop="@mipmap/ic_launcher"
-            android:text="日常体征"/>
-
-    </RadioGroup>
+            android:layout_gravity="top" />
+    </android.support.v4.view.ViewPager>
 </LinearLayout>
