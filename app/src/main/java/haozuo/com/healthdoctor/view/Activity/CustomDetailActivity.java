@@ -21,7 +21,7 @@ import haozuo.com.healthdoctor.view.Fragment.FragmentTest2;
 import haozuo.com.healthdoctor.view.Fragment.FragmentTest3;
 import haozuo.com.healthdoctor.view.adapter.CustDetailFragAdapter;
 
-public class CustomDetailActivity extends BaseActivity {
+public class CustomDetailActivity extends haozuo.com.healthdoctor.view.Activity.BaseActivity {
 
     List<Fragment> fragmentList = new ArrayList<Fragment>();
     List<String>   titleList    = new ArrayList<String>();

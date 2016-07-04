@@ -1,5 +1,6 @@
 package haozuo.com.healthdoctor.contract;
 
+import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.presenter.*;
 
 /**
@@ -8,6 +9,10 @@ import haozuo.com.healthdoctor.presenter.*;
 public interface LoginContract {
 
     interface ILoginView extends BaseView<ILoginPresenter>{
+        void setSMSButtonEnableStatus(boolean isEnabled);
+
+        void getSMSCodeCompelete(GlobalShell<Boolean> resultData);
+
         void loginSuccess();
 
         void loginError(String msg);

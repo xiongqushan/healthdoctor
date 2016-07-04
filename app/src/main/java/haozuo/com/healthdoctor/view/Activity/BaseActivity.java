@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Map;
 
 import haozuo.com.healthdoctor.R;
+import haozuo.com.healthdoctor.contract.BaseView;
 import haozuo.com.healthdoctor.util.CustomDialog;
 import haozuo.com.healthdoctor.util.LoadingDialog;
 import haozuo.com.healthdoctor.util.StringUtil;
@@ -36,7 +37,7 @@ import haozuo.com.healthdoctor.util.SystemBarTintUtil;
 /**
  * Created by xiongwei on 16/5/7.
  */
-public abstract class BaseActivity extends FragmentActivity {
+public abstract class BaseActivity extends FragmentActivity{
     private LoadingDialog loadingDialog;
     private CustomDialog comfirmDialog;
     BaseBroadcastReceiver receiver;
