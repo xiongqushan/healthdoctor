@@ -37,7 +37,7 @@ public class HomeActivity extends BaseActivity implements IHomeActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         if(!UserManager.getInstance().exist()){
-            Intent intent=new Intent(this,LoginActivity.class);
+            Intent intent=new Intent(this, haozuo.com.healthdoctor.view.login.LoginActivity.class);
             startActivity(intent);
             finishThis();
             return;

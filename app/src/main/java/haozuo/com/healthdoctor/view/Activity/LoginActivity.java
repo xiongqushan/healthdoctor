@@ -30,7 +30,7 @@ public class LoginActivity extends BaseActivity implements ILoginActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login_2);
         ButterKnife.bind(this);
         mILoginPresenter=new LoginPresenterImpl(this);
         edit_mobile.setInputType(EditorInfo.TYPE_CLASS_PHONE);

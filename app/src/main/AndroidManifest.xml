@@ -27,7 +27,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.Activity.GroupCustomListActivity" />
-        <activity android:name=".view.Activity.CustomDetailActivity"></activity>
+        <activity android:name=".view.Activity.CustomDetailActivity" />
+        <activity android:name=".view.login.LoginActivity"></activity>
     </application>
 
 </manifest>
