@@ -12,18 +12,18 @@ import haozuo.com.healthdoctor.util.StringUtil;
 /**
  * Created by Administrator on 2016/7/5.
  */
-public abstract class AbsFragmentView extends Fragment  implements BaseView{
+public abstract class AbsFragmentView extends Fragment{
     private LoadingDialog loadingDialog;
     private CustomDialog comfirmDialog;
     protected AbsFragmentView(){
     }
 
-    @Override
+
     public void showDialog() {
         showDialog(null);
     }
 
-    @Override
+
     public void showDialog(String msg) {
         if (loadingDialog == null) {
             loadingDialog = new LoadingDialog(getContext());
@@ -35,12 +35,12 @@ public abstract class AbsFragmentView extends Fragment  implements BaseView{
         loadingDialog.show();
     }
 
-    @Override
+
     public void hideDialog() {
         hideDialog(null);
     }
 
-    @Override
+
     public void hideDialog(String msg) {
         if (loadingDialog != null) {
             loadingDialog.dismiss();
@@ -50,14 +50,14 @@ public abstract class AbsFragmentView extends Fragment  implements BaseView{
         }
     }
 
-    @Override
+
     public void showConfirmDialog(String string, CustomDialog.OnDialogListener onConfirmDialogListener) {
         comfirmDialog = new CustomDialog(getContext(), onConfirmDialogListener);
         comfirmDialog.setContentText(string);
         comfirmDialog.show();
     }
 
-    @Override
+
     public void showConfirmDialog(String content, String confirmText, String cancelText, CustomDialog.OnDialogListener onConfirmDialogListener) {
         comfirmDialog = new CustomDialog(getContext(), onConfirmDialogListener);
         comfirmDialog.setContentText(content);
@@ -66,7 +66,7 @@ public abstract class AbsFragmentView extends Fragment  implements BaseView{
         comfirmDialog.show();
     }
 
-    @Override
+
     public void showConfirmDialog(String content, String confirmText, CustomDialog.OnDialogListener onConfirmDialogListener) {
         comfirmDialog = new CustomDialog(getContext(), onConfirmDialogListener);
         comfirmDialog.setContentText(content);
