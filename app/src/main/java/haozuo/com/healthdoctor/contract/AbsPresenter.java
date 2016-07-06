@@ -3,13 +3,10 @@ package haozuo.com.healthdoctor.contract;
 import java.util.ArrayList;
 import java.util.UUID;
 
-import haozuo.com.healthdoctor.model.IBaseModel;
-import haozuo.com.healthdoctor.presenter.*;
-
 /**
  * Created by Administrator on 2016/7/4.
  */
-public abstract class AbsPresenter implements BasePresenter{
+public abstract class AbsPresenter {
     private ArrayList<String> mTagList;
 
     protected AbsPresenter(){

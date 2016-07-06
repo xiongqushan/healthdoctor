@@ -11,11 +11,7 @@ public interface LoginContract {
     interface ILoginView extends BaseView<ILoginPresenter>{
         void setSMSButtonEnableStatus(boolean isEnabled);
 
-        void getSMSCodeCompelete(GlobalShell<Boolean> resultData);
-
-        void loginSuccess();
-
-        void loginError(String msg);
+        void toHomeActivity();
     }
 
     interface ILoginPresenter extends BasePresenter{

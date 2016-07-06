@@ -2,6 +2,7 @@ package haozuo.com.healthdoctor.view.login;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -19,6 +20,7 @@ import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.contract.AbsFragmentView;
 import haozuo.com.healthdoctor.contract.LoginContract;
 import haozuo.com.healthdoctor.contract.LoginContract.ILoginView;
+import haozuo.com.healthdoctor.view.Activity.HomeActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -54,11 +56,10 @@ public class LoginFragment extends AbsFragmentView implements ILoginView{
             rootView= inflater.inflate(R.layout.fragment_login, container, false);
             ButterKnife.bind(this,rootView);
             edit_mobile.setText("18738170277");
-            final String mobile=edit_mobile.getText().toString();
-            final int code=Integer.parseInt(edit_code.getText().toString());
             txt_GetCode.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                     String mobile=edit_mobile.getText().toString();
                     mILoginPresenter.requestLoginSMS(mobile);
                 }
             });
@@ -66,6 +67,8 @@ public class LoginFragment extends AbsFragmentView implements ILoginView{
             btn_login.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    final String mobile=edit_mobile.getText().toString();
+                    final int code=Integer.parseInt(edit_code.getText().toString());
                     mILoginPresenter.requestLoginWithSMSCode(mobile,code);
                 }
             });
@@ -79,23 +82,10 @@ public class LoginFragment extends AbsFragmentView implements ILoginView{
     }
 
     @Override
-    public void getSMSCodeCompelete(GlobalShell<Boolean> resultData) {
-        if(resultData.LogicSuccess){
-
-        }
-        else{
-
-        }
-    }
-
-    @Override
-    public void loginSuccess() {
-
-    }
-
-    @Override
-    public void loginError(String msg) {
-
+    public void toHomeActivity() {
+        Context context=getContext();
+        Intent intent=new Intent(context, HomeActivity.class);
+        context.startActivity(intent);
     }
 
     @Override
