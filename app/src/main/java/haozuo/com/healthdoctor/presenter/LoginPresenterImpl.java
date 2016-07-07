@@ -3,7 +3,7 @@ package haozuo.com.healthdoctor.presenter;
 import haozuo.com.healthdoctor.bean.DoctorBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
-import haozuo.com.healthdoctor.model.IBaseModel;
+import haozuo.com.healthdoctor.contract.BaseModel;
 import haozuo.com.healthdoctor.model.IUserModel;
 import haozuo.com.healthdoctor.model.UserModel;
 import haozuo.com.healthdoctor.view.Interface.ILoginActivity;
@@ -44,7 +44,7 @@ public class LoginPresenterImpl extends BasePresenter implements ILoginPresenter
     }
 
     @Override
-    public IBaseModel getIBaseModel() {
+    public BaseModel getIBaseModel() {
         return mIUserModel;
     }
 

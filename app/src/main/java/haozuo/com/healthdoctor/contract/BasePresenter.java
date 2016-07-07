@@ -5,4 +5,6 @@ package haozuo.com.healthdoctor.contract;
  */
 public interface BasePresenter {
     void start();
+
+    void cancelRequest();
 }

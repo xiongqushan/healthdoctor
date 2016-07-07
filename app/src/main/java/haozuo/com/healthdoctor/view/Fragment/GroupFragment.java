@@ -1,14 +1,11 @@
 package haozuo.com.healthdoctor.view.Fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTabHost;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +57,7 @@ public class GroupFragment extends BaseFragment implements IGroupFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if(rootview==null) {
-            rootview = inflater.inflate(R.layout.fragment_group, container, false);
+            rootview = inflater.inflate(R.layout.fragment_group_2, container, false);
             ButterKnife.bind(this,rootview);
             list_doctor_group.setAdapter(groupAdapter);
             shareCurrentActivity().showDialog();

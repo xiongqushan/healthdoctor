@@ -16,13 +16,14 @@ import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
 import haozuo.com.healthdoctor.bean.PageBean;
 import haozuo.com.healthdoctor.bean.RequestErrorEnum;
+import haozuo.com.healthdoctor.contract.AbsBaseModel;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
 import haozuo.com.healthdoctor.listener.OnHttpCallbackListener;
 
 /**
  * Created by xiongwei on 16/5/19.
  */
-public class UserModel extends BaseModel implements IUserModel {
+public class UserModel extends AbsBaseModel implements IUserModel {
 
     public static UserModel createInstance(){
         return new UserModel();

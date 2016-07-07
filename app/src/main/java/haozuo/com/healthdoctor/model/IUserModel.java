@@ -7,12 +7,13 @@ import haozuo.com.healthdoctor.bean.DoctorGroupBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
 import haozuo.com.healthdoctor.bean.PageBean;
+import haozuo.com.healthdoctor.contract.BaseModel;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
 
 /**
  * Created by Administrator on 2016/6/18.
  */
-public interface IUserModel extends IBaseModel{
+public interface IUserModel extends BaseModel {
 
     public void GetSMSCode(String tag, String mobile, final OnHandlerResultListener<GlobalShell<Boolean>> callbackListener);
 

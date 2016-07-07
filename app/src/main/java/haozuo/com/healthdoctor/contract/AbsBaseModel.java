@@ -1,4 +1,4 @@
-package haozuo.com.healthdoctor.model;
+package haozuo.com.healthdoctor.contract;
 import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Map;
@@ -10,10 +10,10 @@ import haozuo.com.healthdoctor.util.HttpHelper;
 /**
  * Created by xiongwei on 16/5/19.
  */
-public abstract class BaseModel {
+public abstract class AbsBaseModel {
     protected String CURRENT_VERSION= SysConfig.CURRENT_BASE_VERSION;
     protected String API_BASE_URL=SysConfig.BASE_API[0];
-    public BaseModel(){
+    public AbsBaseModel(){
 
     }
 

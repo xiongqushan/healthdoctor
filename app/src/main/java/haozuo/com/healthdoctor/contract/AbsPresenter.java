@@ -19,12 +19,16 @@ public abstract class AbsPresenter {
         return tag;
     }
 
-    /*public abstract IBaseModel getIBaseModel();
+    public abstract BaseView getBaseView();
+
+    public abstract BaseModel getBaseModel();
 
     public void cancelRequest(){
-        IBaseModel iBaseModel=getIBaseModel();
+        BaseModel iBaseModel= getBaseModel();
         for (String tag:mTagList) {
             iBaseModel.cancel(tag);
         }
-    }*/
+        BaseView baseView=getBaseView();
+        baseView.hideDialog();
+    }
 }

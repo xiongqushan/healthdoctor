@@ -4,7 +4,7 @@ import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
 import haozuo.com.healthdoctor.bean.PageBean;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
-import haozuo.com.healthdoctor.model.IBaseModel;
+import haozuo.com.healthdoctor.contract.BaseModel;
 import haozuo.com.healthdoctor.model.IUserModel;
 import haozuo.com.healthdoctor.model.UserModel;
 import haozuo.com.healthdoctor.view.Interface.IGroupCustomListActivity;
@@ -21,7 +21,7 @@ public class GroupCustomListPresenterImpl extends BasePresenter implements IGrou
     }
 
     @Override
-    public IBaseModel getIBaseModel() {
+    public BaseModel getIBaseModel() {
         return mIUserModel;
     }
 

@@ -28,7 +28,8 @@
         </activity>
         <activity android:name=".view.Activity.GroupCustomListActivity" />
         <activity android:name=".view.Activity.CustomDetailActivity" />
-        <activity android:name=".view.login.LoginActivity"></activity>
+        <activity android:name=".view.login.LoginActivity" />
+        <activity android:name=".view.group.GroupActivity"></activity>
     </application>
 
 </manifest>

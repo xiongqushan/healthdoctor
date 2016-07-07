@@ -9,7 +9,6 @@ import haozuo.com.healthdoctor.presenter.LoginPresenter;
 import haozuo.com.healthdoctor.util.ActivityUtils;
 
 public class LoginActivity extends AppCompatActivity {
-    LoginPresenter mLoginPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +20,7 @@ public class LoginActivity extends AppCompatActivity {
             loginFragment=LoginFragment.newInstance();
             ActivityUtils.addFragmentToActivity(fragmentManager,loginFragment,R.id.frameContent);
         }
-        mLoginPresenter=new LoginPresenter(loginFragment);
+        LoginPresenter mLoginPresenter=new LoginPresenter(loginFragment);
     }
 
 

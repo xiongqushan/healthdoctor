@@ -1,8 +1,8 @@
-package haozuo.com.healthdoctor.model;
+package haozuo.com.healthdoctor.contract;
 
 /**
  * Created by Administrator on 2016/6/19.
  */
-public interface IBaseModel {
+public interface BaseModel {
     void cancel(String tag);
 }

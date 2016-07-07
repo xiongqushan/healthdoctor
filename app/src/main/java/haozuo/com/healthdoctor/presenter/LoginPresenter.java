@@ -3,6 +3,8 @@ package haozuo.com.healthdoctor.presenter;
 import haozuo.com.healthdoctor.bean.DoctorBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.contract.AbsPresenter;
+import haozuo.com.healthdoctor.contract.BaseModel;
+import haozuo.com.healthdoctor.contract.BaseView;
 import haozuo.com.healthdoctor.contract.LoginContract;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
 import haozuo.com.healthdoctor.manager.UserManager;
@@ -63,5 +65,15 @@ public class LoginPresenter extends AbsPresenter implements LoginContract.ILogin
     @Override
     public void start() {
 
+    }
+
+    @Override
+    public BaseView getBaseView() {
+        return mILoginView;
+    }
+
+    @Override
+    public BaseModel getBaseModel() {
+        return mUserModel;
     }
 }

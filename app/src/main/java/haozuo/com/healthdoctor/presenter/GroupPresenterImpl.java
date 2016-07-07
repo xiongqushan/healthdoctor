@@ -5,7 +5,7 @@ import java.util.List;
 import haozuo.com.healthdoctor.bean.DoctorGroupBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
-import haozuo.com.healthdoctor.model.IBaseModel;
+import haozuo.com.healthdoctor.contract.BaseModel;
 import haozuo.com.healthdoctor.model.IUserModel;
 import haozuo.com.healthdoctor.model.UserModel;
 import haozuo.com.healthdoctor.view.Interface.IGroupFragment;
@@ -34,7 +34,7 @@ public class GroupPresenterImpl extends BasePresenter implements IGroupPresenter
     }
 
     @Override
-    public IBaseModel getIBaseModel() {
+    public BaseModel getIBaseModel() {
         return mIUserModel;
     }
 }

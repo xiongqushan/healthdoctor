@@ -3,7 +3,7 @@ package haozuo.com.healthdoctor.presenter;
 import java.util.ArrayList;
 import java.util.UUID;
 
-import haozuo.com.healthdoctor.model.IBaseModel;
+import haozuo.com.healthdoctor.contract.BaseModel;
 
 /**
  * Created by Administrator on 2016/6/19.
@@ -21,10 +21,10 @@ public abstract class BasePresenter {
         return tag;
     }
 
-    public abstract IBaseModel getIBaseModel();
+    public abstract BaseModel getIBaseModel();
 
     public void cancelRequest(){
-        IBaseModel iBaseModel=getIBaseModel();
+        BaseModel iBaseModel=getIBaseModel();
         for (String tag:tagList) {
             iBaseModel.cancel(tag);
         }

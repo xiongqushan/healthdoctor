@@ -4,7 +4,6 @@ package haozuo.com.healthdoctor.view.login;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,8 +15,7 @@ import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
-import haozuo.com.healthdoctor.bean.GlobalShell;
-import haozuo.com.healthdoctor.contract.AbsFragmentView;
+import haozuo.com.healthdoctor.contract.AbsView;
 import haozuo.com.healthdoctor.contract.LoginContract;
 import haozuo.com.healthdoctor.contract.LoginContract.ILoginView;
 import haozuo.com.healthdoctor.view.Activity.HomeActivity;
@@ -25,7 +23,7 @@ import haozuo.com.healthdoctor.view.Activity.HomeActivity;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LoginFragment extends AbsFragmentView implements ILoginView{
+public class LoginFragment extends AbsView implements ILoginView{
     View rootView;
     LoginContract.ILoginPresenter mILoginPresenter;
 
@@ -74,6 +72,12 @@ public class LoginFragment extends AbsFragmentView implements ILoginView{
             });
         }
         return rootView;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mILoginPresenter.cancelRequest();
     }
 
     @Override
