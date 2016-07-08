@@ -1,12 +1,18 @@
 package haozuo.com.healthdoctor.presenter;
 import android.support.annotation.NonNull;
 
+import java.util.List;
+
+import haozuo.com.healthdoctor.bean.DoctorGroupBean;
+import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.contract.AbsPresenter;
 import haozuo.com.healthdoctor.contract.BaseModel;
 import haozuo.com.healthdoctor.contract.BasePresenter;
 import haozuo.com.healthdoctor.contract.BaseView;
 import haozuo.com.healthdoctor.contract.GroupContract;
 import haozuo.com.healthdoctor.contract.GroupContract.IGroupPresenter;
+import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
+import haozuo.com.healthdoctor.manager.UserManager;
 import haozuo.com.healthdoctor.model.UserModel;
 
 /**
@@ -18,6 +24,7 @@ public class GroupPresenter extends AbsPresenter implements IGroupPresenter {
     public GroupPresenter(@NonNull GroupContract.IGroupView iGroupView){
         mIGroupView=iGroupView;
         mUserModel=new UserModel();
+        iGroupView.setPresenter(this);
     }
 
     @Override
@@ -32,7 +39,19 @@ public class GroupPresenter extends AbsPresenter implements IGroupPresenter {
 
     @Override
     public void start() {
-
+        int doctorId= UserManager.getInstance().getDoctorInfo().Id;
+        mIGroupView.showDialog();
+        mUserModel.GetGroup(createRequestTag(), doctorId, new OnHandlerResultListener<GlobalShell<List<DoctorGroupBean>>>() {
+            @Override
+            public void handlerResult(GlobalShell<List<DoctorGroupBean>> resultData) {
+                if(resultData.LogicSuccess) {
+                    mIGroupView.hideDialog();
+                    mIGroupView.refreshGroupList(resultData.Data);
+                }
+                else{
+                    mIGroupView.hideDialog(resultData.Message);
+                }
+            }
+        });
     }
-
 }

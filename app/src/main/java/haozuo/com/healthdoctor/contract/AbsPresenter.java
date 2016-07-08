@@ -7,11 +7,11 @@ import java.util.UUID;
  * Created by Administrator on 2016/7/4.
  */
 public abstract class AbsPresenter {
-    private ArrayList<String> mTagList;
-
-    protected AbsPresenter(){
+    public AbsPresenter(){
         mTagList=new ArrayList<>();
     }
+
+    private ArrayList<String> mTagList;
 
     protected String createRequestTag(){
         String tag= UUID.randomUUID().toString();

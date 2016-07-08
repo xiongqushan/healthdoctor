@@ -1,5 +1,7 @@
 package haozuo.com.healthdoctor.presenter;
 
+import android.support.annotation.NonNull;
+
 import haozuo.com.healthdoctor.bean.DoctorBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.contract.AbsPresenter;
@@ -18,8 +20,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class LoginPresenter extends AbsPresenter implements LoginContract.ILoginPresenter {
     LoginContract.ILoginView mILoginView;
     UserModel mUserModel;
-    public LoginPresenter(LoginContract.ILoginView iLoginView){
-        checkNotNull(iLoginView,"iLoginView can't be null");
+    public LoginPresenter(@NonNull LoginContract.ILoginView iLoginView){
         mILoginView=iLoginView;
         mUserModel=new UserModel();
         mILoginView.setPresenter(this);

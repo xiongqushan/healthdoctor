@@ -5,10 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import haozuo.com.healthdoctor.R;
+import haozuo.com.healthdoctor.contract.BaseActivity;
 import haozuo.com.healthdoctor.presenter.LoginPresenter;
 import haozuo.com.healthdoctor.util.ActivityUtils;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +23,5 @@ public class LoginActivity extends AppCompatActivity {
         }
         LoginPresenter mLoginPresenter=new LoginPresenter(loginFragment);
     }
-
 
 }

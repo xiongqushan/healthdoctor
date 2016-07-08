@@ -9,17 +9,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.GridView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.DoctorGroupBean;
 import haozuo.com.healthdoctor.contract.AbsView;
 import haozuo.com.healthdoctor.contract.BasePresenter;
 import haozuo.com.healthdoctor.contract.GroupContract;
+import haozuo.com.healthdoctor.view.Activity.GroupCustomListActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,17 +33,15 @@ import haozuo.com.healthdoctor.contract.GroupContract;
  * create an instance of this fragment.
  */
 public class GroupFragment extends AbsView implements GroupContract.IGroupView{
+    Context mContext;
     View rootView;
     GroupContract.IGroupPresenter mGroupPresenter;
     GroupAdapter mGroupAdapter;
 
+    @Bind(R.id.list_group)GridView list_group;
+
     private GroupFragment(){
-        mGroupAdapter=new GroupAdapter(getContext(), new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent();
-            }
-        });
+
     }
 
     public static GroupFragment newInstance() {
@@ -57,11 +58,19 @@ public class GroupFragment extends AbsView implements GroupContract.IGroupView{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        mContext=getContext();
         if(rootView==null){
             rootView= inflater.inflate(R.layout.fragment_group, container, false);
             ButterKnife.bind(this,rootView);
-
         }
+        mGroupAdapter=new GroupAdapter(mContext, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(mContext, GroupCustomListActivity.class);
+                mContext.startActivity(intent);
+            }
+        });
+        list_group.setAdapter(mGroupAdapter);
         return rootView;
     }
 
