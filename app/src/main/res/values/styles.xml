@@ -10,7 +10,7 @@
         <item name="android:fitsSystemWindows">true</item>
         <item name="android:windowTitleSize">50dp</item>
     </style>
-    <style name="AppTheme.NoActionBar">
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
     </style>

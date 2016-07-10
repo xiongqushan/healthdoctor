@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -39,5 +40,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         SystemBarTintUtil tintManager = new SystemBarTintUtil(this);
         tintManager.setStatusBarTintEnabled(true);
         tintManager.setStatusBarTintResource(R.color.main_color_blue);//状态栏无背景
+    }
+
+    public void setCustomerTitle(String title){
+        TextView textView=(TextView)findViewById(R.id.txt_TitleBar_title);
+        textView.setText(title);
     }
 }

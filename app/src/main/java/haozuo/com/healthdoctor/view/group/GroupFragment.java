@@ -40,7 +40,7 @@ public class GroupFragment extends AbsView implements GroupContract.IGroupView{
 
     @Bind(R.id.list_group)GridView list_group;
 
-    private GroupFragment(){
+    public GroupFragment(){
 
     }
 

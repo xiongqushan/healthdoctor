@@ -22,7 +22,9 @@
         <activity
             android:name=".view.login.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".view.group.GroupActivity">
+        <activity
+            android:name=".view.group.GroupActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
