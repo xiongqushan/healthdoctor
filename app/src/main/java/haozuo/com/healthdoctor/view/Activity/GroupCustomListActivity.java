@@ -7,7 +7,6 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -20,7 +19,7 @@ import haozuo.com.healthdoctor.presenter.GroupCustomListPresenterImpl;
 import haozuo.com.healthdoctor.presenter.IGroupCustomListPresenter;
 import haozuo.com.healthdoctor.view.Interface.IGroupCustomListActivity;
 import haozuo.com.healthdoctor.view.adapter.GroupCustInfoAdapter;
-import haozuo.com.healthdoctor.view.custom.PullToRefresh.PullToRefreshLayout;
+import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout;
 
 public class GroupCustomListActivity extends BaseActivity implements IGroupCustomListActivity {
     int PAGE_SIZE = 20;
@@ -38,7 +37,7 @@ public class GroupCustomListActivity extends BaseActivity implements IGroupCusto
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_group_custom_list);
+        setContentView(R.layout.activity_group_custom_list_2);
         ButterKnife.bind(this);
 
         setCustomerTitle("分组用户列表");

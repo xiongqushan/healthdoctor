@@ -1,4 +1,4 @@
-package haozuo.com.healthdoctor.view.custom.PullToRefresh;
+package haozuo.com.healthdoctor.view.threePart.PullToRefresh;
 
 import android.content.Context;
 import android.os.Handler;

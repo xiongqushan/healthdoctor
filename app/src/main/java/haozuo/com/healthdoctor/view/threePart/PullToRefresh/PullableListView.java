@@ -1,10 +1,8 @@
-package haozuo.com.healthdoctor.view.custom.PullToRefresh;
+package haozuo.com.healthdoctor.view.threePart.PullToRefresh;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
-import android.view.MotionEvent;
-import android.view.View;
 import android.widget.ListView;
 
 public class PullableListView extends ListView implements Pullable {
