@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -18,17 +19,17 @@ import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
 import haozuo.com.healthdoctor.contract.AbsView;
-import haozuo.com.healthdoctor.contract.GroupCustomList;
+import haozuo.com.healthdoctor.contract.GroupCustomListContract;
 import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout;
 import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullableListView;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class GroupCustomListFragment extends AbsView implements GroupCustomList.IGroupCustomListView {
+public class GroupCustomListFragment extends AbsView implements GroupCustomListContract.IGroupCustomListView {
     Context mContext;
     View rootView;
-    GroupCustomList.IGroupCustomListPresenter mGroupCustomListPresenter;
+    GroupCustomListContract.IGroupCustomListPresenter mGroupCustomListPresenter;
     GroupCustInfoAdapter mGroupCustInfoAdapter;
     @Bind(R.id.list_group_customlist)PullableListView list_group_customlist;
     @Bind(R.id.pull_to_refresh_layout)PullToRefreshLayout pull_to_refresh_layout;
@@ -53,10 +54,11 @@ public class GroupCustomListFragment extends AbsView implements GroupCustomList.
                              Bundle savedInstanceState) {
         mContext=getContext();
         if(rootView==null){
-            rootView= inflater.inflate(R.layout.activity_group_custom_list, container, false);
+            rootView= inflater.inflate(R.layout.fragment_group_custom_list, container, false);
             ButterKnife.bind(this,rootView);
         }
-        mGroupCustInfoAdapter=new GroupCustInfoAdapter(mContext, new View.OnClickListener() {
+
+        mGroupCustInfoAdapter=new GroupCustInfoAdapter(mContext,new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -74,22 +76,28 @@ public class GroupCustomListFragment extends AbsView implements GroupCustomList.
     }
 
     @Override
-    public void setPresenter(GroupCustomList.IGroupCustomListPresenter presenter) {
+    public void setPresenter(GroupCustomListContract.IGroupCustomListPresenter presenter) {
         mGroupCustomListPresenter=presenter;
+    }
+
+    @Override
+    public void refreshCustomAdapter(List<GroupCustInfoBean> dataList) {
+        mGroupCustInfoAdapter.refresh(dataList);
+        mGroupCustInfoAdapter.notifyDataSetChanged();
     }
 
     class PullListener implements PullToRefreshLayout.OnRefreshListener {
 
         @Override
         public void onRefresh() {
-            isRefreshing=true;
-            requestData(false);
+            //isRefreshing=true;
+            mGroupCustomListPresenter.requestCustomList(1);
         }
 
         @Override
         public void onLoadMore() {
-            currentPageIndex++;
-            requestData(true);
+            //currentPageIndex++;
+            //requestData(true);
         }
 
     }
@@ -99,14 +107,15 @@ public class GroupCustomListFragment extends AbsView implements GroupCustomList.
         List<GroupCustInfoBean> dataSource;
         View.OnClickListener clickListener = null;
 
-        public GroupCustInfoAdapter(Context context, View.OnClickListener onClickListener) {
+        public GroupCustInfoAdapter(Context context,View.OnClickListener onClickListener) {
             this.myInflater = LayoutInflater.from(context);
-            dataSource = new ArrayList<>();
+            dataSource =new ArrayList<>();
             clickListener = onClickListener;
         }
 
         public void refresh(List<GroupCustInfoBean> dataList){
-            dataSource=dataList;
+            dataSource.clear();
+            dataSource.addAll(dataList);
             notifyDataSetChanged();
         }
 

@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -22,7 +23,7 @@ import haozuo.com.healthdoctor.bean.DoctorGroupBean;
 import haozuo.com.healthdoctor.contract.AbsView;
 import haozuo.com.healthdoctor.contract.BasePresenter;
 import haozuo.com.healthdoctor.contract.GroupContract;
-import haozuo.com.healthdoctor.view.Activity.GroupCustomListActivity;
+import haozuo.com.healthdoctor.view.custom.GroupCustomListActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -66,7 +67,9 @@ public class GroupFragment extends AbsView implements GroupContract.IGroupView{
         mGroupAdapter=new GroupAdapter(mContext, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int groupId=(int)(((Object[])v.getTag())[0]);
                 Intent intent=new Intent(mContext, GroupCustomListActivity.class);
+                intent.putExtra(GroupCustomListActivity.EXTRA_GROUP_ID,groupId);
                 mContext.startActivity(intent);
             }
         });
@@ -86,7 +89,7 @@ public class GroupFragment extends AbsView implements GroupContract.IGroupView{
     }
 
     @Override
-    public void refreshGroupList(List<DoctorGroupBean> doctorGroupBeanList) {
+    public void refreshGroupAdapter(List<DoctorGroupBean> doctorGroupBeanList) {
         mGroupAdapter.refresh(doctorGroupBeanList);
     }
 

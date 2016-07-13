@@ -7,7 +7,6 @@ import haozuo.com.healthdoctor.bean.DoctorGroupBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.contract.AbsPresenter;
 import haozuo.com.healthdoctor.contract.BaseModel;
-import haozuo.com.healthdoctor.contract.BasePresenter;
 import haozuo.com.healthdoctor.contract.BaseView;
 import haozuo.com.healthdoctor.contract.GroupContract;
 import haozuo.com.healthdoctor.contract.GroupContract.IGroupPresenter;
@@ -46,7 +45,7 @@ public class GroupPresenter extends AbsPresenter implements IGroupPresenter {
             public void handlerResult(GlobalShell<List<DoctorGroupBean>> resultData) {
                 if(resultData.LogicSuccess) {
                     mIGroupView.hideDialog();
-                    mIGroupView.refreshGroupList(resultData.Data);
+                    mIGroupView.refreshGroupAdapter(resultData.Data);
                 }
                 else{
                     mIGroupView.hideDialog(resultData.Message);

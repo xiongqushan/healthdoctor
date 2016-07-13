@@ -14,9 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".view.Activity.HomeActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".view.Activity.GroupCustomListActivity" />
+            android:name=".view.Activity.GroupCustomListActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".view.Activity.CustomDetailActivity" />
         <activity
             android:name=".view.login.LoginActivity"
@@ -30,6 +29,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".view.custom.GroupCustomListActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -37,8 +39,6 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
-        <activity android:name=".view.custom.GroupCustomListActivity"></activity>
     </application>
 
 </manifest>

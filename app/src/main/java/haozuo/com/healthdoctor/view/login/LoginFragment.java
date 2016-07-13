@@ -18,7 +18,7 @@ import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.contract.AbsView;
 import haozuo.com.healthdoctor.contract.LoginContract;
 import haozuo.com.healthdoctor.contract.LoginContract.ILoginView;
-import haozuo.com.healthdoctor.view.Activity.HomeActivity;
+import haozuo.com.healthdoctor.view.group.GroupActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -88,7 +88,7 @@ public class LoginFragment extends AbsView implements ILoginView{
     @Override
     public void toHomeActivity() {
         Context context=getContext();
-        Intent intent=new Intent(context, HomeActivity.class);
+        Intent intent=new Intent(context, GroupActivity.class);
         context.startActivity(intent);
     }
 

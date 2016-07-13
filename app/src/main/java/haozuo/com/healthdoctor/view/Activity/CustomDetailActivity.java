@@ -16,9 +16,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.view.Fragment.CustDetailFragment;
-import haozuo.com.healthdoctor.view.Fragment.FragmentTest1;
-import haozuo.com.healthdoctor.view.Fragment.FragmentTest2;
-import haozuo.com.healthdoctor.view.Fragment.FragmentTest3;
 import haozuo.com.healthdoctor.view.adapter.CustDetailFragAdapter;
 
 public class CustomDetailActivity extends haozuo.com.healthdoctor.view.Activity.BaseActivity {
@@ -49,9 +46,6 @@ public class CustomDetailActivity extends haozuo.com.healthdoctor.view.Activity.
         GenericDraweeHierarchy hierarchy = customerImg.getHierarchy(); //头像占位
         hierarchy.setPlaceholderImage(R.drawable.ic_launcher);
 
-        fragmentList.add(FragmentTest2.newInstance("",""));
-        fragmentList.add(FragmentTest2.newInstance("",""));
-        fragmentList.add(FragmentTest3.newInstance("",""));
         //fragmentList.add(new CustDetailFragment("页面1"));
         //fragmentList.add(new CustDetailFragment("页面2"));
         //fragmentList.add(new CustDetailFragment("页面3"));
