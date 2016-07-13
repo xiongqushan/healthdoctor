@@ -129,11 +129,11 @@ public class UserModel extends AbsBaseModel implements IUserModel {
         get(tag, "GetCusGroupByDoctorId",params,onAsyncCallbackListener);
     }
 
-    public void GetGroupCustInfoList(String tag,int serviceDeptId,int groupId,String customNameOrId,int pageIndex,int pageSize, final OnHandlerResultListener<GlobalShell<PageBean<GroupCustInfoBean>>> callbackListener){
+    public void GetGroupCustInfoList(String tag,int serviceDeptId,int groupId,int doctorId,int pageIndex,int pageSize, final OnHandlerResultListener<GlobalShell<PageBean<GroupCustInfoBean>>> callbackListener){
         Map<String, Object> params=new HashMap<>();
         params.put("serviceDeptId", serviceDeptId);
         params.put("groupId", groupId);
-        params.put("customNameOrId", customNameOrId);
+        params.put("doctorId", doctorId);
         params.put("pageIndex", pageIndex);
         params.put("pageSize", pageSize);
         OnHttpCallbackListener onAsyncCallbackListener=new OnHttpCallbackListener<JSONObject>(){

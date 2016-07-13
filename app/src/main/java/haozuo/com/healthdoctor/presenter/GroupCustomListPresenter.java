@@ -45,8 +45,9 @@ public class GroupCustomListPresenter extends AbsPresenter implements GroupCusto
 
     @Override
     public void requestCustomList(int pageIndex) {
+        int doctorId= UserManager.getInstance().getDoctorInfo().Id;
         int departId= UserManager.getInstance().getDoctorInfo().ServiceDeptId;
-        mUserModel.GetGroupCustInfoList(createRequestTag(), departId, mGroupId, "", pageIndex, PAGE_SIZE, new OnHandlerResultListener<GlobalShell<PageBean<GroupCustInfoBean>>>() {
+        mUserModel.GetGroupCustInfoList(createRequestTag(), departId, mGroupId, doctorId, pageIndex, PAGE_SIZE, new OnHandlerResultListener<GlobalShell<PageBean<GroupCustInfoBean>>>() {
             @Override
             public void handlerResult(GlobalShell<PageBean<GroupCustInfoBean>> resultData) {
                 if(resultData.LogicSuccess) {
