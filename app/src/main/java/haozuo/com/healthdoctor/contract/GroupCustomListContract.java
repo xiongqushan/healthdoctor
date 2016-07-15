@@ -16,6 +16,8 @@ public interface GroupCustomListContract {
     }
 
     interface IGroupCustomListPresenter extends BasePresenter{
-        void requestCustomList(int pageIndex);
+        void refreshCustomList();
+
+        void loadmoreCustomList();
     }
 }
