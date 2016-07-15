@@ -86,18 +86,21 @@ public class GroupCustomListFragment extends AbsView implements GroupCustomListC
         mGroupCustInfoAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void refreshFinish(int status) {
+        pull_to_refresh_layout.refreshFinish(status);
+    }
+
     class PullListener implements PullToRefreshLayout.OnRefreshListener {
 
         @Override
         public void onRefresh() {
-            //isRefreshing=true;
             mGroupCustomListPresenter.requestCustomList(1);
         }
 
         @Override
         public void onLoadMore() {
-            //currentPageIndex++;
-            //requestData(true);
+            mGroupCustomListPresenter.requestCustomList(1);
         }
 
     }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:background="#000000">
+    <ImageButton android:id="@+id/btn_menu_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/tabhost_home_btn"
+        android:scaleType="center"/>
+
+    <ImageButton android:id="@+id/btn_menu_consult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/tabhost_consult_btn"/>
+
+    <ImageButton android:id="@+id/btn_menu_my"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/tabhost_my_btn"/>
+</LinearLayout>

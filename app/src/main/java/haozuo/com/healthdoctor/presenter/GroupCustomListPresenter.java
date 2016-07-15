@@ -12,12 +12,14 @@ import haozuo.com.healthdoctor.contract.GroupCustomListContract;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
 import haozuo.com.healthdoctor.manager.UserManager;
 import haozuo.com.healthdoctor.model.UserModel;
+import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout;
 
 /**
  * Created by xiongwei1 on 2016/7/11.
  */
 public class GroupCustomListPresenter extends AbsPresenter implements GroupCustomListContract.IGroupCustomListPresenter {
     private int PAGE_SIZE=20;
+    private int mCurrentPageIndex=1;
     private GroupCustomListContract.IGroupCustomListView mGroupCustomListView;
     private UserModel mUserModel;
     private int mGroupId;
@@ -45,17 +47,20 @@ public class GroupCustomListPresenter extends AbsPresenter implements GroupCusto
 
     @Override
     public void requestCustomList(int pageIndex) {
+        mCurrentPageIndex=pageIndex;
         int doctorId= UserManager.getInstance().getDoctorInfo().Id;
         int departId= UserManager.getInstance().getDoctorInfo().ServiceDeptId;
-        mUserModel.GetGroupCustInfoList(createRequestTag(), departId, mGroupId, doctorId, pageIndex, PAGE_SIZE, new OnHandlerResultListener<GlobalShell<PageBean<GroupCustInfoBean>>>() {
+        mUserModel.GetGroupCustInfoList(createRequestTag(), departId, mGroupId, doctorId, mCurrentPageIndex, PAGE_SIZE, new OnHandlerResultListener<GlobalShell<PageBean<GroupCustInfoBean>>>() {
             @Override
             public void handlerResult(GlobalShell<PageBean<GroupCustInfoBean>> resultData) {
                 if(resultData.LogicSuccess) {
                     mGroupCustomListView.hideDialog();
                     mGroupCustomListView.refreshCustomAdapter(resultData.Data.CurrentPageDataList);
+                    mGroupCustomListView.refreshFinish(PullToRefreshLayout.SUCCEED);
                 }
                 else{
                     mGroupCustomListView.hideDialog(resultData.Message);
+                    mGroupCustomListView.refreshFinish(PullToRefreshLayout.FAIL);
                 }
             }
         });
