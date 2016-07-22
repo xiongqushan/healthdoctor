@@ -2,6 +2,7 @@ package haozuo.com.healthdoctor.presenter;
 
 import android.support.annotation.NonNull;
 
+import haozuo.com.healthdoctor.bean.CustomBean;
 import haozuo.com.healthdoctor.contract.AbsPresenter;
 import haozuo.com.healthdoctor.contract.BaseModel;
 import haozuo.com.healthdoctor.contract.BaseView;
@@ -22,7 +23,10 @@ public class CustomDetailPresenter extends AbsPresenter implements CustomDetailC
 
     @Override
     public void start() {
+        //request data
+        CustomBean customBean=null;
 
+        mICustomDetailView.InitView(customBean);
     }
 
     @Override

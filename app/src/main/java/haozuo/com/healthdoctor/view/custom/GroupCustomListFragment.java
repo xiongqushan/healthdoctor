@@ -2,6 +2,7 @@ package haozuo.com.healthdoctor.view.custom;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -60,7 +61,11 @@ public class GroupCustomListFragment extends AbsView implements GroupCustomListC
         mGroupCustInfoAdapter=new GroupCustInfoAdapter(mContext,new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Object[]tag=(Object[])v.getTag();
+                int customerId = ((GroupCustInfoBean) tag[0]).CustId;
+                Intent intent = new Intent(getActivity(),haozuo.com.healthdoctor.view.custom.CustomDetailActivity.class);
+                intent.putExtra("CustomerId", customerId);
+                startActivity(intent);
             }
         });
         list_group_customlist.setAdapter(mGroupCustInfoAdapter);
@@ -154,7 +159,7 @@ public class GroupCustomListFragment extends AbsView implements GroupCustomListC
             holder.Birthday.setText(groupCustInfoEntity.Birthday);
             holder.DoctorName.setText(String.valueOf(groupCustInfoEntity.DoctorId));
 
-            holder.DoctorName.setTag(new Object[]{groupCustInfoEntity});
+            holder.DoctorName.setTag(new Object[]{groupCustInfoEntity.CustId});
             holder.DoctorName.setOnClickListener(clickListener);
 
             return convertView;
