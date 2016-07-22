@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.google.android.gms.appindexing.Action;
@@ -43,8 +44,34 @@ public abstract class BaseActivity extends AppCompatActivity {
         tintManager.setStatusBarTintResource(R.color.main_color_blue);//状态栏无背景
     }
 
-    public void setCustomerTitle(String title){
+    protected void setCustomerTitle(String title){
         TextView textView=(TextView)findViewById(R.id.txt_TitleBar_title);
         textView.setText(title);
     }
+
+    protected void initTabhostMenu(){
+        RadioButton rbChat = (RadioButton) findViewById(R.id.rbChat);
+        RadioButton rbAddress = (RadioButton) findViewById(R.id.rbAddress);
+        RadioButton rbFind = (RadioButton) findViewById(R.id.rbFind);
+        rbChat.setOnClickListener(getFragment);
+        rbAddress.setOnClickListener(getFragment);
+        rbFind.setOnClickListener(getFragment);
+    }
+
+    View.OnClickListener getFragment = new View.OnClickListener()
+    {
+        public void onClick(View v){
+            switch (v.getId()){
+                case R.id.rbChat:
+                    //do sth
+                    break;
+                case R.id.rbAddress:
+                    //do sth
+                    break;
+                case R.id.rbFind:
+                    //do sth
+                    break;
+            }
+        }
+    };
 }

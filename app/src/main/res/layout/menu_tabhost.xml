@@ -5,21 +5,61 @@
     android:layout_height="48dp"
     android:background="#000000">
 
+    <!--<ImageButton android:id="@+id/btn_menu_consult"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:background="@drawable/tabhost_consult_btn"/>-->
 
-    
-    <ImageButton android:id="@+id/btn_menu_home"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/tabhost_home_btn"
-        android:scaleType="center"/>
+    <!--<ImageButton android:id="@+id/btn_menu_my"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:background="@drawable/tabhost_my_btn"/>-->
 
-    <ImageButton android:id="@+id/btn_menu_consult"
-        android:layout_width="wrap_content"
+    <RadioGroup
+        android:id="@+id/tab_menu"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/tabhost_consult_btn"/>
+        android:orientation="horizontal" >
 
-    <ImageButton android:id="@+id/btn_menu_my"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/tabhost_my_btn"/>
+        <RadioButton
+            android:id="@+id/rbChat"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:button="@null"
+            android:checked="true"
+            android:drawableTop="@drawable/tabhost_home_btn"
+            android:gravity="center_horizontal|bottom"
+            android:paddingTop="2dp"
+            android:textColor="@drawable/tab_selector_tv_color"
+            android:text="首页" />
+
+        <RadioButton
+            android:id="@+id/rbAddress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/tabhost_consult_btn"
+            android:gravity="center_horizontal|bottom"
+            android:paddingTop="2dp"
+            android:textColor="@drawable/tab_selector_tv_color"
+            android:text="咨询" />
+
+        <RadioButton
+            android:id="@+id/rbFind"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/tabhost_my_btn"
+            android:gravity="center_horizontal|bottom"
+            android:paddingTop="2dp"
+            android:textColor="@drawable/tab_selector_tv_color"
+            android:text="我的" />
+    </RadioGroup>
+
 </LinearLayout>
