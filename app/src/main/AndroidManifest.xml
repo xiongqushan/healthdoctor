@@ -14,10 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".view.Activity.GroupCustomListActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".view.Activity.CustomDetailActivity" />
-        <activity
             android:name=".view.login.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

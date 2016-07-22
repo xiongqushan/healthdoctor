@@ -19,7 +19,6 @@ import haozuo.com.healthdoctor.contract.BaseActivity;
 import haozuo.com.healthdoctor.manager.UserManager;
 import haozuo.com.healthdoctor.presenter.GroupPresenter;
 import haozuo.com.healthdoctor.util.ActivityUtils;
-import haozuo.com.healthdoctor.view.Fragment.*;
 
 public class GroupActivity extends BaseActivity {
     @Override
