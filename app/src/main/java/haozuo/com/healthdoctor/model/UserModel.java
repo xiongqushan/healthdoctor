@@ -167,6 +167,40 @@ public class UserModel extends AbsBaseModel implements IUserModel {
         get(tag,"GetGroupCustInfoList",params,onAsyncCallbackListener);
     }
 
+    public void GetUserDetail(String tag,int customerId, final OnHandlerResultListener<GlobalShell<GroupCustInfoBean>> callbackListener){
+        Map<String, Object> params=new HashMap<>();
+        params.put("customerId", customerId);
+        OnHttpCallbackListener onAsyncCallbackListener=new OnHttpCallbackListener<JSONObject>(){
+            @Override
+            public void onSuccess(JSONObject resultData) {
+                GlobalShell<GroupCustInfoBean> entity = null;
+                try {
+                    int code = resultData.getInt("state");
+                    String msg = resultData.getString("message");
+                    if(code>0) {
+                        String dataString = resultData.getString("Data");
+                        Type listType = new TypeToken<GroupCustInfoBean>() {}.getType();
+                        GroupCustInfoBean result = new Gson().fromJson(dataString, listType);
+                        entity=new GlobalShell<GroupCustInfoBean>(result);
+                    }
+                    else{
+                        entity=new GlobalShell<GroupCustInfoBean>(msg);
+                    }
+                } catch (Exception ex) {
+                    entity = new GlobalShell<GroupCustInfoBean>(RequestErrorEnum.LogicException, ex.getMessage());
+                }
+                callbackListener.handlerResult(entity);
+            }
+
+            @Override
+            public void onError(RequestErrorEnum errorType, String msg) {
+                GlobalShell<GroupCustInfoBean> entity=new GlobalShell<GroupCustInfoBean>(errorType,msg);
+                callbackListener.handlerResult(entity);
+            }
+        };
+        get(tag,"GetCusInfo",params,onAsyncCallbackListener);
+    }
+
     @Override
     protected String getModule() {
         return "User";
