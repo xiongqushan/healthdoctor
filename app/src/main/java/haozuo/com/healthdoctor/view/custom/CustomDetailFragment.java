@@ -56,7 +56,7 @@ public class CustomDetailFragment extends AbsView implements CustomDetailContrac
     @Override
     public void onStop() {
         super.onStop();
-        mCustomDetailPresenter.cancelRequest();
+        mCustomDetailPresenter.cancelRequest(); 
     }
 
     @Override
