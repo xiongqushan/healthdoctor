@@ -1,23 +1,21 @@
 package haozuo.com.healthdoctor.view.custom;
 
-import android.content.Intent;
-import android.net.Uri;
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 
-import com.facebook.drawee.generic.GenericDraweeHierarchy;
-
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.contract.BaseActivity;
-import haozuo.com.healthdoctor.presenter.CustomDetailPresenter;
+import haozuo.com.healthdoctor.presenter.CustomerInfoPresenter;
 import haozuo.com.healthdoctor.util.ActivityUtils;
 
-public class CustomDetailActivity extends BaseActivity {
+public class CustomerInfoActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_custom_detail);
+        setContentView(R.layout.activity_customer_info);
+
         setCustomerTitle("客户详情");
 
         Bundle bundle = getIntent().getExtras();
@@ -25,11 +23,11 @@ public class CustomDetailActivity extends BaseActivity {
         int customerId = bundle.getInt("CustomerId");
 
         FragmentManager fragmentManager=getSupportFragmentManager();
-        CustomDetailFragment fragment=(CustomDetailFragment)fragmentManager.findFragmentById(R.id.frameContent);
+        CustomerInfoFragment fragment=(CustomerInfoFragment)fragmentManager.findFragmentById(R.id.frameContent);
         if(fragment==null){
-            fragment=CustomDetailFragment.newInstance(customerId);
+            fragment=CustomerInfoFragment.newInstance(customerId);
             ActivityUtils.addFragmentToActivity(fragmentManager,fragment,R.id.frameContent);
         }
-        CustomDetailPresenter mGroupPresenter=new CustomDetailPresenter(fragment);
+        CustomerInfoPresenter mGroupPresenter=new CustomerInfoPresenter(customerId, fragment);
     }
 }

@@ -22,7 +22,7 @@ public class GroupCustomListActivity extends BaseActivity {
         FragmentManager fragmentManager=getSupportFragmentManager();
         GroupCustomListFragment groupCustomListFragment=(GroupCustomListFragment)fragmentManager.findFragmentById(R.id.frameContent);
         if(groupCustomListFragment==null){
-            groupCustomListFragment=groupCustomListFragment.newInstance();
+            groupCustomListFragment=GroupCustomListFragment.newInstance();
             ActivityUtils.addFragmentToActivity(fragmentManager,groupCustomListFragment,R.id.frameContent);
         }
         mGroupCustomListPresenter=new GroupCustomListPresenter(groupId, groupCustomListFragment);
