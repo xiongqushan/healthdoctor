@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
-import haozuo.com.healthdoctor.bean.CustomBean;
 import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
 import haozuo.com.healthdoctor.contract.AbsView;
 import haozuo.com.healthdoctor.contract.CustomerInfoContract;
@@ -66,5 +65,6 @@ public class CustomerInfoFragment extends AbsView implements CustomerInfoContrac
     public void InitView(GroupCustInfoBean custom) {
 
     }
+
 
 }

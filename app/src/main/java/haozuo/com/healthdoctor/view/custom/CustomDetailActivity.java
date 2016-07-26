@@ -1,11 +1,8 @@
 package haozuo.com.healthdoctor.view.custom;
 
-import android.content.Intent;
-import android.net.Uri;
+
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-
-import com.facebook.drawee.generic.GenericDraweeHierarchy;
 
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.contract.BaseActivity;
@@ -21,7 +18,6 @@ public class CustomDetailActivity extends BaseActivity {
         setCustomerTitle("客户详情");
 
         Bundle bundle = getIntent().getExtras();
-
         int customerId = bundle.getInt("CustomerId");
 
         FragmentManager fragmentManager=getSupportFragmentManager();
@@ -30,6 +26,6 @@ public class CustomDetailActivity extends BaseActivity {
             fragment=CustomDetailFragment.newInstance(customerId);
             ActivityUtils.addFragmentToActivity(fragmentManager,fragment,R.id.frameContent);
         }
-        CustomDetailPresenter mGroupPresenter=new CustomDetailPresenter(fragment);
+        CustomDetailPresenter mGroupPresenter=new CustomDetailPresenter(fragment, customerId);
     }
 }

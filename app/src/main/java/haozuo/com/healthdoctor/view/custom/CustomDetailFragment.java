@@ -3,25 +3,39 @@ package haozuo.com.healthdoctor.view.custom;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
-import haozuo.com.healthdoctor.bean.CustomBean;
+import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
 import haozuo.com.healthdoctor.contract.AbsView;
 import haozuo.com.healthdoctor.contract.CustomDetailContract;
 
 public class CustomDetailFragment extends AbsView implements CustomDetailContract.ICustomDetailView{
+    private SimpleFragmentPagerAdapter pagerAdapter;
     Context mContext;
     View rootView;
     int mCustomerId;
+    String Cphoto;
     CustomDetailContract.ICustomDetailPresenter mCustomDetailPresenter;
-    @Bind(R.id.tv_testname) TextView tv_testname;
+    @Bind(R.id.customerName) TextView customerName;
+    @Bind(R.id.customerImg) SimpleDraweeView customerImg;
+    @Bind(R.id.customDetail_Tab) TabLayout tabLayout;
+    @Bind(R.id.customDetail_Vp) ViewPager viewPager;
+
 
     public CustomDetailFragment(){
     }
@@ -61,7 +75,52 @@ public class CustomDetailFragment extends AbsView implements CustomDetailContrac
     }
 
     @Override
-    public void InitView(CustomBean custom) {
-        tv_testname.setText(custom.Name);
+    public void InitView(GroupCustInfoBean custom) {
+        if (custom.PhotoUrl == null){
+            Cphoto = "http://pic002.cnblogs.com/images/2011/103608/2011062022023456.jpg";
+        }
+        else {
+            Cphoto = custom.PhotoUrl;
+        }
+        Uri uri = Uri.parse(Cphoto);
+        customerImg.setImageURI(uri);
+        customerName.setText(custom.Cname);
+
+        CustomDetailFragment fragment = new CustomDetailFragment();
+        CustomDetailFragment.SimpleFragmentPagerAdapter pagerAdapter = fragment.new SimpleFragmentPagerAdapter(getActivity().getSupportFragmentManager(), mContext);
+        viewPager.setAdapter(pagerAdapter);
+        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setTabMode(TabLayout.MODE_FIXED);
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
     }
+
+    public class SimpleFragmentPagerAdapter extends FragmentPagerAdapter {
+
+        final int PAGE_COUNT = 4;
+        private String tabTitles[] = new String[]{"tab1","tab2","tab3","tab4"};
+        private Context context;
+
+        public SimpleFragmentPagerAdapter(FragmentManager fm, Context context) {
+            super(fm);
+            this.context = context;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return PageFragment.newInstance(position + 1);
+        }
+
+        @Override
+        public int getCount() {
+            return PAGE_COUNT;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return tabTitles[position];
+        }
+    }
+
 }
+
+

@@ -2,11 +2,14 @@ package haozuo.com.healthdoctor.presenter;
 
 import android.support.annotation.NonNull;
 
-import haozuo.com.healthdoctor.bean.CustomBean;
+import haozuo.com.healthdoctor.bean.GlobalShell;
+import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
 import haozuo.com.healthdoctor.contract.AbsPresenter;
 import haozuo.com.healthdoctor.contract.BaseModel;
 import haozuo.com.healthdoctor.contract.BaseView;
 import haozuo.com.healthdoctor.contract.CustomDetailContract;
+import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
+
 import haozuo.com.healthdoctor.model.UserModel;
 
 /**
@@ -15,18 +18,30 @@ import haozuo.com.healthdoctor.model.UserModel;
 public class CustomDetailPresenter extends AbsPresenter implements CustomDetailContract.ICustomDetailPresenter {
     private CustomDetailContract.ICustomDetailView mICustomDetailView;
     private UserModel mUserModel;
-    public CustomDetailPresenter(@NonNull CustomDetailContract.ICustomDetailView iView){
+    private int mCustomerId;
+    public CustomDetailPresenter(@NonNull CustomDetailContract.ICustomDetailView iView, int customerId){
         mICustomDetailView=iView;
         mUserModel=new UserModel();
         mICustomDetailView.setPresenter(this);
+        mCustomerId = customerId;
     }
 
     @Override
     public void start() {
-        //request data
-        CustomBean customBean=null;
-
-        mICustomDetailView.InitView(customBean);
+        mICustomDetailView.showDialog();
+        mUserModel.GetUserDetail(createRequestTag(), mCustomerId, new OnHandlerResultListener<GlobalShell<GroupCustInfoBean>>() {
+            @Override
+            public void handlerResult(GlobalShell<GroupCustInfoBean> resultData) {
+            if(resultData.LogicSuccess) {
+                mICustomDetailView.hideDialog();
+                GroupCustInfoBean customBean = resultData.Data;
+                mICustomDetailView.InitView(customBean);
+            }
+            else{
+                mICustomDetailView.hideDialog(resultData.Message);
+            }
+            }
+        });
     }
 
     @Override

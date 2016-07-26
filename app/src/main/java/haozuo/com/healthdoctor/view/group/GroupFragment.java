@@ -25,14 +25,6 @@ import haozuo.com.healthdoctor.contract.BasePresenter;
 import haozuo.com.healthdoctor.contract.GroupContract;
 import haozuo.com.healthdoctor.view.custom.GroupCustomListActivity;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link GroupFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link GroupFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class GroupFragment extends AbsView implements GroupContract.IGroupView{
     Context mContext;
     View rootView;

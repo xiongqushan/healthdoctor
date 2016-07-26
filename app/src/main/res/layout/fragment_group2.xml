@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:id="@+id/firstGroup"
+        android:layout_width="190dp"
+        android:layout_height="145dp"
+        android:layout_marginRight="8dp"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:background="@color/light_blue">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            tools:text="高血压组"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="服务人数:58"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/secondGroup"
+        android:layout_width="190dp"
+        android:layout_height="145dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_alignLeft="@id/firstGroup"
+        android:layout_below="@id/firstGroup"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:background="@color/light_blue">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            tools:text="高血压组"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="服务人数:58"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/thirdGroup"
+        android:layout_width="190dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_alignLeft="@id/secondGroup"
+        android:layout_below="@id/secondGroup"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:background="@color/light_blue">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            tools:text="高血压组"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="服务人数:58"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fourthGroup"
+        android:layout_width="190dp"
+        android:layout_height="200dp"
+        android:gravity="center"
+        android:layout_toRightOf="@id/firstGroup"
+        android:orientation="vertical"
+        tools:background="@color/light_blue">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            tools:text="高血压组"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="服务人数:58"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fifthGroup"
+        android:layout_width="190dp"
+        android:layout_height="145dp"
+        android:layout_marginTop="8dp"
+        android:layout_alignLeft="@id/fourthGroup"
+        android:gravity="center"
+        android:layout_below="@id/fourthGroup"
+        android:orientation="vertical"
+        tools:background="@color/light_blue">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            tools:text="高血压组"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="服务人数:58"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/sixedGroup"
+        android:layout_width="190dp"
+        android:layout_height="145dp"
+        android:layout_marginTop="8dp"
+        android:layout_alignLeft="@id/fifthGroup"
+        android:gravity="center"
+        android:layout_below="@id/fifthGroup"
+        android:orientation="vertical"
+        tools:background="@color/light_blue">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            tools:text="高血压组"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="服务人数:58"/>
+    </LinearLayout>
+
+</RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:orientation="vertical" android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:orientation="horizontal">-->
+        <!--<LinearLayout-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:orientation="vertical"-->
+            <!--android:layout_gravity="left">-->
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="0dp"-->
+                    <!--android:layout_weight="1.5"-->
+                    <!--android:layout_margin="5dp"-->
+                    <!--android:gravity="center"-->
+
+                    <!--tools:background="@color/greenyellow">-->
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--tools:text="肿瘤指标异常组"/>-->
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content" />-->
+                <!--</LinearLayout>-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="0dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:layout_margin="5dp"-->
+                    <!--tools:background="@color/orange">-->
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--tools:text="糖尿病组"/>-->
+                <!--</LinearLayout>-->
+            <!---->
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="0dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:layout_margin="5dp"-->
+                    <!--tools:background="@color/seagreen">-->
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--tools:text="其他组"/>-->
+                <!--</LinearLayout>-->
+                <!---->
+        <!--</LinearLayout>-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:orientation="vertical"-->
+            <!--android:layout_gravity="right">-->
+            <!---->
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="0dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_margin="5dp"-->
+                <!--tools:background="@color/seagreen">-->
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--tools:text="高血压组"/>-->
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="0dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_margin="5dp"-->
+                <!--tools:background="@color/orange">-->
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--tools:text="血脂异常组"/>-->
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="0dp"-->
+                <!--android:layout_weight="1.5"-->
+                <!--android:layout_margin="5dp"-->
+                <!--tools:background="@color/greenyellow">-->
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--tools:text="各项指标正常组"/>-->
+            <!--</LinearLayout>-->
+            <!---->
+        <!--</LinearLayout>-->
+    <!--</LinearLayout>-->
+
+<!--</LinearLayout>-->

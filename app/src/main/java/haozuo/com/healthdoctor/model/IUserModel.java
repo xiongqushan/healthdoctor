@@ -22,4 +22,7 @@ public interface IUserModel extends BaseModel {
     public void GetGroup(String tag,int doctorId, final OnHandlerResultListener<GlobalShell<List<DoctorGroupBean>>> callbackListener);
 
     public void GetGroupCustInfoList(String tag,int serviceDeptId,int groupId,int doctorId,int pageIndex,int pageSize, final OnHandlerResultListener<GlobalShell<PageBean<GroupCustInfoBean>>> callbackListener);
+
+    public void GetUserDetail(String tag,int customerId, final OnHandlerResultListener<GlobalShell<GroupCustInfoBean>> callbackListener);
+
 }

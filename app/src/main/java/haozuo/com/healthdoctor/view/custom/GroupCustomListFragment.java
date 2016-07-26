@@ -62,10 +62,10 @@ public class GroupCustomListFragment extends AbsView implements GroupCustomListC
             @Override
             public void onClick(View v) {
                 Object[]tag=(Object[])v.getTag();
-                int customerId = ((GroupCustInfoBean) tag[0]).CustId;
-                Intent intent = new Intent(getActivity(),haozuo.com.healthdoctor.view.custom.CustomDetailActivity.class);
+                int customerId = (int)(((Object[])v.getTag())[0]);
+                Intent intent = new Intent(mContext,CustomDetailActivity.class);
                 intent.putExtra("CustomerId", customerId);
-                startActivity(intent);
+                mContext.startActivity(intent);
             }
         });
         list_group_customlist.setAdapter(mGroupCustInfoAdapter);

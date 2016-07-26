@@ -1,6 +1,5 @@
 package haozuo.com.healthdoctor.contract;
 
-import haozuo.com.healthdoctor.bean.CustomBean;
 import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
 
 /**

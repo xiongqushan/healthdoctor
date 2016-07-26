@@ -1,37 +1,56 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.custom.CustomDetailFragment">
 
-    <TextView android:id="@+id/tv_testname"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:orientation="vertical"
-        android:padding="5dp"
-        tools:background="@color/red">
-
-        <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/customerImg"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center|center_horizontal"
-            android:gravity="center"
-            fresco:roundAsCircle="true" />
-
-        <TextView
-            android:id="@+id/customerName"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:orientation="vertical"
+            android:padding="5dp"
+            tools:background="@color/red"
+            android:weightSum="1">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/customerImg"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center|center_horizontal"
+                android:gravity="center"
+                fresco:roundAsCircle="true" />
+
+            <TextView
+                android:id="@+id/customerName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|center_horizontal"
+                android:gravity="center"
+                tools:text="userName" />
+
+        </LinearLayout>
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/customDetail_Tab"
             android:layout_height="wrap_content"
-            android:layout_gravity="center|center_horizontal"
-            android:gravity="center"
-            tools:text="userName" />
+            android:layout_width="match_parent"
+            app:tabIndicatorColor="@color/red"
+            app:tabSelectedTextColor="@color/red"
+            app:tabTextColor="@color/black">
+        </android.support.design.widget.TabLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/customDetail_Vp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+        </android.support.v4.view.ViewPager>
     </LinearLayout>
 
 </FrameLayout>
