@@ -9,10 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.facebook.drawee.view.SimpleDraweeView;
-
-import org.w3c.dom.Text;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
@@ -56,7 +52,7 @@ public class CustomDetailFragment extends AbsView implements CustomDetailContrac
     @Override
     public void onStop() {
         super.onStop();
-        mCustomDetailPresenter.cancelRequest(); 
+        mCustomDetailPresenter.cancelRequest();
     }
 
     @Override
