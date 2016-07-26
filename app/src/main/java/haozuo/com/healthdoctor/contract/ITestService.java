@@ -1,6 +1,5 @@
 package haozuo.com.healthdoctor.contract;
 
-import haozuo.com.healthdoctor.bean.GetIpInfoResponse;
 import haozuo.com.healthdoctor.bean.TestBean;
 import retrofit.http.GET;
 import retrofit.http.Query;
