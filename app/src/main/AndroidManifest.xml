@@ -40,6 +40,10 @@
             android:name=".view.custom.CustomDetailActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
+        <activity
+            android:name=".view.custom.CustomerInfoActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
     </application>
 
 </manifest>

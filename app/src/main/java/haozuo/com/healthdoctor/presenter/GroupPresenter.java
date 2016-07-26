@@ -1,8 +1,12 @@
 package haozuo.com.healthdoctor.presenter;
+import android.content.ContentValues;
 import android.support.annotation.NonNull;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
+import haozuo.com.healthdoctor.bean.DoctorBean;
 import haozuo.com.healthdoctor.bean.DoctorGroupBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.contract.AbsPresenter;
@@ -17,7 +21,7 @@ import haozuo.com.healthdoctor.model.UserModel;
 /**
  * Created by xiongwei1 on 2016/7/7.
  */
-public class GroupPresenter extends AbsPresenter implements IGroupPresenter {
+public class GroupPresenter extends AbsPresenter implements IGroupPresenter{
     private GroupContract.IGroupView mIGroupView;
     private UserModel mUserModel;
     public GroupPresenter(@NonNull GroupContract.IGroupView iGroupView){
@@ -45,7 +49,10 @@ public class GroupPresenter extends AbsPresenter implements IGroupPresenter {
             public void handlerResult(GlobalShell<List<DoctorGroupBean>> resultData) {
                 if(resultData.LogicSuccess) {
                     mIGroupView.hideDialog();
-                    mIGroupView.refreshGroupAdapter(resultData.Data);
+                    DoctorGroupBean doctorGroupBean = new DoctorGroupBean();
+                    Collections.sort(resultData.Data,doctorGroupBean);
+                    mIGroupView.setGroupInfo(resultData.Data);
+//                    mIGroupView.refreshGroupAdapter(resultData.Data);
                 }
                 else{
                     mIGroupView.hideDialog(resultData.Message);
@@ -53,4 +60,6 @@ public class GroupPresenter extends AbsPresenter implements IGroupPresenter {
             }
         });
     }
+
+
 }
