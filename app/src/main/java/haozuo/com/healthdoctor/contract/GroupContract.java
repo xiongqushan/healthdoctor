@@ -9,7 +9,8 @@ import haozuo.com.healthdoctor.bean.DoctorGroupBean;
  */
 public interface GroupContract {
     interface IGroupView extends BaseView<IGroupPresenter>{
-        void refreshGroupAdapter(List<DoctorGroupBean>doctorGroupBeanList);
+//        void refreshGroupAdapter(List<DoctorGroupBean>doctorGroupBeanList);
+        void setGroupInfo(List<DoctorGroupBean>doctorGroupBeanList);
     }
 
     interface IGroupPresenter extends BasePresenter{

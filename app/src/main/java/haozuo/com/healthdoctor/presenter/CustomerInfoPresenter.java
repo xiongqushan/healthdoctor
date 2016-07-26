@@ -15,11 +15,11 @@ import haozuo.com.healthdoctor.model.UserModel;
  * Created by xiongwei1 on 2016/7/25.
  */
 public class CustomerInfoPresenter extends AbsPresenter implements CustomerInfoContract.ICustomerInfoPresenter {
-    private int mCustomerId;
+    private GroupCustInfoBean mCustomInfo;
     private CustomerInfoContract.ICustomerInfoView mICustomerInfoView;
     private UserModel mUserModel;
-    public CustomerInfoPresenter(@NonNull int customerId, @NonNull CustomerInfoContract.ICustomerInfoView iCustomerInfoView){
-        mCustomerId=customerId;
+    public CustomerInfoPresenter(@NonNull GroupCustInfoBean customInfo, @NonNull CustomerInfoContract.ICustomerInfoView iCustomerInfoView){
+        mCustomInfo=customInfo;
         mICustomerInfoView=iCustomerInfoView;
         mUserModel=new UserModel();
         mICustomerInfoView.setPresenter(this);
@@ -37,19 +37,6 @@ public class CustomerInfoPresenter extends AbsPresenter implements CustomerInfoC
 
     @Override
     public void start() {
-        mICustomerInfoView.showDialog();
-        mUserModel.GetUserDetail(createRequestTag(),mCustomerId, new OnHandlerResultListener<GlobalShell<GroupCustInfoBean>>() {
-            @Override
-            public void handlerResult(GlobalShell<GroupCustInfoBean> resultData) {
-
-                if(resultData.LogicSuccess) {
-                    mICustomerInfoView.hideDialog();
-                    mICustomerInfoView.InitView(resultData.Data);
-                }
-                else{
-                    mICustomerInfoView.hideDialog(resultData.Message);
-                }
-            }
-        });
+        mICustomerInfoView.InitView(mCustomInfo);
     }
 }

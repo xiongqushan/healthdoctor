@@ -1,6 +1,7 @@
 package haozuo.com.healthdoctor.view.custom;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -23,6 +24,7 @@ import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
 import haozuo.com.healthdoctor.contract.AbsView;
 import haozuo.com.healthdoctor.contract.CustomDetailContract;
+import haozuo.com.healthdoctor.contract.CustomerInfoContract;
 
 public class CustomDetailFragment extends AbsView implements CustomDetailContract.ICustomDetailView{
     private SimpleFragmentPagerAdapter pagerAdapter;
@@ -76,6 +78,7 @@ public class CustomDetailFragment extends AbsView implements CustomDetailContrac
 
     @Override
     public void InitView(GroupCustInfoBean custom) {
+        final GroupCustInfoBean customInfo = custom;
         if (custom.PhotoUrl == null){
             Cphoto = "http://pic002.cnblogs.com/images/2011/103608/2011062022023456.jpg";
         }
@@ -85,6 +88,16 @@ public class CustomDetailFragment extends AbsView implements CustomDetailContrac
         Uri uri = Uri.parse(Cphoto);
         customerImg.setImageURI(uri);
         customerName.setText(custom.Cname);
+        customerImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, CustomerInfoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("CustomInfo", customInfo);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
 
         CustomDetailFragment fragment = new CustomDetailFragment();
         CustomDetailFragment.SimpleFragmentPagerAdapter pagerAdapter = fragment.new SimpleFragmentPagerAdapter(getActivity().getSupportFragmentManager(), mContext);
