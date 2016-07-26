@@ -16,11 +16,18 @@ import android.widget.TextView;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.squareup.okhttp.Interceptor;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
 
+import java.io.IOException;
 import java.util.List;
 
 import haozuo.com.healthdoctor.R;
+import haozuo.com.healthdoctor.bean.BaseBean;
 import haozuo.com.healthdoctor.bean.TestBean;
+import haozuo.com.healthdoctor.bean.TestGroupBean;
 import haozuo.com.healthdoctor.contract.BaseActivity;
 import haozuo.com.healthdoctor.contract.ITestService;
 import haozuo.com.healthdoctor.manager.UserManager;
@@ -44,6 +51,7 @@ public class GroupActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group);
         setCustomerTitle("客户分组");
+
         boolean isLogin=checkLogin();
         if(!isLogin){
             return;
@@ -55,9 +63,6 @@ public class GroupActivity extends BaseActivity {
             ActivityUtils.addFragmentToActivity(fragmentManager,groupFragment,R.id.frameContent);
         }
          GroupPresenter mGroupPresenter=new GroupPresenter(groupFragment);
-
-
-
 
         /*
         Retrofit retrofit = new Retrofit.Builder()
@@ -86,6 +91,51 @@ public class GroupActivity extends BaseActivity {
                     }
                 });
                 */
+
+        /*
+        OkHttpClient httpClient = new OkHttpClient.Builder()
+                .addInterceptor(new Interceptor() {
+                    @Override
+                    public Response intercept(Chain chain) throws IOException {
+                        Request request = chain.request()
+                                .newBuilder()
+                                .addHeader("Content-Type", "application/json; charset=UTF-8")
+                                .addHeader("Accept", "application/json")
+                                .addHeader("Authorization", "xxxx")
+                                .build();
+                        return chain.proceed(request);
+                    }
+                })
+                .build();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://hc.ihaozhuo.com:90")
+                .client(httpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+
+        ITestService testService = retrofit.create(ITestService.class);
+        testService.getGroup(30)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<BaseBean<TestGroupBean>>() {
+                    @Override
+                    public void onCompleted() {
+                        String a="";
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        String a="";
+                    }
+
+                    @Override
+                    public void onNext(BaseBean<TestGroupBean> testBean) {
+                        String a= testBean.toString();
+                    }
+                });
+        */
 
     }
 
