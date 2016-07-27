@@ -23,7 +23,7 @@ import haozuo.com.healthdoctor.listener.OnHttpCallbackListener;
 /**
  * Created by xiongwei on 16/5/19.
  */
-public class UserModel extends AbsBaseModel implements IUserModel {
+public class UserModel extends AbsBaseModel {
 
     public static UserModel createInstance(){
         return new UserModel();

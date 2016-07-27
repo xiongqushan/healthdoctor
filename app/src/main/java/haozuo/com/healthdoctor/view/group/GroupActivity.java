@@ -92,7 +92,7 @@ public class GroupActivity extends BaseActivity {
                 });
                 */
 
-        /*
+/*
         OkHttpClient httpClient = new OkHttpClient.Builder()
                 .addInterceptor(new Interceptor() {
                     @Override
@@ -136,7 +136,6 @@ public class GroupActivity extends BaseActivity {
                     }
                 });
         */
-
     }
 
     boolean checkLogin() {

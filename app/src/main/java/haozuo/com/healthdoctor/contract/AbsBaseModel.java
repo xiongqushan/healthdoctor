@@ -10,7 +10,7 @@ import haozuo.com.healthdoctor.util.HttpHelper;
 /**
  * Created by xiongwei on 16/5/19.
  */
-public abstract class AbsBaseModel {
+public abstract class AbsBaseModel implements BaseModel{
     protected String CURRENT_VERSION= SysConfig.CURRENT_BASE_VERSION;
     protected String API_BASE_URL=SysConfig.BASE_API[0];
     public AbsBaseModel(){
