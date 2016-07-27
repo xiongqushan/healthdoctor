@@ -3,28 +3,32 @@ package haozuo.com.healthdoctor.model;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import haozuo.com.healthdoctor.bean.BaseBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.bean.RequestErrorEnum;
+import haozuo.com.healthdoctor.bean.TestGroupBean;
 import haozuo.com.healthdoctor.contract.AbsBaseModel;
+import haozuo.com.healthdoctor.contract.AbsModel;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
 import haozuo.com.healthdoctor.listener.OnHttpCallbackListener;
+import haozuo.com.healthdoctor.service.IGroupService;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by xiongwei1 on 2016/7/27.
  */
-public class GroupModel extends AbsBaseModel {
-    public static UserModel createInstance(){
-        return new UserModel();
+public class GroupModel extends AbsModel {
+
+    public static GroupModel createInstance(){
+        return new GroupModel();
     }
 
-    @Override
-    protected String getModule() {
-        return "User";
-    }
-
-    public void DeleteCustomerGroup(String tag,int customerId,int groupId,String operateBy, final OnHandlerResultListener<GlobalShell<Boolean>> callbackListener){
+    /*public void DeleteCustomerGroup(String tag,int customerId,int groupId,String operateBy, final OnHandlerResultListener<GlobalShell<Boolean>> callbackListener){
         Map<String, Object> params=new HashMap<>();
         params.put("customerId", customerId);
         params.put("curGroupId", groupId);
@@ -56,5 +60,33 @@ public class GroupModel extends AbsBaseModel {
             }
         };
         get(tag,"DeleteCustomerGroup",params,onAsyncCallbackListener);
+    }*/
+
+    public void GetGroup(int doctorId){
+        IGroupService testService=createService(IGroupService.class);
+        testService.getGroup(doctorId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<BaseBean<List<TestGroupBean>>>() {
+                    @Override
+                    public void onCompleted() {
+                        String a="";
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        String a="";
+                    }
+
+                    @Override
+                    public void onNext(BaseBean<List<TestGroupBean>> testBean) {
+                        String a= testBean.toString();
+                    }
+                });
+    }
+
+    @Override
+    public void cancel(String tag) {
+
     }
 }

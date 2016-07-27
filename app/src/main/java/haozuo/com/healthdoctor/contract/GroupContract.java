@@ -15,6 +15,6 @@ public interface GroupContract {
 
     interface IGroupPresenter extends BasePresenter{
 
-
     }
+
 }
