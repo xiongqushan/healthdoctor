@@ -28,62 +28,38 @@ public class GroupModel extends AbsModel {
         return new GroupModel();
     }
 
-    /*public void DeleteCustomerGroup(String tag,int customerId,int groupId,String operateBy, final OnHandlerResultListener<GlobalShell<Boolean>> callbackListener){
-        Map<String, Object> params=new HashMap<>();
-        params.put("customerId", customerId);
-        params.put("curGroupId", groupId);
-        params.put("operateBy", operateBy);
-        OnHttpCallbackListener onAsyncCallbackListener=new OnHttpCallbackListener<JSONObject>(){
-            @Override
-            public void onSuccess(JSONObject resultData) {
-                GlobalShell<Boolean> entity=null;
-                try {
-                    int code = resultData.getInt("state");
-                    String msg = resultData.getString("message");
-                    if(code>0) {
-                        boolean result = resultData.getBoolean("Data");
-                        entity=new GlobalShell<Boolean>(result);
-                    }
-                    else{
-                        entity=new GlobalShell<Boolean>(msg);
-                    }
-                } catch (Exception ex) {
-                    entity=new GlobalShell<Boolean>(RequestErrorEnum.LogicException,ex.getMessage());
-                }
-                callbackListener.handlerResult(entity);
-            }
-
-            @Override
-            public void onError(RequestErrorEnum errorType, String msg) {
-                GlobalShell<Boolean> entity=new GlobalShell<Boolean>(errorType,msg);
-                callbackListener.handlerResult(entity);
-            }
-        };
-        get(tag,"DeleteCustomerGroup",params,onAsyncCallbackListener);
-    }*/
-
-    public void GetGroup(int doctorId){
-        IGroupService testService=createService(IGroupService.class);
-        testService.getGroup(doctorId)
+    public void DeleteCustomerGroup(String tag,int customerId,int groupId,String operateBy, final OnHandlerResultListener<GlobalShell<Boolean>> callbackListener){
+        IGroupService groupService=createService(IGroupService.class);
+        groupService.DeleteGroup(customerId,groupId,operateBy)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<BaseBean<List<TestGroupBean>>>() {
+                .subscribe(new Subscriber<BaseBean<Boolean>>() {
                     @Override
                     public void onCompleted() {
-                        String a="";
+
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        String a="";
+                        GlobalShell<Boolean> entity=new GlobalShell<Boolean>(e.getMessage());
+                        callbackListener.handlerResult(entity);
                     }
 
                     @Override
-                    public void onNext(BaseBean<List<TestGroupBean>> testBean) {
-                        String a= testBean.toString();
+                    public void onNext(BaseBean<Boolean> resultBean) {
+                        GlobalShell<Boolean> entity=null;
+                        if(resultBean.state>0) {
+                            boolean result = resultBean.Data;
+                            entity=new GlobalShell<Boolean>(result);
+                        }
+                        else{
+                            entity=new GlobalShell<Boolean>(resultBean.message);
+                        }
+                        callbackListener.handlerResult(entity);
                     }
                 });
     }
+
 
     @Override
     public void cancel(String tag) {

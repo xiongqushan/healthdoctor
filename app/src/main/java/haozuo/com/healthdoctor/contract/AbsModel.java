@@ -8,11 +8,18 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
+import java.nio.charset.Charset;
 
 import haozuo.com.healthdoctor.framework.SysConfig;
 import haozuo.com.healthdoctor.util.StringUtil;
+import okio.Buffer;
+import okio.BufferedSink;
+import okio.ByteString;
+import okio.Source;
+import okio.Timeout;
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 import retrofit.RxJavaCallAdapterFactory;
@@ -32,12 +39,24 @@ public abstract class AbsModel implements BaseModel{
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request request = chain.request();
+                String originUrl=request.urlString();
+                long timespan=System.currentTimeMillis()/1000L;
+                if(originUrl.contains("?")){
+                    originUrl+="&timespan="+timespan;
+                }
+                else{
+                    originUrl+="?timespan="+timespan;
+                }
+                request= request.newBuilder().url(originUrl).build();
                 String sign ="";
                 if(request.method().toLowerCase().equals("get")) {
                     sign = request.urlString() + "|" + BASIC_SIGN_SECRET;
                 }
                 else{
-                    String postData= request.body().toString();
+                    final Request copy = request.newBuilder().build();
+                    final Buffer buffer = new Buffer();
+                    copy.body().writeTo(buffer);
+                    String postData= buffer.readUtf8();
                     sign=request.urlString()+"|" + postData + "|"+BASIC_SIGN_SECRET;
                 }
                 sign= StringUtil.encodeByMD5(sign);
