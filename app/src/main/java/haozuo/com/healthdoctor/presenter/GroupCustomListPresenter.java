@@ -32,7 +32,7 @@ public class GroupCustomListPresenter extends AbsPresenter implements GroupCusto
         mGroupCustInfoBeanList=new ArrayList<>();
         mGroupId=groupId;
         mGroupCustomListView=iGroupCustomListView;
-        mUserModel=new UserModel();
+        mUserModel=UserModel.createInstance();
         mGroupCustomListView.setPresenter(this);
     }
 
@@ -57,7 +57,7 @@ public class GroupCustomListPresenter extends AbsPresenter implements GroupCusto
         mCurrentPageIndex=1;
         int doctorId= UserManager.getInstance().getDoctorInfo().Id;
         int departId= UserManager.getInstance().getDoctorInfo().ServiceDeptId;
-        mUserModel.GetGroupCustInfoList(createRequestTag(), departId, mGroupId, doctorId, mCurrentPageIndex, PAGE_SIZE, new OnHandlerResultListener<GlobalShell<PageBean<GroupCustInfoBean>>>() {
+        mUserModel.GetGroupCustInfoList(departId, mGroupId, doctorId, mCurrentPageIndex, PAGE_SIZE, new OnHandlerResultListener<GlobalShell<PageBean<GroupCustInfoBean>>>() {
             @Override
             public void handlerResult(GlobalShell<PageBean<GroupCustInfoBean>> resultData) {
                 if(resultData.LogicSuccess) {
@@ -82,7 +82,7 @@ public class GroupCustomListPresenter extends AbsPresenter implements GroupCusto
         mCurrentPageIndex++;
         int doctorId= UserManager.getInstance().getDoctorInfo().Id;
         int departId= UserManager.getInstance().getDoctorInfo().ServiceDeptId;
-        mUserModel.GetGroupCustInfoList(createRequestTag(), departId, mGroupId, doctorId, mCurrentPageIndex, PAGE_SIZE, new OnHandlerResultListener<GlobalShell<PageBean<GroupCustInfoBean>>>() {
+        mUserModel.GetGroupCustInfoList(departId, mGroupId, doctorId, mCurrentPageIndex, PAGE_SIZE, new OnHandlerResultListener<GlobalShell<PageBean<GroupCustInfoBean>>>() {
             @Override
             public void handlerResult(GlobalShell<PageBean<GroupCustInfoBean>> resultData) {
                 if(resultData.LogicSuccess) {

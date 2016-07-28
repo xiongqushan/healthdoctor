@@ -9,8 +9,6 @@ import java.util.Map;
 import haozuo.com.healthdoctor.bean.BaseBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.bean.RequestErrorEnum;
-import haozuo.com.healthdoctor.bean.TestGroupBean;
-import haozuo.com.healthdoctor.contract.AbsBaseModel;
 import haozuo.com.healthdoctor.contract.AbsModel;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
 import haozuo.com.healthdoctor.listener.OnHttpCallbackListener;
@@ -28,7 +26,7 @@ public class GroupModel extends AbsModel {
         return new GroupModel();
     }
 
-    public void DeleteCustomerGroup(String tag,int customerId,int groupId,String operateBy, final OnHandlerResultListener<GlobalShell<Boolean>> callbackListener){
+    public void DeleteCustomerGroup(int customerId,int groupId,String operateBy, final OnHandlerResultListener<GlobalShell<Boolean>> callbackListener){
         IGroupService groupService=createService(IGroupService.class);
         groupService.DeleteGroup(customerId,groupId,operateBy)
                 .subscribeOn(Schedulers.io())
@@ -60,9 +58,4 @@ public class GroupModel extends AbsModel {
                 });
     }
 
-
-    @Override
-    public void cancel(String tag) {
-
-    }
 }

@@ -7,17 +7,6 @@ import java.util.UUID;
  * Created by Administrator on 2016/7/4.
  */
 public abstract class AbsPresenter {
-    public AbsPresenter(){
-        mTagList=new ArrayList<>();
-    }
-
-    private ArrayList<String> mTagList;
-
-    protected String createRequestTag(){
-        String tag= UUID.randomUUID().toString();
-        mTagList.add(tag);
-        return tag;
-    }
 
     public abstract BaseView getBaseView();
 
@@ -25,9 +14,8 @@ public abstract class AbsPresenter {
 
     public void cancelRequest(){
         BaseModel iBaseModel= getBaseModel();
-        for (String tag:mTagList) {
-            iBaseModel.cancel(tag);
-        }
+        iBaseModel.cancelRequest();
+
         BaseView baseView=getBaseView();
         baseView.hideDialog();
     }

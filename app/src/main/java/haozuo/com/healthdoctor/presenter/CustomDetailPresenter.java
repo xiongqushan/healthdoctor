@@ -4,7 +4,6 @@ import android.support.annotation.NonNull;
 
 import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
-import haozuo.com.healthdoctor.contract.AbsBaseModel;
 import haozuo.com.healthdoctor.contract.AbsPresenter;
 import haozuo.com.healthdoctor.contract.BaseModel;
 import haozuo.com.healthdoctor.contract.BaseView;
@@ -22,7 +21,7 @@ public class CustomDetailPresenter extends AbsPresenter implements CustomDetailC
     private int mCustomerId;
     public CustomDetailPresenter(@NonNull CustomDetailContract.ICustomDetailView iView, int customerId){
         mICustomDetailView=iView;
-        mUserModel=new UserModel();
+        mUserModel=UserModel.createInstance();
         mICustomDetailView.setPresenter(this);
         mCustomerId = customerId;
     }
@@ -30,7 +29,7 @@ public class CustomDetailPresenter extends AbsPresenter implements CustomDetailC
     @Override
     public void start() {
         mICustomDetailView.showDialog();
-        mUserModel.GetUserDetail(createRequestTag(), mCustomerId, new OnHandlerResultListener<GlobalShell<GroupCustInfoBean>>() {
+        mUserModel.GetUserDetail(mCustomerId, new OnHandlerResultListener<GlobalShell<GroupCustInfoBean>>() {
             @Override
             public void handlerResult(GlobalShell<GroupCustInfoBean> resultData) {
             if(resultData.LogicSuccess) {

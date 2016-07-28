@@ -21,7 +21,7 @@ public class CustomerInfoPresenter extends AbsPresenter implements CustomerInfoC
     public CustomerInfoPresenter(@NonNull GroupCustInfoBean customInfo, @NonNull CustomerInfoContract.ICustomerInfoView iCustomerInfoView){
         mCustomInfo=customInfo;
         mICustomerInfoView=iCustomerInfoView;
-        mUserModel=new UserModel();
+        mUserModel=UserModel.createInstance();
         mICustomerInfoView.setPresenter(this);
     }
 

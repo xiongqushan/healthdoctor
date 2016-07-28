@@ -22,7 +22,7 @@ public class LoginPresenter extends AbsPresenter implements LoginContract.ILogin
     UserModel mUserModel;
     public LoginPresenter(@NonNull LoginContract.ILoginView iLoginView){
         mILoginView=iLoginView;
-        mUserModel=new UserModel();
+        mUserModel=UserModel.createInstance();
         mILoginView.setPresenter(this);
     }
 
@@ -30,8 +30,7 @@ public class LoginPresenter extends AbsPresenter implements LoginContract.ILogin
     public void requestLoginSMS(String mobile) {
         mILoginView.setSMSButtonEnableStatus(false);
         mILoginView.showDialog();
-        String tag=createRequestTag();
-        mUserModel.GetSMSCode(tag, mobile, new OnHandlerResultListener<GlobalShell<Boolean>>() {
+        mUserModel.GetSMSCode(mobile, new OnHandlerResultListener<GlobalShell<Boolean>>() {
             @Override
             public void handlerResult(GlobalShell<Boolean> resultData) {
                 String msg="获取验证码成功！";
@@ -47,8 +46,7 @@ public class LoginPresenter extends AbsPresenter implements LoginContract.ILogin
     @Override
     public void requestLoginWithSMSCode(String mobile, int code) {
         mILoginView.showDialog();
-        String tag=createRequestTag();
-        mUserModel.Login(tag, mobile, code, new OnHandlerResultListener<GlobalShell<DoctorBean>>() {
+        mUserModel.Login(mobile, code, new OnHandlerResultListener<GlobalShell<DoctorBean>>() {
             @Override
             public void handlerResult(GlobalShell<DoctorBean> resultData) {
                 if(resultData.LogicSuccess) {

@@ -35,7 +35,7 @@ public class UserModel extends AbsModel {
         return new UserModel();
     }
 
-    public void GetSMSCode(String tag,String mobile, final OnHandlerResultListener<GlobalShell<Boolean>> callbackListener){
+    public void GetSMSCode(String mobile, final OnHandlerResultListener<GlobalShell<Boolean>> callbackListener){
         IUserService userService= createService(IUserService.class);
         userService.getSMSCode(mobile)
                 .subscribeOn(Schedulers.io())
@@ -67,7 +67,7 @@ public class UserModel extends AbsModel {
                 });
     }
 
-    public void Login(String tag, String mobile,int smsCode, final OnHandlerResultListener<GlobalShell<DoctorBean>> callbackListener) {
+    public void Login(String mobile,int smsCode, final OnHandlerResultListener<GlobalShell<DoctorBean>> callbackListener) {
         Map<String, Object> params = new HashMap<>();
         params.put("Mobile", mobile);
         params.put("SmsCode", smsCode);
@@ -102,7 +102,7 @@ public class UserModel extends AbsModel {
                 });
     }
 
-    public void GetGroup(String tag,int doctorId, final OnHandlerResultListener<GlobalShell<List<DoctorGroupBean>>> callbackListener){
+    public void GetGroup(int doctorId, final OnHandlerResultListener<GlobalShell<List<DoctorGroupBean>>> callbackListener){
         IGroupService groupService=createService(IGroupService.class);
         groupService.getGroup(doctorId)
                 .subscribeOn(Schedulers.io())
@@ -135,7 +135,7 @@ public class UserModel extends AbsModel {
 
     }
 
-    public void GetGroupCustInfoList(String tag,int serviceDeptId,int groupId,int doctorId,int pageIndex,int pageSize, final OnHandlerResultListener<GlobalShell<PageBean<GroupCustInfoBean>>> callbackListener){
+    public void GetGroupCustInfoList(int serviceDeptId,int groupId,int doctorId,int pageIndex,int pageSize, final OnHandlerResultListener<GlobalShell<PageBean<GroupCustInfoBean>>> callbackListener){
         IUserService userService=createService(IUserService.class);
         userService.getGroupCustInfoList(serviceDeptId,doctorId,groupId,"",pageIndex,pageSize)
                 .subscribeOn(Schedulers.io())
@@ -167,7 +167,7 @@ public class UserModel extends AbsModel {
                 });
     }
 
-    public void GetUserDetail(String tag,int customerId, final OnHandlerResultListener<GlobalShell<GroupCustInfoBean>> callbackListener){
+    public void GetUserDetail(int customerId, final OnHandlerResultListener<GlobalShell<GroupCustInfoBean>> callbackListener){
         IUserService userService=createService(IUserService.class);
         userService.GetCusInfo(customerId)
                 .subscribeOn(Schedulers.io())
@@ -199,8 +199,4 @@ public class UserModel extends AbsModel {
                 });
     }
 
-    @Override
-    public void cancel(String tag) {
-
-    }
 }

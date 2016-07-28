@@ -28,7 +28,6 @@ import java.util.List;
 
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.BaseBean;
-import haozuo.com.healthdoctor.bean.TestGroupBean;
 import haozuo.com.healthdoctor.contract.BaseActivity;
 import haozuo.com.healthdoctor.manager.UserManager;
 import haozuo.com.healthdoctor.model.GroupModel;
