@@ -8,8 +8,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.List;
 
 import haozuo.com.healthdoctor.bean.DoctorBean;
+import haozuo.com.healthdoctor.bean.DoctorGroupBean;
 import haozuo.com.healthdoctor.framework.HZApplication;
 import haozuo.com.healthdoctor.util.StringUtil;
 
@@ -22,6 +24,7 @@ public class UserManager {
     private static UserManager _instance;
     private static SharedPreferences sharedPreferences;
     private static DoctorBean _currentEntity;
+    private static List<DoctorGroupBean> _currentGroupEntity;
     private UserManager() {
         if (null == sharedPreferences) {
             sharedPreferences = HZApplication.shareContext().getSharedPreferences(SP_NAME,Activity.MODE_PRIVATE);
@@ -53,6 +56,24 @@ public class UserManager {
         }
     }
 
+    public void setGroupInfo(List<DoctorGroupBean> GroupEntity){
+        try {
+            _currentGroupEntity=GroupEntity;
+            // 保存对象
+            SharedPreferences.Editor sharedata =sharedPreferences.edit();
+            ByteArrayOutputStream bos=new ByteArrayOutputStream();
+            ObjectOutputStream os=new ObjectOutputStream(bos);
+            //将对象序列化写入byte缓存
+            os.writeObject(GroupEntity);
+            String bytesToHexString = StringUtil.bytesToHexString(bos.toByteArray());
+            sharedata.putString(USER_INFO_KEY, bytesToHexString);
+            sharedata.apply();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public DoctorBean getDoctorInfo(){
         if(_currentEntity==null){
             try {
@@ -73,6 +94,28 @@ public class UserManager {
             }
         }
         return _currentEntity;
+    }
+
+    public List<DoctorGroupBean> getGroupInfo(){
+        if(_currentGroupEntity==null){
+            try {
+                if (sharedPreferences.contains(USER_INFO_KEY)) {
+                    String localData = sharedPreferences.getString(USER_INFO_KEY, "");
+                    if(!StringUtil.isEmpty(localData)){
+                        byte[] stringToBytes = StringUtil.StringToBytes(localData);
+                        ByteArrayInputStream bis=new ByteArrayInputStream(stringToBytes);
+                        ObjectInputStream is=new ObjectInputStream(bis);
+                        //返回反序列化得到的对象
+                        Object localObject = is.readObject();
+                        List<DoctorGroupBean> localInfo=(List<DoctorGroupBean>)localObject;
+                        _currentGroupEntity=localInfo;
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return  _currentGroupEntity;
     }
 
     public boolean exist(){

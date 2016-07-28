@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     tools:context="haozuo.com.healthdoctor.view.custom.GroupCustomListFragment">
 
-
     <haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout
         android:id="@+id/pull_to_refresh_layout"
         android:layout_width="match_parent"
@@ -17,8 +16,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:divider="@null"
-            android:scrollbars="none" />
+            android:scrollbars="none"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"/>
         <include layout="@layout/load_more" />
     </haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout>
--->
+
 </FrameLayout>

@@ -1,5 +1,6 @@
 package haozuo.com.healthdoctor.contract;
 
+import haozuo.com.healthdoctor.bean.CustomDetailBean;
 import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
 
 /**
@@ -7,10 +8,10 @@ import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
  */
 public interface CustomerInfoContract {
     interface ICustomerInfoView extends BaseView<ICustomerInfoPresenter>{
-        void InitView(GroupCustInfoBean custom);
+        void InitView(CustomDetailBean custom);
     }
 
     interface ICustomerInfoPresenter extends BasePresenter{
-
+        void DeleteCustomerGroup(int DeleteGroupId);
     }
 }

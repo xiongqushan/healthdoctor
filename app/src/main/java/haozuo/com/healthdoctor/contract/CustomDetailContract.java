@@ -1,5 +1,6 @@
 package haozuo.com.healthdoctor.contract;
 
+import haozuo.com.healthdoctor.bean.CustomDetailBean;
 import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
 
 /**
@@ -7,7 +8,7 @@ import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
  */
 public interface CustomDetailContract {
     interface ICustomDetailView extends BaseView<ICustomDetailPresenter>{
-        void InitView(GroupCustInfoBean custom);
+        void InitView(CustomDetailBean custom);
     }
 
     interface ICustomDetailPresenter extends BasePresenter{

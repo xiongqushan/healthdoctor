@@ -331,6 +331,18 @@
                 android:layout_marginTop="13dp"
                 android:text="分组"/>
 
+            <ScrollView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+                <haozuo.com.healthdoctor.view.custom.CustomerInfoFlowLayout
+                    android:id="@+id/flow_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:padding="10dp" >
+                </haozuo.com.healthdoctor.view.custom.CustomerInfoFlowLayout>
+            </ScrollView>
+
         </LinearLayout>
 
     </LinearLayout>

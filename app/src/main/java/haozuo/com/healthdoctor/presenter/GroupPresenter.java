@@ -51,6 +51,7 @@ public class GroupPresenter extends AbsPresenter implements IGroupPresenter{
                     mIGroupView.hideDialog();
                     DoctorGroupBean doctorGroupBean = new DoctorGroupBean();
                     Collections.sort(resultData.Data,doctorGroupBean);
+                    UserManager.getInstance().setGroupInfo((List<DoctorGroupBean>) resultData.Data);
                     mIGroupView.setGroupInfo(resultData.Data);
 //                    mIGroupView.refreshGroupAdapter(resultData.Data);
                 }
@@ -60,6 +61,5 @@ public class GroupPresenter extends AbsPresenter implements IGroupPresenter{
             }
         });
     }
-
 
 }

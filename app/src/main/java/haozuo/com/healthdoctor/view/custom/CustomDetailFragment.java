@@ -21,6 +21,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
+import haozuo.com.healthdoctor.bean.CustomDetailBean;
 import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
 import haozuo.com.healthdoctor.contract.AbsView;
 import haozuo.com.healthdoctor.contract.CustomDetailContract;
@@ -77,8 +78,8 @@ public class CustomDetailFragment extends AbsView implements CustomDetailContrac
     }
 
     @Override
-    public void InitView(GroupCustInfoBean custom) {
-        final GroupCustInfoBean customInfo = custom;
+    public void InitView(CustomDetailBean custom) {
+        final CustomDetailBean customInfo = custom;
         if (custom.PhotoUrl == null){
             Cphoto = "http://pic002.cnblogs.com/images/2011/103608/2011062022023456.jpg";
         }

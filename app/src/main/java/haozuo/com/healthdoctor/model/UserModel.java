@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import haozuo.com.healthdoctor.bean.CustomDetailBean;
 import haozuo.com.healthdoctor.bean.DoctorBean;
 import haozuo.com.healthdoctor.bean.DoctorGroupBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
@@ -167,34 +168,34 @@ public class UserModel extends AbsBaseModel {
         get(tag,"GetGroupCustInfoList",params,onAsyncCallbackListener);
     }
 
-    public void GetUserDetail(String tag,int customerId, final OnHandlerResultListener<GlobalShell<GroupCustInfoBean>> callbackListener){
+    public void GetUserDetail(String tag,int customerId, final OnHandlerResultListener<GlobalShell<CustomDetailBean>> callbackListener){
         Map<String, Object> params=new HashMap<>();
         params.put("customerId", customerId);
         OnHttpCallbackListener onAsyncCallbackListener=new OnHttpCallbackListener<JSONObject>(){
             @Override
             public void onSuccess(JSONObject resultData) {
-                GlobalShell<GroupCustInfoBean> entity = null;
+                GlobalShell<CustomDetailBean> entity = null;
                 try {
                     int code = resultData.getInt("state");
                     String msg = resultData.getString("message");
                     if(code>0) {
                         String dataString = resultData.getString("Data");
-                        Type listType = new TypeToken<GroupCustInfoBean>() {}.getType();
-                        GroupCustInfoBean result = new Gson().fromJson(dataString, listType);
-                        entity=new GlobalShell<GroupCustInfoBean>(result);
+                        Type listType = new TypeToken<CustomDetailBean>() {}.getType();
+                        CustomDetailBean result = new Gson().fromJson(dataString, listType);
+                        entity=new GlobalShell<CustomDetailBean>(result);
                     }
                     else{
-                        entity=new GlobalShell<GroupCustInfoBean>(msg);
+                        entity=new GlobalShell<CustomDetailBean>(msg);
                     }
                 } catch (Exception ex) {
-                    entity = new GlobalShell<GroupCustInfoBean>(RequestErrorEnum.LogicException, ex.getMessage());
+                    entity = new GlobalShell<CustomDetailBean>(RequestErrorEnum.LogicException, ex.getMessage());
                 }
                 callbackListener.handlerResult(entity);
             }
 
             @Override
             public void onError(RequestErrorEnum errorType, String msg) {
-                GlobalShell<GroupCustInfoBean> entity=new GlobalShell<GroupCustInfoBean>(errorType,msg);
+                GlobalShell<CustomDetailBean> entity=new GlobalShell<CustomDetailBean>(errorType,msg);
                 callbackListener.handlerResult(entity);
             }
         };

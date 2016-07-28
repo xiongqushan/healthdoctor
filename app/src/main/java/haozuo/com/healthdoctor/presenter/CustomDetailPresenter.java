@@ -2,6 +2,7 @@ package haozuo.com.healthdoctor.presenter;
 
 import android.support.annotation.NonNull;
 
+import haozuo.com.healthdoctor.bean.CustomDetailBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
 import haozuo.com.healthdoctor.contract.AbsBaseModel;
@@ -30,12 +31,12 @@ public class CustomDetailPresenter extends AbsPresenter implements CustomDetailC
     @Override
     public void start() {
         mICustomDetailView.showDialog();
-        mUserModel.GetUserDetail(createRequestTag(), mCustomerId, new OnHandlerResultListener<GlobalShell<GroupCustInfoBean>>() {
+        mUserModel.GetUserDetail(createRequestTag(), mCustomerId, new OnHandlerResultListener<GlobalShell<CustomDetailBean>>() {
             @Override
-            public void handlerResult(GlobalShell<GroupCustInfoBean> resultData) {
+            public void handlerResult(GlobalShell<CustomDetailBean> resultData) {
             if(resultData.LogicSuccess) {
                 mICustomDetailView.hideDialog();
-                GroupCustInfoBean customBean = resultData.Data;
+                CustomDetailBean customBean = resultData.Data;
                 mICustomDetailView.InitView(customBean);
             }
             else{
