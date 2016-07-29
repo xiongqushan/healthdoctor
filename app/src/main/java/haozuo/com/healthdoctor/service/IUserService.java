@@ -3,6 +3,7 @@ package haozuo.com.healthdoctor.service;
 import java.util.Map;
 
 import haozuo.com.healthdoctor.bean.BaseBean;
+import haozuo.com.healthdoctor.bean.CustomDetailBean;
 import haozuo.com.healthdoctor.bean.DoctorBean;
 import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
 import haozuo.com.healthdoctor.bean.PageBean;
@@ -32,5 +33,5 @@ public interface IUserService {
                                                                           @Query("customNameOrMobile")String customNameOrMobile, @Query("pageIndex")int pageIndex, @Query("pageSize")int pageSize);
 
     @GET(SysConfig.CONTROLLER_PRE_API_USER+"GetCusInfo")
-    Observable<BaseBean<GroupCustInfoBean>>GetCusInfo(@Query("customerId")int customerId);
+    Observable<BaseBean<CustomDetailBean>>GetCusInfo(@Query("customerId")int customerId);
 }

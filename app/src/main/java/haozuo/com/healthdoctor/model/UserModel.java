@@ -3,7 +3,7 @@ package haozuo.com.healthdoctor.model;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import haozuo.com.healthdoctor.bean.CustomDetailBean;
 import haozuo.com.healthdoctor.bean.BaseBean;
 import haozuo.com.healthdoctor.bean.DoctorBean;
 import haozuo.com.healthdoctor.bean.DoctorGroupBean;
@@ -93,12 +93,12 @@ public class UserModel extends AbstractModel {
                 });
     }
 
-    public void LoginValidate(String account,int password, final OnHandlerResultListener<GlobalShell<DoctorBean>> callbackListener) {
+    public void LoginValidate(String account,String password, final OnHandlerResultListener<GlobalShell<DoctorBean>> callbackListener) {
         Map<String, Object> params = new HashMap<>();
         params.put("Account", account);
         params.put("Password", password);
         IUserService userService= createService(IUserService.class);
-        userService.login(params)
+        userService.LoginValidate(params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<BaseBean<DoctorBean>>() {
@@ -193,12 +193,12 @@ public class UserModel extends AbstractModel {
                 });
     }
 
-    public void GetUserDetail(int customerId, final OnHandlerResultListener<GlobalShell<GroupCustInfoBean>> callbackListener){
+    public void GetUserDetail(int customerId, final OnHandlerResultListener<GlobalShell<CustomDetailBean>> callbackListener){
         IUserService userService=createService(IUserService.class);
         userService.GetCusInfo(customerId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<BaseBean<GroupCustInfoBean>>() {
+                .subscribe(new Subscriber<BaseBean<CustomDetailBean>>() {
                     @Override
                     public void onCompleted() {
 
@@ -206,23 +206,24 @@ public class UserModel extends AbstractModel {
 
                     @Override
                     public void onError(Throwable e) {
-                        GlobalShell<GroupCustInfoBean> entity=new GlobalShell<GroupCustInfoBean>(e.getMessage());
+                        GlobalShell<CustomDetailBean> entity=new GlobalShell<CustomDetailBean>(e.getMessage());
                         callbackListener.handlerResult(entity);
                     }
 
                     @Override
-                    public void onNext(BaseBean<GroupCustInfoBean> resultBean) {
-                        GlobalShell<GroupCustInfoBean> entity=null;
+                    public void onNext(BaseBean<CustomDetailBean> resultBean) {
+                        GlobalShell<CustomDetailBean> entity=null;
                         if(resultBean.state>0) {
-                            GroupCustInfoBean result = resultBean.Data;
-                            entity=new GlobalShell<GroupCustInfoBean>(result);
+                            CustomDetailBean result = resultBean.Data;
+                            entity=new GlobalShell<CustomDetailBean>(result);
                         }
                         else{
-                            entity=new GlobalShell<GroupCustInfoBean>(resultBean.message);
+                            entity=new GlobalShell<CustomDetailBean>(resultBean.message);
                         }
                         callbackListener.handlerResult(entity);
                     }
                 });
+
     }
 
 }

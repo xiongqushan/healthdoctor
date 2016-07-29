@@ -10,12 +10,16 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import butterknife.Bind;
+import butterknife.OnCheckedChanged;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.util.SystemBarTintUtil;
 
@@ -50,28 +54,29 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected void initTabhostMenu(){
-        RadioButton rbChat = (RadioButton) findViewById(R.id.rbChat);
-        RadioButton rbAddress = (RadioButton) findViewById(R.id.rbAddress);
-        RadioButton rbFind = (RadioButton) findViewById(R.id.rbFind);
-        rbChat.setOnClickListener(getFragment);
-        rbAddress.setOnClickListener(getFragment);
-        rbFind.setOnClickListener(getFragment);
+        RadioGroup tab_menu = (RadioGroup) findViewById(R.id.tab_menu);
+        tab_menu.setOnCheckedChangeListener(new OnNavChangeListener());
     }
 
-    View.OnClickListener getFragment = new View.OnClickListener()
-    {
-        public void onClick(View v){
-            switch (v.getId()){
+    private class OnNavChangeListener implements RadioGroup.OnCheckedChangeListener{
+
+        @Override
+        public void onCheckedChanged(RadioGroup group, int checkedId) {
+            switch (checkedId){
                 case R.id.rbChat:
+                    Toast.makeText(getApplicationContext(),"111",Toast.LENGTH_SHORT).show();
                     //do sth
                     break;
                 case R.id.rbAddress:
+                    Toast.makeText(getApplicationContext(),"222",Toast.LENGTH_SHORT).show();
                     //do sth
                     break;
                 case R.id.rbFind:
+                    Toast.makeText(getApplicationContext(),"333",Toast.LENGTH_SHORT).show();
                     //do sth
                     break;
             }
         }
-    };
+    }
+
 }

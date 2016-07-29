@@ -19,11 +19,11 @@ public class GroupActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group);
         setCustomerTitle("客户分组");
-
         boolean isLogin=checkLogin();
         if(!isLogin){
             return;
         }
+        initTabhostMenu();
         FragmentManager fragmentManager=getSupportFragmentManager();
         GroupFragment groupFragment=(GroupFragment)fragmentManager.findFragmentById(R.id.frameContent);
         if(groupFragment==null){

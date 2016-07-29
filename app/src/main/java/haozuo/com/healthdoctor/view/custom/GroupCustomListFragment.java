@@ -3,6 +3,7 @@ package haozuo.com.healthdoctor.view.custom;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +34,7 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
     View rootView;
     GroupCustomListContract.IGroupCustomListPresenter mGroupCustomListPresenter;
     GroupCustInfoAdapter mGroupCustInfoAdapter;
+    String photoUri;
     @Bind(R.id.list_group_customlist)PullableListView list_group_customlist;
     @Bind(R.id.pull_to_refresh_layout)PullToRefreshLayout pull_to_refresh_layout;
 
@@ -153,33 +157,40 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
             }
 
             GroupCustInfoBean groupCustInfoEntity = dataSource.get(position);
+            if (groupCustInfoEntity.PhotoUrl == null){
+                photoUri = "http://pic002.cnblogs.com/images/2011/103608/2011062022023456.jpg";
+            }
+            else {
+                photoUri = groupCustInfoEntity.PhotoUrl;
+            }
+            Uri uri = Uri.parse(photoUri);
+            holder.CPhoto.setImageURI(uri);
             holder.Cname.setText(groupCustInfoEntity.Cname);
-            holder.Gender.setText(groupCustInfoEntity.Gender);
             holder.NickName.setText(groupCustInfoEntity.NickName);
-            holder.Birthday.setText(groupCustInfoEntity.Birthday);
-            holder.DoctorName.setText(String.valueOf(groupCustInfoEntity.DoctorId));
+            holder.CBirthday.setText(groupCustInfoEntity.Birthday);
+            holder.Company.setText(groupCustInfoEntity.CompanyName);
 
-            holder.DoctorName.setTag(new Object[]{groupCustInfoEntity.CustId});
-            holder.DoctorName.setOnClickListener(clickListener);
+            holder.CPhoto.setTag(new Object[]{groupCustInfoEntity.CustId});
+            holder.CPhoto.setOnClickListener(clickListener);
 
             return convertView;
         }
 
         class ViewHolder {
+            @Bind(R.id.CPhoto)
+            public SimpleDraweeView CPhoto;
+
             @Bind(R.id.txt_Cname)
             public TextView Cname;
-
-            @Bind(R.id.txt_Gender)
-            public TextView Gender;
 
             @Bind(R.id.txt_NickName)
             public TextView NickName;
 
-            @Bind(R.id.txt_Birthday)
-            public TextView Birthday;
+            @Bind(R.id.Company)
+            public TextView Company;
 
-            @Bind(R.id.txt_DoctorName)
-            public TextView DoctorName;
+            @Bind(R.id.CBirthday)
+            public TextView CBirthday;
 
             public ViewHolder(View convertView) {
                 ButterKnife.bind(this, convertView);

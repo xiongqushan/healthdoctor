@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 
 import haozuo.com.healthdoctor.R;
+import haozuo.com.healthdoctor.bean.CustomDetailBean;
 import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
 import haozuo.com.healthdoctor.view.base.BaseActivity;
 import haozuo.com.healthdoctor.presenter.CustomerInfoPresenter;
@@ -18,7 +19,7 @@ public class CustomerInfoActivity extends BaseActivity {
 
         Bundle bundle = getIntent().getExtras();
 
-        GroupCustInfoBean CustomInfo = (GroupCustInfoBean) bundle.getSerializable("CustomInfo");
+        CustomDetailBean CustomInfo = (CustomDetailBean) bundle.getSerializable("CustomInfo");
 
         setCustomerTitle("基本资料—"+CustomInfo.Cname);
 
@@ -28,6 +29,6 @@ public class CustomerInfoActivity extends BaseActivity {
             fragment=CustomerInfoFragment.newInstance(CustomInfo);
             ActivityUtils.addFragmentToActivity(fragmentManager,fragment,R.id.frameContent);
         }
-        CustomerInfoPresenter mGroupPresenter=new CustomerInfoPresenter(CustomInfo, fragment);
+        CustomerInfoPresenter mGroupPresenter=new CustomerInfoPresenter(CustomInfo, fragment, CustomInfo.Id);
     }
 }

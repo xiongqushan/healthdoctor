@@ -1,6 +1,8 @@
 package haozuo.com.healthdoctor.presenter;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
+import android.widget.Toast;
 
 import haozuo.com.healthdoctor.bean.DoctorBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
@@ -10,6 +12,7 @@ import haozuo.com.healthdoctor.contract.LoginContract;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
 import haozuo.com.healthdoctor.manager.UserManager;
 import haozuo.com.healthdoctor.model.UserModel;
+import haozuo.com.healthdoctor.util.StringUtil;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -19,10 +22,12 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class LoginPresenter extends AbstractPresenter implements LoginContract.ILoginPresenter {
     LoginContract.ILoginView mILoginView;
     UserModel mUserModel;
-    public LoginPresenter(@NonNull LoginContract.ILoginView iLoginView){
+    Context mContext;
+    public LoginPresenter(@NonNull LoginContract.ILoginView iLoginView, Context context){
         mILoginView=iLoginView;
         mUserModel=UserModel.createInstance();
         mILoginView.setPresenter(this);
+        mContext = context;
     }
 
     @Override
@@ -59,6 +64,36 @@ public class LoginPresenter extends AbstractPresenter implements LoginContract.I
             }
         });
     }
+
+    @Override
+    public void requestLoginWithPassWord(String mobile, String password){
+        if (password.length()==0||mobile.length()==0){
+            Toast.makeText(mContext,"用户名和密码不能为空!",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else if (!StringUtil.isMobile(mobile)){
+            Toast.makeText(mContext,"请输入正确的手机号!",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+        password = StringUtil.encodeByMD5(password);
+        mILoginView.showDialog();
+        mUserModel.LoginValidate(mobile, password, new OnHandlerResultListener<GlobalShell<DoctorBean>>() {
+            @Override
+            public void handlerResult(GlobalShell<DoctorBean> resultData) {
+                if(resultData.LogicSuccess) {
+                    UserManager.getInstance().setDoctorInfo(resultData.Data);
+                    mILoginView.hideDialog();
+                    mILoginView.toHomeActivity();
+                }
+                else{
+                    mILoginView.hideDialog(resultData.Message);
+                }
+            }
+        });
+    }
+
 
     @Override
     public void start() {
