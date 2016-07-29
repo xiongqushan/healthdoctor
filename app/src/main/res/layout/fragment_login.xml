@@ -28,20 +28,6 @@
             android:background="@drawable/logo"
             android:layout_gravity="center"/>
 
-        <!--<TextView-->
-            <!--android:id="@+id/title"-->
-            <!--android:layout_centerHorizontal="true"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="@string/login_title"-->
-            <!--android:textSize="@dimen/login_title_size"-->
-            <!--android:textColor="@color/royalblue"-->
-            <!--android:textStyle="bold"-->
-            <!--android:gravity="center"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:drawableLeft="@drawable/CellPhone"-->
-            <!--android:drawablePadding="@dimen/login_title"/>-->
-
         <LinearLayout
             android:id="@+id/account"
             android:layout_width="246dp"
@@ -59,6 +45,7 @@
                 android:drawableLeft="@drawable/cellphone"
                 android:hint="@string/login_mobile"
                 android:textSize="@dimen/login_text_size"
+                android:inputType="number"
                 android:background="@null"
                 android:digits="15601815186"
                 android:singleLine="true"
@@ -72,7 +59,8 @@
                 android:layout_toRightOf="@id/edit_mobile"
                 android:textColor="@color/lightgreen"
                 android:textSize="@dimen/login_text_size"
-                android:text="@string/login_get_code" />
+                android:text="@string/login_get_code"
+                android:visibility="gone"/>
         </LinearLayout>
         <View
             android:layout_width="match_parent"
@@ -95,7 +83,7 @@
             android:layout_alignEnd="@+id/account"
             android:layout_marginTop="7dp"
             android:drawableLeft="@drawable/checkcode"
-            android:hint="@string/login_code"
+            android:hint="请输入您的密码"
             android:textSize="@dimen/login_text_size"
             android:background="@null"
             android:singleLine="true"

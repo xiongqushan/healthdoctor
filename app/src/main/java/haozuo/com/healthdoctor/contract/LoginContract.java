@@ -18,5 +18,7 @@ public interface LoginContract {
         void requestLoginSMS(String mobile);
 
         void requestLoginWithSMSCode(String mobile, int code);
+
+        void requestLoginWithPassWord(String mobile,String password);
     }
 }

@@ -55,8 +55,8 @@ public class GroupCustomListPresenter extends AbsPresenter implements GroupCusto
     public void refreshCustomList() {
         mLeastPageIndex=mCurrentPageIndex;
         mCurrentPageIndex=1;
-        int doctorId= UserManager.getInstance().getDoctorInfo().Id;
-        int departId= UserManager.getInstance().getDoctorInfo().ServiceDeptId;
+        int doctorId= UserManager.getInstance().getDoctorInfo().Doctor_ID;
+        int departId= UserManager.getInstance().getDoctorInfo().Dept;
         mUserModel.GetGroupCustInfoList(departId, mGroupId, doctorId, mCurrentPageIndex, PAGE_SIZE, new OnHandlerResultListener<GlobalShell<PageBean<GroupCustInfoBean>>>() {
             @Override
             public void handlerResult(GlobalShell<PageBean<GroupCustInfoBean>> resultData) {
@@ -80,8 +80,8 @@ public class GroupCustomListPresenter extends AbsPresenter implements GroupCusto
     public void loadmoreCustomList() {
         mLeastPageIndex=mCurrentPageIndex;
         mCurrentPageIndex++;
-        int doctorId= UserManager.getInstance().getDoctorInfo().Id;
-        int departId= UserManager.getInstance().getDoctorInfo().ServiceDeptId;
+        int doctorId= UserManager.getInstance().getDoctorInfo().Doctor_ID;
+        int departId= UserManager.getInstance().getDoctorInfo().Dept;
         mUserModel.GetGroupCustInfoList(departId, mGroupId, doctorId, mCurrentPageIndex, PAGE_SIZE, new OnHandlerResultListener<GlobalShell<PageBean<GroupCustInfoBean>>>() {
             @Override
             public void handlerResult(GlobalShell<PageBean<GroupCustInfoBean>> resultData) {

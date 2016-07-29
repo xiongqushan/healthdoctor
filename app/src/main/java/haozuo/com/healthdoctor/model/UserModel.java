@@ -102,12 +102,12 @@ public class UserModel extends AbsModel {
                 });
     }
 
-    public void LoginValidate(String account,int password, final OnHandlerResultListener<GlobalShell<DoctorBean>> callbackListener) {
+    public void LoginValidate(String account,String password, final OnHandlerResultListener<GlobalShell<DoctorBean>> callbackListener) {
         Map<String, Object> params = new HashMap<>();
         params.put("Account", account);
         params.put("Password", password);
         IUserService userService= createService(IUserService.class);
-        userService.login(params)
+        userService.LoginValidate(params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<BaseBean<DoctorBean>>() {

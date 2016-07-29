@@ -21,7 +21,7 @@ public class LoginActivity extends BaseActivity {
             loginFragment=LoginFragment.newInstance();
             ActivityUtils.addFragmentToActivity(fragmentManager,loginFragment,R.id.frameContent);
         }
-        LoginPresenter mLoginPresenter=new LoginPresenter(loginFragment);
+        LoginPresenter mLoginPresenter=new LoginPresenter(loginFragment,this);
     }
 
 }

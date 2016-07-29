@@ -59,7 +59,7 @@ public class CustomerInfoPresenter extends AbsPresenter implements CustomerInfoC
     public void DeleteCustomerGroup(final DoctorGroupBean groupBean) {
         mICustomerInfoView.showDialog();
         int DeleteGroupId = groupBean.id;
-        mOperateBy = (String) UserManager.getInstance().getDoctorInfo().Username;
+        mOperateBy = (String) UserManager.getInstance().getDoctorInfo().Name;
         mGroupModel.DeleteCustomerGroup(mCustomerId, DeleteGroupId, mOperateBy, new OnHandlerResultListener<GlobalShell<Boolean>>() {
             @Override
             public void handlerResult(GlobalShell<Boolean> resultData) {

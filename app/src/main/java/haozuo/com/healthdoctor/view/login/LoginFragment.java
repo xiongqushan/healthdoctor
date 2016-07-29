@@ -66,8 +66,10 @@ public class LoginFragment extends AbsView implements ILoginView{
                 @Override
                 public void onClick(View v) {
                     final String mobile=edit_mobile.getText().toString();
-                    final int code=Integer.parseInt(edit_code.getText().toString());
-                    mILoginPresenter.requestLoginWithSMSCode(mobile,code);
+                    final String code=edit_code.getText().toString();
+//                    final int code=Integer.parseInt(edit_code.getText().toString());
+//                    mILoginPresenter.requestLoginWithSMSCode(mobile,code);
+                    mILoginPresenter.requestLoginWithPassWord(mobile,code);
                 }
             });
         }

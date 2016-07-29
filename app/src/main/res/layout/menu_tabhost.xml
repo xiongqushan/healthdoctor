@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="48dp"
-    android:background="#000000">
+    android:layout_height="48dp">
 
     <!--<ImageButton android:id="@+id/btn_menu_consult"-->
     <!--android:layout_width="wrap_content"-->
@@ -15,9 +14,14 @@
     <!--android:layout_height="wrap_content"-->
     <!--android:background="@drawable/tabhost_my_btn"/>-->
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/lightgray"/>
+
     <RadioGroup
         android:id="@+id/tab_menu"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
 
@@ -31,7 +35,7 @@
             android:checked="true"
             android:drawableTop="@drawable/tabhost_home_btn"
             android:gravity="center_horizontal|bottom"
-            android:paddingTop="2dp"
+            android:paddingTop="4dp"
             android:textColor="@drawable/tab_selector_tv_color"
             android:text="首页" />
 
@@ -44,7 +48,7 @@
             android:button="@null"
             android:drawableTop="@drawable/tabhost_consult_btn"
             android:gravity="center_horizontal|bottom"
-            android:paddingTop="2dp"
+            android:paddingTop="4dp"
             android:textColor="@drawable/tab_selector_tv_color"
             android:text="咨询" />
 
@@ -57,7 +61,7 @@
             android:button="@null"
             android:drawableTop="@drawable/tabhost_my_btn"
             android:gravity="center_horizontal|bottom"
-            android:paddingTop="2dp"
+            android:paddingTop="4dp"
             android:textColor="@drawable/tab_selector_tv_color"
             android:text="我的" />
     </RadioGroup>

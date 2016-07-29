@@ -42,7 +42,7 @@ public class GroupPresenter extends AbsPresenter implements IGroupPresenter{
 
     @Override
     public void start() {
-        int doctorId= UserManager.getInstance().getDoctorInfo().Id;
+        int doctorId= UserManager.getInstance().getDoctorInfo().Doctor_ID;
         mIGroupView.showDialog();
         mUserModel.GetGroup(doctorId, new OnHandlerResultListener<GlobalShell<List<DoctorGroupBean>>>() {
             @Override
