@@ -8,9 +8,8 @@ import java.util.List;
 import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
 import haozuo.com.healthdoctor.bean.PageBean;
-import haozuo.com.healthdoctor.contract.AbsPresenter;
-import haozuo.com.healthdoctor.contract.BaseModel;
-import haozuo.com.healthdoctor.contract.BaseView;
+import haozuo.com.healthdoctor.contract.IBaseModel;
+import haozuo.com.healthdoctor.contract.IBaseView;
 import haozuo.com.healthdoctor.contract.GroupCustomListContract;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
 import haozuo.com.healthdoctor.manager.UserManager;
@@ -20,7 +19,7 @@ import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout;
 /**
  * Created by xiongwei1 on 2016/7/11.
  */
-public class GroupCustomListPresenter extends AbsPresenter implements GroupCustomListContract.IGroupCustomListPresenter {
+public class GroupCustomListPresenter extends AbstractPresenter implements GroupCustomListContract.IGroupCustomListPresenter {
     private int PAGE_SIZE=20;
     private int mCurrentPageIndex=1;
     private int mLeastPageIndex=1;
@@ -37,12 +36,12 @@ public class GroupCustomListPresenter extends AbsPresenter implements GroupCusto
     }
 
     @Override
-    public BaseView getBaseView() {
+    public IBaseView getBaseView() {
         return mGroupCustomListView;
     }
 
     @Override
-    public BaseModel getBaseModel() {
+    public IBaseModel getBaseModel() {
         return mUserModel;
     }
 

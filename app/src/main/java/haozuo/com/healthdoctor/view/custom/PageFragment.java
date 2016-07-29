@@ -8,12 +8,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import haozuo.com.healthdoctor.R;
-import haozuo.com.healthdoctor.contract.AbsView;
+import haozuo.com.healthdoctor.view.base.AbstractView;
 
 /**
  * Created by hzguest3 on 2016/7/25.
  */
-public class PageFragment extends AbsView {
+public class PageFragment extends AbstractView {
     public static final String ARG_PAGE = "ARG_PAGE";
     private int mPage;
 

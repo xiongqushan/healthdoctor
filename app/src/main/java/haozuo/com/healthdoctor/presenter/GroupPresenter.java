@@ -1,17 +1,13 @@
 package haozuo.com.healthdoctor.presenter;
-import android.content.ContentValues;
 import android.support.annotation.NonNull;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
-import haozuo.com.healthdoctor.bean.DoctorBean;
 import haozuo.com.healthdoctor.bean.DoctorGroupBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
-import haozuo.com.healthdoctor.contract.AbsPresenter;
-import haozuo.com.healthdoctor.contract.BaseModel;
-import haozuo.com.healthdoctor.contract.BaseView;
+import haozuo.com.healthdoctor.contract.IBaseModel;
+import haozuo.com.healthdoctor.contract.IBaseView;
 import haozuo.com.healthdoctor.contract.GroupContract;
 import haozuo.com.healthdoctor.contract.GroupContract.IGroupPresenter;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
@@ -21,7 +17,7 @@ import haozuo.com.healthdoctor.model.UserModel;
 /**
  * Created by xiongwei1 on 2016/7/7.
  */
-public class GroupPresenter extends AbsPresenter implements IGroupPresenter{
+public class GroupPresenter extends AbstractPresenter implements IGroupPresenter{
     private GroupContract.IGroupView mIGroupView;
     private UserModel mUserModel;
     public GroupPresenter(@NonNull GroupContract.IGroupView iGroupView){
@@ -31,12 +27,12 @@ public class GroupPresenter extends AbsPresenter implements IGroupPresenter{
     }
 
     @Override
-    public BaseView getBaseView() {
+    public IBaseView getBaseView() {
         return mIGroupView;
     }
 
     @Override
-    public BaseModel getBaseModel() {
+    public IBaseModel getBaseModel() {
         return mUserModel;
     }
 

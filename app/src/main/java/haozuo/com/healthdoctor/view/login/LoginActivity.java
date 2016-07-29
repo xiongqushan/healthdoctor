@@ -1,11 +1,10 @@
 package haozuo.com.healthdoctor.view.login;
 
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import haozuo.com.healthdoctor.R;
-import haozuo.com.healthdoctor.contract.BaseActivity;
+import haozuo.com.healthdoctor.view.base.BaseActivity;
 import haozuo.com.healthdoctor.presenter.LoginPresenter;
 import haozuo.com.healthdoctor.util.ActivityUtils;
 

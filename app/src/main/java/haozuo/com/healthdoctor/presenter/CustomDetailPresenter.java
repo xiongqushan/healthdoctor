@@ -4,9 +4,8 @@ import android.support.annotation.NonNull;
 
 import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
-import haozuo.com.healthdoctor.contract.AbsPresenter;
-import haozuo.com.healthdoctor.contract.BaseModel;
-import haozuo.com.healthdoctor.contract.BaseView;
+import haozuo.com.healthdoctor.contract.IBaseModel;
+import haozuo.com.healthdoctor.contract.IBaseView;
 import haozuo.com.healthdoctor.contract.CustomDetailContract;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
 
@@ -15,7 +14,7 @@ import haozuo.com.healthdoctor.model.UserModel;
 /**
  * Created by hzguest3 on 2016/7/22.
  */
-public class CustomDetailPresenter extends AbsPresenter implements CustomDetailContract.ICustomDetailPresenter {
+public class CustomDetailPresenter extends AbstractPresenter implements CustomDetailContract.ICustomDetailPresenter {
     private CustomDetailContract.ICustomDetailView mICustomDetailView;
     private UserModel mUserModel;
     private int mCustomerId;
@@ -45,12 +44,12 @@ public class CustomDetailPresenter extends AbsPresenter implements CustomDetailC
     }
 
     @Override
-    public BaseView getBaseView() {
+    public IBaseView getBaseView() {
         return mICustomDetailView;
     }
 
     @Override
-    public BaseModel getBaseModel() {
+    public IBaseModel getBaseModel() {
         return mUserModel;
     }
 }

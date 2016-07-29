@@ -4,28 +4,24 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.DoctorGroupBean;
-import haozuo.com.healthdoctor.contract.AbsView;
+import haozuo.com.healthdoctor.view.base.AbstractView;
 import haozuo.com.healthdoctor.contract.GroupContract;
 import haozuo.com.healthdoctor.util.DisplayUtil;
 import haozuo.com.healthdoctor.view.custom.GroupCustomListActivity;
 
-public class GroupFragment extends AbsView implements GroupContract.IGroupView{
+public class GroupFragment extends AbstractView implements GroupContract.IGroupView{
     Context mContext;
     View rootView;
     GroupContract.IGroupPresenter mGroupPresenter;

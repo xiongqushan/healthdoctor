@@ -1,4 +1,4 @@
-package haozuo.com.healthdoctor.contract;
+package haozuo.com.healthdoctor.view.base;
 
 import android.annotation.TargetApi;
 import android.content.pm.ActivityInfo;

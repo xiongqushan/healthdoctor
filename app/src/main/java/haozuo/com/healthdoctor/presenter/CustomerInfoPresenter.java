@@ -2,19 +2,16 @@ package haozuo.com.healthdoctor.presenter;
 
 import android.support.annotation.NonNull;
 
-import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
-import haozuo.com.healthdoctor.contract.AbsPresenter;
-import haozuo.com.healthdoctor.contract.BaseModel;
-import haozuo.com.healthdoctor.contract.BaseView;
+import haozuo.com.healthdoctor.contract.IBaseModel;
+import haozuo.com.healthdoctor.contract.IBaseView;
 import haozuo.com.healthdoctor.contract.CustomerInfoContract;
-import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
 import haozuo.com.healthdoctor.model.UserModel;
 
 /**
  * Created by xiongwei1 on 2016/7/25.
  */
-public class CustomerInfoPresenter extends AbsPresenter implements CustomerInfoContract.ICustomerInfoPresenter {
+public class CustomerInfoPresenter extends AbstractPresenter implements CustomerInfoContract.ICustomerInfoPresenter {
     private GroupCustInfoBean mCustomInfo;
     private CustomerInfoContract.ICustomerInfoView mICustomerInfoView;
     private UserModel mUserModel;
@@ -26,12 +23,12 @@ public class CustomerInfoPresenter extends AbsPresenter implements CustomerInfoC
     }
 
     @Override
-    public BaseView getBaseView() {
+    public IBaseView getBaseView() {
         return mICustomerInfoView;
     }
 
     @Override
-    public BaseModel getBaseModel() {
+    public IBaseModel getBaseModel() {
         return mUserModel;
     }
 

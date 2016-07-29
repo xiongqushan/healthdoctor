@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -17,13 +16,13 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
-import haozuo.com.healthdoctor.contract.AbsView;
+import haozuo.com.healthdoctor.view.base.AbstractView;
 import haozuo.com.healthdoctor.contract.CustomerInfoContract;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CustomerInfoFragment extends AbsView implements CustomerInfoContract.ICustomerInfoView {
+public class CustomerInfoFragment extends AbstractView implements CustomerInfoContract.ICustomerInfoView {
     Context mContext;
     View rootView;
     GroupCustInfoBean mCustomInfo;

@@ -18,7 +18,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
-import haozuo.com.healthdoctor.contract.AbsView;
+import haozuo.com.healthdoctor.view.base.AbstractView;
 import haozuo.com.healthdoctor.contract.GroupCustomListContract;
 import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout;
 import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullableListView;
@@ -26,7 +26,7 @@ import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullableListView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class GroupCustomListFragment extends AbsView implements GroupCustomListContract.IGroupCustomListView {
+public class GroupCustomListFragment extends AbstractView implements GroupCustomListContract.IGroupCustomListView {
     Context mContext;
     View rootView;
     GroupCustomListContract.IGroupCustomListPresenter mGroupCustomListPresenter;
