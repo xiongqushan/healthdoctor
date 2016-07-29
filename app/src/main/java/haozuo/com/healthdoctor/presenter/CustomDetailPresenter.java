@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import haozuo.com.healthdoctor.bean.CustomDetailBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
-import haozuo.com.healthdoctor.contract.AbsBaseModel;
 import haozuo.com.healthdoctor.contract.AbsPresenter;
 import haozuo.com.healthdoctor.contract.BaseModel;
 import haozuo.com.healthdoctor.contract.BaseView;

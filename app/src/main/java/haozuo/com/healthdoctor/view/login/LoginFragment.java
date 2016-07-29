@@ -53,7 +53,7 @@ public class LoginFragment extends AbsView implements ILoginView{
         if(rootView==null){
             rootView= inflater.inflate(R.layout.fragment_login, container, false);
             ButterKnife.bind(this,rootView);
-            edit_mobile.setText("18738170277");
+            edit_mobile.setText("15601815186");
             txt_GetCode.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

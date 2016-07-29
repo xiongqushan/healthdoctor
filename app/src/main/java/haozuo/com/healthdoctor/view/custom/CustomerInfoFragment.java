@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -37,7 +38,9 @@ public class CustomerInfoFragment extends AbsView implements CustomerInfoContrac
     CustomerInfoContract.ICustomerInfoPresenter mPresenter;
     String photoUri;
     List<String> mTvNames = new ArrayList<String>();
-    HashMap<String,Object> mGroups = new HashMap<String,Object>();
+//    HashMap<String,Object> mGroups = new HashMap<String,Object>();
+    List<DoctorGroupBean> mGroups = new ArrayList<DoctorGroupBean>();
+//    CustInfoLabelAdapter mCustInfolabelAdapter;
 
     @Bind(R.id.CPhoto) SimpleDraweeView CPhoto;
     @Bind(R.id.Cname)TextView Cname;
@@ -48,8 +51,7 @@ public class CustomerInfoFragment extends AbsView implements CustomerInfoContrac
     @Bind(R.id.CCompany)TextView CCompany;
     @Bind(R.id.CConnect)TextView CConnect;
     @Bind(R.id.CConnectPhone)TextView CConnectPhone;
-    @Bind(R.id.flow_layout)
-    CustomerInfoFlowLayout mCustomerInfoFlowLayout;
+    @Bind(R.id.flow_layout) CustomerInfoFlowLayout mCustomerInfoFlowLayout;
 
     public CustomerInfoFragment(){
     }
@@ -63,7 +65,7 @@ public class CustomerInfoFragment extends AbsView implements CustomerInfoContrac
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter.start();
+//        mPresenter.start();
     }
 
     @Override
@@ -74,7 +76,7 @@ public class CustomerInfoFragment extends AbsView implements CustomerInfoContrac
             rootView= inflater.inflate(R.layout.fragment_customer_info, container, false);
             ButterKnife.bind(this,rootView);
         }
-
+        mPresenter.start();
         return rootView;
     }
 
@@ -112,41 +114,31 @@ public class CustomerInfoFragment extends AbsView implements CustomerInfoContrac
         CCompany.setText(customInfo.Company_Name);
         CConnect.setText(customInfo.Contact_Name);
         CConnectPhone.setText(customInfo.Contact_Mobile);
-        InitGroupLabel();
+        mPresenter.InitGroupLabel();
     }
 
-    public void InitGroupLabel() {
-        //遍历标签名称数组
-        List<DoctorGroupBean> GroupInfo =(List<DoctorGroupBean>) UserManager.getInstance().getGroupInfo();
-        mGroups.clear();
-        for (int s: mCustomInfo.GroupIdList){
-            for (int i=0; i<GroupInfo.size();i++){
-                if (s == GroupInfo.get(i).id){
-                    mGroups.put(GroupInfo.get(i).name, GroupInfo.get(i).id);
-                }
-            }
-        }
-        for (Map.Entry entry : mGroups.entrySet()) {
-            String groupName = entry.getKey().toString();
-            int groupId = Integer.parseInt(entry.getValue().toString());
-            addLabelView(groupName,groupId);
-        }
+//    public void addLabelView(String groupName, final int groupId) {
+    public void addLabelView(final DoctorGroupBean groupBean) {
+        String groupName = groupBean.name;
 
-    }
-
-    public void addLabelView(String groupName, final int groupId) {
 //        加载TextView并设置名称，并设置名称
         TextViewExtend tvGroupName = (TextViewExtend) LayoutInflater.from(mContext).inflate(R.layout.fragment_customer_info_label, mCustomerInfoFlowLayout, false);
         tvGroupName.setText(groupName);
         tvGroupName.setDrawableRightListener(new TextViewExtend.DrawableRightListener() {
             @Override
             public void onDrawableRightClick(View view) {
-                mPresenter.DeleteCustomerGroup(groupId);
+                mPresenter.DeleteCustomerGroup(groupBean);
             }
         });
 
 //        把TextView加入流式布局
         mCustomerInfoFlowLayout.addView(tvGroupName);
+    }
+
+    @Override
+    public void refreshLabelView(List<DoctorGroupBean> mGroups) {
+        mCustomerInfoFlowLayout.removeAllViews();
+        mPresenter.InitGroupLabel();
     }
 
 }

@@ -9,201 +9,199 @@ import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import haozuo.com.healthdoctor.bean.CustomDetailBean;
+import haozuo.com.healthdoctor.bean.BaseBean;
 import haozuo.com.healthdoctor.bean.DoctorBean;
 import haozuo.com.healthdoctor.bean.DoctorGroupBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
 import haozuo.com.healthdoctor.bean.PageBean;
 import haozuo.com.healthdoctor.bean.RequestErrorEnum;
-import haozuo.com.healthdoctor.contract.AbsBaseModel;
+import haozuo.com.healthdoctor.contract.AbsModel;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
 import haozuo.com.healthdoctor.listener.OnHttpCallbackListener;
+import haozuo.com.healthdoctor.service.IGroupService;
+import haozuo.com.healthdoctor.service.IUserService;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by xiongwei on 16/5/19.
  */
-public class UserModel extends AbsBaseModel {
+public class UserModel extends AbsModel {
 
     public static UserModel createInstance(){
         return new UserModel();
     }
 
     public void GetSMSCode(String tag,String mobile, final OnHandlerResultListener<GlobalShell<Boolean>> callbackListener){
-        Map<String, Object> params=new HashMap<>();
-        params.put("mobile", mobile);
-        OnHttpCallbackListener onAsyncCallbackListener=new OnHttpCallbackListener<JSONObject>(){
-            @Override
-            public void onSuccess(JSONObject resultData) {
-                GlobalShell<Boolean> entity=null;
-                try {
-                    int code = resultData.getInt("state");
-                    String msg = resultData.getString("message");
-                    if(code>0) {
-                        boolean result = resultData.getBoolean("Data");
-                        entity=new GlobalShell<Boolean>(result);
-                    }
-                    else{
-                        entity=new GlobalShell<Boolean>(msg);
-                    }
-                } catch (Exception ex) {
-                    entity=new GlobalShell<Boolean>(RequestErrorEnum.LogicException,ex.getMessage());
-                }
-                callbackListener.handlerResult(entity);
-            }
+        IUserService userService= createService(IUserService.class);
+        userService.getSMSCode(mobile)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<BaseBean<Boolean>>() {
+                    @Override
+                    public void onCompleted() {
 
-            @Override
-            public void onError(RequestErrorEnum errorType, String msg) {
-                GlobalShell<Boolean> entity=new GlobalShell<Boolean>(errorType,msg);
-                callbackListener.handlerResult(entity);
-            }
-        };
-        get(tag,"LoginSMSCode",params,onAsyncCallbackListener);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        GlobalShell<Boolean> entity=new GlobalShell<Boolean>(e.getMessage());
+                        callbackListener.handlerResult(entity);
+                    }
+
+                    @Override
+                    public void onNext(BaseBean<Boolean> resultBean) {
+                        GlobalShell<Boolean> entity=null;
+                        if(resultBean.state>0) {
+                            boolean result = resultBean.Data;
+                            entity=new GlobalShell<Boolean>(result);
+                        }
+                        else{
+                            entity=new GlobalShell<Boolean>(resultBean.message);
+                        }
+                        callbackListener.handlerResult(entity);
+                    }
+                });
     }
 
-    public void Login(String tag,String mobile,int smsCode, final OnHandlerResultListener<GlobalShell<DoctorBean>> callbackListener) {
+    public void Login(String tag, String mobile,int smsCode, final OnHandlerResultListener<GlobalShell<DoctorBean>> callbackListener) {
         Map<String, Object> params = new HashMap<>();
         params.put("Mobile", mobile);
         params.put("SmsCode", smsCode);
-        OnHttpCallbackListener onAsyncCallbackListener = new OnHttpCallbackListener<JSONObject>() {
-            @Override
-            public void onSuccess(JSONObject resultData) {
-                GlobalShell<DoctorBean> entity = null;
-                try {
-                    int code = resultData.getInt("state");
-                    String msg = resultData.getString("message");
-                    if (code > 0) {
-                        String result = resultData.getString("Data");
-                        DoctorBean doctorBean = new Gson().fromJson(result, DoctorBean.class);
-                        entity = new GlobalShell<DoctorBean>(doctorBean);
-                    }
-                    else{
-                        entity=new GlobalShell<DoctorBean>(msg);
-                    }
-                } catch (Exception ex) {
-                    entity = new GlobalShell<DoctorBean>(RequestErrorEnum.LogicException, ex.getMessage());
-                }
-                callbackListener.handlerResult(entity);
-            }
+        IUserService userService= createService(IUserService.class);
+        userService.login(params)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<BaseBean<DoctorBean>>() {
+                    @Override
+                    public void onCompleted() {
 
-            @Override
-            public void onError(RequestErrorEnum errorType, String msg) {
-                GlobalShell<DoctorBean> entity = new GlobalShell<DoctorBean>(errorType, msg);
-                callbackListener.handlerResult(entity);
-            }
-        };
-        post(tag, "Login", params, onAsyncCallbackListener);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        GlobalShell<DoctorBean> entity=new GlobalShell<DoctorBean>(e.getMessage());
+                        callbackListener.handlerResult(entity);
+                    }
+
+                    @Override
+                    public void onNext(BaseBean<DoctorBean> resultBean) {
+                        GlobalShell<DoctorBean> entity=null;
+                        if(resultBean.state>0) {
+                            DoctorBean result = resultBean.Data;
+                            entity=new GlobalShell<DoctorBean>(result);
+                        }
+                        else{
+                            entity=new GlobalShell<DoctorBean>(resultBean.message);
+                        }
+                        callbackListener.handlerResult(entity);
+                    }
+                });
     }
 
     public void GetGroup(String tag,int doctorId, final OnHandlerResultListener<GlobalShell<List<DoctorGroupBean>>> callbackListener){
-        Map<String, Object> params=new HashMap<>();
-        params.put("doctorId", doctorId);
-        OnHttpCallbackListener onAsyncCallbackListener=new OnHttpCallbackListener<JSONObject>(){
-            @Override
-            public void onSuccess(JSONObject resultData) {
-                GlobalShell<List<DoctorGroupBean>> entity = null;
-                try {
-                    int code = resultData.getInt("state");
-                    String msg = resultData.getString("message");
-                    if(code>0) {
-                        String dataString = resultData.getString("Data");
-                        Type listType = new TypeToken<List<DoctorGroupBean>>() {}.getType();
-                        List<DoctorGroupBean> result = new Gson().fromJson(dataString, listType);
-                        entity=new GlobalShell<List<DoctorGroupBean>>(result);
-                    }
-                    else{
-                        entity=new GlobalShell<List<DoctorGroupBean>>(msg);
-                    }
-                } catch (Exception ex) {
-                    entity = new GlobalShell<List<DoctorGroupBean>>(RequestErrorEnum.LogicException, ex.getMessage());
-                }
-                callbackListener.handlerResult(entity);
-            }
+        IGroupService groupService=createService(IGroupService.class);
+        groupService.getGroup(doctorId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<BaseBean<List<DoctorGroupBean>>>() {
+                    @Override
+                    public void onCompleted() {
 
-            @Override
-            public void onError(RequestErrorEnum errorType, String msg) {
-                GlobalShell<List<DoctorGroupBean>> entity=new GlobalShell<List<DoctorGroupBean>>(errorType,msg);
-                callbackListener.handlerResult(entity);
-            }
-        };
-        get(tag, "GetCusGroupByDoctorId",params,onAsyncCallbackListener);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        GlobalShell<List<DoctorGroupBean>> entity=new GlobalShell<List<DoctorGroupBean>>(e.getMessage());
+                        callbackListener.handlerResult(entity);
+                    }
+
+                    @Override
+                    public void onNext(BaseBean<List<DoctorGroupBean>> resultBean) {
+                        GlobalShell<List<DoctorGroupBean>> entity=null;
+                        if(resultBean.state>0) {
+                            List<DoctorGroupBean> result = resultBean.Data;
+                            entity=new GlobalShell<List<DoctorGroupBean>>(result);
+                        }
+                        else{
+                            entity=new GlobalShell<List<DoctorGroupBean>>(resultBean.message);
+                        }
+                        callbackListener.handlerResult(entity);
+                    }
+                });
+
     }
 
     public void GetGroupCustInfoList(String tag,int serviceDeptId,int groupId,int doctorId,int pageIndex,int pageSize, final OnHandlerResultListener<GlobalShell<PageBean<GroupCustInfoBean>>> callbackListener){
-        Map<String, Object> params=new HashMap<>();
-        params.put("serviceDeptId", serviceDeptId);
-        params.put("groupId", groupId);
-        params.put("doctorId", doctorId);
-        params.put("pageIndex", pageIndex);
-        params.put("pageSize", pageSize);
-        OnHttpCallbackListener onAsyncCallbackListener=new OnHttpCallbackListener<JSONObject>(){
-            @Override
-            public void onSuccess(JSONObject resultData) {
-                GlobalShell<PageBean<GroupCustInfoBean>> entity = null;
-                try {
-                    int code = resultData.getInt("state");
-                    String msg = resultData.getString("message");
-                    if(code>0) {
-                        String dataString = resultData.getString("Data");
-                        Type listType = new TypeToken<PageBean<GroupCustInfoBean>>() {}.getType();
-                        PageBean<GroupCustInfoBean> result = new Gson().fromJson(dataString, listType);
-                        entity=new GlobalShell<PageBean<GroupCustInfoBean>>(result);
-                    }
-                    else{
-                        entity=new GlobalShell<PageBean<GroupCustInfoBean>>(msg);
-                    }
-                } catch (Exception ex) {
-                    entity = new GlobalShell<PageBean<GroupCustInfoBean>>(RequestErrorEnum.LogicException, ex.getMessage());
-                }
-                callbackListener.handlerResult(entity);
-            }
+        IUserService userService=createService(IUserService.class);
+        userService.getGroupCustInfoList(serviceDeptId,doctorId,groupId,"",pageIndex,pageSize)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<BaseBean<PageBean<GroupCustInfoBean>>>() {
+                    @Override
+                    public void onCompleted() {
 
-            @Override
-            public void onError(RequestErrorEnum errorType, String msg) {
-                GlobalShell<PageBean<GroupCustInfoBean>> entity=new GlobalShell<PageBean<GroupCustInfoBean>>(errorType,msg);
-                callbackListener.handlerResult(entity);
-            }
-        };
-        get(tag,"GetGroupCustInfoList",params,onAsyncCallbackListener);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        GlobalShell<PageBean<GroupCustInfoBean>> entity=new GlobalShell<PageBean<GroupCustInfoBean>>(e.getMessage());
+                        callbackListener.handlerResult(entity);
+                    }
+
+                    @Override
+                    public void onNext(BaseBean<PageBean<GroupCustInfoBean>> resultBean) {
+                        GlobalShell<PageBean<GroupCustInfoBean>> entity=null;
+                        if(resultBean.state>0) {
+                            PageBean<GroupCustInfoBean> result = resultBean.Data;
+                            entity=new GlobalShell<PageBean<GroupCustInfoBean>>(result);
+                        }
+                        else{
+                            entity=new GlobalShell<PageBean<GroupCustInfoBean>>(resultBean.message);
+                        }
+                        callbackListener.handlerResult(entity);
+                    }
+                });
     }
 
     public void GetUserDetail(String tag,int customerId, final OnHandlerResultListener<GlobalShell<CustomDetailBean>> callbackListener){
-        Map<String, Object> params=new HashMap<>();
-        params.put("customerId", customerId);
-        OnHttpCallbackListener onAsyncCallbackListener=new OnHttpCallbackListener<JSONObject>(){
-            @Override
-            public void onSuccess(JSONObject resultData) {
-                GlobalShell<CustomDetailBean> entity = null;
-                try {
-                    int code = resultData.getInt("state");
-                    String msg = resultData.getString("message");
-                    if(code>0) {
-                        String dataString = resultData.getString("Data");
-                        Type listType = new TypeToken<CustomDetailBean>() {}.getType();
-                        CustomDetailBean result = new Gson().fromJson(dataString, listType);
-                        entity=new GlobalShell<CustomDetailBean>(result);
-                    }
-                    else{
-                        entity=new GlobalShell<CustomDetailBean>(msg);
-                    }
-                } catch (Exception ex) {
-                    entity = new GlobalShell<CustomDetailBean>(RequestErrorEnum.LogicException, ex.getMessage());
-                }
-                callbackListener.handlerResult(entity);
-            }
+        IUserService userService=createService(IUserService.class);
+        userService.GetCusInfo(customerId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<BaseBean<CustomDetailBean>>() {
+                    @Override
+                    public void onCompleted() {
 
-            @Override
-            public void onError(RequestErrorEnum errorType, String msg) {
-                GlobalShell<CustomDetailBean> entity=new GlobalShell<CustomDetailBean>(errorType,msg);
-                callbackListener.handlerResult(entity);
-            }
-        };
-        get(tag,"GetCusInfo",params,onAsyncCallbackListener);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        GlobalShell<CustomDetailBean> entity=new GlobalShell<CustomDetailBean>(e.getMessage());
+                        callbackListener.handlerResult(entity);
+                    }
+
+                    @Override
+                    public void onNext(BaseBean<CustomDetailBean> resultBean) {
+                        GlobalShell<CustomDetailBean> entity=null;
+                        if(resultBean.state>0) {
+                            CustomDetailBean result = resultBean.Data;
+                            entity=new GlobalShell<CustomDetailBean>(result);
+                        }
+                        else{
+                            entity=new GlobalShell<CustomDetailBean>(resultBean.message);
+                        }
+                        callbackListener.handlerResult(entity);
+                    }
+                });
+
     }
 
     @Override
-    protected String getModule() {
-        return "User";
+    public void cancel(String tag) {
+
     }
 }

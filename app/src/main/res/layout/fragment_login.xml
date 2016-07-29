@@ -60,7 +60,7 @@
                 android:hint="@string/login_mobile"
                 android:textSize="@dimen/login_text_size"
                 android:background="@null"
-                android:digits="1234567890."
+                android:digits="15601815186"
                 android:singleLine="true"
                 android:gravity="start|bottom"/>
             <TextView

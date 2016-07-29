@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
 public class CustomerInfoFlowLayout extends ViewGroup {
     //记录每个View的位置
     private List<ChildPos> mChildPos = new ArrayList<ChildPos>();
+    private BaseAdapter mAdapter;
 
     private class ChildPos {
         int left, top, right, bottom;
@@ -41,6 +43,10 @@ public class CustomerInfoFlowLayout extends ViewGroup {
      */
     public CustomerInfoFlowLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+    }
+
+    public void setAdapter(BaseAdapter pAdapter) {
+        mAdapter = pAdapter;
     }
 
     /**
@@ -113,6 +119,7 @@ public class CustomerInfoFlowLayout extends ViewGroup {
                 heightMode == MeasureSpec.EXACTLY ? heightSize : height + getPaddingTop() + getPaddingBottom());
     }
 
+
     /**
      * 让ViewGroup能够支持margin属性
      */
@@ -120,6 +127,7 @@ public class CustomerInfoFlowLayout extends ViewGroup {
     public LayoutParams generateLayoutParams(AttributeSet attrs) {
         return new MarginLayoutParams(getContext(), attrs);
     }
+
 
     /**
      * 设置每个View的位置

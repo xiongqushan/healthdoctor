@@ -2,6 +2,7 @@ package haozuo.com.healthdoctor.presenter;
 
 import android.support.annotation.NonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -28,6 +29,7 @@ public class CustomerInfoPresenter extends AbsPresenter implements CustomerInfoC
     private GroupModel mGroupModel;
     private int mCustomerId;
     private String mOperateBy;
+    private List<DoctorGroupBean> mGroups = new ArrayList<DoctorGroupBean>();
     public CustomerInfoPresenter(@NonNull CustomDetailBean customInfo, @NonNull CustomerInfoContract.ICustomerInfoView iCustomerInfoView, int customerId){
 //    public CustomerInfoPresenter(@NonNull GroupCustInfoBean customInfo, @NonNull CustomerInfoContract.ICustomerInfoView iCustomerInfoView){
         mCustomInfo=customInfo;
@@ -54,14 +56,17 @@ public class CustomerInfoPresenter extends AbsPresenter implements CustomerInfoC
     }
 
     @Override
-    public void DeleteCustomerGroup(int DeleteGroupId) {
+//    public void DeleteCustomerGroup(final int DeleteGroupId) {
+    public void DeleteCustomerGroup(final DoctorGroupBean groupBean) {
         mICustomerInfoView.showDialog();
+        int DeleteGroupId = groupBean.id;
         mOperateBy = (String) UserManager.getInstance().getDoctorInfo().Username;
         mGroupModel.DeleteCustomerGroup(createRequestTag(), mCustomerId, DeleteGroupId, mOperateBy, new OnHandlerResultListener<GlobalShell<Boolean>>() {
             @Override
             public void handlerResult(GlobalShell<Boolean> resultData) {
                 if(resultData.LogicSuccess) {
                     mICustomerInfoView.hideDialog();
+                    mICustomerInfoView.refreshLabelView(mGroups);
                 }
                 else{
                     mICustomerInfoView.hideDialog(resultData.Message);
@@ -69,6 +74,28 @@ public class CustomerInfoPresenter extends AbsPresenter implements CustomerInfoC
 
             }
         });
+    }
+
+    public void InitGroupLabel() {
+        //遍历标签名称数组
+        List<DoctorGroupBean> GroupInfo =(List<DoctorGroupBean>) UserManager.getInstance().getGroupInfo();
+        mGroups.clear();
+
+        for (int s: mCustomInfo.GroupIdList){
+            for (int i=0; i<GroupInfo.size();i++){
+                if (s == GroupInfo.get(i).id){
+                    mGroups.add(GroupInfo.get(i));
+                }
+            }
+        }
+
+        for (DoctorGroupBean entry : mGroups) {
+            String groupName = entry.name;
+            int groupId = Integer.parseInt(String.valueOf(entry.id));
+//            mICustomerInfoView.addLabelView(groupName,groupId);
+            mICustomerInfoView.addLabelView(entry);
+        }
+
     }
 
 

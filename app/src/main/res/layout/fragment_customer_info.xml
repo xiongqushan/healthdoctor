@@ -321,7 +321,7 @@
             android:id="@+id/userGroup"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1">
 
             <TextView
@@ -332,13 +332,12 @@
                 android:text="分组"/>
 
             <ScrollView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" >
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
                 <haozuo.com.healthdoctor.view.custom.CustomerInfoFlowLayout
                     android:id="@+id/flow_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:padding="10dp" >
                 </haozuo.com.healthdoctor.view.custom.CustomerInfoFlowLayout>
             </ScrollView>
