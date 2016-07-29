@@ -8,10 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-<<<<<<< HEAD
-=======
 import android.widget.BaseAdapter;
->>>>>>> f163e6c2eb9fb9602c403b717a973571bfb16a86
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -34,11 +31,8 @@ import haozuo.com.healthdoctor.manager.UserManager;
 /**
  * A simple {@link Fragment} subclass.
  */
-<<<<<<< HEAD
-public class CustomerInfoFragment extends AbstractView implements CustomerInfoContract.ICustomerInfoView {
-=======
-public class CustomerInfoFragment extends AbsView implements CustomerInfoContract.ICustomerInfoView, TextViewExtend.DrawableRightListener {
->>>>>>> f163e6c2eb9fb9602c403b717a973571bfb16a86
+
+public class CustomerInfoFragment extends AbstractView implements CustomerInfoContract.ICustomerInfoView, TextViewExtend.DrawableRightListener {
     Context mContext;
     View rootView;
     CustomDetailBean mCustomInfo;
