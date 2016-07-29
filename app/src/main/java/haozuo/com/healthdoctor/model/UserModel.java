@@ -102,6 +102,41 @@ public class UserModel extends AbsModel {
                 });
     }
 
+    public void LoginValidate(String account,int password, final OnHandlerResultListener<GlobalShell<DoctorBean>> callbackListener) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("Account", account);
+        params.put("Password", password);
+        IUserService userService= createService(IUserService.class);
+        userService.login(params)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<BaseBean<DoctorBean>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        GlobalShell<DoctorBean> entity=new GlobalShell<DoctorBean>(e.getMessage());
+                        callbackListener.handlerResult(entity);
+                    }
+
+                    @Override
+                    public void onNext(BaseBean<DoctorBean> resultBean) {
+                        GlobalShell<DoctorBean> entity=null;
+                        if(resultBean.state>0) {
+                            DoctorBean result = resultBean.Data;
+                            entity=new GlobalShell<DoctorBean>(result);
+                        }
+                        else{
+                            entity=new GlobalShell<DoctorBean>(resultBean.message);
+                        }
+                        callbackListener.handlerResult(entity);
+                    }
+                });
+    }
+
     public void GetGroup(int doctorId, final OnHandlerResultListener<GlobalShell<List<DoctorGroupBean>>> callbackListener){
         IGroupService groupService=createService(IGroupService.class);
         groupService.getGroup(doctorId)
