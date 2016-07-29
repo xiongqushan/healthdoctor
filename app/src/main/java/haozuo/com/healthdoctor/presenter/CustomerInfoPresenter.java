@@ -34,8 +34,7 @@ public class CustomerInfoPresenter extends AbsPresenter implements CustomerInfoC
 //    public CustomerInfoPresenter(@NonNull GroupCustInfoBean customInfo, @NonNull CustomerInfoContract.ICustomerInfoView iCustomerInfoView){
         mCustomInfo=customInfo;
         mICustomerInfoView=iCustomerInfoView;
-        mUserModel=new UserModel();
-        mGroupModel = new GroupModel();
+        mUserModel=UserModel.createInstance();
         mICustomerInfoView.setPresenter(this);
         mCustomerId = customerId;
     }
@@ -61,7 +60,7 @@ public class CustomerInfoPresenter extends AbsPresenter implements CustomerInfoC
         mICustomerInfoView.showDialog();
         int DeleteGroupId = groupBean.id;
         mOperateBy = (String) UserManager.getInstance().getDoctorInfo().Username;
-        mGroupModel.DeleteCustomerGroup(createRequestTag(), mCustomerId, DeleteGroupId, mOperateBy, new OnHandlerResultListener<GlobalShell<Boolean>>() {
+        mGroupModel.DeleteCustomerGroup(mCustomerId, DeleteGroupId, mOperateBy, new OnHandlerResultListener<GlobalShell<Boolean>>() {
             @Override
             public void handlerResult(GlobalShell<Boolean> resultData) {
                 if(resultData.LogicSuccess) {

@@ -12,6 +12,8 @@ import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.nio.charset.Charset;
+import java.util.HashMap;
+import java.util.Map;
 
 import haozuo.com.healthdoctor.framework.SysConfig;
 import haozuo.com.healthdoctor.util.StringUtil;
@@ -33,8 +35,12 @@ public abstract class AbsModel implements BaseModel{
     private static final String BASIC_USER_NAME  = SysConfig.BASE_API[1];
     private static final String BASIC_SIGN_SECRET  =SysConfig.BASE_API[2];
 
+    private Map<String,OkHttpClient>mClentTagDictionary=new HashMap<>();
+
     private OkHttpClient createHttpClient(){
+        final String tag=java.util.UUID.randomUUID().toString();
         OkHttpClient httpClient = new OkHttpClient();
+        mClentTagDictionary.put(tag,httpClient);
         httpClient.interceptors().add(new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
@@ -47,7 +53,7 @@ public abstract class AbsModel implements BaseModel{
                 else{
                     originUrl+="?timespan="+timespan;
                 }
-                request= request.newBuilder().url(originUrl).build();
+                request= request.newBuilder().url(originUrl).tag(tag).build();
                 String sign ="";
                 if(request.method().toLowerCase().equals("get")) {
                     sign = request.urlString() + "|" + BASIC_SIGN_SECRET;
@@ -96,4 +102,10 @@ public abstract class AbsModel implements BaseModel{
         return retrofit.create(service);
     }
 
+    @Override
+    public void cancelRequest() {
+        for(Map.Entry<String,OkHttpClient> entry :mClentTagDictionary.entrySet()){
+            entry.getValue().cancel(entry.getKey());
+        }
+    }
 }

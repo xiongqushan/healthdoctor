@@ -26,7 +26,7 @@ public class GroupModel extends AbsModel {
         return new GroupModel();
     }
 
-    public void DeleteCustomerGroup(String tag,int customerId,int groupId,String operateBy, final OnHandlerResultListener<GlobalShell<Boolean>> callbackListener){
+    public void DeleteCustomerGroup(int customerId,int groupId,String operateBy, final OnHandlerResultListener<GlobalShell<Boolean>> callbackListener){
         IGroupService groupService=createService(IGroupService.class);
         groupService.DeleteGroup(customerId,groupId,operateBy)
                 .subscribeOn(Schedulers.io())
@@ -58,9 +58,4 @@ public class GroupModel extends AbsModel {
                 });
     }
 
-
-    @Override
-    public void cancel(String tag) {
-
-    }
 }

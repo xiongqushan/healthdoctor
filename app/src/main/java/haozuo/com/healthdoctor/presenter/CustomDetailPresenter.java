@@ -22,7 +22,7 @@ public class CustomDetailPresenter extends AbsPresenter implements CustomDetailC
     private int mCustomerId;
     public CustomDetailPresenter(@NonNull CustomDetailContract.ICustomDetailView iView, int customerId){
         mICustomDetailView=iView;
-        mUserModel=new UserModel();
+        mUserModel=UserModel.createInstance();
         mICustomDetailView.setPresenter(this);
         mCustomerId = customerId;
     }
@@ -30,7 +30,7 @@ public class CustomDetailPresenter extends AbsPresenter implements CustomDetailC
     @Override
     public void start() {
         mICustomDetailView.showDialog();
-        mUserModel.GetUserDetail(createRequestTag(), mCustomerId, new OnHandlerResultListener<GlobalShell<CustomDetailBean>>() {
+        mUserModel.GetUserDetail(mCustomerId, new OnHandlerResultListener<GlobalShell<CustomDetailBean>>() {
             @Override
             public void handlerResult(GlobalShell<CustomDetailBean> resultData) {
             if(resultData.LogicSuccess) {

@@ -25,6 +25,9 @@ public interface IUserService {
     @POST(SysConfig.CONTROLLER_PRE_API_USER + "Login")
     Observable<BaseBean<DoctorBean>> login(@Body Map<String, Object> params);
 
+    @POST(SysConfig.CONTROLLER_PRE_API_USER + "LoginValidate")
+    Observable<BaseBean<DoctorBean>> LoginValidate(@Body Map<String, Object> params);
+
     @GET(SysConfig.CONTROLLER_PRE_API_USER+"getGroupCustInfoList")
     Observable<BaseBean<PageBean<GroupCustInfoBean>>>getGroupCustInfoList(@Query("serviceDeptId")int serviceDeptId, @Query("doctorId")int doctorId, @Query("groupId")int groupId,
                                                                           @Query("customNameOrMobile")String customNameOrMobile, @Query("pageIndex")int pageIndex, @Query("pageSize")int pageSize);

@@ -26,7 +26,7 @@ public class GroupPresenter extends AbsPresenter implements IGroupPresenter{
     private UserModel mUserModel;
     public GroupPresenter(@NonNull GroupContract.IGroupView iGroupView){
         mIGroupView=iGroupView;
-        mUserModel=new UserModel();
+        mUserModel=UserModel.createInstance();
         iGroupView.setPresenter(this);
     }
 
@@ -44,7 +44,7 @@ public class GroupPresenter extends AbsPresenter implements IGroupPresenter{
     public void start() {
         int doctorId= UserManager.getInstance().getDoctorInfo().Id;
         mIGroupView.showDialog();
-        mUserModel.GetGroup(createRequestTag(), doctorId, new OnHandlerResultListener<GlobalShell<List<DoctorGroupBean>>>() {
+        mUserModel.GetGroup(doctorId, new OnHandlerResultListener<GlobalShell<List<DoctorGroupBean>>>() {
             @Override
             public void handlerResult(GlobalShell<List<DoctorGroupBean>> resultData) {
                 if(resultData.LogicSuccess) {
