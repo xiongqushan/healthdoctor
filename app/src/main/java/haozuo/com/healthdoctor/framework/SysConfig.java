@@ -12,4 +12,5 @@ public class SysConfig {
 //    public static final String[] BASE_API=new String[]{"http://hz75thbd2:19949","HZ_API_V2","1!2@3#4$5%6^"};//xwdebugg
 
     public static final String CONTROLLER_PRE_API_USER = "api/" + CURRENT_BASE_VERSION + "_User/";
+    public static final String CONTROLLER_PRE_API_CONSULT = "api/" + CURRENT_BASE_VERSION + "_Consult/";
 }
