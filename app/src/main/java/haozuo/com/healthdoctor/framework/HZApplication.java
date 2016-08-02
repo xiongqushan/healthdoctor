@@ -1,25 +1,31 @@
 package haozuo.com.healthdoctor.framework;
 
 import android.app.Application;
-import android.content.Context;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
-
-import haozuo.com.healthdoctor.util.HttpHelper;
+import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
 
 /**
  * Created by xiongwei on 16/5/7.
  */
 public class HZApplication extends Application {
-    private static Context instance;
-    public static Context shareContext() {
-        return instance;
+    private static HZApplication applictaion;
+    public static HZApplication shareApplication() {
+        return applictaion;
     }
+
+    private RefWatcher mRefWatcher;
     @Override
     public void onCreate() {
         super.onCreate();
-        instance=this;
-        HttpHelper.Init(this);
+        applictaion = this;
+        //HttpHelper.Init(this);
         Fresco.initialize(this);
+        mRefWatcher = LeakCanary.install(this);
+    }
+
+    public RefWatcher getRefWatcher(){
+        return mRefWatcher;
     }
 }

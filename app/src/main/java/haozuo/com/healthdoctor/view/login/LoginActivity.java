@@ -21,6 +21,8 @@ public class LoginActivity extends BaseActivity {
             ActivityUtils.addFragmentToActivity(fragmentManager,loginFragment,R.id.frameContent);
         }
         LoginPresenter mLoginPresenter=new LoginPresenter(loginFragment,this);
+
+        haozuo.com.healthdoctor.manager.UserManager.getInstance(this);
     }
 
 }

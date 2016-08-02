@@ -29,16 +29,16 @@ public class InternalStorageManager {
     }
 
     void save(String content) throws IOException {
-        File file = new File(HZApplication.shareContext().getFilesDir(), FILE_NAME);
+        File file = new File(HZApplication.shareApplication().getFilesDir(), FILE_NAME);
         FileOutputStream fos = new FileOutputStream(file);
         fos.write(content.getBytes());
         fos.close();
     }
 
     String getFile() throws IOException {
-        File file = new File(HZApplication.shareContext().getFilesDir(), FILE_NAME);
+        File file = new File(HZApplication.shareApplication().getFilesDir(), FILE_NAME);
         if (file.exists()) {
-            FileInputStream fis = HZApplication.shareContext().openFileInput(FILE_NAME);
+            FileInputStream fis = HZApplication.shareApplication().openFileInput(FILE_NAME);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             byte[] data = new byte[1024];
             int len = -1;

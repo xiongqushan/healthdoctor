@@ -12,7 +12,7 @@ import haozuo.com.healthdoctor.util.StringUtil;
 /**
  * Created by Administrator on 2016/7/5.
  */
-public abstract class AbstractView extends Fragment{
+public abstract class AbstractView extends BaseFragment{
     private LoadingDialog loadingDialog;
     private CustomDialog comfirmDialog;
     protected AbstractView(){

@@ -25,9 +25,11 @@ public class UserManager {
     private static SharedPreferences sharedPreferences;
     private static DoctorBean _currentEntity;
     private static List<DoctorGroupBean> _currentGroupEntity;
+
+    public static Activity testActivity;
     private UserManager() {
         if (null == sharedPreferences) {
-            sharedPreferences = HZApplication.shareContext().getSharedPreferences(SP_NAME,Activity.MODE_PRIVATE);
+            sharedPreferences = HZApplication.shareApplication().getSharedPreferences(SP_NAME,Activity.MODE_PRIVATE);
         }
     }
 
@@ -35,6 +37,14 @@ public class UserManager {
         if (_instance == null) {
             _instance = new UserManager();
         }
+        return _instance;
+    }
+
+    public static UserManager getInstance(Activity a) {
+        if (_instance == null) {
+            _instance = new UserManager();
+        }
+        _instance.testActivity=a;
         return _instance;
     }
 
