@@ -16,9 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:divider="@null"
-            android:scrollbars="none"
-            android:paddingLeft="12dp"
-            android:paddingRight="12dp"/>
+            android:scrollbars="none" />
         <include layout="@layout/load_more" />
     </haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout>
 

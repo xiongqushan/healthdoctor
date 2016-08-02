@@ -1,6 +1,9 @@
 package haozuo.com.healthdoctor.contract;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Build;
@@ -22,6 +25,8 @@ import butterknife.Bind;
 import butterknife.OnCheckedChanged;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.util.SystemBarTintUtil;
+import haozuo.com.healthdoctor.view.consult.ConsultActivity;
+import haozuo.com.healthdoctor.view.group.GroupActivity;
 
 /**
  * Created by xiongwei1 on 2016/7/8.
@@ -33,6 +38,17 @@ public abstract class BaseActivity extends AppCompatActivity {
         setTranslucentStatus();
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
+
+    @Override
+    public void finish(){
+        super.finish();
+        overridePendingTransition(R.anim.to_right_in, R.anim.to_right_out);
+    }
+
+//    public void finishThis() {
+//        this.finish();
+//        overridePendingTransition(R.anim.to_right_in, R.anim.to_right_out);
+//    }
 
     @TargetApi(19)
     private void setTranslucentStatus() {
@@ -55,6 +71,19 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected void initTabhostMenu(){
         RadioGroup tab_menu = (RadioGroup) findViewById(R.id.tab_menu);
+        switch(getLocalClassName()){
+            case "view.group.GroupActivity":
+                RadioButton btnRbChat = (RadioButton) findViewById(R.id.rbChat);
+                btnRbChat.setChecked(true);
+                break;
+            case "view.consult.ConsultActivity":
+                RadioButton btnRbAddress = (RadioButton) findViewById(R.id.rbAddress);
+                btnRbAddress.setChecked(true);
+                break;
+            case "":
+                Toast.makeText(getApplicationContext(),"333",Toast.LENGTH_SHORT).show();
+                break;
+        }
         tab_menu.setOnCheckedChangeListener(new OnNavChangeListener());
     }
 
@@ -64,12 +93,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         public void onCheckedChanged(RadioGroup group, int checkedId) {
             switch (checkedId){
                 case R.id.rbChat:
-                    Toast.makeText(getApplicationContext(),"111",Toast.LENGTH_SHORT).show();
-                    //do sth
+                    startActivity(new Intent(getBaseContext(),GroupActivity.class));
+                    finish();
                     break;
                 case R.id.rbAddress:
-                    Toast.makeText(getApplicationContext(),"222",Toast.LENGTH_SHORT).show();
-                    //do sth
+                    startActivity(new Intent(getBaseContext(),ConsultActivity.class));
+                    finish();
                     break;
                 case R.id.rbFind:
                     Toast.makeText(getApplicationContext(),"333",Toast.LENGTH_SHORT).show();

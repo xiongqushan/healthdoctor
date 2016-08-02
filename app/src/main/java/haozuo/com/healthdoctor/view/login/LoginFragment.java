@@ -92,6 +92,7 @@ public class LoginFragment extends AbsView implements ILoginView{
         Context context=getContext();
         Intent intent=new Intent(context, GroupActivity.class);
         context.startActivity(intent);
+        getActivity().finish();
     }
 
     @Override

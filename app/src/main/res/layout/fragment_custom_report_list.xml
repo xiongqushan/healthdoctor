@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pull_to_refresh_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/refresh_head" />
+    <haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullableListView
+        android:id="@+id/list_custom_report"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@null"
+        android:scrollbars="none"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"/>
+    <include layout="@layout/load_more" />
+</haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout>

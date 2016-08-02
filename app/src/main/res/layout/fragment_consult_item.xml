@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/Cphoto"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="15dp"
+        fresco:roundAsCircle="true" />
+
+    <TextView
+        android:id="@+id/Cname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="张三"
+        android:layout_alignTop="@+id/Cphoto"
+        android:layout_toRightOf="@+id/Cphoto"
+        android:layout_toEndOf="@+id/Cphoto"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/LastConsult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/Cname"
+        android:layout_alignParentRight="true"
+        tools:text="2016-04-11 14:31"/>
+
+    <TextView
+        android:id="@+id/ConsultContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/Cname"
+        android:layout_below="@id/Cname"
+        android:layout_marginTop="12dp"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        tools:text="张三这位客户咨询健管师的最后一个问题11111111111111111111111111111"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/silver"
+        android:layout_alignLeft="@id/ConsultContent"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

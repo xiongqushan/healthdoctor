@@ -83,6 +83,7 @@
             android:layout_alignEnd="@+id/account"
             android:layout_marginTop="7dp"
             android:drawableLeft="@drawable/checkcode"
+            android:inputType="textPassword"
             android:hint="请输入您的密码"
             android:textSize="@dimen/login_text_size"
             android:background="@null"

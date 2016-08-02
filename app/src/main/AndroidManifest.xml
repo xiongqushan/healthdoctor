@@ -44,6 +44,9 @@
             android:name=".view.custom.CustomerInfoActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
+        <activity
+            android:name=".view.consult.ConsultActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

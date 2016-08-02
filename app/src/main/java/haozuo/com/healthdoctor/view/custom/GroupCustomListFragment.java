@@ -158,7 +158,8 @@ public class GroupCustomListFragment extends AbsView implements GroupCustomListC
 
             GroupCustInfoBean groupCustInfoEntity = dataSource.get(position);
             if (groupCustInfoEntity.PhotoUrl == null){
-                photoUri = "http://pic002.cnblogs.com/images/2011/103608/2011062022023456.jpg";
+//                photoUri = "http://pic002.cnblogs.com/images/2011/103608/2011062022023456.jpg";
+                photoUri = "res://haozuo.com.healthdoctor.view.custom/"+R.drawable.default_photourl;
             }
             else {
                 photoUri = groupCustInfoEntity.PhotoUrl;

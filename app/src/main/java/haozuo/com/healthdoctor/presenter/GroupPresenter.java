@@ -47,17 +47,16 @@ public class GroupPresenter extends AbsPresenter implements IGroupPresenter{
         mUserModel.GetGroup(doctorId, new OnHandlerResultListener<GlobalShell<List<DoctorGroupBean>>>() {
             @Override
             public void handlerResult(GlobalShell<List<DoctorGroupBean>> resultData) {
-                if(resultData.LogicSuccess) {
-                    mIGroupView.hideDialog();
-                    DoctorGroupBean doctorGroupBean = new DoctorGroupBean();
-                    Collections.sort(resultData.Data,doctorGroupBean);
-                    UserManager.getInstance().setGroupInfo((List<DoctorGroupBean>) resultData.Data);
-                    mIGroupView.setGroupInfo(resultData.Data);
-//                    mIGroupView.refreshGroupAdapter(resultData.Data);
-                }
-                else{
-                    mIGroupView.hideDialog(resultData.Message);
-                }
+            if(resultData.LogicSuccess) {
+                mIGroupView.hideDialog();
+                DoctorGroupBean doctorGroupBean = new DoctorGroupBean();
+                Collections.sort(resultData.Data,doctorGroupBean);
+                UserManager.getInstance().setGroupInfo((List<DoctorGroupBean>) resultData.Data);
+                mIGroupView.setGroupInfo(resultData.Data);
+            }
+            else{
+                mIGroupView.hideDialog(resultData.Message);
+            }
             }
         });
     }

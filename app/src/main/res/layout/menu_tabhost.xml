@@ -14,10 +14,10 @@
     <!--android:layout_height="wrap_content"-->
     <!--android:background="@drawable/tabhost_my_btn"/>-->
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/lightgray"/>
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="1dp"-->
+        <!--android:background="@color/lightgray"/>-->
 
     <RadioGroup
         android:id="@+id/tab_menu"

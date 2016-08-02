@@ -31,7 +31,6 @@ public class CustomerInfoPresenter extends AbsPresenter implements CustomerInfoC
     private String mOperateBy;
     private List<DoctorGroupBean> mGroups = new ArrayList<DoctorGroupBean>();
     public CustomerInfoPresenter(@NonNull CustomDetailBean customInfo, @NonNull CustomerInfoContract.ICustomerInfoView iCustomerInfoView, int customerId){
-//    public CustomerInfoPresenter(@NonNull GroupCustInfoBean customInfo, @NonNull CustomerInfoContract.ICustomerInfoView iCustomerInfoView){
         mCustomInfo=customInfo;
         mICustomerInfoView=iCustomerInfoView;
         mUserModel=UserModel.createInstance();
@@ -55,7 +54,6 @@ public class CustomerInfoPresenter extends AbsPresenter implements CustomerInfoC
     }
 
     @Override
-//    public void DeleteCustomerGroup(final int DeleteGroupId) {
     public void DeleteCustomerGroup(final DoctorGroupBean groupBean) {
         mICustomerInfoView.showDialog();
         int DeleteGroupId = groupBean.id;
@@ -91,7 +89,6 @@ public class CustomerInfoPresenter extends AbsPresenter implements CustomerInfoC
         for (DoctorGroupBean entry : mGroups) {
             String groupName = entry.name;
             int groupId = Integer.parseInt(String.valueOf(entry.id));
-//            mICustomerInfoView.addLabelView(groupName,groupId);
             mICustomerInfoView.addLabelView(entry);
         }
 

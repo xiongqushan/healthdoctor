@@ -28,7 +28,7 @@ import haozuo.com.healthdoctor.contract.CustomDetailContract;
 import haozuo.com.healthdoctor.contract.CustomerInfoContract;
 
 public class CustomDetailFragment extends AbsView implements CustomDetailContract.ICustomDetailView{
-    private SimpleFragmentPagerAdapter pagerAdapter;
+//    SimpleFragmentPagerAdapter pagerAdapter;
     Context mContext;
     View rootView;
     int mCustomerId;
@@ -81,7 +81,8 @@ public class CustomDetailFragment extends AbsView implements CustomDetailContrac
     public void InitView(CustomDetailBean custom) {
         final CustomDetailBean customInfo = custom;
         if (custom.PhotoUrl == null){
-            Cphoto = "http://pic002.cnblogs.com/images/2011/103608/2011062022023456.jpg";
+//            Cphoto = "http://pic002.cnblogs.com/images/2011/103608/2011062022023456.jpg";
+            Cphoto = "res://haozuo.com.healthdoctor.view.custom/"+R.drawable.default_photourl;
         }
         else {
             Cphoto = custom.PhotoUrl;

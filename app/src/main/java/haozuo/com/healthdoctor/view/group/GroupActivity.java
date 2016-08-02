@@ -57,7 +57,6 @@ public class GroupActivity extends BaseActivity {
         if(!isLogin){
             return;
         }
-        initTabhostMenu();
         FragmentManager fragmentManager=getSupportFragmentManager();
         GroupFragment groupFragment=(GroupFragment)fragmentManager.findFragmentById(R.id.frameContent);
         if(groupFragment==null){
@@ -65,8 +64,12 @@ public class GroupActivity extends BaseActivity {
             ActivityUtils.addFragmentToActivity(fragmentManager,groupFragment,R.id.frameContent);
         }
          GroupPresenter mGroupPresenter=new GroupPresenter(groupFragment);
-        //UserModel.createInstance().Login("13601994100",1234);
-        //GroupModel.createInstance().GetGroup(2055);
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        initTabhostMenu();
     }
 
     boolean checkLogin() {

@@ -1,0 +1,64 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    tools:context="haozuo.com.healthdoctor.view.consult.ConsultDetailFragment">
+
+    <RadioGroup
+        android:id="@+id/consult_Tab"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/consult_All"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/silver"
+            android:checked="true"
+            android:text="全部" />
+        <RadioButton
+            android:id="@+id/consult_Submit"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/silver"
+            android:text="转入" />
+        <RadioButton
+            android:id="@+id/consult_Mine"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/silver"
+            android:text="我的" />
+    </RadioGroup>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/lightgrey"
+        android:visibility="gone"/>
+
+    <!--<haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout-->
+        <!--android:id="@+id/pull_to_refresh_layout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+
+        <!--<include layout="@layout/refresh_head" />-->
+
+        <!--<haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullableListView-->
+            <!--android:id="@+id/consult_List"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="0dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:paddingLeft="12dp"-->
+            <!--android:paddingRight="12dp"/>-->
+        <!--<include layout="@layout/load_more" />-->
+    <!--</haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout>-->
+
+</LinearLayout>

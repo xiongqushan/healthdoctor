@@ -15,7 +15,7 @@ public class CustomDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_detail);
-        setCustomerTitle("客户详情");
+//        setCustomerTitle("客户详情");
 
         Bundle bundle = getIntent().getExtras();
         int customerId = bundle.getInt("CustomerId");
