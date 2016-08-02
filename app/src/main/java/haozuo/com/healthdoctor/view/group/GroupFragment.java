@@ -54,8 +54,6 @@ public class GroupFragment extends AbsView implements GroupContract.IGroupView{
     @Bind(R.id.sixthGroupCount)TextView sixthGroupCount;
 
 
-
-
     public GroupFragment(){
 
     }

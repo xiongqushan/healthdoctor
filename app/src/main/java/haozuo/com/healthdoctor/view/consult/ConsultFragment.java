@@ -17,6 +17,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
+import haozuo.com.healthdoctor.bean.ConsultDetailBean;
 import haozuo.com.healthdoctor.contract.AbsView;
 import haozuo.com.healthdoctor.contract.ConsultContract;
 import haozuo.com.healthdoctor.view.custom.PageFragment;
@@ -28,6 +29,7 @@ public class ConsultFragment extends AbsView implements ConsultContract.IConsult
     Context mContext;
     View rootView;
     public ConsultContract.IConsultPresenter ConsultPresenter;
+    private OnPendingRefreshListener mPendingPageListener;
     @Bind(R.id.consult_Tab) TabLayout tabLayout;
     @Bind(R.id.consult_Vp) ViewPager viewPager;
 
@@ -67,6 +69,7 @@ public class ConsultFragment extends AbsView implements ConsultContract.IConsult
         ConsultPresenter=presenter;
     }
 
+
     private String tabTitles2[] = new String[]{"待处理","已处理","问题反馈"};
     private List<Fragment> fragList2 = new ArrayList<Fragment>(){};
     @Override
@@ -96,7 +99,7 @@ public class ConsultFragment extends AbsView implements ConsultContract.IConsult
                 case 2:
                     return PageFragment.newInstance(3);
                 default:
-                    return ConsultDetailFragment.newInstance();
+                    return ConsultPandingFragment.newInstance();
             }
         }
 
@@ -110,4 +113,13 @@ public class ConsultFragment extends AbsView implements ConsultContract.IConsult
             return tabTitles[position];
         }
     }
+
+    public void attachPendingPageEvent(OnPendingRefreshListener pendingPageListener) {
+        mPendingPageListener = pendingPageListener;
+    }
+
+    public interface OnPendingRefreshListener {
+        void refreshConsultDetailList(List<ConsultDetailBean> consultDetailBeanList);
+    }
+
 }

@@ -57,13 +57,14 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="15dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         fresco:roundAsCircle="true"/>
     <TextView
         android:id="@+id/txt_Cname"
         android:layout_width="wrap_content"
         android:layout_height="43dp"
         android:layout_toRightOf="@id/CPhoto"
+        android:layout_marginLeft="10dp"
         android:gravity="center_vertical"
         android:textSize="20sp"
         tools:text="张三"/>
@@ -94,6 +95,7 @@
         android:layout_marginTop="17dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
+        android:layout_marginRight="12dp"
         tools:text="1990-01-01" />
     <View
         android:layout_width="match_parent"

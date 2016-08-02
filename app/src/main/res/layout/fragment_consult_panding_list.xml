@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
 
-    tools:context="haozuo.com.healthdoctor.view.consult.ConsultDetailFragment">
+    tools:context=".view.consult.ConsultPandingFragment">
 
     <RadioGroup
         android:id="@+id/consult_Tab"
@@ -44,6 +44,14 @@
         android:background="@color/lightgrey"
         android:visibility="gone"/>
 
+
+    <ListView
+        android:id="@+id/consult_detail_List"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+    </ListView>
+
     <!--<haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout-->
         <!--android:id="@+id/pull_to_refresh_layout"-->
         <!--android:layout_width="match_parent"-->
@@ -56,8 +64,6 @@
             <!--android:layout_width="match_parent"-->
             <!--android:layout_height="0dp"-->
             <!--android:layout_weight="1"-->
-            <!--android:paddingLeft="12dp"-->
-            <!--android:paddingRight="12dp"/>-->
         <!--<include layout="@layout/load_more" />-->
     <!--</haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout>-->
 

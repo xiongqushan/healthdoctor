@@ -6,46 +6,50 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/Cphoto"
+        android:id="@+id/consult_Cphoto"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="15dp"
+        android:layout_marginLeft="12dp"
         fresco:roundAsCircle="true" />
 
     <TextView
-        android:id="@+id/Cname"
+        android:id="@+id/consult_Cname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="张三"
-        android:layout_alignTop="@+id/Cphoto"
-        android:layout_toRightOf="@+id/Cphoto"
-        android:layout_toEndOf="@+id/Cphoto"
+        android:layout_alignTop="@+id/consult_Cphoto"
+        android:layout_toRightOf="@+id/consult_Cphoto"
+        android:layout_toEndOf="@+id/consult_Cphoto"
         android:layout_marginLeft="10dp"/>
 
     <TextView
-        android:id="@+id/LastConsult"
+        android:id="@+id/consult_LastConsult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/Cname"
+        android:layout_alignBottom="@id/consult_Cname"
         android:layout_alignParentRight="true"
+        android:layout_marginRight="12dp"
         tools:text="2016-04-11 14:31"/>
 
     <TextView
-        android:id="@+id/ConsultContent"
-        android:layout_width="wrap_content"
+        android:id="@+id/consult_ConsultContent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/Cname"
-        android:layout_below="@id/Cname"
+        android:layout_alignLeft="@id/consult_Cname"
+        android:layout_alignRight="@id/consult_LastConsult"
+        android:layout_below="@id/consult_Cname"
         android:layout_marginTop="12dp"
         android:singleLine="true"
         android:ellipsize="marquee"
         tools:text="张三这位客户咨询健管师的最后一个问题11111111111111111111111111111"/>
 
     <View
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="@color/silver"
-        android:layout_alignLeft="@id/ConsultContent"
+        android:layout_alignLeft="@id/consult_ConsultContent"
+        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

@@ -99,7 +99,8 @@ public class CustomerInfoFragment extends AbsView implements CustomerInfoContrac
     public void InitView(CustomDetailBean customInfo) {
         mCustomInfo = customInfo;
         if (customInfo.PhotoUrl == null){
-            photoUri = "http://pic002.cnblogs.com/images/2011/103608/2011062022023456.jpg";
+//            photoUri = "http://pic002.cnblogs.com/images/2011/103608/2011062022023456.jpg";
+            photoUri = "res://haozuo.com.healthdoctor.view.custom/"+R.drawable.default_photourl;
         }
         else {
             photoUri = customInfo.PhotoUrl;
