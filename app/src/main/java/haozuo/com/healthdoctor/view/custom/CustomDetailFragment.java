@@ -9,9 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -23,12 +21,16 @@ import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.CustomDetailBean;
 import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
-import haozuo.com.healthdoctor.contract.AbsView;
+import haozuo.com.healthdoctor.view.base.AbstractView;
 import haozuo.com.healthdoctor.contract.CustomDetailContract;
-import haozuo.com.healthdoctor.contract.CustomerInfoContract;
 
-public class CustomDetailFragment extends AbsView implements CustomDetailContract.ICustomDetailView{
-//    SimpleFragmentPagerAdapter pagerAdapter;
+//<<<<<<< HEAD
+//public class CustomDetailFragment extends AbsView implements CustomDetailContract.ICustomDetailView{
+////    SimpleFragmentPagerAdapter pagerAdapter;
+//=======
+public class CustomDetailFragment extends AbstractView implements CustomDetailContract.ICustomDetailView{
+    private SimpleFragmentPagerAdapter pagerAdapter;
+
     Context mContext;
     View rootView;
     int mCustomerId;

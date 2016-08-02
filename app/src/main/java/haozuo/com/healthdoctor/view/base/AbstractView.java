@@ -1,4 +1,4 @@
-package haozuo.com.healthdoctor.contract;
+package haozuo.com.healthdoctor.view.base;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -12,10 +12,10 @@ import haozuo.com.healthdoctor.util.StringUtil;
 /**
  * Created by Administrator on 2016/7/5.
  */
-public abstract class AbsView extends Fragment{
+public abstract class AbstractView extends BaseFragment{
     private LoadingDialog loadingDialog;
     private CustomDialog comfirmDialog;
-    protected AbsView(){
+    protected AbstractView(){
     }
 
 

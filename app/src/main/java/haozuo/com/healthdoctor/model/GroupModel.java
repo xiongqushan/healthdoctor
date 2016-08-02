@@ -1,17 +1,8 @@
 package haozuo.com.healthdoctor.model;
 
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import haozuo.com.healthdoctor.bean.BaseBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
-import haozuo.com.healthdoctor.bean.RequestErrorEnum;
-import haozuo.com.healthdoctor.contract.AbsModel;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
-import haozuo.com.healthdoctor.listener.OnHttpCallbackListener;
 import haozuo.com.healthdoctor.service.IGroupService;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -20,7 +11,7 @@ import rx.schedulers.Schedulers;
 /**
  * Created by xiongwei1 on 2016/7/27.
  */
-public class GroupModel extends AbsModel {
+public class GroupModel extends AbstractModel {
 
     public static GroupModel createInstance(){
         return new GroupModel();

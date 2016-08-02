@@ -1,11 +1,5 @@
 package haozuo.com.healthdoctor.model;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import org.json.JSONObject;
-
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,10 +10,7 @@ import haozuo.com.healthdoctor.bean.DoctorGroupBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
 import haozuo.com.healthdoctor.bean.PageBean;
-import haozuo.com.healthdoctor.bean.RequestErrorEnum;
-import haozuo.com.healthdoctor.contract.AbsModel;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
-import haozuo.com.healthdoctor.listener.OnHttpCallbackListener;
 import haozuo.com.healthdoctor.service.IGroupService;
 import haozuo.com.healthdoctor.service.IUserService;
 import rx.Subscriber;
@@ -29,7 +20,7 @@ import rx.schedulers.Schedulers;
 /**
  * Created by xiongwei on 16/5/19.
  */
-public class UserModel extends AbsModel {
+public class UserModel extends AbstractModel {
 
     public static UserModel createInstance(){
         return new UserModel();

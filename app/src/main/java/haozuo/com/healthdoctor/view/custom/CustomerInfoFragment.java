@@ -24,14 +24,15 @@ import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.CustomDetailBean;
 import haozuo.com.healthdoctor.bean.DoctorGroupBean;
 import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
-import haozuo.com.healthdoctor.contract.AbsView;
+import haozuo.com.healthdoctor.view.base.AbstractView;
 import haozuo.com.healthdoctor.contract.CustomerInfoContract;
 import haozuo.com.healthdoctor.manager.UserManager;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CustomerInfoFragment extends AbsView implements CustomerInfoContract.ICustomerInfoView, TextViewExtend.DrawableRightListener {
+
+public class CustomerInfoFragment extends AbstractView implements CustomerInfoContract.ICustomerInfoView, TextViewExtend.DrawableRightListener {
     Context mContext;
     View rootView;
     CustomDetailBean mCustomInfo;

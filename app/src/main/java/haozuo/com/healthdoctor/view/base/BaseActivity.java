@@ -1,4 +1,4 @@
-package haozuo.com.healthdoctor.contract;
+package haozuo.com.healthdoctor.view.base;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -101,7 +101,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                     finish();
                     break;
                 case R.id.rbFind:
-                    Toast.makeText(getApplicationContext(),"333",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(),"333",Toast.LENGTH_SHORT).show();
                     //do sth
                     break;
             }

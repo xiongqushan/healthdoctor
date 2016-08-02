@@ -1,4 +1,4 @@
-package haozuo.com.healthdoctor.contract;
+package haozuo.com.healthdoctor.model;
 
 import android.util.Base64;
 
@@ -8,20 +8,14 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Type;
-import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 
+import haozuo.com.healthdoctor.contract.IBaseModel;
 import haozuo.com.healthdoctor.framework.SysConfig;
 import haozuo.com.healthdoctor.util.StringUtil;
 import okio.Buffer;
-import okio.BufferedSink;
-import okio.ByteString;
-import okio.Source;
-import okio.Timeout;
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 import retrofit.RxJavaCallAdapterFactory;
@@ -29,7 +23,7 @@ import retrofit.RxJavaCallAdapterFactory;
 /**
  * Created by xiongwei1 on 2016/7/27.
  */
-public abstract class AbsModel implements BaseModel{
+public abstract class AbstractModel implements IBaseModel {
     private static final String CURRENT_VERSION= SysConfig.CURRENT_BASE_VERSION;
     private static final String API_BASE_URL=SysConfig.BASE_API[0];
     private static final String BASIC_USER_NAME  = SysConfig.BASE_API[1];

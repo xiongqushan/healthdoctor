@@ -15,7 +15,7 @@ import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
-import haozuo.com.healthdoctor.contract.AbsView;
+import haozuo.com.healthdoctor.view.base.AbstractView;
 import haozuo.com.healthdoctor.contract.LoginContract;
 import haozuo.com.healthdoctor.contract.LoginContract.ILoginView;
 import haozuo.com.healthdoctor.view.group.GroupActivity;
@@ -23,7 +23,7 @@ import haozuo.com.healthdoctor.view.group.GroupActivity;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LoginFragment extends AbsView implements ILoginView{
+public class LoginFragment extends AbstractView implements ILoginView{
     View rootView;
     LoginContract.ILoginPresenter mILoginPresenter;
 

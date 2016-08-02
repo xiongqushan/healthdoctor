@@ -18,18 +18,18 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.ConsultDetailBean;
-import haozuo.com.healthdoctor.contract.AbsView;
 import haozuo.com.healthdoctor.contract.ConsultContract;
+import haozuo.com.healthdoctor.view.base.AbstractView;
 import haozuo.com.healthdoctor.view.custom.PageFragment;
 
 /**
  * Created by hzguest3 on 2016/8/1.
  */
-public class ConsultFragment extends AbsView implements ConsultContract.IConsultView {
+public class ConsultFragment extends AbstractView implements ConsultContract.IConsultView {
     Context mContext;
     View rootView;
     public ConsultContract.IConsultPresenter ConsultPresenter;
-    private OnPendingRefreshListener mPendingPageListener;
+    private OnPendingPageListener mPendingPageListener;
     @Bind(R.id.consult_Tab) TabLayout tabLayout;
     @Bind(R.id.consult_Vp) ViewPager viewPager;
 
@@ -43,7 +43,7 @@ public class ConsultFragment extends AbsView implements ConsultContract.IConsult
     @Override
     public void onResume(){
         super.onResume();
-        ConsultPresenter.start();
+//        ConsultPresenter.start();
     }
 
     @Override
@@ -54,7 +54,7 @@ public class ConsultFragment extends AbsView implements ConsultContract.IConsult
             rootView= inflater.inflate(R.layout.fragment_consult, container, false);
             ButterKnife.bind(this,rootView);
         }
-//        InitView();
+        InitView();
         return rootView;
     }
 
@@ -69,10 +69,9 @@ public class ConsultFragment extends AbsView implements ConsultContract.IConsult
         ConsultPresenter=presenter;
     }
 
-
     private String tabTitles2[] = new String[]{"待处理","已处理","问题反馈"};
     private List<Fragment> fragList2 = new ArrayList<Fragment>(){};
-    @Override
+
     public void InitView() {
         ConsultFragment fragment = new ConsultFragment();
         ConsultFragment.SimpleFragmentPagerAdapter pagerAdapter = fragment.new SimpleFragmentPagerAdapter(getActivity().getSupportFragmentManager());
@@ -114,11 +113,18 @@ public class ConsultFragment extends AbsView implements ConsultContract.IConsult
         }
     }
 
-    public void attachPendingPageEvent(OnPendingRefreshListener pendingPageListener) {
+    public void setOnPendingRefreshListener(OnPendingPageListener pendingPageListener) {
         mPendingPageListener = pendingPageListener;
     }
 
-    public interface OnPendingRefreshListener {
+    @Override
+    public void RefreshPendingPageList() {
+        if(mPendingPageListener!=null){
+            mPendingPageListener.refreshConsultDetailList(null);
+        }
+    }
+
+    public interface OnPendingPageListener {
         void refreshConsultDetailList(List<ConsultDetailBean> consultDetailBeanList);
     }
 

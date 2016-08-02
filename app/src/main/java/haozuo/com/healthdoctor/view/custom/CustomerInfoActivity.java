@@ -1,13 +1,12 @@
 package haozuo.com.healthdoctor.view.custom;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.CustomDetailBean;
 import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
-import haozuo.com.healthdoctor.contract.BaseActivity;
+import haozuo.com.healthdoctor.view.base.BaseActivity;
 import haozuo.com.healthdoctor.presenter.CustomerInfoPresenter;
 import haozuo.com.healthdoctor.util.ActivityUtils;
 

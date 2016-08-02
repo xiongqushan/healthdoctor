@@ -6,9 +6,8 @@ import android.widget.Toast;
 
 import haozuo.com.healthdoctor.bean.DoctorBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
-import haozuo.com.healthdoctor.contract.AbsPresenter;
-import haozuo.com.healthdoctor.contract.BaseModel;
-import haozuo.com.healthdoctor.contract.BaseView;
+import haozuo.com.healthdoctor.contract.IBaseModel;
+import haozuo.com.healthdoctor.contract.IBaseView;
 import haozuo.com.healthdoctor.contract.LoginContract;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
 import haozuo.com.healthdoctor.manager.UserManager;
@@ -20,7 +19,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Created by xiongwei1 on 2016/7/4.
  */
-public class LoginPresenter extends AbsPresenter implements LoginContract.ILoginPresenter {
+public class LoginPresenter extends AbstractPresenter implements LoginContract.ILoginPresenter {
     LoginContract.ILoginView mILoginView;
     UserModel mUserModel;
     Context mContext;
@@ -102,12 +101,12 @@ public class LoginPresenter extends AbsPresenter implements LoginContract.ILogin
     }
 
     @Override
-    public BaseView getBaseView() {
+    public IBaseView getBaseView() {
         return mILoginView;
     }
 
     @Override
-    public BaseModel getBaseModel() {
+    public IBaseModel getBaseModel() {
         return mUserModel;
     }
 }

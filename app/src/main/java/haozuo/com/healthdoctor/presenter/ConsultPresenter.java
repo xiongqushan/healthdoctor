@@ -2,16 +2,11 @@ package haozuo.com.healthdoctor.presenter;
 
 import android.support.annotation.NonNull;
 
-import java.util.Collections;
-import java.util.List;
 
-import haozuo.com.healthdoctor.bean.DoctorGroupBean;
-import haozuo.com.healthdoctor.bean.GlobalShell;
-import haozuo.com.healthdoctor.contract.AbsPresenter;
-import haozuo.com.healthdoctor.contract.BaseModel;
-import haozuo.com.healthdoctor.contract.BaseView;
 import haozuo.com.healthdoctor.contract.ConsultContract;
 import haozuo.com.healthdoctor.contract.GroupContract;
+import haozuo.com.healthdoctor.contract.IBaseModel;
+import haozuo.com.healthdoctor.contract.IBaseView;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
 import haozuo.com.healthdoctor.manager.UserManager;
 import haozuo.com.healthdoctor.model.UserModel;
@@ -21,7 +16,7 @@ import haozuo.com.healthdoctor.view.custom.CustomDetailFragment;
  * Created by hzguest3 on 2016/8/1.
  */
 
-public class ConsultPresenter extends AbsPresenter implements ConsultContract.IConsultPresenter {
+public class ConsultPresenter extends AbstractPresenter implements ConsultContract.IConsultPresenter {
     private ConsultContract.IConsultView mIConsultView;
     private UserModel mUserModel;
     public ConsultPresenter(@NonNull  ConsultContract.IConsultView iConsultView){
@@ -31,18 +26,22 @@ public class ConsultPresenter extends AbsPresenter implements ConsultContract.IC
     }
 
     @Override
-    public BaseView getBaseView() {
+    public IBaseView getBaseView() {
         return mIConsultView;
     }
 
     @Override
-    public BaseModel getBaseModel() {
+    public IBaseModel getBaseModel() {
         return mUserModel;
     }
 
     @Override
     public void start() {
-        mIConsultView.InitView();
+
     }
 
+    @Override
+    public void getConsultList(){
+        //http request here;
+    }
 }

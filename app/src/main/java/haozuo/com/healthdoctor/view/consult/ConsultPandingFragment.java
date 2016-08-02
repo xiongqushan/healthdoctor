@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +21,7 @@ import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.ConsultDetailBean;
 import haozuo.com.healthdoctor.contract.ConsultContract;
+import haozuo.com.healthdoctor.view.group.GroupActivity;
 
 
 public class ConsultPandingFragment extends Fragment{
@@ -26,8 +29,10 @@ public class ConsultPandingFragment extends Fragment{
     View rootView;
     ConsultContract.IConsultPresenter mConsultPresenter;
     ConsultListAdapter mConsultListAdapter;
+    RadioGroup.OnCheckedChangeListener mOnCheckedChangeListener;
 
     @Bind(R.id.consult_detail_List) ListView consult_detail_List;
+    @Bind(R.id.consult_Tab) RadioGroup consult_Tab;
 
     public ConsultPandingFragment(){};
 
@@ -41,7 +46,8 @@ public class ConsultPandingFragment extends Fragment{
                              Bundle savedInstanceState) {
         mContext=getContext();
         ConsultFragment consultFragment=(ConsultFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.frameContent);
-        consultFragment.attachPendingPageEvent(new ConsultFragment.OnPendingRefreshListener() {
+        consultFragment.ConsultPresenter.getConsultList();
+        consultFragment.setOnPendingRefreshListener(new ConsultFragment.OnPendingPageListener() {
             @Override
             public void refreshConsultDetailList(List<ConsultDetailBean> consultDetailBeanList) {
                 mConsultListAdapter.refresh(consultDetailBeanList);
@@ -54,6 +60,7 @@ public class ConsultPandingFragment extends Fragment{
             ButterKnife.bind(this,rootView);
         }
 
+
         mConsultListAdapter=new ConsultListAdapter(mContext, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,10 +70,30 @@ public class ConsultPandingFragment extends Fragment{
                 mContext.startActivity(intent);
             }
         });
-        consult_detail_List.setAdapter(mConsultListAdapter);
 
+        mOnCheckedChangeListener = new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.consult_All:
+                        Toast.makeText(mContext,"111",Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.consult_Submit:
+                        Toast.makeText(mContext,"222",Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.consult_Mine:
+                        Toast.makeText(mContext,"333",Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            }
+        };
+
+        consult_detail_List.setAdapter(mConsultListAdapter);
+        consult_Tab.setOnCheckedChangeListener(mOnCheckedChangeListener);
         return rootView;
     }
+
+
 
     class ConsultListAdapter extends BaseAdapter {
         private LayoutInflater myInflater;

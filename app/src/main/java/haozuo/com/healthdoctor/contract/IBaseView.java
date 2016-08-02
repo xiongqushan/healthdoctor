@@ -1,12 +1,11 @@
 package haozuo.com.healthdoctor.contract;
 
-import haozuo.com.healthdoctor.presenter.*;
 import haozuo.com.healthdoctor.util.CustomDialog;
 
 /**
  * Created by xiongwei1 on 2016/7/4.
  */
-public interface BaseView<T extends BasePresenter> {
+public interface IBaseView<T extends IBasePresenter> {
     void showDialog();
 
     void showDialog(String msg) ;

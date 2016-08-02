@@ -4,28 +4,24 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.DoctorGroupBean;
-import haozuo.com.healthdoctor.contract.AbsView;
+import haozuo.com.healthdoctor.view.base.AbstractView;
 import haozuo.com.healthdoctor.contract.GroupContract;
 import haozuo.com.healthdoctor.util.DisplayUtil;
 import haozuo.com.healthdoctor.view.custom.GroupCustomListActivity;
 
-public class GroupFragment extends AbsView implements GroupContract.IGroupView{
+public class GroupFragment extends AbstractView implements GroupContract.IGroupView{
     Context mContext;
     View rootView;
     GroupContract.IGroupPresenter mGroupPresenter;
@@ -117,16 +113,10 @@ public class GroupFragment extends AbsView implements GroupContract.IGroupView{
             String groupNum = "服务人数"+doctorGroupBeanList.get(i).groupNum;
             String groupName = doctorGroupBeanList.get(i).name;
             final int groupId=doctorGroupBeanList.get(i).id;
-//            TextView groupNumTV = new TextView(mContext);
-//            TextView groupNameTV = new TextView(mContext);
-//            groupNumTV.setText(groupNum);
-//            groupNameTV.setText(groupName);
-//            groupNumTV.setGravity(Gravity.CENTER);
-//            groupNameTV.setGravity(Gravity.CENTER);
 
             GroupNameArray[i].setText(groupName);
             GroupCountArray[i].setText(groupNum);
-            GroupNameArray[i].setOnClickListener(new View.OnClickListener() {
+            mLayoutList[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent=new Intent(mContext, GroupCustomListActivity.class);
@@ -142,7 +132,6 @@ public class GroupFragment extends AbsView implements GroupContract.IGroupView{
             mLayoutList[i].setLayoutParams(layoutParams);
         }
     }
-
 
 //    class GroupAdapter extends BaseAdapter {
 //        private LayoutInflater myInflater;

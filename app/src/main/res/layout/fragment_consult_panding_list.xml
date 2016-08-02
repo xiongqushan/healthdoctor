@@ -18,6 +18,11 @@
             android:layout_weight="1"
             android:gravity="center"
             android:textColor="@color/silver"
+            android:background="@null"
+            android:button="@null"
+            android:drawableLeft="@drawable/consult_group_btn"
+            android:paddingRight="30dp"
+            android:paddingLeft="30dp"
             android:checked="true"
             android:text="全部" />
         <RadioButton
@@ -27,6 +32,11 @@
             android:layout_weight="1"
             android:gravity="center"
             android:textColor="@color/silver"
+            android:background="@null"
+            android:button="@null"
+            android:drawableLeft="@drawable/consult_group_btn"
+            android:paddingRight="30dp"
+            android:paddingLeft="30dp"
             android:text="转入" />
         <RadioButton
             android:id="@+id/consult_Mine"
@@ -35,6 +45,11 @@
             android:layout_weight="1"
             android:gravity="center"
             android:textColor="@color/silver"
+            android:background="@null"
+            android:button="@null"
+            android:drawableLeft="@drawable/consult_group_btn"
+            android:paddingRight="30dp"
+            android:paddingLeft="30dp"
             android:text="我的" />
     </RadioGroup>
 
@@ -43,7 +58,6 @@
         android:layout_height="1dp"
         android:background="@color/lightgrey"
         android:visibility="gone"/>
-
 
     <ListView
         android:id="@+id/consult_detail_List"

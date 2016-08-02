@@ -2,6 +2,7 @@ package haozuo.com.healthdoctor.contract;
 
 import java.util.List;
 
+import haozuo.com.healthdoctor.bean.ConsultDetailBean;
 import haozuo.com.healthdoctor.bean.DoctorGroupBean;
 
 /**
@@ -9,11 +10,11 @@ import haozuo.com.healthdoctor.bean.DoctorGroupBean;
  */
 public interface ConsultContract {
 
-    interface IConsultView extends BaseView<IConsultPresenter>{
-        void InitView();
+    interface IConsultView extends IBaseView<IConsultPresenter>{
+        void RefreshPendingPageList();
     }
 
-    interface IConsultPresenter extends BasePresenter{
-
+    interface IConsultPresenter extends IBasePresenter{
+        void getConsultList();
     }
 }

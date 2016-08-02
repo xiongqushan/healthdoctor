@@ -21,7 +21,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
-import haozuo.com.healthdoctor.contract.AbsView;
+import haozuo.com.healthdoctor.view.base.AbstractView;
 import haozuo.com.healthdoctor.contract.GroupCustomListContract;
 import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout;
 import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullableListView;
@@ -29,7 +29,7 @@ import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullableListView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class GroupCustomListFragment extends AbsView implements GroupCustomListContract.IGroupCustomListView {
+public class GroupCustomListFragment extends AbstractView implements GroupCustomListContract.IGroupCustomListView {
     Context mContext;
     View rootView;
     GroupCustomListContract.IGroupCustomListPresenter mGroupCustomListPresenter;
@@ -65,8 +65,10 @@ public class GroupCustomListFragment extends AbsView implements GroupCustomListC
         mGroupCustInfoAdapter=new GroupCustInfoAdapter(mContext,new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Object[]tag=(Object[])v.getTag();
-                int customerId = (int)(((Object[])v.getTag())[0]);
+                GroupCustInfoAdapter.ViewHolder tag=( GroupCustInfoAdapter.ViewHolder)v.getTag();
+                int customerId = (int)(((Object[])tag.CPhoto.getTag())[0]);
+//                Object[]tag=(Object[])v.getTag();
+//                int customerId = (int)(((Object[])v.getTag())[0]);
                 Intent intent = new Intent(mContext,CustomDetailActivity.class);
                 intent.putExtra("CustomerId", customerId);
                 mContext.startActivity(intent);
@@ -152,6 +154,7 @@ public class GroupCustomListFragment extends AbsView implements GroupCustomListC
                 convertView = myInflater.inflate(R.layout.group_custinfo_item, parent, false);
                 holder = new ViewHolder(convertView);
                 convertView.setTag(holder);
+                convertView.setOnClickListener(clickListener);
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
@@ -172,12 +175,12 @@ public class GroupCustomListFragment extends AbsView implements GroupCustomListC
             holder.Company.setText(groupCustInfoEntity.CompanyName);
 
             holder.CPhoto.setTag(new Object[]{groupCustInfoEntity.CustId});
-            holder.CPhoto.setOnClickListener(clickListener);
+//            holder.CPhoto.setOnClickListener(clickListener);
 
             return convertView;
         }
 
-        class ViewHolder {
+        public class ViewHolder {
             @Bind(R.id.CPhoto)
             public SimpleDraweeView CPhoto;
 
