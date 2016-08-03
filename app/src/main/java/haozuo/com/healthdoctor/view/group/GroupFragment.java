@@ -103,24 +103,26 @@ public class GroupFragment extends AbstractView implements GroupContract.IGroupV
 //    }
 
     @Override
-    public void setGroupInfo(List<DoctorGroupBean> doctorGroupBeanList) {
+    public void setGroupInfo(final List<DoctorGroupBean> doctorGroupBeanList) {
 
         LinearLayout[] mLayoutList = {firstGroup,secondGroup,thirdGroup,fourthGroup,fifthGroup,sixthGroup};
         TextView[] GroupNameArray = {firstGroupName,secondGroupName,thirdGroupName,fourthGroupName,fifthGroupName,sixthGroupName};
         TextView[] GroupCountArray = {firstGroupCount,secondGroupCount,thirdGroupCount,fourthGroupCount,fifthGroupCount,sixthGroupCount};
 
         for (int i=0;i<doctorGroupBeanList.size();i++){
-            String groupNum = "服务人数"+doctorGroupBeanList.get(i).groupNum;
+            String doctorNum = "服务人数: "+doctorGroupBeanList.get(i).doctorNum;
             String groupName = doctorGroupBeanList.get(i).name;
             final int groupId=doctorGroupBeanList.get(i).id;
 
             GroupNameArray[i].setText(groupName);
-            GroupCountArray[i].setText(groupNum);
+            GroupCountArray[i].setText(doctorNum);
+            final int finalI = i;
             mLayoutList[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent=new Intent(mContext, GroupCustomListActivity.class);
-                    intent.putExtra(GroupCustomListActivity.EXTRA_GROUP_ID,groupId);
+                    intent.putExtra(GroupCustomListActivity.EXTRA_GROUP_ID,doctorGroupBeanList.get(finalI));
+//                    intent.putExtra(GroupCustomListActivity.EXTRA_GROUP_ID,groupId);
                     mContext.startActivity(intent);
                 }
             });

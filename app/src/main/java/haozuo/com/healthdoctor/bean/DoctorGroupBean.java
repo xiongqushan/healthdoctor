@@ -1,11 +1,12 @@
 package haozuo.com.healthdoctor.bean;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
 /**
  * Created by xiongwei on 16/5/22.
  */
-public class DoctorGroupBean implements Comparator<DoctorGroupBean> {
+public class DoctorGroupBean implements Comparator<DoctorGroupBean>,Serializable{
     public int id;
     public int type;
     public String name;

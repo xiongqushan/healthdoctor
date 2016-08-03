@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Created by xiongwei1 on 2016/8/2.
  */
-public class ConsultItem {
+public class ConsultItemBean {
 
     /**
      * ROWNUMBER : 1

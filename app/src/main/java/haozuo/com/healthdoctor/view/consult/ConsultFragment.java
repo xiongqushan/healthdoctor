@@ -17,7 +17,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
-import haozuo.com.healthdoctor.bean.ConsultDetailBean;
+import haozuo.com.healthdoctor.bean.ConsultItemBean;
 import haozuo.com.healthdoctor.contract.ConsultContract;
 import haozuo.com.healthdoctor.view.base.AbstractView;
 import haozuo.com.healthdoctor.view.custom.PageFragment;
@@ -43,7 +43,6 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
     @Override
     public void onResume(){
         super.onResume();
-//        ConsultPresenter.start();
     }
 
     @Override
@@ -117,15 +116,25 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
         mPendingPageListener = pendingPageListener;
     }
 
+
     @Override
-    public void RefreshPendingPageList() {
+    public void RefreshPendingPageList(List<ConsultItemBean> consultItemBeanList) {
         if(mPendingPageListener!=null){
-            mPendingPageListener.refreshConsultDetailList(null);
+            mPendingPageListener.refreshConsultDetailList(consultItemBeanList);
+        }
+    }
+
+    @Override
+    public void refreshFinish(int status) {
+        if (mPendingPageListener!=null){
+            mPendingPageListener.refreshFinish(status);
         }
     }
 
     public interface OnPendingPageListener {
-        void refreshConsultDetailList(List<ConsultDetailBean> consultDetailBeanList);
+        void refreshConsultDetailList(List<ConsultItemBean> consultDetailBeanList);
+
+        void refreshFinish(int status);
     }
 
 }

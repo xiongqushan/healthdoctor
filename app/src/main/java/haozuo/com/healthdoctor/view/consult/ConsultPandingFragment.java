@@ -1,7 +1,7 @@
 package haozuo.com.healthdoctor.view.consult;
 
 import android.content.Context;
-import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,7 +11,8 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,18 +20,22 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
-import haozuo.com.healthdoctor.bean.ConsultDetailBean;
+import haozuo.com.healthdoctor.bean.ConsultItemBean;
 import haozuo.com.healthdoctor.contract.ConsultContract;
-import haozuo.com.healthdoctor.view.group.GroupActivity;
+import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout;
 
 
 public class ConsultPandingFragment extends Fragment{
     Context mContext;
     View rootView;
+    ConsultFragment mConsultFragment;
     ConsultContract.IConsultPresenter mConsultPresenter;
     ConsultListAdapter mConsultListAdapter;
     RadioGroup.OnCheckedChangeListener mOnCheckedChangeListener;
 
+    private int mFlag;
+
+    @Bind(R.id.consult_pull_to_refresh_layout)PullToRefreshLayout consult_pull_to_refresh_layout;
     @Bind(R.id.consult_detail_List) ListView consult_detail_List;
     @Bind(R.id.consult_Tab) RadioGroup consult_Tab;
 
@@ -45,44 +50,45 @@ public class ConsultPandingFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mContext=getContext();
-        ConsultFragment consultFragment=(ConsultFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.frameContent);
-        consultFragment.ConsultPresenter.getConsultList();
-        consultFragment.setOnPendingRefreshListener(new ConsultFragment.OnPendingPageListener() {
+        mConsultFragment=(ConsultFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.frameContent);
+        mFlag = 3;
+        mConsultFragment.ConsultPresenter.refreshCustomList(mFlag); //首次加载全部咨询内容
+        mConsultFragment.setOnPendingRefreshListener(new ConsultFragment.OnPendingPageListener() {
             @Override
-            public void refreshConsultDetailList(List<ConsultDetailBean> consultDetailBeanList) {
-                mConsultListAdapter.refresh(consultDetailBeanList);
+            public void refreshConsultDetailList(List<ConsultItemBean> consultItemBeanList) {
+                mConsultListAdapter.refresh(consultItemBeanList);
+                mConsultListAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void refreshFinish(int status) {
+                consult_pull_to_refresh_layout.refreshFinish(status);
             }
         });
 
-        mConsultPresenter = consultFragment.ConsultPresenter;
+        mConsultPresenter = mConsultFragment.ConsultPresenter;
         if(rootView==null){
             rootView= inflater.inflate(R.layout.fragment_consult_panding_list, container, false);
             ButterKnife.bind(this,rootView);
         }
 
-
-        mConsultListAdapter=new ConsultListAdapter(mContext, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int groupId=(int)(((Object[])v.getTag())[0]);
-                Intent intent=new Intent(mContext, ConsultPandingFragment.class);
-                intent.putExtra("CustomerID",groupId);
-                mContext.startActivity(intent);
-            }
-        });
+        mConsultListAdapter=new ConsultListAdapter(mContext);
 
         mOnCheckedChangeListener = new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId){
                     case R.id.consult_All:
-                        Toast.makeText(mContext,"111",Toast.LENGTH_SHORT).show();
+                        mFlag = 3;
+                        mConsultFragment.ConsultPresenter.refreshCustomList(mFlag);//全部
                         break;
                     case R.id.consult_Submit:
-                        Toast.makeText(mContext,"222",Toast.LENGTH_SHORT).show();
+                        mFlag = 2;
+                        mConsultFragment.ConsultPresenter.refreshCustomList(mFlag);//转入
                         break;
                     case R.id.consult_Mine:
-                        Toast.makeText(mContext,"333",Toast.LENGTH_SHORT).show();
+                        mFlag = 1;
+                        mConsultFragment.ConsultPresenter.refreshCustomList(mFlag);//我的
                         break;
                 }
             }
@@ -90,23 +96,22 @@ public class ConsultPandingFragment extends Fragment{
 
         consult_detail_List.setAdapter(mConsultListAdapter);
         consult_Tab.setOnCheckedChangeListener(mOnCheckedChangeListener);
+        consult_pull_to_refresh_layout.setOnRefreshListener(new PullListener());
         return rootView;
     }
 
 
-
     class ConsultListAdapter extends BaseAdapter {
         private LayoutInflater myInflater;
-        List<ConsultDetailBean> dataSource;
-        View.OnClickListener clickListener = null;
+        List<ConsultItemBean> dataSource;
+        private String Cphoto;
 
-        public ConsultListAdapter(Context context, View.OnClickListener onClickListener) {
+        public ConsultListAdapter(Context context) {
             this.myInflater = LayoutInflater.from(context);
             dataSource = new ArrayList<>();
-            clickListener = onClickListener;
         }
 
-        public void refresh(List<ConsultDetailBean> dataList){
+        public void refresh(List<ConsultItemBean> dataList){
             dataSource=dataList;
             notifyDataSetChanged();
         }
@@ -132,7 +137,7 @@ public class ConsultPandingFragment extends Fragment{
             if (convertView == null) {
                 holder = new ViewHolder();
                 convertView = myInflater.inflate(R.layout.fragment_consult_panding_item, parent, false);
-                holder.Cphoto = (TextView) convertView.findViewById(R.id.consult_Cphoto);
+                holder.Cphoto = (SimpleDraweeView) convertView.findViewById(R.id.consult_Cphoto);
                 holder.Cname = (TextView) convertView.findViewById(R.id.consult_Cname);
                 holder.LastConsult = (TextView) convertView.findViewById(R.id.consult_LastConsult);
                 holder.ConsultContent = (TextView) convertView.findViewById(R.id.consult_ConsultContent);
@@ -140,23 +145,43 @@ public class ConsultPandingFragment extends Fragment{
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
-            ConsultDetailBean doctorGroupEntity = dataSource.get(position);
-            holder.Cname.setText(doctorGroupEntity.Cname);
-            holder.Cphoto.setText(doctorGroupEntity.Cphoto);
-            holder.ConsultContent.setText(doctorGroupEntity.CommitContent);
-            holder.LastConsult.setText(doctorGroupEntity.LastCommit);
+            ConsultItemBean doctorGroupEntity = dataSource.get(position);
+            if (doctorGroupEntity.PhotoUrl == null){
+                Cphoto = "res://haozuo.com.healthdoctor.view.custom/"+R.drawable.default_photourl;
+            }
+            else {
+                Cphoto = doctorGroupEntity.PhotoUrl;
+            }
+            Uri uri = Uri.parse(Cphoto);
+            holder.Cphoto.setImageURI(uri);
+            holder.Cname.setText(doctorGroupEntity.CustName);
+            holder.ConsultContent.setText(doctorGroupEntity.ConsultTitele);
+            holder.LastConsult.setText(doctorGroupEntity.CommitOn);
 
-            holder.Cphoto.setTag(new Object[]{doctorGroupEntity.ID});
-            holder.Cphoto.setOnClickListener(clickListener);
+            holder.Cphoto.setTag(new Object[]{doctorGroupEntity.CustId});
             return convertView;
         }
 
         public class ViewHolder {
-            public TextView Cphoto;
+            public SimpleDraweeView Cphoto;
             public TextView Cname;
             public TextView LastConsult;
             public TextView ConsultContent;
         }
+    }
+
+    class PullListener implements PullToRefreshLayout.OnRefreshListener {
+
+        @Override
+        public void onRefresh() {
+            mConsultPresenter.refreshCustomList(mFlag);
+        }
+
+        @Override
+        public void onLoadMore() {
+            mConsultPresenter.loadmoreCustomList(mFlag);
+        }
+
     }
 
 }

@@ -19,11 +19,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:textColor="@color/white"
             tools:text="高血压组"/>
         <TextView
             android:id="@+id/firstGroupCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             tools:text="服务人数:58"/>
     </LinearLayout>
 
@@ -41,11 +43,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:textColor="@color/white"
             tools:text="高血压组"/>
         <TextView
             android:id="@+id/secondGroupCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             tools:text="服务人数:58"/>
     </LinearLayout>
 
@@ -65,11 +69,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:textColor="@color/white"
             tools:text="高血压组"/>
         <TextView
             android:id="@+id/thirdGroupCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             tools:text="服务人数:58"/>
     </LinearLayout>
 
@@ -89,11 +95,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:textColor="@color/white"
             tools:text="高血压组"/>
         <TextView
             android:id="@+id/fourthGroupCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             tools:text="服务人数:58"/>
     </LinearLayout>
 
@@ -114,11 +122,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:textColor="@color/white"
             tools:text="高血压组"/>
         <TextView
             android:id="@+id/fifthGroupCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             tools:text="服务人数:58"/>
     </LinearLayout>
 
@@ -139,11 +149,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:textColor="@color/white"
             tools:text="高血压组"/>
         <TextView
             android:id="@+id/sixthGroupCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             tools:text="服务人数:58"/>
     </LinearLayout>
 

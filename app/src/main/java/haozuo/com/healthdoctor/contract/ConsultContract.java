@@ -2,8 +2,8 @@ package haozuo.com.healthdoctor.contract;
 
 import java.util.List;
 
-import haozuo.com.healthdoctor.bean.ConsultDetailBean;
-import haozuo.com.healthdoctor.bean.DoctorGroupBean;
+import haozuo.com.healthdoctor.bean.ConsultItemBean;
+import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
 
 /**
  * Created by hzguest3 on 2016/8/1.
@@ -11,10 +11,17 @@ import haozuo.com.healthdoctor.bean.DoctorGroupBean;
 public interface ConsultContract {
 
     interface IConsultView extends IBaseView<IConsultPresenter>{
-        void RefreshPendingPageList();
+        void RefreshPendingPageList(List<ConsultItemBean> consultItemBeanList);
+
+
+        void refreshFinish(int status);
     }
 
     interface IConsultPresenter extends IBasePresenter{
-        void getConsultList();
+//        void getConsultList(int flag);
+
+        void refreshCustomList(int flag);
+
+        void loadmoreCustomList(int flag);
     }
 }

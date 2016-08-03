@@ -62,7 +62,9 @@ public class GroupCustomListPresenter extends AbstractPresenter implements Group
                 if(resultData.LogicSuccess) {
                     mGroupCustomListView.hideDialog();
                     mGroupCustInfoBeanList.clear();
-                    mGroupCustInfoBeanList.addAll(resultData.Data.CurrentPageDataList);
+                    if (resultData.Data.CurrentPageDataList != null){
+                        mGroupCustInfoBeanList.addAll(resultData.Data.CurrentPageDataList);
+                    }
                     mGroupCustomListView.refreshCustomAdapter(mGroupCustInfoBeanList);
                     mGroupCustomListView.refreshFinish(PullToRefreshLayout.SUCCEED);
                 }

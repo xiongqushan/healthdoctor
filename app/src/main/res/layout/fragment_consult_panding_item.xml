@@ -2,8 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="70dp"
+    android:descendantFocusability="blocksDescendants"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <!--descendantFocusability 屏蔽子控件抢夺ListView的焦点-->
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/consult_Cphoto"
@@ -47,7 +49,7 @@
     <View
         android:layout_width="0dp"
         android:layout_height="1dp"
-        android:background="@color/silver"
+        android:background="@color/lightgrey"
         android:layout_alignLeft="@id/consult_ConsultContent"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"/>
