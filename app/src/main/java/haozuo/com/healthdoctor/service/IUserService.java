@@ -17,7 +17,7 @@ import rx.Observable;
 /**
  * Created by xiongwei1 on 2016/7/28.
  */
-public interface IUserService {
+public interface IUserService {  
 
     @GET(SysConfig.CONTROLLER_PRE_API_USER+"LoginSMSCode")
     Observable<BaseBean<Boolean>> getSMSCode(@Query("mobile") String mobile);
