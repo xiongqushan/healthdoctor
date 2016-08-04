@@ -10,7 +10,7 @@ import haozuo.com.healthdoctor.presenter.CustomDetailPresenter;
 import haozuo.com.healthdoctor.util.ActivityUtils;
 
 public class CustomDetailActivity extends BaseActivity {
-
+    public static String EXTRA_CUSTOMER_ID="Customer_ID";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

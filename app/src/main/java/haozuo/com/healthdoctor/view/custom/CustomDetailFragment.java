@@ -97,7 +97,7 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, CustomerInfoActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("CustomInfo", customInfo);
+                bundle.putSerializable(CustomerInfoActivity.EXTRA_CUSTOMER_INFO, customInfo);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

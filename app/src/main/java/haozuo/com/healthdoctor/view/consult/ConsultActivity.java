@@ -15,7 +15,7 @@ public class ConsultActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consult);
-        setCustomerTitle("咨询");
+//        setCustomerTitle("咨询");
 
         FragmentManager fragmentManager=getSupportFragmentManager();
         ConsultFragment fragment=(ConsultFragment)fragmentManager.findFragmentById(R.id.frameContent);

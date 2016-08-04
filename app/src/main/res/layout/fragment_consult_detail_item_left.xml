@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/consult_item_photo"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginLeft="12dp"/>
+
+    <TextView
+        android:id="@+id/consult_item_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/consult_item_photo"
+        android:layout_marginTop="15dp"
+        android:textSize="12sp"
+        tools:text="客户回复的纯文本或者体检异常项内容~~~~~~~~~~~~~~~~~~~~~~~~~~"/>
+
+\
+</RelativeLayout>

@@ -1,11 +1,12 @@
 package haozuo.com.healthdoctor.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by xiongwei1 on 2016/8/2.
  */
-public class ConsultItemBean {
+public class ConsultItemBean implements Serializable {
 
     /**
      * ROWNUMBER : 1

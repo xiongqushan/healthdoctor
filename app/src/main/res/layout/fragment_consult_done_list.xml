@@ -1,13 +1,57 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="haozuo.com.healthdoctor.view.consult.ConsultDoneFragment">
+    android:layout_height="70dp"
+    android:descendantFocusability="blocksDescendants"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <!--descendantFocusability 屏蔽子控件抢夺ListView的焦点-->
 
-    <!-- TODO: Update blank fragment layout -->
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/consult_Cphoto"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="12dp"
+        fresco:roundAsCircle="true" />
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/consult_Cname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="张三"
+        android:layout_alignTop="@+id/consult_Cphoto"
+        android:layout_toRightOf="@+id/consult_Cphoto"
+        android:layout_toEndOf="@+id/consult_Cphoto"
+        android:layout_marginLeft="10dp"/>
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/consult_LastConsult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/consult_Cname"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="12dp"
+        tools:text="2016-04-11 14:31"/>
+
+    <TextView
+        android:id="@+id/consult_ConsultContent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/consult_Cname"
+        android:layout_alignRight="@id/consult_LastConsult"
+        android:layout_below="@id/consult_Cname"
+        android:layout_marginTop="12dp"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        tools:text="张三这位客户咨询健管师的最后一个问题11111111111111111111111111111"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/lightgrey"
+        android:layout_alignLeft="@id/consult_ConsultContent"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

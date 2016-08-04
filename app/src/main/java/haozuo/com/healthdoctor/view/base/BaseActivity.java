@@ -45,11 +45,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.to_right_in, R.anim.to_right_out);
     }
 
-//    public void finishThis() {
-//        this.finish();
-//        overridePendingTransition(R.anim.to_right_in, R.anim.to_right_out);
-//    }
-
     @TargetApi(19)
     private void setTranslucentStatus() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {

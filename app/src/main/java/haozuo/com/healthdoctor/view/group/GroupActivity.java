@@ -41,6 +41,7 @@ public class GroupActivity extends BaseActivity {
         if (!UserManager.getInstance().exist()) {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
+            finish();
             return false;
         }
         return true;

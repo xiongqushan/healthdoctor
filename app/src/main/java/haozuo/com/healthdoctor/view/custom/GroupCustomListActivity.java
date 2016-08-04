@@ -22,7 +22,6 @@ public class GroupCustomListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_custom_list);
 
-//        int groupId=getIntent().getIntExtra(EXTRA_GROUP_ID,-1);
         Serializable obj= getIntent().getSerializableExtra(EXTRA_GROUP_ID);
         if(obj!=null){
             DoctorGroupBean doctorGroupBean = (DoctorGroupBean) obj;

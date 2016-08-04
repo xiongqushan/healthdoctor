@@ -1,5 +1,6 @@
 package haozuo.com.healthdoctor.presenter;
 import android.support.annotation.NonNull;
+import android.widget.Toast;
 
 import java.util.Collections;
 import java.util.List;
@@ -47,8 +48,10 @@ public class GroupPresenter extends AbstractPresenter implements IGroupPresenter
                 mIGroupView.hideDialog();
                 DoctorGroupBean doctorGroupBean = new DoctorGroupBean();
                 Collections.sort(resultData.Data,doctorGroupBean);
-                UserManager.getInstance().setGroupInfo((List<DoctorGroupBean>) resultData.Data);
-                mIGroupView.setGroupInfo(resultData.Data);
+                if ((List<DoctorGroupBean>) resultData.Data != null){
+                    UserManager.getInstance().setGroupInfo((List<DoctorGroupBean>) resultData.Data);
+                    mIGroupView.setGroupInfo(resultData.Data);
+                }
             }
             else{
                 mIGroupView.hideDialog(resultData.Message);

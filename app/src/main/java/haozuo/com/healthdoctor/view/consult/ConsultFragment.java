@@ -68,9 +68,6 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
         ConsultPresenter=presenter;
     }
 
-    private String tabTitles2[] = new String[]{"待处理","已处理","问题反馈"};
-    private List<Fragment> fragList2 = new ArrayList<Fragment>(){};
-
     public void InitView() {
         ConsultFragment fragment = new ConsultFragment();
         ConsultFragment.SimpleFragmentPagerAdapter pagerAdapter = fragment.new SimpleFragmentPagerAdapter(getActivity().getSupportFragmentManager());
@@ -78,6 +75,11 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        //自定义TABVIEW
+//        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+//            TabLayout.Tab tab = tabLayout.getTabAt(i);
+//            tab.setCustomView(pagerAdapter.getTabView(i));
+//        }
     }
 
     public class SimpleFragmentPagerAdapter extends FragmentPagerAdapter {
@@ -110,6 +112,16 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
         public CharSequence getPageTitle(int position) {
             return tabTitles[position];
         }
+        //自定义TABVIEW
+//        public View getTabView(int position){
+//            View view = LayoutInflater.from(context).inflate(R.layout.tab_item, null);
+//            TextView tv= (TextView) view.findViewById(R.id.textView);
+//            tv.setText(tabTitles[position]);
+//            ImageView img = (ImageView) view.findViewById(R.id.imageView);
+//            img.setImageResource(imageResId[position]);
+//            return view;
+//        }
+
     }
 
     public void setOnPendingRefreshListener(OnPendingPageListener pendingPageListener) {

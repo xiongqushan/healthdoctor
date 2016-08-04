@@ -1,0 +1,58 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="haozuo.com.healthdoctor.view.consult.ConsultDetailFragment">
+
+    <!--<include-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="60dp"-->
+        <!--layout="@layout/fragment_consult_panding_item"/>-->
+
+    <ListView
+        android:id="@+id/consult_detail_List"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="@null"/>
+
+    <RelativeLayout
+        android:id="@+id/edit_area"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+
+        <ImageView
+            android:id="@+id/btn_sound_message"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginLeft="12dp"
+            android:background="@drawable/sound_message"
+            android:focusable="true"
+            android:focusableInTouchMode="true"/>
+
+        <ImageView
+            android:id="@+id/btn_usually_message"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignTop="@id/btn_sound_message"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="12dp"
+            android:background="@drawable/usually_message" />
+
+        <EditText
+            android:id="@+id/message_edittxt"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/btn_sound_message"
+            android:layout_toLeftOf="@id/btn_usually_message"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginBottom="11dp"
+            android:background="@drawable/editview_bg_selector"
+            tools:text="在这里输入相应的编辑文本~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

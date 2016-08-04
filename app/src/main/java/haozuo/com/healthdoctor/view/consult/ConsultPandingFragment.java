@@ -1,6 +1,7 @@
 package haozuo.com.healthdoctor.view.consult;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -32,6 +33,7 @@ public class ConsultPandingFragment extends Fragment{
     ConsultContract.IConsultPresenter mConsultPresenter;
     ConsultListAdapter mConsultListAdapter;
     RadioGroup.OnCheckedChangeListener mOnCheckedChangeListener;
+    View.OnClickListener mOnClicklistener;
 
     private int mFlag;
 
@@ -52,6 +54,16 @@ public class ConsultPandingFragment extends Fragment{
         mContext=getContext();
         mConsultFragment=(ConsultFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.frameContent);
         mFlag = 3;
+        mOnClicklistener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ConsultListAdapter.ViewHolder tag=( ConsultListAdapter.ViewHolder)v.getTag();
+                ConsultItemBean customerItem = (ConsultItemBean)(((Object[])tag.Cphoto.getTag())[0]);
+                Intent intent = new Intent(mContext,ConsultDetailActivity.class);
+                intent.putExtra(ConsultDetailActivity.EXTRA_CONSULT_ITEM, customerItem);
+                mContext.startActivity(intent);
+            }
+        };
         mConsultFragment.ConsultPresenter.refreshCustomList(mFlag); //首次加载全部咨询内容
         mConsultFragment.setOnPendingRefreshListener(new ConsultFragment.OnPendingPageListener() {
             @Override
@@ -72,7 +84,7 @@ public class ConsultPandingFragment extends Fragment{
             ButterKnife.bind(this,rootView);
         }
 
-        mConsultListAdapter=new ConsultListAdapter(mContext);
+        mConsultListAdapter=new ConsultListAdapter(mContext, mOnClicklistener);
 
         mOnCheckedChangeListener = new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -106,9 +118,10 @@ public class ConsultPandingFragment extends Fragment{
         List<ConsultItemBean> dataSource;
         private String Cphoto;
 
-        public ConsultListAdapter(Context context) {
+        public ConsultListAdapter(Context context, View.OnClickListener onClickListener) {
             this.myInflater = LayoutInflater.from(context);
             dataSource = new ArrayList<>();
+            mOnClicklistener = onClickListener;
         }
 
         public void refresh(List<ConsultItemBean> dataList){
@@ -142,6 +155,7 @@ public class ConsultPandingFragment extends Fragment{
                 holder.LastConsult = (TextView) convertView.findViewById(R.id.consult_LastConsult);
                 holder.ConsultContent = (TextView) convertView.findViewById(R.id.consult_ConsultContent);
                 convertView.setTag(holder);
+                convertView.setOnClickListener(mOnClicklistener);
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
@@ -158,7 +172,7 @@ public class ConsultPandingFragment extends Fragment{
             holder.ConsultContent.setText(doctorGroupEntity.ConsultTitele);
             holder.LastConsult.setText(doctorGroupEntity.CommitOn);
 
-            holder.Cphoto.setTag(new Object[]{doctorGroupEntity.CustId});
+            holder.Cphoto.setTag(new Object[]{doctorGroupEntity});
             return convertView;
         }
 
