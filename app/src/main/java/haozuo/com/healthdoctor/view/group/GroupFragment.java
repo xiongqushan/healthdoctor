@@ -3,7 +3,6 @@ package haozuo.com.healthdoctor.view.group;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,41 +15,58 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.DoctorGroupBean;
-import haozuo.com.healthdoctor.view.base.AbstractView;
 import haozuo.com.healthdoctor.contract.GroupContract;
-import haozuo.com.healthdoctor.util.DisplayUtil;
+import haozuo.com.healthdoctor.view.base.AbstractView;
 import haozuo.com.healthdoctor.view.custom.GroupCustomListActivity;
 
-public class GroupFragment extends AbstractView implements GroupContract.IGroupView{
+public class GroupFragment extends AbstractView implements GroupContract.IGroupView {
     Context mContext;
     View rootView;
     GroupContract.IGroupPresenter mGroupPresenter;
 //    GroupAdapter mGroupAdapter;
 
-//    @Bind(R.id.list_group)GridView list_group;
-    @Bind(R.id.firstGroup)LinearLayout firstGroup;
-    @Bind(R.id.secondGroup)LinearLayout secondGroup;
-    @Bind(R.id.thirdGroup)LinearLayout thirdGroup;
-    @Bind(R.id.fourthGroup)LinearLayout fourthGroup;
-    @Bind(R.id.fifthGroup)LinearLayout fifthGroup;
-    @Bind(R.id.sixthGroup)LinearLayout sixthGroup;
+    //    @Bind(R.id.list_group)GridView list_group;
+    @Bind(R.id.firstGroup)
+    LinearLayout firstGroup;
+    @Bind(R.id.secondGroup)
+    LinearLayout secondGroup;
+    @Bind(R.id.thirdGroup)
+    LinearLayout thirdGroup;
+    @Bind(R.id.fourthGroup)
+    LinearLayout fourthGroup;
+    @Bind(R.id.fifthGroup)
+    LinearLayout fifthGroup;
+    @Bind(R.id.sixthGroup)
+    LinearLayout sixthGroup;
 
-    @Bind(R.id.firstGroupName)TextView firstGroupName;
-    @Bind(R.id.secondGroupName)TextView secondGroupName;
-    @Bind(R.id.thirdGroupName)TextView thirdGroupName;
-    @Bind(R.id.fourthGroupName)TextView fourthGroupName;
-    @Bind(R.id.fifthGroupName)TextView fifthGroupName;
-    @Bind(R.id.sixthGroupName)TextView sixthGroupName;
+    @Bind(R.id.firstGroupName)
+    TextView firstGroupName;
+    @Bind(R.id.secondGroupName)
+    TextView secondGroupName;
+    @Bind(R.id.thirdGroupName)
+    TextView thirdGroupName;
+    @Bind(R.id.fourthGroupName)
+    TextView fourthGroupName;
+    @Bind(R.id.fifthGroupName)
+    TextView fifthGroupName;
+    @Bind(R.id.sixthGroupName)
+    TextView sixthGroupName;
 
-    @Bind(R.id.firstGroupCount)TextView firstGroupCount;
-    @Bind(R.id.secondGroupCount)TextView secondGroupCount;
-    @Bind(R.id.thirdGroupCount)TextView thirdGroupCount;
-    @Bind(R.id.fourthGroupCount)TextView fourthGroupCount;
-    @Bind(R.id.fifthGroupCount)TextView fifthGroupCount;
-    @Bind(R.id.sixthGroupCount)TextView sixthGroupCount;
+    @Bind(R.id.firstGroupCount)
+    TextView firstGroupCount;
+    @Bind(R.id.secondGroupCount)
+    TextView secondGroupCount;
+    @Bind(R.id.thirdGroupCount)
+    TextView thirdGroupCount;
+    @Bind(R.id.fourthGroupCount)
+    TextView fourthGroupCount;
+    @Bind(R.id.fifthGroupCount)
+    TextView fifthGroupCount;
+    @Bind(R.id.sixthGroupCount)
+    TextView sixthGroupCount;
 
 
-    public GroupFragment(){
+    public GroupFragment() {
 
     }
 
@@ -68,10 +84,10 @@ public class GroupFragment extends AbstractView implements GroupContract.IGroupV
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mContext=getContext();
-        if(rootView==null){
-            rootView= inflater.inflate(R.layout.fragment_group, container, false);
-            ButterKnife.bind(this,rootView);
+        mContext = getContext();
+        if (rootView == null) {
+            rootView = inflater.inflate(R.layout.fragment_group, container, false);
+            ButterKnife.bind(this, rootView);
         }
 //        mGroupAdapter=new GroupAdapter(mContext, new View.OnClickListener() {
 //            @Override
@@ -94,7 +110,7 @@ public class GroupFragment extends AbstractView implements GroupContract.IGroupV
 
     @Override
     public void setPresenter(GroupContract.IGroupPresenter presenter) {
-        mGroupPresenter=presenter;
+        mGroupPresenter = presenter;
     }
 
 //    @Override
@@ -105,14 +121,14 @@ public class GroupFragment extends AbstractView implements GroupContract.IGroupV
     @Override
     public void setGroupInfo(final List<DoctorGroupBean> doctorGroupBeanList) {
 
-        LinearLayout[] mLayoutList = {firstGroup,secondGroup,thirdGroup,fourthGroup,fifthGroup,sixthGroup};
-        TextView[] GroupNameArray = {firstGroupName,secondGroupName,thirdGroupName,fourthGroupName,fifthGroupName,sixthGroupName};
-        TextView[] GroupCountArray = {firstGroupCount,secondGroupCount,thirdGroupCount,fourthGroupCount,fifthGroupCount,sixthGroupCount};
+        LinearLayout[] mLayoutList = {firstGroup, secondGroup, thirdGroup, fourthGroup, fifthGroup, sixthGroup};
+        TextView[] GroupNameArray = {firstGroupName, secondGroupName, thirdGroupName, fourthGroupName, fifthGroupName, sixthGroupName};
+        TextView[] GroupCountArray = {firstGroupCount, secondGroupCount, thirdGroupCount, fourthGroupCount, fifthGroupCount, sixthGroupCount};
 
-        for (int i=0;i<doctorGroupBeanList.size();i++){
-            String doctorNum = "服务人数: "+doctorGroupBeanList.get(i).doctorNum;
+        for (int i = 0; i < doctorGroupBeanList.size(); i++) {
+            String doctorNum = "服务人数: " + doctorGroupBeanList.get(i).doctorNum;
             String groupName = doctorGroupBeanList.get(i).name;
-            final int groupId=doctorGroupBeanList.get(i).id;
+            final int groupId = doctorGroupBeanList.get(i).id;
 
             GroupNameArray[i].setText(groupName);
             GroupCountArray[i].setText(doctorNum);
@@ -120,18 +136,19 @@ public class GroupFragment extends AbstractView implements GroupContract.IGroupV
             mLayoutList[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent=new Intent(mContext, GroupCustomListActivity.class);
-                    intent.putExtra(GroupCustomListActivity.EXTRA_GROUP_ID,doctorGroupBeanList.get(finalI));
+                    Intent intent = new Intent(mContext, GroupCustomListActivity.class);
+                    intent.putExtra(GroupCustomListActivity.EXTRA_GROUP_ID, doctorGroupBeanList.get(finalI));
 //                    intent.putExtra(GroupCustomListActivity.EXTRA_GROUP_ID,groupId);
                     mContext.startActivity(intent);
                 }
             });
-            DisplayMetrics dm =getResources().getDisplayMetrics();
-            int w_screen = dm.widthPixels;
-            int h_screen = dm.heightPixels;
-            android.view.ViewGroup.LayoutParams layoutParams = mLayoutList[i].getLayoutParams();
-            layoutParams.width=DisplayUtil.px2dip(mContext,w_screen-60);
-            mLayoutList[i].setLayoutParams(layoutParams);
+            // TODO 删除code适配  by zy
+//            DisplayMetrics dm =getResources().getDisplayMetrics();
+//            int w_screen = dm.widthPixels;
+//            int h_screen = dm.heightPixels;
+//            android.view.ViewGroup.LayoutParams layoutParams = mLayoutList[i].getLayoutParams();
+//            layoutParams.width=DisplayUtil.px2dip(mContext,w_screen-60);
+//            mLayoutList[i].setLayoutParams(layoutParams);
         }
     }
 
