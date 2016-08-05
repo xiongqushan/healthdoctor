@@ -4,6 +4,8 @@ import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 
 import haozuo.com.healthdoctor.R;
+import haozuo.com.healthdoctor.ioc.DaggerLoginPresenterComponent;
+import haozuo.com.healthdoctor.ioc.LoginPresenterModule;
 import haozuo.com.healthdoctor.view.base.BaseActivity;
 import haozuo.com.healthdoctor.presenter.LoginPresenter;
 import haozuo.com.healthdoctor.util.ActivityUtils;
@@ -20,9 +22,12 @@ public class LoginActivity extends BaseActivity {
             loginFragment=LoginFragment.newInstance();
             ActivityUtils.addFragmentToActivity(fragmentManager,loginFragment,R.id.frameContent);
         }
-        LoginPresenter mLoginPresenter=new LoginPresenter(loginFragment,this);
-
-        haozuo.com.healthdoctor.manager.UserManager.getInstance(this);
+        //LoginPresenter mLoginPresenter=new LoginPresenter(loginFragment,this);
+        DaggerLoginPresenterComponent.builder()
+                .appComponent(getAppComponent())
+                .loginPresenterModule(new LoginPresenterModule(loginFragment))
+                .build()
+                .inject(this);
     }
 
 }
