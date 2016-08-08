@@ -20,9 +20,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.CustomDetailBean;
-import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
 import haozuo.com.healthdoctor.view.base.AbstractView;
 import haozuo.com.healthdoctor.contract.CustomDetailContract;
+import haozuo.com.healthdoctor.view.threePart.common.PageFragment;
 
 //<<<<<<< HEAD
 //public class CustomDetailFragment extends AbsView implements CustomDetailContract.ICustomDetailView{

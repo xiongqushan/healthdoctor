@@ -5,17 +5,13 @@
     android:orientation="vertical"
     tools:context="haozuo.com.healthdoctor.view.consult.ConsultDetailFragment">
 
-    <!--<include-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="60dp"-->
-        <!--layout="@layout/fragment_consult_panding_item"/>-->
-
     <ListView
         android:id="@+id/consult_detail_List"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:divider="@null"/>
+        android:divider="@null"
+        android:listSelector="@android:color/transparent"/>
 
     <RelativeLayout
         android:id="@+id/edit_area"
@@ -42,7 +38,7 @@
             android:background="@drawable/usually_message" />
 
         <EditText
-            android:id="@+id/message_edittxt"
+            android:id="@+id/edittxt_message"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_toRightOf="@id/btn_sound_message"

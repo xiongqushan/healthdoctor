@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -61,7 +62,20 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected void setCustomerTitle(String title){
         TextView textView=(TextView)findViewById(R.id.txt_TitleBar_title);
+        View btnGoBack = (View)findViewById(R.id.btn_go_back);
         textView.setText(title);
+        btnGoBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+    }
+
+    protected void hideGoBackBtn(){
+        View btnGoBack = (View)findViewById(R.id.btn_go_back);
+        btnGoBack.setVisibility(View.GONE);
     }
 
     protected void initTabhostMenu(){

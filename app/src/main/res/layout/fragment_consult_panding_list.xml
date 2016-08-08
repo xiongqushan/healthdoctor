@@ -12,7 +12,7 @@
         android:layout_height="60dp"
         android:orientation="horizontal">
         <RadioButton
-            android:id="@+id/consult_All"
+            android:id="@+id/btn_consult_All"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -26,7 +26,7 @@
             android:checked="true"
             android:text="全部" />
         <RadioButton
-            android:id="@+id/consult_Submit"
+            android:id="@+id/btn_consult_Submit"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -38,19 +38,9 @@
             android:paddingRight="30dp"
             android:paddingLeft="30dp"
             android:text="转入" />
-        <!--<RadioButton-->
-            <!--android:id="@+id/consult_Mine"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_weight="1"-->
-            <!--android:gravity="center"-->
-            <!--android:textColor="@color/silver"-->
-            <!--android:paddingRight="30dp"-->
-            <!--android:paddingLeft="30dp"-->
-            <!--android:text="我的" />-->
 
         <RadioButton
-            android:id="@+id/consult_Mine"
+            android:id="@+id/btn_consult_Mine"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

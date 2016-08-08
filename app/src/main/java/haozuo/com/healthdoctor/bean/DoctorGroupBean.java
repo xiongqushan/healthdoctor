@@ -23,4 +23,6 @@ public class DoctorGroupBean implements Comparator<DoctorGroupBean>,Serializable
         else return 0;
     }
 
+
+
 }

@@ -1,4 +1,4 @@
-package haozuo.com.healthdoctor.view.consult;
+package haozuo.com.healthdoctor.view.threePart.common;
 
 import android.app.Activity;
 import android.graphics.Rect;
@@ -9,19 +9,19 @@ import android.widget.FrameLayout;
 /**
  * Created by hzguest3 on 2016/8/4.
  */
-public class AndroidBug5497Workaround {
+public class WindowResize {
     // For more information, see https://code.google.com/p/android/issues/detail?id=5497
     // To use this class, simply invoke assistActivity() on an Activity that already has its content view set.
 
     public static void assistActivity (Activity activity) {
-        new AndroidBug5497Workaround(activity);
+        new WindowResize(activity);
     }
 
     private View mChildOfContent;
     private int usableHeightPrevious;
     private FrameLayout.LayoutParams frameLayoutParams;
 
-    private AndroidBug5497Workaround(Activity activity) {
+    private WindowResize(Activity activity) {
         FrameLayout content = (FrameLayout) activity.findViewById(android.R.id.content);
         mChildOfContent = content.getChildAt(0);
         mChildOfContent.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {

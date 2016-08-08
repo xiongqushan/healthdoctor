@@ -4,9 +4,26 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">32dp</dimen>
 
+    <dimen name="textsize_h1">20sp</dimen>
+    <dimen name="textsize_h2">18sp</dimen>
+    <dimen name="textsize_h3">16sp</dimen>
+    <dimen name="textsize_h4">13sp</dimen>
+
     <dimen name="login_title">8dp</dimen>
     <dimen name="login_title_size">24dp</dimen>
     <dimen name="login_text_size">15sp</dimen>
     <dimen name="login_submit">20dp</dimen>
     <dimen name="login_submit_padding">5dp</dimen>
+
+    <dimen name="actionbar_high">38dp</dimen>
+
+    <dimen name="consult_detail_paddingbottom">15dp</dimen>
+    <dimen name="consult_photo_height">40dp</dimen>
+    <dimen name="consult_photo_margintop">9dp</dimen>
+    <dimen name="consult_photot_marginleft">12dp</dimen>
+    <dimen name="consult_textview_margintop">15dp</dimen>
+    <dimen name="consult_textview_marginleft">10dp</dimen>
+    <dimen name="consult_textview_padding">10dp</dimen>
+    <dimen name="consult_flowlayout_paddingleftright">6dp</dimen>
+    <dimen name="consult_flowlayout_paddingtop">10dp</dimen>
 </resources>

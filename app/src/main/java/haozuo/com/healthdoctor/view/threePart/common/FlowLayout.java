@@ -1,4 +1,4 @@
-package haozuo.com.healthdoctor.view.custom;
+package haozuo.com.healthdoctor.view.threePart.common;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by hzguest3 on 2016/7/27.
  */
-public class CustomerInfoFlowLayout extends ViewGroup {
+public class FlowLayout extends ViewGroup {
     //记录每个View的位置
     private List<ChildPos> mChildPos = new ArrayList<ChildPos>();
     private BaseAdapter mAdapter;
@@ -27,11 +27,11 @@ public class CustomerInfoFlowLayout extends ViewGroup {
         }
     }
 
-    public CustomerInfoFlowLayout(Context context) {
+    public FlowLayout(Context context) {
         this(context, null);
     }
 
-    public CustomerInfoFlowLayout(Context context, AttributeSet attrs) {
+    public FlowLayout(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
@@ -41,7 +41,7 @@ public class CustomerInfoFlowLayout extends ViewGroup {
      * @param attrs xml属性集合
      * @param defStyle Theme中定义的style
      */
-    public CustomerInfoFlowLayout(Context context, AttributeSet attrs, int defStyle) {
+    public FlowLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 

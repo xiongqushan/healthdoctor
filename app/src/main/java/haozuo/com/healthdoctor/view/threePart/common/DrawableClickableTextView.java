@@ -1,4 +1,4 @@
-package haozuo.com.healthdoctor.view.custom;
+package haozuo.com.healthdoctor.view.threePart.common;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -12,7 +12,7 @@ import android.widget.TextView;
 /**
  * Created by hzguest3 on 2016/7/27.
  */
-public class TextViewExtend extends TextView {
+public class DrawableClickableTextView extends TextView {
 
     private DrawableLeftListener mLeftListener ;
     private DrawableRightListener mRightListener ;
@@ -23,20 +23,20 @@ public class TextViewExtend extends TextView {
     final int DRAWABLE_BOTTOM = 3;
 
     @SuppressLint("NewApi")
-    public TextViewExtend(Context context, AttributeSet attrs, int defStyleAttr,
-                          int defStyleRes) {
+    public DrawableClickableTextView(Context context, AttributeSet attrs, int defStyleAttr,
+                                     int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    public TextViewExtend(Context context, AttributeSet attrs, int defStyleAttr) {
+    public DrawableClickableTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
-    public TextViewExtend(Context context, AttributeSet attrs) {
+    public DrawableClickableTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public TextViewExtend(Context context) {
+    public DrawableClickableTextView(Context context) {
         super(context);
     }
 

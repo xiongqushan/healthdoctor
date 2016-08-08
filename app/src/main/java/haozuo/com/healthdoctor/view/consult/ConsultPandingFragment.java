@@ -23,6 +23,7 @@ import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.ConsultItemBean;
 import haozuo.com.healthdoctor.contract.ConsultContract;
+import haozuo.com.healthdoctor.util.DateUtil;
 import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout;
 
 
@@ -90,15 +91,15 @@ public class ConsultPandingFragment extends Fragment{
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId){
-                    case R.id.consult_All:
+                    case R.id.btn_consult_All:
                         mFlag = 3;
                         mConsultFragment.ConsultPresenter.refreshCustomList(mFlag);//全部
                         break;
-                    case R.id.consult_Submit:
+                    case R.id.btn_consult_Submit:
                         mFlag = 2;
                         mConsultFragment.ConsultPresenter.refreshCustomList(mFlag);//转入
                         break;
-                    case R.id.consult_Mine:
+                    case R.id.btn_consult_Mine:
                         mFlag = 1;
                         mConsultFragment.ConsultPresenter.refreshCustomList(mFlag);//我的
                         break;
@@ -111,7 +112,6 @@ public class ConsultPandingFragment extends Fragment{
         consult_pull_to_refresh_layout.setOnRefreshListener(new PullListener());
         return rootView;
     }
-
 
     class ConsultListAdapter extends BaseAdapter {
         private LayoutInflater myInflater;
@@ -150,10 +150,10 @@ public class ConsultPandingFragment extends Fragment{
             if (convertView == null) {
                 holder = new ViewHolder();
                 convertView = myInflater.inflate(R.layout.fragment_consult_panding_item, parent, false);
-                holder.Cphoto = (SimpleDraweeView) convertView.findViewById(R.id.consult_Cphoto);
-                holder.Cname = (TextView) convertView.findViewById(R.id.consult_Cname);
-                holder.LastConsult = (TextView) convertView.findViewById(R.id.consult_LastConsult);
-                holder.ConsultContent = (TextView) convertView.findViewById(R.id.consult_ConsultContent);
+                holder.Cphoto = (SimpleDraweeView) convertView.findViewById(R.id.drawee_consult_Cphoto);
+                holder.Cname = (TextView) convertView.findViewById(R.id.txt_consult_Cname);
+                holder.LastConsult = (TextView) convertView.findViewById(R.id.txt_consult_LastConsult);
+                holder.ConsultContent = (TextView) convertView.findViewById(R.id.txt_consult_ConsultContent);
                 convertView.setTag(holder);
                 convertView.setOnClickListener(mOnClicklistener);
             } else {
@@ -170,7 +170,7 @@ public class ConsultPandingFragment extends Fragment{
             holder.Cphoto.setImageURI(uri);
             holder.Cname.setText(doctorGroupEntity.CustName);
             holder.ConsultContent.setText(doctorGroupEntity.ConsultTitele);
-            holder.LastConsult.setText(doctorGroupEntity.CommitOn);
+            holder.LastConsult.setText(DateUtil.str2Date(doctorGroupEntity.CommitOn,"yyyy-mm-dd mm:ss").toString());
 
             holder.Cphoto.setTag(new Object[]{doctorGroupEntity});
             return convertView;

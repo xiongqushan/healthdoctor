@@ -33,7 +33,7 @@ public class ConsultDetailActivity extends BaseActivity {
         FragmentManager fragmentManager=getSupportFragmentManager();
         ConsultDetailFragment consultDetailfragment=(ConsultDetailFragment)fragmentManager.findFragmentById(R.id.frameContent);
         if(consultDetailfragment==null){
-            consultDetailfragment=ConsultDetailFragment.newInstance();
+            consultDetailfragment=ConsultDetailFragment.newInstance(mCustId);
             ActivityUtils.addFragmentToActivity(fragmentManager,consultDetailfragment,R.id.frameContent);
         }
         ConsultDetailPresenter mConsultPresenter=new ConsultDetailPresenter(consultDetailfragment) ;

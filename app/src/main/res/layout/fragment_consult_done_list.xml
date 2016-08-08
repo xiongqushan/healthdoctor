@@ -8,7 +8,7 @@
     <!--descendantFocusability 屏蔽子控件抢夺ListView的焦点-->
 
     <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/consult_Cphoto"
+        android:id="@+id/txt_consult_Cphoto"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="15dp"
@@ -20,9 +20,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="张三"
-        android:layout_alignTop="@+id/consult_Cphoto"
-        android:layout_toRightOf="@+id/consult_Cphoto"
-        android:layout_toEndOf="@+id/consult_Cphoto"
+        android:layout_alignTop="@+id/txt_consult_Cphoto"
+        android:layout_toRightOf="@+id/txt_consult_Cphoto"
+        android:layout_toEndOf="@+id/txt_consult_Cphoto"
         android:layout_marginLeft="10dp"/>
 
     <TextView

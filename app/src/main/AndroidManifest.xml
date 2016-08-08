@@ -62,7 +62,7 @@
 
         <activity android:name=".view.consult.ConsultDetailActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"/>
+            android:windowSoftInputMode="adjustResize"/>
 
     </application>
 

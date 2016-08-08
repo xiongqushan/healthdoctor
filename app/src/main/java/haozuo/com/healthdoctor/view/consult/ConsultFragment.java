@@ -20,7 +20,7 @@ import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.ConsultItemBean;
 import haozuo.com.healthdoctor.contract.ConsultContract;
 import haozuo.com.healthdoctor.view.base.AbstractView;
-import haozuo.com.healthdoctor.view.custom.PageFragment;
+import haozuo.com.healthdoctor.view.threePart.common.PageFragment;
 
 /**
  * Created by hzguest3 on 2016/8/1.
@@ -75,15 +75,9 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-        //自定义TABVIEW
-//        for (int i = 0; i < tabLayout.getTabCount(); i++) {
-//            TabLayout.Tab tab = tabLayout.getTabAt(i);
-//            tab.setCustomView(pagerAdapter.getTabView(i));
-//        }
     }
 
     public class SimpleFragmentPagerAdapter extends FragmentPagerAdapter {
-//        final int PAGE_COUNT = 3;
         private String tabTitles[] = new String[]{"待处理","已处理","问题反馈"};
         private List<Fragment> fragList = new ArrayList<Fragment>(){};
         public SimpleFragmentPagerAdapter(FragmentManager fm) {
@@ -92,7 +86,6 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
 
         @Override
         public Fragment getItem(int position) {
-//            return fragList.get(position);
             switch (position){
                 case 1:
                     return PageFragment.newInstance(2);
@@ -112,15 +105,6 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
         public CharSequence getPageTitle(int position) {
             return tabTitles[position];
         }
-        //自定义TABVIEW
-//        public View getTabView(int position){
-//            View view = LayoutInflater.from(context).inflate(R.layout.tab_item, null);
-//            TextView tv= (TextView) view.findViewById(R.id.textView);
-//            tv.setText(tabTitles[position]);
-//            ImageView img = (ImageView) view.findViewById(R.id.imageView);
-//            img.setImageResource(imageResId[position]);
-//            return view;
-//        }
 
     }
 
