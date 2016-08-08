@@ -4,6 +4,8 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.widget.Toast;
 
+import javax.inject.Inject;
+
 import haozuo.com.healthdoctor.bean.DoctorBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.contract.IBaseModel;
@@ -23,7 +25,9 @@ public class LoginPresenter extends AbstractPresenter implements LoginContract.I
     LoginContract.ILoginView mILoginView;
     UserModel mUserModel;
     Context mContext;
-    public LoginPresenter(@NonNull LoginContract.ILoginView iLoginView, Context context){
+
+    @Inject
+    public LoginPresenter(@NonNull LoginContract.ILoginView iLoginView,@NonNull Context context){
         mILoginView=iLoginView;
         mUserModel=UserModel.createInstance();
         mILoginView.setPresenter(this);

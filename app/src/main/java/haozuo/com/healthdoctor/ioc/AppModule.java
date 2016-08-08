@@ -1,5 +1,6 @@
 package haozuo.com.healthdoctor.ioc;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 
 import javax.inject.Singleton;
@@ -23,5 +24,11 @@ public class AppModule {
     @Singleton
     HZApplication provideApplication(){
         return mHZApplication;
+    }
+
+    @Provides
+    @Singleton
+    Context provideContext(){
+        return mHZApplication.getApplicationContext();
     }
 }

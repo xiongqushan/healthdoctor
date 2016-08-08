@@ -2,6 +2,7 @@ package haozuo.com.healthdoctor.view.base;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
