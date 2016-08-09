@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/lightgray"
     tools:context="haozuo.com.healthdoctor.view.consult.ConsultDetailFragment">
 
     <ListView
@@ -16,25 +17,25 @@
     <RelativeLayout
         android:id="@+id/edit_area"
         android:layout_width="match_parent"
-        android:layout_height="48dp">
+        android:layout_height="@dimen/consult_tab_height">
 
         <ImageView
             android:id="@+id/btn_sound_message"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginTop="11dp"
-            android:layout_marginLeft="12dp"
+            android:layout_width="@dimen/consult_customer_usuallymessage_height"
+            android:layout_height="@dimen/consult_customer_usuallymessage_height"
+            android:layout_marginTop="@dimen/consult_customer_usuallymessage_margintop"
+            android:layout_marginLeft="@dimen/consult_customer_usuallymessage_marginleft"
             android:background="@drawable/sound_message"
             android:focusable="true"
             android:focusableInTouchMode="true"/>
 
         <ImageView
             android:id="@+id/btn_usually_message"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="@dimen/consult_customer_usuallymessage_height"
+            android:layout_height="@dimen/consult_customer_usuallymessage_height"
             android:layout_alignTop="@id/btn_sound_message"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="12dp"
+            android:layout_marginRight="@dimen/consult_customer_usuallymessage_marginright"
             android:background="@drawable/usually_message" />
 
         <EditText
@@ -43,9 +44,10 @@
             android:layout_height="match_parent"
             android:layout_toRightOf="@id/btn_sound_message"
             android:layout_toLeftOf="@id/btn_usually_message"
-            android:layout_marginLeft="3dp"
-            android:layout_marginRight="3dp"
-            android:layout_marginBottom="11dp"
+            android:layout_marginLeft="@dimen/consult_customer_edittext_marginleft"
+            android:layout_marginRight="@dimen/consult_customer_edittext_marginleft"
+            android:layout_marginBottom="@dimen/consult_customer_edittext_marginbottom"
+            android:maxLines="5"
             android:background="@drawable/editview_bg_selector"
             tools:text="在这里输入相应的编辑文本~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"/>
 

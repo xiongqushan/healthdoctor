@@ -111,7 +111,7 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
 
         @Override
         public int getCount() {
-            return dataSource.size();
+              return dataSource.size();
         }
 
         @Override

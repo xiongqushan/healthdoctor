@@ -10,8 +10,6 @@ import android.widget.FrameLayout;
  * Created by hzguest3 on 2016/8/4.
  */
 public class WindowResize {
-    // For more information, see https://code.google.com/p/android/issues/detail?id=5497
-    // To use this class, simply invoke assistActivity() on an Activity that already has its content view set.
 
     public static void assistActivity (Activity activity) {
         new WindowResize(activity);
@@ -38,10 +36,8 @@ public class WindowResize {
             int usableHeightSansKeyboard = mChildOfContent.getRootView().getHeight();
             int heightDifference = usableHeightSansKeyboard - usableHeightNow;
             if (heightDifference > (usableHeightSansKeyboard/4)) {
-                // keyboard probably just became visible
-                frameLayoutParams.height = usableHeightSansKeyboard - heightDifference;
+                frameLayoutParams.height = usableHeightSansKeyboard - heightDifference ;
             } else {
-                // keyboard probably just became hidden
                 frameLayoutParams.height = usableHeightSansKeyboard;
             }
             mChildOfContent.requestLayout();
@@ -52,7 +48,7 @@ public class WindowResize {
     private int computeUsableHeight() {
         Rect r = new Rect();
         mChildOfContent.getWindowVisibleDisplayFrame(r);
-        return (r.bottom - r.top);
+        return (r.bottom);
     }
 
 }

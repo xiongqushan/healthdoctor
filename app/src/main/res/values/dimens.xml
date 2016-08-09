@@ -17,6 +17,17 @@
 
     <dimen name="actionbar_high">38dp</dimen>
 
+    <dimen name="consult_panding_list_radiobutton_padding">40dp</dimen>
+
+    <dimen name="consult_tab_height">48dp</dimen>
+    <dimen name="consult_customer_usuallymessage_height">25dp</dimen>
+    <dimen name="consult_customer_usuallymessage_marginright">12dp</dimen>
+    <dimen name="consult_customer_usuallymessage_margintop">11dp</dimen>
+    <dimen name="consult_customer_usuallymessage_marginleft">12dp</dimen>
+    <dimen name="consult_customer_edittext_marginleft">3dp</dimen>
+    <dimen name="consult_customer_edittext_marginbottom">3dp</dimen>
+
+
     <dimen name="consult_detail_paddingbottom">15dp</dimen>
     <dimen name="consult_photo_height">40dp</dimen>
     <dimen name="consult_photo_margintop">9dp</dimen>
@@ -26,4 +37,8 @@
     <dimen name="consult_textview_padding">10dp</dimen>
     <dimen name="consult_flowlayout_paddingleftright">6dp</dimen>
     <dimen name="consult_flowlayout_paddingtop">10dp</dimen>
+
+
+
+
 </resources>

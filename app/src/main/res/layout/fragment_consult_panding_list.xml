@@ -21,8 +21,8 @@
             android:background="@null"
             android:button="@null"
             android:drawableLeft="@drawable/consult_group_btn"
-            android:paddingRight="30dp"
-            android:paddingLeft="30dp"
+            android:paddingRight="@dimen/consult_panding_list_radiobutton_padding"
+            android:paddingLeft="@dimen/consult_panding_list_radiobutton_padding"
             android:checked="true"
             android:text="全部" />
         <RadioButton
@@ -35,8 +35,8 @@
             android:background="@null"
             android:button="@null"
             android:drawableLeft="@drawable/consult_group_btn"
-            android:paddingRight="30dp"
-            android:paddingLeft="30dp"
+            android:paddingRight="@dimen/consult_panding_list_radiobutton_padding"
+            android:paddingLeft="@dimen/consult_panding_list_radiobutton_padding"
             android:text="转入" />
 
         <RadioButton
@@ -49,8 +49,8 @@
             android:background="@null"
             android:button="@null"
             android:drawableLeft="@drawable/consult_group_btn"
-            android:paddingRight="30dp"
-            android:paddingLeft="30dp"
+            android:paddingRight="@dimen/consult_panding_list_radiobutton_padding"
+            android:paddingLeft="@dimen/consult_panding_list_radiobutton_padding"
             android:text="我的" />
     </RadioGroup>
 
