@@ -20,9 +20,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.CustomDetailBean;
-import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
 import haozuo.com.healthdoctor.view.base.AbstractView;
 import haozuo.com.healthdoctor.contract.CustomDetailContract;
+import haozuo.com.healthdoctor.view.threePart.common.PageFragment;
 
 //<<<<<<< HEAD
 //public class CustomDetailFragment extends AbsView implements CustomDetailContract.ICustomDetailView{
@@ -97,7 +97,7 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, CustomerInfoActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("CustomInfo", customInfo);
+                bundle.putSerializable(CustomerInfoActivity.EXTRA_CUSTOMER_INFO, customInfo);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

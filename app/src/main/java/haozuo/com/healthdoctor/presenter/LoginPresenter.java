@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import javax.inject.Inject;
 
+import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.DoctorBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.contract.IBaseModel;
@@ -87,6 +88,9 @@ public class LoginPresenter extends AbstractPresenter implements LoginContract.I
             @Override
             public void handlerResult(GlobalShell<DoctorBean> resultData) {
                 if(resultData.LogicSuccess) {
+                    if (resultData.Data.PhotoUrl == null){
+                        resultData.Data.PhotoUrl ="res://haozuo.com.healthdoctor.view.custom/"+ R.drawable.doctor_default_photourl;
+                    }
                     UserManager.getInstance().setDoctorInfo(resultData.Data);
                     mILoginView.hideDialog();
                     mILoginView.toHomeActivity();

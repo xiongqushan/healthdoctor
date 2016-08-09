@@ -67,10 +67,8 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
             public void onClick(View v) {
                 GroupCustInfoAdapter.ViewHolder tag=( GroupCustInfoAdapter.ViewHolder)v.getTag();
                 int customerId = (int)(((Object[])tag.CPhoto.getTag())[0]);
-//                Object[]tag=(Object[])v.getTag();
-//                int customerId = (int)(((Object[])v.getTag())[0]);
                 Intent intent = new Intent(mContext,CustomDetailActivity.class);
-                intent.putExtra("CustomerId", customerId);
+                intent.putExtra(CustomDetailActivity.EXTRA_CUSTOMER_ID, customerId);
                 mContext.startActivity(intent);
             }
         });

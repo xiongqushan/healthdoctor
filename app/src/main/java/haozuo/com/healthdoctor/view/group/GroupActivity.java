@@ -24,16 +24,15 @@ public class GroupActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group);
         setCustomerTitle("客户分组");
-        boolean isLogin=checkLogin();
-        if(!isLogin){
-            return;
-        }
+        hideGoBackBtn();
+
         FragmentManager fragmentManager=getSupportFragmentManager();
         GroupFragment groupFragment=(GroupFragment)fragmentManager.findFragmentById(R.id.frameContent);
         if(groupFragment==null){
             groupFragment=GroupFragment.newInstance();
             ActivityUtils.addFragmentToActivity(fragmentManager,groupFragment,R.id.frameContent);
         }
+
         DaggerGroupPresenterComponent.builder()
                 .appComponent(getAppComponent())
                 .groupPresenterModule(new GroupPresenterModule(groupFragment))
@@ -47,14 +46,7 @@ public class GroupActivity extends BaseActivity {
         initTabhostMenu();
     }
 
-    boolean checkLogin() {
-        if (!UserManager.getInstance().exist()) {
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-            return false;
-        }
-        return true;
-    }
+
 
 
 }

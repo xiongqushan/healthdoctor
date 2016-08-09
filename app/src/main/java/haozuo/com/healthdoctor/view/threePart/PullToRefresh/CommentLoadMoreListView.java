@@ -4,6 +4,8 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.ListView;
 
+import haozuo.com.healthdoctor.view.threePart.PullToRefresh.Pullable;
+
 public class CommentLoadMoreListView extends ListView implements Pullable {
     private int firstListSize = 0;
 

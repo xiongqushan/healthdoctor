@@ -1,9 +1,10 @@
 package haozuo.com.healthdoctor.model;
 
 import javax.inject.Inject;
-
+import java.util.List;
 import haozuo.com.healthdoctor.bean.BaseBean;
 import haozuo.com.healthdoctor.bean.ConsultItemBean;
+import haozuo.com.healthdoctor.bean.ConsultReplyBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.bean.PageBean;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
@@ -47,6 +48,38 @@ public class ConsultModel extends AbstractModel {
                         }
                         else{
                             entity=new GlobalShell<PageBean<ConsultItemBean>>(resultBean.message);
+                        }
+                        callbackListener.handlerResult(entity);
+                    }
+                });
+    }
+
+    public void GetConsultReplyList(int customerId,String commitOn, final OnHandlerResultListener<GlobalShell<List<ConsultReplyBean>>> callbackListener){
+        IConsultService consultService=createService(IConsultService.class);
+        consultService.getConsultReplyData(customerId,commitOn)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<BaseBean<List<ConsultReplyBean>>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        GlobalShell<List<ConsultReplyBean>> entity=new GlobalShell<List<ConsultReplyBean>>(e.getMessage());
+                        callbackListener.handlerResult(entity);
+                    }
+
+                    @Override
+                    public void onNext(BaseBean<List<ConsultReplyBean>> resultBean) {
+                        GlobalShell<List<ConsultReplyBean>> entity=null;
+                        if(resultBean.state>0) {
+                            List<ConsultReplyBean> result = resultBean.Data;
+                            entity=new GlobalShell<List<ConsultReplyBean>>(result);
+                        }
+                        else{
+                            entity=new GlobalShell<List<ConsultReplyBean>>(resultBean.message);
                         }
                         callbackListener.handlerResult(entity);
                     }

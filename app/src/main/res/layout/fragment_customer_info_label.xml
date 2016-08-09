@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<haozuo.com.healthdoctor.view.custom.TextViewExtend
+<haozuo.com.healthdoctor.view.threePart.common.DrawableClickableTextView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/CgroupLabel"
     android:layout_width="wrap_content"
@@ -10,4 +10,4 @@
     android:textSize="15sp"
     android:drawableRight="@drawable/group_label_close"
     android:drawablePadding="5dp">
-</haozuo.com.healthdoctor.view.custom.TextViewExtend>
+</haozuo.com.healthdoctor.view.threePart.common.DrawableClickableTextView>

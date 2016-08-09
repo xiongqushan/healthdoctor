@@ -17,6 +17,7 @@ import haozuo.com.healthdoctor.util.ActivityUtils;
 public class CustomerInfoActivity extends BaseActivity {
     @Inject
     CustomerInfoPresenter mGroupPresenter;
+    public static String EXTRA_CUSTOMER_INFO="Custom_Info";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +26,8 @@ public class CustomerInfoActivity extends BaseActivity {
 
         Bundle bundle = getIntent().getExtras();
 
-        CustomDetailBean customInfo = (CustomDetailBean) bundle.getSerializable("CustomInfo");
 
+        CustomDetailBean customInfo = (CustomDetailBean) bundle.getSerializable(EXTRA_CUSTOMER_INFO);
         setCustomerTitle("基本资料—"+customInfo.Cname);
 
         FragmentManager fragmentManager=getSupportFragmentManager();

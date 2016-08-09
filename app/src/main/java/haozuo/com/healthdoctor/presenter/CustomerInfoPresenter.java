@@ -79,7 +79,6 @@ public class CustomerInfoPresenter extends AbstractPresenter implements Customer
         //遍历标签名称数组
         List<DoctorGroupBean> GroupInfo =(List<DoctorGroupBean>) UserManager.getInstance().getGroupInfo();
         mGroups.clear();
-
         for (int s: mCustomInfo.GroupIdList){
             for (int i=0; i<GroupInfo.size();i++){
                 if (s == GroupInfo.get(i).id){
@@ -93,6 +92,7 @@ public class CustomerInfoPresenter extends AbstractPresenter implements Customer
             int groupId = Integer.parseInt(String.valueOf(entry.id));
             mICustomerInfoView.addLabelView(entry);
         }
+
 
     }
 

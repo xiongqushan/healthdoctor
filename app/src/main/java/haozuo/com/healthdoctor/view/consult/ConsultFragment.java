@@ -20,7 +20,7 @@ import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.ConsultItemBean;
 import haozuo.com.healthdoctor.contract.ConsultContract;
 import haozuo.com.healthdoctor.view.base.AbstractView;
-import haozuo.com.healthdoctor.view.custom.PageFragment;
+import haozuo.com.healthdoctor.view.threePart.common.PageFragment;
 
 /**
  * Created by hzguest3 on 2016/8/1.
@@ -68,9 +68,6 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
         ConsultPresenter=presenter;
     }
 
-    private String tabTitles2[] = new String[]{"待处理","已处理","问题反馈"};
-    private List<Fragment> fragList2 = new ArrayList<Fragment>(){};
-
     public void InitView() {
         ConsultFragment fragment = new ConsultFragment();
         ConsultFragment.SimpleFragmentPagerAdapter pagerAdapter = fragment.new SimpleFragmentPagerAdapter(getActivity().getSupportFragmentManager());
@@ -81,7 +78,6 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
     }
 
     public class SimpleFragmentPagerAdapter extends FragmentPagerAdapter {
-//        final int PAGE_COUNT = 3;
         private String tabTitles[] = new String[]{"待处理","已处理","问题反馈"};
         private List<Fragment> fragList = new ArrayList<Fragment>(){};
         public SimpleFragmentPagerAdapter(FragmentManager fm) {
@@ -90,7 +86,6 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
 
         @Override
         public Fragment getItem(int position) {
-//            return fragList.get(position);
             switch (position){
                 case 1:
                     return PageFragment.newInstance(2);
@@ -110,6 +105,7 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
         public CharSequence getPageTitle(int position) {
             return tabTitles[position];
         }
+
     }
 
     public void setOnPendingRefreshListener(OnPendingPageListener pendingPageListener) {

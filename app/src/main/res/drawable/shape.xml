@@ -9,16 +9,16 @@
         android:bottomRightRadius="2dp"-->
 
     <!-- 渐变 -->
-    <gradient
-        android:startColor="@color/royalblue"
-        android:centerColor="@color/royalblue"
-        android:endColor="@color/black"
-        android:useLevel="true"
-        android:angle="45"
-        android:type="linear"
-        android:centerX="0"
-        android:centerY="0"
-        android:gradientRadius="90"/>
+    <!--<gradient-->
+        <!--android:startColor="@color/royalblue"-->
+        <!--android:centerColor="@color/royalblue"-->
+        <!--android:endColor="@color/black"-->
+        <!--android:useLevel="true"-->
+        <!--android:angle="45"-->
+        <!--android:type="linear"-->
+        <!--android:centerX="0"-->
+        <!--android:centerY="0"-->
+        <!--android:gradientRadius="90"/>-->
 
     <!--&lt;!&ndash; 间隔 &ndash;&gt;-->
     <!--<padding-->

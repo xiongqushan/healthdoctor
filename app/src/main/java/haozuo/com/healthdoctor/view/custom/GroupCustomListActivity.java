@@ -28,7 +28,6 @@ public class GroupCustomListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_custom_list);
 
-//        int groupId=getIntent().getIntExtra(EXTRA_GROUP_ID,-1);
         Serializable obj= getIntent().getSerializableExtra(EXTRA_GROUP_ID);
         if(obj!=null){
             DoctorGroupBean doctorGroupBean = (DoctorGroupBean) obj;
@@ -45,6 +44,8 @@ public class GroupCustomListActivity extends BaseActivity {
         //mGroupCustomListPresenter=new GroupCustomListPresenter(groupId, groupCustomListFragment);
         DaggerGroupCustomListPresenterComponent.builder()
                 .appComponent(getAppComponent())
-                .groupCustomListPresenterModule(new GroupCustomListPresenterModule(groupCustomListFragment,groupId));
+                .groupCustomListPresenterModule(new GroupCustomListPresenterModule(groupCustomListFragment,groupId))
+                .build()
+                .inject(this);
     }
 }

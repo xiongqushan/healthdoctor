@@ -1,4 +1,4 @@
-package haozuo.com.healthdoctor.view.custom;
+package haozuo.com.healthdoctor.view.threePart.common;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

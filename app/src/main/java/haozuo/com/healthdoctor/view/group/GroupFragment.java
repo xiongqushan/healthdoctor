@@ -23,51 +23,15 @@ public class GroupFragment extends AbstractView implements GroupContract.IGroupV
     Context mContext;
     View rootView;
     GroupContract.IGroupPresenter mGroupPresenter;
-//    GroupAdapter mGroupAdapter;
 
-    //    @Bind(R.id.list_group)GridView list_group;
-    @Bind(R.id.firstGroup)
-    LinearLayout firstGroup;
-    @Bind(R.id.secondGroup)
-    LinearLayout secondGroup;
-    @Bind(R.id.thirdGroup)
-    LinearLayout thirdGroup;
-    @Bind(R.id.fourthGroup)
-    LinearLayout fourthGroup;
-    @Bind(R.id.fifthGroup)
-    LinearLayout fifthGroup;
-    @Bind(R.id.sixthGroup)
-    LinearLayout sixthGroup;
+    @Bind(R.id.firstGroupName)TextView firstGroupName;
+    @Bind(R.id.secondGroupName)TextView secondGroupName;
+    @Bind(R.id.thirdGroupName)TextView thirdGroupName;
+    @Bind(R.id.fourthGroupName)TextView fourthGroupName;
+    @Bind(R.id.fifthGroupName)TextView fifthGroupName;
+    @Bind(R.id.sixthGroupName)TextView sixthGroupName;
 
-    @Bind(R.id.firstGroupName)
-    TextView firstGroupName;
-    @Bind(R.id.secondGroupName)
-    TextView secondGroupName;
-    @Bind(R.id.thirdGroupName)
-    TextView thirdGroupName;
-    @Bind(R.id.fourthGroupName)
-    TextView fourthGroupName;
-    @Bind(R.id.fifthGroupName)
-    TextView fifthGroupName;
-    @Bind(R.id.sixthGroupName)
-    TextView sixthGroupName;
-
-    @Bind(R.id.firstGroupCount)
-    TextView firstGroupCount;
-    @Bind(R.id.secondGroupCount)
-    TextView secondGroupCount;
-    @Bind(R.id.thirdGroupCount)
-    TextView thirdGroupCount;
-    @Bind(R.id.fourthGroupCount)
-    TextView fourthGroupCount;
-    @Bind(R.id.fifthGroupCount)
-    TextView fifthGroupCount;
-    @Bind(R.id.sixthGroupCount)
-    TextView sixthGroupCount;
-
-
-    public GroupFragment() {
-
+    public GroupFragment(){
     }
 
     public static GroupFragment newInstance() {
@@ -89,16 +53,6 @@ public class GroupFragment extends AbstractView implements GroupContract.IGroupV
             rootView = inflater.inflate(R.layout.fragment_group, container, false);
             ButterKnife.bind(this, rootView);
         }
-//        mGroupAdapter=new GroupAdapter(mContext, new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                int groupId=(int)(((Object[])v.getTag())[0]);
-//                Intent intent=new Intent(mContext, GroupCustomListActivity.class);
-//                intent.putExtra(GroupCustomListActivity.EXTRA_GROUP_ID,groupId);
-//                mContext.startActivity(intent);
-//            }
-//        });
-//        list_group.setAdapter(mGroupAdapter);
         return rootView;
     }
 
@@ -113,101 +67,28 @@ public class GroupFragment extends AbstractView implements GroupContract.IGroupV
         mGroupPresenter = presenter;
     }
 
-//    @Override
-//    public void refreshGroupAdapter(List<DoctorGroupBean> doctorGroupBeanList) {
-//        mGroupAdapter.refresh(doctorGroupBeanList);
-//    }
-
     @Override
     public void setGroupInfo(final List<DoctorGroupBean> doctorGroupBeanList) {
-
-        LinearLayout[] mLayoutList = {firstGroup, secondGroup, thirdGroup, fourthGroup, fifthGroup, sixthGroup};
-        TextView[] GroupNameArray = {firstGroupName, secondGroupName, thirdGroupName, fourthGroupName, fifthGroupName, sixthGroupName};
-        TextView[] GroupCountArray = {firstGroupCount, secondGroupCount, thirdGroupCount, fourthGroupCount, fifthGroupCount, sixthGroupCount};
+        TextView[] GroupNameArray = {firstGroupName,secondGroupName,thirdGroupName,fourthGroupName,fifthGroupName,sixthGroupName};
 
         for (int i = 0; i < doctorGroupBeanList.size(); i++) {
             String doctorNum = "服务人数: " + doctorGroupBeanList.get(i).doctorNum;
             String groupName = doctorGroupBeanList.get(i).name;
-            final int groupId = doctorGroupBeanList.get(i).id;
-
-            GroupNameArray[i].setText(groupName);
-            GroupCountArray[i].setText(doctorNum);
+            String groupContent = groupName + "\n" + doctorNum;
+            GroupNameArray[i].setText(groupContent);
             final int finalI = i;
-            mLayoutList[i].setOnClickListener(new View.OnClickListener() {
+            GroupNameArray[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(mContext, GroupCustomListActivity.class);
-                    intent.putExtra(GroupCustomListActivity.EXTRA_GROUP_ID, doctorGroupBeanList.get(finalI));
-//                    intent.putExtra(GroupCustomListActivity.EXTRA_GROUP_ID,groupId);
+                    Intent intent=new Intent(mContext, GroupCustomListActivity.class);
+                    intent.putExtra(GroupCustomListActivity.EXTRA_GROUP_ID,doctorGroupBeanList.get(finalI));
                     mContext.startActivity(intent);
                 }
             });
-            // TODO 删除code适配  by zy
-//            DisplayMetrics dm =getResources().getDisplayMetrics();
-//            int w_screen = dm.widthPixels;
-//            int h_screen = dm.heightPixels;
-//            android.view.ViewGroup.LayoutParams layoutParams = mLayoutList[i].getLayoutParams();
-//            layoutParams.width=DisplayUtil.px2dip(mContext,w_screen-60);
-//            mLayoutList[i].setLayoutParams(layoutParams);
+
         }
     }
 
-//    class GroupAdapter extends BaseAdapter {
-//        private LayoutInflater myInflater;
-//        List<DoctorGroupBean> dataSource;
-//        View.OnClickListener clickListener = null;
-//
-//        public GroupAdapter(Context context, View.OnClickListener onClickListener) {
-//            this.myInflater = LayoutInflater.from(context);
-//            dataSource = new ArrayList<>();
-//            clickListener = onClickListener;
-//        }
-//
-//        public void refresh(List<DoctorGroupBean> dataList){
-//            dataSource=dataList;
-//            notifyDataSetChanged();
-//        }
-//
-//        @Override
-//        public int getCount() {
-//            return dataSource.size();
-//        }
-//
-//        @Override
-//        public Object getItem(int arg0) {
-//            return null;
-//        }
-//
-//        @Override
-//        public long getItemId(int arg0) {
-//            return arg0;
-//        }
-//
-//        @Override
-//        public View getView(int position, View convertView, ViewGroup parent) {
-//            ViewHolder holder = null;
-//            if (convertView == null) {
-//                holder = new ViewHolder();
-//                convertView = myInflater.inflate(R.layout.doctor_group_item, parent, false);
-//                holder.txt_group_item_name = (TextView) convertView.findViewById(R.id.txt_group_item_name);
-//                holder.txt_group_item_doctorNum = (TextView) convertView.findViewById(R.id.txt_group_item_doctorNum);
-//                convertView.setTag(holder);
-//            } else {
-//                holder = (ViewHolder) convertView.getTag();
-//            }
-//            DoctorGroupBean doctorGroupEntity = dataSource.get(position);
-//            holder.txt_group_item_name.setText(doctorGroupEntity.name);
-//            holder.txt_group_item_doctorNum.setText(doctorGroupEntity.doctorNum);
-//
-//            holder.txt_group_item_name.setTag(new Object[]{doctorGroupEntity.id});
-//            holder.txt_group_item_name.setOnClickListener(clickListener);
-//            return convertView;
-//        }
-//
-//        public class ViewHolder {
-//            public TextView txt_group_item_name;
-//            public TextView txt_group_item_doctorNum;
-//        }
-//    }
+
 }
 

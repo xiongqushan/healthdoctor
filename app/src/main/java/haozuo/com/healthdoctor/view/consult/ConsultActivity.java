@@ -23,6 +23,7 @@ public class ConsultActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consult);
         setCustomerTitle("咨询");
+        hideGoBackBtn();
 
         FragmentManager fragmentManager=getSupportFragmentManager();
         ConsultFragment fragment=(ConsultFragment)fragmentManager.findFragmentById(R.id.frameContent);

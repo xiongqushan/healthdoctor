@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="haozuo.com.healthdoctor.view.welcome.WelcomeActivity">
+
+    <ImageView
+        android:layout_width="190dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="242dp"
+        android:layout_marginLeft="85dp"
+        android:background="@drawable/logo"/>
+
+    <View
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/gray"
+        android:textSize="12sp"
+        android:text="您的健康，我们帮您把关" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="12dp"
+        android:gravity="center"
+        android:textSize="7sp"
+        android:textColor="@color/silver"
+        android:text="© 2016 上海好卓数据服务有限公司 沪ICP备15002919号"/>
+
+
+</LinearLayout>
