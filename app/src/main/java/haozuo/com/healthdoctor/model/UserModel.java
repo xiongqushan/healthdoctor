@@ -1,5 +1,7 @@
 package haozuo.com.healthdoctor.model;
 
+import android.support.annotation.NonNull;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,20 +26,15 @@ import rx.schedulers.Schedulers;
  * Created by xiongwei on 16/5/19.
  */
 public class UserModel extends AbstractModel {
+    IUserService mIUserService;
 
     @Inject
-    public UserModel(){
-
+    public UserModel(IUserService iUserService){
+        mIUserService=iUserService;
     }
 
-    /*public static UserModel createInstance(){
-        return new UserModel();
-    }*/
-
-
     public void GetSMSCode(String mobile, final OnHandlerResultListener<GlobalShell<Boolean>> callbackListener){
-        IUserService userService= createService(IUserService.class);
-        userService.getSMSCode(mobile)
+        mIUserService.getSMSCode(mobile)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<BaseBean<Boolean>>() {
@@ -71,8 +68,7 @@ public class UserModel extends AbstractModel {
         Map<String, Object> params = new HashMap<>();
         params.put("Mobile", mobile);
         params.put("SmsCode", smsCode);
-        IUserService userService= createService(IUserService.class);
-        userService.login(params)
+        mIUserService.login(params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<BaseBean<DoctorBean>>() {
