@@ -6,6 +6,8 @@ import android.support.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import haozuo.com.healthdoctor.bean.ConsultItemBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
@@ -30,12 +32,14 @@ public class ConsultPresenter extends AbstractPresenter implements ConsultContra
     private int mCurrentPageIndex=1;
     private int mLeastPageIndex=1;
     private ConsultContract.IConsultView mIConsultView;
-    private ConsultModel mUserModel;
+    private ConsultModel mConsultModel;
     private List<ConsultItemBean> mConsultItemBeanList;
-    public ConsultPresenter(@NonNull  ConsultContract.IConsultView iConsultView){
+
+    @Inject
+    public ConsultPresenter(@NonNull  ConsultContract.IConsultView iConsultView,@NonNull ConsultModel consultModel){
         mConsultItemBeanList = new ArrayList<ConsultItemBean>();
         mIConsultView=iConsultView;
-        mUserModel=ConsultModel.createInstance();
+        mConsultModel=consultModel;
         iConsultView.setPresenter(this);
     }
 
@@ -46,7 +50,7 @@ public class ConsultPresenter extends AbstractPresenter implements ConsultContra
 
     @Override
     public IBaseModel getBaseModel() {
-        return mUserModel;
+        return mConsultModel;
     }
 
     @Override
@@ -59,7 +63,7 @@ public class ConsultPresenter extends AbstractPresenter implements ConsultContra
         //http request here;
         mIConsultView.showDialog();
         int doctorId= UserManager.getInstance().getDoctorInfo().Doctor_ID;
-        mUserModel.GetGroupCustInfoList(doctorId,mCurrentPageIndex,PAGE_SIZE,flag, new OnHandlerResultListener<GlobalShell<PageBean<ConsultItemBean>>>() {
+        mConsultModel.GetGroupCustInfoList(doctorId,mCurrentPageIndex,PAGE_SIZE,flag, new OnHandlerResultListener<GlobalShell<PageBean<ConsultItemBean>>>() {
             @Override
             public void handlerResult(GlobalShell<PageBean<ConsultItemBean>> resultData) {
                 if(resultData.LogicSuccess) {
@@ -87,7 +91,7 @@ public class ConsultPresenter extends AbstractPresenter implements ConsultContra
         mCurrentPageIndex++;
         mIConsultView.showDialog();
         int doctorId= UserManager.getInstance().getDoctorInfo().Doctor_ID;
-        mUserModel.GetGroupCustInfoList(doctorId,mCurrentPageIndex,PAGE_SIZE,flag, new OnHandlerResultListener<GlobalShell<PageBean<ConsultItemBean>>>() {
+        mConsultModel.GetGroupCustInfoList(doctorId,mCurrentPageIndex,PAGE_SIZE,flag, new OnHandlerResultListener<GlobalShell<PageBean<ConsultItemBean>>>() {
             @Override
             public void handlerResult(GlobalShell<PageBean<ConsultItemBean>> resultData) {
                 if(resultData.LogicSuccess) {

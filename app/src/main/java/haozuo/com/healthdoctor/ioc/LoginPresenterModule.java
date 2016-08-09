@@ -1,6 +1,7 @@
 package haozuo.com.healthdoctor.ioc;
 
 import android.app.Application;
+import android.support.annotation.NonNull;
 
 import javax.inject.Inject;
 
@@ -15,7 +16,7 @@ import haozuo.com.healthdoctor.presenter.LoginPresenter;
 @Module
 public class LoginPresenterModule {
     LoginContract.ILoginView mILoginView;
-    public LoginPresenterModule(LoginContract.ILoginView fragmentView){
+    public LoginPresenterModule(@NonNull LoginContract.ILoginView fragmentView){
         mILoginView=fragmentView;
     }
 

@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.ioc.DaggerLoginPresenterComponent;
 import haozuo.com.healthdoctor.ioc.LoginPresenterModule;
+import haozuo.com.healthdoctor.model.UserModel;
 import haozuo.com.healthdoctor.view.base.BaseActivity;
 import haozuo.com.healthdoctor.presenter.LoginPresenter;
 import haozuo.com.healthdoctor.util.ActivityUtils;
@@ -16,6 +17,8 @@ public class LoginActivity extends BaseActivity {
     @Inject
     LoginPresenter mLoginPresenter;
 
+    @Inject
+    UserModel userModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

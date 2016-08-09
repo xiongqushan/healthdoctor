@@ -1,5 +1,7 @@
 package haozuo.com.healthdoctor.model;
 
+import javax.inject.Inject;
+
 import haozuo.com.healthdoctor.bean.BaseBean;
 import haozuo.com.healthdoctor.bean.ConsultItemBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
@@ -14,8 +16,9 @@ import rx.schedulers.Schedulers;
  * Created by xiongwei1 on 2016/8/2.
  */
 public class ConsultModel extends AbstractModel {
-    public static ConsultModel createInstance(){
-        return new ConsultModel();
+    @Inject
+    public ConsultModel(){
+
     }
 
     public void GetGroupCustInfoList(int doctorId,int pageIndex,int pageSize,int flag, final OnHandlerResultListener<GlobalShell<PageBean<ConsultItemBean>>> callbackListener){

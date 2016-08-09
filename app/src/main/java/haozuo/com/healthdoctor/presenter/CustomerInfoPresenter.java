@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import haozuo.com.healthdoctor.bean.CustomDetailBean;
 import haozuo.com.healthdoctor.bean.DoctorGroupBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
@@ -27,15 +29,15 @@ public class CustomerInfoPresenter extends AbstractPresenter implements Customer
     private CustomerInfoContract.ICustomerInfoView mICustomerInfoView;
     private UserModel mUserModel;
     private GroupModel mGroupModel;
-    private int mCustomerId;
     private String mOperateBy;
     private List<DoctorGroupBean> mGroups = new ArrayList<DoctorGroupBean>();
-    public CustomerInfoPresenter(@NonNull CustomDetailBean customInfo, @NonNull CustomerInfoContract.ICustomerInfoView iCustomerInfoView, int customerId){
+
+    @Inject
+    public CustomerInfoPresenter(@NonNull CustomerInfoContract.ICustomerInfoView iCustomerInfoView,@NonNull UserModel userModel,@NonNull CustomDetailBean customInfo){
         mCustomInfo=customInfo;
         mICustomerInfoView=iCustomerInfoView;
-        mUserModel=UserModel.createInstance();
+        mUserModel=userModel;
         mICustomerInfoView.setPresenter(this);
-        mCustomerId = customerId;
     }
 
     @Override
@@ -58,7 +60,7 @@ public class CustomerInfoPresenter extends AbstractPresenter implements Customer
         mICustomerInfoView.showDialog();
         int DeleteGroupId = groupBean.id;
         mOperateBy = (String) UserManager.getInstance().getDoctorInfo().Name;
-        mGroupModel.DeleteCustomerGroup(mCustomerId, DeleteGroupId, mOperateBy, new OnHandlerResultListener<GlobalShell<Boolean>>() {
+        mGroupModel.DeleteCustomerGroup(mCustomInfo.Id, DeleteGroupId, mOperateBy, new OnHandlerResultListener<GlobalShell<Boolean>>() {
             @Override
             public void handlerResult(GlobalShell<Boolean> resultData) {
                 if(resultData.LogicSuccess) {

@@ -27,9 +27,9 @@ public class LoginPresenter extends AbstractPresenter implements LoginContract.I
     Context mContext;
 
     @Inject
-    public LoginPresenter(@NonNull LoginContract.ILoginView iLoginView,@NonNull Context context){
+    public LoginPresenter(@NonNull LoginContract.ILoginView iLoginView,@NonNull Context context,@NonNull UserModel userModel){
         mILoginView=iLoginView;
-        mUserModel=UserModel.createInstance();
+        mUserModel=userModel;
         mILoginView.setPresenter(this);
         mContext = context;
     }
