@@ -5,6 +5,8 @@ import android.widget.Toast;
 import java.util.Collections;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import haozuo.com.healthdoctor.bean.DoctorGroupBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.contract.IBaseModel;
@@ -13,17 +15,19 @@ import haozuo.com.healthdoctor.contract.GroupContract;
 import haozuo.com.healthdoctor.contract.GroupContract.IGroupPresenter;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
 import haozuo.com.healthdoctor.manager.UserManager;
-import haozuo.com.healthdoctor.model.UserModel;
+import haozuo.com.healthdoctor.model.GroupModel;
 
 /**
  * Created by xiongwei1 on 2016/7/7.
  */
 public class GroupPresenter extends AbstractPresenter implements IGroupPresenter{
     private GroupContract.IGroupView mIGroupView;
-    private UserModel mUserModel;
-    public GroupPresenter(@NonNull GroupContract.IGroupView iGroupView){
+    private GroupModel mGroupModel;
+
+    @Inject
+    public GroupPresenter(@NonNull GroupContract.IGroupView iGroupView,@NonNull GroupModel groupModel){
         mIGroupView=iGroupView;
-        mUserModel=UserModel.createInstance();
+        mGroupModel=groupModel;
         iGroupView.setPresenter(this);
     }
 
@@ -34,14 +38,14 @@ public class GroupPresenter extends AbstractPresenter implements IGroupPresenter
 
     @Override
     public IBaseModel getBaseModel() {
-        return mUserModel;
+        return mGroupModel;
     }
 
     @Override
     public void start() {
         int doctorId= UserManager.getInstance().getDoctorInfo().Doctor_ID;
         mIGroupView.showDialog();
-        mUserModel.GetGroup(doctorId, new OnHandlerResultListener<GlobalShell<List<DoctorGroupBean>>>() {
+        mGroupModel.GetGroup(doctorId, new OnHandlerResultListener<GlobalShell<List<DoctorGroupBean>>>() {
             @Override
             public void handlerResult(GlobalShell<List<DoctorGroupBean>> resultData) {
             if(resultData.LogicSuccess) {

@@ -2,6 +2,8 @@ package haozuo.com.healthdoctor.presenter;
 
 import android.support.annotation.NonNull;
 
+import javax.inject.Inject;
+
 import haozuo.com.healthdoctor.bean.CustomDetailBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
@@ -19,9 +21,11 @@ public class CustomDetailPresenter extends AbstractPresenter implements CustomDe
     private CustomDetailContract.ICustomDetailView mICustomDetailView;
     private UserModel mUserModel;
     private int mCustomerId;
-    public CustomDetailPresenter(@NonNull CustomDetailContract.ICustomDetailView iView, int customerId){
+
+    @Inject
+    public CustomDetailPresenter(@NonNull CustomDetailContract.ICustomDetailView iView,@NonNull UserModel userModel,@NonNull int customerId){
         mICustomDetailView=iView;
-        mUserModel=UserModel.createInstance();
+        mUserModel=userModel;
         mICustomDetailView.setPresenter(this);
         mCustomerId = customerId;
     }

@@ -5,15 +5,21 @@ import android.support.v4.app.FragmentManager;
 
 import java.io.Serializable;
 
+import javax.inject.Inject;
+
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.DoctorGroupBean;
+import haozuo.com.healthdoctor.ioc.DaggerGroupCustomListPresenterComponent;
+import haozuo.com.healthdoctor.ioc.GroupCustomListPresenterModule;
 import haozuo.com.healthdoctor.view.base.BaseActivity;
 import haozuo.com.healthdoctor.presenter.GroupCustomListPresenter;
 import haozuo.com.healthdoctor.util.ActivityUtils;
 
 public class GroupCustomListActivity extends BaseActivity {
-    public static String EXTRA_GROUP_ID="GROUP_ID";
+    @Inject
     GroupCustomListPresenter mGroupCustomListPresenter;
+
+    public static String EXTRA_GROUP_ID="GROUP_ID";
     int groupId;
     String groupName;
 
@@ -35,6 +41,11 @@ public class GroupCustomListActivity extends BaseActivity {
             groupCustomListFragment=GroupCustomListFragment.newInstance();
             ActivityUtils.addFragmentToActivity(fragmentManager,groupCustomListFragment,R.id.frameContent);
         }
-        mGroupCustomListPresenter=new GroupCustomListPresenter(groupId, groupCustomListFragment);
+        //mGroupCustomListPresenter=new GroupCustomListPresenter(groupId, groupCustomListFragment);
+        DaggerGroupCustomListPresenterComponent.builder()
+                .appComponent(getAppComponent())
+                .groupCustomListPresenterModule(new GroupCustomListPresenterModule(groupCustomListFragment,groupId))
+                .build()
+                .inject(this);
     }
 }

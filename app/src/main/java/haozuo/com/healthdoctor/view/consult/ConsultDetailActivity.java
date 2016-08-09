@@ -6,14 +6,20 @@ import android.support.v4.app.FragmentManager;
 
 import java.io.Serializable;
 
+import javax.inject.Inject;
+
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.ConsultItemBean;
+import haozuo.com.healthdoctor.ioc.ConsultDetailPresenterModule;
+import haozuo.com.healthdoctor.ioc.DaggerConsultDetailPresenterComponent;
 import haozuo.com.healthdoctor.presenter.ConsultDetailPresenter;
-import haozuo.com.healthdoctor.presenter.ConsultPresenter;
 import haozuo.com.healthdoctor.util.ActivityUtils;
 import haozuo.com.healthdoctor.view.base.BaseActivity;
 
 public class ConsultDetailActivity extends BaseActivity {
+    @Inject
+    ConsultDetailPresenter mConsultPresenter;
+
     public static String EXTRA_CONSULT_ITEM="CONSULT_ITEM";
     private String mCustName;
     private int mCustId;
@@ -36,7 +42,12 @@ public class ConsultDetailActivity extends BaseActivity {
             consultDetailfragment=ConsultDetailFragment.newInstance(mCustId);
             ActivityUtils.addFragmentToActivity(fragmentManager,consultDetailfragment,R.id.frameContent);
         }
-        ConsultDetailPresenter mConsultPresenter=new ConsultDetailPresenter(consultDetailfragment) ;
+
+        DaggerConsultDetailPresenterComponent.builder()
+                .appComponent(getAppComponent())
+                .consultDetailPresenterModule(new ConsultDetailPresenterModule(consultDetailfragment))
+                .build()
+                .inject(this);
     }
 }
 

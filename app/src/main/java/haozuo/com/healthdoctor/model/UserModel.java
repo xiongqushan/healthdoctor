@@ -1,8 +1,13 @@
 package haozuo.com.healthdoctor.model;
 
+import android.support.annotation.NonNull;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.inject.Inject;
+
 import haozuo.com.healthdoctor.bean.CustomDetailBean;
 import haozuo.com.healthdoctor.bean.BaseBean;
 import haozuo.com.healthdoctor.bean.DoctorBean;
@@ -21,14 +26,15 @@ import rx.schedulers.Schedulers;
  * Created by xiongwei on 16/5/19.
  */
 public class UserModel extends AbstractModel {
+    IUserService mIUserService;
 
-    public static UserModel createInstance(){
-        return new UserModel();
+    @Inject
+    public UserModel(IUserService iUserService){
+        mIUserService=iUserService;
     }
 
     public void GetSMSCode(String mobile, final OnHandlerResultListener<GlobalShell<Boolean>> callbackListener){
-        IUserService userService= createService(IUserService.class);
-        userService.getSMSCode(mobile)
+        mIUserService.getSMSCode(mobile)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<BaseBean<Boolean>>() {
@@ -62,8 +68,7 @@ public class UserModel extends AbstractModel {
         Map<String, Object> params = new HashMap<>();
         params.put("Mobile", mobile);
         params.put("SmsCode", smsCode);
-        IUserService userService= createService(IUserService.class);
-        userService.login(params)
+        mIUserService.login(params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<BaseBean<DoctorBean>>() {
@@ -122,71 +127,6 @@ public class UserModel extends AbstractModel {
                         }
                         else{
                             entity=new GlobalShell<DoctorBean>(resultBean.message);
-                        }
-                        callbackListener.handlerResult(entity);
-                    }
-                });
-    }
-
-    public void GetGroup(int doctorId, final OnHandlerResultListener<GlobalShell<List<DoctorGroupBean>>> callbackListener){
-        IGroupService groupService=createService(IGroupService.class);
-        groupService.getGroup(doctorId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<BaseBean<List<DoctorGroupBean>>>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        GlobalShell<List<DoctorGroupBean>> entity=new GlobalShell<List<DoctorGroupBean>>(e.getMessage());
-                        callbackListener.handlerResult(entity);
-                    }
-
-                    @Override
-                    public void onNext(BaseBean<List<DoctorGroupBean>> resultBean) {
-                        GlobalShell<List<DoctorGroupBean>> entity=null;
-                        if(resultBean.state>0) {
-                            List<DoctorGroupBean> result = resultBean.Data;
-                            entity=new GlobalShell<List<DoctorGroupBean>>(result);
-                        }
-                        else{
-                            entity=new GlobalShell<List<DoctorGroupBean>>(resultBean.message);
-                        }
-                        callbackListener.handlerResult(entity);
-                    }
-                });
-
-    }
-
-    public void GetGroupCustInfoList(int serviceDeptId,int groupId,int doctorId,int pageIndex,int pageSize, final OnHandlerResultListener<GlobalShell<PageBean<GroupCustInfoBean>>> callbackListener){
-        IUserService userService=createService(IUserService.class);
-        userService.getGroupCustInfoList(serviceDeptId,doctorId,groupId,"",pageIndex,pageSize)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<BaseBean<PageBean<GroupCustInfoBean>>>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        GlobalShell<PageBean<GroupCustInfoBean>> entity=new GlobalShell<PageBean<GroupCustInfoBean>>(e.getMessage());
-                        callbackListener.handlerResult(entity);
-                    }
-
-                    @Override
-                    public void onNext(BaseBean<PageBean<GroupCustInfoBean>> resultBean) {
-                        GlobalShell<PageBean<GroupCustInfoBean>> entity=null;
-                        if(resultBean.state>0) {
-                            PageBean<GroupCustInfoBean> result = resultBean.Data;
-                            entity=new GlobalShell<PageBean<GroupCustInfoBean>>(result);
-                        }
-                        else{
-                            entity=new GlobalShell<PageBean<GroupCustInfoBean>>(resultBean.message);
                         }
                         callbackListener.handlerResult(entity);
                     }

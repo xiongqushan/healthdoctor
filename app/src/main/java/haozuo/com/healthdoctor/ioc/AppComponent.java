@@ -1,12 +1,14 @@
 package haozuo.com.healthdoctor.ioc;
 
-import android.app.Activity;
 import android.content.Context;
 
 import javax.inject.Singleton;
 
 import dagger.Component;
 import haozuo.com.healthdoctor.framework.HZApplication;
+import haozuo.com.healthdoctor.service.IConsultService;
+import haozuo.com.healthdoctor.service.IGroupService;
+import haozuo.com.healthdoctor.service.IUserService;
 
 /**
  * Created by xiongwei1 on 2016/8/5.
@@ -18,4 +20,10 @@ public interface AppComponent {
     HZApplication getApplication();
 
     Context getContext();
+
+    IUserService getUserService();
+
+    IGroupService getGroupService();
+
+    IConsultService getConsultService();
 }

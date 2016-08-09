@@ -9,6 +9,8 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import haozuo.com.healthdoctor.bean.ConsultItemBean;
 import haozuo.com.healthdoctor.bean.ConsultReplyBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
@@ -29,10 +31,11 @@ public class ConsultDetailPresenter extends AbstractPresenter implements Consult
     private List<ConsultReplyBean> mConsultItemBeanList;
     private String mCommitOn;
 
-    public ConsultDetailPresenter(@NonNull ConsultDetailContract.IConsultDetailView iConsultDetailView){
-        mConsultItemBeanList = new ArrayList<>();
+    @Inject
+    public ConsultDetailPresenter(@NonNull ConsultDetailContract.IConsultDetailView iConsultDetailView,@NonNull ConsultModel consultModel){
+        mConsultItemBeanList = new ArrayList<ConsultReplyBean>();
         mIConsultDetailView=iConsultDetailView;
-        mConsultModel=ConsultModel.createInstance();
+        mConsultModel=consultModel;
         iConsultDetailView.setPresenter(this);
         DateFormat df = new SimpleDateFormat("yyyyMMddhhmmss");
         mCommitOn = df.format(new Date()).toString();
