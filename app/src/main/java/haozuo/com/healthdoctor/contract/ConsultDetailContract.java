@@ -10,13 +10,17 @@ import haozuo.com.healthdoctor.bean.ConsultReplyBean;
 public interface ConsultDetailContract {
 
     interface IConsultDetailView extends IBaseView<IConsultDetailPresenter> {
+
         void setPresenter(ConsultDetailContract.IConsultDetailPresenter presenter);
 
         void refreshCustomAdapter(List<ConsultReplyBean> dataList);
     }
 
     interface IConsultDetailPresenter extends IBasePresenter {
-        void GetConsultReply(int customerId);
+
+        void refreshConsultList(int customerId);
+
+        void loadmoreConsultList(int customerId);
     }
 
 }

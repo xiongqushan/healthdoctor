@@ -1,6 +1,7 @@
 package haozuo.com.healthdoctor.view.consult;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -28,7 +29,11 @@ import haozuo.com.healthdoctor.contract.ConsultDetailContract;
 import haozuo.com.healthdoctor.manager.UserManager;
 import haozuo.com.healthdoctor.util.DateUtil;
 import haozuo.com.healthdoctor.view.base.AbstractView;
+import haozuo.com.healthdoctor.view.login.LoginActivity;
+import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout;
+import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullableListView;
 import haozuo.com.healthdoctor.view.threePart.common.FlowLayout;
+import haozuo.com.healthdoctor.view.threePart.common.PageFragment;
 import haozuo.com.healthdoctor.view.threePart.common.WindowResize;
 
 public class ConsultDetailFragment extends AbstractView implements ConsultDetailContract.IConsultDetailView {
@@ -36,12 +41,18 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
     View rootView;
     public ConsultDetailContract.IConsultDetailPresenter mConsultDetailPresenter;
     ConsultListAdapter mConsultListAdapter;
-    List<GroupCustInfoBean> dataList;
     private String mURI;
     private static int mCustomerID;
     private static DoctorBean mDoctorEntity;
 
-    @Bind(R.id.consult_detail_List) ListView consult_detail_List;
+    @Bind(R.id.consult_detail_ListView)PullableListView consult_detail_List;
+    @Bind(R.id.consult_detail_pull_to_refresh_layout)PullToRefreshLayout consult_detail_pull_to_refresh_layout;
+
+    @OnClick(R.id.btn_usually_message)
+    public void getUsefulMessage(View v){
+        startActivity(new Intent(mContext, LoginActivity.class));
+    };
+
     public ConsultDetailFragment(){};
 
     public static ConsultDetailFragment newInstance(int customerID){
@@ -67,7 +78,8 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
         WindowResize.assistActivity(getActivity());
         mConsultListAdapter=new ConsultListAdapter(mContext);
         consult_detail_List.setAdapter(mConsultListAdapter);
-        mConsultDetailPresenter.GetConsultReply(mCustomerID);
+        consult_detail_pull_to_refresh_layout.setOnRefreshListener(new PullListener());
+        mConsultDetailPresenter.refreshConsultList(mCustomerID);
 
         return rootView;
     }
@@ -86,7 +98,20 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
     @Override
     public void refreshCustomAdapter(List<ConsultReplyBean> dataList) {
         mConsultListAdapter.refresh(dataList);
-//        mConsultListAdapter.notifyDataSetChanged();
+    }
+
+    class PullListener implements PullToRefreshLayout.OnRefreshListener {
+
+        @Override
+        public void onRefresh() {
+            mConsultDetailPresenter.refreshConsultList(mCustomerID);
+        }
+
+        @Override
+        public void onLoadMore() {
+            mConsultDetailPresenter.loadmoreConsultList(mCustomerID);
+        }
+
     }
 
     class ConsultListAdapter extends BaseAdapter {

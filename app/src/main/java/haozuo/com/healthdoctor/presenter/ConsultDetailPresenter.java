@@ -25,15 +25,18 @@ import haozuo.com.healthdoctor.model.ConsultModel;
 public class ConsultDetailPresenter extends AbstractPresenter implements ConsultDetailContract.IConsultDetailPresenter {
     private ConsultDetailContract.IConsultDetailView mIConsultDetailView;
     private ConsultModel mConsultModel;
-    private List<ConsultItemBean> mConsultItemBeanList;
+    private ConsultReplyBean consultReplyBean;
+    private List<ConsultReplyBean> mConsultItemBeanList;
     private String mCommitOn;
+
     public ConsultDetailPresenter(@NonNull ConsultDetailContract.IConsultDetailView iConsultDetailView){
-        mConsultItemBeanList = new ArrayList<ConsultItemBean>();
+        mConsultItemBeanList = new ArrayList<>();
         mIConsultDetailView=iConsultDetailView;
         mConsultModel=ConsultModel.createInstance();
         iConsultDetailView.setPresenter(this);
         DateFormat df = new SimpleDateFormat("yyyyMMddhhmmss");
         mCommitOn = df.format(new Date()).toString();
+        consultReplyBean = new ConsultReplyBean();
     }
 
     @Override
@@ -51,7 +54,29 @@ public class ConsultDetailPresenter extends AbstractPresenter implements Consult
     public void start() {}
 
     @Override
-    public void GetConsultReply(int customerId) {
+    public void refreshConsultList(int customerId) {
+        mIConsultDetailView.showDialog();
+        mConsultModel.GetConsultReplyList(customerId,mCommitOn, new OnHandlerResultListener<GlobalShell<List<ConsultReplyBean>>>() {
+            @Override
+            public void handlerResult(GlobalShell<List<ConsultReplyBean>> resultData) {
+                if(resultData.LogicSuccess) {
+                    mIConsultDetailView.hideDialog();
+                    mConsultItemBeanList.clear();
+                    if ((List<ConsultReplyBean>) resultData.Data != null){
+                        mConsultItemBeanList.addAll(resultData.Data);
+                        Collections.sort(mConsultItemBeanList,consultReplyBean);
+                        mIConsultDetailView.refreshCustomAdapter(mConsultItemBeanList);
+                    }
+                }
+                else{
+                    mIConsultDetailView.hideDialog(resultData.Message);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void loadmoreConsultList(int customerId) {
         mIConsultDetailView.showDialog();
         mConsultModel.GetConsultReplyList(customerId,mCommitOn, new OnHandlerResultListener<GlobalShell<List<ConsultReplyBean>>>() {
             @Override
@@ -61,7 +86,9 @@ public class ConsultDetailPresenter extends AbstractPresenter implements Consult
                     ConsultReplyBean consultReplyBean = new ConsultReplyBean();
                     Collections.sort(resultData.Data,consultReplyBean);
                     if ((List<ConsultReplyBean>) resultData.Data != null){
-                        mIConsultDetailView.refreshCustomAdapter(resultData.Data);
+                        mConsultItemBeanList.addAll(resultData.Data);
+                        Collections.sort(mConsultItemBeanList,consultReplyBean);
+                        mIConsultDetailView.refreshCustomAdapter(mConsultItemBeanList);
                     }
                 }
                 else{

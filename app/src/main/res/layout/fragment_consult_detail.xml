@@ -3,16 +3,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/lightgray"
     tools:context="haozuo.com.healthdoctor.view.consult.ConsultDetailFragment">
 
-    <ListView
-        android:id="@+id/consult_detail_List"
+    <!--<ListView-->
+        <!--android:id="@+id/consult_detail_List"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:divider="@null"-->
+        <!--android:listSelector="@android:color/transparent"/>-->
+
+    <haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout
+        android:id="@+id/consult_detail_pull_to_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:divider="@null"
-        android:listSelector="@android:color/transparent"/>
+        android:layout_weight="1">
+        <include layout="@layout/refresh_head" />
+
+        <haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullableListView
+            android:id="@+id/consult_detail_ListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null"
+            android:listSelector="@android:color/transparent" />
+        <include layout="@layout/load_more" />
+    </haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout>
 
     <RelativeLayout
         android:id="@+id/edit_area"
@@ -47,10 +62,9 @@
             android:layout_marginLeft="@dimen/consult_customer_edittext_marginleft"
             android:layout_marginRight="@dimen/consult_customer_edittext_marginleft"
             android:layout_marginBottom="@dimen/consult_customer_edittext_marginbottom"
-            android:maxLines="5"
+            android:minLines="3"
             android:background="@drawable/editview_bg_selector"
             tools:text="在这里输入相应的编辑文本~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"/>
-
     </RelativeLayout>
 
 </LinearLayout>
