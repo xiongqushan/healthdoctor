@@ -40,14 +40,6 @@ public class UserManager {
         return _instance;
     }
 
-    public static UserManager getInstance(Activity a) {
-        if (_instance == null) {
-            _instance = new UserManager();
-        }
-        _instance.testActivity=a;
-        return _instance;
-    }
-
     public void setDoctorInfo(DoctorBean doctorEntity){
         try {
             _currentEntity=doctorEntity;

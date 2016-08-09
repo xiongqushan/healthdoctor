@@ -2,6 +2,7 @@ package haozuo.com.healthdoctor.view.base;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -25,6 +26,8 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import butterknife.Bind;
 import butterknife.OnCheckedChanged;
 import haozuo.com.healthdoctor.R;
+import haozuo.com.healthdoctor.framework.HZApplication;
+import haozuo.com.healthdoctor.ioc.AppComponent;
 import haozuo.com.healthdoctor.util.SystemBarTintUtil;
 import haozuo.com.healthdoctor.view.consult.ConsultActivity;
 import haozuo.com.healthdoctor.view.group.GroupActivity;
@@ -94,6 +97,10 @@ public abstract class BaseActivity extends AppCompatActivity {
                 break;
         }
         tab_menu.setOnCheckedChangeListener(new OnNavChangeListener());
+    }
+
+    protected AppComponent getAppComponent(){
+        return ((HZApplication)getApplication()).getAppComponent();
     }
 
     private class OnNavChangeListener implements RadioGroup.OnCheckedChangeListener{

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.widget.Toast;
 
+import javax.inject.Inject;
+
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.DoctorBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
@@ -24,7 +26,9 @@ public class LoginPresenter extends AbstractPresenter implements LoginContract.I
     LoginContract.ILoginView mILoginView;
     UserModel mUserModel;
     Context mContext;
-    public LoginPresenter(@NonNull LoginContract.ILoginView iLoginView, Context context){
+
+    @Inject
+    public LoginPresenter(@NonNull LoginContract.ILoginView iLoginView,@NonNull Context context){
         mILoginView=iLoginView;
         mUserModel=UserModel.createInstance();
         mILoginView.setPresenter(this);
@@ -85,7 +89,7 @@ public class LoginPresenter extends AbstractPresenter implements LoginContract.I
             public void handlerResult(GlobalShell<DoctorBean> resultData) {
                 if(resultData.LogicSuccess) {
                     if (resultData.Data.PhotoUrl == null){
-                        resultData.Data.PhotoUrl ="res://haozuo.com.healthdoctor.view.custom/"+R.drawable.doctor_default_photourl;
+                        resultData.Data.PhotoUrl ="res://haozuo.com.healthdoctor.view.custom/"+ R.drawable.doctor_default_photourl;
                     }
                     UserManager.getInstance().setDoctorInfo(resultData.Data);
                     mILoginView.hideDialog();

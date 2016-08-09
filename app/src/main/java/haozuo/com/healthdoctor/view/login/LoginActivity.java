@@ -5,12 +5,20 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 
+import javax.inject.Inject;
+
 import haozuo.com.healthdoctor.R;
+import haozuo.com.healthdoctor.ioc.DaggerLoginPresenterComponent;
+import haozuo.com.healthdoctor.ioc.LoginPresenterModule;
 import haozuo.com.healthdoctor.view.base.BaseActivity;
 import haozuo.com.healthdoctor.presenter.LoginPresenter;
 import haozuo.com.healthdoctor.util.ActivityUtils;
 
-public class LoginActivity extends AppCompatActivity {
+
+public class LoginActivity extends BaseActivity {
+    @Inject
+    LoginPresenter mLoginPresenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,9 +32,13 @@ public class LoginActivity extends AppCompatActivity {
             loginFragment=LoginFragment.newInstance();
             ActivityUtils.addFragmentToActivity(fragmentManager,loginFragment,R.id.frameContent);
         }
-        LoginPresenter mLoginPresenter=new LoginPresenter(loginFragment,this);
 
-        haozuo.com.healthdoctor.manager.UserManager.getInstance(this);
+        DaggerLoginPresenterComponent.builder()
+                .appComponent(getAppComponent())
+                .loginPresenterModule(new LoginPresenterModule(loginFragment))
+                .build()
+                .inject(this);
+
     }
 
 }
