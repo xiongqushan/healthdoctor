@@ -1,23 +1,23 @@
 package haozuo.com.healthdoctor.view.group;
 
-import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 
 import javax.inject.Inject;
 
 import haozuo.com.healthdoctor.R;
-import haozuo.com.healthdoctor.ioc.DaggerGroupPresenterComponent;
-import haozuo.com.healthdoctor.ioc.GroupPresenterModule;
+import haozuo.com.healthdoctor.contract.GroupContract;
+import haozuo.com.healthdoctor.ioc.DaggerGroupComponent;
+import haozuo.com.healthdoctor.ioc.GroupModule;
 import haozuo.com.healthdoctor.view.base.BaseActivity;
-import haozuo.com.healthdoctor.manager.UserManager;
 import haozuo.com.healthdoctor.presenter.GroupPresenter;
 import haozuo.com.healthdoctor.util.ActivityUtils;
-import haozuo.com.healthdoctor.view.login.LoginActivity;
 
 public class GroupActivity extends BaseActivity {
     @Inject
     GroupPresenter mGroupPresenter;
+    @Inject
+    GroupContract.IGroupView mIGroupView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,18 +26,18 @@ public class GroupActivity extends BaseActivity {
         setCustomerTitle("客户分组");
         hideGoBackBtn();
 
+        DaggerGroupComponent.builder()
+                .appComponent(getAppComponent())
+                .groupModule(new GroupModule())
+                .build()
+                .inject(this);
+
         FragmentManager fragmentManager=getSupportFragmentManager();
         GroupFragment groupFragment=(GroupFragment)fragmentManager.findFragmentById(R.id.frameContent);
         if(groupFragment==null){
-            groupFragment=GroupFragment.newInstance();
+            groupFragment=(GroupFragment)mIGroupView;
             ActivityUtils.addFragmentToActivity(fragmentManager,groupFragment,R.id.frameContent);
         }
-
-        DaggerGroupPresenterComponent.builder()
-                .appComponent(getAppComponent())
-                .groupPresenterModule(new GroupPresenterModule(groupFragment))
-                .build()
-                .inject(this);
     }
 
     @Override

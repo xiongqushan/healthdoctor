@@ -5,21 +5,21 @@ import android.support.annotation.NonNull;
 import dagger.Module;
 import dagger.Provides;
 import haozuo.com.healthdoctor.contract.ConsultContract;
+import haozuo.com.healthdoctor.view.consult.ConsultFragment;
 
 /**
  * Created by xiongwei1 on 2016/8/9.
  */
 
 @Module
-public class ConsultPresenterModule {
-    ConsultContract.IConsultView mIConsultView;
-    public ConsultPresenterModule(@NonNull ConsultContract.IConsultView iConsultView){
-        mIConsultView=iConsultView;
+public class ConsultModule {
+    public ConsultModule(){
+
     }
 
     @ScopeType.ActivityScope
     @Provides
     ConsultContract.IConsultView provideConsultView(){
-        return  mIConsultView;
+        return  ConsultFragment.newInstance();
     }
 }

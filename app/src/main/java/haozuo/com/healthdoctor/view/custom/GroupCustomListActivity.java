@@ -9,8 +9,9 @@ import javax.inject.Inject;
 
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.DoctorGroupBean;
-import haozuo.com.healthdoctor.ioc.DaggerGroupCustomListPresenterComponent;
-import haozuo.com.healthdoctor.ioc.GroupCustomListPresenterModule;
+import haozuo.com.healthdoctor.contract.GroupCustomListContract;
+import haozuo.com.healthdoctor.ioc.DaggerGroupCustomListComponent;
+import haozuo.com.healthdoctor.ioc.GroupCustomListModule;
 import haozuo.com.healthdoctor.view.base.BaseActivity;
 import haozuo.com.healthdoctor.presenter.GroupCustomListPresenter;
 import haozuo.com.healthdoctor.util.ActivityUtils;
@@ -18,6 +19,9 @@ import haozuo.com.healthdoctor.util.ActivityUtils;
 public class GroupCustomListActivity extends BaseActivity {
     @Inject
     GroupCustomListPresenter mGroupCustomListPresenter;
+    @Inject
+    GroupCustomListContract.IGroupCustomListView mIGroupCustomListView;
+
 
     public static String EXTRA_GROUP_ID="GROUP_ID";
     int groupId;
@@ -28,24 +32,25 @@ public class GroupCustomListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_custom_list);
 
-        Serializable obj= getIntent().getSerializableExtra(EXTRA_GROUP_ID);
-        if(obj!=null){
+        Serializable obj = getIntent().getSerializableExtra(EXTRA_GROUP_ID);
+        if (obj != null) {
             DoctorGroupBean doctorGroupBean = (DoctorGroupBean) obj;
             groupName = doctorGroupBean.name;
             groupId = doctorGroupBean.id;
         }
         setCustomerTitle(groupName);
-        FragmentManager fragmentManager=getSupportFragmentManager();
-        GroupCustomListFragment groupCustomListFragment=(GroupCustomListFragment)fragmentManager.findFragmentById(R.id.frameContent);
-        if(groupCustomListFragment==null){
-            groupCustomListFragment=GroupCustomListFragment.newInstance();
-            ActivityUtils.addFragmentToActivity(fragmentManager,groupCustomListFragment,R.id.frameContent);
-        }
-        //mGroupCustomListPresenter=new GroupCustomListPresenter(groupId, groupCustomListFragment);
-        DaggerGroupCustomListPresenterComponent.builder()
+
+        DaggerGroupCustomListComponent.builder()
                 .appComponent(getAppComponent())
-                .groupCustomListPresenterModule(new GroupCustomListPresenterModule(groupCustomListFragment,groupId))
+                .groupCustomListModule(new GroupCustomListModule(groupId))
                 .build()
                 .inject(this);
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        GroupCustomListFragment groupCustomListFragment = (GroupCustomListFragment) fragmentManager.findFragmentById(R.id.frameContent);
+        if (groupCustomListFragment == null) {
+            groupCustomListFragment = (GroupCustomListFragment) mIGroupCustomListView;
+            ActivityUtils.addFragmentToActivity(fragmentManager, groupCustomListFragment, R.id.frameContent);
+        }
     }
 }

@@ -8,8 +8,8 @@ import javax.inject.Inject;
 
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.contract.LoginContract;
-import haozuo.com.healthdoctor.ioc.DaggerLoginPresenterComponent;
-import haozuo.com.healthdoctor.ioc.LoginPresenterModule;
+import haozuo.com.healthdoctor.ioc.DaggerLoginComponent;
+import haozuo.com.healthdoctor.ioc.LoginModule;
 import haozuo.com.healthdoctor.view.base.BaseActivity;
 import haozuo.com.healthdoctor.presenter.LoginPresenter;
 import haozuo.com.healthdoctor.util.ActivityUtils;
@@ -19,7 +19,7 @@ public class LoginActivity extends BaseActivity {
     @Inject
     LoginPresenter mLoginPresenter;
     @Inject
-    LoginContract.ILoginView mLoginFragment;
+    LoginContract.ILoginView mLoginView;
 
 
     @Override
@@ -30,16 +30,16 @@ public class LoginActivity extends BaseActivity {
         setContentView(R.layout.activity_login);
 
 
-        DaggerLoginPresenterComponent.builder()
+        DaggerLoginComponent.builder()
                 .appComponent(getAppComponent())
-                .loginPresenterModule(new LoginPresenterModule())
+                .loginModule(new LoginModule())
                 .build()
                 .inject(this);
 
         FragmentManager fragmentManager=getSupportFragmentManager();
         LoginFragment loginFragment=(LoginFragment)fragmentManager.findFragmentById(R.id.frameContent);
         if(loginFragment==null){
-            loginFragment=(LoginFragment) mLoginFragment;
+            loginFragment=(LoginFragment) mLoginView;
             ActivityUtils.addFragmentToActivity(fragmentManager,loginFragment,R.id.frameContent);
         }
     }

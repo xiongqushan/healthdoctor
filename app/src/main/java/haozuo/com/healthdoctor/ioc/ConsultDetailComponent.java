@@ -1,7 +1,6 @@
 package haozuo.com.healthdoctor.ioc;
 
 import dagger.Component;
-import haozuo.com.healthdoctor.view.consult.ConsultActivity;
 import haozuo.com.healthdoctor.view.consult.ConsultDetailActivity;
 
 /**
@@ -9,7 +8,7 @@ import haozuo.com.healthdoctor.view.consult.ConsultDetailActivity;
  */
 
 @ScopeType.ActivityScope
-@Component(modules = ConsultDetailPresenterModule.class,dependencies = AppComponent.class)
-public interface ConsultDetailPresenterComponent {
+@Component(modules = ConsultDetailModule.class,dependencies = AppComponent.class)
+public interface ConsultDetailComponent {
     void inject(ConsultDetailActivity activity);
 }

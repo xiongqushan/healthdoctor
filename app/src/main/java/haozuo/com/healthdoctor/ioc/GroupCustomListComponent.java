@@ -8,7 +8,7 @@ import haozuo.com.healthdoctor.view.custom.GroupCustomListActivity;
  */
 
 @ScopeType.ActivityScope
-@Component(modules = GroupCustomListPresenterModule.class, dependencies = AppComponent.class)
-public interface GroupCustomListPresenterComponent {
+@Component(modules = GroupCustomListModule.class, dependencies = AppComponent.class)
+public interface GroupCustomListComponent {
     void inject(GroupCustomListActivity activity);
 }

@@ -4,23 +4,23 @@ import android.support.annotation.NonNull;
 import dagger.Module;
 import dagger.Provides;
 import haozuo.com.healthdoctor.contract.CustomDetailContract;
+import haozuo.com.healthdoctor.view.custom.CustomDetailFragment;
 
 /**
  * Created by xiongwei1 on 2016/8/8.
  */
 @Module
-public class CustomDetailPresenterModule {
+public class CustomDetailModule {
     CustomDetailContract.ICustomDetailView mICustomDetailView;
     int mCustomId;
-    public CustomDetailPresenterModule(@NonNull CustomDetailContract.ICustomDetailView fragmentView, int customId){
-        mICustomDetailView=fragmentView;
+    public CustomDetailModule(@NonNull int customId){
         mCustomId=customId;
     }
 
     @ScopeType.ActivityScope
     @Provides
     CustomDetailContract.ICustomDetailView provideCustomDetailView(){
-        return mICustomDetailView;
+        return CustomDetailFragment.newInstance();
     }
 
     @ScopeType.ActivityScope

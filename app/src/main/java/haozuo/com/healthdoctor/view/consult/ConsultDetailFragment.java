@@ -42,7 +42,6 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
     public ConsultDetailContract.IConsultDetailPresenter mConsultDetailPresenter;
     ConsultListAdapter mConsultListAdapter;
     private String mURI;
-    private static int mCustomerID;
     private static DoctorBean mDoctorEntity;
 
     @Bind(R.id.consult_detail_ListView)PullableListView consult_detail_List;
@@ -55,9 +54,8 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
 
     public ConsultDetailFragment(){};
 
-    public static ConsultDetailFragment newInstance(int customerID){
+    public static ConsultDetailFragment newInstance(){
         ConsultDetailFragment fragment = new ConsultDetailFragment();
-        mCustomerID = customerID;
         mDoctorEntity = UserManager.getInstance().getDoctorInfo();
         return fragment;
     }
@@ -79,7 +77,7 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
         mConsultListAdapter=new ConsultListAdapter(mContext);
         consult_detail_List.setAdapter(mConsultListAdapter);
         consult_detail_pull_to_refresh_layout.setOnRefreshListener(new PullListener());
-        mConsultDetailPresenter.refreshConsultList(mCustomerID);
+        mConsultDetailPresenter.refreshConsultList();
 
         return rootView;
     }
@@ -104,12 +102,12 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
 
         @Override
         public void onRefresh() {
-            mConsultDetailPresenter.refreshConsultList(mCustomerID);
+            mConsultDetailPresenter.refreshConsultList();
         }
 
         @Override
         public void onLoadMore() {
-            mConsultDetailPresenter.loadmoreConsultList(mCustomerID);
+            mConsultDetailPresenter.loadmoreConsultList();
         }
 
     }

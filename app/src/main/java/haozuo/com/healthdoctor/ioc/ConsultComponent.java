@@ -8,7 +8,7 @@ import haozuo.com.healthdoctor.view.consult.ConsultActivity;
  */
 
 @ScopeType.ActivityScope
-@Component(modules = ConsultPresenterModule.class,dependencies = AppComponent.class)
-public interface ConsultPresenterComponent {
+@Component(modules = ConsultModule.class,dependencies = AppComponent.class)
+public interface ConsultComponent {
     void inject(ConsultActivity activity);
 }

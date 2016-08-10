@@ -24,16 +24,11 @@ import haozuo.com.healthdoctor.view.base.AbstractView;
 import haozuo.com.healthdoctor.contract.CustomDetailContract;
 import haozuo.com.healthdoctor.view.threePart.common.PageFragment;
 
-//<<<<<<< HEAD
-//public class CustomDetailFragment extends AbsView implements CustomDetailContract.ICustomDetailView{
-////    SimpleFragmentPagerAdapter pagerAdapter;
-//=======
 public class CustomDetailFragment extends AbstractView implements CustomDetailContract.ICustomDetailView{
     private SimpleFragmentPagerAdapter pagerAdapter;
 
     Context mContext;
     View rootView;
-    int mCustomerId;
     String Cphoto;
     CustomDetailContract.ICustomDetailPresenter mCustomDetailPresenter;
     @Bind(R.id.customerName) TextView customerName;
@@ -45,9 +40,8 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
     public CustomDetailFragment(){
     }
 
-    public static CustomDetailFragment newInstance(int customerId) {
+    public static CustomDetailFragment newInstance() {
         CustomDetailFragment fragment = new CustomDetailFragment();
-        fragment.mCustomerId = customerId;
         return fragment;
     }
 

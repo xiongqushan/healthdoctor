@@ -32,7 +32,6 @@ import haozuo.com.healthdoctor.view.threePart.common.DrawableClickableTextView;
 public class CustomerInfoFragment extends AbstractView implements CustomerInfoContract.ICustomerInfoView, DrawableClickableTextView.DrawableRightListener {
     Context mContext;
     View rootView;
-    CustomDetailBean mCustomInfo;
     CustomerInfoContract.ICustomerInfoPresenter mPresenter;
     String photoUri;
     List<String> mTvNames = new ArrayList<String>();
@@ -53,9 +52,8 @@ public class CustomerInfoFragment extends AbstractView implements CustomerInfoCo
     public CustomerInfoFragment(){
     }
 
-    public static CustomerInfoFragment newInstance(CustomDetailBean customInfo) {
+    public static CustomerInfoFragment newInstance() {
         CustomerInfoFragment fragment = new CustomerInfoFragment();
-        fragment.mCustomInfo = customInfo;
         return fragment;
     }
 
@@ -94,7 +92,6 @@ public class CustomerInfoFragment extends AbstractView implements CustomerInfoCo
 
     @Override
     public void InitView(CustomDetailBean customInfo) {
-        mCustomInfo = customInfo;
         if (customInfo.PhotoUrl == null){
 //            photoUri = "http://pic002.cnblogs.com/images/2011/103608/2011062022023456.jpg";
             photoUri = "res://haozuo.com.healthdoctor.view.custom/"+R.drawable.default_photourl;

@@ -8,8 +8,8 @@ import haozuo.com.healthdoctor.view.consult.UsefulMesasgeActivity;
  */
 
 @ScopeType.ActivityScope
-@Component(modules = UsefulMessagePresenterModule.class, dependencies = AppComponent.class)
-public interface UsefulMessagePresenterComponent {
+@Component(modules = UsefulMessageModule.class, dependencies = AppComponent.class)
+public interface UsefulMessageComponent {
     void inject(UsefulMesasgeActivity activity);
 
 }

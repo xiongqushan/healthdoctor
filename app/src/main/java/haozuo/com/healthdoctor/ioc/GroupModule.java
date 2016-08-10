@@ -7,22 +7,21 @@ import javax.inject.Inject;
 import dagger.Module;
 import dagger.Provides;
 import haozuo.com.healthdoctor.contract.GroupContract;
+import haozuo.com.healthdoctor.view.group.GroupFragment;
 
 /**
  * Created by xiongwei1 on 2016/8/8.
  */
 
 @Module
-public class GroupPresenterModule {
-    GroupContract.IGroupView mIGroupView;
+public class GroupModule {
+    public GroupModule(){
 
-    public GroupPresenterModule(@NonNull GroupContract.IGroupView iGroupView){
-        mIGroupView=iGroupView;
     }
 
     @ScopeType.ActivityScope
     @Provides
     GroupContract.IGroupView provideGroupView(){
-        return mIGroupView;
+        return GroupFragment.newInstance();
     }
 }

@@ -30,12 +30,14 @@ public class ConsultDetailPresenter extends AbstractPresenter implements Consult
     private ConsultReplyBean consultReplyBean;
     private List<ConsultReplyBean> mConsultItemBeanList;
     private String mCommitOn;
+    private int mCustomerId;
 
     @Inject
-    public ConsultDetailPresenter(@NonNull ConsultDetailContract.IConsultDetailView iConsultDetailView,@NonNull ConsultModel consultModel){
+    public ConsultDetailPresenter(@NonNull ConsultDetailContract.IConsultDetailView iConsultDetailView,@NonNull ConsultModel consultModel,@NonNull int customerId){
         mConsultItemBeanList = new ArrayList<ConsultReplyBean>();
         mIConsultDetailView=iConsultDetailView;
         mConsultModel=consultModel;
+        mCustomerId=customerId;
         iConsultDetailView.setPresenter(this);
         DateFormat df = new SimpleDateFormat("yyyyMMddhhmmss");
         mCommitOn = df.format(new Date()).toString();
@@ -57,9 +59,9 @@ public class ConsultDetailPresenter extends AbstractPresenter implements Consult
     public void start() {}
 
     @Override
-    public void refreshConsultList(int customerId) {
+    public void refreshConsultList() {
         mIConsultDetailView.showDialog();
-        mConsultModel.GetConsultReplyList(customerId,mCommitOn, new OnHandlerResultListener<GlobalShell<List<ConsultReplyBean>>>() {
+        mConsultModel.GetConsultReplyList(mCustomerId,mCommitOn, new OnHandlerResultListener<GlobalShell<List<ConsultReplyBean>>>() {
             @Override
             public void handlerResult(GlobalShell<List<ConsultReplyBean>> resultData) {
                 if(resultData.LogicSuccess) {
@@ -79,9 +81,9 @@ public class ConsultDetailPresenter extends AbstractPresenter implements Consult
     }
 
     @Override
-    public void loadmoreConsultList(int customerId) {
+    public void loadmoreConsultList() {
         mIConsultDetailView.showDialog();
-        mConsultModel.GetConsultReplyList(customerId,mCommitOn, new OnHandlerResultListener<GlobalShell<List<ConsultReplyBean>>>() {
+        mConsultModel.GetConsultReplyList(mCustomerId,mCommitOn, new OnHandlerResultListener<GlobalShell<List<ConsultReplyBean>>>() {
             @Override
             public void handlerResult(GlobalShell<List<ConsultReplyBean>> resultData) {
                 if(resultData.LogicSuccess) {

@@ -17,14 +17,14 @@ import retrofit.Retrofit;
  * Created by xiongwei1 on 2016/8/5.
  */
 @Module
-public class LoginPresenterModule {
+public class LoginModule {
     /*LoginContract.ILoginView mILoginView;
-    public LoginPresenterModule(@NonNull LoginContract.ILoginView fragmentView){
+    public LoginModule(@NonNull LoginContract.ILoginView fragmentView){
         mILoginView=fragmentView;
     }*/
 
 
-    public LoginPresenterModule(){
+    public LoginModule(){
     }
 
     @Provides

@@ -5,25 +5,24 @@ import android.support.annotation.NonNull;
 import dagger.Module;
 import dagger.Provides;
 import haozuo.com.healthdoctor.contract.GroupCustomListContract;
+import haozuo.com.healthdoctor.view.custom.GroupCustomListFragment;
 
 /**
  * Created by xiongwei1 on 2016/8/8.
  */
 
 @Module
-public class GroupCustomListPresenterModule {
-    GroupCustomListContract.IGroupCustomListView mIGroupCustomListView;
+public class GroupCustomListModule {
     int mGroupId;
 
-    public GroupCustomListPresenterModule(@NonNull GroupCustomListContract.IGroupCustomListView iGroupCustomListView, @NonNull int groupId){
-        mIGroupCustomListView=iGroupCustomListView;
+    public GroupCustomListModule(@NonNull int groupId){
         mGroupId=groupId;
     }
 
     @ScopeType.ActivityScope
     @Provides
     GroupCustomListContract.IGroupCustomListView provideGroupCustomListView(){
-        return mIGroupCustomListView;
+        return GroupCustomListFragment.newInstance();
     }
 
     @ScopeType.ActivityScope

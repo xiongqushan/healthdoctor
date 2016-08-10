@@ -18,9 +18,9 @@ public interface ConsultDetailContract {
 
     interface IConsultDetailPresenter extends IBasePresenter {
 
-        void refreshConsultList(int customerId);
+        void refreshConsultList();
 
-        void loadmoreConsultList(int customerId);
+        void loadmoreConsultList();
     }
 
 }
