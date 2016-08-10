@@ -16,26 +16,25 @@
         <activity
             android:name=".view.welcome.WelcomeActivity"
             android:theme="@style/AppTheme.NoActionBar">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
         <activity
             android:name=".view.login.LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.group.GroupActivity"
             android:theme="@style/AppTheme.NoActionBar">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".view.custom.GroupCustomListActivity"
@@ -51,19 +50,17 @@
         <activity
             android:name=".view.custom.CustomDetailActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".view.custom.CustomerInfoActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".view.consult.ConsultActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity android:name=".view.consult.ConsultDetailActivity"
+        <activity
+            android:name=".view.consult.ConsultDetailActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustResize"/>
-
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".view.consult.UsefulMesasgeActivity"></activity>
     </application>
 
 </manifest>

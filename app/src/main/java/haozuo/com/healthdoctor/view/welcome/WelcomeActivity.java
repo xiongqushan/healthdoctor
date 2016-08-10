@@ -24,30 +24,16 @@ public class WelcomeActivity extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_welcome);
-        boolean isLogin=checkLogin();
-        if(!isLogin){
-            return;
-        }
 
         TimerTask task = new TimerTask()
         {
             public void run()
             {
-                startActivity(new Intent(getBaseContext(),GroupActivity.class));
+                startActivity(new Intent(getBaseContext(),LoginActivity.class));
                 finish();
             }
         };
         Timer timer = new Timer();
         timer.schedule(task,2000);
-    }
-
-    boolean checkLogin() {
-        if (!UserManager.getInstance().exist()) {
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-            finish();
-            return false;
-        }
-        return true;
     }
 }

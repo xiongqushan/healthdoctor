@@ -3,7 +3,6 @@ package haozuo.com.healthdoctor.ioc;
 import android.app.Activity;
 
 import dagger.Component;
-import haozuo.com.healthdoctor.presenter.LoginPresenter;
 import haozuo.com.healthdoctor.view.login.LoginActivity;
 
 /**

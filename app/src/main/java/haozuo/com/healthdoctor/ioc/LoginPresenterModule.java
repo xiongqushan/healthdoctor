@@ -10,6 +10,7 @@ import dagger.Provides;
 import haozuo.com.healthdoctor.contract.LoginContract;
 import haozuo.com.healthdoctor.presenter.LoginPresenter;
 import haozuo.com.healthdoctor.service.IUserService;
+import haozuo.com.healthdoctor.view.login.LoginFragment;
 import retrofit.Retrofit;
 
 /**
@@ -17,15 +18,19 @@ import retrofit.Retrofit;
  */
 @Module
 public class LoginPresenterModule {
-    LoginContract.ILoginView mILoginView;
+    /*LoginContract.ILoginView mILoginView;
     public LoginPresenterModule(@NonNull LoginContract.ILoginView fragmentView){
         mILoginView=fragmentView;
-    }
+    }*/
 
+
+    public LoginPresenterModule(){
+    }
 
     @Provides
     @ScopeType.ActivityScope
     LoginContract.ILoginView provideLoginView(){
-        return mILoginView;
+        return LoginFragment.newInstance() ;
     }
+
 }

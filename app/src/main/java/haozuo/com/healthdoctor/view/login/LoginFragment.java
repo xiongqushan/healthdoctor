@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import javax.inject.Inject;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
@@ -33,7 +35,6 @@ public class LoginFragment extends AbstractView implements ILoginView{
     @Bind(R.id.edit_code)EditText edit_code;
 
     private LoginFragment() {
-        // Required empty public constructor
     }
 
     public static LoginFragment newInstance() {

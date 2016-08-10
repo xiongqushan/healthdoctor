@@ -13,6 +13,8 @@ import haozuo.com.healthdoctor.view.base.BaseActivity;
 import haozuo.com.healthdoctor.presenter.CustomDetailPresenter;
 import haozuo.com.healthdoctor.util.ActivityUtils;
 
+
+
 public class CustomDetailActivity extends BaseActivity {
     @Inject
     CustomDetailPresenter mGroupPresenter;
@@ -21,10 +23,9 @@ public class CustomDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_detail);
-//        setCustomerTitle("客户详情");
 
-        Bundle bundle = getIntent().getExtras();
-        int customerId = bundle.getInt("CustomerId");
+    Bundle bundle = getIntent().getExtras();
+    int customerId = bundle.getInt("CustomerId");
 
         FragmentManager fragmentManager=getSupportFragmentManager();
         CustomDetailFragment fragment=(CustomDetailFragment)fragmentManager.findFragmentById(R.id.frameContent);
@@ -40,3 +41,4 @@ public class CustomDetailActivity extends BaseActivity {
                 .inject(this);
     }
 }
+
