@@ -24,7 +24,7 @@ import retrofit.RxJavaCallAdapterFactory;
  * Created by xiongwei1 on 2016/7/27.
  */
 public abstract class AbstractModel implements IBaseModel {
-    private static final String CURRENT_VERSION= SysConfig.CURRENT_BASE_VERSION;
+    /*private static final String CURRENT_VERSION= SysConfig.CURRENT_BASE_VERSION;
     private static final String API_BASE_URL=SysConfig.BASE_API[0];
     private static final String BASIC_USER_NAME  = SysConfig.BASE_API[1];
     private static final String BASIC_SIGN_SECRET  =SysConfig.BASE_API[2];
@@ -95,11 +95,14 @@ public abstract class AbstractModel implements IBaseModel {
         Retrofit retrofit=createRetrofit();
         return retrofit.create(service);
     }
+    */
 
     @Override
     public void cancelRequest() {
+        /*
         for(Map.Entry<String,OkHttpClient> entry :mClentTagDictionary.entrySet()){
             entry.getValue().cancel(entry.getKey());
         }
+        */
     }
 }

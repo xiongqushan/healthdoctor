@@ -68,22 +68,24 @@ public class AppModule {
 
     @Provides
     @Singleton
-    IUserService provideUserService(){
-        return createRetrofit().create(IUserService.class);
+    IUserService provideUserService(@NonNull Retrofit retrofit){
+        return retrofit.create(IUserService.class);
     }
 
     @Provides
     @Singleton
-    IGroupService provideGroupService(){
-        return createRetrofit().create(IGroupService.class);
+    IGroupService provideGroupService(@NonNull Retrofit retrofit){
+        return retrofit.create(IGroupService.class);
     }
 
     @Provides
     @Singleton
-    IConsultService provideConsultService(){
-        return createRetrofit().create(IConsultService.class);
+    IConsultService provideConsultService(@NonNull Retrofit retrofit){
+        return retrofit.create(IConsultService.class);
     }
 
+    @Provides
+    @Singleton
     OkHttpClient createHttpClient(){
         final String tag=java.util.UUID.randomUUID().toString();
         OkHttpClient httpClient = new OkHttpClient();
@@ -133,8 +135,9 @@ public class AppModule {
         return httpClient;
     }
 
-    Retrofit createRetrofit(){
-        OkHttpClient httpClient=createHttpClient();
+    @Provides
+    @Singleton
+    Retrofit createRetrofit(@NonNull OkHttpClient httpClient){
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(API_BASE_URL)
                 .client(httpClient)

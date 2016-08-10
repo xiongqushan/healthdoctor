@@ -102,8 +102,7 @@ public class UserModel extends AbstractModel {
         Map<String, Object> params = new HashMap<>();
         params.put("Account", account);
         params.put("Password", password);
-        IUserService userService= createService(IUserService.class);
-        userService.LoginValidate(params)
+        mIUserService.LoginValidate(params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<BaseBean<DoctorBean>>() {
@@ -134,8 +133,7 @@ public class UserModel extends AbstractModel {
     }
 
     public void GetUserDetail(int customerId, final OnHandlerResultListener<GlobalShell<CustomDetailBean>> callbackListener){
-        IUserService userService=createService(IUserService.class);
-        userService.GetCusInfo(customerId)
+        mIUserService.GetCusInfo(customerId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<BaseBean<CustomDetailBean>>() {
