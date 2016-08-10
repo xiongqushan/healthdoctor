@@ -16,7 +16,6 @@ import haozuo.com.healthdoctor.contract.GroupContract;
 public class GroupPresenterModule {
     GroupContract.IGroupView mIGroupView;
 
-    @Inject
     public GroupPresenterModule(@NonNull GroupContract.IGroupView iGroupView){
         mIGroupView=iGroupView;
     }

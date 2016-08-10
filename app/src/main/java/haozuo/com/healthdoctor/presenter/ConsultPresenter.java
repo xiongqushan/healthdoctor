@@ -19,8 +19,6 @@ import haozuo.com.healthdoctor.contract.IBaseView;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
 import haozuo.com.healthdoctor.manager.UserManager;
 import haozuo.com.healthdoctor.model.ConsultModel;
-import haozuo.com.healthdoctor.model.UserModel;
-import haozuo.com.healthdoctor.view.custom.CustomDetailFragment;
 import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout;
 
 /**
