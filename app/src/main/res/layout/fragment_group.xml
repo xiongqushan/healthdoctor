@@ -19,10 +19,11 @@
             android:layout_weight="2"
             android:background="#23CA9E"
             android:gravity="center"
+            android:lineSpacingExtra="8dp"
             android:orientation="vertical"
-            android:textSize="@dimen/textsize_h2"
             android:textColor="@color/white"
-            tools:text="高血压组\n服务人数:58"/>
+            android:textSize="@dimen/textsize_h2"
+            tools:text="高血压组\n服务人数:58" />
 
         <TextView
             android:id="@+id/fourthGroupName"
@@ -33,9 +34,9 @@
             android:background="#B1E17F"
             android:gravity="center"
             android:orientation="vertical"
-            android:textSize="@dimen/textsize_h2"
             android:textColor="@color/white"
-            tools:text="高血压组\n服务人数:58"/>
+            android:textSize="@dimen/textsize_h2"
+            tools:text="高血压组\n服务人数:58" />
 
         <TextView
             android:id="@+id/fifthGroupName"
@@ -46,9 +47,9 @@
             android:background="#F6B6A9"
             android:gravity="center"
             android:orientation="vertical"
-            android:textSize="@dimen/textsize_h2"
             android:textColor="@color/white"
-            tools:text="高血压组\n服务人数:58"/>
+            android:textSize="@dimen/textsize_h2"
+            tools:text="高血压组\n服务人数:58" />
 
     </LinearLayout>
 
@@ -74,9 +75,9 @@
             android:background="#61C8F1"
             android:gravity="center"
             android:orientation="vertical"
-            android:textSize="@dimen/textsize_h2"
             android:textColor="@color/white"
-            tools:text="高血压组\n服务人数:58"/>
+            android:textSize="@dimen/textsize_h2"
+            tools:text="高血压组\n服务人数:58" />
 
         <TextView
             android:id="@+id/thirdGroupName"
@@ -87,9 +88,9 @@
             android:background="#FCCC97"
             android:gravity="center"
             android:orientation="vertical"
-            android:textSize="@dimen/textsize_h2"
             android:textColor="@color/white"
-            tools:text="高血压组\n服务人数:58"/>
+            android:textSize="@dimen/textsize_h2"
+            tools:text="高血压组\n服务人数:58" />
 
         <TextView
             android:id="@+id/sixthGroupName"
@@ -100,9 +101,9 @@
             android:background="#59DBD9"
             android:gravity="center"
             android:orientation="vertical"
-            android:textSize="@dimen/textsize_h2"
             android:textColor="@color/white"
-            tools:text="高血压组\n服务人数:58"/>
+            android:textSize="@dimen/textsize_h2"
+            tools:text="高血压组\n服务人数:58" />
 
     </LinearLayout>
 

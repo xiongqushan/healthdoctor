@@ -2,7 +2,9 @@ package haozuo.com.healthdoctor.ioc;
 
 import dagger.Module;
 import dagger.Provides;
+import haozuo.com.healthdoctor.contract.ConsultContract;
 import haozuo.com.healthdoctor.contract.GroupContract;
+import haozuo.com.healthdoctor.view.consult.ConsultFragment;
 import haozuo.com.healthdoctor.view.group.GroupFragment;
 
 /**
@@ -10,8 +12,8 @@ import haozuo.com.healthdoctor.view.group.GroupFragment;
  */
 
 @Module
-public class GroupModule {
-    public GroupModule() {
+public class HomeModule {
+    public HomeModule() {
 
     }
 
@@ -19,5 +21,11 @@ public class GroupModule {
     @Provides
     GroupContract.IGroupView provideGroupView() {
         return GroupFragment.newInstance();
+    }
+
+    @ScopeType.ActivityScope
+    @Provides
+    ConsultContract.IConsultView provideConsultView() {
+        return ConsultFragment.newInstance();
     }
 }

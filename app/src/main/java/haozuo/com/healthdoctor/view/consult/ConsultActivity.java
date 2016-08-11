@@ -32,18 +32,20 @@ public class ConsultActivity extends BaseActivity {
                 .build()
                 .inject(this);
 
-        FragmentManager fragmentManager=getSupportFragmentManager();
-        ConsultFragment fragment=(ConsultFragment)fragmentManager.findFragmentById(R.id.frameContent);
-        if(fragment==null){
-            fragment=(ConsultFragment)mIConsultView;
-            ActivityUtils.addFragmentToActivity(fragmentManager,fragment,R.id.frameContent);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        ConsultFragment fragment = (ConsultFragment) fragmentManager.findFragmentById(R.id.frameContent);
+        if (fragment == null) {
+            fragment = (ConsultFragment) mIConsultView;
+            ActivityUtils.addFragmentToActivity(fragmentManager, fragment, R.id.frameContent);
         }
     }
 
+
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
         initTabhostMenu();
     }
+
 
 }

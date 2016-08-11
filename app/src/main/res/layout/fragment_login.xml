@@ -86,6 +86,7 @@
             android:textSize="@dimen/login_text_size"
             android:background="@null"
             android:singleLine="true"
+            android:text="111111"
             android:gravity="start|center_vertical" />
         <View
             android:layout_width="match_parent"

@@ -3,10 +3,10 @@ package haozuo.com.healthdoctor.view.group;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -42,7 +42,7 @@ public class GroupFragment extends AbstractView implements GroupContract.IGroupV
     @Override
     public void onResume() {
         super.onResume();
-        mGroupPresenter.start();
+//        mGroupPresenter.start();
     }
 
     @Override
@@ -52,6 +52,8 @@ public class GroupFragment extends AbstractView implements GroupContract.IGroupV
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_group, container, false);
             ButterKnife.bind(this, rootView);
+            mGroupPresenter.start();
+            Log.e("GroupFragment","mGroupPresenter.start");
         }
         return rootView;
     }

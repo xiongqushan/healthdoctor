@@ -1,12 +1,7 @@
 package haozuo.com.healthdoctor.ioc;
 
-import android.support.annotation.NonNull;
-
-import javax.inject.Scope;
-
 import dagger.Module;
 import dagger.Provides;
-import haozuo.com.healthdoctor.contract.LoginContract;
 import haozuo.com.healthdoctor.contract.UsefulMessageContract;
 import haozuo.com.healthdoctor.view.consult.UsefulMessageFragment;
 
@@ -17,7 +12,6 @@ import haozuo.com.healthdoctor.view.consult.UsefulMessageFragment;
 @Module
 public class UsefulMessageModule {
     public UsefulMessageModule(){
-
     }
 
     @Provides

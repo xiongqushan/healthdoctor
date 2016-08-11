@@ -1,30 +1,19 @@
 package haozuo.com.healthdoctor.view.base;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
-import android.app.Application;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
-
-import butterknife.Bind;
-import butterknife.OnCheckedChanged;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.framework.HZApplication;
 import haozuo.com.healthdoctor.ioc.AppComponent;
@@ -39,12 +28,12 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTranslucentStatus();
+       // setTranslucentStatus();
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
     @Override
-    public void finish(){
+    public void finish() {
         super.finish();
         overridePendingTransition(R.anim.to_right_in, R.anim.to_right_out);
     }
@@ -63,9 +52,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         tintManager.setStatusBarTintResource(R.color.main_color_blue);//状态栏无背景
     }
 
-    protected void setCustomerTitle(String title){
-        TextView textView=(TextView)findViewById(R.id.txt_TitleBar_title);
-        View btnGoBack = (View)findViewById(R.id.btn_go_back);
+    protected void setCustomerTitle(String title) {
+        TextView textView = (TextView) findViewById(R.id.txt_TitleBar_title);
+        View btnGoBack = (View) findViewById(R.id.btn_go_back);
         textView.setText(title);
         btnGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,48 +65,50 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     }
 
-    protected void hideGoBackBtn(){
-        View btnGoBack = (View)findViewById(R.id.btn_go_back);
+    protected void hideGoBackBtn() {
+        View btnGoBack = (View) findViewById(R.id.btn_go_back);
         btnGoBack.setVisibility(View.GONE);
     }
 
-    protected void initTabhostMenu(){
+    protected void initTabhostMenu() {
         RadioGroup tab_menu = (RadioGroup) findViewById(R.id.tab_menu);
-        switch(getLocalClassName()){
+        switch (getLocalClassName()) {
             case "view.group.GroupActivity":
-                RadioButton btnRbChat = (RadioButton) findViewById(R.id.rbChat);
-                btnRbChat.setChecked(true);
+                RadioButton btnrbGroup = (RadioButton) findViewById(R.id.rbGroup);
+                btnrbGroup.setChecked(true);
                 break;
             case "view.consult.ConsultActivity":
-                RadioButton btnRbAddress = (RadioButton) findViewById(R.id.rbAddress);
-                btnRbAddress.setChecked(true);
+                RadioButton btnrbConsult = (RadioButton) findViewById(R.id.rbConsult);
+                btnrbConsult.setChecked(true);
                 break;
             case "":
-                Toast.makeText(getApplicationContext(),"333",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "333", Toast.LENGTH_SHORT).show();
                 break;
         }
         tab_menu.setOnCheckedChangeListener(new OnNavChangeListener());
     }
 
-    protected AppComponent getAppComponent(){
-        return ((HZApplication)getApplication()).getAppComponent();
+    protected AppComponent getAppComponent() {
+        return ((HZApplication) getApplication()).getAppComponent();
     }
 
-    private class OnNavChangeListener implements RadioGroup.OnCheckedChangeListener{
+    private class OnNavChangeListener implements RadioGroup.OnCheckedChangeListener {
 
         @Override
         public void onCheckedChanged(RadioGroup group, int checkedId) {
-            switch (checkedId){
-                case R.id.rbChat:
-                    startActivity(new Intent(getBaseContext(),GroupActivity.class));
-                    finish();
+            switch (checkedId) {
+                case R.id.rbGroup:
+                    startActivity(new Intent(getBaseContext(), GroupActivity.class));
+                    overridePendingTransition(0, 0);
+//                    finish();
                     break;
-                case R.id.rbAddress:
-                    startActivity(new Intent(getBaseContext(),ConsultActivity.class));
-                    finish();
+                case R.id.rbConsult:
+                    startActivity(new Intent(getBaseContext(), ConsultActivity.class));
+                    overridePendingTransition(0, 0);
+//                    finish();
                     break;
-                case R.id.rbFind:
-                    Toast.makeText(getBaseContext(),"333",Toast.LENGTH_SHORT).show();
+                case R.id.rbMine:
+                    Toast.makeText(getBaseContext(), "333", Toast.LENGTH_SHORT).show();
                     //do sth
                     break;
             }
