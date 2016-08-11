@@ -32,8 +32,8 @@ public class UsefulMessagePresenter extends AbstractPresenter implements UsefulM
     }
 
     @Override
-    public IBaseModel getBaseModel() {
-        return mConsultModel;
+    public IBaseModel[] getBaseModelList() {
+        return new IBaseModel[]{mConsultModel};
     }
 
     @Override

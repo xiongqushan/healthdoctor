@@ -50,10 +50,10 @@ public class ConsultDetailPresenter extends AbstractPresenter implements Consult
     }
 
     @Override
-    public IBaseModel getBaseModel() {
-        return mConsultModel;
-    }
+    public IBaseModel[] getBaseModelList() {
+        return new IBaseModel[]{mConsultModel};
 
+    }
 
     @Override
     public void start() {}

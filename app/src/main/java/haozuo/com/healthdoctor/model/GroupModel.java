@@ -2,6 +2,8 @@ package haozuo.com.healthdoctor.model;
 
 import android.support.annotation.NonNull;
 
+import com.squareup.okhttp.OkHttpClient;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -26,13 +28,14 @@ public class GroupModel extends AbstractModel {
     IUserService mIUserService;
 
     @Inject
-    public GroupModel(@NonNull IGroupService iGroupService,@NonNull IUserService userService){
+    public GroupModel(@NonNull OkHttpClient okHttpClient, @NonNull IGroupService iGroupService, @NonNull IUserService userService){
+        super(okHttpClient);
         mIGroupService=iGroupService;
         mIUserService=userService;
     }
 
     public void GetGroup(int doctorId, final OnHandlerResultListener<GlobalShell<List<DoctorGroupBean>>> callbackListener){
-        mIGroupService.getGroup(doctorId)
+        mIGroupService.getGroup(requestTag(),doctorId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<BaseBean<List<DoctorGroupBean>>>() {
@@ -64,7 +67,7 @@ public class GroupModel extends AbstractModel {
     }
 
     public void GetGroupCustInfoList(int serviceDeptId,int groupId,int doctorId,int pageIndex,int pageSize, final OnHandlerResultListener<GlobalShell<PageBean<GroupCustInfoBean>>> callbackListener){
-        mIUserService.getGroupCustInfoList(serviceDeptId,doctorId,groupId,"",pageIndex,pageSize)
+        mIUserService.getGroupCustInfoList(requestTag(),serviceDeptId,doctorId,groupId,"",pageIndex,pageSize)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<BaseBean<PageBean<GroupCustInfoBean>>>() {
@@ -95,7 +98,7 @@ public class GroupModel extends AbstractModel {
     }
 
     public void DeleteCustomerGroup(int customerId,int groupId,String operateBy, final OnHandlerResultListener<GlobalShell<Boolean>> callbackListener){
-        mIGroupService.DeleteGroup(customerId,groupId,operateBy)
+        mIGroupService.DeleteGroup(requestTag(),customerId,groupId,operateBy)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<BaseBean<Boolean>>() {

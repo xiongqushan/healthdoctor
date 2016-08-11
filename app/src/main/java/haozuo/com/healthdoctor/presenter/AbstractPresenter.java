@@ -1,5 +1,7 @@
 package haozuo.com.healthdoctor.presenter;
 
+import java.util.List;
+
 import haozuo.com.healthdoctor.contract.IBaseModel;
 import haozuo.com.healthdoctor.contract.IBaseView;
 
@@ -10,13 +12,17 @@ public abstract class AbstractPresenter {
 
     public abstract IBaseView getBaseView();
 
-    public abstract IBaseModel getBaseModel();
+    public abstract IBaseModel[] getBaseModelList();
 
-    public void cancelRequest(){
-        IBaseModel iBaseModel= getBaseModel();
-        iBaseModel.cancelRequest();
-
-        IBaseView baseView=getBaseView();
+    public void cancelRequest() {
+        IBaseModel[] iBaseModelList = getBaseModelList();
+        if (iBaseModelList == null) {
+            return;
+        }
+        for (IBaseModel ibaseModel : iBaseModelList) {
+            ibaseModel.cancelRequest();
+        }
+        IBaseView baseView = getBaseView();
         baseView.hideDialog();
     }
 }

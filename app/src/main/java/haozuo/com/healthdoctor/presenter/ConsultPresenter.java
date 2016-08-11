@@ -47,8 +47,8 @@ public class ConsultPresenter extends AbstractPresenter implements ConsultContra
     }
 
     @Override
-    public IBaseModel getBaseModel() {
-        return mConsultModel;
+    public IBaseModel[] getBaseModelList() {
+        return new IBaseModel[]{mConsultModel};
     }
 
     @Override
