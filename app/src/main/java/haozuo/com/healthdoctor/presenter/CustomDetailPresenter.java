@@ -54,7 +54,7 @@ public class CustomDetailPresenter extends AbstractPresenter implements CustomDe
     }
 
     @Override
-    public IBaseModel getBaseModel() {
-        return mUserModel;
+    public IBaseModel[] getBaseModelList() {
+        return new IBaseModel[]{mUserModel};
     }
 }

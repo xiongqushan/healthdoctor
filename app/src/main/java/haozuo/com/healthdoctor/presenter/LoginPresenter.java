@@ -114,7 +114,7 @@ public class LoginPresenter extends AbstractPresenter implements LoginContract.I
     }
 
     @Override
-    public IBaseModel getBaseModel() {
-        return mUserModel;
+    public IBaseModel[] getBaseModelList() {
+        return new IBaseModel[]{mUserModel};
     }
 }

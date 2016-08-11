@@ -37,10 +37,9 @@ public class GroupPresenter extends AbstractPresenter implements IGroupPresenter
     }
 
     @Override
-    public IBaseModel getBaseModel() {
-        return mGroupModel;
+    public IBaseModel[] getBaseModelList() {
+        return new IBaseModel[]{mGroupModel};
     }
-
     @Override
     public void start() {
         int doctorId= UserManager.getInstance().getDoctorInfo().Doctor_ID;

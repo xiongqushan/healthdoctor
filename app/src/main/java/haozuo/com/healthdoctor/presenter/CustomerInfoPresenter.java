@@ -46,8 +46,8 @@ public class CustomerInfoPresenter extends AbstractPresenter implements Customer
     }
 
     @Override
-    public IBaseModel getBaseModel() {
-        return mUserModel;
+    public IBaseModel[] getBaseModelList() {
+        return new IBaseModel[]{mUserModel};
     }
 
     @Override

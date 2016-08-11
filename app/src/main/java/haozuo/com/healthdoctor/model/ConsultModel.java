@@ -2,6 +2,8 @@ package haozuo.com.healthdoctor.model;
 
 import android.support.annotation.NonNull;
 
+import com.squareup.okhttp.OkHttpClient;
+
 import javax.inject.Inject;
 import java.util.List;
 import haozuo.com.healthdoctor.bean.BaseBean;
@@ -21,12 +23,13 @@ import rx.schedulers.Schedulers;
 public class ConsultModel extends AbstractModel {
     IConsultService mIConsultService;
     @Inject
-    public ConsultModel(@NonNull IConsultService iConsultService){
+    public ConsultModel(@NonNull OkHttpClient okHttpClient, @NonNull IConsultService iConsultService){
+        super(okHttpClient);
         mIConsultService=iConsultService;
     }
 
     public void GetGroupCustInfoList(int doctorId,int pageIndex,int pageSize,int flag, final OnHandlerResultListener<GlobalShell<PageBean<ConsultItemBean>>> callbackListener){
-        mIConsultService.getPendingAskData(doctorId,pageIndex,pageSize,flag)
+        mIConsultService.getPendingAskData(requestTag(),doctorId,pageIndex,pageSize,flag)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<BaseBean<PageBean<ConsultItemBean>>>() {
@@ -57,7 +60,7 @@ public class ConsultModel extends AbstractModel {
     }
 
     public void GetConsultReplyList(int customerId,String commitOn, final OnHandlerResultListener<GlobalShell<List<ConsultReplyBean>>> callbackListener){
-        mIConsultService.getConsultReplyData(customerId,commitOn)
+        mIConsultService.getConsultReplyData(requestTag(),customerId,commitOn)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<BaseBean<List<ConsultReplyBean>>>() {

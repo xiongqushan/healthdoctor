@@ -134,4 +134,20 @@ public class StringUtil {
         }
         return sb.toString();
     }
+
+    public static String getUrlParam(String url,String key){
+        if(!url.contains("?")){
+            return null;
+        }
+        String paramString=url.split("[?]")[1];
+        String[] keyValues=paramString.split("&");
+        String param=null;
+        for (String keyValue:keyValues){
+            if(keyValue.contains("=") && keyValue.split("=")[0].toLowerCase().equals(key.toLowerCase())){
+                param=keyValue.split("=")[1];
+                break;
+            }
+        }
+        return param;
+    }
 }
