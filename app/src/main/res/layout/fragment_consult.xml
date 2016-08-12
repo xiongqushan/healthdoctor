@@ -9,8 +9,8 @@
         android:id="@+id/consult_Tab"
         android:layout_height="60dp"
         android:layout_width="match_parent"
-        app:tabIndicatorColor="#00ADF3"
-        app:tabSelectedTextColor="#00ADF3"
+        app:tabIndicatorColor="@color/main_color_blue"
+        app:tabSelectedTextColor="@color/main_color_blue"
         app:tabTextColor="@color/black">
     </android.support.design.widget.TabLayout>
 

@@ -60,21 +60,17 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
     ConsultListAdapter mConsultListAdapter;
     private String mURI;
     private static DoctorBean mDoctorEntity;
+    private ConsultReplyBean mConsultReplmyItem;
 
     public static final String PREFER_NAME = "com.iflytek.setting";
     private static String TAG = ConsultDetailFragment.class.getSimpleName();
-    // 语音听写对象
-    private SpeechRecognizer mIat;
-    // 语音听写UI
-    private RecognizerDialog mIatDialog;
-    // 用HashMap存储听写结果
-    private HashMap<String, String> mIatResults = new LinkedHashMap<String, String>();
+    private SpeechRecognizer mIat;                                                              // 语音听写对象
+    private RecognizerDialog mIatDialog;                                                       // 语音听写UI
+    private HashMap<String, String> mIatResults = new LinkedHashMap<String, String>();        // 用HashMap存储听写结果
+    private String mEngineType = SpeechConstant.TYPE_CLOUD;                                  // 引擎类型
+    int ret = 0;                                                                                // 函数调用返回值
     private Toast mToast;
     private SharedPreferences mSharedPreferences;
-    // 引擎类型
-    private String mEngineType = SpeechConstant.TYPE_CLOUD;
-    int ret = 0; // 函数调用返回值
-
 
     @Bind(R.id.consult_detail_ListView)PullableListView consult_detail_List;
     @Bind(R.id.consult_detail_pull_to_refresh_layout)PullToRefreshLayout consult_detail_pull_to_refresh_layout;
@@ -107,7 +103,7 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
 
     @OnClick(R.id.btn_usually_message)
     public void getUsefulMessage(View v){
-        startActivity(new Intent(mContext, LoginActivity.class));
+        startActivity(new Intent(mContext,UsefulMesasgeActivity.class).putExtra(UsefulMesasgeActivity.LAST_CONSULT_CONTENT,mConsultReplmyItem));
     };
 
     public ConsultDetailFragment(){};
@@ -201,6 +197,7 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
         public void refresh(List<ConsultReplyBean> dataList){
             dataSource.clear();
             dataSource.addAll(dataList);
+            mConsultReplmyItem = dataSource.get(dataSource.size()-1);
             notifyDataSetChanged();
         }
 
@@ -329,9 +326,6 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
             @Bind(R.id.flowLayout_consult_photo)
             FlowLayout flowLayout_consult_photo;
 
-            @OnClick(R.id.flowLayout_consult_photo)
-            public void test(View v){};
-
             public ViewHolderLeft(View convertView) {
                 ButterKnife.bind(this, convertView);
             }
@@ -423,9 +417,7 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
 
     private void printResult(RecognizerResult results) {
         String text = JsonParser.parseIatResult(results.getResultString());
-
-        String sn = null;
-        // 读取json结果中的sn字段
+        String sn = null;       // 读取json结果中的sn字段
         try {
             JSONObject resultJson = new JSONObject(results.getResultString());
             sn = resultJson.optString("sn");
@@ -460,7 +452,6 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
         }
 
     };
-
 
     private void showTip(final String str) {
         mToast.setText(str);

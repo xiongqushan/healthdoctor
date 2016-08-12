@@ -22,7 +22,6 @@ public class GroupCustomListActivity extends BaseActivity {
     @Inject
     GroupCustomListContract.IGroupCustomListView mIGroupCustomListView;
 
-
     public static String EXTRA_GROUP_ID="GROUP_ID";
     int groupId;
     String groupName;

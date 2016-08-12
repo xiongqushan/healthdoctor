@@ -25,9 +25,8 @@ public class ConsultActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consult);
-//        setCustomerTitle("咨询");
-//        hideGoBackBtn();
-        showConsulTab();
+        setCustomerTitle("咨询");
+        hideGoBackBtn();
 
         DaggerConsultComponent.builder()
                 .appComponent(getAppComponent())

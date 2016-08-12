@@ -1,5 +1,6 @@
 package haozuo.com.healthdoctor.bean;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,7 +10,7 @@ import java.util.Date;
 /**
  * Created by hzguest3 on 2016/8/4.
  */
-public class ConsultReplyBean implements Comparator<ConsultReplyBean> {
+public class ConsultReplyBean implements Comparator<ConsultReplyBean>,Serializable{
 
     public int Id;
     public int CustomerId;

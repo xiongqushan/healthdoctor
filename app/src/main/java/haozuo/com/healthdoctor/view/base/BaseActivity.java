@@ -76,17 +76,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected void hideGoBackBtn(){
-        ImageView btnGoBack = (ImageView) findViewById(R.id.btn_go_back);
-        btnGoBack.setVisibility(View.GONE);
-    }
-
-    protected void showConsulTab(){
-        ImageView btnGoBack = (ImageView) findViewById(R.id.btn_go_back);
-        TextView textView = (TextView) findViewById(R.id.txt_TitleBar_title);
-//        RadioGroup consult_tab_menu = (RadioGroup) findViewById(R.id.consult_tab_menu);
-        btnGoBack.setVisibility(View.GONE);
-        textView.setVisibility(View.GONE);
-//        consult_tab_menu.setVisibility(View.VISIBLE);
+        findViewById(R.id.btn_go_back).setVisibility(View.GONE);
     }
 
     protected void initTabhostMenu(){
