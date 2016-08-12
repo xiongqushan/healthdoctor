@@ -3,9 +3,11 @@ package haozuo.com.healthdoctor.framework;
 import android.app.Application;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.iflytek.cloud.SpeechUtility;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
+import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.ioc.AppComponent;
 import haozuo.com.healthdoctor.ioc.AppModule;
 import haozuo.com.healthdoctor.ioc.DaggerAppComponent;
@@ -32,6 +34,10 @@ public class HZApplication extends Application {
         applictaion = this;
         Fresco.initialize(this);
         mRefWatcher = LeakCanary.install(this);
+
+        SpeechUtility.createUtility(this, "appid=" + getString(R.string.app_id));
+        // 以下语句用于设置日志开关（默认开启），设置成false时关闭语音云SDK日志打印
+        // Setting.setShowLog(false);
     }
 
     public RefWatcher getRefWatcher(){

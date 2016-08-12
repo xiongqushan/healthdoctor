@@ -22,44 +22,4 @@
         android:gravity="center"
        android:layout_centerInParent="true"/>
 
-    <!--<RadioGroup-->
-        <!--android:id="@+id/consult_tab_menu"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:orientation="horizontal"-->
-        <!--android:layout_marginTop="5dp"-->
-        <!--android:layout_marginBottom="5dp"-->
-        <!--android:layout_marginLeft="20dp"-->
-        <!--android:layout_marginRight="20dp"-->
-        <!--android:background="@drawable/consult_radiogroup_shape"-->
-        <!--android:visibility="gone">-->
-        <!--<RadioButton-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_weight="1"-->
-            <!--android:button="@null"-->
-            <!--android:background="@drawable/tab_selector_bg"-->
-            <!--android:textColor="@color/black"-->
-            <!--android:gravity="center"-->
-            <!--android:checked="true"-->
-            <!--android:text="待处理"/>-->
-        <!--<RadioButton-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_weight="1"-->
-            <!--android:button="@null"-->
-            <!--android:background="@drawable/tab_selector_bg"-->
-            <!--android:textColor="@color/black"-->
-            <!--android:gravity="center"-->
-            <!--android:text="已处理"/>-->
-        <!--<RadioButton-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_weight="1"-->
-            <!--android:button="@null"-->
-            <!--android:background="@drawable/tab_selector_bg"-->
-            <!--android:textColor="@color/black"-->
-            <!--android:gravity="center"-->
-            <!--android:text="问题反馈"/>-->
-    <!--</RadioGroup>-->
 </RelativeLayout>
