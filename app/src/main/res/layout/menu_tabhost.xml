@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="48dp">
+    android:layout_height="48dp"
+    android:orientation="vertical">
 
     <!--<ImageButton android:id="@+id/btn_menu_consult"-->
     <!--android:layout_width="wrap_content"-->
@@ -14,46 +14,47 @@
     <!--android:layout_height="wrap_content"-->
     <!--android:background="@drawable/tabhost_my_btn"/>-->
 
-    <!--<View-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="1dp"-->
-        <!--android:background="@color/lightgray"/>-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#88888888" />
 
     <RadioGroup
         android:id="@+id/tab_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/rbChat"
+            android:id="@+id/rbGroup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:button="@null"
+            android:checked="false"
+            android:drawableTop="@drawable/tabhost_home_btn"
+            android:gravity="center_horizontal|bottom"
+            android:paddingTop="4dp"
+            android:text="首页"
+            android:textColor="@drawable/tab_selector_tv_color" />
+
+        <RadioButton
+            android:id="@+id/rbConsult"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_weight="1"
             android:button="@null"
             android:checked="true"
-            android:drawableTop="@drawable/tabhost_home_btn"
-            android:gravity="center_horizontal|bottom"
-            android:paddingTop="4dp"
-            android:textColor="@drawable/tab_selector_tv_color"
-            android:text="首页" />
-
-        <RadioButton
-            android:id="@+id/rbAddress"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_weight="1"
-            android:button="@null"
             android:drawableTop="@drawable/tabhost_consult_btn"
             android:gravity="center_horizontal|bottom"
             android:paddingTop="4dp"
-            android:textColor="@drawable/tab_selector_tv_color"
-            android:text="咨询" />
+            android:text="咨询"
+            android:textColor="@drawable/tab_selector_tv_color" />
 
         <RadioButton
-            android:id="@+id/rbFind"
+            android:id="@+id/rbMine"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -62,8 +63,8 @@
             android:drawableTop="@drawable/tabhost_my_btn"
             android:gravity="center_horizontal|bottom"
             android:paddingTop="4dp"
-            android:textColor="@drawable/tab_selector_tv_color"
-            android:text="我的" />
+            android:text="我的"
+            android:textColor="@drawable/tab_selector_tv_color" />
     </RadioGroup>
 
 </LinearLayout>

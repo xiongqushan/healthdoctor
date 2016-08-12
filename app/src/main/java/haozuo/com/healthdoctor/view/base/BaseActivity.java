@@ -1,36 +1,19 @@
 package haozuo.com.healthdoctor.view.base;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
-import android.app.Application;
-import android.content.Context;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
-
-import butterknife.Bind;
-import butterknife.OnCheckedChanged;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.framework.HZApplication;
 import haozuo.com.healthdoctor.ioc.AppComponent;
 import haozuo.com.healthdoctor.util.SystemBarTintUtil;
-import haozuo.com.healthdoctor.view.consult.ConsultActivity;
-import haozuo.com.healthdoctor.view.group.GroupActivity;
 
 /**
  * Created by xiongwei1 on 2016/7/8.
@@ -44,7 +27,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     @Override
-    public void finish(){
+    public void finish() {
         super.finish();
         overridePendingTransition(R.anim.to_right_in, R.anim.to_right_out);
     }
@@ -63,11 +46,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         tintManager.setStatusBarTintResource(R.color.main_color_blue);//状态栏无背景
     }
 
-    protected void setCustomerTitle(String title){
+    protected void setCustomerTitle(String title) {
         TextView textView = (TextView) findViewById(R.id.txt_TitleBar_title);
-        ImageView btnGoBack = (ImageView) findViewById(R.id.btn_go_back);
         textView.setText(title);
-        btnGoBack.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_go_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -75,51 +57,14 @@ public abstract class BaseActivity extends AppCompatActivity {
         });
     }
 
-    protected void hideGoBackBtn(){
+    protected void hideGoBackBtn() {
         findViewById(R.id.btn_go_back).setVisibility(View.GONE);
     }
 
-    protected void initTabhostMenu(){
-        RadioGroup tab_menu = (RadioGroup) findViewById(R.id.tab_menu);
-        switch(getLocalClassName()){
-            case "view.group.GroupActivity":
-                RadioButton btnRbChat = (RadioButton) findViewById(R.id.rbChat);
-                btnRbChat.setChecked(true);
-                break;
-            case "view.consult.ConsultActivity":
-                RadioButton btnRbAddress = (RadioButton) findViewById(R.id.rbAddress);
-                btnRbAddress.setChecked(true);
-                break;
-            case "":
-                Toast.makeText(getApplicationContext(),"333",Toast.LENGTH_SHORT).show();
-                break;
-        }
-        tab_menu.setOnCheckedChangeListener(new OnNavChangeListener());
+
+    protected AppComponent getAppComponent() {
+        return ((HZApplication) getApplication()).getAppComponent();
     }
 
-    protected AppComponent getAppComponent(){
-        return ((HZApplication)getApplication()).getAppComponent();
-    }
-
-    private class OnNavChangeListener implements RadioGroup.OnCheckedChangeListener{
-
-        @Override
-        public void onCheckedChanged(RadioGroup group, int checkedId) {
-            switch (checkedId){
-                case R.id.rbChat:
-                    startActivity(new Intent(getBaseContext(),GroupActivity.class));
-                    finish();
-                    break;
-                case R.id.rbAddress:
-                    startActivity(new Intent(getBaseContext(),ConsultActivity.class));
-                    finish();
-                    break;
-                case R.id.rbFind:
-                    Toast.makeText(getBaseContext(),"333",Toast.LENGTH_SHORT).show();
-                    //do sth
-                    break;
-            }
-        }
-    }
 
 }

@@ -11,47 +11,73 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:orientation="horizontal">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"/>
+
         <RadioButton
             android:id="@+id/btn_consult_All"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textColor="@color/silver"
             android:background="@null"
             android:button="@null"
-            android:drawableLeft="@drawable/consult_group_btn"
-            android:paddingRight="@dimen/consult_panding_list_radiobutton_padding"
-            android:paddingLeft="@dimen/consult_panding_list_radiobutton_padding"
             android:checked="true"
-            android:text="全部" />
+            android:drawableLeft="@drawable/consult_group_btn"
+            android:gravity="center"
+            android:paddingLeft="@dimen/consult_panding_list_radiobutton_padding"
+            android:paddingRight="@dimen/consult_panding_list_radiobutton_padding"
+            android:text="全部"
+            android:textColor="@color/silver" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"/>
+
+
         <RadioButton
             android:id="@+id/btn_consult_Submit"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textColor="@color/silver"
             android:background="@null"
             android:button="@null"
             android:drawableLeft="@drawable/consult_group_btn"
-            android:paddingRight="@dimen/consult_panding_list_radiobutton_padding"
+            android:gravity="center"
             android:paddingLeft="@dimen/consult_panding_list_radiobutton_padding"
-            android:text="转入" />
+            android:paddingRight="@dimen/consult_panding_list_radiobutton_padding"
+            android:text="转入"
+            android:textColor="@color/silver" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"/>
+
 
         <RadioButton
             android:id="@+id/btn_consult_Mine"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textColor="@color/silver"
             android:background="@null"
             android:button="@null"
             android:drawableLeft="@drawable/consult_group_btn"
-            android:paddingRight="@dimen/consult_panding_list_radiobutton_padding"
+            android:gravity="center"
             android:paddingLeft="@dimen/consult_panding_list_radiobutton_padding"
-            android:text="我的" />
+            android:paddingRight="@dimen/consult_panding_list_radiobutton_padding"
+            android:text="我的"
+            android:textColor="@color/silver" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"/>
+
     </RadioGroup>
 
 
@@ -59,7 +85,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/lightgrey"
-        android:visibility="visible"/>
+        android:visibility="visible" />
 
     <haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout
         android:id="@+id/consult_pull_to_refresh_layout"
@@ -74,6 +100,7 @@
             android:layout_height="match_parent"
             android:divider="@null"
             android:scrollbars="none" />
+
         <include layout="@layout/load_more" />
     </haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout>
 

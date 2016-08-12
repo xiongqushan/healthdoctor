@@ -19,15 +19,17 @@ import haozuo.com.healthdoctor.ioc.DaggerAppComponent;
 public class HZApplication extends Application {
     private AppComponent mAppComponent;
     private static HZApplication applictaion;
+
     public static HZApplication shareApplication() {
         return applictaion;
     }
 
     private RefWatcher mRefWatcher;
+
     @Override
     public void onCreate() {
         super.onCreate();
-        mAppComponent= DaggerAppComponent.builder()
+        mAppComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(this))
                 .build();
 
@@ -40,11 +42,11 @@ public class HZApplication extends Application {
         // Setting.setShowLog(false);
     }
 
-    public RefWatcher getRefWatcher(){
+    public RefWatcher getRefWatcher() {
         return mRefWatcher;
     }
 
-    public AppComponent getAppComponent(){
+    public AppComponent getAppComponent() {
         return mAppComponent;
     }
 }

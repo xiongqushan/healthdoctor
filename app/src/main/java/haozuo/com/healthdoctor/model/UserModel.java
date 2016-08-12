@@ -2,6 +2,8 @@ package haozuo.com.healthdoctor.model;
 
 import android.support.annotation.NonNull;
 
+import com.squareup.okhttp.OkHttpClient;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,12 +31,13 @@ public class UserModel extends AbstractModel {
     IUserService mIUserService;
 
     @Inject
-    public UserModel(IUserService iUserService){
+    public UserModel(@NonNull OkHttpClient okHttpClient, IUserService iUserService){
+        super(okHttpClient);
         mIUserService=iUserService;
     }
 
     public void GetSMSCode(String mobile, final OnHandlerResultListener<GlobalShell<Boolean>> callbackListener){
-        mIUserService.getSMSCode(mobile)
+        mIUserService.getSMSCode(requestTag(),mobile)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<BaseBean<Boolean>>() {
@@ -68,7 +71,7 @@ public class UserModel extends AbstractModel {
         Map<String, Object> params = new HashMap<>();
         params.put("Mobile", mobile);
         params.put("SmsCode", smsCode);
-        mIUserService.login(params)
+        mIUserService.login(requestTag(),params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<BaseBean<DoctorBean>>() {
@@ -102,7 +105,7 @@ public class UserModel extends AbstractModel {
         Map<String, Object> params = new HashMap<>();
         params.put("Account", account);
         params.put("Password", password);
-        mIUserService.LoginValidate(params)
+        mIUserService.LoginValidate(requestTag(),params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<BaseBean<DoctorBean>>() {
@@ -133,7 +136,7 @@ public class UserModel extends AbstractModel {
     }
 
     public void GetUserDetail(int customerId, final OnHandlerResultListener<GlobalShell<CustomDetailBean>> callbackListener){
-        mIUserService.GetCusInfo(customerId)
+        mIUserService.GetCusInfo(requestTag(),customerId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<BaseBean<CustomDetailBean>>() {

@@ -16,8 +16,8 @@ import rx.Observable;
  */
 public interface IConsultService {
     @GET(SysConfig.CONTROLLER_PRE_API_CONSULT + "GetPendingAskData")
-    Observable<BaseBean<PageBean<ConsultItemBean>>> getPendingAskData(@Query("doctorId") int doctorId, @Query("pageIndex") int pageIndex, @Query("pageSize") int pageSize, @Query("flag") int flag);
+    Observable<BaseBean<PageBean<ConsultItemBean>>> getPendingAskData(@Query("tag") String tag,@Query("doctorId") int doctorId, @Query("pageIndex") int pageIndex, @Query("pageSize") int pageSize, @Query("flag") int flag);
 
     @GET(SysConfig.CONTROLLER_PRE_API_CONSULT + "GetAskReplyData")
-    Observable<BaseBean<List<ConsultReplyBean>>> getConsultReplyData(@Query("customerId") int customerId, @Query("commitOn") String commitOn);
+    Observable<BaseBean<List<ConsultReplyBean>>> getConsultReplyData(@Query("tag") String tag,@Query("customerId") int customerId, @Query("commitOn") String commitOn);
 }

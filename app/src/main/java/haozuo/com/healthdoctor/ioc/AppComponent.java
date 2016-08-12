@@ -2,6 +2,8 @@ package haozuo.com.healthdoctor.ioc;
 
 import android.content.Context;
 
+import com.squareup.okhttp.OkHttpClient;
+
 import javax.inject.Singleton;
 
 import dagger.Component;
@@ -26,4 +28,6 @@ public interface AppComponent {
     IGroupService getGroupService();
 
     IConsultService getConsultService();
+
+    OkHttpClient getOkHttpClient();
 }

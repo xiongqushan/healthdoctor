@@ -26,10 +26,6 @@
             android:name=".view.login.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.group.GroupActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity
             android:name=".view.custom.GroupCustomListActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <!--
@@ -47,15 +43,19 @@
             android:name=".view.custom.CustomerInfoActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.consult.ConsultActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".view.consult.ConsultDetailActivity"
+
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
+
         <activity
             android:name=".view.consult.UsefulMesasgeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".view.home.HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
     </application>
 
     <uses-permission android:name="android.permission.RECORD_AUDIO" />

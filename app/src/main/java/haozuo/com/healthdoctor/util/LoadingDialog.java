@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import haozuo.com.healthdoctor.R;
-import haozuo.com.healthdoctor.util.UIHelper;
 
 /**
  * Created by xiongwei on 16/5/17.

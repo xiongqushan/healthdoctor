@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -24,14 +23,20 @@ public class GroupFragment extends AbstractView implements GroupContract.IGroupV
     View rootView;
     GroupContract.IGroupPresenter mGroupPresenter;
 
-    @Bind(R.id.firstGroupName)TextView firstGroupName;
-    @Bind(R.id.secondGroupName)TextView secondGroupName;
-    @Bind(R.id.thirdGroupName)TextView thirdGroupName;
-    @Bind(R.id.fourthGroupName)TextView fourthGroupName;
-    @Bind(R.id.fifthGroupName)TextView fifthGroupName;
-    @Bind(R.id.sixthGroupName)TextView sixthGroupName;
+    @Bind(R.id.firstGroupName)
+    TextView firstGroupName;
+    @Bind(R.id.secondGroupName)
+    TextView secondGroupName;
+    @Bind(R.id.thirdGroupName)
+    TextView thirdGroupName;
+    @Bind(R.id.fourthGroupName)
+    TextView fourthGroupName;
+    @Bind(R.id.fifthGroupName)
+    TextView fifthGroupName;
+    @Bind(R.id.sixthGroupName)
+    TextView sixthGroupName;
 
-    public GroupFragment(){
+    public GroupFragment() {
     }
 
     public static GroupFragment newInstance() {
@@ -52,6 +57,7 @@ public class GroupFragment extends AbstractView implements GroupContract.IGroupV
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_group, container, false);
             ButterKnife.bind(this, rootView);
+//            mGroupPresenter.start();
         }
         return rootView;
     }
@@ -69,7 +75,7 @@ public class GroupFragment extends AbstractView implements GroupContract.IGroupV
 
     @Override
     public void setGroupInfo(final List<DoctorGroupBean> doctorGroupBeanList) {
-        TextView[] GroupNameArray = {firstGroupName,secondGroupName,thirdGroupName,fourthGroupName,fifthGroupName,sixthGroupName};
+        TextView[] GroupNameArray = {firstGroupName, secondGroupName, thirdGroupName, fourthGroupName, fifthGroupName, sixthGroupName};
 
         for (int i = 0; i < doctorGroupBeanList.size(); i++) {
             String doctorNum = "服务人数: " + doctorGroupBeanList.get(i).doctorNum;
@@ -80,8 +86,8 @@ public class GroupFragment extends AbstractView implements GroupContract.IGroupV
             GroupNameArray[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent=new Intent(mContext, GroupCustomListActivity.class);
-                    intent.putExtra(GroupCustomListActivity.EXTRA_GROUP_ID,doctorGroupBeanList.get(finalI));
+                    Intent intent = new Intent(mContext, GroupCustomListActivity.class);
+                    intent.putExtra(GroupCustomListActivity.EXTRA_GROUP_ID, doctorGroupBeanList.get(finalI));
                     mContext.startActivity(intent);
                 }
             });

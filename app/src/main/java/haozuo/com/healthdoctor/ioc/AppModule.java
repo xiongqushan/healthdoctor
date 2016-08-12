@@ -46,7 +46,6 @@ public class AppModule {
     private static final String API_BASE_URL=SysConfig.BASE_API[0];
     private static final String BASIC_USER_NAME  = SysConfig.BASE_API[1];
     private static final String BASIC_SIGN_SECRET  =SysConfig.BASE_API[2];
-    private Map<String,OkHttpClient> mClentTagDictionary=new HashMap<>();
 
     private HZApplication mHZApplication;
 
@@ -87,14 +86,13 @@ public class AppModule {
     @Provides
     @Singleton
     OkHttpClient createHttpClient(){
-        final String tag=java.util.UUID.randomUUID().toString();
         OkHttpClient httpClient = new OkHttpClient();
-        mClentTagDictionary.put(tag,httpClient);
         httpClient.interceptors().add(new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request request = chain.request();
                 String originUrl=request.urlString();
+                String tag=StringUtil.getUrlParam(originUrl,"tag");
                 long timespan=System.currentTimeMillis()/1000L;
                 if(originUrl.contains("?")){
                     originUrl+="&timespan="+timespan;

@@ -46,10 +46,9 @@ public class GroupCustomListPresenter extends AbstractPresenter implements Group
     }
 
     @Override
-    public IBaseModel getBaseModel() {
-        return mGroupModel;
+    public IBaseModel[] getBaseModelList() {
+        return new IBaseModel[]{mGroupModel};
     }
-
     @Override
     public void start() {
         refreshCustomList();
