@@ -20,7 +20,6 @@ import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.ConsultItemBean;
 import haozuo.com.healthdoctor.contract.ConsultContract;
 import haozuo.com.healthdoctor.view.base.AbstractView;
-import haozuo.com.healthdoctor.view.threePart.common.PageFragment;
 
 /**
  * Created by hzguest3 on 2016/8/1.
@@ -33,7 +32,7 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
     @Bind(R.id.consult_Tab)
     TabLayout tabLayout;
     @Bind(R.id.consult_Vp)
-    ViewPager viewPager;
+    ViewPager mViewPager;
 
     public ConsultFragment() {
     }
@@ -77,14 +76,14 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
                 fragment.new SimpleFragmentPagerAdapter(getChildFragmentManager());
 //        ConsultFragment.SimpleFragmentPagerAdapter pagerAdapter =
 //                fragment.new SimpleFragmentPagerAdapter(getActivity().getSupportFragmentManager());
-        viewPager.setAdapter(pagerAdapter);
-        tabLayout.setupWithViewPager(viewPager);
+        mViewPager.setAdapter(pagerAdapter);
+        tabLayout.setupWithViewPager(mViewPager);
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
     }
 
     public class SimpleFragmentPagerAdapter extends FragmentPagerAdapter {
-        private String tabTitles[] = new String[]{"待处理", "已处理", "问题反馈"};
+        private String tabTitles[] = new String[]{"全部", "转入", "我的"};
         private List<Fragment> fragList = new ArrayList<Fragment>() {
         };
 
@@ -96,11 +95,11 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
         public Fragment getItem(int position) {
             switch (position) {
                 case 1:
-                    return PageFragment.newInstance(2);
+                    return  ConsultPandingFragment.newInstance(2);
                 case 2:
-                    return PageFragment.newInstance(3);
+                    return  ConsultPandingFragment.newInstance(1);
                 default:
-                    return ConsultPandingFragment.newInstance();
+                    return ConsultPandingFragment.newInstance(3);
             }
         }
 

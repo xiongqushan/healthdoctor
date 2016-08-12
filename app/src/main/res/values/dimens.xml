@@ -39,4 +39,8 @@
     <dimen name="consult_flowlayout_paddingtop">10dp</dimen>
 
 
+    <dimen name="dividerline">1dp</dimen>
+    <dimen name="tablayout_txtsize">16sp</dimen>
+
+
 </resources>

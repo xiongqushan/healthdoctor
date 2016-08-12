@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -28,31 +27,48 @@ import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout;
 
 
 public class ConsultPandingFragment extends Fragment {
+    public static final String ARG_PAGE = "ARG_PAGE_CONSULTPANDINGFRAGMENT";
     Context mContext;
     View rootView;
     ConsultFragment mConsultFragment;
     ConsultContract.IConsultPresenter mConsultPresenter;
     ConsultListAdapter mConsultListAdapter;
-    RadioGroup.OnCheckedChangeListener mOnCheckedChangeListener;
+    //    RadioGroup.OnCheckedChangeListener mOnCheckedChangeListener;
     View.OnClickListener mOnClicklistener;
 
-    private int mFlag;
+    private int mFlag = 3;
 
     @Bind(R.id.consult_pull_to_refresh_layout)
     PullToRefreshLayout consult_pull_to_refresh_layout;
     @Bind(R.id.consult_detail_List)
     ListView consult_detail_List;
-    @Bind(R.id.consult_Tab)
-    RadioGroup consult_Tab;
+//    @Bind(R.id.consult_Tab)
+//    RadioGroup consult_Tab;
 
     public ConsultPandingFragment() {
     }
 
-    ;
+//    public ConsultPandingFragment(int tab) {
+//        this.mFlag = tab;
+//    }
 
     public static ConsultPandingFragment newInstance() {
         ConsultPandingFragment fragment = new ConsultPandingFragment();
         return fragment;
+    }
+
+    public static ConsultPandingFragment newInstance(int flag) {
+        Bundle args = new Bundle();
+        args.putInt(ARG_PAGE, flag);
+        ConsultPandingFragment fragment = new ConsultPandingFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mFlag = getArguments().getInt(ARG_PAGE, 3);
     }
 
     @Override
@@ -61,7 +77,7 @@ public class ConsultPandingFragment extends Fragment {
         if (rootView == null) {
             mContext = getContext();
             mConsultFragment = (ConsultFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.content_consult);
-            mFlag = 3;
+//            mFlag = 3;
             mOnClicklistener = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -94,28 +110,28 @@ public class ConsultPandingFragment extends Fragment {
 
             mConsultListAdapter = new ConsultListAdapter(mContext, mOnClicklistener);
 
-            mOnCheckedChangeListener = new RadioGroup.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(RadioGroup group, int checkedId) {
-                    switch (checkedId) {
-                        case R.id.btn_consult_All:
-                            mFlag = 3;
-                            mConsultFragment.ConsultPresenter.refreshCustomList(mFlag);//全部
-                            break;
-                        case R.id.btn_consult_Submit:
-                            mFlag = 2;
-                            mConsultFragment.ConsultPresenter.refreshCustomList(mFlag);//转入
-                            break;
-                        case R.id.btn_consult_Mine:
-                            mFlag = 1;
-                            mConsultFragment.ConsultPresenter.refreshCustomList(mFlag);//我的
-                            break;
-                    }
-                }
-            };
+//            mOnCheckedChangeListener = new RadioGroup.OnCheckedChangeListener() {
+//                @Override
+//                public void onCheckedChanged(RadioGroup group, int checkedId) {
+//                    switch (checkedId) {
+//                        case R.id.btn_consult_All:
+//                            mFlag = 3;
+//                            mConsultFragment.ConsultPresenter.refreshCustomList(mFlag);//全部
+//                            break;
+//                        case R.id.btn_consult_Submit:
+//                            mFlag = 2;
+//                            mConsultFragment.ConsultPresenter.refreshCustomList(mFlag);//转入
+//                            break;
+//                        case R.id.btn_consult_Mine:
+//                            mFlag = 1;
+//                            mConsultFragment.ConsultPresenter.refreshCustomList(mFlag);//我的
+//                            break;
+//                    }
+//                }
+//            };
 
             consult_detail_List.setAdapter(mConsultListAdapter);
-            consult_Tab.setOnCheckedChangeListener(mOnCheckedChangeListener);
+//            consult_Tab.setOnCheckedChangeListener(mOnCheckedChangeListener);
             consult_pull_to_refresh_layout.setOnRefreshListener(new PullListener());
         }
         return rootView;

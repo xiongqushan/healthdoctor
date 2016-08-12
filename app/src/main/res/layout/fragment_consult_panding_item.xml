@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="70dp"
-    android:descendantFocusability="blocksDescendants"
-    xmlns:fresco="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:descendantFocusability="blocksDescendants">
     <!--descendantFocusability 屏蔽子控件抢夺ListView的焦点-->
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/drawee_consult_Cphoto"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginTop="15dp"
         android:layout_marginLeft="12dp"
+        android:layout_marginTop="15dp"
         fresco:roundAsCircle="true" />
 
     <TextView
         android:id="@+id/txt_consult_Cname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="张三"
         android:layout_alignTop="@+id/drawee_consult_Cphoto"
-        android:layout_toRightOf="@+id/drawee_consult_Cphoto"
+        android:layout_marginLeft="10dp"
         android:layout_toEndOf="@+id/drawee_consult_Cphoto"
-        android:layout_marginLeft="10dp"/>
+        android:layout_toRightOf="@+id/drawee_consult_Cphoto"
+        tools:text="张三" />
 
     <TextView
         android:id="@+id/txt_consult_LastConsult"
@@ -32,7 +32,8 @@
         android:layout_alignBottom="@id/txt_consult_Cname"
         android:layout_alignParentRight="true"
         android:layout_marginRight="12dp"
-        tools:text="2016-04-11 14:31"/>
+        tools:text="2016-04-11 14:31" />
+
 
     <TextView
         android:id="@+id/txt_consult_ConsultContent"
@@ -42,16 +43,16 @@
         android:layout_alignRight="@id/txt_consult_LastConsult"
         android:layout_below="@id/txt_consult_Cname"
         android:layout_marginTop="12dp"
-        android:singleLine="true"
         android:ellipsize="marquee"
-        tools:text="张三这位客户咨询健管师的最后一个问题11111111111111111111111111111"/>
+        android:singleLine="true"
+        tools:text="张三这位客户咨询健管师的最后一个问题11111111111111111111111111111" />
 
     <View
         android:layout_width="0dp"
         android:layout_height="1dp"
-        android:background="@color/lightgrey"
         android:layout_alignLeft="@id/txt_consult_ConsultContent"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"/>
+        android:background="@color/lightgrey" />
 
 </RelativeLayout>
