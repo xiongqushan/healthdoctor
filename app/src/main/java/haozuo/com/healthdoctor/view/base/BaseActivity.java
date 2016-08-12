@@ -64,8 +64,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected void setCustomerTitle(String title){
-        TextView textView=(TextView)findViewById(R.id.txt_TitleBar_title);
-        View btnGoBack = (View)findViewById(R.id.btn_go_back);
+        TextView textView = (TextView) findViewById(R.id.txt_TitleBar_title);
+        ImageView btnGoBack = (ImageView) findViewById(R.id.btn_go_back);
         textView.setText(title);
         btnGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,12 +73,20 @@ public abstract class BaseActivity extends AppCompatActivity {
                 finish();
             }
         });
-
     }
 
     protected void hideGoBackBtn(){
-        View btnGoBack = (View)findViewById(R.id.btn_go_back);
+        ImageView btnGoBack = (ImageView) findViewById(R.id.btn_go_back);
         btnGoBack.setVisibility(View.GONE);
+    }
+
+    protected void showConsulTab(){
+        ImageView btnGoBack = (ImageView) findViewById(R.id.btn_go_back);
+        TextView textView = (TextView) findViewById(R.id.txt_TitleBar_title);
+//        RadioGroup consult_tab_menu = (RadioGroup) findViewById(R.id.consult_tab_menu);
+        btnGoBack.setVisibility(View.GONE);
+        textView.setVisibility(View.GONE);
+//        consult_tab_menu.setVisibility(View.VISIBLE);
     }
 
     protected void initTabhostMenu(){

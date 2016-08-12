@@ -17,7 +17,8 @@
 
     <dimen name="actionbar_high">38dp</dimen>
 
-    <dimen name="consult_panding_list_radiobutton_padding">40dp</dimen>
+    <dimen name="consult_inputtab_height">60dp</dimen>
+    <dimen name="consult_panding_list_radiobutton_padding">20dp</dimen>
 
     <dimen name="consult_tab_height">48dp</dimen>
     <dimen name="consult_customer_usuallymessage_height">25dp</dimen>
