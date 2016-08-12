@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import javax.inject.Inject;
@@ -28,8 +27,6 @@ import haozuo.com.healthdoctor.view.consult.ConsultFragment;
 import haozuo.com.healthdoctor.view.group.GroupFragment;
 
 public class HomeActivity extends BaseActivity {
-    @Bind(R.id.txt_TitleBar_title)
-    TextView tvTitleBar;
     @Bind(R.id.tab_menu)
     RadioGroup rgTabhost;
     @Bind(R.id.rbGroup)
@@ -70,10 +67,10 @@ public class HomeActivity extends BaseActivity {
 
 
         fragmentManager = getSupportFragmentManager();
-        GroupFragment consultFragment = (GroupFragment) fragmentManager.findFragmentById(R.id.content_consult);
+        ConsultFragment consultFragment = (ConsultFragment) fragmentManager.findFragmentById(R.id.content_consult);
         if (consultFragment == null) {
 //            consultFragment = new ConsultFragment();
-            consultFragment = (GroupFragment) mIGroupView;
+            consultFragment = (ConsultFragment) mIConsultView;
             ActivityUtils.addFragmentToActivity(fragmentManager, consultFragment, R.id.content_consult);
         }
 
@@ -85,18 +82,15 @@ public class HomeActivity extends BaseActivity {
                 layoutMine.setVisibility(View.GONE);
                 if (id == R.id.rbGroup) {
                     layoutGroup.setVisibility(View.VISIBLE);
-                    ConsultFragment groupFragment = (ConsultFragment) fragmentManager.findFragmentById(R.id.content_group);
+                    GroupFragment groupFragment = (GroupFragment) fragmentManager.findFragmentById(R.id.content_group);
                     if (groupFragment == null) {
-//                        groupFragment = （GroupFragment）mIGroupView;
-                        groupFragment = (ConsultFragment) mIConsultView;
+                        groupFragment = (GroupFragment) mIGroupView;
                         ActivityUtils.addFragmentToActivity(fragmentManager, groupFragment, R.id.content_group);
                     }
-                    tvTitleBar.setText("客户分组");
                     rbGroup.setChecked(true);
                 }
                 if (id == R.id.rbConsult) {
                     layoutConsult.setVisibility(View.VISIBLE);
-                    tvTitleBar.setText("咨询");
                     rbConsult.setChecked(true);
                 }
                 if (id == R.id.rbMine) {
@@ -106,7 +100,6 @@ public class HomeActivity extends BaseActivity {
 //                        ActivityUtils.addFragmentToActivity(fragmentManager, groupFragment, R.id.content_mine);
 //                    }
                     layoutMine.setVisibility(View.VISIBLE);
-                    tvTitleBar.setText("我的");
                     rbMine.setChecked(true);
                 }
             }
@@ -120,7 +113,6 @@ public class HomeActivity extends BaseActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-
             if (isExit) {
                 System.exit(0);
                 return true;
@@ -132,7 +124,7 @@ public class HomeActivity extends BaseActivity {
                     public void run() {
                         isExit = false;
                     }
-                }, 2500);
+                }, 2000);
                 return false;
             }
         }

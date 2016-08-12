@@ -147,7 +147,7 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            ViewHolder holder = null;
+            ViewHolder holder =  null;
             if (convertView == null) {
                 convertView = myInflater.inflate(R.layout.group_custinfo_item, parent, false);
                 holder = new ViewHolder(convertView);

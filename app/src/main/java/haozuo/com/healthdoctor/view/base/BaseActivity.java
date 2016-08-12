@@ -1,7 +1,6 @@
 package haozuo.com.healthdoctor.view.base;
 
 import android.annotation.TargetApi;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
@@ -9,17 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.framework.HZApplication;
 import haozuo.com.healthdoctor.ioc.AppComponent;
 import haozuo.com.healthdoctor.util.SystemBarTintUtil;
-import haozuo.com.healthdoctor.view.consult.ConsultActivity;
-import haozuo.com.healthdoctor.view.group.GroupActivity;
 
 /**
  * Created by xiongwei1 on 2016/7/8.
@@ -28,7 +22,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // setTranslucentStatus();
+        setTranslucentStatus();
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
@@ -54,9 +48,8 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected void setCustomerTitle(String title) {
         TextView textView = (TextView) findViewById(R.id.txt_TitleBar_title);
-        View btnGoBack = (View) findViewById(R.id.btn_go_back);
         textView.setText(title);
-        btnGoBack.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_go_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -66,53 +59,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected void hideGoBackBtn() {
-        View btnGoBack = (View) findViewById(R.id.btn_go_back);
-        btnGoBack.setVisibility(View.GONE);
+        findViewById(R.id.btn_go_back).setVisibility(View.GONE);
     }
 
-    protected void initTabhostMenu() {
-        RadioGroup tab_menu = (RadioGroup) findViewById(R.id.tab_menu);
-        switch (getLocalClassName()) {
-            case "view.group.GroupActivity":
-                RadioButton btnrbGroup = (RadioButton) findViewById(R.id.rbGroup);
-                btnrbGroup.setChecked(true);
-                break;
-            case "view.consult.ConsultActivity":
-                RadioButton btnrbConsult = (RadioButton) findViewById(R.id.rbConsult);
-                btnrbConsult.setChecked(true);
-                break;
-            case "":
-                Toast.makeText(getApplicationContext(), "333", Toast.LENGTH_SHORT).show();
-                break;
-        }
-        tab_menu.setOnCheckedChangeListener(new OnNavChangeListener());
-    }
 
     protected AppComponent getAppComponent() {
         return ((HZApplication) getApplication()).getAppComponent();
     }
 
-    private class OnNavChangeListener implements RadioGroup.OnCheckedChangeListener {
-
-        @Override
-        public void onCheckedChanged(RadioGroup group, int checkedId) {
-            switch (checkedId) {
-                case R.id.rbGroup:
-                    startActivity(new Intent(getBaseContext(), GroupActivity.class));
-                    overridePendingTransition(0, 0);
-//                    finish();
-                    break;
-                case R.id.rbConsult:
-                    startActivity(new Intent(getBaseContext(), ConsultActivity.class));
-                    overridePendingTransition(0, 0);
-//                    finish();
-                    break;
-                case R.id.rbMine:
-                    Toast.makeText(getBaseContext(), "333", Toast.LENGTH_SHORT).show();
-                    //do sth
-                    break;
-            }
-        }
-    }
 
 }

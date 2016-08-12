@@ -26,18 +26,6 @@
             android:name=".view.login.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.group.GroupActivity"
-            android:launchMode="singleTop"
-            android:theme="@style/AppTheme.NoActionBar">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-        </activity>
-        <activity
             android:name=".view.custom.GroupCustomListActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <!--
@@ -55,15 +43,13 @@
             android:name=".view.custom.CustomerInfoActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.consult.ConsultActivity"
-            android:launchMode="singleTop"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".view.consult.ConsultDetailActivity"
 
+            android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".view.consult.UsefulMesasgeActivity" />
-        <activity android:name=".view.home.HomeActivity"
+        <activity
+            android:name=".view.home.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

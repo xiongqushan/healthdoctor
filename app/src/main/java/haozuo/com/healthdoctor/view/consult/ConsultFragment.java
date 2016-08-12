@@ -55,8 +55,8 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_consult, container, false);
             ButterKnife.bind(this, rootView);
+            InitView();
         }
-        InitView();
         return rootView;
     }
 

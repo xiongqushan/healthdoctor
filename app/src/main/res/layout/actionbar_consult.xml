@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:background="@color/main_color_blue">
+
+    <View
+        android:id="@+id/left"
+        android:layout_width="48dp"
+        android:layout_height="match_parent" />
+
+
+    <RadioGroup
+        android:id="@+id/groupConsult"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_toLeftOf="@+id/right"
+        android:layout_toRightOf="@+id/left"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+
+        <RadioButton
+            android:id="@+id/rbPending"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_tableft"
+            android:button="@null"
+            android:checked="true"
+            android:gravity="center"
+            android:text="待处理"
+            android:textColor="@color/textcolor_white_blue"
+            android:textSize="16sp" />
+
+        <RadioButton
+
+            android:id="@+id/rbDone"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_tabcenter"
+            android:button="@null"
+            android:gravity="center"
+            android:text="已处理"
+            android:textColor="@color/textcolor_white_blue"
+            android:textSize="16sp" />
+
+
+        <RadioButton
+
+            android:id="@+id/rbFeedback"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_tabright"
+            android:button="@null"
+            android:gravity="center"
+            android:text="问题反馈"
+            android:textColor="@color/textcolor_white_blue"
+            android:textSize="16sp" />
+
+    </RadioGroup>
+
+
+    <View
+        android:id="@+id/right"
+        android:layout_width="48dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignLeft="@+id/groupConsult"
+        android:layout_alignRight="@+id/groupConsult"
+        android:orientation="horizontal">
+
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/mid"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true" />
+
+
+
+            <TextView
+                android:id="@+id/tv_msgnum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="18dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/mid"
+                android:layout_weight="1"
+                android:background="@drawable/bg_redcircle"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:paddingBottom="1px"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:paddingTop="1px"
+                android:text="99"
+                android:textColor="@color/white"
+                android:textSize="10sp" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_weight="1" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

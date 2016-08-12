@@ -3,6 +3,7 @@ package haozuo.com.healthdoctor.view.welcome;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.WindowManager;
 
 import java.util.Timer;
@@ -28,5 +29,12 @@ public class WelcomeActivity extends Activity {
         };
         Timer timer = new Timer();
         timer.schedule(task, 2000);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

@@ -60,8 +60,7 @@ public class ConsultPandingFragment extends Fragment {
                              Bundle savedInstanceState) {
         if (rootView == null) {
             mContext = getContext();
-//            mConsultFragment = (ConsultFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.content_consult);
-            mConsultFragment = (ConsultFragment) getChildFragmentManager().findFragmentById(R.id.content_group);
+            mConsultFragment = (ConsultFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.content_consult);
             mFlag = 3;
             mOnClicklistener = new View.OnClickListener() {
                 @Override
@@ -88,10 +87,10 @@ public class ConsultPandingFragment extends Fragment {
             });
 
             mConsultPresenter = mConsultFragment.ConsultPresenter;
-            if (rootView == null) {
-                rootView = inflater.inflate(R.layout.fragment_consult_panding_list, container, false);
-                ButterKnife.bind(this, rootView);
-            }
+//            if (rootView == null) {
+            rootView = inflater.inflate(R.layout.fragment_consult_panding_list, container, false);
+            ButterKnife.bind(this, rootView);
+//            }
 
             mConsultListAdapter = new ConsultListAdapter(mContext, mOnClicklistener);
 
