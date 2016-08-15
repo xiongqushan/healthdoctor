@@ -12,6 +12,7 @@ import java.util.List;
 
 import haozuo.com.healthdoctor.bean.DoctorBean;
 import haozuo.com.healthdoctor.bean.DoctorGroupBean;
+import haozuo.com.healthdoctor.bean.UsefulExpressionBean;
 import haozuo.com.healthdoctor.framework.HZApplication;
 import haozuo.com.healthdoctor.util.StringUtil;
 
@@ -21,10 +22,12 @@ import haozuo.com.healthdoctor.util.StringUtil;
 public class UserManager {
     private static final String SP_NAME = "User";
     private static final String USER_INFO_KEY = "User_Info_Key";
+    private static final String DEFAULT_EXPRESSION_KEY = "Default_Expression_Key";
     private static UserManager _instance;
     private static SharedPreferences sharedPreferences;
     private static DoctorBean _currentEntity;
     private static List<DoctorGroupBean> _currentGroupEntity;
+    private static List<UsefulExpressionBean> _usefulExpressionEntity;
 
     public static Activity testActivity;
     private UserManager() {
@@ -76,6 +79,24 @@ public class UserManager {
         }
     }
 
+    public void setDefaultExpression(List<UsefulExpressionBean> usefulExpressionEntity){
+        try {
+            _usefulExpressionEntity=usefulExpressionEntity;
+            // 保存对象
+            SharedPreferences.Editor sharedata =sharedPreferences.edit();
+            ByteArrayOutputStream bos=new ByteArrayOutputStream();
+            ObjectOutputStream os=new ObjectOutputStream(bos);
+            //将对象序列化写入byte缓存
+            os.writeObject(usefulExpressionEntity);
+            String bytesToHexString = StringUtil.bytesToHexString(bos.toByteArray());
+            sharedata.putString(DEFAULT_EXPRESSION_KEY, bytesToHexString);
+            sharedata.apply();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public DoctorBean getDoctorInfo(){
         if(_currentEntity==null){
             try {
@@ -119,6 +140,29 @@ public class UserManager {
         }
         return  _currentGroupEntity;
     }
+
+    public List<UsefulExpressionBean> getDefaultExpression(){
+        if(_usefulExpressionEntity==null){
+            try {
+                if (sharedPreferences.contains(DEFAULT_EXPRESSION_KEY)) {
+                    String localData = sharedPreferences.getString(DEFAULT_EXPRESSION_KEY, "");
+                    if(!StringUtil.isEmpty(localData)){
+                        byte[] stringToBytes = StringUtil.StringToBytes(localData);
+                        ByteArrayInputStream bis=new ByteArrayInputStream(stringToBytes);
+                        ObjectInputStream is=new ObjectInputStream(bis);
+                        //返回反序列化得到的对象
+                        Object localObject = is.readObject();
+                        List<UsefulExpressionBean> localInfo=(List<UsefulExpressionBean>)localObject;
+                        _usefulExpressionEntity=localInfo;
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return  _usefulExpressionEntity;
+    }
+
 
     public boolean exist(){
         return getDoctorInfo()!=null;

@@ -127,7 +127,7 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
             rootView= inflater.inflate(R.layout.fragment_consult_detail, container, false);
             ButterKnife.bind(this,rootView);
         }
-        WindowResize.assistActivity(getActivity());
+//        WindowResize.assistActivity(getActivity());
         mConsultListAdapter=new ConsultListAdapter(mContext);
         consult_detail_List.setAdapter(mConsultListAdapter);
         consult_detail_pull_to_refresh_layout.setOnRefreshListener(new PullListener());

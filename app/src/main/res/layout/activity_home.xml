@@ -12,13 +12,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/bottom"
-        android:visibility="gone"></FrameLayout>
+        android:visibility="gone" />
 
     <FrameLayout
         android:id="@+id/content_consult"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottom"></FrameLayout>
+        android:layout_above="@+id/bottom" />
 
     <FrameLayout
         android:id="@+id/content_mine"
@@ -26,13 +26,13 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/bottom"
 
-        android:visibility="gone"></FrameLayout>
+        android:visibility="gone" />
 
     <include
         android:id="@+id/bottom"
         layout="@layout/menu_tabhost"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_alignParentBottom="true"></include>
+        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>

@@ -1,8 +1,13 @@
 package haozuo.com.healthdoctor.view.consult;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.v4.app.FragmentManager;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 
 import java.io.Serializable;
 
@@ -53,5 +58,7 @@ public class UsefulMesasgeActivity extends BaseActivity {
             }
         });
     }
+
+
 
 }

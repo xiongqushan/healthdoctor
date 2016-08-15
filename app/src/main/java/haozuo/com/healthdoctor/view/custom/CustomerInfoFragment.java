@@ -37,7 +37,7 @@ public class CustomerInfoFragment extends AbstractView implements CustomerInfoCo
     List<String> mTvNames = new ArrayList<String>();
     List<DoctorGroupBean> mGroups = new ArrayList<DoctorGroupBean>();
 
-    @Bind(R.id.CPhoto) SimpleDraweeView CPhoto;
+    @Bind(R.id.CPhoto)SimpleDraweeView CPhoto;
     @Bind(R.id.Cname)TextView Cname;
     @Bind(R.id.CAge)TextView CAge;
     @Bind(R.id.CHeight)TextView CHeight;
@@ -60,7 +60,6 @@ public class CustomerInfoFragment extends AbstractView implements CustomerInfoCo
     @Override
     public void onResume() {
         super.onResume();
-//        mPresenter.start();
     }
 
     @Override

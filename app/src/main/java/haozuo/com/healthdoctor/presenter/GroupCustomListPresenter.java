@@ -60,6 +60,7 @@ public class GroupCustomListPresenter extends AbstractPresenter implements Group
         mCurrentPageIndex=1;
         int doctorId= UserManager.getInstance().getDoctorInfo().Doctor_ID;
         int departId= UserManager.getInstance().getDoctorInfo().Dept;
+        mGroupCustomListView.showDialog();
         mGroupModel.GetGroupCustInfoList(departId, mGroupId, doctorId, mCurrentPageIndex, PAGE_SIZE, new OnHandlerResultListener<GlobalShell<PageBean<GroupCustInfoBean>>>() {
             @Override
             public void handlerResult(GlobalShell<PageBean<GroupCustInfoBean>> resultData) {
@@ -87,6 +88,7 @@ public class GroupCustomListPresenter extends AbstractPresenter implements Group
         mCurrentPageIndex++;
         int doctorId= UserManager.getInstance().getDoctorInfo().Doctor_ID;
         int departId= UserManager.getInstance().getDoctorInfo().Dept;
+        mGroupCustomListView.showDialog();
         mGroupModel.GetGroupCustInfoList(departId, mGroupId, doctorId, mCurrentPageIndex, PAGE_SIZE, new OnHandlerResultListener<GlobalShell<PageBean<GroupCustInfoBean>>>() {
             @Override
             public void handlerResult(GlobalShell<PageBean<GroupCustInfoBean>> resultData) {
