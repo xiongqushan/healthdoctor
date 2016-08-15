@@ -10,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioGroup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,8 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
     TabLayout tabLayout;
     @Bind(R.id.consult_Vp)
     ViewPager mViewPager;
+    @Bind(R.id.groupConsult)
+    private RadioGroup mRadioGroup;
 
     public ConsultFragment() {
     }
@@ -95,9 +98,9 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
         public Fragment getItem(int position) {
             switch (position) {
                 case 1:
-                    return  ConsultPandingFragment.newInstance(2);
+                    return ConsultPandingFragment.newInstance(2);
                 case 2:
-                    return  ConsultPandingFragment.newInstance(1);
+                    return ConsultPandingFragment.newInstance(1);
                 default:
                     return ConsultPandingFragment.newInstance(3);
             }
