@@ -17,8 +17,8 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/lightgrey" />
+        android:layout_height="@dimen/dividerline"
+        android:background="@color/divider_d3" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/consult_Vp"

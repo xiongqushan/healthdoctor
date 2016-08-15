@@ -17,8 +17,6 @@ import haozuo.com.healthdoctor.manager.UserManager;
 import haozuo.com.healthdoctor.model.UserModel;
 import haozuo.com.healthdoctor.util.StringUtil;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 /**
  * Created by xiongwei1 on 2016/7/4.
  */
@@ -28,9 +26,9 @@ public class LoginPresenter extends AbstractPresenter implements LoginContract.I
     Context mContext;
 
     @Inject
-    public LoginPresenter(@NonNull LoginContract.ILoginView iLoginView,@NonNull Context context,@NonNull UserModel userModel){
-        mILoginView=iLoginView;
-        mUserModel=userModel;
+    public LoginPresenter(@NonNull LoginContract.ILoginView iLoginView, @NonNull Context context, @NonNull UserModel userModel) {
+        mILoginView = iLoginView;
+        mUserModel = userModel;
         mILoginView.setPresenter(this);
         mContext = context;
     }
@@ -42,9 +40,9 @@ public class LoginPresenter extends AbstractPresenter implements LoginContract.I
         mUserModel.GetSMSCode(mobile, new OnHandlerResultListener<GlobalShell<Boolean>>() {
             @Override
             public void handlerResult(GlobalShell<Boolean> resultData) {
-                String msg="获取验证码成功！";
-                if(!resultData.LogicSuccess){
-                    msg=resultData.Message;
+                String msg = "获取验证码成功！";
+                if (!resultData.LogicSuccess) {
+                    msg = resultData.Message;
                 }
                 mILoginView.hideDialog(msg);
                 mILoginView.setSMSButtonEnableStatus(true);
@@ -58,12 +56,11 @@ public class LoginPresenter extends AbstractPresenter implements LoginContract.I
         mUserModel.Login(mobile, code, new OnHandlerResultListener<GlobalShell<DoctorBean>>() {
             @Override
             public void handlerResult(GlobalShell<DoctorBean> resultData) {
-                if(resultData.LogicSuccess) {
+                if (resultData.LogicSuccess) {
                     UserManager.getInstance().setDoctorInfo(resultData.Data);
                     mILoginView.hideDialog();
                     mILoginView.toHomeActivity();
-                }
-                else{
+                } else {
                     mILoginView.hideDialog(resultData.Message);
                 }
             }
@@ -71,14 +68,13 @@ public class LoginPresenter extends AbstractPresenter implements LoginContract.I
     }
 
     @Override
-    public void requestLoginWithPassWord(String mobile, String password){
-        if (password.length()==0||mobile.length()==0){
-            Toast.makeText(mContext,"用户名和密码不能为空!",
+    public void requestLoginWithPassWord(String mobile, String password) {
+        if (password.length() == 0 || mobile.length() == 0) {
+            Toast.makeText(mContext, "用户名和密码不能为空!",
                     Toast.LENGTH_SHORT).show();
             return;
-        }
-        else if (!StringUtil.isMobile(mobile)){
-            Toast.makeText(mContext,"请输入正确的手机号!",
+        } else if (!StringUtil.isMobile(mobile)) {
+            Toast.makeText(mContext, "请输入正确的手机号!",
                     Toast.LENGTH_SHORT).show();
             return;
         }
@@ -87,15 +83,14 @@ public class LoginPresenter extends AbstractPresenter implements LoginContract.I
         mUserModel.LoginValidate(mobile, password, new OnHandlerResultListener<GlobalShell<DoctorBean>>() {
             @Override
             public void handlerResult(GlobalShell<DoctorBean> resultData) {
-                if(resultData.LogicSuccess) {
-                    if (resultData.Data.PhotoUrl == null){
-                        resultData.Data.PhotoUrl ="res://haozuo.com.healthdoctor.view.custom/"+ R.drawable.doctor_default_photourl;
+                if (resultData.LogicSuccess) {
+                    if (resultData.Data.PhotoUrl == null) {
+                        resultData.Data.PhotoUrl = "res://haozuo.com.healthdoctor.view.custom/" + R.drawable.doctor_default_photourl;
                     }
                     UserManager.getInstance().setDoctorInfo(resultData.Data);
                     mILoginView.hideDialog();
                     mILoginView.toHomeActivity();
-                }
-                else{
+                } else {
                     mILoginView.hideDialog(resultData.Message);
                 }
             }
