@@ -55,7 +55,6 @@ public abstract class BaseActivity extends AppCompatActivity {
                 finish();
             }
         });
-
     }
 
     protected void hideGoBackBtn() {

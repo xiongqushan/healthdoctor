@@ -81,12 +81,6 @@
 
     </RadioGroup>
 
-    <!--<View-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="1dp"-->
-        <!--android:background="@color/lightgrey"-->
-        <!--android:visibility="visible" />-->
-
     <haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout
         android:id="@+id/consult_pull_to_refresh_layout"
         android:layout_width="match_parent"

@@ -2,6 +2,8 @@ package haozuo.com.healthdoctor.ioc;
 
 import dagger.Module;
 import dagger.Provides;
+
+import haozuo.com.healthdoctor.bean.ConsultReplyBean;
 import haozuo.com.healthdoctor.contract.UsefulMessageContract;
 import haozuo.com.healthdoctor.view.consult.UsefulMessageFragment;
 
@@ -11,12 +13,15 @@ import haozuo.com.healthdoctor.view.consult.UsefulMessageFragment;
 
 @Module
 public class UsefulMessageModule {
-    public UsefulMessageModule(){
+
+    private ConsultReplyBean mConsultReplyItem;
+    public UsefulMessageModule(ConsultReplyBean consultReplyItem){
+        mConsultReplyItem = consultReplyItem;
     }
 
     @Provides
     @ScopeType.ActivityScope
     UsefulMessageContract.IUsefulMessageView provideUsefulMessageView(){
-        return UsefulMessageFragment.newInstance();
+        return UsefulMessageFragment.newInstance(mConsultReplyItem);
     }
 }

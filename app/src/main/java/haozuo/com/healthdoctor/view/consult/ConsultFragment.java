@@ -75,12 +75,14 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
 
     public void InitView() {
         ConsultFragment fragment = new ConsultFragment();
-        ConsultFragment.SimpleFragmentPagerAdapter pagerAdapter =
-                fragment.new SimpleFragmentPagerAdapter(getChildFragmentManager());
+
 //        ConsultFragment.SimpleFragmentPagerAdapter pagerAdapter =
-//                fragment.new SimpleFragmentPagerAdapter(getActivity().getSupportFragmentManager());
+//                fragment.new SimpleFragmentPagerAdapter(getChildFragmentManager());
+        ConsultFragment.SimpleFragmentPagerAdapter pagerAdapter =
+                fragment.new SimpleFragmentPagerAdapter(getActivity().getSupportFragmentManager());
         mViewPager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(mViewPager);
+
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
     }

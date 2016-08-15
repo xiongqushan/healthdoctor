@@ -18,7 +18,6 @@ public abstract class AbstractView extends BaseFragment{
     protected AbstractView(){
     }
 
-
     public void showDialog() {
         showDialog(null);
     }
