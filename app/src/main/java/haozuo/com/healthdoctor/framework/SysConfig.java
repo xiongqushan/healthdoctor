@@ -1,5 +1,14 @@
 package haozuo.com.healthdoctor.framework;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import haozuo.com.healthdoctor.bean.ExpressionConst;
+import haozuo.com.healthdoctor.bean.UsefulExpressionBean;
+
 /**
  * Created by xiongwei on 16/5/19.
  */
@@ -14,4 +23,17 @@ public class SysConfig {
     public static final String CONTROLLER_PRE_API_USER = "api/" + CURRENT_BASE_VERSION + "_User/";
     public static final String CONTROLLER_PRE_API_CONSULT = "api/" + CURRENT_BASE_VERSION + "_Consult/";
 
+
+    public static List<ExpressionConst> getExpressionConstList(){
+        List<ExpressionConst>ExpressionConstList=new ArrayList<>();
+        List<String> ExpressionContent = new ArrayList(Arrays.asList("您好！", "感谢您的支持。", "祝健康！"));
+        List<Integer> ExpressionPosition = new ArrayList(Arrays.asList(-1, 1, 1));
+        for(int i = 0;i<3;i++){
+            ExpressionConst expressionConst = new ExpressionConst();
+            expressionConst.Content = ExpressionContent.get(i);
+            expressionConst.Postion = ExpressionPosition.get(i);
+            ExpressionConstList.add(expressionConst);
+        }
+     return ExpressionConstList;
+    }
 }

@@ -2,13 +2,81 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="#ffffffff"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="10dp">
 
-    <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:id="@+id/tvname"
-        android:text="TEST" />
+    <EditText
+        android:id="@+id/et_Expression"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="10dp"
+        android:gravity="top"
+        android:background="@drawable/editview_bg_selector"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="vertical">
+        <CheckBox
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:drawableLeft="@drawable/bgcheckbox_usefulmessage"
+            android:drawablePadding="5dp"
+            android:background="@null"
+            android:button="@null"
+            android:textColor="@color/black"
+            tools:text="您好!"/>
+        <CheckBox
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:drawableLeft="@drawable/bgcheckbox_usefulmessage"
+            android:drawablePadding="5dp"
+            android:background="@null"
+            android:button="@null"
+            android:textColor="@color/black"
+            tools:text="感谢您的支持。"/>
+        <CheckBox
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:drawableLeft="@drawable/bgcheckbox_usefulmessage"
+            android:drawablePadding="5dp"
+            android:background="@null"
+            android:button="@null"
+            android:textColor="@color/black"
+            tools:text="祝健康!"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/shape"
+            android:layout_margin="5dp"
+            android:text="上一页"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/shape"
+            android:layout_margin="5dp"
+            android:text="确定"/>
+
+    </LinearLayout>
 
 </LinearLayout>

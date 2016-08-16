@@ -10,13 +10,18 @@ import haozuo.com.healthdoctor.bean.DoctorGroupBean;
  */
 public interface CustomerInfoContract {
     interface ICustomerInfoView extends IBaseView<ICustomerInfoPresenter>{
+
         void InitView(CustomDetailBean custom);
+
         void addLabelView(DoctorGroupBean groupBean);
+
         void refreshLabelView(List<DoctorGroupBean> mGroups);
     }
 
     interface ICustomerInfoPresenter extends IBasePresenter{
+
         void DeleteCustomerGroup(DoctorGroupBean groupBean);
+
         void InitGroupLabel();
     }
 }

@@ -14,6 +14,9 @@ public interface ConsultDetailContract {
         void setPresenter(ConsultDetailContract.IConsultDetailPresenter presenter);
 
         void refreshCustomAdapter(List<ConsultReplyBean> dataList);
+
+        void refreshFinish(int status);
+
     }
 
     interface IConsultDetailPresenter extends IBasePresenter {

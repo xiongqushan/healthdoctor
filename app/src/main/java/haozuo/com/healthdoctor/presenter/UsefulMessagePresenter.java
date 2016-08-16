@@ -47,11 +47,11 @@ public class UsefulMessagePresenter extends AbstractPresenter implements UsefulM
 
     @Override
     public void getDefaultUsefulExpression() {
-        mIUsefulMessageView.showDialog();
         if (UserManager.getInstance().getDefaultExpression() != null){
             mIUsefulMessageView.refreshUsefulMessageAdapter(UserManager.getInstance().getDefaultExpression());
         }
         else {
+            mIUsefulMessageView.showDialog();
             mConsultModel.getUsefulExpression(new OnHandlerResultListener<GlobalShell<List<UsefulExpressionBean>>>() {
                 @Override
                 public void handlerResult(GlobalShell<List<UsefulExpressionBean>> resultData) {
@@ -75,7 +75,6 @@ public class UsefulMessagePresenter extends AbstractPresenter implements UsefulM
             @Override
             public void handlerResult(GlobalShell<List<UsefulExpressionBean>> resultData) {
                 if (resultData.LogicSuccess){
-                    UserManager.getInstance().setDefaultExpression(resultData.Data);
                     mIUsefulMessageView.hideDialog();
                     mIUsefulMessageView.refreshUsefulMessageAdapter(resultData.Data);
                 }else {

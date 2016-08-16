@@ -19,6 +19,7 @@ import haozuo.com.healthdoctor.contract.IBaseModel;
 import haozuo.com.healthdoctor.contract.IBaseView;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
 import haozuo.com.healthdoctor.model.ConsultModel;
+import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout;
 
 /**
  * Created by hzguest3 on 2016/8/3.
@@ -71,6 +72,7 @@ public class ConsultDetailPresenter extends AbstractPresenter implements Consult
                         mConsultItemBeanList.addAll(resultData.Data);
                         Collections.sort(mConsultItemBeanList,consultReplyBean);
                         mIConsultDetailView.refreshCustomAdapter(mConsultItemBeanList);
+                        mIConsultDetailView.refreshFinish(PullToRefreshLayout.FAIL);
                     }
                 }
                 else{

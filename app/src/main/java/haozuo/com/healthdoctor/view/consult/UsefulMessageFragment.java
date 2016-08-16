@@ -2,6 +2,7 @@ package haozuo.com.healthdoctor.view.consult;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.Display;
@@ -13,21 +14,31 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.iflytek.thirdparty.E;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.ConsultReplyBean;
+import haozuo.com.healthdoctor.bean.ExpressionConst;
 import haozuo.com.healthdoctor.bean.UsefulExpressionBean;
 import haozuo.com.healthdoctor.contract.UsefulMessageContract;
+import haozuo.com.healthdoctor.framework.SysConfig;
 import haozuo.com.healthdoctor.view.base.AbstractView;
 import haozuo.com.healthdoctor.view.threePart.common.DrawableClickableEditText;
 
@@ -40,29 +51,21 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
     private UsefulMessageContract.IUsefulMessagePresenter mIUsefulMessagePresenter;
     private UsefulMessageAdapter mUsefulMessageAdapter;
     private static ConsultReplyBean mConsultReplyBean;
+//    private Map<String,String> mSelectedExpressionMap;
+    private List<UsefulExpressionBean> mSelectedExpressionMap;
+    private List<ExpressionConst> mExpressionConstList;
 
     @Bind(R.id.txt_reportdetail_content)
     TextView txt_reportdetail_content;
     @Bind(R.id.usefulmessage_list)
     ListView usefulmessage_list;
-//    @Bind(R.id.et_TitleBar_search)
-//    DrawableClickableEditText et_TitleBar_search;
+//    @Bind(R.id.et_Expression)
+//    EditText et_Expression;
 
     @OnClick(R.id.btn_nextstep)
     public void nextPage(View v) {
-        Dialog dialog = new Dialog(mContext, R.style.Dialog_Fullscreen);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.fragment_usefulmessage_dialog);
-        dialog.show();
-        Window win = dialog.getWindow();
-        win.getDecorView().setPadding(0, 0, 0, 0);
-        win.setGravity(Gravity.BOTTOM);
-        win.setWindowAnimations(R.style.Dialog_Fullscreen);
-        WindowManager.LayoutParams lp = win.getAttributes();
-        Display d = getActivity().getWindowManager().getDefaultDisplay();
-        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        lp.height = (int) (d.getHeight() * 0.8);
-        win.setAttributes(lp);
+        showDialogPage();
+//        refreshExpressionContent();
     }
 
     public UsefulMessageFragment() {}
@@ -81,10 +84,25 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
             rootView = inflater.inflate(R.layout.fragment_usefulmessage_list, container, false);
             ButterKnife.bind(this, rootView);
         }
+        mSelectedExpressionMap = new ArrayList<>();
         setConsultContent();
         mUsefulMessageAdapter = new UsefulMessageAdapter(mContext);
         usefulmessage_list.setAdapter(mUsefulMessageAdapter);
+//        usefulmessage_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                CheckBox checkBox = (CheckBox) view.findViewById(R.id.txt_message_content);
+//                UsefulExpressionBean selectedExpressionItem = mUsefulMessageAdapter.getDataSource().get(position);
+//                if(checkBox.isChecked()){
+//                    mSelectedExpressionList.add(selectedExpressionItem);
+//                }
+//                else {
+//                    mSelectedExpressionList.remove(selectedExpressionItem);
+//                }
+//            }
+//        });
         mIUsefulMessagePresenter.getDefaultUsefulExpression();
+        mExpressionConstList = SysConfig.getExpressionConstList();
 
         final DrawableClickableEditText et_TitleBar_search = (DrawableClickableEditText) getActivity().findViewById(R.id.et_TitleBar_search);
         et_TitleBar_search.setDrawableRightListener(new DrawableClickableEditText.DrawableRightListener() {
@@ -124,6 +142,9 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
         mUsefulMessageAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void onDrawableRightClick(View view) {}
+
     public void setConsultContent() {
         switch (mConsultReplyBean.ConsultType) {
             case 1:
@@ -139,8 +160,48 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
         }
     }
 
-    @Override
-    public void onDrawableRightClick(View view) {}
+    public void showDialogPage(){
+        Dialog dialog = new Dialog(mContext, R.style.Dialog_Fullscreen);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(refreshExpressionContent());
+        dialog.show();
+        Window win = dialog.getWindow();
+        win.getDecorView().setPadding(0, 0, 0, 0);
+        win.setGravity(Gravity.BOTTOM);
+        win.setWindowAnimations(R.style.Dialog_Fullscreen);
+        WindowManager.LayoutParams lp = win.getAttributes();
+        Display d = getActivity().getWindowManager().getDefaultDisplay();
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = (int) (d.getHeight() * 0.8);
+        win.setAttributes(lp);
+    }
+
+    public View refreshExpressionContent(){
+        String Content = "";
+        for (ExpressionConst e : mExpressionConstList){
+            if (e.Postion<0){
+                Content += e.Content+"\n";
+            }
+        }
+        for (int i =0;i<mSelectedExpressionMap.size();i++){
+            Content += (i+1)+"."+mSelectedExpressionMap.get(i).Content+"\n";
+        }
+        for (ExpressionConst e : mExpressionConstList){
+            if (e.Postion>0){
+                Content += e.Content+"\n";
+            }
+        }
+
+        //动态加载布局生成View对象
+        LayoutInflater layoutInflater = LayoutInflater.from(mContext);
+        View longinDialogView = layoutInflater.inflate(R.layout.fragment_usefulmessage_dialog, null);
+
+        //获取布局中的控件
+        EditText et_Expression = (EditText)longinDialogView.findViewById(R.id.et_Expression);
+        et_Expression.setText(Content);
+
+        return longinDialogView;
+    }
 
     class UsefulMessageAdapter extends BaseAdapter {
         LayoutInflater myInflater;
@@ -184,10 +245,53 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
+            final UsefulExpressionBean usefulExpressionEntity = dataSource.get(position);
+            holder.messageContent.setText((position+1)+"."+usefulExpressionEntity.Content);
+//            holder.messageContent.setChecked(usefulExpressionEntity.IsChecked);
+//            for (String k : mSelectedExpressionMap.keySet()){
+//                if (k.equals(usefulExpressionEntity.Id)){
+//                    holder.messageContent.setChecked(true);
+//                    break;
+//                }
+//                else {
+//                    holder.messageContent.setChecked(false);
+//                }
+//            }
+            for (int i=0;i<mSelectedExpressionMap.size();i++){
+                if (mSelectedExpressionMap.get(i).Id.equals(usefulExpressionEntity.Id)){
+                    holder.messageContent.setChecked(true);
+                    break;
+                } else {
+                    holder.messageContent.setChecked(false);
+                }
+            }
+            holder.messageContent.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    CheckBox checkBox = (CheckBox)v;
+                    UsefulExpressionBean selectedExpression = new UsefulExpressionBean();
+//                    usefulExpressionEntity.IsChecked = checkBox.isChecked();
+                    if(checkBox.isChecked()){
+//                        mSelectedExpressionMap.put(usefulExpressionEntity.Id,usefulExpressionEntity.Content);
+                        selectedExpression.Id = usefulExpressionEntity.Id;
+                        selectedExpression.Content = usefulExpressionEntity.Content;
+                        mSelectedExpressionMap.add(selectedExpression);
+                    }
+                    else {
+//                        for(String id : mSelectedExpressionMap.keySet()){
+//                            if (usefulExpressionEntity.Id.equals(id)){
+//                                mSelectedExpressionMap.remove(id);
+//                            }
+//                        }
 
-            UsefulExpressionBean usefulExpressionEntity = dataSource.get(position);
-            holder.messageContent.setText(usefulExpressionEntity.Content);
-            holder.cbMessage.setChecked(usefulExpressionEntity.IsChecked);
+                        for (int i =0;i<mSelectedExpressionMap.size();i++){
+                            if (mSelectedExpressionMap.get(i).Id.equals(usefulExpressionEntity.Id)){
+                                mSelectedExpressionMap.remove(i);
+                            }
+                        }
+                    }
+                }
+            });
 
             return convertView;
         }
@@ -195,15 +299,13 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
         public class ViewHolder {
 
             @Bind(R.id.txt_message_content)
-            public TextView messageContent;
-
-            @Bind(R.id.cb_message)
-            public CheckBox cbMessage;
+            public CheckBox messageContent;
 
             public ViewHolder(View convertView) {
                 ButterKnife.bind(this, convertView);
             }
         }
     }
+
 
 }

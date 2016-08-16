@@ -26,7 +26,7 @@ public class UsefulExpressionBean {
      * Guid : sample string 16
      */
 
-    public int Id;
+    public String Id;
     public String ItemName;
     public String ItemSpell;
     public String KeyWord;
@@ -43,5 +43,5 @@ public class UsefulExpressionBean {
     public String ModifiedOn;
     public int Version;
     public String Guid;
-    public boolean IsChecked = false;
+    public boolean IsChecked;
 }
