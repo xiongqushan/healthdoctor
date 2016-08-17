@@ -3,83 +3,82 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
     tools:context=".view.consult.ConsultPandingFragment">
 
-    <RadioGroup
-        android:visibility="gone"
-        android:id="@+id/consult_Tab"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="horizontal">
+    <!--<RadioGroup-->
+    <!--android:visibility="gone"-->
+    <!--android:id="@+id/consult_Tab"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="60dp"-->
+    <!--android:orientation="horizontal">-->
 
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null"/>
+    <!--<RadioButton-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1"-->
+    <!--android:button="@null"/>-->
 
-        <RadioButton
-            android:id="@+id/btn_consult_All"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@null"
-            android:button="@null"
-            android:checked="true"
-            android:drawableLeft="@drawable/consult_group_btn"
-            android:gravity="center"
-            android:paddingLeft="@dimen/consult_panding_list_radiobutton_padding"
-            android:paddingRight="@dimen/consult_panding_list_radiobutton_padding"
-            android:text="全部"
-            android:textColor="@color/silver" />
+    <!--<RadioButton-->
+    <!--android:id="@+id/btn_consult_All"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@null"-->
+    <!--android:button="@null"-->
+    <!--android:checked="true"-->
+    <!--android:drawableLeft="@drawable/consult_group_btn"-->
+    <!--android:gravity="center"-->
+    <!--android:paddingLeft="@dimen/consult_panding_list_radiobutton_padding"-->
+    <!--android:paddingRight="@dimen/consult_panding_list_radiobutton_padding"-->
+    <!--android:text="全部"-->
+    <!--android:textColor="@color/silver" />-->
 
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null"/>
-
-
-        <RadioButton
-            android:id="@+id/btn_consult_Submit"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@null"
-            android:button="@null"
-            android:drawableLeft="@drawable/consult_group_btn"
-            android:gravity="center"
-            android:paddingLeft="@dimen/consult_panding_list_radiobutton_padding"
-            android:paddingRight="@dimen/consult_panding_list_radiobutton_padding"
-            android:text="转入"
-            android:textColor="@color/silver" />
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null"/>
+    <!--<RadioButton-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1"-->
+    <!--android:button="@null"/>-->
 
 
-        <RadioButton
-            android:id="@+id/btn_consult_Mine"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@null"
-            android:button="@null"
-            android:drawableLeft="@drawable/consult_group_btn"
-            android:gravity="center"
-            android:paddingLeft="@dimen/consult_panding_list_radiobutton_padding"
-            android:paddingRight="@dimen/consult_panding_list_radiobutton_padding"
-            android:text="我的"
-            android:textColor="@color/silver" />
+    <!--<RadioButton-->
+    <!--android:id="@+id/btn_consult_Submit"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@null"-->
+    <!--android:button="@null"-->
+    <!--android:drawableLeft="@drawable/consult_group_btn"-->
+    <!--android:gravity="center"-->
+    <!--android:paddingLeft="@dimen/consult_panding_list_radiobutton_padding"-->
+    <!--android:paddingRight="@dimen/consult_panding_list_radiobutton_padding"-->
+    <!--android:text="转入"-->
+    <!--android:textColor="@color/silver" />-->
 
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null"/>
+    <!--<RadioButton-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1"-->
+    <!--android:button="@null"/>-->
 
-    </RadioGroup>
+
+    <!--<RadioButton-->
+    <!--android:id="@+id/btn_consult_Mine"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@null"-->
+    <!--android:button="@null"-->
+    <!--android:drawableLeft="@drawable/consult_group_btn"-->
+    <!--android:gravity="center"-->
+    <!--android:paddingLeft="@dimen/consult_panding_list_radiobutton_padding"-->
+    <!--android:paddingRight="@dimen/consult_panding_list_radiobutton_padding"-->
+    <!--android:text="我的"-->
+    <!--android:textColor="@color/silver" />-->
+
+    <!--<RadioButton-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1"-->
+    <!--android:button="@null"/>-->
+
+    <!--</RadioGroup>-->
 
     <haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout
         android:id="@+id/consult_pull_to_refresh_layout"

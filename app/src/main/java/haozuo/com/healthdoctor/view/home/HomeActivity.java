@@ -94,11 +94,11 @@ public class HomeActivity extends BaseActivity {
                     rbConsult.setChecked(true);
                 }
                 if (id == R.id.rbMine) {
-//                    GroupFragment groupFragment = (GroupFragment) fragmentManager.findFragmentById(R.id.content_mine);
-//                    if (groupFragment == null) {
-//                        groupFragment = new GroupFragment();
-//                        ActivityUtils.addFragmentToActivity(fragmentManager, groupFragment, R.id.content_mine);
-//                    }
+                    MineFragment groupFragment = (MineFragment) fragmentManager.findFragmentById(R.id.content_mine);
+                    if (groupFragment == null) {
+                        groupFragment = new MineFragment();
+                        ActivityUtils.addFragmentToActivity(fragmentManager, groupFragment, R.id.content_mine);
+                    }
                     layoutMine.setVisibility(View.VISIBLE);
                     rbMine.setChecked(true);
                 }

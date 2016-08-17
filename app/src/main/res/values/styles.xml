@@ -30,7 +30,7 @@
         <item name="android:backgroundDimEnabled">false</item>
         <!--模糊 -->
     </style>
-    <style name="TabLayoutTextStyle">
+    <style name="TabLayoutTextSize">
         <item name="android:textSize">@dimen/tablayout_txtsize</item>
     </style>
 </resources>

@@ -31,7 +31,7 @@ public class PageFragment extends AbstractView {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPage = getArguments().getInt(ARG_PAGE);
+        mPage = getArguments().getInt(ARG_PAGE, 0);
     }
 
     @Nullable

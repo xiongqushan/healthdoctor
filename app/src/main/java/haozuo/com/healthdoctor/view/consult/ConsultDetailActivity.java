@@ -22,7 +22,7 @@ public class ConsultDetailActivity extends BaseActivity {
     @Inject
     ConsultDetailContract.IConsultDetailView mIConsultDetailView;
 
-    public static String EXTRA_CONSULT_ITEM="CONSULT_ITEM";
+    public static String EXTRA_CONSULT_ITEM = "CONSULT_ITEM";
     private String mCustName;
     private int mCustId;
 
@@ -30,8 +30,8 @@ public class ConsultDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consult_detail);
-        Serializable obj= getIntent().getSerializableExtra(EXTRA_CONSULT_ITEM);
-        if(obj!=null){
+        Serializable obj = getIntent().getSerializableExtra(EXTRA_CONSULT_ITEM);
+        if (obj != null) {
             ConsultItemBean doctorGroupBean = (ConsultItemBean) obj;
             mCustName = doctorGroupBean.CustName;
             mCustId = doctorGroupBean.CustId;
@@ -44,11 +44,11 @@ public class ConsultDetailActivity extends BaseActivity {
                 .build()
                 .inject(this);
 
-        FragmentManager fragmentManager=getSupportFragmentManager();
-        ConsultDetailFragment consultDetailfragment=(ConsultDetailFragment)fragmentManager.findFragmentById(R.id.frameContent);
-        if(consultDetailfragment==null){
-            consultDetailfragment=(ConsultDetailFragment)mIConsultDetailView;
-            ActivityUtils.addFragmentToActivity(fragmentManager,consultDetailfragment,R.id.frameContent);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        ConsultDetailFragment consultDetailfragment = (ConsultDetailFragment) fragmentManager.findFragmentById(R.id.frameContent);
+        if (consultDetailfragment == null) {
+            consultDetailfragment = (ConsultDetailFragment) mIConsultDetailView;
+            ActivityUtils.addFragmentToActivity(fragmentManager, consultDetailfragment, R.id.frameContent);
         }
 
 
