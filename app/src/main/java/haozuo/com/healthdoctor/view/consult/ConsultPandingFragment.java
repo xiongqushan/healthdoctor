@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,13 +31,13 @@ public class ConsultPandingFragment extends Fragment {
     public static final String ARG_PAGE = "ARG_PAGE_CONSULTPANDINGFRAGMENT";
     Context mContext;
     View rootView;
-    ConsultFragment mConsultFragment;
-    ConsultListAdapter mConsultListAdapter;
+    private ConsultFragment mConsultFragment;
+    private ConsultListAdapter adapter;
     View.OnClickListener mOnClicklistener;
-    private int mFlag = 3;// TODO 3全部 2转入 1我的
+    private int mFlag;// TODO 3全部 2转入 1我的
 
     @Bind(R.id.consult_pull_to_refresh_layout)
-    PullToRefreshLayout consult_pull_to_refresh_layout;
+    PullToRefreshLayout ptrLayout;
     @Bind(R.id.consult_detail_List)
     ListView consult_detail_List;
 
@@ -60,33 +61,28 @@ public class ConsultPandingFragment extends Fragment {
         return fragment;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        mConsultFragment.setOnPendingRefreshListener(new ConsultFragment.OnPendingPageListener() {
-            @Override
-            public void refreshConsultDetailList(List<ConsultItemBean> consultItemBeanList) {
-                mConsultListAdapter.refresh(consultItemBeanList);
-                mConsultListAdapter.notifyDataSetChanged();
-            }
 
-            @Override
-            public void refreshFinish(int status) {
-                consult_pull_to_refresh_layout.refreshFinish(status);
-            }
-        });
+    public void refreshConsultPendingList(List<ConsultItemBean> dataList) {
+        adapter.refresh(dataList);
+    }
+
+    public void refreshFinish(int status) {
+        ptrLayout.refreshFinish(status);
+        ptrLayout.loadmoreFinish(status);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mFlag = getArguments().getInt(ARG_PAGE, 3);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if (rootView == null) {
-            mFlag = getArguments().getInt(ARG_PAGE, 3);
-            Log.e("mFlag", mFlag + "");
             mContext = getContext();
-//            mConsultFragment = (ConsultFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.content_consult);
             mConsultFragment = (ConsultFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.content_consult);
-//            mFlag = 3;
             mOnClicklistener = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -100,30 +96,31 @@ public class ConsultPandingFragment extends Fragment {
 
             rootView = inflater.inflate(R.layout.fragment_consult_panding_list, container, false);
             ButterKnife.bind(this, rootView);
-            mConsultListAdapter = new ConsultListAdapter(mContext, mOnClicklistener);
-            consult_detail_List.setAdapter(mConsultListAdapter);
-            consult_pull_to_refresh_layout.setOnRefreshListener(new PullListener());
+            adapter = new ConsultListAdapter(mOnClicklistener);
+            Log.e("adapterObject" + mFlag, adapter.toString());
+            consult_detail_List.setAdapter(adapter);
+            ptrLayout.setOnRefreshListener(new PullListener());
             mConsultFragment.refreshCustomList(mFlag); //首次加载全部咨询内容
         }
         return rootView;
     }
 
-    class ConsultListAdapter extends BaseAdapter {
-        private LayoutInflater myInflater;
-        List<ConsultItemBean> dataSource;
-        private String Cphoto;
 
-        public ConsultListAdapter(Context context, View.OnClickListener onClickListener) {
-            this.myInflater = LayoutInflater.from(context);
-            dataSource = new ArrayList<>();
+    class ConsultListAdapter extends BaseAdapter {
+        private String Cphoto;
+        List<ConsultItemBean> dataSource;
+
+        public ConsultListAdapter(View.OnClickListener onClickListener) {
             mOnClicklistener = onClickListener;
+            dataSource = new ArrayList<>();
         }
 
         public void refresh(List<ConsultItemBean> dataList) {
-            Log.e("adapter mFlag", mFlag + "");
-            dataSource = dataList;
+            dataSource.clear();
+            dataSource.addAll(dataList);
             notifyDataSetChanged();
         }
+
 
         @Override
         public int getCount() {
@@ -145,7 +142,7 @@ public class ConsultPandingFragment extends Fragment {
             ViewHolder holder = null;
             if (convertView == null) {
                 holder = new ViewHolder();
-                convertView = myInflater.inflate(R.layout.fragment_consult_panding_item, parent, false);
+                convertView = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_consult_panding_item, parent, false);
                 holder.Cphoto = (SimpleDraweeView) convertView.findViewById(R.id.drawee_consult_Cphoto);
                 holder.Cname = (TextView) convertView.findViewById(R.id.txt_consult_Cname);
                 holder.LastConsult = (TextView) convertView.findViewById(R.id.txt_consult_LastConsult);

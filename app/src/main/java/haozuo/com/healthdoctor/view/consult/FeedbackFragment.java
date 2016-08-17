@@ -50,6 +50,14 @@ public class FeedbackFragment extends Fragment {
         return fragment;
     }
 
+    public void refreshFeedbackList(List<FeedbackItemBean> dataList) {
+        adapter.refresh(dataList);
+    }
+
+    public void refreshFinish(int status) {
+        ptrLayout.refreshFinish(status);
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,18 +70,6 @@ public class FeedbackFragment extends Fragment {
         if (rootView == null) {
             mContext = getActivity();
             mConsultFragment = (ConsultFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.content_consult);
-            mConsultFragment.setOnFeedBackPageListener(new ConsultFragment.OnFeedBackPageListener() {
-                @Override
-                public void refreshFeedBackList(List<FeedbackItemBean> dataList) {
-                    adapter.refresh(dataList);
-                    adapter.notifyDataSetChanged();
-                }
-
-                @Override
-                public void refreshFinish(int status) {
-                    ptrLayout.refreshFinish(status);
-                }
-            });
             rootView = inflater.inflate(R.layout.fragment_consult_panding_list, container, false);
             ButterKnife.bind(this, rootView);
             adapter = new ListAdapter(mContext);
@@ -106,7 +102,8 @@ public class FeedbackFragment extends Fragment {
         }
 
         public void refresh(List<FeedbackItemBean> dataList) {
-            dataSource = dataList;
+            dataSource.clear();
+            dataSource.addAll(dataList);
             notifyDataSetChanged();
         }
 

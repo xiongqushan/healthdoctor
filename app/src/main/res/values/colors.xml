@@ -8,6 +8,7 @@
     <color name="divider_d3">#D3D3D3</color>
     <color name="title_color34">#343434</color>
     <color name="subtitle_color88">#888888</color>
+    <color name="gray_bg_ee">#eeeeee</color>
 
     <color name="lightred">#DA4042</color>
     <color name="white">#FFFFFFFF</color><!--白色 -->

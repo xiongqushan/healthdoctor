@@ -32,7 +32,7 @@ public class ConsultDoneFragment extends Fragment {
     View rootView;
     ConsultFragment mConsultFragment;
     ListAdapter adapter;
-    private int mFlag = 1; // TODO  1当天  2本周 3本月
+    private int mFlag = 3; // TODO  1当天  2本周 3本月
 
     @Bind(R.id.consult_pull_to_refresh_layout)
     PullToRefreshLayout ptrLayout;
@@ -50,10 +50,18 @@ public class ConsultDoneFragment extends Fragment {
         return fragment;
     }
 
+    public void refreshConsultDoneList(List<ConsultDoneItemBean> dataList) {
+        adapter.refresh(dataList);
+    }
+
+    public void refreshFinish(int status) {
+        ptrLayout.refreshFinish(status);
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mFlag = getArguments().getInt(ARG_PAGE, 1);
+        mFlag = getArguments().getInt(ARG_PAGE, 3);
     }
 
     @Override
@@ -62,18 +70,6 @@ public class ConsultDoneFragment extends Fragment {
         if (rootView == null) {
             mContext = getActivity();
             mConsultFragment = (ConsultFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.content_consult);
-            mConsultFragment.setOnConsultDonePageListener(new ConsultFragment.OnConsultDonePageListener() {
-                @Override
-                public void refreshConsultDoneList(List<ConsultDoneItemBean> dataList) {
-                    adapter.refresh(dataList);
-                    adapter.notifyDataSetChanged();
-                }
-
-                @Override
-                public void refreshFinish(int status) {
-                    ptrLayout.refreshFinish(status);
-                }
-            });
 
             rootView = inflater.inflate(R.layout.fragment_consult_panding_list, container, false);
             ButterKnife.bind(this, rootView);
@@ -108,7 +104,8 @@ public class ConsultDoneFragment extends Fragment {
         }
 
         public void refresh(List<ConsultDoneItemBean> dataList) {
-            dataSource = dataList;
+            dataSource.clear();
+            dataSource.addAll(dataList);
             notifyDataSetChanged();
         }
 

@@ -62,7 +62,7 @@ public class ConsultPresenter extends AbstractPresenter implements ConsultContra
     }
 
     @Override
-    public void refreshCustomList(int flag) {
+    public void refreshCustomList(final int flag) {
         mCurrentPageIndex = 1;
         mIConsultView.showDialog();
         int doctorId = UserManager.getInstance().getDoctorInfo().Doctor_ID;
@@ -75,11 +75,11 @@ public class ConsultPresenter extends AbstractPresenter implements ConsultContra
                     if (resultData.Data.CurrentPageDataList != null) {
                         mConsultItemBeanList.addAll(resultData.Data.CurrentPageDataList);
                     }
-                    mIConsultView.refreshPendingPageList(mConsultItemBeanList);
-                    mIConsultView.refreshFinish(PullToRefreshLayout.SUCCEED);
+                    mIConsultView.refreshPendingPageList(mConsultItemBeanList, flag);
+                    mIConsultView.refreshFinish(PullToRefreshLayout.SUCCEED, flag);
                 } else {
                     mIConsultView.hideDialog(resultData.Message);
-                    mIConsultView.refreshFinish(PullToRefreshLayout.FAIL);
+                    mIConsultView.refreshFinish(PullToRefreshLayout.FAIL, flag);
                     mCurrentPageIndex = mLeastPageIndex;
                 }
             }
@@ -87,7 +87,7 @@ public class ConsultPresenter extends AbstractPresenter implements ConsultContra
     }
 
     @Override
-    public void loadmoreCustomList(int flag) {
+    public void loadmoreCustomList(final int flag) {
         //http request here;
         mLeastPageIndex = mCurrentPageIndex;
         mCurrentPageIndex++;
@@ -99,11 +99,11 @@ public class ConsultPresenter extends AbstractPresenter implements ConsultContra
                 if (resultData.LogicSuccess) {
                     mIConsultView.hideDialog();
                     mConsultItemBeanList.addAll(resultData.Data.CurrentPageDataList);
-                    mIConsultView.refreshPendingPageList(mConsultItemBeanList);
-                    mIConsultView.refreshFinish(PullToRefreshLayout.SUCCEED);
+                    mIConsultView.refreshPendingPageList(mConsultItemBeanList, flag);
+                    mIConsultView.refreshFinish(PullToRefreshLayout.SUCCEED, flag);
                 } else {
                     mIConsultView.hideDialog(resultData.Message);
-                    mIConsultView.refreshFinish(PullToRefreshLayout.FAIL);
+                    mIConsultView.refreshFinish(PullToRefreshLayout.FAIL, flag);
                     mCurrentPageIndex = mLeastPageIndex;
                 }
             }
@@ -111,7 +111,7 @@ public class ConsultPresenter extends AbstractPresenter implements ConsultContra
     }
 
     @Override
-    public void refreshConsultDoneList(int flag) {
+    public void refreshConsultDoneList(final int flag) {
         String beginCommitOn = "2016-08-01";
         String endCommitOn = "2016-08-16";
         mConssultDonePageIndex = 1;
@@ -126,19 +126,19 @@ public class ConsultPresenter extends AbstractPresenter implements ConsultContra
                     if (resultData.Data.CurrentPageDataList != null) {
                         mConsultDoneBeanList.addAll(resultData.Data.CurrentPageDataList);
                     }
-                    mIConsultView.refreshConsultDonePageList(mConsultDoneBeanList);
-                    mIConsultView.refreshConsultDonePageFinish(PullToRefreshLayout.SUCCEED);
+                    mIConsultView.refreshConsultDonePageList(mConsultDoneBeanList, flag);
+                    mIConsultView.refreshConsultDonePageFinish(PullToRefreshLayout.SUCCEED, flag);
                     mConssultDonePageIndex++;
                 } else {
                     mIConsultView.hideDialog(resultData.Message);
-                    mIConsultView.refreshConsultDonePageFinish(PullToRefreshLayout.FAIL);
+                    mIConsultView.refreshConsultDonePageFinish(PullToRefreshLayout.FAIL, flag);
                 }
             }
         });
     }
 
     @Override
-    public void loadmoreConsultDoneList(int flag) {
+    public void loadmoreConsultDoneList(final int flag) {
         String beginCommitOn = "2016-08-01";
         String endCommitOn = "2016-08-16";
         mIConsultView.showDialog();
@@ -151,19 +151,19 @@ public class ConsultPresenter extends AbstractPresenter implements ConsultContra
                     if (resultData.Data.CurrentPageDataList != null) {
                         mConsultDoneBeanList.addAll(resultData.Data.CurrentPageDataList);
                     }
-                    mIConsultView.refreshConsultDonePageList(mConsultDoneBeanList);
-                    mIConsultView.refreshConsultDonePageFinish(PullToRefreshLayout.SUCCEED);
+                    mIConsultView.refreshConsultDonePageList(mConsultDoneBeanList, flag);
+                    mIConsultView.refreshConsultDonePageFinish(PullToRefreshLayout.SUCCEED, flag);
                     mConssultDonePageIndex++;
                 } else {
                     mIConsultView.hideDialog(resultData.Message);
-                    mIConsultView.refreshConsultDonePageFinish(PullToRefreshLayout.FAIL);
+                    mIConsultView.refreshConsultDonePageFinish(PullToRefreshLayout.FAIL, flag);
                 }
             }
         });
     }
 
     @Override
-    public void refreshFeedBackList(int flag) {
+    public void refreshFeedBackList(final int flag) {
         mFeedbackPageIndex = 1;
         mIConsultView.showDialog();
         int doctorId = UserManager.getInstance().getDoctorInfo().Doctor_ID;
@@ -176,19 +176,19 @@ public class ConsultPresenter extends AbstractPresenter implements ConsultContra
                     if (resultData.Data.CurrentPageDataList != null) {
                         mFeedbackBeanList.addAll(resultData.Data.CurrentPageDataList);
                     }
-                    mIConsultView.refreshFeedbackPageList(mFeedbackBeanList);
-                    mIConsultView.refreshFeedbackPageFinish(PullToRefreshLayout.SUCCEED);
+                    mIConsultView.refreshFeedbackPageList(mFeedbackBeanList, flag);
+                    mIConsultView.refreshFeedbackPageFinish(PullToRefreshLayout.SUCCEED, flag);
                     mFeedbackPageIndex++;
                 } else {
                     mIConsultView.hideDialog(resultData.Message);
-                    mIConsultView.refreshFeedbackPageFinish(PullToRefreshLayout.FAIL);
+                    mIConsultView.refreshFeedbackPageFinish(PullToRefreshLayout.FAIL, flag);
                 }
             }
         });
     }
 
     @Override
-    public void loadmoreFeedBackList(int flag) {
+    public void loadmoreFeedBackList(final int flag) {
         mIConsultView.showDialog();
         int doctorId = UserManager.getInstance().getDoctorInfo().Doctor_ID;
         mConsultModel.GetFeedbackInfoList(flag, doctorId, mFeedbackPageIndex, PAGE_SIZE, new OnHandlerResultListener<GlobalShell<PageBean<FeedbackItemBean>>>() {
@@ -199,12 +199,12 @@ public class ConsultPresenter extends AbstractPresenter implements ConsultContra
                     if (resultData.Data.CurrentPageDataList != null) {
                         mFeedbackBeanList.addAll(resultData.Data.CurrentPageDataList);
                     }
-                    mIConsultView.refreshFeedbackPageList(mFeedbackBeanList);
-                    mIConsultView.refreshFeedbackPageFinish(PullToRefreshLayout.SUCCEED);
-                    mConssultDonePageIndex++;
+                    mIConsultView.refreshFeedbackPageList(mFeedbackBeanList, flag);
+                    mIConsultView.refreshFeedbackPageFinish(PullToRefreshLayout.SUCCEED, flag);
+                    mFeedbackPageIndex++;
                 } else {
                     mIConsultView.hideDialog(resultData.Message);
-                    mIConsultView.refreshFeedbackPageFinish(PullToRefreshLayout.FAIL);
+                    mIConsultView.refreshFeedbackPageFinish(PullToRefreshLayout.FAIL, flag);
                 }
             }
         });

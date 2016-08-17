@@ -24,7 +24,6 @@ import haozuo.com.healthdoctor.bean.ConsultItemBean;
 import haozuo.com.healthdoctor.bean.FeedbackItemBean;
 import haozuo.com.healthdoctor.contract.ConsultContract;
 import haozuo.com.healthdoctor.view.base.AbstractView;
-import haozuo.com.healthdoctor.view.threePart.common.PageFragment;
 
 /**
  * Created by hzguest3 on 2016/8/1.
@@ -33,7 +32,6 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
     Context mContext;
     View rootView;
     public ConsultContract.IConsultPresenter ConsultPresenter;
-    private OnPendingPageListener mPendingPageListener;
     @Bind(R.id.consult_Tab)
     TabLayout tabLayout;
     @Bind(R.id.consult_pager_pending)
@@ -58,11 +56,6 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
         return fragment;
     }
 
-
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -92,7 +85,7 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
 
 //        ConsultFragment.SimpleFragmentPagerAdapter pagerAdapter =
 //                fragment.new SimpleFragmentPagerAdapter(getChildFragmentManager());
-        pendingAdapter = new SimpleFragmentPagerAdapter(getActivity().getSupportFragmentManager());
+        pendingAdapter = new SimpleFragmentPagerAdapter(getChildFragmentManager());
         pagerPending.setAdapter(pendingAdapter);
         tabLayout.setupWithViewPager(pagerPending);
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
@@ -109,7 +102,7 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
                 }
                 if (id == R.id.rbDone) {
                     if (doneAdapter == null) {
-                        doneAdapter = new DonePagerAdapter(getActivity().getSupportFragmentManager());
+                        doneAdapter = new DonePagerAdapter(getChildFragmentManager());
                         pagerDone.setAdapter(doneAdapter);
                     }
                     pagerDone.setVisibility(View.VISIBLE);
@@ -117,7 +110,7 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
                 }
                 if (id == R.id.rbFeedback) {
                     if (feedBackAdapter == null) {
-                        feedBackAdapter = new FeedBackPagerAdapter(getActivity().getSupportFragmentManager());
+                        feedBackAdapter = new FeedBackPagerAdapter(getChildFragmentManager());
                         pagerFeedback.setAdapter(feedBackAdapter);
                     }
                     pagerFeedback.setVisibility(View.VISIBLE);
@@ -129,37 +122,27 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
     }
 
 
+    private List<ConsultPandingFragment> pendingList = new ArrayList<ConsultPandingFragment>();
+
     public class SimpleFragmentPagerAdapter extends FragmentPagerAdapter {
+
         private String tabTitles[] = new String[]{"全部", "转入", "我的"};
 
         public SimpleFragmentPagerAdapter(FragmentManager fm) {
             super(fm);
+            pendingList.add(ConsultPandingFragment.newInstance(3));
+            pendingList.add(ConsultPandingFragment.newInstance(2));
+            pendingList.add(ConsultPandingFragment.newInstance(1));
         }
-
-        private List<Fragment> fragList = new ArrayList<Fragment>() {
-        };
 
         @Override
         public Fragment getItem(int position) {
-            switch (position) {
-//                case 1:
-//                    return ConsultPandingFragment.newInstance(2);
-//                case 2:
-//                    return ConsultPandingFragment.newInstance(1);
-//                default:
-//                    return ConsultPandingFragment.newInstance(3);
-                case 1:
-                    return PageFragment.newInstance(2);
-                case 2:
-                    return PageFragment.newInstance(3);
-                default:
-                    return ConsultPandingFragment.newInstance(3);
-            }
+            return pendingList.get(position);
         }
 
         @Override
         public int getCount() {
-            return tabTitles.length;
+            return pendingList.size();
         }
 
         @Override
@@ -168,36 +151,27 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
         }
 
     }
+
+    private List<ConsultDoneFragment> doneList = new ArrayList<ConsultDoneFragment>();
 
     public class DonePagerAdapter extends FragmentPagerAdapter {
         private String tabTitles[] = new String[]{"当天", "本周", "本月"};
 
         public DonePagerAdapter(FragmentManager fm) {
             super(fm);
+            doneList.add(ConsultDoneFragment.newInstance(1));
+            doneList.add(ConsultDoneFragment.newInstance(2));
+            doneList.add(ConsultDoneFragment.newInstance(3));
         }
 
         @Override
         public Fragment getItem(int position) {
-            switch (position) {
-                case 1:
-                    return PageFragment.newInstance(2);
-                case 2:
-                    return PageFragment.newInstance(3);
-                default:
-                    return ConsultDoneFragment.newInstance(3);
-            }
-//                case 1:
-//                    return ConsultDoneFragment.newInstance(1);
-//                case 2:
-//                    return ConsultDoneFragment.newInstance(2);
-//                default:
-//                    return ConsultDoneFragment.newInstance(3);
-//            }
+            return doneList.get(position);
         }
 
         @Override
         public int getCount() {
-            return tabTitles.length;
+            return doneList.size();
         }
 
         @Override
@@ -207,37 +181,26 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
 
     }
 
+    private List<FeedbackFragment> feedbackList = new ArrayList<FeedbackFragment>();
+
     public class FeedBackPagerAdapter extends FragmentPagerAdapter {
         private String tabTitles[] = new String[]{"全部", "已反馈", "未反馈"};
 
-
         public FeedBackPagerAdapter(FragmentManager fm) {
             super(fm);
+            feedbackList.add(FeedbackFragment.newInstance(3));
+            feedbackList.add(FeedbackFragment.newInstance(2));
+            feedbackList.add(FeedbackFragment.newInstance(1));
         }
 
         @Override
         public Fragment getItem(int position) {
-            switch (position) {
-                case 1:
-                    return PageFragment.newInstance(2);
-                case 2:
-                    return PageFragment.newInstance(3);
-                default:
-                    return FeedbackFragment.newInstance(1);
-//                case 0:
-//                    return FeedbackFragment.newInstance(1);
-//                case 1:
-//                    return FeedbackFragment.newInstance(2);
-//                case 2:
-//                    return FeedbackFragment.newInstance(3);
-//                default:
-//                    return FeedbackFragment.newInstance(1);
-            }
+            return feedbackList.get(position);
         }
 
         @Override
         public int getCount() {
-            return tabTitles.length;
+            return feedbackList.size();
         }
 
         @Override
@@ -249,82 +212,68 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
 
     // TODO 实现view接口
     @Override
-    public void refreshPendingPageList(List<ConsultItemBean> consultItemBeanList) {
-        if (mPendingPageListener != null) {
-            mPendingPageListener.refreshConsultDetailList(consultItemBeanList);
+    public void refreshPendingPageList(List<ConsultItemBean> dataList, int flag) {
+        if (flag == 3) {
+            pendingList.get(0).refreshConsultPendingList(dataList);
+        }
+        if (flag == 2) {
+            pendingList.get(1).refreshConsultPendingList(dataList);
+        }
+        if (flag == 1) {
+            pendingList.get(2).refreshConsultPendingList(dataList);
         }
     }
 
     @Override
-    public void refreshFinish(int status) {
-        if (mPendingPageListener != null) {
-            mPendingPageListener.refreshFinish(status);
+    public void refreshFinish(int status, int flag) {
+        if (flag == 3) {
+            pendingList.get(0).refreshFinish(status);
+        }
+        if (flag == 2) {
+            pendingList.get(1).refreshFinish(status);
+        }
+        if (flag == 1) {
+            pendingList.get(2).refreshFinish(status);
         }
     }
 
     @Override
-    public void refreshConsultDonePageList(List<ConsultDoneItemBean> dataList) {
-        if (mConsultDonePageListener != null) {
-            mConsultDonePageListener.refreshConsultDoneList(dataList);
-        }
+    public void refreshConsultDonePageList(List<ConsultDoneItemBean> dataList, int flag) {
+        doneList.get(flag - 1).refreshConsultDoneList(dataList);
+    }
+
+
+    @Override
+    public void refreshConsultDonePageFinish(int status, int flag) {
+        doneList.get(flag - 1).refreshFinish(status);
     }
 
     @Override
-    public void refreshConsultDonePageFinish(int status) {
-        if (mConsultDonePageListener != null) {
-            mConsultDonePageListener.refreshFinish(status);
+    public void refreshFeedbackPageList(List<FeedbackItemBean> dataList, int flag) {
+        if (flag == 1) {
+            feedbackList.get(2).refreshFeedbackList(dataList);
         }
+        if (flag == 2) {
+            feedbackList.get(1).refreshFeedbackList(dataList);
+        }
+        if (flag == 3) {
+            feedbackList.get(0).refreshFeedbackList(dataList);
+        }
+
     }
 
     @Override
-    public void refreshFeedbackPageList(List<FeedbackItemBean> dataList) {
-        if (mFeedBackPageListener != null) {
-            mFeedBackPageListener.refreshFeedBackList(dataList);
+    public void refreshFeedbackPageFinish(int status, int flag) {
+        if (flag == 1) {
+            feedbackList.get(2).refreshFinish(status);
+        }
+        if (flag == 2) {
+            feedbackList.get(1).refreshFinish(status);
+        }
+        if (flag == 3) {
+            feedbackList.get(0).refreshFinish(status);
         }
     }
-
-    @Override
-    public void refreshFeedbackPageFinish(int status) {
-        if (mFeedBackPageListener != null) {
-            mFeedBackPageListener.refreshFinish(status);
-        }
-    }
-
-    // TODO 提供给二级片段的回调
-    public interface OnPendingPageListener {
-        void refreshConsultDetailList(List<ConsultItemBean> consultDetailBeanList);
-
-        void refreshFinish(int status);
-    }
-
-    public void setOnPendingRefreshListener(OnPendingPageListener pendingPageListener) {
-        mPendingPageListener = pendingPageListener;
-    }
-
-    private OnConsultDonePageListener mConsultDonePageListener;
-
-    public interface OnConsultDonePageListener {
-        void refreshConsultDoneList(List<ConsultDoneItemBean> dataList);
-
-        void refreshFinish(int status);
-    }
-
-    public void setOnConsultDonePageListener(OnConsultDonePageListener consultDonePageListener) {
-        mConsultDonePageListener = consultDonePageListener;
-    }
-
-    private OnFeedBackPageListener mFeedBackPageListener;
-
-    public interface OnFeedBackPageListener {
-        void refreshFeedBackList(List<FeedbackItemBean> dataList);
-
-        void refreshFinish(int status);
-    }
-
-    public void setOnFeedBackPageListener(OnFeedBackPageListener feedBackPageListener) {
-        mFeedBackPageListener = feedBackPageListener;
-    }
-
 
     public void refreshFeedBackList(int flag) {
         ConsultPresenter.refreshFeedBackList(flag);

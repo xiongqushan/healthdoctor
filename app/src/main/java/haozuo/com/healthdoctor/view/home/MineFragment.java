@@ -13,15 +13,22 @@ import haozuo.com.healthdoctor.R;
  * by zy  2016.08.15.
  */
 public class MineFragment extends Fragment {
+    private View view;
 
     public MineFragment() {
     }
 
+    public static MineFragment newInstance() {
+        MineFragment fragment = new MineFragment();
+        return fragment;
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_mine, container, false);
+        if (view == null) {
+            view = inflater.inflate(R.layout.fragment_mine, container, false);
+        }
         return view;
     }
 

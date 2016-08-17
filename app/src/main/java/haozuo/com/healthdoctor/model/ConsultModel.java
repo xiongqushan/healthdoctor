@@ -154,7 +154,7 @@ public class ConsultModel extends AbstractModel {
                 });
     }
 
-    public void getUsefulExpression(final OnHandlerResultListener<GlobalShell<List<UsefulExpressionBean>>> callbackListener){
+    public void getUsefulExpression(final OnHandlerResultListener<GlobalShell<List<UsefulExpressionBean>>> callbackListener) {
         mIConsultService.getUsefulExpression(requestTag())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -166,27 +166,26 @@ public class ConsultModel extends AbstractModel {
 
                     @Override
                     public void onError(Throwable e) {
-                        GlobalShell<List<UsefulExpressionBean>> entity=new GlobalShell<List<UsefulExpressionBean>>(e.getMessage());
+                        GlobalShell<List<UsefulExpressionBean>> entity = new GlobalShell<List<UsefulExpressionBean>>(e.getMessage());
                         callbackListener.handlerResult(entity);
                     }
 
                     @Override
                     public void onNext(BaseBean<List<UsefulExpressionBean>> resultBean) {
-                        GlobalShell<List<UsefulExpressionBean>> entity=null;
-                        if(resultBean.state>0) {
+                        GlobalShell<List<UsefulExpressionBean>> entity = null;
+                        if (resultBean.state > 0) {
                             List<UsefulExpressionBean> result = resultBean.Data;
-                            entity=new GlobalShell<List<UsefulExpressionBean>>(result);
-                        }
-                        else{
-                            entity=new GlobalShell<List<UsefulExpressionBean>>(resultBean.message);
+                            entity = new GlobalShell<List<UsefulExpressionBean>>(result);
+                        } else {
+                            entity = new GlobalShell<List<UsefulExpressionBean>>(resultBean.message);
                         }
                         callbackListener.handlerResult(entity);
                     }
                 });
     }
 
-    public void searchUsefulExpression(String keyWord,final OnHandlerResultListener<GlobalShell<List<UsefulExpressionBean>>> callbackListener){
-        mIConsultService.searchUsefulExpression(requestTag(),keyWord)
+    public void searchUsefulExpression(String keyWord, final OnHandlerResultListener<GlobalShell<List<UsefulExpressionBean>>> callbackListener) {
+        mIConsultService.searchUsefulExpression(requestTag(), keyWord)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<BaseBean<List<UsefulExpressionBean>>>() {
@@ -197,19 +196,18 @@ public class ConsultModel extends AbstractModel {
 
                     @Override
                     public void onError(Throwable e) {
-                        GlobalShell<List<UsefulExpressionBean>> entity=new GlobalShell<List<UsefulExpressionBean>>(e.getMessage());
+                        GlobalShell<List<UsefulExpressionBean>> entity = new GlobalShell<List<UsefulExpressionBean>>(e.getMessage());
                         callbackListener.handlerResult(entity);
                     }
 
                     @Override
                     public void onNext(BaseBean<List<UsefulExpressionBean>> resultBean) {
-                        GlobalShell<List<UsefulExpressionBean>> entity=null;
-                        if(resultBean.state>0) {
+                        GlobalShell<List<UsefulExpressionBean>> entity = null;
+                        if (resultBean.state > 0) {
                             List<UsefulExpressionBean> result = resultBean.Data;
-                            entity=new GlobalShell<List<UsefulExpressionBean>>(result);
-                        }
-                        else{
-                            entity=new GlobalShell<List<UsefulExpressionBean>>(resultBean.message);
+                            entity = new GlobalShell<List<UsefulExpressionBean>>(result);
+                        } else {
+                            entity = new GlobalShell<List<UsefulExpressionBean>>(resultBean.message);
                         }
                         callbackListener.handlerResult(entity);
                     }
