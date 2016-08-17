@@ -2,18 +2,17 @@ package haozuo.com.healthdoctor.presenter;
 
 import android.support.annotation.NonNull;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import haozuo.com.healthdoctor.bean.ConsultDoneItemBean;
 import haozuo.com.healthdoctor.bean.ConsultItemBean;
+import haozuo.com.healthdoctor.bean.FeedbackItemBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
-import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
 import haozuo.com.healthdoctor.bean.PageBean;
 import haozuo.com.healthdoctor.contract.ConsultContract;
-import haozuo.com.healthdoctor.contract.GroupContract;
 import haozuo.com.healthdoctor.contract.IBaseModel;
 import haozuo.com.healthdoctor.contract.IBaseView;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
@@ -26,18 +25,24 @@ import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout;
  */
 
 public class ConsultPresenter extends AbstractPresenter implements ConsultContract.IConsultPresenter {
-    private int PAGE_SIZE=20;
-    private int mCurrentPageIndex=1;
-    private int mLeastPageIndex=1;
+    private int PAGE_SIZE = 20;
+    private int mCurrentPageIndex = 1;
+    private int mConssultDonePageIndex = 1;
+    private int mFeedbackPageIndex = 1;
+    private int mLeastPageIndex = 1;
     private ConsultContract.IConsultView mIConsultView;
     private ConsultModel mConsultModel;
     private List<ConsultItemBean> mConsultItemBeanList;
+    private List<ConsultDoneItemBean> mConsultDoneBeanList;
+    private List<FeedbackItemBean> mFeedbackBeanList;
 
     @Inject
-    public ConsultPresenter(@NonNull  ConsultContract.IConsultView iConsultView,@NonNull ConsultModel consultModel){
+    public ConsultPresenter(@NonNull ConsultContract.IConsultView iConsultView, @NonNull ConsultModel consultModel) {
         mConsultItemBeanList = new ArrayList<ConsultItemBean>();
-        mIConsultView=iConsultView;
-        mConsultModel=consultModel;
+        mConsultDoneBeanList = new ArrayList<ConsultDoneItemBean>();
+        mFeedbackBeanList = new ArrayList<FeedbackItemBean>();
+        mIConsultView = iConsultView;
+        mConsultModel = consultModel;
         iConsultView.setPresenter(this);
     }
 
@@ -57,51 +62,149 @@ public class ConsultPresenter extends AbstractPresenter implements ConsultContra
     }
 
     @Override
-    public void refreshCustomList(int flag) {
-        //http request here;
+    public void refreshCustomList(final int flag) {
+        mCurrentPageIndex = 1;
         mIConsultView.showDialog();
-        int doctorId= UserManager.getInstance().getDoctorInfo().Doctor_ID;
-        mConsultModel.GetGroupCustInfoList(doctorId,mCurrentPageIndex,PAGE_SIZE,flag, new OnHandlerResultListener<GlobalShell<PageBean<ConsultItemBean>>>() {
+        int doctorId = UserManager.getInstance().getDoctorInfo().Doctor_ID;
+        mConsultModel.GetGroupCustInfoList(doctorId, mCurrentPageIndex, PAGE_SIZE, flag, new OnHandlerResultListener<GlobalShell<PageBean<ConsultItemBean>>>() {
             @Override
             public void handlerResult(GlobalShell<PageBean<ConsultItemBean>> resultData) {
-                if(resultData.LogicSuccess) {
+                if (resultData.LogicSuccess) {
                     mIConsultView.hideDialog();
                     mConsultItemBeanList.clear();
-                    if(resultData.Data.CurrentPageDataList != null){
+                    if (resultData.Data.CurrentPageDataList != null) {
                         mConsultItemBeanList.addAll(resultData.Data.CurrentPageDataList);
                     }
-                    mIConsultView.RefreshPendingPageList(mConsultItemBeanList);
-                    mIConsultView.refreshFinish(PullToRefreshLayout.SUCCEED);
-                }
-                else{
+                    mIConsultView.refreshPendingPageList(mConsultItemBeanList, flag);
+                    mIConsultView.refreshFinish(PullToRefreshLayout.SUCCEED, flag);
+                } else {
                     mIConsultView.hideDialog(resultData.Message);
-                    mIConsultView.refreshFinish(PullToRefreshLayout.FAIL);
-                    mCurrentPageIndex=mLeastPageIndex;
+                    mIConsultView.refreshFinish(PullToRefreshLayout.FAIL, flag);
+                    mCurrentPageIndex = mLeastPageIndex;
                 }
             }
         });
     }
 
     @Override
-    public void loadmoreCustomList(int flag) {
+    public void loadmoreCustomList(final int flag) {
         //http request here;
-        mLeastPageIndex=mCurrentPageIndex;
+        mLeastPageIndex = mCurrentPageIndex;
         mCurrentPageIndex++;
         mIConsultView.showDialog();
-        int doctorId= UserManager.getInstance().getDoctorInfo().Doctor_ID;
-        mConsultModel.GetGroupCustInfoList(doctorId,mCurrentPageIndex,PAGE_SIZE,flag, new OnHandlerResultListener<GlobalShell<PageBean<ConsultItemBean>>>() {
+        int doctorId = UserManager.getInstance().getDoctorInfo().Doctor_ID;
+        mConsultModel.GetGroupCustInfoList(doctorId, mCurrentPageIndex, PAGE_SIZE, flag, new OnHandlerResultListener<GlobalShell<PageBean<ConsultItemBean>>>() {
             @Override
             public void handlerResult(GlobalShell<PageBean<ConsultItemBean>> resultData) {
-                if(resultData.LogicSuccess) {
+                if (resultData.LogicSuccess) {
                     mIConsultView.hideDialog();
                     mConsultItemBeanList.addAll(resultData.Data.CurrentPageDataList);
-                    mIConsultView.RefreshPendingPageList(mConsultItemBeanList);
-                    mIConsultView.refreshFinish(PullToRefreshLayout.SUCCEED);
-                }
-                else{
+                    mIConsultView.refreshPendingPageList(mConsultItemBeanList, flag);
+                    mIConsultView.refreshFinish(PullToRefreshLayout.SUCCEED, flag);
+                } else {
                     mIConsultView.hideDialog(resultData.Message);
-                    mIConsultView.refreshFinish(PullToRefreshLayout.FAIL);
-                    mCurrentPageIndex=mLeastPageIndex;
+                    mIConsultView.refreshFinish(PullToRefreshLayout.FAIL, flag);
+                    mCurrentPageIndex = mLeastPageIndex;
+                }
+            }
+        });
+    }
+
+    @Override
+    public void refreshConsultDoneList(final int flag) {
+        String beginCommitOn = "2016-08-01";
+        String endCommitOn = "2016-08-16";
+        mConssultDonePageIndex = 1;
+        mIConsultView.showDialog();
+        int doctorId = UserManager.getInstance().getDoctorInfo().Doctor_ID;
+        mConsultModel.GetConsultDoneInfoList(doctorId, beginCommitOn, endCommitOn, mConssultDonePageIndex, PAGE_SIZE, new OnHandlerResultListener<GlobalShell<PageBean<ConsultDoneItemBean>>>() {
+            @Override
+            public void handlerResult(GlobalShell<PageBean<ConsultDoneItemBean>> resultData) {
+                if (resultData.LogicSuccess) {
+                    mIConsultView.hideDialog();
+                    mConsultDoneBeanList.clear();
+                    if (resultData.Data.CurrentPageDataList != null) {
+                        mConsultDoneBeanList.addAll(resultData.Data.CurrentPageDataList);
+                    }
+                    mIConsultView.refreshConsultDonePageList(mConsultDoneBeanList, flag);
+                    mIConsultView.refreshConsultDonePageFinish(PullToRefreshLayout.SUCCEED, flag);
+                    mConssultDonePageIndex++;
+                } else {
+                    mIConsultView.hideDialog(resultData.Message);
+                    mIConsultView.refreshConsultDonePageFinish(PullToRefreshLayout.FAIL, flag);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void loadmoreConsultDoneList(final int flag) {
+        String beginCommitOn = "2016-08-01";
+        String endCommitOn = "2016-08-16";
+        mIConsultView.showDialog();
+        int doctorId = UserManager.getInstance().getDoctorInfo().Doctor_ID;
+        mConsultModel.GetConsultDoneInfoList(doctorId, beginCommitOn, endCommitOn, mConssultDonePageIndex, PAGE_SIZE, new OnHandlerResultListener<GlobalShell<PageBean<ConsultDoneItemBean>>>() {
+            @Override
+            public void handlerResult(GlobalShell<PageBean<ConsultDoneItemBean>> resultData) {
+                if (resultData.LogicSuccess) {
+                    mIConsultView.hideDialog();
+                    if (resultData.Data.CurrentPageDataList != null) {
+                        mConsultDoneBeanList.addAll(resultData.Data.CurrentPageDataList);
+                    }
+                    mIConsultView.refreshConsultDonePageList(mConsultDoneBeanList, flag);
+                    mIConsultView.refreshConsultDonePageFinish(PullToRefreshLayout.SUCCEED, flag);
+                    mConssultDonePageIndex++;
+                } else {
+                    mIConsultView.hideDialog(resultData.Message);
+                    mIConsultView.refreshConsultDonePageFinish(PullToRefreshLayout.FAIL, flag);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void refreshFeedBackList(final int flag) {
+        mFeedbackPageIndex = 1;
+        mIConsultView.showDialog();
+        int doctorId = UserManager.getInstance().getDoctorInfo().Doctor_ID;
+        mConsultModel.GetFeedbackInfoList(flag, doctorId, mFeedbackPageIndex, PAGE_SIZE, new OnHandlerResultListener<GlobalShell<PageBean<FeedbackItemBean>>>() {
+            @Override
+            public void handlerResult(GlobalShell<PageBean<FeedbackItemBean>> resultData) {
+                if (resultData.LogicSuccess) {
+                    mIConsultView.hideDialog();
+                    mFeedbackBeanList.clear();
+                    if (resultData.Data.CurrentPageDataList != null) {
+                        mFeedbackBeanList.addAll(resultData.Data.CurrentPageDataList);
+                    }
+                    mIConsultView.refreshFeedbackPageList(mFeedbackBeanList, flag);
+                    mIConsultView.refreshFeedbackPageFinish(PullToRefreshLayout.SUCCEED, flag);
+                    mFeedbackPageIndex++;
+                } else {
+                    mIConsultView.hideDialog(resultData.Message);
+                    mIConsultView.refreshFeedbackPageFinish(PullToRefreshLayout.FAIL, flag);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void loadmoreFeedBackList(final int flag) {
+        mIConsultView.showDialog();
+        int doctorId = UserManager.getInstance().getDoctorInfo().Doctor_ID;
+        mConsultModel.GetFeedbackInfoList(flag, doctorId, mFeedbackPageIndex, PAGE_SIZE, new OnHandlerResultListener<GlobalShell<PageBean<FeedbackItemBean>>>() {
+            @Override
+            public void handlerResult(GlobalShell<PageBean<FeedbackItemBean>> resultData) {
+                if (resultData.LogicSuccess) {
+                    mIConsultView.hideDialog();
+                    if (resultData.Data.CurrentPageDataList != null) {
+                        mFeedbackBeanList.addAll(resultData.Data.CurrentPageDataList);
+                    }
+                    mIConsultView.refreshFeedbackPageList(mFeedbackBeanList, flag);
+                    mIConsultView.refreshFeedbackPageFinish(PullToRefreshLayout.SUCCEED, flag);
+                    mFeedbackPageIndex++;
+                } else {
+                    mIConsultView.hideDialog(resultData.Message);
+                    mIConsultView.refreshFeedbackPageFinish(PullToRefreshLayout.FAIL, flag);
                 }
             }
         });

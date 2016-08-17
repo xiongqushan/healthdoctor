@@ -1,7 +1,5 @@
 package haozuo.com.healthdoctor.ioc;
 
-import android.support.annotation.NonNull;
-
 import dagger.Module;
 import dagger.Provides;
 import haozuo.com.healthdoctor.contract.ConsultContract;

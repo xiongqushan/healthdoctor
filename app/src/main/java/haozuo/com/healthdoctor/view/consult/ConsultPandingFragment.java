@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +23,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.ConsultItemBean;
-import haozuo.com.healthdoctor.contract.ConsultContract;
 import haozuo.com.healthdoctor.util.DateUtil;
 import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout;
 
@@ -30,20 +31,15 @@ public class ConsultPandingFragment extends Fragment {
     public static final String ARG_PAGE = "ARG_PAGE_CONSULTPANDINGFRAGMENT";
     Context mContext;
     View rootView;
-    ConsultFragment mConsultFragment;
-    ConsultContract.IConsultPresenter mConsultPresenter;
-    ConsultListAdapter mConsultListAdapter;
-    //    RadioGroup.OnCheckedChangeListener mOnCheckedChangeListener;
+    private ConsultFragment mConsultFragment;
+    private ConsultListAdapter adapter;
     View.OnClickListener mOnClicklistener;
-
-    private int mFlag = 3;
+    private int mFlag;// TODO 3全部 2转入 1我的
 
     @Bind(R.id.consult_pull_to_refresh_layout)
-    PullToRefreshLayout consult_pull_to_refresh_layout;
+    PullToRefreshLayout ptrLayout;
     @Bind(R.id.consult_detail_List)
     ListView consult_detail_List;
-//    @Bind(R.id.consult_Tab)
-//    RadioGroup consult_Tab;
 
     public ConsultPandingFragment() {
     }
@@ -52,11 +48,11 @@ public class ConsultPandingFragment extends Fragment {
 //        this.mFlag = tab;
 //    }
 
-    public static ConsultPandingFragment newInstance() {
-        ConsultPandingFragment fragment = new ConsultPandingFragment();
-        return fragment;
-    }
-
+    //    public static ConsultPandingFragment newInstance() {
+//        ConsultPandingFragment fragment = new ConsultPandingFragment();
+//        return fragment;
+//    }
+//
     public static ConsultPandingFragment newInstance(int flag) {
         Bundle args = new Bundle();
         args.putInt(ARG_PAGE, flag);
@@ -65,8 +61,18 @@ public class ConsultPandingFragment extends Fragment {
         return fragment;
     }
 
+
+    public void refreshConsultPendingList(List<ConsultItemBean> dataList) {
+        adapter.refresh(dataList);
+    }
+
+    public void refreshFinish(int status) {
+        ptrLayout.refreshFinish(status);
+        ptrLayout.loadmoreFinish(status);
+    }
+
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mFlag = getArguments().getInt(ARG_PAGE, 3);
     }
@@ -77,7 +83,6 @@ public class ConsultPandingFragment extends Fragment {
         if (rootView == null) {
             mContext = getContext();
             mConsultFragment = (ConsultFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.content_consult);
-//            mFlag = 3;
             mOnClicklistener = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -88,70 +93,34 @@ public class ConsultPandingFragment extends Fragment {
                     mContext.startActivity(intent);
                 }
             };
-            mConsultFragment.ConsultPresenter.refreshCustomList(mFlag); //首次加载全部咨询内容
-            mConsultFragment.setOnPendingRefreshListener(new ConsultFragment.OnPendingPageListener() {
-                @Override
-                public void refreshConsultDetailList(List<ConsultItemBean> consultItemBeanList) {
-                    mConsultListAdapter.refresh(consultItemBeanList);
-                    mConsultListAdapter.notifyDataSetChanged();
-                }
 
-                @Override
-                public void refreshFinish(int status) {
-                    consult_pull_to_refresh_layout.refreshFinish(status);
-                }
-            });
-
-            mConsultPresenter = mConsultFragment.ConsultPresenter;
-//            if (rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_consult_panding_list, container, false);
             ButterKnife.bind(this, rootView);
-//            }
-
-            mConsultListAdapter = new ConsultListAdapter(mContext, mOnClicklistener);
-
-//            mOnCheckedChangeListener = new RadioGroup.OnCheckedChangeListener() {
-//                @Override
-//                public void onCheckedChanged(RadioGroup group, int checkedId) {
-//                    switch (checkedId) {
-//                        case R.id.btn_consult_All:
-//                            mFlag = 3;
-//                            mConsultFragment.ConsultPresenter.refreshCustomList(mFlag);//全部
-//                            break;
-//                        case R.id.btn_consult_Submit:
-//                            mFlag = 2;
-//                            mConsultFragment.ConsultPresenter.refreshCustomList(mFlag);//转入
-//                            break;
-//                        case R.id.btn_consult_Mine:
-//                            mFlag = 1;
-//                            mConsultFragment.ConsultPresenter.refreshCustomList(mFlag);//我的
-//                            break;
-//                    }
-//                }
-//            };
-
-            consult_detail_List.setAdapter(mConsultListAdapter);
-//            consult_Tab.setOnCheckedChangeListener(mOnCheckedChangeListener);
-            consult_pull_to_refresh_layout.setOnRefreshListener(new PullListener());
+            adapter = new ConsultListAdapter(mOnClicklistener);
+            Log.e("adapterObject" + mFlag, adapter.toString());
+            consult_detail_List.setAdapter(adapter);
+            ptrLayout.setOnRefreshListener(new PullListener());
+            mConsultFragment.refreshCustomList(mFlag); //首次加载全部咨询内容
         }
         return rootView;
     }
 
-    class ConsultListAdapter extends BaseAdapter {
-        private LayoutInflater myInflater;
-        List<ConsultItemBean> dataSource;
-        private String Cphoto;
 
-        public ConsultListAdapter(Context context, View.OnClickListener onClickListener) {
-            this.myInflater = LayoutInflater.from(context);
-            dataSource = new ArrayList<>();
+    class ConsultListAdapter extends BaseAdapter {
+        private String Cphoto;
+        List<ConsultItemBean> dataSource;
+
+        public ConsultListAdapter(View.OnClickListener onClickListener) {
             mOnClicklistener = onClickListener;
+            dataSource = new ArrayList<>();
         }
 
         public void refresh(List<ConsultItemBean> dataList) {
-            dataSource = dataList;
+            dataSource.clear();
+            dataSource.addAll(dataList);
             notifyDataSetChanged();
         }
+
 
         @Override
         public int getCount() {
@@ -173,7 +142,7 @@ public class ConsultPandingFragment extends Fragment {
             ViewHolder holder = null;
             if (convertView == null) {
                 holder = new ViewHolder();
-                convertView = myInflater.inflate(R.layout.fragment_consult_panding_item, parent, false);
+                convertView = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_consult_panding_item, parent, false);
                 holder.Cphoto = (SimpleDraweeView) convertView.findViewById(R.id.drawee_consult_Cphoto);
                 holder.Cname = (TextView) convertView.findViewById(R.id.txt_consult_Cname);
                 holder.LastConsult = (TextView) convertView.findViewById(R.id.txt_consult_LastConsult);
@@ -211,12 +180,14 @@ public class ConsultPandingFragment extends Fragment {
 
         @Override
         public void onRefresh() {
-            mConsultPresenter.refreshCustomList(mFlag);
+            Log.e("onRefresh mFlag", mFlag + "");
+            mConsultFragment.refreshCustomList(mFlag);
         }
 
         @Override
         public void onLoadMore() {
-            mConsultPresenter.loadmoreCustomList(mFlag);
+            Log.e("onLoadMore mFlag", mFlag + "");
+            mConsultFragment.loadmoreCustomList(mFlag);
         }
 
     }

@@ -323,7 +323,7 @@ public class PullToRefreshLayout extends RelativeLayout {
      */
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        if(((Pullable) pullableView).isLocked())
+        if (((Pullable) pullableView).isLocked())
             return super.dispatchTouchEvent(ev);
         switch (ev.getActionMasked()) {
             case MotionEvent.ACTION_CANCEL:

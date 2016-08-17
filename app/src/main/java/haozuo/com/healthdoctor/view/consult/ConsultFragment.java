@@ -10,6 +10,8 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +19,9 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
+import haozuo.com.healthdoctor.bean.ConsultDoneItemBean;
 import haozuo.com.healthdoctor.bean.ConsultItemBean;
+import haozuo.com.healthdoctor.bean.FeedbackItemBean;
 import haozuo.com.healthdoctor.contract.ConsultContract;
 import haozuo.com.healthdoctor.view.base.AbstractView;
 
@@ -28,11 +32,21 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
     Context mContext;
     View rootView;
     public ConsultContract.IConsultPresenter ConsultPresenter;
-    private OnPendingPageListener mPendingPageListener;
     @Bind(R.id.consult_Tab)
     TabLayout tabLayout;
-    @Bind(R.id.consult_Vp)
-    ViewPager mViewPager;
+    @Bind(R.id.consult_pager_pending)
+    ViewPager pagerPending;
+    @Bind(R.id.consult_pager_done)
+    ViewPager pagerDone;
+    @Bind(R.id.consult_pager_feedback)
+    ViewPager pagerFeedback;
+    @Bind(R.id.tv_msgnum)
+    TextView tvMsgNum;
+    @Bind(R.id.groupConsult)
+    RadioGroup mRadioGroup;
+    private SimpleFragmentPagerAdapter pendingAdapter;
+    private DonePagerAdapter doneAdapter;
+    private FeedBackPagerAdapter feedBackAdapter;
 
     public ConsultFragment() {
     }
@@ -42,10 +56,6 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
         return fragment;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,43 +81,68 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
     }
 
     public void InitView() {
-        ConsultFragment fragment = new ConsultFragment();
+//        ConsultFragment fragment = new ConsultFragment();
 
 //        ConsultFragment.SimpleFragmentPagerAdapter pagerAdapter =
 //                fragment.new SimpleFragmentPagerAdapter(getChildFragmentManager());
-        ConsultFragment.SimpleFragmentPagerAdapter pagerAdapter =
-                fragment.new SimpleFragmentPagerAdapter(getActivity().getSupportFragmentManager());
-        mViewPager.setAdapter(pagerAdapter);
-        tabLayout.setupWithViewPager(mViewPager);
-
+        pendingAdapter = new SimpleFragmentPagerAdapter(getChildFragmentManager());
+        pagerPending.setAdapter(pendingAdapter);
+        tabLayout.setupWithViewPager(pagerPending);
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int id) {
+                pagerFeedback.setVisibility(View.GONE);
+                pagerPending.setVisibility(View.GONE);
+                pagerDone.setVisibility(View.GONE);
+                if (id == R.id.rbPending) {
+                    pagerPending.setVisibility(View.VISIBLE);
+                    tabLayout.setupWithViewPager(pagerPending);
+                }
+                if (id == R.id.rbDone) {
+                    if (doneAdapter == null) {
+                        doneAdapter = new DonePagerAdapter(getChildFragmentManager());
+                        pagerDone.setAdapter(doneAdapter);
+                    }
+                    pagerDone.setVisibility(View.VISIBLE);
+                    tabLayout.setupWithViewPager(pagerDone);
+                }
+                if (id == R.id.rbFeedback) {
+                    if (feedBackAdapter == null) {
+                        feedBackAdapter = new FeedBackPagerAdapter(getChildFragmentManager());
+                        pagerFeedback.setAdapter(feedBackAdapter);
+                    }
+                    pagerFeedback.setVisibility(View.VISIBLE);
+                    tabLayout.setupWithViewPager(pagerFeedback);
+                }
+
+            }
+        });
     }
 
+
+    private List<ConsultPandingFragment> pendingList = new ArrayList<ConsultPandingFragment>();
+
     public class SimpleFragmentPagerAdapter extends FragmentPagerAdapter {
+
         private String tabTitles[] = new String[]{"全部", "转入", "我的"};
-        private List<Fragment> fragList = new ArrayList<Fragment>() {
-        };
 
         public SimpleFragmentPagerAdapter(FragmentManager fm) {
             super(fm);
+            pendingList.add(ConsultPandingFragment.newInstance(3));
+            pendingList.add(ConsultPandingFragment.newInstance(2));
+            pendingList.add(ConsultPandingFragment.newInstance(1));
         }
 
         @Override
         public Fragment getItem(int position) {
-            switch (position) {
-                case 1:
-                    return  ConsultPandingFragment.newInstance(2);
-                case 2:
-                    return  ConsultPandingFragment.newInstance(1);
-                default:
-                    return ConsultPandingFragment.newInstance(3);
-            }
+            return pendingList.get(position);
         }
 
         @Override
         public int getCount() {
-            return tabTitles.length;
+            return pendingList.size();
         }
 
         @Override
@@ -117,29 +152,152 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
 
     }
 
-    public void setOnPendingRefreshListener(OnPendingPageListener pendingPageListener) {
-        mPendingPageListener = pendingPageListener;
+    private List<ConsultDoneFragment> doneList = new ArrayList<ConsultDoneFragment>();
+
+    public class DonePagerAdapter extends FragmentPagerAdapter {
+        private String tabTitles[] = new String[]{"当天", "本周", "本月"};
+
+        public DonePagerAdapter(FragmentManager fm) {
+            super(fm);
+            doneList.add(ConsultDoneFragment.newInstance(1));
+            doneList.add(ConsultDoneFragment.newInstance(2));
+            doneList.add(ConsultDoneFragment.newInstance(3));
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return doneList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return doneList.size();
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return tabTitles[position];
+        }
+
     }
 
+    private List<FeedbackFragment> feedbackList = new ArrayList<FeedbackFragment>();
 
+    public class FeedBackPagerAdapter extends FragmentPagerAdapter {
+        private String tabTitles[] = new String[]{"全部", "已反馈", "未反馈"};
+
+        public FeedBackPagerAdapter(FragmentManager fm) {
+            super(fm);
+            feedbackList.add(FeedbackFragment.newInstance(3));
+            feedbackList.add(FeedbackFragment.newInstance(2));
+            feedbackList.add(FeedbackFragment.newInstance(1));
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return feedbackList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return feedbackList.size();
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return tabTitles[position];
+        }
+
+    }
+
+    // TODO 实现view接口
     @Override
-    public void RefreshPendingPageList(List<ConsultItemBean> consultItemBeanList) {
-        if (mPendingPageListener != null) {
-            mPendingPageListener.refreshConsultDetailList(consultItemBeanList);
+    public void refreshPendingPageList(List<ConsultItemBean> dataList, int flag) {
+        if (flag == 3) {
+            pendingList.get(0).refreshConsultPendingList(dataList);
+        }
+        if (flag == 2) {
+            pendingList.get(1).refreshConsultPendingList(dataList);
+        }
+        if (flag == 1) {
+            pendingList.get(2).refreshConsultPendingList(dataList);
         }
     }
 
     @Override
-    public void refreshFinish(int status) {
-        if (mPendingPageListener != null) {
-            mPendingPageListener.refreshFinish(status);
+    public void refreshFinish(int status, int flag) {
+        if (flag == 3) {
+            pendingList.get(0).refreshFinish(status);
+        }
+        if (flag == 2) {
+            pendingList.get(1).refreshFinish(status);
+        }
+        if (flag == 1) {
+            pendingList.get(2).refreshFinish(status);
         }
     }
 
-    public interface OnPendingPageListener {
-        void refreshConsultDetailList(List<ConsultItemBean> consultDetailBeanList);
-
-        void refreshFinish(int status);
+    @Override
+    public void refreshConsultDonePageList(List<ConsultDoneItemBean> dataList, int flag) {
+        doneList.get(flag - 1).refreshConsultDoneList(dataList);
     }
+
+
+    @Override
+    public void refreshConsultDonePageFinish(int status, int flag) {
+        doneList.get(flag - 1).refreshFinish(status);
+    }
+
+    @Override
+    public void refreshFeedbackPageList(List<FeedbackItemBean> dataList, int flag) {
+        if (flag == 1) {
+            feedbackList.get(2).refreshFeedbackList(dataList);
+        }
+        if (flag == 2) {
+            feedbackList.get(1).refreshFeedbackList(dataList);
+        }
+        if (flag == 3) {
+            feedbackList.get(0).refreshFeedbackList(dataList);
+        }
+
+    }
+
+    @Override
+    public void refreshFeedbackPageFinish(int status, int flag) {
+        if (flag == 1) {
+            feedbackList.get(2).refreshFinish(status);
+        }
+        if (flag == 2) {
+            feedbackList.get(1).refreshFinish(status);
+        }
+        if (flag == 3) {
+            feedbackList.get(0).refreshFinish(status);
+        }
+    }
+
+    public void refreshFeedBackList(int flag) {
+        ConsultPresenter.refreshFeedBackList(flag);
+    }
+
+    public void loadmoreFeedBackList(int flag) {
+        ConsultPresenter.loadmoreFeedBackList(flag);
+    }
+
+    public void refreshConsultDoneList(int flag) {
+        ConsultPresenter.refreshConsultDoneList(flag);
+    }
+
+    public void loadmoreConsultDoneList(int flag) {
+        ConsultPresenter.loadmoreConsultDoneList(flag);
+    }
+
+    public void refreshCustomList(int flag) {
+        ConsultPresenter.refreshCustomList(flag);
+    }
+
+    public void loadmoreCustomList(int flag) {
+        ConsultPresenter.loadmoreCustomList(flag);
+    }
+
 
 }

@@ -32,7 +32,7 @@ public class LoadingDialog extends Dialog {
         ivLoading = (ImageView) vContent.findViewById(R.id.ivLoading);
         animator = ObjectAnimator.ofFloat(ivLoading, "rotation", 0, 360).setDuration(800);
         animator.setInterpolator(new LinearInterpolator());
-        animator.setRepeatCount(5000);
+        animator.setRepeatCount(-1);
         animator.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
@@ -44,7 +44,7 @@ public class LoadingDialog extends Dialog {
         setCancelable(false);
     }
 
-    public void setMessage(String msg){
+    public void setMessage(String msg) {
         tvTip.setText(msg);
     }
 

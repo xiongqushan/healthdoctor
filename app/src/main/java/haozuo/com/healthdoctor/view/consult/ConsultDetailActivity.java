@@ -22,7 +22,7 @@ public class ConsultDetailActivity extends BaseActivity {
     @Inject
     ConsultDetailContract.IConsultDetailView mIConsultDetailView;
 
-    public static String EXTRA_CONSULT_ITEM="CONSULT_ITEM";
+    public static String EXTRA_CONSULT_ITEM = "CONSULT_ITEM";
     private String mCustName;
     private int mCustId;
     private int mDoctorId;
@@ -46,11 +46,11 @@ public class ConsultDetailActivity extends BaseActivity {
                 .build()
                 .inject(this);
 
-        FragmentManager fragmentManager=getSupportFragmentManager();
-        ConsultDetailFragment consultDetailfragment=(ConsultDetailFragment)fragmentManager.findFragmentById(R.id.frameContent);
-        if(consultDetailfragment==null){
-            consultDetailfragment=(ConsultDetailFragment)mIConsultDetailView;
-            ActivityUtils.addFragmentToActivity(fragmentManager,consultDetailfragment,R.id.frameContent);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        ConsultDetailFragment consultDetailfragment = (ConsultDetailFragment) fragmentManager.findFragmentById(R.id.frameContent);
+        if (consultDetailfragment == null) {
+            consultDetailfragment = (ConsultDetailFragment) mIConsultDetailView;
+            ActivityUtils.addFragmentToActivity(fragmentManager, consultDetailfragment, R.id.frameContent);
         }
 
 
