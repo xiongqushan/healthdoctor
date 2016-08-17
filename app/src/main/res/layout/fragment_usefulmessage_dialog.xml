@@ -14,46 +14,26 @@
         android:layout_weight="1"
         android:padding="10dp"
         android:gravity="top"
+        android:textColor="@color/black"
         android:background="@drawable/editview_bg_selector"/>
 
     <LinearLayout
+        android:id="@+id/cbgroup_expression"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:orientation="vertical">
-        <CheckBox
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:drawableLeft="@drawable/bgcheckbox_usefulmessage"
-            android:drawablePadding="5dp"
-            android:background="@null"
-            android:button="@null"
-            android:textColor="@color/black"
-            tools:text="您好!"/>
-        <CheckBox
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:drawableLeft="@drawable/bgcheckbox_usefulmessage"
-            android:drawablePadding="5dp"
-            android:background="@null"
-            android:button="@null"
-            android:textColor="@color/black"
-            tools:text="感谢您的支持。"/>
-        <CheckBox
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:drawableLeft="@drawable/bgcheckbox_usefulmessage"
-            android:drawablePadding="5dp"
-            android:background="@null"
-            android:button="@null"
-            android:textColor="@color/black"
-            tools:text="祝健康!"/>
-
+        <!--<CheckBox-->
+            <!--android:id="@+id/cb_expression1"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="0dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:drawableLeft="@drawable/bgcheckbox_usefulmessage"-->
+            <!--android:drawablePadding="5dp"-->
+            <!--android:background="@null"-->
+            <!--android:button="@null"-->
+            <!--android:textColor="@color/black"-->
+            <!--tools:text="您好!"/>-->
     </LinearLayout>
 
     <LinearLayout
@@ -61,21 +41,25 @@
         android:layout_height="50dp"
         android:layout_gravity="bottom"
         android:orientation="horizontal">
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/shape"
-            android:layout_margin="5dp"
-            android:text="上一页"/>
+       <Button
+           android:id="@+id/btn_hideDialog"
+           android:layout_width="0dp"
+           android:layout_height="match_parent"
+           android:layout_weight="1"
+           android:background="@drawable/shape"
+           android:layout_margin="5dp"
+           android:text="上一页"
+           android:textColor="@color/white"/>
 
         <Button
+            android:id="@+id/btn_submit"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/shape"
             android:layout_margin="5dp"
-            android:text="确定"/>
+            android:text="确定"
+            android:textColor="@color/white"/>
 
     </LinearLayout>
 

@@ -9,6 +9,7 @@ public interface CustomDetailContract {
 
     interface ICustomDetailView extends IBaseView<ICustomDetailPresenter>{
         void InitView(CustomDetailBean custom);
+
     }
 
     interface ICustomDetailPresenter extends IBasePresenter {

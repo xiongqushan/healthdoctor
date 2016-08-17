@@ -7,10 +7,13 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -32,6 +35,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -56,17 +60,19 @@ import haozuo.com.healthdoctor.view.threePart.common.WindowResize;
 public class ConsultDetailFragment extends AbstractView implements ConsultDetailContract.IConsultDetailView {
     Context mContext;
     View rootView;
-    public ConsultDetailContract.IConsultDetailPresenter mConsultDetailPresenter;
     ConsultListAdapter mConsultListAdapter;
+    public ConsultDetailContract.IConsultDetailPresenter mConsultDetailPresenter;
+    public static int RESULT_EXPRESSION = 0;
     private String mURI;
     private static DoctorBean mDoctorEntity;
     private ConsultReplyBean mConsultReplmyItem;
+    private static int mCustomerId;
 
     public static final String PREFER_NAME = "com.iflytek.setting";
     private static String TAG = ConsultDetailFragment.class.getSimpleName();
     private SpeechRecognizer mIat;                                                              // 语音听写对象
     private RecognizerDialog mIatDialog;                                                       // 语音听写UI
-    private HashMap<String, String> mIatResults = new LinkedHashMap<String, String>();        // 用HashMap存储听写结果
+    private HashMap<String, String> mIatResults = new LinkedHashMap<String, String>();                     // 用HashMap存储听写结果
     private String mEngineType = SpeechConstant.TYPE_CLOUD;                                  // 引擎类型
     int ret = 0;                                                                                // 函数调用返回值
     private Toast mToast;
@@ -103,14 +109,15 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
 
     @OnClick(R.id.btn_usually_message)
     public void getUsefulMessage(View v){
-        startActivity(new Intent(mContext,UsefulMesasgeActivity.class).putExtra(UsefulMesasgeActivity.LAST_CONSULT_CONTENT,mConsultReplmyItem));
+        startActivityForResult(new Intent(mContext,UsefulMesasgeActivity.class).putExtra(UsefulMesasgeActivity.LAST_CONSULT_CONTENT,mConsultReplmyItem),RESULT_EXPRESSION);
     };
 
     public ConsultDetailFragment(){};
 
-    public static ConsultDetailFragment newInstance(){
+    public static ConsultDetailFragment newInstance(int CustomerId){
         ConsultDetailFragment fragment = new ConsultDetailFragment();
         mDoctorEntity = UserManager.getInstance().getDoctorInfo();
+        mCustomerId = CustomerId;
         return fragment;
     }
 
@@ -127,7 +134,8 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
             rootView= inflater.inflate(R.layout.fragment_consult_detail, container, false);
             ButterKnife.bind(this,rootView);
         }
-//        WindowResize.assistActivity(getActivity());
+        //监听软键盘弹出，在弹出状态下重新调整窗口
+        //WindowResize.assistActivity(getActivity());
         mConsultListAdapter=new ConsultListAdapter(mContext);
         consult_detail_List.setAdapter(mConsultListAdapter);
         consult_detail_pull_to_refresh_layout.setOnRefreshListener(new PullListener());
@@ -138,6 +146,23 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
         mSharedPreferences = mContext.getSharedPreferences(this.PREFER_NAME,
                 Activity.MODE_PRIVATE);
         mToast = Toast.makeText(mContext, "", Toast.LENGTH_SHORT);
+
+        //回复框回车监听
+        edittxt_message.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER&& event.getAction() == KeyEvent.ACTION_DOWN) {
+                    InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    if (imm.isActive()) {
+                        imm.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0);
+                        String replyContent = edittxt_message.getText().toString();
+                        addDpctorReply(replyContent);
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
 
         return rootView;
     }
@@ -157,6 +182,15 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (data == null){
+            return;
+        }
+        String replyContent = data.getExtras().getString(String.valueOf(RESULT_EXPRESSION));
+        addDpctorReply(replyContent);
+    }
+
+    @Override
     public void setPresenter(ConsultDetailContract.IConsultDetailPresenter presenter) {
         mConsultDetailPresenter=presenter;
     }
@@ -169,6 +203,11 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
     @Override
     public void refreshFinish(int status) {
         consult_detail_pull_to_refresh_layout.refreshFinish(status);
+    }
+
+    @Override
+    public void loadmoreFinish(int status){
+        consult_detail_pull_to_refresh_layout.loadmoreFinish(status);
     }
 
     class PullListener implements PullToRefreshLayout.OnRefreshListener {
@@ -261,6 +300,7 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
 
                 switch(consultReplyEntity.ConsultType){
                     case 1://纯文本
+                    case 4://问卷相关信息
                         holder.txt_consult_item.setText(consultReplyEntity.Content);
                         holder.flowLayout_consult_photo.setVisibility(View.GONE);
                         break;
@@ -352,6 +392,17 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
             }
         }
 
+    }
+
+    public void addDpctorReply(String replyContent){
+        if (replyContent.equals("")){
+            showTip("请输入需要回复的内容");
+            return;
+        }
+        String CommitOn = DateUtil.date2Str(new Date(),"yyyy-MM-dd'T'HH:mm:ss");
+        mConsultDetailPresenter.addDoctorReply(0,mDoctorEntity.Doctor_ID,mDoctorEntity.Name,mCustomerId,replyContent,CommitOn);
+//        mConsultDetailPresenter.refreshConsultList();
+        edittxt_message.setText("");
     }
 
     /**
@@ -472,7 +523,6 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
     public void setParam() {
         // 清空参数
         mIat.setParameter(SpeechConstant.PARAMS, null);
-
         // 设置听写引擎
         mIat.setParameter(SpeechConstant.ENGINE_TYPE, mEngineType);
         // 设置返回结果格式
@@ -504,6 +554,5 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
         mIat.setParameter(SpeechConstant.AUDIO_FORMAT,"wav");
         mIat.setParameter(SpeechConstant.ASR_AUDIO_PATH, Environment.getExternalStorageDirectory()+"/msc/iat.wav");
     }
-
 
 }

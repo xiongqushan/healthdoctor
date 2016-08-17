@@ -31,4 +31,7 @@ public interface IConsultService {
     @GET(SysConfig.CONTROLLER_PRE_API_CONSULT + "SearchExpressionsByKeyWord")
     Observable<BaseBean<List<UsefulExpressionBean>>> searchUsefulExpression(@Query("tag") String tag, @Query("keyWord")String keyWord);
 
+    @POST(SysConfig.CONTROLLER_PRE_API_CONSULT + "AddDoctorReply")
+    Observable<BaseBean<Boolean>> addDoctorReply(@Query("tag") String tag,@Body Map<String, Object> params);
+
 }
