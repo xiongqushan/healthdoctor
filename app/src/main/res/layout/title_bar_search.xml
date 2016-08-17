@@ -4,7 +4,6 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="@dimen/actionbar_high"
-    android:layout_marginTop="25dp"
     android:background="@color/main_color_blue">
 
     <ImageView
@@ -14,8 +13,8 @@
         android:padding="10dp"
         android:src="@drawable/go_back"/>
 
-    <EditText
-        android:id="@+id/txt_TitleBar_search"
+    <haozuo.com.healthdoctor.view.threePart.common.DrawableClickableEditText
+        android:id="@+id/et_TitleBar_search"
         android:layout_width="match_parent"
         android:layout_height="31dp"
         android:drawableRight="@drawable/search"

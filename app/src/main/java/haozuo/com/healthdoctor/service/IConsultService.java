@@ -8,6 +8,7 @@ import haozuo.com.healthdoctor.bean.ConsultItemBean;
 import haozuo.com.healthdoctor.bean.ConsultReplyBean;
 import haozuo.com.healthdoctor.bean.FeedbackItemBean;
 import haozuo.com.healthdoctor.bean.PageBean;
+import haozuo.com.healthdoctor.bean.UsefulExpressionBean;
 import haozuo.com.healthdoctor.framework.SysConfig;
 import retrofit.http.GET;
 import retrofit.http.Query;
@@ -28,4 +29,11 @@ public interface IConsultService {
 
     @GET(SysConfig.CONTROLLER_PRE_API_CONSULT + "GetAskReplyData")
     Observable<BaseBean<List<ConsultReplyBean>>> getConsultReplyData(@Query("tag") String tag, @Query("customerId") int customerId, @Query("commitOn") String commitOn);
+
+    @GET(SysConfig.CONTROLLER_PRE_API_CONSULT + "GetDefaultExpressions")
+    Observable<BaseBean<List<UsefulExpressionBean>>> getUsefulExpression(@Query("tag") String tag);
+
+    @GET(SysConfig.CONTROLLER_PRE_API_CONSULT + "SearchExpressionsByKeyWord")
+    Observable<BaseBean<List<UsefulExpressionBean>>> searchUsefulExpression(@Query("tag") String tag, @Query("keyWord") String keyWord);
+
 }

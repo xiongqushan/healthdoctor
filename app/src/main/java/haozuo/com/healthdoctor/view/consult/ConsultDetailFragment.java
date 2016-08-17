@@ -170,6 +170,11 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
         mConsultListAdapter.refresh(dataList);
     }
 
+    @Override
+    public void refreshFinish(int status) {
+        consult_detail_pull_to_refresh_layout.refreshFinish(status);
+    }
+
     class PullListener implements PullToRefreshLayout.OnRefreshListener {
 
         @Override

@@ -9,6 +9,8 @@
     <dimen name="textsize_h3">16sp</dimen>
     <dimen name="textsize_h4">13sp</dimen>
 
+    <dimen name="radius_1">7dp</dimen>
+
     <dimen name="login_title">8dp</dimen>
     <dimen name="login_title_size">24dp</dimen>
     <dimen name="login_text_size">15sp</dimen>
@@ -27,7 +29,6 @@
     <dimen name="consult_customer_usuallymessage_marginleft">12dp</dimen>
     <dimen name="consult_customer_edittext_marginleft">3dp</dimen>
     <dimen name="consult_customer_edittext_marginbottom">3dp</dimen>
-
 
     <dimen name="consult_detail_paddingbottom">15dp</dimen>
     <dimen name="consult_photo_height">40dp</dimen>

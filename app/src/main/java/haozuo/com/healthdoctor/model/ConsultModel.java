@@ -15,6 +15,7 @@ import haozuo.com.healthdoctor.bean.ConsultReplyBean;
 import haozuo.com.healthdoctor.bean.FeedbackItemBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.bean.PageBean;
+import haozuo.com.healthdoctor.bean.UsefulExpressionBean;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
 import haozuo.com.healthdoctor.service.IConsultService;
 import rx.Subscriber;
@@ -147,6 +148,68 @@ public class ConsultModel extends AbstractModel {
                             entity = new GlobalShell<List<ConsultReplyBean>>(result);
                         } else {
                             entity = new GlobalShell<List<ConsultReplyBean>>(resultBean.message);
+                        }
+                        callbackListener.handlerResult(entity);
+                    }
+                });
+    }
+
+    public void getUsefulExpression(final OnHandlerResultListener<GlobalShell<List<UsefulExpressionBean>>> callbackListener){
+        mIConsultService.getUsefulExpression(requestTag())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<BaseBean<List<UsefulExpressionBean>>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        GlobalShell<List<UsefulExpressionBean>> entity=new GlobalShell<List<UsefulExpressionBean>>(e.getMessage());
+                        callbackListener.handlerResult(entity);
+                    }
+
+                    @Override
+                    public void onNext(BaseBean<List<UsefulExpressionBean>> resultBean) {
+                        GlobalShell<List<UsefulExpressionBean>> entity=null;
+                        if(resultBean.state>0) {
+                            List<UsefulExpressionBean> result = resultBean.Data;
+                            entity=new GlobalShell<List<UsefulExpressionBean>>(result);
+                        }
+                        else{
+                            entity=new GlobalShell<List<UsefulExpressionBean>>(resultBean.message);
+                        }
+                        callbackListener.handlerResult(entity);
+                    }
+                });
+    }
+
+    public void searchUsefulExpression(String keyWord,final OnHandlerResultListener<GlobalShell<List<UsefulExpressionBean>>> callbackListener){
+        mIConsultService.searchUsefulExpression(requestTag(),keyWord)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<BaseBean<List<UsefulExpressionBean>>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        GlobalShell<List<UsefulExpressionBean>> entity=new GlobalShell<List<UsefulExpressionBean>>(e.getMessage());
+                        callbackListener.handlerResult(entity);
+                    }
+
+                    @Override
+                    public void onNext(BaseBean<List<UsefulExpressionBean>> resultBean) {
+                        GlobalShell<List<UsefulExpressionBean>> entity=null;
+                        if(resultBean.state>0) {
+                            List<UsefulExpressionBean> result = resultBean.Data;
+                            entity=new GlobalShell<List<UsefulExpressionBean>>(result);
+                        }
+                        else{
+                            entity=new GlobalShell<List<UsefulExpressionBean>>(resultBean.message);
                         }
                         callbackListener.handlerResult(entity);
                     }

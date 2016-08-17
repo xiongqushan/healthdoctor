@@ -34,7 +34,7 @@
 
     <!-- 填充 -->
     <solid
-        android:color="@color/royalblue"/><!-- 填充的颜色 -->
+        android:color="@color/main_color_blue"/><!-- 填充的颜色 -->
 
     <!--&lt;!&ndash; 描边 &ndash;&gt;-->
     <!--<stroke-->

@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!--<include layout="@layout/title_bar_search"/>-->
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -19,7 +21,8 @@
             android:layout_marginBottom="10dp"
             android:ems="1"
             android:text="咨询内容"
-            android:textColor="@color/gray" />
+            android:textColor="@color/gray"
+            android:textSize="@dimen/textsize_h3"/>
         <View
             android:id="@+id/split_line"
             android:layout_width="1dp"
@@ -39,5 +42,28 @@
             android:maxLines="5"
             android:scrollbars = "vertical" />
     </RelativeLayout>
+
+    <ListView
+        android:id="@+id/usefulmessage_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:divider="@null"
+        android:listSelector="@android:color/transparent"/>
+
+    <Button
+        android:id="@+id/btn_nextstep"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/shape"
+        android:text="下一步"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textsize_h2"/>
 
 </LinearLayout>

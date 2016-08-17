@@ -77,7 +77,6 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
     public void InitView(CustomDetailBean custom) {
         final CustomDetailBean customInfo = custom;
         if (custom.PhotoUrl == null){
-//            Cphoto = "http://pic002.cnblogs.com/images/2011/103608/2011062022023456.jpg";
             Cphoto = "res://haozuo.com.healthdoctor.view.custom/"+R.drawable.default_photourl;
         }
         else {

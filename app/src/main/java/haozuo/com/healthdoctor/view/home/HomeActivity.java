@@ -69,7 +69,6 @@ public class HomeActivity extends BaseActivity {
         fragmentManager = getSupportFragmentManager();
         ConsultFragment consultFragment = (ConsultFragment) fragmentManager.findFragmentById(R.id.content_consult);
         if (consultFragment == null) {
-//            consultFragment = new ConsultFragment();
             consultFragment = (ConsultFragment) mIConsultView;
             ActivityUtils.addFragmentToActivity(fragmentManager, consultFragment, R.id.content_consult);
         }

@@ -581,7 +581,6 @@ public class DateUtil {
             time = time.replace('T',' ');
             date = sdf.parse(time);
             } catch(ParseException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             }
         return date.getTime();
