@@ -21,6 +21,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
+import haozuo.com.healthdoctor.contract.IBasePresenter;
 import haozuo.com.healthdoctor.view.base.AbstractView;
 import haozuo.com.healthdoctor.contract.GroupCustomListContract;
 import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout;
@@ -40,6 +41,11 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
 
     public GroupCustomListFragment(){
 
+    }
+
+    @Override
+    protected IBasePresenter getPresenter() {
+        return mGroupCustomListPresenter;
     }
 
     public static GroupCustomListFragment newInstance() {

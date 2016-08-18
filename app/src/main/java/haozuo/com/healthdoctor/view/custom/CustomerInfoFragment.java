@@ -20,6 +20,7 @@ import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.CustomDetailBean;
 import haozuo.com.healthdoctor.bean.DoctorGroupBean;
+import haozuo.com.healthdoctor.contract.IBasePresenter;
 import haozuo.com.healthdoctor.view.base.AbstractView;
 import haozuo.com.healthdoctor.contract.CustomerInfoContract;
 import haozuo.com.healthdoctor.view.threePart.common.FlowLayout;
@@ -50,6 +51,11 @@ public class CustomerInfoFragment extends AbstractView implements CustomerInfoCo
     FlowLayout mFlowLayout;
 
     public CustomerInfoFragment(){
+    }
+
+    @Override
+    protected IBasePresenter getPresenter() {
+        return mPresenter;
     }
 
     public static CustomerInfoFragment newInstance() {

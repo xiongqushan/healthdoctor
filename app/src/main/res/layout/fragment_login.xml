@@ -1,16 +1,15 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="haozuo.com.healthdoctor.view.login.LoginFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="haozuo.com.healthdoctor.view.login.LoginFragment">
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:visibility="invisible"/>
+        android:visibility="invisible" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -22,9 +21,9 @@
             android:layout_width="171dp"
             android:layout_height="52dp"
             android:layout_centerHorizontal="true"
-            android:gravity="center"
+            android:layout_gravity="center"
             android:background="@drawable/logo"
-            android:layout_gravity="center"/>
+            android:gravity="center" />
 
         <LinearLayout
             android:id="@+id/account"
@@ -33,87 +32,91 @@
             android:layout_below="@id/title"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
-            android:paddingBottom="13dp"
-            android:gravity="bottom">
+            android:gravity="bottom"
+            android:paddingBottom="13dp">
+
             <EditText
                 android:id="@+id/edit_mobile"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:drawableLeft="@drawable/cellphone"
-                android:hint="@string/login_mobile"
-                android:textSize="@dimen/login_text_size"
-                android:inputType="number"
                 android:background="@null"
                 android:digits="15601815186"
+                android:drawableLeft="@drawable/cellphone"
+                android:gravity="start|bottom"
+                android:hint="@string/login_mobile"
+                android:inputType="number"
                 android:singleLine="true"
-                android:gravity="start|bottom"/>
+                android:textSize="@dimen/login_text_size" />
+
             <TextView
                 android:id="@+id/txt_GetCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="30dp"
                 android:layout_alignBottom="@id/edit_mobile"
                 android:layout_toRightOf="@id/edit_mobile"
+                android:paddingLeft="30dp"
+                android:text="@string/login_get_code"
                 android:textColor="@color/lightgreen"
                 android:textSize="@dimen/login_text_size"
-                android:text="@string/login_get_code"
-                android:visibility="gone"/>
+                android:visibility="gone" />
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/gray"
-            android:layout_below="@id/account"
+            android:layout_alignEnd="@+id/account"
             android:layout_alignLeft="@id/account"
-            android:layout_alignStart="@id/account"
             android:layout_alignRight="@+id/account"
-            android:layout_alignEnd="@+id/account"/>
+            android:layout_alignStart="@id/account"
+            android:layout_below="@id/account"
+            android:background="@color/gray" />
 
         <EditText
             android:id="@+id/edit_code"
             android:layout_width="wrap_content"
             android:layout_height="55dp"
-            android:layout_below="@id/account"
-            android:layout_alignLeft="@id/account"
-            android:layout_alignStart="@id/account"
-            android:layout_alignRight="@+id/account"
             android:layout_alignEnd="@+id/account"
+            android:layout_alignLeft="@id/account"
+            android:layout_alignRight="@+id/account"
+            android:layout_alignStart="@id/account"
+            android:layout_below="@id/account"
             android:layout_marginTop="7dp"
-            android:drawableLeft="@drawable/checkcode"
-            android:inputType="textPassword"
-            android:hint="请输入您的密码"
-            android:textSize="@dimen/login_text_size"
             android:background="@null"
+            android:drawableLeft="@drawable/checkcode"
+            android:gravity="start|center_vertical"
+            android:hint="请输入您的密码"
+            android:inputType="textPassword"
             android:singleLine="true"
             android:text="111111"
-            android:gravity="start|center_vertical" />
+            android:textSize="@dimen/login_text_size" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/gray"
-            android:layout_below="@id/edit_code"
+            android:layout_alignEnd="@+id/account"
             android:layout_alignLeft="@id/account"
-            android:layout_alignStart="@id/account"
             android:layout_alignRight="@+id/account"
-            android:layout_alignEnd="@+id/account"/>
+            android:layout_alignStart="@id/account"
+            android:layout_below="@id/edit_code"
+            android:background="@color/gray" />
 
         <Button
             android:id="@+id/btn_login"
-            android:layout_marginTop="25dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/edit_code"
-            android:layout_alignLeft="@id/account"
-            android:layout_alignStart="@id/account"
-            android:layout_alignRight="@id/account"
             android:layout_alignEnd="@id/account"
-            android:padding="@dimen/login_submit_padding"
+            android:layout_alignLeft="@id/account"
+            android:layout_alignRight="@id/account"
+            android:layout_alignStart="@id/account"
+            android:layout_below="@id/edit_code"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/shape"
             android:gravity="center"
+            android:padding="@dimen/login_submit_padding"
             android:text="@string/login_submit"
-            android:textSize="@dimen/login_submit"
             android:textColor="@color/white"
-            android:background="@drawable/shape" />
+            android:textSize="@dimen/login_submit" />
     </RelativeLayout>
 
 

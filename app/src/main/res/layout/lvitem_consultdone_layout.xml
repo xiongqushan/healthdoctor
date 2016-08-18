@@ -3,7 +3,7 @@
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="70dp"
-    android:background="#ffffff"
+    android:background="@color/white"
     android:descendantFocusability="blocksDescendants">
     <!--descendantFocusability 屏蔽子控件抢夺ListView的焦点-->
 
@@ -48,19 +48,19 @@
         android:textColor="@color/subtitle_color88"
         android:textSize="@dimen/txt_subtitle_14sp" />
 
-    <TextView
+    <RatingBar
         android:id="@+id/RatingBar"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvTitle"
-        android:layout_marginTop="8dp"
+        android:layout_height="16dp"
+        android:layout_alignBottom="@id/tvSubtitle"
         android:layout_toRightOf="@id/tvSubtitle"
-        android:text="RatingBar"
-        android:textColor="@color/subtitle_color88"
-        android:textSize="@dimen/txt_subtitle_14sp" />
+        android:indeterminateDrawable="@drawable/ratingbar_full"
+        android:isIndicator="true"
+        android:progressDrawable="@drawable/ratingbar_full"
+        android:rating="3.0" />
 
     <TextView
-        android:id="@+id/tvName"
+        android:id="@+id/tvReDoctor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/tvSubtitle"

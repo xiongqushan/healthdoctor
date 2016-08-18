@@ -4,14 +4,15 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
@@ -22,6 +23,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.ConsultDoneItemBean;
+import haozuo.com.healthdoctor.util.DateUtil;
 import haozuo.com.healthdoctor.util.UIHelper;
 import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout;
 
@@ -32,8 +34,8 @@ public class ConsultDoneFragment extends Fragment {
     View rootView;
     ConsultFragment mConsultFragment;
     ListAdapter adapter;
-    private int mFlag = 3; // TODO  1当天  2本周 3本月
-
+    private int mFlag = 1; // TODO  1当天  2本周 3本月
+    private boolean initData = true;
     @Bind(R.id.consult_pull_to_refresh_layout)
     PullToRefreshLayout ptrLayout;
     @Bind(R.id.consult_detail_List)
@@ -54,9 +56,20 @@ public class ConsultDoneFragment extends Fragment {
         adapter.refresh(dataList);
     }
 
-    public void refreshFinish(int status) {
-        ptrLayout.refreshFinish(status);
+    public void refreshFinish(int status, boolean isRefresh) {
+        if (isRefresh) {
+            ptrLayout.refreshFinish(status);
+        } else {
+            ptrLayout.loadmoreFinish(status);
+        }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.e("ConsultDoneFragment", "onResume");
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -78,25 +91,23 @@ public class ConsultDoneFragment extends Fragment {
             mListView.setAdapter(adapter);
             mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                    ConsultListAdapter.ViewHolder tag = (ConsultListAdapter.ViewHolder) v.getTag();
-//                    ConsultItemBean customerItem = (ConsultItemBean) (((Object[]) tag.Cphoto.getTag())[0]);
+                public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 //                    Intent intent = new Intent(mContext, ConsultDetailActivity.class);
-//                    intent.putExtra(ConsultDetailActivity.EXTRA_CONSULT_ITEM, customerItem);
+//                    intent.putExtra(ConsultDetailActivity.EXTRA_CONSULT_ITEM, dataSource.get(position));
 //                    mContext.startActivity(intent);
-                    Toast.makeText(mContext, "test", Toast.LENGTH_SHORT).show();
                 }
             });
             ptrLayout.setOnRefreshListener(new OnPTRListener());
-            mConsultFragment.refreshConsultDoneList(mFlag); //首次加载全部咨询内容
+            mConsultFragment.refreshConsultDoneList(mFlag, initData); //首次加载全部咨询内容
+            initData = false;
         }
         return rootView;
     }
 
+    private List<ConsultDoneItemBean> dataSource;
+
     class ListAdapter extends BaseAdapter {
         private LayoutInflater myInflater;
-        List<ConsultDoneItemBean> dataSource;
-        private String Cphoto;
 
         public ListAdapter(Context context) {
             this.myInflater = LayoutInflater.from(context);
@@ -115,13 +126,19 @@ public class ConsultDoneFragment extends Fragment {
             if (convertView == null) {
                 convertView = myInflater.inflate(R.layout.lvitem_consultdone_layout, null);
             }
-            TextView tvTile = UIHelper.getAdapterView(convertView, R.id.tvTitle);
+            TextView tvTitle = UIHelper.getAdapterView(convertView, R.id.tvTitle);
             TextView tvTime = UIHelper.getAdapterView(convertView, R.id.tvTime);
             SimpleDraweeView img = UIHelper.getAdapterView(convertView, R.id.drawee_consult_Cphoto);
-            Cphoto = "res://haozuo.com.healthdoctor.view.custom/" + R.drawable.default_photourl;
-            Uri uri = Uri.parse(Cphoto);
+            RatingBar ratingBar = UIHelper.getAdapterView(convertView, R.id.RatingBar);
+            ratingBar.setRating(dataSource.get(position).Score);
+            String imgUrl = dataSource.get(position).PhotoUrl;
+            if (imgUrl == null || imgUrl.equals("")) {
+                imgUrl = "res://haozuo.com.healthdoctor.view.custom/" + R.drawable.default_photourl;
+            }
+            Uri uri = Uri.parse(imgUrl);
             img.setImageURI(uri);
-            //tvTime.setText(DateUtil.converTime(DateUtil.getStringToTimestamp(doctorGroupEntity.CommitOn)));
+            tvTitle.setText(dataSource.get(position).CustName);
+            tvTime.setText(DateUtil.converTime(DateUtil.getStringToTimestamp(dataSource.get(position).CommitOn)));
             return convertView;
         }
 
@@ -147,7 +164,7 @@ public class ConsultDoneFragment extends Fragment {
 
         @Override
         public void onRefresh() {
-            mConsultFragment.refreshConsultDoneList(mFlag);
+            mConsultFragment.refreshConsultDoneList(mFlag, initData);
         }
 
         @Override
@@ -156,5 +173,6 @@ public class ConsultDoneFragment extends Fragment {
         }
 
     }
+
 
 }

@@ -2,7 +2,6 @@ package haozuo.com.healthdoctor.view.consult;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.Display;
@@ -14,21 +13,14 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.iflytek.thirdparty.E;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.concurrent.ConcurrentHashMap;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -37,6 +29,7 @@ import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.ConsultReplyBean;
 import haozuo.com.healthdoctor.bean.ExpressionConst;
 import haozuo.com.healthdoctor.bean.UsefulExpressionBean;
+import haozuo.com.healthdoctor.contract.IBasePresenter;
 import haozuo.com.healthdoctor.contract.UsefulMessageContract;
 import haozuo.com.healthdoctor.framework.SysConfig;
 import haozuo.com.healthdoctor.view.base.AbstractView;
@@ -69,6 +62,11 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
     }
 
     public UsefulMessageFragment() {}
+
+    @Override
+    protected IBasePresenter getPresenter() {
+        return mIUsefulMessagePresenter;
+    }
 
     public static UsefulMessageFragment newInstance(@NonNull ConsultReplyBean consultReplyItem) {
         UsefulMessageFragment fragment = new UsefulMessageFragment();

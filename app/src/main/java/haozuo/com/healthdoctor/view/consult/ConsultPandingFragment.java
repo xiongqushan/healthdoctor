@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -33,9 +34,8 @@ public class ConsultPandingFragment extends Fragment {
     View rootView;
     private ConsultFragment mConsultFragment;
     private ConsultListAdapter adapter;
-    View.OnClickListener mOnClicklistener;
     private int mFlag;// TODO 3全部 2转入 1我的
-
+    private boolean initData = true;
     @Bind(R.id.consult_pull_to_refresh_layout)
     PullToRefreshLayout ptrLayout;
     @Bind(R.id.consult_detail_List)
@@ -66,9 +66,17 @@ public class ConsultPandingFragment extends Fragment {
         adapter.refresh(dataList);
     }
 
-    public void refreshFinish(int status) {
-        ptrLayout.refreshFinish(status);
-        ptrLayout.loadmoreFinish(status);
+    public void refreshFinish(int status, boolean isRefresh) {
+        if (isRefresh) {
+            ptrLayout.refreshFinish(status);
+        } else {
+            ptrLayout.loadmoreFinish(status);
+        }
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.e("ConsultPandingFragment", "onResume");
     }
 
     @Override
@@ -83,35 +91,32 @@ public class ConsultPandingFragment extends Fragment {
         if (rootView == null) {
             mContext = getContext();
             mConsultFragment = (ConsultFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.content_consult);
-            mOnClicklistener = new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ConsultListAdapter.ViewHolder tag = (ConsultListAdapter.ViewHolder) v.getTag();
-                    ConsultItemBean customerItem = (ConsultItemBean) (((Object[]) tag.Cphoto.getTag())[0]);
-                    Intent intent = new Intent(mContext, ConsultDetailActivity.class);
-                    intent.putExtra(ConsultDetailActivity.EXTRA_CONSULT_ITEM, customerItem);
-                    mContext.startActivity(intent);
-                }
-            };
-
             rootView = inflater.inflate(R.layout.fragment_consult_panding_list, container, false);
             ButterKnife.bind(this, rootView);
-            adapter = new ConsultListAdapter(mOnClicklistener);
-            Log.e("adapterObject" + mFlag, adapter.toString());
+            adapter = new ConsultListAdapter();
             consult_detail_List.setAdapter(adapter);
+            consult_detail_List.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                    Intent intent = new Intent(mContext, ConsultDetailActivity.class);
+                    intent.putExtra(ConsultDetailActivity.EXTRA_CONSULT_ITEM, dataSource.get(position));
+                    mContext.startActivity(intent);
+                }
+            });
             ptrLayout.setOnRefreshListener(new PullListener());
-            mConsultFragment.refreshCustomList(mFlag); //首次加载全部咨询内容
+            mConsultFragment.refreshCustomList(mFlag, initData); //首次加载全部咨询内容
+            initData = false;
         }
         return rootView;
     }
 
 
+    private List<ConsultItemBean> dataSource;
+
     class ConsultListAdapter extends BaseAdapter {
         private String Cphoto;
-        List<ConsultItemBean> dataSource;
 
-        public ConsultListAdapter(View.OnClickListener onClickListener) {
-            mOnClicklistener = onClickListener;
+        public ConsultListAdapter() {
             dataSource = new ArrayList<>();
         }
 
@@ -142,13 +147,12 @@ public class ConsultPandingFragment extends Fragment {
             ViewHolder holder = null;
             if (convertView == null) {
                 holder = new ViewHolder();
-                convertView = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_consult_panding_item, parent, false);
+                convertView = LayoutInflater.from(getActivity()).inflate(R.layout.lvitem_consultpanding_layout, parent, false);
                 holder.Cphoto = (SimpleDraweeView) convertView.findViewById(R.id.drawee_consult_Cphoto);
                 holder.Cname = (TextView) convertView.findViewById(R.id.txt_consult_Cname);
                 holder.LastConsult = (TextView) convertView.findViewById(R.id.txt_consult_LastConsult);
                 holder.ConsultContent = (TextView) convertView.findViewById(R.id.txt_consult_ConsultContent);
                 convertView.setTag(holder);
-                convertView.setOnClickListener(mOnClicklistener);
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
@@ -181,7 +185,7 @@ public class ConsultPandingFragment extends Fragment {
         @Override
         public void onRefresh() {
             Log.e("onRefresh mFlag", mFlag + "");
-            mConsultFragment.refreshCustomList(mFlag);
+            mConsultFragment.refreshCustomList(mFlag, initData);
         }
 
         @Override

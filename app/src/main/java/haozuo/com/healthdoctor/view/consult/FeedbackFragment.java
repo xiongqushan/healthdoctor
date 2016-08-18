@@ -4,19 +4,21 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -33,7 +35,8 @@ public class FeedbackFragment extends Fragment {
     View rootView;
     ConsultFragment mConsultFragment;
     ListAdapter adapter;
-    private int mFlag = 1; // TODO 1全部 2已反馈 3未反馈
+    private int mFlag = 1; // TODO 3全部 2已反馈 1未反馈
+    private boolean initData = true;
     @Bind(R.id.consult_pull_to_refresh_layout)
     PullToRefreshLayout ptrLayout;
     @Bind(R.id.consult_detail_List)
@@ -54,8 +57,12 @@ public class FeedbackFragment extends Fragment {
         adapter.refresh(dataList);
     }
 
-    public void refreshFinish(int status) {
-        ptrLayout.refreshFinish(status);
+    public void refreshFinish(int status, boolean isRefresh) {
+        if (isRefresh) {
+            ptrLayout.refreshFinish(status);
+        } else {
+            ptrLayout.loadmoreFinish(status);
+        }
     }
 
     @Override
@@ -76,25 +83,23 @@ public class FeedbackFragment extends Fragment {
             mListView.setAdapter(adapter);
             mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                    ConsultListAdapter.ViewHolder tag = (ConsultListAdapter.ViewHolder) v.getTag();
-//                    ConsultItemBean customerItem = (ConsultItemBean) (((Object[]) tag.Cphoto.getTag())[0]);
+                public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 //                    Intent intent = new Intent(mContext, ConsultDetailActivity.class);
-//                    intent.putExtra(ConsultDetailActivity.EXTRA_CONSULT_ITEM, customerItem);
+//                    intent.putExtra(ConsultDetailActivity.EXTRA_CONSULT_ITEM, dataSource.get(position));
 //                    mContext.startActivity(intent);
-                    Toast.makeText(mContext, "test", Toast.LENGTH_SHORT).show();
                 }
             });
             ptrLayout.setOnRefreshListener(new OnPTRListener());
-            mConsultFragment.refreshFeedBackList(mFlag); //首次加载全部咨询内容
+            mConsultFragment.refreshFeedBackList(mFlag, initData); //首次加载全部咨询内容
+            initData = false;
         }
         return rootView;
     }
 
+    private List<FeedbackItemBean> dataSource;
+
     class ListAdapter extends BaseAdapter {
         private LayoutInflater myInflater;
-        List<FeedbackItemBean> dataSource;
-        private String Cphoto;
 
         public ListAdapter(Context context) {
             this.myInflater = LayoutInflater.from(context);
@@ -113,20 +118,23 @@ public class FeedbackFragment extends Fragment {
             if (convertView == null) {
                 convertView = myInflater.inflate(R.layout.lvitem_consultdone_layout, null);
             }
-            TextView tvTile = UIHelper.getAdapterView(convertView, R.id.tvTitle);
+            TextView tvTitle = UIHelper.getAdapterView(convertView, R.id.tvTitle);
             TextView tvTime = UIHelper.getAdapterView(convertView, R.id.tvTime);
-            TextView tvName = UIHelper.getAdapterView(convertView, R.id.tvName);
-            tvTile.setText(dataSource.get(position).CustName);
+            TextView tvName = UIHelper.getAdapterView(convertView, R.id.tvReDoctor);
+            SimpleDraweeView img = UIHelper.getAdapterView(convertView, R.id.drawee_consult_Cphoto);
+            RatingBar ratingBar = UIHelper.getAdapterView(convertView, R.id.RatingBar);
+            ratingBar.setRating(dataSource.get(position).Score);
+            ratingBar.setRating(new Random().nextInt(6));
+            tvTitle.setText(dataSource.get(position).CustName);
             tvName.setText(dataSource.get(position).ReDoctor);
             tvName.setVisibility(View.VISIBLE);
-            SimpleDraweeView img = UIHelper.getAdapterView(convertView, R.id.drawee_consult_Cphoto);
-            Cphoto = dataSource.get(position).PhotoUrl;
-            if (Cphoto == null || Cphoto.equals("")) {
-                Cphoto = "res://haozuo.com.healthdoctor.view.custom/" + R.drawable.default_photourl;
+            String imgUrl = dataSource.get(position).PhotoUrl;
+            if (imgUrl == null || imgUrl.equals("")) {
+                imgUrl = "res://haozuo.com.healthdoctor.view.custom/" + R.drawable.default_photourl;
             }
-            tvTime.setText(DateUtil.converTime(DateUtil.getStringToTimestamp(dataSource.get(position).CommitOn)));
-            Uri uri = Uri.parse(Cphoto);
+            Uri uri = Uri.parse(imgUrl);
             img.setImageURI(uri);
+            tvTime.setText(DateUtil.converTime(DateUtil.getStringToTimestamp(dataSource.get(position).CommitOn)));
             return convertView;
         }
 
@@ -152,7 +160,7 @@ public class FeedbackFragment extends Fragment {
 
         @Override
         public void onRefresh() {
-            mConsultFragment.refreshFeedBackList(mFlag);
+            mConsultFragment.refreshFeedBackList(mFlag, false);
         }
 
         @Override
@@ -162,4 +170,9 @@ public class FeedbackFragment extends Fragment {
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.e("FeedbackFragment","onResume");
+    }
 }

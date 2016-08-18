@@ -20,5 +20,7 @@ public interface IBaseView<T extends IBasePresenter> {
 
     void showConfirmDialog(String content, String confirmText, CustomDialog.OnDialogListener onConfirmDialogListener);
 
+    void showRetryLayer();
+
     void setPresenter(T presenter);
 }
