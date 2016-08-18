@@ -17,6 +17,8 @@ public interface ConsultDetailContract {
 
         void refreshFinish(int status);
 
+        void loadmoreFinish(int status);
+
     }
 
     interface IConsultDetailPresenter extends IBasePresenter {
@@ -24,6 +26,8 @@ public interface ConsultDetailContract {
         void refreshConsultList();
 
         void loadmoreConsultList();
+
+        void addDoctorReply(int DoctorId,int ReDoctorId,String ReDoctorName,int CustomerId,String ReplyContent,String ReplyTime);
     }
 
 }

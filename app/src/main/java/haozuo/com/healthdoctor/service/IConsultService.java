@@ -1,6 +1,7 @@
 package haozuo.com.healthdoctor.service;
 
 import java.util.List;
+import java.util.Map;
 
 import haozuo.com.healthdoctor.bean.BaseBean;
 import haozuo.com.healthdoctor.bean.ConsultDoneItemBean;
@@ -10,7 +11,9 @@ import haozuo.com.healthdoctor.bean.FeedbackItemBean;
 import haozuo.com.healthdoctor.bean.PageBean;
 import haozuo.com.healthdoctor.bean.UsefulExpressionBean;
 import haozuo.com.healthdoctor.framework.SysConfig;
+import retrofit.http.Body;
 import retrofit.http.GET;
+import retrofit.http.POST;
 import retrofit.http.Query;
 import rx.Observable;
 
@@ -35,5 +38,8 @@ public interface IConsultService {
 
     @GET(SysConfig.CONTROLLER_PRE_API_CONSULT + "SearchExpressionsByKeyWord")
     Observable<BaseBean<List<UsefulExpressionBean>>> searchUsefulExpression(@Query("tag") String tag, @Query("keyWord") String keyWord);
+
+    @POST(SysConfig.CONTROLLER_PRE_API_CONSULT + "AddDoctorReply")
+    Observable<BaseBean<Boolean>> addDoctorReply(@Query("tag") String tag,@Body Map<String, Object> params);
 
 }

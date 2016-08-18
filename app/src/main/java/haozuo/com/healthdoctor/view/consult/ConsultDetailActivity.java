@@ -25,16 +25,18 @@ public class ConsultDetailActivity extends BaseActivity {
     public static String EXTRA_CONSULT_ITEM = "CONSULT_ITEM";
     private String mCustName;
     private int mCustId;
+    private int mDoctorId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consult_detail);
-        Serializable obj = getIntent().getSerializableExtra(EXTRA_CONSULT_ITEM);
-        if (obj != null) {
-            ConsultItemBean doctorGroupBean = (ConsultItemBean) obj;
-            mCustName = doctorGroupBean.CustName;
-            mCustId = doctorGroupBean.CustId;
+        Serializable obj= getIntent().getSerializableExtra(EXTRA_CONSULT_ITEM);
+        if(obj!=null){
+            ConsultItemBean consultItemBean = (ConsultItemBean) obj;
+            mCustName = consultItemBean.CustName;
+            mCustId = consultItemBean.CustId;
+//            mDoctorId = consultItemBean.
         }
         setCustomerTitle(mCustName);
 

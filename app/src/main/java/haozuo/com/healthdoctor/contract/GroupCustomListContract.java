@@ -12,6 +12,7 @@ public interface GroupCustomListContract {
         void refreshCustomAdapter(List<GroupCustInfoBean> dataList);
 
         void refreshFinish(int status);
+
     }
 
     interface IGroupCustomListPresenter extends IBasePresenter {

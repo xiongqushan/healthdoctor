@@ -19,6 +19,7 @@ import haozuo.com.healthdoctor.contract.IBaseModel;
 import haozuo.com.healthdoctor.contract.IBaseView;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
 import haozuo.com.healthdoctor.model.ConsultModel;
+import haozuo.com.healthdoctor.util.DateUtil;
 import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout;
 
 /**
@@ -40,8 +41,9 @@ public class ConsultDetailPresenter extends AbstractPresenter implements Consult
         mConsultModel=consultModel;
         mCustomerId=customerId;
         iConsultDetailView.setPresenter(this);
-        DateFormat df = new SimpleDateFormat("yyyyMMddhhmmss");
-        mCommitOn = df.format(new Date()).toString();
+//        DateFormat df = new SimpleDateFormat("yyyyMMddhhmmss");
+//        mCommitOn = df.format(new Date()).toString();
+        mCommitOn = DateUtil.date2Str(new Date(),"yyyyMMddHHmmss");
         consultReplyBean = new ConsultReplyBean();
     }
 
@@ -53,7 +55,6 @@ public class ConsultDetailPresenter extends AbstractPresenter implements Consult
     @Override
     public IBaseModel[] getBaseModelList() {
         return new IBaseModel[]{mConsultModel};
-
     }
 
     @Override
@@ -67,16 +68,17 @@ public class ConsultDetailPresenter extends AbstractPresenter implements Consult
             public void handlerResult(GlobalShell<List<ConsultReplyBean>> resultData) {
                 if(resultData.LogicSuccess) {
                     mIConsultDetailView.hideDialog();
-                    mConsultItemBeanList.clear();
                     if ((List<ConsultReplyBean>) resultData.Data != null){
+                        mConsultItemBeanList.clear();
                         mConsultItemBeanList.addAll(resultData.Data);
                         Collections.sort(mConsultItemBeanList,consultReplyBean);
                         mIConsultDetailView.refreshCustomAdapter(mConsultItemBeanList);
-                        mIConsultDetailView.refreshFinish(PullToRefreshLayout.FAIL);
+                        mIConsultDetailView.refreshFinish(PullToRefreshLayout.SUCCEED);
                     }
                 }
                 else{
                     mIConsultDetailView.hideDialog(resultData.Message);
+                    mIConsultDetailView.refreshFinish(PullToRefreshLayout.FAIL);
                 }
             }
         });
@@ -90,15 +92,33 @@ public class ConsultDetailPresenter extends AbstractPresenter implements Consult
             public void handlerResult(GlobalShell<List<ConsultReplyBean>> resultData) {
                 if(resultData.LogicSuccess) {
                     mIConsultDetailView.hideDialog();
-                    ConsultReplyBean consultReplyBean = new ConsultReplyBean();
-                    Collections.sort(resultData.Data,consultReplyBean);
                     if ((List<ConsultReplyBean>) resultData.Data != null){
+                        mConsultItemBeanList.clear();
                         mConsultItemBeanList.addAll(resultData.Data);
                         Collections.sort(mConsultItemBeanList,consultReplyBean);
                         mIConsultDetailView.refreshCustomAdapter(mConsultItemBeanList);
+                        mIConsultDetailView.loadmoreFinish(PullToRefreshLayout.SUCCEED);
                     }
                 }
                 else{
+                    mIConsultDetailView.hideDialog(resultData.Message);
+                    mIConsultDetailView.loadmoreFinish(PullToRefreshLayout.FAIL);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void addDoctorReply(int DoctorId,int ReDoctorId,String ReDoctorName,int CustomerId,String ReplyContent,String ReplyTime) {
+        mIConsultDetailView.showDialog();
+        mConsultModel.addDoctorReply(DoctorId,ReDoctorId,ReDoctorName,CustomerId,ReplyContent,ReplyTime ,new OnHandlerResultListener<GlobalShell<Boolean>>() {
+            @Override
+            public void handlerResult(GlobalShell<Boolean> resultData) {
+                if (resultData.LogicSuccess) {
+//                    mIConsultDetailView.hideDialog();
+                    mCommitOn = DateUtil.date2Str(new Date(),"yyyyMMddHHmmss");
+                    refreshConsultList();
+                } else {
                     mIConsultDetailView.hideDialog(resultData.Message);
                 }
             }

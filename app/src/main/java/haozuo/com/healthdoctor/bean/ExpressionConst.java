@@ -6,5 +6,5 @@ package haozuo.com.healthdoctor.bean;
 public class ExpressionConst {
     public String Content;
     public int Postion;
-    public boolean IsChecked;
+    public boolean IsChecked = true;
 }

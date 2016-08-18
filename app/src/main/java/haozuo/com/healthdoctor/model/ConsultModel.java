@@ -4,9 +4,13 @@ import android.support.annotation.NonNull;
 
 import com.squareup.okhttp.OkHttpClient;
 
-import java.util.List;
 
 import javax.inject.Inject;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 import haozuo.com.healthdoctor.bean.BaseBean;
 import haozuo.com.healthdoctor.bean.ConsultDoneItemBean;
@@ -208,6 +212,44 @@ public class ConsultModel extends AbstractModel {
                             entity = new GlobalShell<List<UsefulExpressionBean>>(result);
                         } else {
                             entity = new GlobalShell<List<UsefulExpressionBean>>(resultBean.message);
+                        }
+                        callbackListener.handlerResult(entity);
+                    }
+                });
+    }
+
+    public void addDoctorReply(int DoctorId,int ReDoctorId,String ReDoctorName,int CustomerId,String ReplyContent,String ReplyTime, final OnHandlerResultListener<GlobalShell<Boolean>> callbackListener) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("DoctorId", DoctorId);
+        params.put("ReDoctorId", ReDoctorId);
+        params.put("ReDoctorName", ReDoctorName);
+        params.put("CustomerId", CustomerId);
+        params.put("ReplyContent", ReplyContent);
+        params.put("ReplyTime", ReplyTime);
+        mIConsultService.addDoctorReply(requestTag(),params)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<BaseBean<Boolean>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        GlobalShell<Boolean> entity=new GlobalShell<Boolean>(e.getMessage());
+                        callbackListener.handlerResult(entity);
+                    }
+
+                    @Override
+                    public void onNext(BaseBean<Boolean> resultBean) {
+                        GlobalShell<Boolean> entity=null;
+                        if(resultBean.state>0) {
+                            Boolean result = resultBean.Data;
+                            entity=new GlobalShell<Boolean>(result);
+                        }
+                        else{
+                            entity=new GlobalShell<Boolean>(resultBean.message);
                         }
                         callbackListener.handlerResult(entity);
                     }

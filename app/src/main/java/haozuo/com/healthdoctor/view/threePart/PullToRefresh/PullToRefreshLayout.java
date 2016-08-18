@@ -430,7 +430,6 @@ public class PullToRefreshLayout extends RelativeLayout {
         return true;
     }
 
-
     private void initView() {
         // 初始化下拉布局
         pullView = refreshView.findViewById(R.id.pull_icon);
