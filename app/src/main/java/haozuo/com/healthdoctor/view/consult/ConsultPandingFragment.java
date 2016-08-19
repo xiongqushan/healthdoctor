@@ -61,7 +61,6 @@ public class ConsultPandingFragment extends Fragment {
         return fragment;
     }
 
-
     public void refreshConsultPendingList(List<ConsultItemBean> dataList) {
         adapter.refresh(dataList);
     }
@@ -166,7 +165,7 @@ public class ConsultPandingFragment extends Fragment {
             holder.Cphoto.setImageURI(uri);
             holder.Cname.setText(doctorGroupEntity.CustName);
             holder.ConsultContent.setText(doctorGroupEntity.ConsultTitele);
-            holder.LastConsult.setText(DateUtil.converTime(DateUtil.getStringToTimestamp(doctorGroupEntity.CommitOn)));
+            holder.LastConsult.setText(DateUtil.converTime(DateUtil.getStringToTimestamp(doctorGroupEntity.CommitOn,"yyyy-MM-dd")));
 
             holder.Cphoto.setTag(new Object[]{doctorGroupEntity});
             return convertView;

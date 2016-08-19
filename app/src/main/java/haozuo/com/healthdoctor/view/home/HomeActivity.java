@@ -57,6 +57,7 @@ public class HomeActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTranslucentStatus(R.color.main_color_blue);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
         DaggerHomeComponent.builder()
@@ -64,7 +65,6 @@ public class HomeActivity extends BaseActivity {
                 .homeModule(new HomeModule())
                 .build()
                 .inject(this);
-
 
         fragmentManager = getSupportFragmentManager();
         ConsultFragment consultFragment = (ConsultFragment) fragmentManager.findFragmentById(R.id.content_consult);

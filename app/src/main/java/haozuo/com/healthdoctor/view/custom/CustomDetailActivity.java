@@ -27,6 +27,7 @@ public class CustomDetailActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTranslucentStatus(R.color.main_color_blue);
         setContentView(R.layout.activity_custom_detail);
 
         Bundle bundle = getIntent().getExtras();

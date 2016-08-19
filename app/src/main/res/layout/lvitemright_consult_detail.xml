@@ -14,7 +14,9 @@
         android:layout_alignParentRight="true"
         android:layout_marginTop="@dimen/consult_photo_margintop"
         android:layout_marginRight="@dimen/consult_photot_marginleft"
-        fresco:roundAsCircle="true"/>
+        fresco:roundAsCircle="true"
+        fresco:roundingBorderWidth="1dp"
+        fresco:roundingBorderColor="@color/black"/>
 
     <TextView
         android:id="@+id/txt_consult_commiton"
@@ -30,6 +32,7 @@
         android:layout_toLeftOf="@id/drawee_consult_item_photo"
         android:layout_marginTop="@dimen/consult_textview_margintop"
         android:layout_marginRight="@dimen/consult_textview_marginleft"
+        android:layout_marginLeft="50dp"
         android:padding="@dimen/consult_textview_padding"
         android:gravity="left"
         android:textSize="@dimen/textsize_h4"

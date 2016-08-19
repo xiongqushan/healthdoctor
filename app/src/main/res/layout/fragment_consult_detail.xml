@@ -3,6 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     tools:context="haozuo.com.healthdoctor.view.consult.ConsultDetailFragment">
 
     <!--<ListView-->
@@ -13,7 +15,7 @@
         <!--android:divider="@null"-->
         <!--android:listSelector="@android:color/transparent"/>-->
 
-    <haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout
+    <haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToLoadMoreLayout
         android:id="@+id/consult_detail_pull_to_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -25,9 +27,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:divider="@null"
-            android:listSelector="@android:color/transparent" />
-        <include layout="@layout/load_more" />
-    </haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout>
+            android:listSelector="@android:color/transparent"
+            android:stackFromBottom="true"
+            android:overScrollMode="always"/>
+        <!--<include layout="@layout/load_more" />-->
+    </haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToLoadMoreLayout>
 
     <RelativeLayout
         android:id="@+id/edit_area"
@@ -40,9 +44,7 @@
             android:layout_height="@dimen/consult_customer_usuallymessage_height"
             android:layout_marginTop="@dimen/consult_customer_usuallymessage_margintop"
             android:layout_marginLeft="@dimen/consult_customer_usuallymessage_marginleft"
-            android:background="@drawable/sound_message"
-            android:focusable="true"
-            android:focusableInTouchMode="true"/>
+            android:background="@drawable/sound_message" />
 
         <ImageView
             android:id="@+id/btn_usually_message"

@@ -87,7 +87,7 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
                              Bundle savedInstanceState) {
         mContext = getContext();
         if (rootView == null) {
-            rootView = inflater.inflate(R.layout.fragment_usefulmessage_list, container, false);
+            rootView = inflater.inflate(R.layout.lv_usefulmessage, container, false);
             ButterKnife.bind(this, rootView);
         }
         mSelectedExpressionMap = new ArrayList<>();
@@ -124,7 +124,7 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
         et_TitleBar_search.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_ENTER&& event.getAction() == KeyEvent.ACTION_DOWN) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER&& event.getAction() == KeyEvent.ACTION_UP) {
                     InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                     if (imm.isActive()) {
                         imm.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0);
@@ -175,7 +175,7 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
 
         final Dialog dialog = new Dialog(mContext, R.style.Dialog_Fullscreen);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.fragment_usefulmessage_dialog);
+        dialog.setContentView(R.layout.dialog_usefulmessage);
         refreshExpressionContent(dialog);
         dialog.show();
 
@@ -303,7 +303,7 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
         public View getView(int position, View convertView, ViewGroup parent) {
             ViewHolder holder = null;
             if (convertView == null) {
-                convertView = myInflater.inflate(R.layout.fragment_usefulmessage_item, parent, false);
+                convertView = myInflater.inflate(R.layout.lvitem_usefulmessage, parent, false);
                 holder = new ViewHolder(convertView);
                 convertView.setTag(holder);
                 convertView.setOnClickListener(clickListener);

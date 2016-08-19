@@ -66,6 +66,7 @@ public class ConsultPresenter extends AbstractPresenter implements ConsultContra
     }
 
     @Override
+
     public void refreshCustomList(final int flag, final boolean initData) {
         mCurrentPageIndex = 1;
         mIConsultView.showDialog();

@@ -59,7 +59,11 @@ public class GroupPresenter extends AbstractPresenter implements IGroupPresenter
                     mIGroupView.changeRetryLayer(false);
                 } else {
                     mIGroupView.hideDialog(resultData.Message);
+<<<<<<< HEAD
                     mIGroupView.changeRetryLayer(true);
+=======
+
+>>>>>>> a2144eb22585a320b7fab271cb8e77ff6170b109
                 }
             }
         });

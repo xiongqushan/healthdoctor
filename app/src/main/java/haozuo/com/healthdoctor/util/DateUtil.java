@@ -574,8 +574,8 @@ public class DateUtil {
     }
 
     /*将字符串转为时间戳*/
-    public static long getStringToTimestamp(String time) {
-        DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    public static long getStringToTimestamp(String time,String format) {
+        DateFormat sdf = new SimpleDateFormat(format);
         Date date = new Date();
         try {
             time = time.replace('T', ' ');
@@ -585,4 +585,17 @@ public class DateUtil {
         }
         return date.getTime();
     }
+
+    public static int getSecondDiff(String sBegin, String sEnd){
+        int diff = 0;
+        long lBegin = getStringToTimestamp(sBegin,"yyyy-MM-dd HH:mm:ss");
+        long lEnd = getStringToTimestamp(sEnd,"yyyy-MM-dd HH:mm:ss");
+
+        if (lBegin<=lEnd){
+            diff = (int) (lEnd - lBegin)/1000;
+        }
+        return diff;
+    }
+
+
 }

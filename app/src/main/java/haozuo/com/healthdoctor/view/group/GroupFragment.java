@@ -19,6 +19,7 @@ import haozuo.com.healthdoctor.contract.GroupContract;
 import haozuo.com.healthdoctor.contract.IBasePresenter;
 import haozuo.com.healthdoctor.view.base.AbstractView;
 import haozuo.com.healthdoctor.view.custom.GroupCustomListActivity;
+import retrofit.http.HEAD;
 
 public class GroupFragment extends AbstractView implements GroupContract.IGroupView {
     Context mContext;
@@ -92,11 +93,11 @@ public class GroupFragment extends AbstractView implements GroupContract.IGroupV
         TextView[] GroupNameArray = {firstGroupName, secondGroupName, thirdGroupName, fourthGroupName, fifthGroupName, sixthGroupName};
         for (int i = 0; i < GroupNameArray.length; i++) {
 //        for (int i = 0; i < doctorGroupBeanList.size(); i++) {
+            final int finalI = i;
             String doctorNum = "服务人数: " + doctorGroupBeanList.get(i).doctorNum;
             String groupName = doctorGroupBeanList.get(i).name;
             String groupContent = groupName + "\n" + doctorNum;
             GroupNameArray[i].setText(groupContent);
-            final int finalI = i;
             GroupNameArray[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

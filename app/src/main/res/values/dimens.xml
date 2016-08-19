@@ -19,6 +19,7 @@
 
     <dimen name="actionbar_high">48dp</dimen>
     <dimen name="actionbar_high_44dp">44dp</dimen>
+    <dimen name="actionbar_padding">10dp</dimen>
 
     <dimen name="consult_inputtab_height">60dp</dimen>
     <dimen name="consult_panding_list_radiobutton_padding">20dp</dimen>
@@ -32,7 +33,7 @@
     <dimen name="consult_customer_edittext_marginbottom">3dp</dimen>
 
     <dimen name="consult_detail_paddingbottom">15dp</dimen>
-    <dimen name="consult_photo_height">40dp</dimen>
+    <dimen name="consult_photo_height">60dp</dimen>
     <dimen name="consult_photo_margintop">9dp</dimen>
     <dimen name="consult_photot_marginleft">12dp</dimen>
     <dimen name="consult_textview_margintop">15dp</dimen>

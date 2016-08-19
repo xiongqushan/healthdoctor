@@ -28,8 +28,8 @@ public class ConsultReplyBean implements Comparator<ConsultReplyBean>,Serializab
     public int compare(ConsultReplyBean lhs, ConsultReplyBean rhs) {
         try
         {
-            Date _date1 = (new SimpleDateFormat("yyyy-MM-dd")).parse(lhs.CommitOn);
-            Date _date2 = (new SimpleDateFormat("yyyy-MM-dd")).parse(rhs.CommitOn);
+            Date _date1 = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).parse(lhs.CommitOn);
+            Date _date2 = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).parse(rhs.CommitOn);
 
             if (_date1.compareTo(_date2) > 0)
                 return 1;
