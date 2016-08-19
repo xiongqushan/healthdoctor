@@ -16,8 +16,8 @@ public interface GroupCustomListContract {
     }
 
     interface IGroupCustomListPresenter extends IBasePresenter {
-        void refreshCustomList();
+        void refreshCustomList(String customNameOrMobile);
 
-        void loadmoreCustomList();
+        void loadmoreCustomList(String customNameOrMobile);
     }
 }

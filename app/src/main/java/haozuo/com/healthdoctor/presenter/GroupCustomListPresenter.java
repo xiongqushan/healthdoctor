@@ -26,10 +26,12 @@ public class GroupCustomListPresenter extends AbstractPresenter implements Group
     private int PAGE_SIZE=20;
     private int mCurrentPageIndex=1;
     private int mLeastPageIndex=1;
+    private int mGroupId;
+//    private String mCustomNameOrMobile;
     private List<GroupCustInfoBean>mGroupCustInfoBeanList;
     private GroupCustomListContract.IGroupCustomListView mGroupCustomListView;
     private GroupModel mGroupModel;
-    private int mGroupId;
+
 
     @Inject
     public GroupCustomListPresenter(@NonNull GroupCustomListContract.IGroupCustomListView iGroupCustomListView,@NonNull GroupModel groupModel,@NonNull int groupId){
@@ -52,17 +54,17 @@ public class GroupCustomListPresenter extends AbstractPresenter implements Group
 
     @Override
     public void start() {
-        refreshCustomList();
+        refreshCustomList("");
     }
 
     @Override
-    public void refreshCustomList() {
+    public void refreshCustomList(String customNameOrMobile) {
         mLeastPageIndex=mCurrentPageIndex;
         mCurrentPageIndex=1;
         int doctorId= UserManager.getInstance().getDoctorInfo().Doctor_ID;
         int departId= UserManager.getInstance().getDoctorInfo().Dept;
         mGroupCustomListView.showDialog();
-        mGroupModel.GetGroupCustInfoList(departId, mGroupId, doctorId, mCurrentPageIndex, PAGE_SIZE, new OnHandlerResultListener<GlobalShell<PageBean<GroupCustInfoBean>>>() {
+        mGroupModel.GetGroupCustInfoList(departId, mGroupId, doctorId, customNameOrMobile,mCurrentPageIndex, PAGE_SIZE, new OnHandlerResultListener<GlobalShell<PageBean<GroupCustInfoBean>>>() {
             @Override
             public void handlerResult(GlobalShell<PageBean<GroupCustInfoBean>> resultData) {
                 if(resultData.LogicSuccess) {
@@ -84,13 +86,13 @@ public class GroupCustomListPresenter extends AbstractPresenter implements Group
     }
 
     @Override
-    public void loadmoreCustomList() {
+    public void loadmoreCustomList(String customNameOrMobile) {
         mLeastPageIndex=mCurrentPageIndex;
         mCurrentPageIndex++;
         int doctorId= UserManager.getInstance().getDoctorInfo().Doctor_ID;
         int departId= UserManager.getInstance().getDoctorInfo().Dept;
         mGroupCustomListView.showDialog();
-        mGroupModel.GetGroupCustInfoList(departId, mGroupId, doctorId, mCurrentPageIndex, PAGE_SIZE, new OnHandlerResultListener<GlobalShell<PageBean<GroupCustInfoBean>>>() {
+        mGroupModel.GetGroupCustInfoList(departId, mGroupId, doctorId, customNameOrMobile,mCurrentPageIndex, PAGE_SIZE, new OnHandlerResultListener<GlobalShell<PageBean<GroupCustInfoBean>>>() {
             @Override
             public void handlerResult(GlobalShell<PageBean<GroupCustInfoBean>> resultData) {
                 if(resultData.LogicSuccess) {

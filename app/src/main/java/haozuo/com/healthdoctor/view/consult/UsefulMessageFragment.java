@@ -78,6 +78,12 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
     }
 
     @Override
+    public void onResume(){
+        super.onResume();
+        mIUsefulMessagePresenter.getDefaultUsefulExpression();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mContext = getContext();
@@ -102,7 +108,7 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
 //                }
 //            }
 //        });
-        mIUsefulMessagePresenter.getDefaultUsefulExpression();
+
         mExpressionConstList = new ArrayList<ExpressionConst>();
         mExpressionConstList.addAll(SysConfig.getExpressionConstList());
 

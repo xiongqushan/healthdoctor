@@ -44,7 +44,7 @@
         android:layout_marginRight="10dp"
         android:layout_gravity="center_vertical"
         android:textSize="@dimen/textsize_h3"
-        android:maxLines="1"
+        android:singleLine="true"
         android:hint="请输入搜索的关键字"
         android:visibility="gone"/>
 

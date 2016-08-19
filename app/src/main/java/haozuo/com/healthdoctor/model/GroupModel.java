@@ -66,8 +66,8 @@ public class GroupModel extends AbstractModel {
 
     }
 
-    public void GetGroupCustInfoList(int serviceDeptId, int groupId, int doctorId, int pageIndex, int pageSize, final OnHandlerResultListener<GlobalShell<PageBean<GroupCustInfoBean>>> callbackListener) {
-        mIUserService.getGroupCustInfoList(requestTag(), serviceDeptId, doctorId, groupId, "", pageIndex, pageSize)
+    public void GetGroupCustInfoList(int serviceDeptId, int groupId, int doctorId, String customNameOrMobile, int pageIndex, int pageSize, final OnHandlerResultListener<GlobalShell<PageBean<GroupCustInfoBean>>> callbackListener) {
+        mIUserService.getGroupCustInfoList(requestTag(), serviceDeptId, doctorId, groupId, customNameOrMobile, pageIndex, pageSize)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<BaseBean<PageBean<GroupCustInfoBean>>>() {

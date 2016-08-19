@@ -266,7 +266,7 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
 //        ConsultDetailActivity.setCustomerTitle(mCustomDetailBean);
         TextView textView = (TextView) getActivity().findViewById(R.id.txt_TitleBar_title);
         textView.setText(mCustomDetailBean.Cname);
-        getActivity().findViewById(R.id.btn_search).setVisibility(View.GONE);
+        getActivity().findViewById(R.id.btn_search).setVisibility(View.INVISIBLE);
         getActivity().findViewById(R.id.btn_go_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -373,7 +373,7 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
                         holder.flowLayout_consult_photo.removeAllViews();
                         for (String s : photoList) {
                             SimpleDraweeView consult_photo = (SimpleDraweeView) LayoutInflater.from(mContext).inflate(R.layout.lvitemleft_consult_detail_photo, holder.flowLayout_consult_photo, false);
-                            Uri photoUri = Uri.parse(s);
+                            Uri photoUri = Uri.parse(s+"!small200");
                             consult_photo.setImageURI(photoUri);
                             holder.flowLayout_consult_photo.addView(consult_photo);
                         }

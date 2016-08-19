@@ -68,7 +68,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void setCustomerTitle(String title) {
         TextView textView = (TextView) findViewById(R.id.txt_TitleBar_title);
         textView.setText(title);
-        findViewById(R.id.btn_search).setVisibility(View.GONE);
+        findViewById(R.id.btn_search).setVisibility(View.INVISIBLE);
         findViewById(R.id.btn_go_back).setOnClickListener(finishActivity);
     }
 
