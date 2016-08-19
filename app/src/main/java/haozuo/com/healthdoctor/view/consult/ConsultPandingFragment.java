@@ -61,7 +61,6 @@ public class ConsultPandingFragment extends Fragment {
         return fragment;
     }
 
-
     public void refreshConsultPendingList(List<ConsultItemBean> dataList) {
         adapter.refresh(dataList);
     }
@@ -100,7 +99,7 @@ public class ConsultPandingFragment extends Fragment {
             Log.e("adapterObject" + mFlag, adapter.toString());
             consult_detail_List.setAdapter(adapter);
             ptrLayout.setOnRefreshListener(new PullListener());
-            mConsultFragment.refreshCustomList(mFlag); //首次加载全部咨询内容
+            mConsultFragment.refreshCustomList(mFlag,false); //首次加载全部咨询内容
         }
         return rootView;
     }
@@ -162,7 +161,7 @@ public class ConsultPandingFragment extends Fragment {
             holder.Cphoto.setImageURI(uri);
             holder.Cname.setText(doctorGroupEntity.CustName);
             holder.ConsultContent.setText(doctorGroupEntity.ConsultTitele);
-            holder.LastConsult.setText(DateUtil.converTime(DateUtil.getStringToTimestamp(doctorGroupEntity.CommitOn)));
+            holder.LastConsult.setText(DateUtil.converTime(DateUtil.getStringToTimestamp(doctorGroupEntity.CommitOn,"yyyy-MM-dd")));
 
             holder.Cphoto.setTag(new Object[]{doctorGroupEntity});
             return convertView;
@@ -181,7 +180,7 @@ public class ConsultPandingFragment extends Fragment {
         @Override
         public void onRefresh() {
             Log.e("onRefresh mFlag", mFlag + "");
-            mConsultFragment.refreshCustomList(mFlag);
+            mConsultFragment.refreshCustomList(mFlag,true);
         }
 
         @Override

@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -15,7 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,13 +46,14 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.ConsultReplyBean;
+import haozuo.com.healthdoctor.bean.CustomDetailBean;
 import haozuo.com.healthdoctor.bean.DoctorBean;
 import haozuo.com.healthdoctor.contract.ConsultDetailContract;
 import haozuo.com.healthdoctor.manager.UserManager;
 import haozuo.com.healthdoctor.util.DateUtil;
 import haozuo.com.healthdoctor.util.JsonParser;
 import haozuo.com.healthdoctor.view.base.AbstractView;
-import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout;
+import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToLoadMoreLayout;
 import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullableListView;
 import haozuo.com.healthdoctor.view.threePart.common.FlowLayout;
 
@@ -59,12 +61,15 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
     Context mContext;
     View rootView;
     ConsultListAdapter mConsultListAdapter;
+    ConsultDetailActivity mActivity;
     public ConsultDetailContract.IConsultDetailPresenter mConsultDetailPresenter;
     public static int RESULT_EXPRESSION = 0;
     private String mURI;
-    private static DoctorBean mDoctorEntity;
     private ConsultReplyBean mConsultReplmyItem;
+    private CustomDetailBean mCustomDetailBean;
+    private static DoctorBean mDoctorEntity;
     private static int mCustomerId;
+
     public static final String PREFER_NAME = "com.iflytek.setting";
     private static String TAG = ConsultDetailFragment.class.getSimpleName();
     private SpeechRecognizer mIat;                                                              // 语音听写对象
@@ -78,7 +83,7 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
     @Bind(R.id.consult_detail_ListView)
     PullableListView consult_detail_List;
     @Bind(R.id.consult_detail_pull_to_refresh_layout)
-    PullToRefreshLayout consult_detail_pull_to_refresh_layout;
+    PullToLoadMoreLayout consult_detail_pull_to_refresh_layout;
     @Bind(R.id.edittxt_message)
     EditText edittxt_message;
 
@@ -116,7 +121,6 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
     public ConsultDetailFragment() {
     }
 
-
     public static ConsultDetailFragment newInstance(int CustomerId){
         ConsultDetailFragment fragment = new ConsultDetailFragment();
         mDoctorEntity = UserManager.getInstance().getDoctorInfo();
@@ -141,10 +145,38 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
         //监听软键盘弹出，在弹出状态下重新调整窗口
         //WindowResize.assistActivity(getActivity());
         mConsultListAdapter=new ConsultListAdapter(mContext);
-
         consult_detail_List.setAdapter(mConsultListAdapter);
+//        consult_detail_List.setOnScrollListener(new AbsListView.OnScrollListener() {
+//            private boolean flag;
+//            @Override
+//            public void onScrollStateChanged(AbsListView view, int scrollState) {
+//                switch (scrollState) {
+//                    case AbsListView.OnScrollListener.SCROLL_STATE_IDLE:
+//                        // 判断滚动到底部
+//                        if (consult_detail_List.getLastVisiblePosition() == (consult_detail_List.getCount() - 1)) {
+//                            showTip("底部");
+//                        }
+//                        // 判断滚动到顶部
+//                        if(consult_detail_List.getFirstVisiblePosition() == 0){
+//                            showTip("顶部");
+//                            mConsultDetailPresenter.loadmoreConsultList();
+//
+//                        }
+//                        break;
+//                }
+//            }
+//
+//            @Override
+//            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+//                if (firstVisibleItem + visibleItemCount == totalItemCount && !flag) {
+//                    flag = true;
+//                } else
+//                    flag = false;
+//            }
+//        });
         consult_detail_pull_to_refresh_layout.setOnRefreshListener(new PullListener());
         mConsultDetailPresenter.refreshConsultList();
+        mConsultDetailPresenter.getUserDetail(mCustomerId);
 
         mIat = SpeechRecognizer.createRecognizer(mContext, mInitListener);
         mIatDialog = new RecognizerDialog(mContext, mInitListener);
@@ -156,7 +188,7 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
         edittxt_message.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_ENTER&& event.getAction() == KeyEvent.ACTION_DOWN) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER&& event.getAction() == KeyEvent.ACTION_UP) {
                     InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                     if (imm.isActive()) {
                         imm.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0);
@@ -206,24 +238,41 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
     }
 
     @Override
+    public void setListViewPosition(int position){
+//        consult_detail_List.smoothScrollToPosition(position);
+        consult_detail_List.setSelection(position);
+    }
+
+    @Override
     public void refreshFinish(int status) {
         consult_detail_pull_to_refresh_layout.refreshFinish(status);
     }
 
     @Override
     public void loadmoreFinish(int status){
-        consult_detail_pull_to_refresh_layout.loadmoreFinish(status);
+//        consult_detail_pull_to_refresh_layout.loadmoreFinish(status);
     }
 
-    class PullListener implements PullToRefreshLayout.OnRefreshListener {
+    @Override
+    public void setCustmoerInfo(CustomDetailBean customDetailItem){
+        mCustomDetailBean = customDetailItem;
+//        ConsultDetailActivity.setCustomerTitle(mCustomDetailBean);
+        TextView textView = (TextView) getActivity().findViewById(R.id.txt_TitleBar_title);
+        textView.setText(mCustomDetailBean.Cname);
+        getActivity().findViewById(R.id.btn_search).setVisibility(View.GONE);
+        getActivity().findViewById(R.id.btn_go_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().finish();
+            }
+        });
+//        getActivity().setTitle(mCustomDetailBean.Cname+"\b"+mCustomDetailBean.Sex+"\b"+mCustomDetailBean.Age);
+    }
+
+    class PullListener implements PullToLoadMoreLayout.OnRefreshListener {
 
         @Override
         public void onRefresh() {
-            mConsultDetailPresenter.refreshConsultList();
-        }
-
-        @Override
-        public void onLoadMore() {
             mConsultDetailPresenter.loadmoreConsultList();
         }
 
@@ -287,7 +336,7 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
             if (currentType == TYPE_COSTUMER) {
                 ViewHolderLeft holder = null;
                 if (convertView == null) {
-                    convertView = myInflater.inflate(R.layout.fragment_consult_detail_item_left, parent, false);
+                    convertView = myInflater.inflate(R.layout.lvitemleft_consult_detail, parent, false);
                     holder = new ViewHolderLeft(convertView);
                     convertView.setTag(holder);
                 } else {
@@ -305,43 +354,56 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
                 switch (consultReplyEntity.ConsultType) {
                     case 1://纯文本
                     case 4://问卷相关信息
-                        holder.txt_consult_item.setText(consultReplyEntity.Content);
+                        holder.txt_consult_item.setVisibility(View.VISIBLE);
                         holder.flowLayout_consult_photo.setVisibility(View.GONE);
+                        holder.txt_consult_item.setText(consultReplyEntity.Content);
+                        holder.txt_consult_item.setOnClickListener(null);
                         break;
                     case 2://照片病例
                         holder.txt_consult_item.setVisibility(View.GONE);
-                        String[] photoList = consultReplyEntity.AppendInfo.split(";");
+                        holder.flowLayout_consult_photo.setVisibility(View.VISIBLE);
+                        String[] photoList = consultReplyEntity.AppendInfo.split(",");
+                        holder.flowLayout_consult_photo.removeAllViews();
                         for (String s : photoList) {
-                            holder.flowLayout_consult_photo.removeAllViews();
-                            SimpleDraweeView consult_photo = (SimpleDraweeView) LayoutInflater.from(mContext).inflate(R.layout.fragment_consult_detail_item_left_photo, holder.flowLayout_consult_photo, false);
+                            SimpleDraweeView consult_photo = (SimpleDraweeView) LayoutInflater.from(mContext).inflate(R.layout.lvitemleft_consult_detail_photo, holder.flowLayout_consult_photo, false);
                             Uri photoUri = Uri.parse(s);
                             consult_photo.setImageURI(photoUri);
                             holder.flowLayout_consult_photo.addView(consult_photo);
                         }
                         break;
                     case 3://体检异常项
+                        holder.txt_consult_item.setVisibility(View.VISIBLE);
+                        holder.flowLayout_consult_photo.setVisibility(View.GONE);
                         holder.txt_consult_item.setText(consultReplyEntity.Content);
                         holder.txt_consult_item.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Toast.makeText(mContext, "异常项转跳逻辑", Toast.LENGTH_SHORT).show();
+                                showTip("异常项转跳逻辑");
                             }
                         });
-                        holder.flowLayout_consult_photo.setVisibility(View.GONE);
                         break;
                     default:
                         break;
                 }
-                if (mCommitOn.equals(DateUtil.converTime(DateUtil.getStringToTimestamp(consultReplyEntity.CommitOn)))) {
-                    holder.txt_consult_commiton.setVisibility(View.GONE);
-                } else {
-                    mCommitOn = DateUtil.converTime(DateUtil.getStringToTimestamp(consultReplyEntity.CommitOn));
+                mCommitOn = consultReplyEntity.CommitOn.replace("T"," ");
+//                mCommitOn = DateUtil.converTime(DateUtil.getStringToTimestamp(consultReplyEntity.CommitOn,"yyyy-MM-dd"));
+                if (position == 0){//如果是列表中的第一条数据则直接展示时间
+                    holder.txt_consult_commiton.setVisibility(View.VISIBLE);
                     holder.txt_consult_commiton.setText(mCommitOn);
+                }else {//与列表中上一条数据的时间相比较，若间隔时间小于30s则展示时间
+                    if (DateUtil.getSecondDiff(dataSource.get(position-1).CommitOn,consultReplyEntity.CommitOn)>=30){
+                        holder.txt_consult_commiton.setVisibility(View.VISIBLE);
+                        holder.txt_consult_commiton.setText(mCommitOn);
+                    }
+                    else {
+                        holder.txt_consult_commiton.setVisibility(View.GONE);
+                    }
                 }
+
             } else if (currentType == TYPE_DOCTOR) {
                 ViewHolderRight holder = null;
                 if (convertView == null) {
-                    convertView = myInflater.inflate(R.layout.fragment_consult_detail_item_right, parent, false);
+                    convertView = myInflater.inflate(R.layout.lvitemright_consult_detail, parent, false);
                     holder = new ViewHolderRight(convertView);
                     convertView.setTag(holder);
                 } else {
@@ -351,11 +413,21 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
                 Uri uri = Uri.parse(mDoctorEntity.PhotoUrl);
                 holder.drawee_consult_item_photo.setImageURI(uri);
                 holder.txt_consult_item.setText(consultReplyEntity.Content);
-                if (mCommitOn.equals(DateUtil.converTime(DateUtil.getStringToTimestamp(consultReplyEntity.CommitOn)))) {
-                    holder.txt_consult_commiton.setVisibility(View.GONE);
-                } else {
-                    mCommitOn = DateUtil.converTime(DateUtil.getStringToTimestamp(consultReplyEntity.CommitOn));
+
+                mCommitOn = consultReplyEntity.CommitOn.replace("T"," ");
+//                    mCommitOn = DateUtil.converTime(DateUtil.getStringToTimestamp(consultReplyEntity.CommitOn,"yyyy-MM-dd"));
+                if (position == 0){//如果是列表中的第一条数据则直接展示时间
+
+                    holder.txt_consult_commiton.setVisibility(View.VISIBLE);
                     holder.txt_consult_commiton.setText(mCommitOn);
+                }else {//与列表中上一条数据的时间相比较，若间隔时间小于30s则展示时间
+                    if (DateUtil.getSecondDiff(dataSource.get(position-1).CommitOn,consultReplyEntity.CommitOn)>=30){
+                        holder.txt_consult_commiton.setVisibility(View.VISIBLE);
+                        holder.txt_consult_commiton.setText(mCommitOn);
+                    }
+                    else {
+                        holder.txt_consult_commiton.setVisibility(View.GONE);
+                    }
                 }
             }
             return convertView;
@@ -404,10 +476,10 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
             return;
         }
         String CommitOn = DateUtil.date2Str(new Date(),"yyyy-MM-dd'T'HH:mm:ss");
-        mConsultDetailPresenter.addDoctorReply(0,mDoctorEntity.Doctor_ID,mDoctorEntity.Name,mCustomerId,replyContent,CommitOn);
-//        mConsultDetailPresenter.refreshConsultList();
+        mConsultDetailPresenter.addDoctorReply(mCustomDetailBean.DoctorID,mDoctorEntity.Doctor_ID,mDoctorEntity.Name,mCustomerId,replyContent,CommitOn);
         edittxt_message.setText("");
     }
+
 
     /**
      * 初始化监听器。

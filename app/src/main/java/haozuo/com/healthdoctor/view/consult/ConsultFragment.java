@@ -291,8 +291,8 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
         ConsultPresenter.loadmoreConsultDoneList(flag);
     }
 
-    public void refreshCustomList(int flag) {
-        ConsultPresenter.refreshCustomList(flag);
+    public void refreshCustomList(int flag,boolean isPullToRefresh) {
+        ConsultPresenter.refreshCustomList(flag,isPullToRefresh);
     }
 
     public void loadmoreCustomList(int flag) {

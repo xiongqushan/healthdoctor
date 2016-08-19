@@ -26,6 +26,7 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setTranslucentStatus(0);
         setContentView(R.layout.activity_login);
 
         DaggerLoginComponent.builder()

@@ -13,12 +13,14 @@ import javax.inject.Inject;
 
 import haozuo.com.healthdoctor.bean.ConsultItemBean;
 import haozuo.com.healthdoctor.bean.ConsultReplyBean;
+import haozuo.com.healthdoctor.bean.CustomDetailBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.contract.ConsultDetailContract;
 import haozuo.com.healthdoctor.contract.IBaseModel;
 import haozuo.com.healthdoctor.contract.IBaseView;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
 import haozuo.com.healthdoctor.model.ConsultModel;
+import haozuo.com.healthdoctor.model.GroupModel;
 import haozuo.com.healthdoctor.util.DateUtil;
 import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout;
 
@@ -29,21 +31,20 @@ import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout;
 public class ConsultDetailPresenter extends AbstractPresenter implements ConsultDetailContract.IConsultDetailPresenter {
     private ConsultDetailContract.IConsultDetailView mIConsultDetailView;
     private ConsultModel mConsultModel;
+    private GroupModel mGroupModel;
     private ConsultReplyBean consultReplyBean;
     private List<ConsultReplyBean> mConsultItemBeanList;
     private String mCommitOn;
     private int mCustomerId;
 
     @Inject
-    public ConsultDetailPresenter(@NonNull ConsultDetailContract.IConsultDetailView iConsultDetailView,@NonNull ConsultModel consultModel,@NonNull int customerId){
+    public ConsultDetailPresenter(@NonNull ConsultDetailContract.IConsultDetailView iConsultDetailView, @NonNull ConsultModel consultModel, GroupModel groupModel, @NonNull int customerId){
         mConsultItemBeanList = new ArrayList<ConsultReplyBean>();
         mIConsultDetailView=iConsultDetailView;
         mConsultModel=consultModel;
+        mGroupModel = groupModel;
         mCustomerId=customerId;
         iConsultDetailView.setPresenter(this);
-//        DateFormat df = new SimpleDateFormat("yyyyMMddhhmmss");
-//        mCommitOn = df.format(new Date()).toString();
-        mCommitOn = DateUtil.date2Str(new Date(),"yyyyMMddHHmmss");
         consultReplyBean = new ConsultReplyBean();
     }
 
@@ -62,6 +63,7 @@ public class ConsultDetailPresenter extends AbstractPresenter implements Consult
 
     @Override
     public void refreshConsultList() {
+        mCommitOn = DateUtil.date2Str(new Date(),"yyyyMMddHHmmss");
         mIConsultDetailView.showDialog();
         mConsultModel.GetConsultReplyList(mCustomerId,mCommitOn, new OnHandlerResultListener<GlobalShell<List<ConsultReplyBean>>>() {
             @Override
@@ -73,7 +75,7 @@ public class ConsultDetailPresenter extends AbstractPresenter implements Consult
                         mConsultItemBeanList.addAll(resultData.Data);
                         Collections.sort(mConsultItemBeanList,consultReplyBean);
                         mIConsultDetailView.refreshCustomAdapter(mConsultItemBeanList);
-                        mIConsultDetailView.refreshFinish(PullToRefreshLayout.SUCCEED);
+                        mCommitOn =mConsultItemBeanList.get(0).CommitOn.replaceAll("(?:T|:|-)","");
                     }
                 }
                 else{
@@ -93,11 +95,25 @@ public class ConsultDetailPresenter extends AbstractPresenter implements Consult
                 if(resultData.LogicSuccess) {
                     mIConsultDetailView.hideDialog();
                     if ((List<ConsultReplyBean>) resultData.Data != null){
-                        mConsultItemBeanList.clear();
-                        mConsultItemBeanList.addAll(resultData.Data);
+                        List<ConsultReplyBean> loadmoreConsultResults = new ArrayList<ConsultReplyBean>();
+                        loadmoreConsultResults.addAll(resultData.Data);
+                        for (int i=0;i<resultData.Data.size();i++){
+                            for (int j=0;j<mConsultItemBeanList.size();j++){
+                                if (resultData.Data.get(i).Id == mConsultItemBeanList.get(j).Id){
+                                    loadmoreConsultResults.remove(resultData.Data.get(i));
+                                }
+                            }
+                        }
+                        mIConsultDetailView.refreshFinish(PullToRefreshLayout.SUCCEED);
+                        if(loadmoreConsultResults.size() == 0){
+                            return;
+                        }
+                        mConsultItemBeanList.addAll(loadmoreConsultResults);
                         Collections.sort(mConsultItemBeanList,consultReplyBean);
                         mIConsultDetailView.refreshCustomAdapter(mConsultItemBeanList);
-                        mIConsultDetailView.loadmoreFinish(PullToRefreshLayout.SUCCEED);
+                        mCommitOn =mConsultItemBeanList.get(0).CommitOn.replaceAll("(?:T|:|-)","");
+                        mIConsultDetailView.setListViewPosition(loadmoreConsultResults.size());
+
                     }
                 }
                 else{
@@ -125,6 +141,25 @@ public class ConsultDetailPresenter extends AbstractPresenter implements Consult
         });
     }
 
+    @Override
+    public void getUserDetail(int customerId){
+        mIConsultDetailView.showDialog();
+        mGroupModel.GetUserDetail(customerId, new OnHandlerResultListener<GlobalShell<CustomDetailBean>>() {
+            @Override
+            public void handlerResult(GlobalShell<CustomDetailBean> resultData) {
+                if (resultData.LogicSuccess) {
+//                    mIConsultDetailView.hideDialog();
+                    if (resultData.Data != null){
+                        mIConsultDetailView.setCustmoerInfo(resultData.Data);
+                    }
+                    refreshConsultList();
+                } else {
+                    mIConsultDetailView.hideDialog(resultData.Message);
+                }
+            }
+        });
+
+    }
 
 }
 

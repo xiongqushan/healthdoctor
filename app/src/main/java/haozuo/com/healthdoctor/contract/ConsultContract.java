@@ -70,7 +70,7 @@ public interface ConsultContract {
 
     interface IConsultPresenter extends IBasePresenter {
 
-        void refreshCustomList(int flag);
+        void refreshCustomList(int flag,boolean isPullToRefresh);
 
         void loadmoreCustomList(int flag);
 

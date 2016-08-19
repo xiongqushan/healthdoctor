@@ -124,7 +124,7 @@ public class FeedbackFragment extends Fragment {
             if (Cphoto == null || Cphoto.equals("")) {
                 Cphoto = "res://haozuo.com.healthdoctor.view.custom/" + R.drawable.default_photourl;
             }
-            tvTime.setText(DateUtil.converTime(DateUtil.getStringToTimestamp(dataSource.get(position).CommitOn)));
+            tvTime.setText(DateUtil.converTime(DateUtil.getStringToTimestamp(dataSource.get(position).CommitOn,"yyyy-MM-dd")));
             Uri uri = Uri.parse(Cphoto);
             img.setImageURI(uri);
             return convertView;

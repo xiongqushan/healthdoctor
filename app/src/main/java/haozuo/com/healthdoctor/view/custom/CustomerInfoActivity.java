@@ -25,10 +25,10 @@ public class CustomerInfoActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTranslucentStatus(R.color.main_color_blue);
         setContentView(R.layout.activity_customer_info);
 
         Bundle bundle = getIntent().getExtras();
-
 
         CustomDetailBean customInfo = (CustomDetailBean) bundle.getSerializable(EXTRA_CUSTOMER_INFO);
         setCustomerTitle("基本资料—" + customInfo.Cname);

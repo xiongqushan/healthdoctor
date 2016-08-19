@@ -62,7 +62,7 @@ public class ConsultPresenter extends AbstractPresenter implements ConsultContra
     }
 
     @Override
-    public void refreshCustomList(final int flag) {
+    public void refreshCustomList(final int flag, final boolean isPullToRefresh) {
         mCurrentPageIndex = 1;
         mIConsultView.showDialog();
         int doctorId = UserManager.getInstance().getDoctorInfo().Doctor_ID;
@@ -76,7 +76,10 @@ public class ConsultPresenter extends AbstractPresenter implements ConsultContra
                         mConsultItemBeanList.addAll(resultData.Data.CurrentPageDataList);
                     }
                     mIConsultView.refreshPendingPageList(mConsultItemBeanList, flag);
-                    mIConsultView.refreshFinish(PullToRefreshLayout.SUCCEED, flag);
+                    if (isPullToRefresh){
+                        mIConsultView.refreshFinish(PullToRefreshLayout.SUCCEED, flag);
+                    }
+
                 } else {
                     mIConsultView.hideDialog(resultData.Message);
                     mIConsultView.refreshFinish(PullToRefreshLayout.FAIL, flag);
