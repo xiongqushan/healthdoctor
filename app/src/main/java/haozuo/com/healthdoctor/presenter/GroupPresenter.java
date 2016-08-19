@@ -47,18 +47,17 @@ public class GroupPresenter extends AbstractPresenter implements IGroupPresenter
         mGroupModel.GetGroup(doctorId, new OnHandlerResultListener<GlobalShell<List<DoctorGroupBean>>>() {
             @Override
             public void handlerResult(GlobalShell<List<DoctorGroupBean>> resultData) {
-            if(resultData.LogicSuccess) {
-                mIGroupView.hideDialog();
-                DoctorGroupBean doctorGroupBean = new DoctorGroupBean();
-                Collections.sort(resultData.Data,doctorGroupBean);
-                if ((List<DoctorGroupBean>) resultData.Data != null){
-                    UserManager.getInstance().setGroupInfo((List<DoctorGroupBean>) resultData.Data);
-                    mIGroupView.setGroupInfo(resultData.Data);
+                if (resultData.LogicSuccess) {
+                    mIGroupView.hideDialog();
+                    DoctorGroupBean doctorGroupBean = new DoctorGroupBean();
+                    Collections.sort(resultData.Data, doctorGroupBean);
+                    if ((List<DoctorGroupBean>) resultData.Data != null) {
+                        UserManager.getInstance().setGroupInfo((List<DoctorGroupBean>) resultData.Data);
+                        mIGroupView.setGroupInfo(resultData.Data);
+                    }
+                } else {
+                    mIGroupView.hideDialog(resultData.Message);
                 }
-            }
-            else{
-                mIGroupView.hideDialog(resultData.Message);
-            }
             }
         });
     }
