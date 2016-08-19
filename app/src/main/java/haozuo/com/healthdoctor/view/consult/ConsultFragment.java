@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import haozuo.com.healthdoctor.bean.ConsultDoneItemBean;
 import haozuo.com.healthdoctor.bean.ConsultItemBean;
 import haozuo.com.healthdoctor.bean.FeedbackItemBean;
 import haozuo.com.healthdoctor.contract.ConsultContract;
+import haozuo.com.healthdoctor.contract.IBasePresenter;
 import haozuo.com.healthdoctor.view.base.AbstractView;
 
 /**
@@ -31,7 +33,7 @@ import haozuo.com.healthdoctor.view.base.AbstractView;
 public class ConsultFragment extends AbstractView implements ConsultContract.IConsultView {
     Context mContext;
     View rootView;
-    public ConsultContract.IConsultPresenter ConsultPresenter;
+    public ConsultContract.IConsultPresenter mConsultPresenter;
     @Bind(R.id.consult_Tab)
     TabLayout tabLayout;
     @Bind(R.id.consult_pager_pending)
@@ -49,6 +51,11 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
     private FeedBackPagerAdapter feedBackAdapter;
 
     public ConsultFragment() {
+    }
+
+    @Override
+    protected IBasePresenter getPresenter() {
+        return mConsultPresenter;
     }
 
     public static ConsultFragment newInstance() {
@@ -72,12 +79,18 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
     @Override
     public void onStop() {
         super.onStop();
-        ConsultPresenter.cancelRequest();
+        mConsultPresenter.cancelRequest();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.e("ConsultFragment", "onResume");
     }
 
     @Override
     public void setPresenter(ConsultContract.IConsultPresenter presenter) {
-        ConsultPresenter = presenter;
+        mConsultPresenter = presenter;
     }
 
     public void InitView() {
@@ -225,15 +238,15 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
     }
 
     @Override
-    public void refreshFinish(int status, int flag) {
+    public void refreshFinish(int status, int flag, boolean isRefresh) {
         if (flag == 3) {
-            pendingList.get(0).refreshFinish(status);
+            pendingList.get(0).refreshFinish(status, isRefresh);
         }
         if (flag == 2) {
-            pendingList.get(1).refreshFinish(status);
+            pendingList.get(1).refreshFinish(status, isRefresh);
         }
         if (flag == 1) {
-            pendingList.get(2).refreshFinish(status);
+            pendingList.get(2).refreshFinish(status, isRefresh);
         }
     }
 
@@ -244,8 +257,8 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
 
 
     @Override
-    public void refreshConsultDonePageFinish(int status, int flag) {
-        doneList.get(flag - 1).refreshFinish(status);
+    public void refreshConsultDonePageFinish(int status, int flag, boolean isRefresh) {
+        doneList.get(flag - 1).refreshFinish(status, isRefresh);
     }
 
     @Override
@@ -263,40 +276,41 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
     }
 
     @Override
-    public void refreshFeedbackPageFinish(int status, int flag) {
+    public void refreshFeedbackPageFinish(int status, int flag, boolean isRefresh) {
         if (flag == 1) {
-            feedbackList.get(2).refreshFinish(status);
+            feedbackList.get(2).refreshFinish(status, isRefresh);
         }
         if (flag == 2) {
-            feedbackList.get(1).refreshFinish(status);
+            feedbackList.get(1).refreshFinish(status, isRefresh);
         }
         if (flag == 3) {
-            feedbackList.get(0).refreshFinish(status);
+            feedbackList.get(0).refreshFinish(status, isRefresh);
         }
     }
 
-    public void refreshFeedBackList(int flag) {
-        ConsultPresenter.refreshFeedBackList(flag);
+    public void refreshFeedBackList(int flag, boolean initData) {
+        mConsultPresenter.refreshFeedBackList(flag, initData);
     }
 
     public void loadmoreFeedBackList(int flag) {
-        ConsultPresenter.loadmoreFeedBackList(flag);
+        mConsultPresenter.loadmoreFeedBackList(flag);
     }
 
-    public void refreshConsultDoneList(int flag) {
-        ConsultPresenter.refreshConsultDoneList(flag);
+    public void refreshConsultDoneList(int flag, boolean initData) {
+        mConsultPresenter.refreshConsultDoneList(flag, initData);
     }
 
     public void loadmoreConsultDoneList(int flag) {
-        ConsultPresenter.loadmoreConsultDoneList(flag);
+        mConsultPresenter.loadmoreConsultDoneList(flag);
     }
 
-    public void refreshCustomList(int flag) {
-        ConsultPresenter.refreshCustomList(flag);
+
+    public void refreshCustomList(int flag, boolean initData) {
+        mConsultPresenter.refreshCustomList(flag, initData);
     }
 
     public void loadmoreCustomList(int flag) {
-        ConsultPresenter.loadmoreCustomList(flag);
+        mConsultPresenter.loadmoreCustomList(flag);
     }
 
 

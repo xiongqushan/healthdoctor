@@ -13,7 +13,9 @@
         android:layout_height="@dimen/consult_photo_height"
         android:layout_marginTop="@dimen/consult_photo_margintop"
         android:layout_marginLeft="@dimen/consult_photot_marginleft"
-        fresco:roundAsCircle="true"/>
+        fresco:roundAsCircle="true"
+        fresco:roundingBorderWidth="1dp"
+        fresco:roundingBorderColor="@color/black"/>
 
     <TextView
         android:id="@+id/txt_consult_commiton"
@@ -29,6 +31,7 @@
         android:layout_toRightOf="@id/drawee_consult_item_photo"
         android:layout_marginTop="@dimen/consult_textview_margintop"
         android:layout_marginLeft="@dimen/consult_textview_marginleft"
+        android:layout_marginRight="50dp"
         android:gravity="left"
         android:padding="@dimen/consult_textview_padding"
         android:textSize="@dimen/textsize_h4"
@@ -41,6 +44,7 @@
         android:layout_toRightOf="@id/drawee_consult_item_photo"
         android:layout_marginTop="@dimen/consult_textview_margintop"
         android:layout_marginLeft="@dimen/consult_textview_marginleft"
+        android:layout_marginRight="50dp"
         android:gravity="left"
         android:paddingTop="@dimen/consult_flowlayout_paddingtop"
         android:paddingLeft="@dimen/consult_flowlayout_paddingleftright"

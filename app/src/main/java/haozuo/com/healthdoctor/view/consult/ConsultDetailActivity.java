@@ -3,12 +3,15 @@ package haozuo.com.healthdoctor.view.consult;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+
 import java.io.Serializable;
 
 import javax.inject.Inject;
 
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.ConsultItemBean;
+import haozuo.com.healthdoctor.bean.CustomDetailBean;
 import haozuo.com.healthdoctor.contract.ConsultDetailContract;
 import haozuo.com.healthdoctor.ioc.ConsultDetailModule;
 import haozuo.com.healthdoctor.ioc.DaggerConsultDetailComponent;
@@ -25,20 +28,19 @@ public class ConsultDetailActivity extends BaseActivity {
     public static String EXTRA_CONSULT_ITEM = "CONSULT_ITEM";
     private String mCustName;
     private int mCustId;
-    private int mDoctorId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTranslucentStatus(R.color.main_color_blue);
         setContentView(R.layout.activity_consult_detail);
         Serializable obj= getIntent().getSerializableExtra(EXTRA_CONSULT_ITEM);
+//        mCustId = getIntent().getExtras().getInt(EXTRA_CONSULT_ITEM);
         if(obj!=null){
             ConsultItemBean consultItemBean = (ConsultItemBean) obj;
             mCustName = consultItemBean.CustName;
             mCustId = consultItemBean.CustId;
-//            mDoctorId = consultItemBean.
         }
-        setCustomerTitle(mCustName);
 
         DaggerConsultDetailComponent.builder()
                 .appComponent(getAppComponent())
@@ -52,8 +54,10 @@ public class ConsultDetailActivity extends BaseActivity {
             consultDetailfragment = (ConsultDetailFragment) mIConsultDetailView;
             ActivityUtils.addFragmentToActivity(fragmentManager, consultDetailfragment, R.id.frameContent);
         }
+    }
 
-
+    public void setCustomerTitle(CustomDetailBean customDetailBean){
+        setCustomerTitle(customDetailBean.Cname);
     }
 }
 

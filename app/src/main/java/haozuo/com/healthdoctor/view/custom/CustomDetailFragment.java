@@ -20,6 +20,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.CustomDetailBean;
+import haozuo.com.healthdoctor.contract.IBasePresenter;
 import haozuo.com.healthdoctor.view.base.AbstractView;
 import haozuo.com.healthdoctor.contract.CustomDetailContract;
 import haozuo.com.healthdoctor.view.threePart.common.PageFragment;
@@ -38,6 +39,11 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
 
 
     public CustomDetailFragment(){
+    }
+
+    @Override
+    protected IBasePresenter getPresenter() {
+        return mCustomDetailPresenter;
     }
 
     public static CustomDetailFragment newInstance() {

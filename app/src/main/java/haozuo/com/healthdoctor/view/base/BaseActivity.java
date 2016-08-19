@@ -27,7 +27,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTranslucentStatus();
+//        setTranslucentStatus();
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
@@ -52,7 +52,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     @TargetApi(19)
-    private void setTranslucentStatus() {
+    protected void setTranslucentStatus(int resource) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window win = getWindow();
             WindowManager.LayoutParams winParams = win.getAttributes();
@@ -62,22 +62,28 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
         SystemBarTintUtil tintManager = new SystemBarTintUtil(this);
         tintManager.setStatusBarTintEnabled(true);
-        tintManager.setStatusBarTintResource(R.color.main_color_blue);//状态栏无背景
+        tintManager.setStatusBarTintResource(resource);//状态栏无背景
     }
 
     protected void setCustomerTitle(String title) {
         TextView textView = (TextView) findViewById(R.id.txt_TitleBar_title);
         textView.setText(title);
-        findViewById(R.id.btn_go_back).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        findViewById(R.id.btn_search).setVisibility(View.GONE);
+        findViewById(R.id.btn_go_back).setOnClickListener(finishActivity);
     }
 
-    protected void hideGoBackBtn() {
-        findViewById(R.id.btn_go_back).setVisibility(View.GONE);
+    protected void setTitleWithSearch(String title){
+        TextView textView = (TextView) findViewById(R.id.txt_TitleBar_title);
+        textView.setText(title);
+        findViewById(R.id.btn_go_back).setOnClickListener(finishActivity);
+        findViewById(R.id.btn_search).setOnClickListener(showSearchbar);
+    }
+
+    protected void setSearchBar(){
+        findViewById(R.id.txt_TitleBar_title).setVisibility(View.GONE);
+        findViewById(R.id.btn_search).setVisibility(View.GONE);
+        findViewById(R.id.et_TitleBar_search).setVisibility(View.VISIBLE);
+        findViewById(R.id.btn_go_back).setOnClickListener(finishActivity);
     }
 
     protected AppComponent getAppComponent() {
@@ -112,5 +118,22 @@ public abstract class BaseActivity extends AppCompatActivity {
                     InputMethodManager.HIDE_NOT_ALWAYS);
         }
     }
+
+
+    View.OnClickListener finishActivity = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            finish();
+        }
+    };
+
+    View.OnClickListener showSearchbar = new View.OnClickListener(){
+        @Override
+        public void onClick(View v) {
+            findViewById(R.id.txt_TitleBar_title).setVisibility(View.GONE);
+            findViewById(R.id.btn_search).setVisibility(View.GONE);
+            findViewById(R.id.et_TitleBar_search).setVisibility(View.VISIBLE);
+        }
+    };
 
 }

@@ -29,6 +29,7 @@ public class GroupCustomListActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTranslucentStatus(R.color.main_color_blue);
         setContentView(R.layout.activity_group_custom_list);
 
         Serializable obj = getIntent().getSerializableExtra(EXTRA_GROUP_ID);
@@ -37,7 +38,8 @@ public class GroupCustomListActivity extends BaseActivity {
             groupName = doctorGroupBean.name;
             groupId = doctorGroupBean.id;
         }
-        setCustomerTitle(groupName);
+//        setCustomerTitle(groupName);
+        setTitleWithSearch(groupName);
 
         DaggerGroupCustomListComponent.builder()
                 .appComponent(getAppComponent())

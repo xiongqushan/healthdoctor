@@ -10,15 +10,17 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import haozuo.com.healthdoctor.R;
+import haozuo.com.healthdoctor.view.base.BaseActivity;
 import haozuo.com.healthdoctor.view.login.LoginActivity;
 
-public class WelcomeActivity extends Activity {
+public class WelcomeActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setTranslucentStatus(0);
         setContentView(R.layout.activity_welcome);
 
         TimerTask task = new TimerTask() {

@@ -10,6 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -19,8 +23,10 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
+import haozuo.com.healthdoctor.contract.IBasePresenter;
 import haozuo.com.healthdoctor.view.base.AbstractView;
 import haozuo.com.healthdoctor.contract.GroupCustomListContract;
 import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout;
@@ -42,6 +48,11 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
 
     }
 
+    @Override
+    protected IBasePresenter getPresenter() {
+        return mGroupCustomListPresenter;
+    }
+
     public static GroupCustomListFragment newInstance() {
         GroupCustomListFragment fragment = new GroupCustomListFragment();
         return fragment;
@@ -58,10 +69,9 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
                              Bundle savedInstanceState) {
         mContext=getContext();
         if(rootView==null){
-            rootView= inflater.inflate(R.layout.fragment_group_custom_list, container, false);
+            rootView= inflater.inflate(R.layout.lv_group_custom, container, false);
             ButterKnife.bind(this,rootView);
         }
-
         mGroupCustInfoAdapter=new GroupCustInfoAdapter(mContext,new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -149,7 +159,7 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
         public View getView(int position, View convertView, ViewGroup parent) {
             ViewHolder holder =  null;
             if (convertView == null) {
-                convertView = myInflater.inflate(R.layout.group_custinfo_item, parent, false);
+                convertView = myInflater.inflate(R.layout.lvitem_group_custinfo, parent, false);
                 holder = new ViewHolder(convertView);
                 convertView.setTag(holder);
                 convertView.setOnClickListener(clickListener);

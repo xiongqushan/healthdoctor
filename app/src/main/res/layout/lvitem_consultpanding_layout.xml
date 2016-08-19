@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="70dp"
+    android:background="@color/white"
     android:descendantFocusability="blocksDescendants">
     <!--descendantFocusability 屏蔽子控件抢夺ListView的焦点-->
 

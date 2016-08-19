@@ -3,6 +3,7 @@ package haozuo.com.healthdoctor.view.home;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,12 @@ public class MineFragment extends Fragment {
     public static MineFragment newInstance() {
         MineFragment fragment = new MineFragment();
         return fragment;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.e("MineFragment","onResume");
     }
 
     @Nullable

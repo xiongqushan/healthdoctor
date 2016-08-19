@@ -31,9 +31,11 @@ public class UsefulMesasgeActivity extends BaseActivity {
 
     public static String LAST_CONSULT_CONTENT="LAST_CONSULT_CONTENT";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTranslucentStatus(R.color.main_color_blue);
         setContentView(R.layout.activity_useful_message);
 
         ConsultReplyBean consultReplyItem = (ConsultReplyBean) getIntent().getSerializableExtra(LAST_CONSULT_CONTENT);
@@ -50,15 +52,7 @@ public class UsefulMesasgeActivity extends BaseActivity {
             userfulMessageFragment=(UsefulMessageFragment)mIUsefulMessageView;
             ActivityUtils.addFragmentToActivity(fragmentManager,userfulMessageFragment,R.id.frameContent);
         }
-
-        findViewById(R.id.btn_go_back).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        setSearchBar();
     }
-
-
 
 }
