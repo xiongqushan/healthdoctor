@@ -24,6 +24,7 @@ public class DateUtil {
 
     /**
      * 字符串转时间
+     *
      * @param str
      * @param format
      * @return
@@ -145,13 +146,10 @@ public class DateUtil {
     /**
      * 字符串转换到时间格式
      *
-     * @param dateStr
-     *            需要转换的字符串
-     * @param formatStr
-     *            需要格式的目标字符串 举例 yyyy-MM-dd
+     * @param dateStr   需要转换的字符串
+     * @param formatStr 需要格式的目标字符串 举例 yyyy-MM-dd
      * @return Date 返回转换后的时间
-     * @throws ParseException
-     *             转换异常
+     * @throws ParseException 转换异常
      */
     public static Date StringToDate(String dateStr, String formatStr) {
         DateFormat sdf = new SimpleDateFormat(formatStr);
@@ -172,11 +170,11 @@ public class DateUtil {
      */
     public static String converTime(long timestamp) {
         long currentSeconds = System.currentTimeMillis();
-                // 1000;
-        long timeGap = (currentSeconds - timestamp)/1000;// 与现在时间相差秒数
+        // 1000;
+        long timeGap = (currentSeconds - timestamp) / 1000;// 与现在时间相差秒数
         String timeStr = null;
-        if (timeGap >7*24*60*60){
-          timeStr = getStandardTime(timestamp,"MM月dd日");
+        if (timeGap > 7 * 24 * 60 * 60) {
+            timeStr = getStandardTime(timestamp, "MM月dd日");
         } else if (timeGap > 24 * 60 * 60) {// 1天以上
             timeStr = timeGap / (24 * 60 * 60) + "天前";
         } else if (timeGap > 60 * 60) {// 1小时-24小时
@@ -195,7 +193,7 @@ public class DateUtil {
      * @param timestamp
      * @return
      */
-    public static String getStandardTime(long timestamp,String formatStr) {
+    public static String getStandardTime(long timestamp, String formatStr) {
         SimpleDateFormat sdf = new SimpleDateFormat(formatStr);
         Date date = new Date(timestamp * 1000);
         sdf.format(date);
@@ -255,7 +253,7 @@ public class DateUtil {
 
     /**
      * 获得当前时间的毫秒数
-     *
+     * <p/>
      * 详见{@link System#currentTimeMillis()}
      *
      * @return
@@ -265,7 +263,6 @@ public class DateUtil {
     }
 
     /**
-     *
      * 获得当前Chinese月份
      *
      * @return
@@ -337,12 +334,9 @@ public class DateUtil {
     /**
      * 判断某个日期是否在某个日期范围
      *
-     * @param beginDate
-     *            日期范围开始
-     * @param endDate
-     *            日期范围结束
-     * @param src
-     *            需要判断的日期
+     * @param beginDate 日期范围开始
+     * @param endDate   日期范围结束
+     * @param src       需要判断的日期
      * @return
      */
     public static boolean between(Date beginDate, Date endDate, Date src) {
@@ -351,7 +345,7 @@ public class DateUtil {
 
     /**
      * 获得当前月的最后一天
-     *
+     * <p/>
      * HH:mm:ss为0，毫秒为999
      *
      * @return
@@ -370,7 +364,7 @@ public class DateUtil {
 
     /**
      * 获得当前月的第一天
-     *
+     * <p/>
      * HH:mm:ss SS为零
      *
      * @return
@@ -393,7 +387,7 @@ public class DateUtil {
 
     /**
      * 获得周五日期
-     *
+     * <p/>
      * 注：日历工厂方法{@link #calendar()}设置类每个星期的第一天为Monday，US等每星期第一天为sunday
      *
      * @return
@@ -404,7 +398,7 @@ public class DateUtil {
 
     /**
      * 获得周六日期
-     *
+     * <p/>
      * 注：日历工厂方法{@link #calendar()}设置类每个星期的第一天为Monday，US等每星期第一天为sunday
      *
      * @return
@@ -489,6 +483,7 @@ public class DateUtil {
 
     /**
      * 比较时间大小
+     *
      * @param begin
      * @param end
      * @return
@@ -513,10 +508,11 @@ public class DateUtil {
 
     /**
      * 获得年份
+     *
      * @param date
      * @return
      */
-    public int getYear(Date date){
+    public int getYear(Date date) {
         Calendar c = Calendar.getInstance();
         c.setTime(date);
         return c.get(Calendar.YEAR);
@@ -524,10 +520,11 @@ public class DateUtil {
 
     /**
      * 获得月份
+     *
      * @param date
      * @return
      */
-    public int getMonth(Date date){
+    public int getMonth(Date date) {
         Calendar c = Calendar.getInstance();
         c.setTime(date);
         return c.get(Calendar.MONTH) + 1;
@@ -535,10 +532,11 @@ public class DateUtil {
 
     /**
      * 获得星期几
+     *
      * @param date
      * @return
      */
-    public int getWeek(Date date){
+    public int getWeek(Date date) {
         Calendar c = Calendar.getInstance();
         c.setTime(date);
         return c.get(Calendar.WEEK_OF_YEAR);
@@ -546,10 +544,11 @@ public class DateUtil {
 
     /**
      * 获得日期
+     *
      * @param date
      * @return
      */
-    public int getDay(Date date){
+    public int getDay(Date date) {
         Calendar c = Calendar.getInstance();
         c.setTime(date);
         return c.get(Calendar.DATE);
@@ -557,18 +556,19 @@ public class DateUtil {
 
     /**
      * 获得天数差
+     *
      * @param begin
      * @param end
      * @return
      */
-    public long getDayDiff(Date begin, Date end){
+    public long getDayDiff(Date begin, Date end) {
         long day = 1;
-        if(end.getTime() < begin.getTime()){
+        if (end.getTime() < begin.getTime()) {
             day = -1;
-        }else if(end.getTime() == begin.getTime()){
+        } else if (end.getTime() == begin.getTime()) {
             day = 1;
-        }else {
-            day += (end.getTime() - begin.getTime())/(24 * 60 * 60 * 1000) ;
+        } else {
+            day += (end.getTime() - begin.getTime()) / (24 * 60 * 60 * 1000);
         }
         return day;
     }
@@ -577,12 +577,12 @@ public class DateUtil {
     public static long getStringToTimestamp(String time,String format) {
         DateFormat sdf = new SimpleDateFormat(format);
         Date date = new Date();
-        try{
-            time = time.replace('T',' ');
+        try {
+            time = time.replace('T', ' ');
             date = sdf.parse(time);
-            } catch(ParseException e) {
+        } catch (ParseException e) {
             e.printStackTrace();
-            }
+        }
         return date.getTime();
     }
 

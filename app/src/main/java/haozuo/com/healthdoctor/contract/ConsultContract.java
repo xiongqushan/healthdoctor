@@ -11,74 +11,33 @@ import haozuo.com.healthdoctor.bean.FeedbackItemBean;
  */
 public interface ConsultContract {
 
-//    interface IConsultPendingView extends IBaseView<IConsultPendingPresenter> {
-//        void refreshPendingPageList(List<ConsultItemBean> consultItemBeanList);
-//
-//        void refreshFinish(int status);
-//
-//    }
-//
-//    interface IConsultPendingPresenter extends IBasePresenter {
-//        void refreshPendingPageList(int flag);
-//
-//        void loadmorePendingPageList(int flag);
-//
-//    }
-//
-//    interface IConsultDoneView extends IBaseView<IConsultDonePresenter> {
-//        void refreshConsultDoneList(List<ConsultDoneItemBean> dataList);
-//
-//        void refreshFinish(int status);
-//
-//    }
-//
-//    interface IConsultDonePresenter extends IBasePresenter {
-//        void refreshConsultDoneList(int flag);
-//
-//        void loadmoreConsultDoneList(int flag);
-//
-//    }
-//
-//    interface IConsultFeedbackView extends IBaseView<IConsultFeedbackPresenter> {
-//        void refreshFeedbackList(List<FeedbackItemBean> dataList);
-//
-//        void refreshFinish(int status);
-//
-//    }
-//
-//    interface IConsultFeedbackPresenter extends IBasePresenter {
-//        void refreshFeedbackList(int flag);
-//
-//        void loadmoreFeedbackList(int flag);
-//
-//    }
 
     interface IConsultView extends IBaseView<IConsultPresenter> {
         void refreshPendingPageList(List<ConsultItemBean> consultItemBeanList, int flag);
 
-        void refreshFinish(int status, int flag);
+        void refreshFinish(int status, int flag, boolean isRefresh);
 
-        void refreshConsultDonePageList(List<ConsultDoneItemBean> dataList,int flag);
+        void refreshConsultDonePageList(List<ConsultDoneItemBean> dataList, int flag);
 
-        void refreshConsultDonePageFinish(int status,int flag);
+        void refreshConsultDonePageFinish(int status, int flag, boolean isRefresh);
 
-        void refreshFeedbackPageList(List<FeedbackItemBean> dataList,int flag);
+        void refreshFeedbackPageList(List<FeedbackItemBean> dataList, int flag);
 
-        void refreshFeedbackPageFinish(int status,int flag);
+        void refreshFeedbackPageFinish(int status, int flag, boolean isRefresh);
 
     }
 
     interface IConsultPresenter extends IBasePresenter {
 
-        void refreshCustomList(int flag,boolean isPullToRefresh);
+        void refreshCustomList(int flag, boolean initData);
 
         void loadmoreCustomList(int flag);
 
-        void refreshConsultDoneList(int flag);
+        void refreshConsultDoneList(int flag, boolean initData);
 
         void loadmoreConsultDoneList(int flag);
 
-        void refreshFeedBackList(int flag);
+        void refreshFeedBackList(int flag, boolean initData);
 
         void loadmoreFeedBackList(int flag);
     }

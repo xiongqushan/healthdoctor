@@ -34,6 +34,7 @@ import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.ConsultReplyBean;
 import haozuo.com.healthdoctor.bean.ExpressionConst;
 import haozuo.com.healthdoctor.bean.UsefulExpressionBean;
+import haozuo.com.healthdoctor.contract.IBasePresenter;
 import haozuo.com.healthdoctor.contract.UsefulMessageContract;
 import haozuo.com.healthdoctor.framework.SysConfig;
 import haozuo.com.healthdoctor.view.base.AbstractView;
@@ -63,6 +64,11 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
     }
 
     public UsefulMessageFragment() {
+    }
+
+    @Override
+    protected IBasePresenter getPresenter() {
+        return mIUsefulMessagePresenter;
     }
 
     public static UsefulMessageFragment newInstance(@NonNull ConsultReplyBean consultReplyItem) {

@@ -1,10 +1,8 @@
 package haozuo.com.healthdoctor.view.base;
 
-import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.widget.Toast;
 
+import haozuo.com.healthdoctor.contract.IBasePresenter;
 import haozuo.com.healthdoctor.util.CustomDialog;
 import haozuo.com.healthdoctor.util.LoadingDialog;
 import haozuo.com.healthdoctor.util.StringUtil;
@@ -17,6 +15,8 @@ public abstract class AbstractView extends BaseFragment{
     private CustomDialog comfirmDialog;
     protected AbstractView(){
     }
+
+    protected abstract IBasePresenter getPresenter();
 
     public void showDialog() {
         showDialog(null);
@@ -73,4 +73,8 @@ public abstract class AbstractView extends BaseFragment{
         comfirmDialog.show();
     }
 
+    public void showRetryLayer(){
+        IBasePresenter presenter=getPresenter();
+        presenter.start();
+    }
 }

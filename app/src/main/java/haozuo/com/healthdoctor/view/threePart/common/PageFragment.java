@@ -2,18 +2,18 @@ package haozuo.com.healthdoctor.view.threePart.common;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import haozuo.com.healthdoctor.R;
-import haozuo.com.healthdoctor.view.base.AbstractView;
 
 /**
  * Created by hzguest3 on 2016/7/25.
  */
-public class PageFragment extends AbstractView {
+public class PageFragment extends Fragment {
     public static final String ARG_PAGE = "ARG_PAGE";
     private int mPage;
 

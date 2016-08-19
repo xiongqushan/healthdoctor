@@ -15,6 +15,7 @@ import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
+import haozuo.com.healthdoctor.contract.IBasePresenter;
 import haozuo.com.healthdoctor.contract.LoginContract;
 import haozuo.com.healthdoctor.contract.LoginContract.ILoginView;
 import haozuo.com.healthdoctor.view.base.AbstractView;
@@ -37,6 +38,11 @@ public class LoginFragment extends AbstractView implements ILoginView {
     EditText edit_code;
 
     private LoginFragment() {
+    }
+
+    @Override
+    protected IBasePresenter getPresenter() {
+        return mILoginPresenter;
     }
 
     public static LoginFragment newInstance() {

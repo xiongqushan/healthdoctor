@@ -49,6 +49,7 @@ import haozuo.com.healthdoctor.bean.ConsultReplyBean;
 import haozuo.com.healthdoctor.bean.CustomDetailBean;
 import haozuo.com.healthdoctor.bean.DoctorBean;
 import haozuo.com.healthdoctor.contract.ConsultDetailContract;
+import haozuo.com.healthdoctor.contract.IBasePresenter;
 import haozuo.com.healthdoctor.manager.UserManager;
 import haozuo.com.healthdoctor.util.DateUtil;
 import haozuo.com.healthdoctor.util.JsonParser;
@@ -119,6 +120,12 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
     };
 
     public ConsultDetailFragment() {
+    }
+
+
+    @Override
+    protected IBasePresenter getPresenter() {
+        return mConsultDetailPresenter;
     }
 
     public static ConsultDetailFragment newInstance(int CustomerId){
