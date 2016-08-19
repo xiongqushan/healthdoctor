@@ -46,6 +46,11 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
         return mCustomDetailPresenter;
     }
 
+    @Override
+    protected View getRootView() {
+        return rootView;
+    }
+
     public static CustomDetailFragment newInstance() {
         CustomDetailFragment fragment = new CustomDetailFragment();
         return fragment;

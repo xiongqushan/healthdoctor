@@ -56,9 +56,10 @@ public class GroupPresenter extends AbstractPresenter implements IGroupPresenter
                         UserManager.getInstance().setGroupInfo((List<DoctorGroupBean>) resultData.Data);
                         mIGroupView.setGroupInfo(resultData.Data);
                     }
+                    mIGroupView.changeRetryLayer(false);
                 } else {
                     mIGroupView.hideDialog(resultData.Message);
-                    //mIGroupView.showRetryLayer();
+                    mIGroupView.changeRetryLayer(true);
                 }
             }
         });

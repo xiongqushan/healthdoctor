@@ -58,6 +58,11 @@ public class CustomerInfoFragment extends AbstractView implements CustomerInfoCo
         return mPresenter;
     }
 
+    @Override
+    protected View getRootView() {
+        return rootView;
+    }
+
     public static CustomerInfoFragment newInstance() {
         CustomerInfoFragment fragment = new CustomerInfoFragment();
         return fragment;

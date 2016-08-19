@@ -58,6 +58,11 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
         return mConsultPresenter;
     }
 
+    @Override
+    protected View getRootView() {
+        return rootView;
+    }
+
     public static ConsultFragment newInstance() {
         ConsultFragment fragment = new ConsultFragment();
         return fragment;
@@ -85,7 +90,6 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
     @Override
     public void onResume() {
         super.onResume();
-        Log.e("ConsultFragment", "onResume");
     }
 
     @Override

@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -120,6 +119,11 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
     @Override
     protected IBasePresenter getPresenter() {
         return mConsultDetailPresenter;
+    }
+
+    @Override
+    protected View getRootView() {
+        return rootView;
     }
 
 

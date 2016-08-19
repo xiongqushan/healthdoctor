@@ -24,7 +24,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.FeedbackItemBean;
-import haozuo.com.healthdoctor.util.DateUtil;
 import haozuo.com.healthdoctor.util.UIHelper;
 import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout;
 
@@ -134,7 +133,8 @@ public class FeedbackFragment extends Fragment {
             }
             Uri uri = Uri.parse(imgUrl);
             img.setImageURI(uri);
-            tvTime.setText(DateUtil.converTime(DateUtil.getStringToTimestamp(dataSource.get(position).CommitOn)));
+//            tvTime.setText(DateUtil.converTime(DateUtil.getStringToTimestamp(dataSource.get(position).CommitOn)));
+            tvTime.setText(dataSource.get(position).CommitOn);
             return convertView;
         }
 
@@ -173,6 +173,6 @@ public class FeedbackFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Log.e("FeedbackFragment","onResume");
+        Log.e("FeedbackFragment", "onResume");
     }
 }

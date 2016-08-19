@@ -45,9 +45,10 @@
     <include layout="@layout/divider_12dp_gray_ee" />
 
     <LinearLayout
+        android:id="@+id/layout_basedata"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/actionbar_high"
-        android:background="@color/white"
+        android:layout_height="@dimen/actionbar_high_44dp"
+        android:background="@color/item_press_white_gray"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -69,9 +70,10 @@
     <include layout="@layout/divider_12dp_gray_ee" />
 
     <LinearLayout
+        android:id="@+id/layout_set"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/actionbar_high"
-        android:background="@color/white"
+        android:layout_height="@dimen/actionbar_high_44dp"
+        android:background="@color/item_press_white_gray"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 

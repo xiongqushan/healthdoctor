@@ -23,7 +23,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.ConsultDoneItemBean;
-import haozuo.com.healthdoctor.util.DateUtil;
 import haozuo.com.healthdoctor.util.UIHelper;
 import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout;
 
@@ -138,7 +137,8 @@ public class ConsultDoneFragment extends Fragment {
             Uri uri = Uri.parse(imgUrl);
             img.setImageURI(uri);
             tvTitle.setText(dataSource.get(position).CustName);
-            tvTime.setText(DateUtil.converTime(DateUtil.getStringToTimestamp(dataSource.get(position).CommitOn)));
+//            tvTime.setText(DateUtil.converTime(DateUtil.getStringToTimestamp(dataSource.get(position).CommitOn)));
+            tvTime.setText(dataSource.get(position).CommitOn);
             return convertView;
         }
 

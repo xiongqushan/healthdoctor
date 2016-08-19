@@ -45,6 +45,11 @@ public class LoginFragment extends AbstractView implements ILoginView {
         return mILoginPresenter;
     }
 
+    @Override
+    protected View getRootView() {
+        return rootView;
+    }
+
     public static LoginFragment newInstance() {
         LoginFragment fragment = new LoginFragment();
         return fragment;

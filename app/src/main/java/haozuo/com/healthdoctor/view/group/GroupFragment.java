@@ -46,6 +46,11 @@ public class GroupFragment extends AbstractView implements GroupContract.IGroupV
         return mGroupPresenter;
     }
 
+    @Override
+    protected View getRootView() {
+        return rootView;
+    }
+
     public static GroupFragment newInstance() {
         GroupFragment fragment = new GroupFragment();
         return fragment;
@@ -65,6 +70,7 @@ public class GroupFragment extends AbstractView implements GroupContract.IGroupV
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_group, container, false);
             ButterKnife.bind(this, rootView);
+
         }
         return rootView;
     }
@@ -75,6 +81,7 @@ public class GroupFragment extends AbstractView implements GroupContract.IGroupV
         mGroupPresenter.cancelRequest();
     }
 
+
     @Override
     public void setPresenter(GroupContract.IGroupPresenter presenter) {
         mGroupPresenter = presenter;
@@ -83,8 +90,8 @@ public class GroupFragment extends AbstractView implements GroupContract.IGroupV
     @Override
     public void setGroupInfo(final List<DoctorGroupBean> doctorGroupBeanList) {
         TextView[] GroupNameArray = {firstGroupName, secondGroupName, thirdGroupName, fourthGroupName, fifthGroupName, sixthGroupName};
-
-        for (int i = 0; i < doctorGroupBeanList.size(); i++) {
+        for (int i = 0; i < GroupNameArray.length; i++) {
+//        for (int i = 0; i < doctorGroupBeanList.size(); i++) {
             String doctorNum = "服务人数: " + doctorGroupBeanList.get(i).doctorNum;
             String groupName = doctorGroupBeanList.get(i).name;
             String groupContent = groupName + "\n" + doctorNum;
@@ -102,6 +109,14 @@ public class GroupFragment extends AbstractView implements GroupContract.IGroupV
         }
     }
 
+    @Override
+    public void changeRetryLayer(boolean isShow) {
+        if (isShow) {
+            showRetryLayer(R.id.rLayout);
+        } else {
+            hideRetryLayer(R.id.rLayout);
+        }
+    }
 
 }
 
