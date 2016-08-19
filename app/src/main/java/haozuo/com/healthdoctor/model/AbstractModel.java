@@ -20,6 +20,7 @@ import java.util.Map;
 
 import haozuo.com.healthdoctor.contract.IBaseModel;
 import haozuo.com.healthdoctor.framework.SysConfig;
+import haozuo.com.healthdoctor.listener.OnSimpleRequestListener;
 import haozuo.com.healthdoctor.util.StringUtil;
 import okio.Buffer;
 import retrofit.GsonConverterFactory;

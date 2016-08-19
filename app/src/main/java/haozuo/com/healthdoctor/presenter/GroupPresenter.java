@@ -58,7 +58,7 @@ public class GroupPresenter extends AbstractPresenter implements IGroupPresenter
                     }
                 } else {
                     mIGroupView.hideDialog(resultData.Message);
-                    //mIGroupView.showRetryLayer();
+
                 }
             }
         });
