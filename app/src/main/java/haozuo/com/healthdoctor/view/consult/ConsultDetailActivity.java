@@ -3,14 +3,9 @@ package haozuo.com.healthdoctor.view.consult;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 
-import com.facebook.drawee.backends.pipeline.Fresco;
-
-import java.io.Serializable;
-
 import javax.inject.Inject;
 
 import haozuo.com.healthdoctor.R;
-import haozuo.com.healthdoctor.bean.ConsultItemBean;
 import haozuo.com.healthdoctor.bean.CustomDetailBean;
 import haozuo.com.healthdoctor.contract.ConsultDetailContract;
 import haozuo.com.healthdoctor.ioc.ConsultDetailModule;
@@ -34,13 +29,13 @@ public class ConsultDetailActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setTranslucentStatus(R.color.main_color_blue);
         setContentView(R.layout.activity_consult_detail);
-        Serializable obj= getIntent().getSerializableExtra(EXTRA_CONSULT_ITEM);
-//        mCustId = getIntent().getExtras().getInt(EXTRA_CONSULT_ITEM);
-        if(obj!=null){
-            ConsultItemBean consultItemBean = (ConsultItemBean) obj;
-            mCustName = consultItemBean.CustName;
-            mCustId = consultItemBean.CustId;
-        }
+//        Serializable obj= getIntent().getSerializableExtra(EXTRA_CONSULT_ITEM);
+        mCustId = getIntent().getExtras().getInt(EXTRA_CONSULT_ITEM);
+//        if(obj!=null){
+//            ConsultItemBean consultItemBean = (ConsultItemBean) obj;
+//            mCustName = consultItemBean.CustName;
+//            mCustId = consultItemBean.CustId;
+//        }
 
         DaggerConsultDetailComponent.builder()
                 .appComponent(getAppComponent())

@@ -1,26 +1,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical"
-    tools:context="haozuo.com.healthdoctor.view.custom.CustomerReportFragment">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white"
+              android:orientation="vertical"
+              tools:context="haozuo.com.healthdoctor.view.custom.CustomerReportFragment">
 
-    <include layout="@layout/title_bar" />
+    <include layout="@layout/title_bar"/>
 
     <android.support.design.widget.TabLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/tabLayout"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/actionbar_high_44dp"
-        app:tabIndicatorColor="@color/main_color_blue"
-        app:tabSelectedTextColor="@color/main_color_blue"
-        app:tabTextAppearance="@style/TabLayoutTextSize"
-        app:tabTextColor="@color/black" />
+                                             android:id="@+id/tabLayout"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="@dimen/actionbar_high_44dp"
+                                             app:tabIndicatorColor="@color/main_color_blue"
+                                             app:tabSelectedTextColor="@color/main_color_blue"
+                                             app:tabTextAppearance="@style/TabLayoutTextSize"
+                                             app:tabTextColor="@color/black"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/dividerline"
-        android:background="@color/divider_d3" />
+        android:background="@color/divider_d3"/>
 
     <FrameLayout
         android:id="@+id/layerLayout"
@@ -30,7 +30,7 @@
         <android.support.v4.view.ViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"/>
 
     </FrameLayout>
 

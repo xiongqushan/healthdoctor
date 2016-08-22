@@ -72,6 +72,7 @@ public class ConsultPandingFragment extends Fragment {
             ptrLayout.loadmoreFinish(status);
         }
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -98,7 +99,7 @@ public class ConsultPandingFragment extends Fragment {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                     Intent intent = new Intent(mContext, ConsultDetailActivity.class);
-                    intent.putExtra(ConsultDetailActivity.EXTRA_CONSULT_ITEM, dataSource.get(position));
+                    intent.putExtra(ConsultDetailActivity.EXTRA_CONSULT_ITEM, dataSource.get(position).CustId);
                     mContext.startActivity(intent);
                 }
             });
@@ -165,7 +166,7 @@ public class ConsultPandingFragment extends Fragment {
             holder.Cphoto.setImageURI(uri);
             holder.Cname.setText(doctorGroupEntity.CustName);
             holder.ConsultContent.setText(doctorGroupEntity.ConsultTitele);
-            holder.LastConsult.setText(DateUtil.converTime(DateUtil.getStringToTimestamp(doctorGroupEntity.CommitOn,"yyyy-MM-dd")));
+            holder.LastConsult.setText(DateUtil.converTime(DateUtil.getStringToTimestamp(doctorGroupEntity.CommitOn, "yyyy-MM-dd")));
 
             holder.Cphoto.setTag(new Object[]{doctorGroupEntity});
             return convertView;

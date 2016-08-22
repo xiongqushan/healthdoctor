@@ -16,9 +16,9 @@
         <item name="android:windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
     <style name="dialog_loading" parent="@android:style/Theme.Dialog">
         <item name="android:windowFrame">@null</item>
@@ -30,6 +30,7 @@
         <item name="android:backgroundDimEnabled">false</item>
         <!--模糊 -->
     </style>
+
     <style name="TabLayoutTextSize">
         <item name="android:textSize">@dimen/tablayout_txtsize</item>
     </style>

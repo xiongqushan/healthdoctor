@@ -62,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="基本资料"
-            android:textColor="@color/title_color34"
+            android:textColor="@color/title_color28"
             android:textSize="16sp" />
 
     </LinearLayout>
@@ -87,7 +87,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="设置"
-            android:textColor="@color/title_color34"
+            android:textColor="@color/title_color28"
             android:textSize="16sp" />
     </LinearLayout>
 

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import haozuo.com.healthdoctor.R;
+import haozuo.com.healthdoctor.view.custom.CustomerReportActivity;
 
 /**
  * by zy  2016.08.15.
@@ -28,7 +29,7 @@ public class MineFragment extends Fragment {
 
     @OnClick(R.id.layout_set)
     void clickLayoutSet() {
-        getActivity().startActivity(new Intent(getActivity(), BaseinfoActivity.class));
+        getActivity().startActivity(new Intent(getActivity(), CustomerReportActivity.class));
     }
 
     public MineFragment() {

@@ -20,6 +20,7 @@ public class CustomerReportActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTranslucentStatus(R.color.main_color_blue);
         setContentView(R.layout.activity_customer_report);
         DaggerCustomerReportComponent.builder()
                 .appComponent(getAppComponent())
