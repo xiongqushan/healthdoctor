@@ -128,6 +128,12 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
         return mConsultDetailPresenter;
     }
 
+    @Override
+    protected View getRootView() {
+        return rootView;
+    }
+
+
     public static ConsultDetailFragment newInstance(int CustomerId){
         ConsultDetailFragment fragment = new ConsultDetailFragment();
         mDoctorEntity = UserManager.getInstance().getDoctorInfo();

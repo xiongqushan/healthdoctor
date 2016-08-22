@@ -71,6 +71,11 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
         return mIUsefulMessagePresenter;
     }
 
+    @Override
+    protected View getRootView() {
+        return rootView;
+    }
+
     public static UsefulMessageFragment newInstance(@NonNull ConsultReplyBean consultReplyItem) {
         UsefulMessageFragment fragment = new UsefulMessageFragment();
         mConsultReplyBean = consultReplyItem;
