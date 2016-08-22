@@ -4,7 +4,6 @@ import java.util.List;
 
 import haozuo.com.healthdoctor.contract.IBaseModel;
 import haozuo.com.healthdoctor.contract.IBaseView;
-import haozuo.com.healthdoctor.listener.OnSimpleRequestListener;
 
 /**
  * Created by Administrator on 2016/7/4.
@@ -26,9 +25,4 @@ public abstract class AbstractPresenter {
         IBaseView baseView = getBaseView();
         baseView.hideDialog();
     }
-
-    protected void batchRequest(List<OnSimpleRequestListener> onSimpleRequestListenerList){
-
-    }
-
 }
