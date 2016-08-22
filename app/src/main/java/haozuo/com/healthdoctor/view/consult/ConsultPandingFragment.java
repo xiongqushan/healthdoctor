@@ -72,6 +72,7 @@ public class ConsultPandingFragment extends Fragment {
             ptrLayout.loadmoreFinish(status);
         }
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -165,7 +166,7 @@ public class ConsultPandingFragment extends Fragment {
             holder.Cphoto.setImageURI(uri);
             holder.Cname.setText(doctorGroupEntity.CustName);
             holder.ConsultContent.setText(doctorGroupEntity.ConsultTitele);
-            holder.LastConsult.setText(DateUtil.converTime(DateUtil.getStringToTimestamp(doctorGroupEntity.CommitOn,"yyyy-MM-dd")));
+            holder.LastConsult.setText(DateUtil.converTime(DateUtil.getStringToTimestamp(doctorGroupEntity.CommitOn, "yyyy-MM-dd")));
 
             holder.Cphoto.setTag(new Object[]{doctorGroupEntity});
             return convertView;

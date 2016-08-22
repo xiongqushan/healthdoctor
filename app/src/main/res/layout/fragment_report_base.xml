@@ -1,13 +1,238 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="haozuo.com.healthdoctor.view.custom.ReportBaseFragment">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/gray_bg_ee"
+              android:orientation="vertical"
+              tools:context="haozuo.com.healthdoctor.view.custom.ReportBaseFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <View
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="@dimen/bg_gray_ee_high"
+        android:background="@color/gray_bg_ee"/>
 
-</FrameLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dividerline"
+        android:background="@color/divider_d3"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="@dimen/report_padding">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="姓名"
+            android:textColor="@color/subtitle_color66"
+            android:textSize="@dimen/txt_title_16sp"/>
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="阿斯蒂芬"
+            android:textColor="@color/subtitle_color66"
+            android:textSize="@dimen/txt_title_16sp"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dividerline"
+        android:layout_marginLeft="@dimen/report_padding"
+        android:layout_marginRight="@dimen/report_padding"
+        android:background="@color/divider_d3"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="@dimen/report_padding">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="性别"
+            android:textColor="@color/subtitle_color66"
+            android:textSize="@dimen/txt_title_16sp"/>
+
+        <TextView
+            android:id="@+id/tvSex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="男"
+            android:textColor="@color/subtitle_color66"
+            android:textSize="@dimen/txt_title_16sp"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dividerline"
+        android:layout_marginLeft="@dimen/report_padding"
+        android:layout_marginRight="@dimen/report_padding"
+        android:background="@color/divider_d3"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="@dimen/report_padding">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="年龄"
+            android:textColor="@color/subtitle_color66"
+            android:textSize="@dimen/txt_title_16sp"/>
+
+        <TextView
+            android:id="@+id/tvAge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="18"
+            android:textColor="@color/subtitle_color66"
+            android:textSize="@dimen/txt_title_16sp"/>
+    </RelativeLayout>
+
+    <include
+        layout="@layout/divider_12dp_gray_ee"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="@dimen/report_padding">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="体检中心"
+            android:textColor="@color/subtitle_color66"
+            android:textSize="@dimen/txt_title_16sp"/>
+
+        <TextView
+            android:id="@+id/tvReportCenter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="上海市第一医院"
+            android:textColor="@color/subtitle_color66"
+            android:textSize="@dimen/txt_title_16sp"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dividerline"
+        android:layout_marginLeft="@dimen/report_padding"
+        android:layout_marginRight="@dimen/report_padding"
+        android:background="@color/divider_d3"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="@dimen/report_padding">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="体检日期"
+            android:textColor="@color/subtitle_color66"
+            android:textSize="@dimen/txt_title_16sp"/>
+
+        <TextView
+            android:id="@+id/tvReportDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="2016-08-22"
+            android:textColor="@color/subtitle_color66"
+            android:textSize="@dimen/txt_title_16sp"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dividerline"
+        android:layout_marginLeft="@dimen/report_padding"
+        android:layout_marginRight="@dimen/report_padding"
+        android:background="@color/divider_d3"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="@dimen/report_padding">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="体检号"
+            android:textColor="@color/subtitle_color66"
+            android:textSize="@dimen/txt_title_16sp"/>
+
+        <TextView
+            android:id="@+id/tvReportCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="1357902468"
+            android:textColor="@color/subtitle_color66"
+            android:textSize="@dimen/txt_title_16sp"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dividerline"
+        android:layout_marginLeft="@dimen/report_padding"
+        android:layout_marginRight="@dimen/report_padding"
+        android:background="@color/divider_d3"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="@dimen/report_padding">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="工作单位"
+            android:textColor="@color/subtitle_color66"
+            android:textSize="@dimen/txt_title_16sp"/>
+
+        <TextView
+            android:id="@+id/tvWorkUnit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="上海好卓数据服务有限公司"
+            android:textColor="@color/subtitle_color66"
+            android:textSize="@dimen/txt_title_16sp"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dividerline"
+        android:background="@color/divider_d3"/>
+
+
+</LinearLayout>

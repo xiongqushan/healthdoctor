@@ -27,7 +27,7 @@ public abstract class AbstractPresenter {
         baseView.hideDialog();
     }
 
-    protected void batchRequest(List<OnSimpleRequestListener> onSimpleRequestListenerList){
+    protected void batchRequest(List<OnSimpleRequestListener> onSimpleRequestListenerList) {
 
     }
 

@@ -27,6 +27,7 @@ import haozuo.com.healthdoctor.framework.HZApplication;
 import haozuo.com.healthdoctor.framework.SysConfig;
 import haozuo.com.healthdoctor.service.IConsultService;
 import haozuo.com.healthdoctor.service.IGroupService;
+import haozuo.com.healthdoctor.service.IReportService;
 import haozuo.com.healthdoctor.service.IUserService;
 import haozuo.com.healthdoctor.util.StringUtil;
 import okio.Buffer;
@@ -81,6 +82,12 @@ public class AppModule {
     @Singleton
     IConsultService provideConsultService(@NonNull Retrofit retrofit){
         return retrofit.create(IConsultService.class);
+    }
+
+    @Provides
+    @Singleton
+    IReportService provideReportService(@NonNull Retrofit retrofit){
+        return retrofit.create(IReportService.class);
     }
 
     @Provides

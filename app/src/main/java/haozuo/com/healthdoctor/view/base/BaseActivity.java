@@ -45,7 +45,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 
             // 获得当前得到焦点的View，一般情况下就是EditText（特殊情况就是轨迹求或者实体案件会移动焦点）
             View v = getCurrentFocus();
-
             if (isShouldHideInput(v, ev)) {
                 hideSoftInput(v.getWindowToken());
             }
@@ -74,7 +73,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         findViewById(R.id.btn_go_back).setOnClickListener(finishActivity);
     }
 
-    protected void setTitleWithSearch(String title){
+    protected void setTitleWithSearch(String title) {
         TextView textView = (TextView) findViewById(R.id.txt_TitleBar_title);
         textView.setText(title);
         findViewById(R.id.btn_go_back).setOnClickListener(finishActivity);
@@ -113,7 +112,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     private boolean isShouldHideInput(View v, MotionEvent event) {
         if (v != null && (v instanceof EditText)) {
-            int[] l = { 0, 0 };
+            int[] l = {0, 0};
             v.getLocationInWindow(l);
             int left = l[0], top = l[1], bottom = top + v.getHeight(), right = left
                     + v.getWidth();
@@ -145,7 +144,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     };
 
-    View.OnClickListener showSearchbar = new View.OnClickListener(){
+    View.OnClickListener showSearchbar = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             findViewById(R.id.txt_TitleBar_title).setVisibility(View.GONE);

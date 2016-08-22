@@ -10,6 +10,7 @@ import dagger.Component;
 import haozuo.com.healthdoctor.framework.HZApplication;
 import haozuo.com.healthdoctor.service.IConsultService;
 import haozuo.com.healthdoctor.service.IGroupService;
+import haozuo.com.healthdoctor.service.IReportService;
 import haozuo.com.healthdoctor.service.IUserService;
 
 /**
@@ -28,6 +29,8 @@ public interface AppComponent {
     IGroupService getGroupService();
 
     IConsultService getConsultService();
+
+    IReportService getReportService();
 
     OkHttpClient getOkHttpClient();
 }

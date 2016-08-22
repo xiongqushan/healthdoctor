@@ -18,20 +18,19 @@ import haozuo.com.healthdoctor.util.UIHelper;
 /**
  * by zy 2016.08.22
  */
-public class ReportAllFragment extends Fragment {
-
-    @Bind(R.id.listView_report_all)
+public class ReportBadFragment extends Fragment {
+    @Bind(R.id.listView_report_bad)
     ListView mListView;
-
     private View rootView;
-//    private List<String> dataList = new ArrayList<String>();
 
-    public ReportAllFragment() {
+    private TextView tvReportWarn;
+
+    public ReportBadFragment() {
         // Required empty public constructor
     }
 
-    public static ReportAllFragment newInstance() {
-        ReportAllFragment fragment = new ReportAllFragment();
+    public static ReportBadFragment newInstance() {
+        ReportBadFragment fragment = new ReportBadFragment();
         return fragment;
     }
 
@@ -39,20 +38,25 @@ public class ReportAllFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if (rootView == null) {
-            rootView = inflater.inflate(R.layout.fragment_report_all, container, false);
+
+            rootView = inflater.inflate(R.layout.fragment_report_bad, container, false);
             ButterKnife.bind(this, rootView);
             initView();
         }
         return rootView;
     }
 
+
     private void initView() {
+        View header = LayoutInflater.from(getActivity()).inflate(R.layout.headerview_reportbadlv_layout, null);
+        tvReportWarn = (TextView) header.findViewById(R.id.tvReportWarn);
+        mListView.addHeaderView(header);
         ListAdapter adapter = new ListAdapter();
         mListView.setAdapter(adapter);
     }
 
-    class ListAdapter extends BaseAdapter {
 
+    class ListAdapter extends BaseAdapter {
         @Override
         public int getCount() {
             return 15;
@@ -71,12 +75,11 @@ public class ReportAllFragment extends Fragment {
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
             if (view == null) {
-                view = LayoutInflater.from(getActivity()).inflate(R.layout.lvitem_reportall_layout, null);
+                view = LayoutInflater.from(getActivity()).inflate(R.layout.lvitem_reportbad_layout, null);
             }
             TextView tvTitle = UIHelper.getAdapterView(view, R.id.tvTitle);
             TextView tvSubtitle = UIHelper.getAdapterView(view, R.id.tvSubtitle);
             return view;
         }
     }
-
 }

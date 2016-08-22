@@ -178,6 +178,7 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
                         imm.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0);
                         String replyContent = edittxt_message.getText().toString();
                         addDpctorReply(replyContent);
+                        sendCustomBroadcast(BROADFILTER_CONSULT_REPLAY);
                     }
                     return true;
                 }

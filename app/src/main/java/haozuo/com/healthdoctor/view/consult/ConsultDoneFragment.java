@@ -1,6 +1,7 @@
 package haozuo.com.healthdoctor.view.consult;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -92,9 +93,9 @@ public class ConsultDoneFragment extends Fragment {
             mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-//                    Intent intent = new Intent(mContext, ConsultDetailActivity.class);
-//                    intent.putExtra(ConsultDetailActivity.EXTRA_CONSULT_ITEM, dataSource.get(position));
-//                    mContext.startActivity(intent);
+                    Intent intent = new Intent(mContext, ConsultDetailActivity.class);
+                    intent.putExtra(ConsultDetailActivity.EXTRA_CONSULT_ITEM, dataSource.get(position).CustId);
+                    mContext.startActivity(intent);
                 }
             });
             ptrLayout.setOnRefreshListener(new OnPTRListener());

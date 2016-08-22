@@ -14,8 +14,10 @@ import haozuo.com.healthdoctor.bean.DoctorGroupBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
 import haozuo.com.healthdoctor.bean.PageBean;
+import haozuo.com.healthdoctor.bean.ReportParamsBean;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
 import haozuo.com.healthdoctor.service.IGroupService;
+import haozuo.com.healthdoctor.service.IReportService;
 import haozuo.com.healthdoctor.service.IUserService;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -27,6 +29,7 @@ import rx.schedulers.Schedulers;
 public class GroupModel extends AbstractModel {
     IGroupService mIGroupService;
     IUserService mIUserService;
+    IReportService mIReportService;
 
     @Inject
     public GroupModel(@NonNull OkHttpClient okHttpClient, @NonNull IGroupService iGroupService, @NonNull IUserService userService) {

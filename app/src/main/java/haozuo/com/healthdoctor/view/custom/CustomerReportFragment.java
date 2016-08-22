@@ -4,12 +4,16 @@ package haozuo.com.healthdoctor.view.custom;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -28,6 +32,8 @@ public class CustomerReportFragment extends AbstractView implements CustomerRepo
     ViewPager mViewPager;
 
     private View rootVeiw;
+    private List<Fragment> fragmentList = new ArrayList();
+
 
     public CustomerReportFragment() {
 
@@ -60,17 +66,7 @@ public class CustomerReportFragment extends AbstractView implements CustomerRepo
     }
 
     private void initView() {
-        PagerAdapter pagerAdapter = new FragmentPagerAdapter(getChildFragmentManager()) {
-            @Override
-            public Fragment getItem(int position) {
-                return null;
-            }
-
-            @Override
-            public int getCount() {
-                return 4;
-            }
-        };
+        PagerAdapter pagerAdapter = new ReportPagerAdapter(getChildFragmentManager());
         mViewPager.setAdapter(pagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.setTabMode(TabLayout.MODE_FIXED);
@@ -79,5 +75,37 @@ public class CustomerReportFragment extends AbstractView implements CustomerRepo
 
     @Override
     public void setPresenter(CustomerReportContract.ICustomerReportPresenter presenter) {
+    }
+
+
+    class ReportPagerAdapter extends FragmentPagerAdapter {
+        private List<String> titleList = new ArrayList();
+
+        public ReportPagerAdapter(FragmentManager fm) {
+            super(fm);
+            fragmentList.add(new ReportBaseFragment());
+            fragmentList.add(new ReportAllFragment());
+            fragmentList.add(new ReportBadFragment());
+            fragmentList.add(new ReportDetailFragment());
+            titleList.add("基本信息");
+            titleList.add("体检汇总");
+            titleList.add("体检异常");
+            titleList.add("体检详情");
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return fragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return fragmentList.size();
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return titleList.get(position);
+        }
     }
 }

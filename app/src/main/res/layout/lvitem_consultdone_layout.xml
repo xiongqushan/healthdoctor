@@ -22,7 +22,7 @@
         android:layout_alignTop="@+id/drawee_consult_Cphoto"
         android:layout_toRightOf="@+id/drawee_consult_Cphoto"
         android:text="张三"
-        android:textColor="@color/title_color34"
+        android:textColor="@color/title_color28"
         android:textSize="@dimen/txt_title_16sp" />
 
     <TextView
@@ -33,7 +33,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="12dp"
         android:text="2016-04-11 14:31"
-        android:textColor="@color/subtitle_color88"
+        android:textColor="@color/subtitle_colorb2"
         android:textSize="@dimen/txt_subtitle_14sp" />
 
 
@@ -45,7 +45,7 @@
         android:layout_below="@id/tvTitle"
         android:layout_marginTop="8dp"
         android:text="客户满意度："
-        android:textColor="@color/subtitle_color88"
+        android:textColor="@color/subtitle_color66"
         android:textSize="@dimen/txt_subtitle_14sp" />
 
     <RatingBar
@@ -67,7 +67,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="12dp"
         android:text="医师赵"
-        android:textColor="@color/subtitle_color88"
+        android:textColor="@color/subtitle_color66"
         android:textSize="@dimen/txt_subtitle_14sp"
         android:visibility="gone" />
 

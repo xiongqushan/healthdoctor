@@ -21,7 +21,6 @@ import rx.schedulers.Schedulers;
  * Created by hzguest3 on 2016/8/22.
  */
 public class ReportModel extends AbstractModel{
-
     IReportService mIReportService;
 
     @Inject
@@ -30,35 +29,35 @@ public class ReportModel extends AbstractModel{
         mIReportService = iReportService;
     }
 
-//    public void getReportParams(int customerId, final OnHandlerResultListener<GlobalShell<List<ReportParamsBean>>> callbackListener) {
-//        mIReportService.getReportParams(requestTag(), customerId)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Subscriber<BaseBean<List<ReportParamsBean>>>() {
-//                    @Override
-//                    public void onCompleted() {
-//
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        GlobalShell<List<ReportParamsBean>> entity = new GlobalShell<List<ReportParamsBean>>(e.getMessage());
-//                        callbackListener.handlerResult(entity);
-//                    }
-//
-//                    @Override
-//                    public void onNext(BaseBean<List<ReportParamsBean>> resultBean) {
-//                        GlobalShell<List<ReportParamsBean>> entity = null;
-//                        if (resultBean.state > 0) {
-//                            List<ReportParamsBean> result = resultBean.Data;
-//                            entity = new GlobalShell<List<ReportParamsBean>>(result);
-//                        } else {
-//                            entity = new GlobalShell<List<ReportParamsBean>>(resultBean.message);
-//                        }
-//                        callbackListener.handlerResult(entity);
-//                    }
-//                });
-//
-//    }
+    public void getReportParams(int customerId, final OnHandlerResultListener<GlobalShell<List<ReportParamsBean>>> callbackListener) {
+        mIReportService.getReportParams(requestTag(), customerId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<BaseBean<List<ReportParamsBean>>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        GlobalShell<List<ReportParamsBean>> entity = new GlobalShell<List<ReportParamsBean>>(e.getMessage());
+                        callbackListener.handlerResult(entity);
+                    }
+
+                    @Override
+                    public void onNext(BaseBean<List<ReportParamsBean>> resultBean) {
+                        GlobalShell<List<ReportParamsBean>> entity = null;
+                        if (resultBean.state > 0) {
+                            List<ReportParamsBean> result = resultBean.Data;
+                            entity = new GlobalShell<List<ReportParamsBean>>(result);
+                        } else {
+                            entity = new GlobalShell<List<ReportParamsBean>>(resultBean.message);
+                        }
+                        callbackListener.handlerResult(entity);
+                    }
+                });
+
+    }
 
 }
