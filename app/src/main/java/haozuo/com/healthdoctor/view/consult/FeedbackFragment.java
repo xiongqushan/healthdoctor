@@ -132,8 +132,7 @@ public class FeedbackFragment extends Fragment {
             if (imgUrl == null || imgUrl.equals("")) {
                 imgUrl = "res://haozuo.com.healthdoctor.view.custom/" + R.drawable.default_photourl;
             }
-
-            tvTime.setText(DateUtil.converTime(DateUtil.getStringToTimestamp(dataSource.get(position).CommitOn,"yyyy-MM-dd")));
+            tvTime.setText(DateUtil.converTime(DateUtil.getStringToTimestamp(dataSource.get(position).CommitOn, "yyyy-MM-dd")));
             Uri uri = Uri.parse(imgUrl);
             img.setImageURI(uri);
             return convertView;
@@ -174,6 +173,6 @@ public class FeedbackFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Log.e("FeedbackFragment","onResume");
+        Log.e("FeedbackFragment", "onResume");
     }
 }

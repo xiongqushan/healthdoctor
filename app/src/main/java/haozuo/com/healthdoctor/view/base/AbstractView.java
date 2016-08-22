@@ -1,7 +1,13 @@
 package haozuo.com.healthdoctor.view.base;
 
+import android.graphics.Color;
+import android.util.Log;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.contract.IBasePresenter;
 import haozuo.com.healthdoctor.util.CustomDialog;
 import haozuo.com.healthdoctor.util.LoadingDialog;
@@ -10,13 +16,16 @@ import haozuo.com.healthdoctor.util.StringUtil;
 /**
  * Created by Administrator on 2016/7/5.
  */
-public abstract class AbstractView extends BaseFragment{
+public abstract class AbstractView extends BaseFragment {
     private LoadingDialog loadingDialog;
     private CustomDialog comfirmDialog;
-    protected AbstractView(){
+
+    protected AbstractView() {
     }
 
     protected abstract IBasePresenter getPresenter();
+
+    protected abstract View getRootView();
 
     public void showDialog() {
         showDialog(null);
@@ -73,8 +82,36 @@ public abstract class AbstractView extends BaseFragment{
         comfirmDialog.show();
     }
 
-    public void showRetryLayer(){
-        IBasePresenter presenter=getPresenter();
-        presenter.start();
+    private static final int ID_BTNRELOAD = 1357902468;
+
+    public void showRetryLayer(int frameLayoutContainerId) {
+        FrameLayout rLayout = (FrameLayout) getRootView().findViewById(frameLayoutContainerId);
+        ImageView btnReload = (ImageView) getRootView().findViewById(ID_BTNRELOAD);
+        Log.e("show==btnReload", btnReload + "");
+        if (btnReload == null) {
+            btnReload = new ImageView(getActivity());
+            btnReload.setId(ID_BTNRELOAD);
+            btnReload.setImageResource(R.drawable.ic_launcher);
+            btnReload.setBackgroundColor(Color.parseColor("#FFFFFFFF"));
+            btnReload.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    IBasePresenter presenter = getPresenter();
+                    presenter.start();
+                    //
+                }
+            });
+            rLayout.addView(btnReload);
+        }
+
+    }
+
+    public void hideRetryLayer(int frameLayoutContainerId) {
+        final FrameLayout rLayout = (FrameLayout) getRootView().findViewById(frameLayoutContainerId);
+        ImageView btnReload = (ImageView) getRootView().findViewById(ID_BTNRELOAD);
+        Log.e("hide==btnReload", btnReload + "");
+        if (btnReload != null) {
+            rLayout.removeView(btnReload);
+        }
     }
 }

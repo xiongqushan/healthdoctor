@@ -8,7 +8,7 @@ import haozuo.com.healthdoctor.util.CustomDialog;
 public interface IBaseView<T extends IBasePresenter> {
     void showDialog();
 
-    void showDialog(String msg) ;
+    void showDialog(String msg);
 
     void hideDialog();
 
@@ -16,11 +16,13 @@ public interface IBaseView<T extends IBasePresenter> {
 
     void showConfirmDialog(String string, CustomDialog.OnDialogListener onConfirmDialogListener);
 
-    void showConfirmDialog(String content, String confirmText, String cancelText, CustomDialog.OnDialogListener onConfirmDialogListener) ;
+    void showConfirmDialog(String content, String confirmText, String cancelText, CustomDialog.OnDialogListener onConfirmDialogListener);
 
     void showConfirmDialog(String content, String confirmText, CustomDialog.OnDialogListener onConfirmDialogListener);
 
-    void showRetryLayer();
+    void showRetryLayer(int frameLayoutContainerId);
+
+    void hideRetryLayer(int frameLayoutContainerId);
 
     void setPresenter(T presenter);
 }

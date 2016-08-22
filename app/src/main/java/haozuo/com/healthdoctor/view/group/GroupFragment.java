@@ -19,6 +19,7 @@ import haozuo.com.healthdoctor.contract.GroupContract;
 import haozuo.com.healthdoctor.contract.IBasePresenter;
 import haozuo.com.healthdoctor.view.base.AbstractView;
 import haozuo.com.healthdoctor.view.custom.GroupCustomListActivity;
+import retrofit.http.HEAD;
 
 public class GroupFragment extends AbstractView implements GroupContract.IGroupView {
     Context mContext;
@@ -46,6 +47,11 @@ public class GroupFragment extends AbstractView implements GroupContract.IGroupV
         return mGroupPresenter;
     }
 
+    @Override
+    protected View getRootView() {
+        return rootView;
+    }
+
     public static GroupFragment newInstance() {
         GroupFragment fragment = new GroupFragment();
         return fragment;
@@ -65,6 +71,7 @@ public class GroupFragment extends AbstractView implements GroupContract.IGroupV
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_group, container, false);
             ButterKnife.bind(this, rootView);
+
         }
         return rootView;
     }
@@ -75,6 +82,7 @@ public class GroupFragment extends AbstractView implements GroupContract.IGroupV
         mGroupPresenter.cancelRequest();
     }
 
+
     @Override
     public void setPresenter(GroupContract.IGroupPresenter presenter) {
         mGroupPresenter = presenter;
@@ -83,7 +91,6 @@ public class GroupFragment extends AbstractView implements GroupContract.IGroupV
     @Override
     public void setGroupInfo(final List<DoctorGroupBean> doctorGroupBeanList) {
         TextView[] GroupNameArray = {firstGroupName, secondGroupName, thirdGroupName, fourthGroupName, fifthGroupName, sixthGroupName};
-
         for (int i = 0; i < GroupNameArray.length; i++) {
             final int finalI = i;
             String doctorNum = "服务人数: " + doctorGroupBeanList.get(i).doctorNum;
@@ -102,6 +109,14 @@ public class GroupFragment extends AbstractView implements GroupContract.IGroupV
         }
     }
 
+    @Override
+    public void changeRetryLayer(boolean isShow) {
+        if (isShow) {
+            showRetryLayer(R.id.rLayout);
+        } else {
+            hideRetryLayer(R.id.rLayout);
+        }
+    }
 
 }
 

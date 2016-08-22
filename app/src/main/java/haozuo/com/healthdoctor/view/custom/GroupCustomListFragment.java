@@ -57,6 +57,11 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
         return mGroupCustomListPresenter;
     }
 
+    @Override
+    protected View getRootView() {
+        return rootView;
+    }
+
     public static GroupCustomListFragment newInstance() {
         GroupCustomListFragment fragment = new GroupCustomListFragment();
         return fragment;

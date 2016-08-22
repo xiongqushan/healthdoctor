@@ -22,6 +22,7 @@ public class SysConfig {
 
     public static final String CONTROLLER_PRE_API_USER = "api/" + CURRENT_BASE_VERSION + "_User/";
     public static final String CONTROLLER_PRE_API_CONSULT = "api/" + CURRENT_BASE_VERSION + "_Consult/";
+    public static final String CONTROLLER_PRE_API_REPORT = "api/" + CURRENT_BASE_VERSION + "_Report/";
 
 
     public static List<ExpressionConst> getExpressionConstList(){

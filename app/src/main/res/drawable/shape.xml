@@ -33,8 +33,7 @@
     <!--android:height="50dp"/>&lt;!&ndash; 宽度和高度 &ndash;&gt;-->
 
     <!-- 填充 -->
-    <solid
-        android:color="@color/main_color_blue"/><!-- 填充的颜色 -->
+    <solid android:color="@color/main_color_blue"/><!-- 填充的颜色 -->
 
     <!--&lt;!&ndash; 描边 &ndash;&gt;-->
     <!--<stroke-->

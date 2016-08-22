@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentManager;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -25,16 +24,17 @@ import haozuo.com.healthdoctor.util.ActivityUtils;
 import haozuo.com.healthdoctor.view.base.BaseActivity;
 import haozuo.com.healthdoctor.view.consult.ConsultFragment;
 import haozuo.com.healthdoctor.view.group.GroupFragment;
+import haozuo.com.healthdoctor.view.mine.MineFragment;
 
 public class HomeActivity extends BaseActivity {
     @Bind(R.id.tab_menu)
     RadioGroup rgTabhost;
-    @Bind(R.id.rbGroup)
-    RadioButton rbGroup;
-    @Bind(R.id.rbConsult)
-    RadioButton rbConsult;
-    @Bind(R.id.rbMine)
-    RadioButton rbMine;
+    //    @Bind(R.id.rbGroup)
+//    RadioButton rbGroup;
+//    @Bind(R.id.rbConsult)
+//    RadioButton rbConsult;
+//    @Bind(R.id.rbMine)
+//    RadioButton rbMine;
     @Bind(R.id.content_group)
     FrameLayout layoutGroup;
     @Bind(R.id.content_consult)
@@ -86,11 +86,11 @@ public class HomeActivity extends BaseActivity {
                         groupFragment = (GroupFragment) mIGroupView;
                         ActivityUtils.addFragmentToActivity(fragmentManager, groupFragment, R.id.content_group);
                     }
-                    rbGroup.setChecked(true);
+//                    rbGroup.setChecked(true);
                 }
                 if (id == R.id.rbConsult) {
                     layoutConsult.setVisibility(View.VISIBLE);
-                    rbConsult.setChecked(true);
+//                    rbConsult.setChecked(true);
                 }
                 if (id == R.id.rbMine) {
                     MineFragment groupFragment = (MineFragment) fragmentManager.findFragmentById(R.id.content_mine);
@@ -99,7 +99,7 @@ public class HomeActivity extends BaseActivity {
                         ActivityUtils.addFragmentToActivity(fragmentManager, groupFragment, R.id.content_mine);
                     }
                     layoutMine.setVisibility(View.VISIBLE);
-                    rbMine.setChecked(true);
+//                    rbMine.setChecked(true);
                 }
             }
         });

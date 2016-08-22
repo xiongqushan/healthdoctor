@@ -32,20 +32,7 @@ public class CustomDetailPresenter extends AbstractPresenter implements CustomDe
 
     @Override
     public void start() {
-        mICustomDetailView.showDialog();
-        mUserModel.GetUserDetail(mCustomerId, new OnHandlerResultListener<GlobalShell<CustomDetailBean>>() {
-            @Override
-            public void handlerResult(GlobalShell<CustomDetailBean> resultData) {
-            if(resultData.LogicSuccess) {
-                mICustomDetailView.hideDialog();
-                CustomDetailBean customBean = resultData.Data;
-                mICustomDetailView.InitView(customBean);
-            }
-            else{
-                mICustomDetailView.hideDialog(resultData.Message);
-            }
-            }
-        });
+        GetUserDetail();
     }
 
     @Override
@@ -57,4 +44,25 @@ public class CustomDetailPresenter extends AbstractPresenter implements CustomDe
     public IBaseModel[] getBaseModelList() {
         return new IBaseModel[]{mUserModel};
     }
+
+    public void GetUserDetail(){
+        mICustomDetailView.showDialog();
+        mUserModel.GetUserDetail(mCustomerId, new OnHandlerResultListener<GlobalShell<CustomDetailBean>>() {
+            @Override
+            public void handlerResult(GlobalShell<CustomDetailBean> resultData) {
+                if(resultData.LogicSuccess) {
+                    mICustomDetailView.hideDialog();
+                    CustomDetailBean customBean = resultData.Data;
+                    customBean.Sex = CustomDetailBean.GenderConvert(customBean.Gender);
+                    mICustomDetailView.InitView(customBean);
+                    mICustomDetailView.changeRetryLayer(true);
+                }
+                else{
+                    mICustomDetailView.hideDialog(resultData.Message);
+                    mICustomDetailView.changeRetryLayer(false);
+                }
+            }
+        });
+    }
+
 }

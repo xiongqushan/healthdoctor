@@ -21,6 +21,7 @@ import haozuo.com.healthdoctor.contract.IBaseView;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
 import haozuo.com.healthdoctor.model.ConsultModel;
 import haozuo.com.healthdoctor.model.GroupModel;
+import haozuo.com.healthdoctor.model.UserModel;
 import haozuo.com.healthdoctor.util.DateUtil;
 import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout;
 
@@ -31,18 +32,20 @@ import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout;
 public class ConsultDetailPresenter extends AbstractPresenter implements ConsultDetailContract.IConsultDetailPresenter {
     private ConsultDetailContract.IConsultDetailView mIConsultDetailView;
     private ConsultModel mConsultModel;
-    private GroupModel mGroupModel;
+//    private GroupModel mGroupModel;
+    private UserModel mUserModel;
     private ConsultReplyBean consultReplyBean;
     private List<ConsultReplyBean> mConsultItemBeanList;
     private String mCommitOn;
     private int mCustomerId;
 
     @Inject
-    public ConsultDetailPresenter(@NonNull ConsultDetailContract.IConsultDetailView iConsultDetailView, @NonNull ConsultModel consultModel, GroupModel groupModel, @NonNull int customerId){
+    public ConsultDetailPresenter(@NonNull ConsultDetailContract.IConsultDetailView iConsultDetailView, @NonNull ConsultModel consultModel,@NonNull GroupModel groupModel,@NonNull UserModel userModel, @NonNull int customerId){
         mConsultItemBeanList = new ArrayList<ConsultReplyBean>();
         mIConsultDetailView=iConsultDetailView;
         mConsultModel=consultModel;
-        mGroupModel = groupModel;
+//        mGroupModel = groupModel;
+        mUserModel = userModel;
         mCustomerId=customerId;
         iConsultDetailView.setPresenter(this);
         consultReplyBean = new ConsultReplyBean();
@@ -144,7 +147,7 @@ public class ConsultDetailPresenter extends AbstractPresenter implements Consult
     @Override
     public void getUserDetail(int customerId){
         mIConsultDetailView.showDialog();
-        mGroupModel.GetUserDetail(customerId, new OnHandlerResultListener<GlobalShell<CustomDetailBean>>() {
+        mUserModel.GetUserDetail(customerId, new OnHandlerResultListener<GlobalShell<CustomDetailBean>>() {
             @Override
             public void handlerResult(GlobalShell<CustomDetailBean> resultData) {
                 if (resultData.LogicSuccess) {

@@ -122,11 +122,16 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
     public ConsultDetailFragment() {
     }
 
-
     @Override
     protected IBasePresenter getPresenter() {
         return mConsultDetailPresenter;
     }
+
+    @Override
+    protected View getRootView() {
+        return rootView;
+    }
+
 
     public static ConsultDetailFragment newInstance(int CustomerId){
         ConsultDetailFragment fragment = new ConsultDetailFragment();
@@ -153,34 +158,6 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
         //WindowResize.assistActivity(getActivity());
         mConsultListAdapter=new ConsultListAdapter(mContext);
         consult_detail_List.setAdapter(mConsultListAdapter);
-//        consult_detail_List.setOnScrollListener(new AbsListView.OnScrollListener() {
-//            private boolean flag;
-//            @Override
-//            public void onScrollStateChanged(AbsListView view, int scrollState) {
-//                switch (scrollState) {
-//                    case AbsListView.OnScrollListener.SCROLL_STATE_IDLE:
-//                        // 判断滚动到底部
-//                        if (consult_detail_List.getLastVisiblePosition() == (consult_detail_List.getCount() - 1)) {
-//                            showTip("底部");
-//                        }
-//                        // 判断滚动到顶部
-//                        if(consult_detail_List.getFirstVisiblePosition() == 0){
-//                            showTip("顶部");
-//                            mConsultDetailPresenter.loadmoreConsultList();
-//
-//                        }
-//                        break;
-//                }
-//            }
-//
-//            @Override
-//            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-//                if (firstVisibleItem + visibleItemCount == totalItemCount && !flag) {
-//                    flag = true;
-//                } else
-//                    flag = false;
-//            }
-//        });
         consult_detail_pull_to_refresh_layout.setOnRefreshListener(new PullListener());
         mConsultDetailPresenter.refreshConsultList();
         mConsultDetailPresenter.getUserDetail(mCustomerId);

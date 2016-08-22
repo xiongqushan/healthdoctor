@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+    <corners android:radius="5dp" />
+    <solid android:color="@color/bg_report_lightgreen"/>
+    <padding android:left="@dimen/report_title_paddingleft"
+        android:right="@dimen/report_title_paddingleft"
+        android:bottom="@dimen/report_title_paddingTop"
+        android:top="@dimen/report_title_paddingTop"/>
+</shape>

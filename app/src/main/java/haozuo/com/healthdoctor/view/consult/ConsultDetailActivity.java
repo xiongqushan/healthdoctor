@@ -26,7 +26,6 @@ public class ConsultDetailActivity extends BaseActivity {
     ConsultDetailContract.IConsultDetailView mIConsultDetailView;
 
     public static String EXTRA_CONSULT_ITEM = "CONSULT_ITEM";
-    private String mCustName;
     private int mCustId;
 
     @Override
@@ -34,13 +33,12 @@ public class ConsultDetailActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setTranslucentStatus(R.color.main_color_blue);
         setContentView(R.layout.activity_consult_detail);
-        Serializable obj= getIntent().getSerializableExtra(EXTRA_CONSULT_ITEM);
-//        mCustId = getIntent().getExtras().getInt(EXTRA_CONSULT_ITEM);
-        if(obj!=null){
-            ConsultItemBean consultItemBean = (ConsultItemBean) obj;
-            mCustName = consultItemBean.CustName;
-            mCustId = consultItemBean.CustId;
-        }
+//        Serializable obj= getIntent().getSerializableExtra(EXTRA_CONSULT_ITEM);
+        mCustId = getIntent().getExtras().getInt(EXTRA_CONSULT_ITEM);
+//        if(obj!=null){
+//            ConsultItemBean consultItemBean = (ConsultItemBean) obj;
+//            mCustId = consultItemBean.CustId;
+//        }
 
         DaggerConsultDetailComponent.builder()
                 .appComponent(getAppComponent())

@@ -1,7 +1,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.custom.CustomDetailFragment">
@@ -10,51 +10,164 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <LinearLayout
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="153dp"
+            android:layout_height="85dp"
             android:orientation="vertical"
-            android:padding="5dp"
-            android:background="@drawable/custodetail_bg"
-            android:weightSum="1">
+            android:background="@drawable/bg_custom_info">
 
             <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/customerImg"
-                android:layout_width="74dp"
-                android:layout_height="74dp"
-                android:layout_marginTop="34dp"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center"
+                android:id="@+id/drawee_CPhoto"
+                android:layout_width="@dimen/custom_url_height"
+                android:layout_height="@dimen/custom_url_height"
+                android:padding="@dimen/custom_padding"
+                android:layout_centerVertical="true"
                 fresco:roundAsCircle="true" />
 
             <TextView
-                android:id="@+id/customerName"
-                android:layout_width="match_parent"
+                android:id="@+id/tv_CName"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="11dp"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center"
-                android:textSize="18sp"
+                android:layout_marginTop="17dp"
+                android:layout_toRightOf="@id/drawee_CPhoto"
+                android:textSize="@dimen/textsize_h2"
+                android:textColor="@color/textColor_black"
+                tools:text="张三" />
+
+            <TextView
+                android:id="@+id/tv_CGender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/drawee_CPhoto"
+                android:layout_below="@id/tv_CName"
+                android:layout_marginTop="@dimen/custom_gender_margintop"
+                android:layout_marginRight="@dimen/custom_gender_marginright"
+                android:textSize="@dimen/textsize_h4"
+                android:textColor="@color/textColor_dirtygrey"
+                tools:text="男"/>
+
+            <TextView
+                android:id="@+id/tv_CAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/tv_CGender"
+                android:layout_toRightOf="@id/tv_CGender"
+                android:layout_marginRight="@dimen/custom_gender_marginright"
+                android:textSize="@dimen/textsize_h4"
+                android:textColor="@color/textColor_dirtygrey"
+                tools:text="35"/>
+
+            <TextView
+                android:id="@+id/tv_Cphone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/tv_CAge"
+                android:layout_toRightOf="@id/tv_CAge"
+                android:textSize="@dimen/textsize_h4"
+                android:textColor="@color/textColor_dirtygrey"
+                tools:text="1388888888"/>
+
+            <ImageView
+                android:id="@+id/btn_go_into"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/btn_go_into"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:paddingRight="@dimen/custom_padding"
+                android:paddingLeft="20dp"
+                android:paddingTop="33dp"
+                android:paddingBottom="33dp"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/Linear_ReportTitle"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/report_title_height"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/custom_padding"
+            android:paddingRight="@dimen/custom_padding"
+            android:background="@drawable/bg_report_title">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="体检报告"
+                android:textColor="@color/textColor_light_blue"
+                android:textSize="@dimen/textsize_h2"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/custom_padding"
+                android:text="更新"
+                android:textSize="@dimen/textsize_h5"
                 android:textColor="@color/white"
-                tools:text="userName" />
+                android:background="@drawable/report_title_shape"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"/>
+
+            <ImageView
+                android:id="@+id/btn_show_Report"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/btn_show_report"/>
 
         </LinearLayout>
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/customDetail_Tab"
+        <ListView
+            android:id="@+id/lv_custom_report"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            app:tabIndicatorColor="#00ADF3"
-            app:tabSelectedTextColor="#00ADF3"
-            app:tabTextColor="@color/black">
-        </android.support.design.widget.TabLayout>
+            android:visibility="gone"/>
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/customDetail_Vp"
+        <LinearLayout
+            android:id="@+id/linear_PhotoReport"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-        </android.support.v4.view.ViewPager>
+            android:layout_height="@dimen/report_title_height"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/custom_padding"
+            android:paddingRight="@dimen/custom_padding"
+            android:background="@drawable/bg_report_title">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="照片病例"
+                android:textColor="@color/textColor_light_blue"
+                android:textSize="@dimen/textsize_h2"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"/>
+
+            <ImageView
+                android:id="@+id/btn_show_PhotoReport"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/btn_show_report"/>
+
+        </LinearLayout>
+
+        <GridView
+            android:id="@+id/gv_PhotoReport"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:numColumns="3"
+            android:visibility="gone"/>
+
+
     </LinearLayout>
 
 </FrameLayout>

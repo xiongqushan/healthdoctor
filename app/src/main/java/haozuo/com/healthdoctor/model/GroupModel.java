@@ -126,35 +126,4 @@ public class GroupModel extends AbstractModel {
                 });
     }
 
-    public void GetUserDetail(int customerId, final OnHandlerResultListener<GlobalShell<CustomDetailBean>> callbackListener) {
-        mIUserService.GetCusInfo(requestTag(), customerId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<BaseBean<CustomDetailBean>>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        GlobalShell<CustomDetailBean> entity = new GlobalShell<CustomDetailBean>(e.getMessage());
-                        callbackListener.handlerResult(entity);
-                    }
-
-                    @Override
-                    public void onNext(BaseBean<CustomDetailBean> resultBean) {
-                        GlobalShell<CustomDetailBean> entity = null;
-                        if (resultBean.state > 0) {
-                            CustomDetailBean result = resultBean.Data;
-                            entity = new GlobalShell<CustomDetailBean>(result);
-                        } else {
-                            entity = new GlobalShell<CustomDetailBean>(resultBean.message);
-                        }
-                        callbackListener.handlerResult(entity);
-                    }
-                });
-    }
-
-
 }

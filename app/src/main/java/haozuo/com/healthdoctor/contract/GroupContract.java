@@ -11,7 +11,9 @@ public interface GroupContract {
     interface IGroupView extends IBaseView<IGroupPresenter> {
         //        void refreshGroupAdapter(List<DoctorGroupBean>doctorGroupBeanList);
 
-        void setGroupInfo(List<DoctorGroupBean>doctorGroupBeanList);
+        void setGroupInfo(List<DoctorGroupBean> doctorGroupBeanList);
+
+        void changeRetryLayer(boolean isShow);
     }
 
     interface IGroupPresenter extends IBasePresenter {
