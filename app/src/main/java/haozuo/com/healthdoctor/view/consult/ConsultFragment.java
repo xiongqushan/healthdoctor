@@ -77,6 +77,8 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
             rootView = inflater.inflate(R.layout.fragment_consult, container, false);
             ButterKnife.bind(this, rootView);
             InitView();
+
+            registerCustomReceiver(BROADFILTER_CONSULT_REPLAY);
         }
         return rootView;
     }
@@ -292,6 +294,14 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
         }
     }
 
+    @Override
+    protected void onReceiveBroadcast(String filterAction) {
+        super.onReceiveBroadcast(filterAction);
+        if(filterAction==BROADFILTER_CONSULT_REPLAY){
+
+        }
+    }
+
     public void refreshFeedBackList(int flag, boolean initData) {
         mConsultPresenter.refreshFeedBackList(flag, initData);
     }
@@ -316,6 +326,5 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
     public void loadmoreCustomList(int flag) {
         mConsultPresenter.loadmoreCustomList(flag);
     }
-
 
 }
