@@ -19,23 +19,18 @@ import rx.Observable;
  */
 public interface IUserService {
 
-    @GET(SysConfig.CONTROLLER_PRE_API_USER + "LoginSMSCode")
-    Observable<BaseBean<Boolean>> getSMSCode(@Query("tag") String tag, @Query("mobile") String mobile);
+    @GET(SysConfig.CONTROLLER_PRE_API_USER+"LoginSMSCode")
+    Observable<BaseBean<Boolean>> getSMSCode(@Query("tag") String tag,@Query("mobile") String mobile);
 
     @POST(SysConfig.CONTROLLER_PRE_API_USER + "Login")
-    Observable<BaseBean<DoctorBean>> login(@Query("tag") String tag, @Body Map<String, Object> params);
+    Observable<BaseBean<DoctorBean>> login(@Query("tag") String tag,@Body Map<String, Object> params);
 
     @POST(SysConfig.CONTROLLER_PRE_API_USER + "LoginValidate")
-    Observable<BaseBean<DoctorBean>> LoginValidate(@Query("tag") String tag, @Body Map<String, Object> params);
+    Observable<BaseBean<DoctorBean>> LoginValidate(@Query("tag") String tag,@Body Map<String, Object> params);
 
-    @GET(SysConfig.CONTROLLER_PRE_API_USER + "getGroupCustInfoList")
-    Observable<BaseBean<PageBean<GroupCustInfoBean>>> getGroupCustInfoList(@Query("tag") String tag, @Query("serviceDeptId") int serviceDeptId, @Query("doctorId") int doctorId, @Query("groupId") int groupId, @Query("customNameOrMobile") String customNameOrMobile, @Query("pageIndex") int pageIndex, @Query("pageSize") int pageSize);
+    @GET(SysConfig.CONTROLLER_PRE_API_USER+"getGroupCustInfoList")
+    Observable<BaseBean<PageBean<GroupCustInfoBean>>>getGroupCustInfoList(@Query("tag") String tag,@Query("serviceDeptId")int serviceDeptId, @Query("doctorId")int doctorId, @Query("groupId")int groupId, @Query("customNameOrMobile")String customNameOrMobile, @Query("pageIndex")int pageIndex, @Query("pageSize")int pageSize);
 
-    @GET(SysConfig.CONTROLLER_PRE_API_USER + "GetCusInfo")
-    Observable<BaseBean<CustomDetailBean>> GetCusInfo(@Query("tag") String tag, @Query("customerId") int customerId);
-
-//      TODO  0822 未完成的体检报告的接口请求
-//    @GET(SysConfig.CONTROLLER_PRE_API_USER + "GetHealthReport")
-//    Observable<BaseBean<String>> GetHealthReport(@Query("tag") String tag, @Query("intCustomerId") int intCustomerId, @Query("strCheckCode1") String strCheckCode1, @Query("strWorkNo1") String strWorkNo1);
-
+    @GET(SysConfig.CONTROLLER_PRE_API_USER+"GetCusInfo")
+    Observable<BaseBean<CustomDetailBean>>GetCusInfo(@Query("tag") String tag,@Query("customerId")int customerId);
 }

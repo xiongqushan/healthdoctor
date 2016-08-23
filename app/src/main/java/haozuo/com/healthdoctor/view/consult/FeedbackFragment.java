@@ -87,6 +87,7 @@ public class FeedbackFragment extends Fragment {
                 public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                     Intent intent = new Intent(mContext, ConsultDetailActivity.class);
                     intent.putExtra(ConsultDetailActivity.EXTRA_CONSULT_ITEM, dataSource.get(position).CustId);
+                    intent.putExtra(ConsultDetailActivity.EXTRA_SHOW_EDITLAYOUT, false);
                     mContext.startActivity(intent);
                 }
             });

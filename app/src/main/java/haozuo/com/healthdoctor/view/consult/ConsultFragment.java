@@ -7,10 +7,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -42,10 +42,12 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
     ViewPager pagerDone;
     @Bind(R.id.consult_pager_feedback)
     ViewPager pagerFeedback;
-    @Bind(R.id.tv_msgnum)
-    TextView tvMsgNum;
+    @Bind(R.id.tv_msgcount)
+    TextView tvMsgCount;
     @Bind(R.id.groupConsult)
     RadioGroup mRadioGroup;
+    @Bind(R.id.rbPending)
+    RadioButton rbPending;
     private SimpleFragmentPagerAdapter pendingAdapter;
     private DonePagerAdapter doneAdapter;
     private FeedBackPagerAdapter feedBackAdapter;
@@ -295,10 +297,18 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
     }
 
     @Override
+    public void updateMsgCounts(int newCount) {
+        tvMsgCount.setText(newCount + "");
+    }
+
+    @Override//TODO 添加返回信息
     protected void onReceiveBroadcast(String filterAction) {
         super.onReceiveBroadcast(filterAction);
-        if(filterAction==BROADFILTER_CONSULT_REPLAY){
-
+        if (filterAction == BROADFILTER_CONSULT_REPLAY) {
+            refreshCustomList(3, true);
+            if (rbPending.isChecked()) {
+                pagerPending.setCurrentItem(0);
+            }
         }
     }
 

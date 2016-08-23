@@ -14,9 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -87,6 +86,8 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
     PullToLoadMoreLayout consult_detail_pull_to_refresh_layout;
     @Bind(R.id.edittxt_message)
     EditText edittxt_message;
+    @Bind(R.id.edit_area)
+    RelativeLayout layoutEditArea;
 
     @OnClick(R.id.btn_sound_message)
     public void getVoiceContent() {
@@ -115,9 +116,11 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
     }
 
     @OnClick(R.id.btn_usually_message)
-    public void getUsefulMessage(View v){
-        startActivityForResult(new Intent(mContext,UsefulMesasgeActivity.class).putExtra(UsefulMesasgeActivity.LAST_CONSULT_CONTENT,mConsultReplmyItem),RESULT_EXPRESSION);
-    };
+    public void getUsefulMessage(View v) {
+        startActivityForResult(new Intent(mContext, UsefulMesasgeActivity.class).putExtra(UsefulMesasgeActivity.LAST_CONSULT_CONTENT, mConsultReplmyItem), RESULT_EXPRESSION);
+    }
+
+    ;
 
     public ConsultDetailFragment() {
     }
@@ -134,7 +137,7 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
     }
 
 
-    public static ConsultDetailFragment newInstance(int CustomerId){
+    public static ConsultDetailFragment newInstance(int CustomerId) {
         ConsultDetailFragment fragment = new ConsultDetailFragment();
         mDoctorEntity = UserManager.getInstance().getDoctorInfo();
         mCustomerId = CustomerId;
@@ -153,11 +156,14 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_consult_detail, container, false);
             ButterKnife.bind(this, rootView);
+            if (!getActivity().getIntent().getBooleanExtra(ConsultDetailActivity.EXTRA_SHOW_EDITLAYOUT, true)) {
+                layoutEditArea.setVisibility(View.GONE);
+            }
         }
 
         //监听软键盘弹出，在弹出状态下重新调整窗口
         //WindowResize.assistActivity(getActivity());
-        mConsultListAdapter=new ConsultListAdapter(mContext);
+        mConsultListAdapter = new ConsultListAdapter(mContext);
         consult_detail_List.setAdapter(mConsultListAdapter);
 //        consult_detail_List.setOnScrollListener(new AbsListView.OnScrollListener() {
 //            private boolean flag;
@@ -201,7 +207,7 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
         edittxt_message.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_ENTER&& event.getAction() == KeyEvent.ACTION_UP) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_UP) {
                     InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                     if (imm.isActive()) {
                         imm.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0);
@@ -234,7 +240,7 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (data == null){
+        if (data == null) {
             return;
         }
         String replyContent = data.getExtras().getString(String.valueOf(RESULT_EXPRESSION));
@@ -252,7 +258,7 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
     }
 
     @Override
-    public void setListViewPosition(int position){
+    public void setListViewPosition(int position) {
 //        consult_detail_List.smoothScrollToPosition(position);
         consult_detail_List.setSelection(position);
     }
@@ -263,12 +269,12 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
     }
 
     @Override
-    public void loadmoreFinish(int status){
+    public void loadmoreFinish(int status) {
 //        consult_detail_pull_to_refresh_layout.loadmoreFinish(status);
     }
 
     @Override
-    public void setCustmoerInfo(CustomDetailBean customDetailItem){
+    public void setCustmoerInfo(CustomDetailBean customDetailItem) {
         mCustomDetailBean = customDetailItem;
 //        ConsultDetailActivity.setCustomerTitle(mCustomDetailBean);
         TextView textView = (TextView) getActivity().findViewById(R.id.txt_TitleBar_title);
@@ -399,17 +405,16 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
                     default:
                         break;
                 }
-                mCommitOn = consultReplyEntity.CommitOn.replace("T"," ");
+                mCommitOn = consultReplyEntity.CommitOn.replace("T", " ");
 //                mCommitOn = DateUtil.converTime(DateUtil.getStringToTimestamp(consultReplyEntity.CommitOn,"yyyy-MM-dd"));
-                if (position == 0){//如果是列表中的第一条数据则直接展示时间
+                if (position == 0) {//如果是列表中的第一条数据则直接展示时间
                     holder.txt_consult_commiton.setVisibility(View.VISIBLE);
                     holder.txt_consult_commiton.setText(mCommitOn);
-                }else {//与列表中上一条数据的时间相比较，若间隔时间小于30s则展示时间
-                    if (DateUtil.getSecondDiff(dataSource.get(position-1).CommitOn,consultReplyEntity.CommitOn)>=30){
+                } else {//与列表中上一条数据的时间相比较，若间隔时间小于30s则展示时间
+                    if (DateUtil.getSecondDiff(dataSource.get(position - 1).CommitOn, consultReplyEntity.CommitOn) >= 30) {
                         holder.txt_consult_commiton.setVisibility(View.VISIBLE);
                         holder.txt_consult_commiton.setText(mCommitOn);
-                    }
-                    else {
+                    } else {
                         holder.txt_consult_commiton.setVisibility(View.GONE);
                     }
                 }
@@ -428,18 +433,17 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
                 holder.drawee_consult_item_photo.setImageURI(uri);
                 holder.txt_consult_item.setText(consultReplyEntity.Content);
 
-                mCommitOn = consultReplyEntity.CommitOn.replace("T"," ");
+                mCommitOn = consultReplyEntity.CommitOn.replace("T", " ");
 //                    mCommitOn = DateUtil.converTime(DateUtil.getStringToTimestamp(consultReplyEntity.CommitOn,"yyyy-MM-dd"));
-                if (position == 0){//如果是列表中的第一条数据则直接展示时间
+                if (position == 0) {//如果是列表中的第一条数据则直接展示时间
 
                     holder.txt_consult_commiton.setVisibility(View.VISIBLE);
                     holder.txt_consult_commiton.setText(mCommitOn);
-                }else {//与列表中上一条数据的时间相比较，若间隔时间小于30s则展示时间
-                    if (DateUtil.getSecondDiff(dataSource.get(position-1).CommitOn,consultReplyEntity.CommitOn)>=30){
+                } else {//与列表中上一条数据的时间相比较，若间隔时间小于30s则展示时间
+                    if (DateUtil.getSecondDiff(dataSource.get(position - 1).CommitOn, consultReplyEntity.CommitOn) >= 30) {
                         holder.txt_consult_commiton.setVisibility(View.VISIBLE);
                         holder.txt_consult_commiton.setText(mCommitOn);
-                    }
-                    else {
+                    } else {
                         holder.txt_consult_commiton.setVisibility(View.GONE);
                     }
                 }
@@ -484,13 +488,13 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
 
     }
 
-    public void addDpctorReply(String replyContent){
-        if (replyContent.equals("")){
+    public void addDpctorReply(String replyContent) {
+        if (replyContent.equals("")) {
             showTip("请输入需要回复的内容");
             return;
         }
-        String CommitOn = DateUtil.date2Str(new Date(),"yyyy-MM-dd'T'HH:mm:ss");
-        mConsultDetailPresenter.addDoctorReply(mCustomDetailBean.DoctorID,mDoctorEntity.Doctor_ID,mDoctorEntity.Name,mCustomerId,replyContent,CommitOn);
+        String CommitOn = DateUtil.date2Str(new Date(), "yyyy-MM-dd'T'HH:mm:ss");
+        mConsultDetailPresenter.addDoctorReply(mCustomDetailBean.DoctorID, mDoctorEntity.Doctor_ID, mDoctorEntity.Name, mCustomerId, replyContent, CommitOn);
         edittxt_message.setText("");
     }
 
