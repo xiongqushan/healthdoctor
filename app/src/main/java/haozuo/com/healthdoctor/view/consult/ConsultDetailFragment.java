@@ -54,9 +54,11 @@ import haozuo.com.healthdoctor.manager.UserManager;
 import haozuo.com.healthdoctor.util.DateUtil;
 import haozuo.com.healthdoctor.util.JsonParser;
 import haozuo.com.healthdoctor.view.base.AbstractView;
+import haozuo.com.healthdoctor.view.custom.CustomDetailActivity;
 import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToLoadMoreLayout;
 import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullableListView;
 import haozuo.com.healthdoctor.view.threePart.common.FlowLayout;
+import haozuo.com.healthdoctor.view.threePart.common.PinchToZoomDraweeView;
 
 public class ConsultDetailFragment extends AbstractView implements ConsultDetailContract.IConsultDetailView {
     Context mContext;
@@ -70,6 +72,7 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
     private CustomDetailBean mCustomDetailBean;
     private static DoctorBean mDoctorEntity;
     private static int mCustomerId;
+    private static String mAccountId;
 
     public static final String PREFER_NAME = "com.iflytek.setting";
     private static String TAG = ConsultDetailFragment.class.getSimpleName();
@@ -133,10 +136,11 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
     }
 
 
-    public static ConsultDetailFragment newInstance(int CustomerId){
+    public static ConsultDetailFragment newInstance(int CustomerId, String AccountId){
         ConsultDetailFragment fragment = new ConsultDetailFragment();
         mDoctorEntity = UserManager.getInstance().getDoctorInfo();
         mCustomerId = CustomerId;
+        mAccountId = AccountId;
         return fragment;
     }
 
@@ -252,6 +256,15 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
             }
         });
 //        getActivity().setTitle(mCustomDetailBean.Cname+"\b"+mCustomDetailBean.Sex+"\b"+mCustomDetailBean.Age);
+
+        getActivity().findViewById(R.id.txt_TitleBar_title).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(mContext,CustomDetailActivity.class)
+                        .putExtra(CustomDetailActivity.EXTRA_ACCOUNT_ID,mCustomDetailBean.Account_Id)
+                        .putExtra(CustomDetailActivity.EXTRA_CUSTOMER_ID,mCustomDetailBean.Id));
+            }
+        });
     }
 
     class PullListener implements PullToLoadMoreLayout.OnRefreshListener {
@@ -424,6 +437,7 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
             TextView txt_consult_commiton;
 
             @Bind(R.id.drawee_consult_item_photo)
+//            PinchToZoomDraweeView drawee_consult_item_photo;
             SimpleDraweeView drawee_consult_item_photo;
 
             @Bind(R.id.txt_consult_item)

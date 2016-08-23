@@ -22,6 +22,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -88,8 +89,10 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
             public void onClick(View v) {
                 GroupCustInfoAdapter.ViewHolder tag=( GroupCustInfoAdapter.ViewHolder)v.getTag();
                 int customerId = (int)(((Object[])tag.CPhoto.getTag())[0]);
+                String accountId = (String)(((Object[])tag.CPhoto.getTag())[1]);
                 Intent intent = new Intent(mContext,CustomDetailActivity.class);
                 intent.putExtra(CustomDetailActivity.EXTRA_CUSTOMER_ID, customerId);
+                intent.putExtra(CustomDetailActivity.EXTRA_ACCOUNT_ID,accountId);
                 mContext.startActivity(intent);
             }
         });
@@ -219,7 +222,7 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
             holder.CBirthday.setText(groupCustInfoEntity.Birthday);
             holder.Company.setText(groupCustInfoEntity.CompanyName);
 
-            holder.CPhoto.setTag(new Object[]{groupCustInfoEntity.CustId});
+            holder.CPhoto.setTag(new Object[]{groupCustInfoEntity.CustId,groupCustInfoEntity.AccountId});
 //            holder.CPhoto.setOnClickListener(clickListener);
 
             return convertView;

@@ -1,5 +1,6 @@
 package haozuo.com.healthdoctor.view.custom;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -9,11 +10,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.Display;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -22,21 +28,30 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.CustomDetailBean;
+import haozuo.com.healthdoctor.bean.ReportParamsBean;
+import haozuo.com.healthdoctor.bean.RequestPhotoReportListBean;
 import haozuo.com.healthdoctor.contract.IBasePresenter;
+import haozuo.com.healthdoctor.util.UIHelper;
 import haozuo.com.healthdoctor.view.base.AbstractView;
 import haozuo.com.healthdoctor.contract.CustomDetailContract;
-import haozuo.com.healthdoctor.view.threePart.common.PageFragment;
+import haozuo.com.healthdoctor.view.threePart.common.PinchToZoomDraweeView;
 
 public class CustomDetailFragment extends AbstractView implements CustomDetailContract.ICustomDetailView{
     Context mContext;
     View rootView;
     String Cphoto;
     CustomDetailContract.ICustomDetailPresenter mCustomDetailPresenter;
+    private ReportParamsAdapter mReportParamsAdapter;
+    private PhotoReportAdapter mPhotoReportAdapter;
+    private CustomDetailBean mCustomInfo;
     @Bind(R.id.drawee_CPhoto) SimpleDraweeView CPhoto;
     @Bind(R.id.tv_CName) TextView CName;
     @Bind(R.id.tv_CGender) TextView CGender;
@@ -85,7 +100,6 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
     @Override
     public void onResume() {
         super.onResume();
-        mCustomDetailPresenter.start();
     }
 
     @Override
@@ -96,6 +110,12 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
             rootView= inflater.inflate(R.layout.fragment_custom_detail, container, false);
             ButterKnife.bind(this,rootView);
         }
+        mReportParamsAdapter = new ReportParamsAdapter(mContext);
+        lv_custom_report.setAdapter(mReportParamsAdapter);
+        mPhotoReportAdapter =new PhotoReportAdapter(mContext);
+        gv_PhotoReport.setAdapter(mPhotoReportAdapter);
+        mCustomDetailPresenter.start();
+
         return rootView;
     }
 
@@ -120,8 +140,18 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
     }
 
     @Override
+    public void RefreshReportParams(List<ReportParamsBean> ReportParamList) {
+        mReportParamsAdapter.RefreshReportParams(ReportParamList);
+    }
+
+    @Override
+    public void RefreshPhotoReport(List<RequestPhotoReportListBean> RequestPhotoReportList) {
+        mPhotoReportAdapter.RefreshPhotoReportAdapter(RequestPhotoReportList);
+    }
+
+    @Override
     public void InitView(CustomDetailBean custom) {
-        final CustomDetailBean customInfo = custom;
+        mCustomInfo = custom;
         if (custom.PhotoUrl == null){
             Cphoto = "res://haozuo.com.healthdoctor.view.custom/"+R.drawable.default_photourl;
         }
@@ -139,14 +169,146 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, CustomerInfoActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable(CustomerInfoActivity.EXTRA_CUSTOMER_INFO, customInfo);
+                bundle.putSerializable(CustomerInfoActivity.EXTRA_CUSTOMER_INFO, mCustomInfo);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
     }
 
+    class ReportParamsAdapter extends BaseAdapter{
+        private LayoutInflater mInflater;
+        private List<ReportParamsBean> dataSource;
 
+        public ReportParamsAdapter(Context context){
+            this.mInflater = LayoutInflater.from(context);
+            dataSource = new ArrayList<>();
+        }
+
+        public void RefreshReportParams(List<ReportParamsBean> dataList){
+            dataSource.clear();
+            dataSource.addAll(dataList);
+            notifyDataSetChanged();
+        }
+
+        @Override
+        public int getCount() {
+            return dataSource.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            if (convertView == null) {
+                convertView = mInflater.inflate(R.layout.lvitem_custom_report, null);
+            }
+            TextView tv_CName = UIHelper.getAdapterView(convertView,R.id.tv_CName);
+            TextView tv_CGender = UIHelper.getAdapterView(convertView,R.id.tv_CGender);
+            TextView tv_CAge = UIHelper.getAdapterView(convertView,R.id.tv_CAge);
+            TextView tv_DeptName = UIHelper.getAdapterView(convertView,R.id.tv_DeptName);
+            TextView tv_ReportDate = UIHelper.getAdapterView(convertView,R.id.tv_ReportDate);
+            TextView tv_ReportCode = UIHelper.getAdapterView(convertView,R.id.tv_ReportCode);
+            TextView tv_CCompany = UIHelper.getAdapterView(convertView,R.id.tv_CCompany);
+
+            ReportParamsBean ReportParamsEntity = dataSource.get(position);
+
+            tv_CName.setText(mCustomInfo.Cname);
+            tv_CGender.setText(mCustomInfo.Sex);
+            tv_CAge.setText(String.valueOf(mCustomInfo.Age));
+            tv_DeptName.setText(ReportParamsEntity.CheckUnitName);
+            tv_ReportDate.setText(ReportParamsEntity.CheckDate);
+            tv_ReportCode.setText(ReportParamsEntity.CheckUnitCode);
+            tv_CCompany.setText(ReportParamsEntity.WorkNo);
+
+            return convertView;
+        }
+    }
+
+    class PhotoReportAdapter extends BaseAdapter{
+        private LayoutInflater mInflater;
+        private List<RequestPhotoReportListBean> dataSource;
+
+        public PhotoReportAdapter(Context context){
+            this.mInflater = LayoutInflater.from(context);
+            dataSource = new ArrayList<>();
+        }
+
+        public void RefreshPhotoReportAdapter(List<RequestPhotoReportListBean> dataList){
+            dataSource.clear();
+            dataSource.addAll(dataList);
+            notifyDataSetChanged();
+        }
+
+        @Override
+        public int getCount() {
+            return dataSource.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            if (convertView == null) {
+                convertView = mInflater.inflate(R.layout.gvitem_photoreport, null);
+            }
+            TextView tv_Count = UIHelper.getAdapterView(convertView,R.id.tv_Count);
+            TextView tv_PhotoReport_Date = UIHelper.getAdapterView(convertView,R.id.tv_PhotoReport_Date);
+            TextView tv_PhotoReport_Dept = UIHelper.getAdapterView(convertView,R.id.tv_PhotoReport_Dept);
+
+            final RequestPhotoReportListBean RequestPhotoReportEntity = dataSource.get(position);
+            tv_Count.setText("共"+RequestPhotoReportEntity.ImageUrlList.size()+"张");
+            tv_PhotoReport_Date.setText(RequestPhotoReportEntity.Date);
+            tv_PhotoReport_Dept.setText(RequestPhotoReportEntity.HealthCompanyName);
+            tv_Count.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showDialogPage(RequestPhotoReportEntity);
+
+                }
+            });
+
+            return convertView;
+        }
+    }
+
+    public void showDialogPage(RequestPhotoReportListBean RequestPhotoReportEntity) {
+        Dialog dialog = new Dialog(mContext, R.style.Dialog_Fullscreen);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_photoreport);
+        dialog.show();
+
+        Window win = dialog.getWindow();
+        win.getDecorView().setPadding(0, 0, 0, 0);
+        win.setGravity(Gravity.BOTTOM);
+        win.setWindowAnimations(R.style.Dialog_Fullscreen);
+        WindowManager.LayoutParams lp = win.getAttributes();
+        Display d = getActivity().getWindowManager().getDefaultDisplay();
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+        win.setAttributes(lp);
+
+        Uri uri = Uri.parse(RequestPhotoReportEntity.ImageUrlList.get(0));
+        PinchToZoomDraweeView drawee_photoreport = (PinchToZoomDraweeView) dialog.findViewById(R.id.drawee_photoreport);
+        drawee_photoreport.setImageURI(uri);
+
+    }
 }
 
 

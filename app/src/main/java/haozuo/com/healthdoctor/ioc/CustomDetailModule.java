@@ -13,8 +13,10 @@ import haozuo.com.healthdoctor.view.custom.CustomDetailFragment;
 public class CustomDetailModule {
     CustomDetailContract.ICustomDetailView mICustomDetailView;
     int mCustomId;
-    public CustomDetailModule(@NonNull int customId){
+    String mAccountId;
+    public CustomDetailModule(@NonNull int customId, @NonNull String accountId){
         mCustomId=customId;
+        mAccountId = accountId;
     }
 
     @ScopeType.ActivityScope
@@ -27,5 +29,11 @@ public class CustomDetailModule {
     @Provides
     int provideCustomId(){
         return mCustomId;
+    }
+
+    @ScopeType.ActivityScope
+    @Provides
+    String provideAccountId(){
+        return mAccountId;
     }
 }

@@ -23,6 +23,7 @@ public class CustomDetailActivity extends BaseActivity {
     CustomDetailContract.ICustomDetailView mICustomDetailView;
 
     public static String EXTRA_CUSTOMER_ID = "Customer_ID";
+    public static String EXTRA_ACCOUNT_ID = "Account_ID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +31,12 @@ public class CustomDetailActivity extends BaseActivity {
         setTranslucentStatus(R.color.main_color_blue);
         setContentView(R.layout.activity_custom_detail);
 
-        Bundle bundle = getIntent().getExtras();
-        int customerId = bundle.getInt(EXTRA_CUSTOMER_ID);
+        int customerId = getIntent().getIntExtra(EXTRA_CUSTOMER_ID,0);
+        String accountId = getIntent().getStringExtra(EXTRA_ACCOUNT_ID);
 
         DaggerCustomDetailComponent.builder()
                 .appComponent(getAppComponent())
-                .customDetailModule(new CustomDetailModule(customerId))
+                .customDetailModule(new CustomDetailModule(customerId,accountId))
                 .build()
                 .inject(this);
 

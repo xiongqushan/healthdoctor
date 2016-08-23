@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import haozuo.com.healthdoctor.bean.BaseBean;
 import haozuo.com.healthdoctor.bean.ReportParamsBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
+import haozuo.com.healthdoctor.bean.RequestPhotoReportListBean;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
 import haozuo.com.healthdoctor.service.IReportService;
 import rx.Subscriber;
@@ -59,5 +60,38 @@ public class ReportModel extends AbstractModel{
                 });
 
     }
+
+    public void requestPhotoReportList(String accountID, final OnHandlerResultListener<GlobalShell<List<RequestPhotoReportListBean>>> callbackListener) {
+        mIReportService.requestPhotoReportList(requestTag(), accountID)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<BaseBean<List<RequestPhotoReportListBean>>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        GlobalShell<List<RequestPhotoReportListBean>> entity = new GlobalShell<List<RequestPhotoReportListBean>>(e.getMessage());
+                        callbackListener.handlerResult(entity);
+                    }
+
+                    @Override
+                    public void onNext(BaseBean<List<RequestPhotoReportListBean>> resultBean) {
+                        GlobalShell<List<RequestPhotoReportListBean>> entity = null;
+                        if (resultBean.state > 0) {
+                            List<RequestPhotoReportListBean> result = resultBean.Data;
+                            entity = new GlobalShell<List<RequestPhotoReportListBean>>(result);
+                        } else {
+                            entity = new GlobalShell<List<RequestPhotoReportListBean>>(resultBean.message);
+                        }
+                        callbackListener.handlerResult(entity);
+                    }
+                });
+
+    }
+
+
 
 }

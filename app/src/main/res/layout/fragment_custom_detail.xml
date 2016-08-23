@@ -125,9 +125,11 @@
 
         <ListView
             android:id="@+id/lv_custom_report"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"/>
+            android:divider="@null"
+            android:visibility="visible"/>
+
 
         <LinearLayout
             android:id="@+id/linear_PhotoReport"
@@ -165,8 +167,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:numColumns="3"
-            android:visibility="gone"/>
-
+            android:visibility="visible"/>
 
     </LinearLayout>
 
