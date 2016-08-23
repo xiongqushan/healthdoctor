@@ -31,7 +31,7 @@ public class CustomDetailActivity extends BaseActivity {
         setContentView(R.layout.activity_custom_detail);
 
         Bundle bundle = getIntent().getExtras();
-        int customerId = bundle.getInt("CustomerId");
+        int customerId = bundle.getInt(EXTRA_CUSTOMER_ID);
 
         DaggerCustomDetailComponent.builder()
                 .appComponent(getAppComponent())
@@ -45,6 +45,7 @@ public class CustomDetailActivity extends BaseActivity {
             fragment = (CustomDetailFragment) mICustomDetailView;
             ActivityUtils.addFragmentToActivity(fragmentManager, fragment, R.id.frameContent);
         }
+        setTitleWithConsult("客户详情", customerId);
     }
 }
 

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@drawable/bg_custom_report">
+
+        <TextView
+            android:id="@+id/tv_CName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/custom_report_marginLeft"
+            android:textSize="@dimen/textsize_h3"
+            android:textColor="@color/white"
+            tools:text="张三"/>
+
+        <TextView
+            android:id="@+id/tv_CGender"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="@dimen/textsize_h3"
+            android:textColor="@color/white"
+            tools:text="男"/>
+
+        <TextView
+            android:id="@+id/tv_CAge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/custom_report_marginLeft"
+            android:textSize="@dimen/textsize_h3"
+            android:textColor="@color/white"
+            tools:text="35岁"/>
+
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/report_padding_bottom"
+        android:paddingTop="@dimen/report_padding_bottom"
+        android:paddingLeft="@dimen/report_padding_left"
+        android:background="@drawable/bg_report_content">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="体检中心："
+                android:textColor="@color/textColor_dirtygrey"/>
+
+            <TextView
+                android:id="@+id/tv_DeptName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="河南省直三院"
+                android:textColor="@color/textColor_lightgrey"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="@dimen/report_item_margin"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="体检日期："
+                android:textColor="@color/textColor_dirtygrey"/>
+
+            <TextView
+                android:id="@+id/tv_ReportDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="河南省直三院"
+                android:textColor="@color/textColor_lightgrey"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="@dimen/report_item_margin"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="体检号："
+                android:textColor="@color/textColor_dirtygrey"/>
+
+            <TextView
+                android:id="@+id/tv_ReportCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="河南省直三院"
+                android:textColor="@color/textColor_lightgrey"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="@dimen/report_item_margin"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="工作单位："
+                android:textColor="@color/textColor_dirtygrey"/>
+
+            <TextView
+                android:id="@+id/tv_CCompany"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="河南省直三院"
+                android:textColor="@color/textColor_lightgrey"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

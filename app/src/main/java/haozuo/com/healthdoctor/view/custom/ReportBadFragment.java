@@ -13,6 +13,7 @@ import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
+import haozuo.com.healthdoctor.bean.ReportDetailBean;
 import haozuo.com.healthdoctor.util.UIHelper;
 
 /**
@@ -32,6 +33,10 @@ public class ReportBadFragment extends Fragment {
     public static ReportBadFragment newInstance() {
         ReportBadFragment fragment = new ReportBadFragment();
         return fragment;
+    }
+
+    public void updateUI(ReportDetailBean bean) {
+
     }
 
     @Override

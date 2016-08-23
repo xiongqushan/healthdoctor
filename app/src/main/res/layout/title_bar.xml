@@ -24,14 +24,24 @@
         android:gravity="center"
         android:text="title"
         android:textColor="@color/white"
-        android:textSize="20sp" />
+        android:textSize="@dimen/textsize_h1" />
 
     <ImageView
         android:id="@+id/btn_search"
         android:layout_width="@dimen/actionbar_high"
         android:layout_height="match_parent"
         android:padding="@dimen/actionbar_padding"
-        android:src="@drawable/search" />
+        android:src="@drawable/search"/>
+
+    <TextView
+        android:id="@+id/tv_Consult"
+        android:layout_width="@dimen/actionbar_high"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="咨询"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textsize_h3"
+        android:visibility="gone"/>
 
     <haozuo.com.healthdoctor.view.threePart.common.DrawableClickableEditText
         android:id="@+id/et_TitleBar_search"
@@ -46,6 +56,8 @@
         android:paddingLeft="7dp"
         android:paddingRight="7dp"
         android:textSize="@dimen/textsize_h3"
-        android:visibility="gone" />
+        android:singleLine="true"
+        android:visibility="gone"/>
+
 
 </LinearLayout>

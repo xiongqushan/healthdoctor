@@ -14,7 +14,6 @@
         android:background="@color/main_color_blue">
 
         <TextView
-            android:id="@+id/txt_TitleBar_title"
             android:layout_width="match_parent"
             android:layout_height="@dimen/actionbar_high"
             android:layout_centerInParent="true"
@@ -137,7 +136,6 @@
 
             </LinearLayout>
         </LinearLayout>
-
 
     </FrameLayout>
 

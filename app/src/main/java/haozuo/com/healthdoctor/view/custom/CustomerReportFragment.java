@@ -18,6 +18,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
+import haozuo.com.healthdoctor.bean.ReportDetailBean;
 import haozuo.com.healthdoctor.contract.CustomerReportContract;
 import haozuo.com.healthdoctor.contract.IBasePresenter;
 import haozuo.com.healthdoctor.view.base.AbstractView;
@@ -33,6 +34,7 @@ public class CustomerReportFragment extends AbstractView implements CustomerRepo
 
     private View rootVeiw;
     private List<Fragment> fragmentList = new ArrayList();
+    CustomerReportContract.ICustomerReportPresenter mIReportPresenter;
 
 
     public CustomerReportFragment() {
@@ -41,7 +43,7 @@ public class CustomerReportFragment extends AbstractView implements CustomerRepo
 
     @Override
     protected IBasePresenter getPresenter() {
-        return null;
+        return mIReportPresenter;
     }
 
     @Override
@@ -52,6 +54,12 @@ public class CustomerReportFragment extends AbstractView implements CustomerRepo
     public static CustomerReportFragment newInstance() {
         CustomerReportFragment fragment = new CustomerReportFragment();
         return fragment;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mIReportPresenter.start();
     }
 
     @Override
@@ -68,13 +76,42 @@ public class CustomerReportFragment extends AbstractView implements CustomerRepo
     private void initView() {
         PagerAdapter pagerAdapter = new ReportPagerAdapter(getChildFragmentManager());
         mViewPager.setAdapter(pagerAdapter);
-        mTabLayout.setupWithViewPager(mViewPager);
+        mViewPager.setOffscreenPageLimit(4);
         mTabLayout.setTabMode(TabLayout.MODE_FIXED);
         mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        mTabLayout.setupWithViewPager(mViewPager);
     }
 
     @Override
     public void setPresenter(CustomerReportContract.ICustomerReportPresenter presenter) {
+        mIReportPresenter = presenter;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mIReportPresenter.cancelRequest();
+    }
+
+    @Override
+    public void changeRetryLayer(boolean isShow) {
+        if (isShow) {
+            showRetryLayer(R.id.layerLayout);
+        } else {
+            hideRetryLayer(R.id.layerLayout);
+        }
+    }
+
+    @Override
+    public void updateChildUI(ReportDetailBean bean) {
+        ReportBaseFragment base = (ReportBaseFragment) fragmentList.get(0);
+        ReportAllFragment all = (ReportAllFragment) fragmentList.get(1);
+        ReportBadFragment bad = (ReportBadFragment) fragmentList.get(2);
+        ReportDetailFragment detail = (ReportDetailFragment) fragmentList.get(3);
+        base.updateUI(bean);
+        all.updateUI(bean);
+        bad.updateUI(bean);
+        detail.updateUI(bean);
     }
 
 
@@ -93,6 +130,30 @@ public class CustomerReportFragment extends AbstractView implements CustomerRepo
             titleList.add("体检详情");
         }
 
+        //        @Override
+//        public Fragment getItem(int position) {
+//
+//            switch (position) {
+//                case 1:
+//                    ReportAllFragment all = new ReportAllFragment();
+//                    fragmentList.add(all);
+//                    return all;
+//                case 2:
+//                    ReportBadFragment bad = new ReportBadFragment();
+//                    fragmentList.add(bad);
+//                    bad.updateUI(reportDetailBean);
+//                    return bad;
+//                case 3:
+//                    ReportDetailFragment detail = new ReportDetailFragment();
+//                    fragmentList.add(detail);
+//                    detail.updateUI(reportDetailBean);
+//                    return detail;
+//                default:
+//                    ReportBaseFragment base = new ReportBaseFragment();
+//                    fragmentList.add(base);
+//                    return base;
+//            }
+//        }
         @Override
         public Fragment getItem(int position) {
             return fragmentList.get(position);
@@ -100,7 +161,7 @@ public class CustomerReportFragment extends AbstractView implements CustomerRepo
 
         @Override
         public int getCount() {
-            return fragmentList.size();
+            return titleList.size();
         }
 
         @Override

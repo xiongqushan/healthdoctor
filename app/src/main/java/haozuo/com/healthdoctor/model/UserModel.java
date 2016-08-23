@@ -5,20 +5,15 @@ import android.support.annotation.NonNull;
 import com.squareup.okhttp.OkHttpClient;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
 
-import haozuo.com.healthdoctor.bean.CustomDetailBean;
 import haozuo.com.healthdoctor.bean.BaseBean;
+import haozuo.com.healthdoctor.bean.CustomDetailBean;
 import haozuo.com.healthdoctor.bean.DoctorBean;
-import haozuo.com.healthdoctor.bean.DoctorGroupBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
-import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
-import haozuo.com.healthdoctor.bean.PageBean;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
-import haozuo.com.healthdoctor.service.IGroupService;
 import haozuo.com.healthdoctor.service.IUserService;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -135,8 +130,8 @@ public class UserModel extends AbstractModel {
                 });
     }
 
-    public void GetUserDetail(int customerId, final OnHandlerResultListener<GlobalShell<CustomDetailBean>> callbackListener){
-        mIUserService.GetCusInfo(requestTag(),customerId)
+    public void GetUserDetail(int customerId, final OnHandlerResultListener<GlobalShell<CustomDetailBean>> callbackListener) {
+        mIUserService.GetCusInfo(requestTag(), customerId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<BaseBean<CustomDetailBean>>() {
@@ -147,24 +142,22 @@ public class UserModel extends AbstractModel {
 
                     @Override
                     public void onError(Throwable e) {
-                        GlobalShell<CustomDetailBean> entity=new GlobalShell<CustomDetailBean>(e.getMessage());
+                        GlobalShell<CustomDetailBean> entity = new GlobalShell<CustomDetailBean>(e.getMessage());
                         callbackListener.handlerResult(entity);
                     }
 
                     @Override
                     public void onNext(BaseBean<CustomDetailBean> resultBean) {
-                        GlobalShell<CustomDetailBean> entity=null;
-                        if(resultBean.state>0) {
+                        GlobalShell<CustomDetailBean> entity = null;
+                        if (resultBean.state > 0) {
                             CustomDetailBean result = resultBean.Data;
-                            entity=new GlobalShell<CustomDetailBean>(result);
-                        }
-                        else{
-                            entity=new GlobalShell<CustomDetailBean>(resultBean.message);
+                            entity = new GlobalShell<CustomDetailBean>(result);
+                        } else {
+                            entity = new GlobalShell<CustomDetailBean>(resultBean.message);
                         }
                         callbackListener.handlerResult(entity);
                     }
                 });
-
     }
 
 }

@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -31,6 +33,7 @@ import haozuo.com.healthdoctor.view.base.AbstractView;
 import haozuo.com.healthdoctor.contract.GroupCustomListContract;
 import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout;
 import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullableListView;
+import haozuo.com.healthdoctor.view.threePart.common.DrawableClickableEditText;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,6 +44,7 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
     GroupCustomListContract.IGroupCustomListPresenter mGroupCustomListPresenter;
     GroupCustInfoAdapter mGroupCustInfoAdapter;
     String photoUri;
+    String customNameOrMobile;
     @Bind(R.id.list_group_customlist)PullableListView list_group_customlist;
     @Bind(R.id.pull_to_refresh_layout)PullToRefreshLayout pull_to_refresh_layout;
 
@@ -73,10 +77,12 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mContext=getContext();
+        customNameOrMobile = "";
         if(rootView==null){
             rootView= inflater.inflate(R.layout.lv_group_custom, container, false);
             ButterKnife.bind(this,rootView);
         }
+
         mGroupCustInfoAdapter=new GroupCustInfoAdapter(mContext,new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,6 +95,33 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
         });
         list_group_customlist.setAdapter(mGroupCustInfoAdapter);
         pull_to_refresh_layout.setOnRefreshListener(new PullListener());
+
+        final DrawableClickableEditText et_TitleBar_search = (DrawableClickableEditText) getActivity().findViewById(R.id.et_TitleBar_search);
+        //搜索框按钮监听
+        et_TitleBar_search.setDrawableRightListener(new DrawableClickableEditText.DrawableRightListener() {
+            @Override
+            public void onDrawableRightClick(View view) {
+                customNameOrMobile = et_TitleBar_search.getText().toString();
+                mGroupCustomListPresenter.refreshCustomList(customNameOrMobile);
+            }
+        });
+        //搜索框回车监听
+        et_TitleBar_search.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER&& event.getAction() == KeyEvent.ACTION_UP) {
+                    InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    if (imm.isActive()) {
+                        imm.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0);
+                        customNameOrMobile = et_TitleBar_search.getText().toString();
+                        mGroupCustomListPresenter.refreshCustomList(customNameOrMobile);
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
+
         return rootView;
     }
 
@@ -118,14 +151,13 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
 
         @Override
         public void onRefresh() {
-            mGroupCustomListPresenter.refreshCustomList();
+            mGroupCustomListPresenter.refreshCustomList(customNameOrMobile);
         }
 
         @Override
         public void onLoadMore() {
-            mGroupCustomListPresenter.loadmoreCustomList();
+            mGroupCustomListPresenter.loadmoreCustomList(customNameOrMobile);
         }
-
     }
 
     class GroupCustInfoAdapter extends BaseAdapter {

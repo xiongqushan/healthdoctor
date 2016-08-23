@@ -7,7 +7,8 @@
     <dimen name="textsize_h1">20sp</dimen>
     <dimen name="textsize_h2">18sp</dimen>
     <dimen name="textsize_h3">16sp</dimen>
-    <dimen name="textsize_h4">13sp</dimen>
+    <dimen name="textsize_h4">14sp</dimen>
+    <dimen name="textsize_h5">11sp</dimen>
 
     <dimen name="radius_1">7dp</dimen>
 
@@ -19,7 +20,7 @@
 
     <dimen name="actionbar_high">48dp</dimen>
     <dimen name="actionbar_high_44dp">44dp</dimen>
-    <dimen name="actionbar_padding">10dp</dimen>
+    <dimen name="actionbar_padding">15dp</dimen>
 
     <dimen name="consult_inputtab_height">60dp</dimen>
     <dimen name="consult_panding_list_radiobutton_padding">20dp</dimen>
@@ -42,6 +43,19 @@
     <dimen name="consult_flowlayout_paddingleftright">6dp</dimen>
     <dimen name="consult_flowlayout_paddingtop">10dp</dimen>
 
+    <dimen name="custom_url_height">73dp</dimen>
+    <dimen name="custom_padding">10dp</dimen>
+    <dimen name="custom_gender_margintop">19dp</dimen>
+    <dimen name="custom_gender_marginright">40dp</dimen>
+    <dimen name="report_title_height">40dp</dimen>
+    <dimen name="report_title_paddingleft">5dp</dimen>
+    <dimen name="report_title_paddingTop">2dp</dimen>
+    <dimen name="report_btn_height">48dp</dimen>
+    <dimen name="custom_report_marginLeft">53dp</dimen>
+    <dimen name="report_padding_bottom">15dp</dimen>
+    <dimen name="report_padding_left">20dp</dimen>
+    <dimen name="report_item_margin">10dp</dimen>
+    <dimen name="PhotoReport_margin">9dp</dimen>
 
     <dimen name="dividerline">0.5dp</dimen>
     <dimen name="txt_title_16sp">16sp</dimen>

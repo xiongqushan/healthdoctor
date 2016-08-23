@@ -125,7 +125,6 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
     public ConsultDetailFragment() {
     }
 
-
     @Override
     protected IBasePresenter getPresenter() {
         return mConsultDetailPresenter;
@@ -165,34 +164,6 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
         //WindowResize.assistActivity(getActivity());
         mConsultListAdapter = new ConsultListAdapter(mContext);
         consult_detail_List.setAdapter(mConsultListAdapter);
-//        consult_detail_List.setOnScrollListener(new AbsListView.OnScrollListener() {
-//            private boolean flag;
-//            @Override
-//            public void onScrollStateChanged(AbsListView view, int scrollState) {
-//                switch (scrollState) {
-//                    case AbsListView.OnScrollListener.SCROLL_STATE_IDLE:
-//                        // 判断滚动到底部
-//                        if (consult_detail_List.getLastVisiblePosition() == (consult_detail_List.getCount() - 1)) {
-//                            showTip("底部");
-//                        }
-//                        // 判断滚动到顶部
-//                        if(consult_detail_List.getFirstVisiblePosition() == 0){
-//                            showTip("顶部");
-//                            mConsultDetailPresenter.loadmoreConsultList();
-//
-//                        }
-//                        break;
-//                }
-//            }
-//
-//            @Override
-//            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-//                if (firstVisibleItem + visibleItemCount == totalItemCount && !flag) {
-//                    flag = true;
-//                } else
-//                    flag = false;
-//            }
-//        });
         consult_detail_pull_to_refresh_layout.setOnRefreshListener(new PullListener());
         mConsultDetailPresenter.refreshConsultList();
         mConsultDetailPresenter.getUserDetail(mCustomerId);
@@ -279,7 +250,7 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
 //        ConsultDetailActivity.setCustomerTitle(mCustomDetailBean);
         TextView textView = (TextView) getActivity().findViewById(R.id.txt_TitleBar_title);
         textView.setText(mCustomDetailBean.Cname);
-        getActivity().findViewById(R.id.btn_search).setVisibility(View.GONE);
+        getActivity().findViewById(R.id.btn_search).setVisibility(View.INVISIBLE);
         getActivity().findViewById(R.id.btn_go_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -386,7 +357,7 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
                         holder.flowLayout_consult_photo.removeAllViews();
                         for (String s : photoList) {
                             SimpleDraweeView consult_photo = (SimpleDraweeView) LayoutInflater.from(mContext).inflate(R.layout.lvitemleft_consult_detail_photo, holder.flowLayout_consult_photo, false);
-                            Uri photoUri = Uri.parse(s);
+                            Uri photoUri = Uri.parse(s+"!small200");
                             consult_photo.setImageURI(photoUri);
                             holder.flowLayout_consult_photo.addView(consult_photo);
                         }

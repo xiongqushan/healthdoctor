@@ -14,8 +14,10 @@ import haozuo.com.healthdoctor.bean.DoctorGroupBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
 import haozuo.com.healthdoctor.bean.PageBean;
+import haozuo.com.healthdoctor.bean.ReportParamsBean;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
 import haozuo.com.healthdoctor.service.IGroupService;
+import haozuo.com.healthdoctor.service.IReportService;
 import haozuo.com.healthdoctor.service.IUserService;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -27,6 +29,7 @@ import rx.schedulers.Schedulers;
 public class GroupModel extends AbstractModel {
     IGroupService mIGroupService;
     IUserService mIUserService;
+    IReportService mIReportService;
 
     @Inject
     public GroupModel(@NonNull OkHttpClient okHttpClient, @NonNull IGroupService iGroupService, @NonNull IUserService userService) {
@@ -66,8 +69,8 @@ public class GroupModel extends AbstractModel {
 
     }
 
-    public void GetGroupCustInfoList(int serviceDeptId, int groupId, int doctorId, int pageIndex, int pageSize, final OnHandlerResultListener<GlobalShell<PageBean<GroupCustInfoBean>>> callbackListener) {
-        mIUserService.getGroupCustInfoList(requestTag(), serviceDeptId, doctorId, groupId, "", pageIndex, pageSize)
+    public void GetGroupCustInfoList(int serviceDeptId, int groupId, int doctorId, String customNameOrMobile, int pageIndex, int pageSize, final OnHandlerResultListener<GlobalShell<PageBean<GroupCustInfoBean>>> callbackListener) {
+        mIUserService.getGroupCustInfoList(requestTag(), serviceDeptId, doctorId, groupId, customNameOrMobile, pageIndex, pageSize)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<BaseBean<PageBean<GroupCustInfoBean>>>() {
@@ -125,36 +128,5 @@ public class GroupModel extends AbstractModel {
                     }
                 });
     }
-
-    public void GetUserDetail(int customerId, final OnHandlerResultListener<GlobalShell<CustomDetailBean>> callbackListener) {
-        mIUserService.GetCusInfo(requestTag(), customerId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<BaseBean<CustomDetailBean>>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        GlobalShell<CustomDetailBean> entity = new GlobalShell<CustomDetailBean>(e.getMessage());
-                        callbackListener.handlerResult(entity);
-                    }
-
-                    @Override
-                    public void onNext(BaseBean<CustomDetailBean> resultBean) {
-                        GlobalShell<CustomDetailBean> entity = null;
-                        if (resultBean.state > 0) {
-                            CustomDetailBean result = resultBean.Data;
-                            entity = new GlobalShell<CustomDetailBean>(result);
-                        } else {
-                            entity = new GlobalShell<CustomDetailBean>(resultBean.message);
-                        }
-                        callbackListener.handlerResult(entity);
-                    }
-                });
-    }
-
 
 }

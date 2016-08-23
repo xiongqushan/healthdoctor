@@ -10,6 +10,8 @@ public interface CustomDetailContract {
     interface ICustomDetailView extends IBaseView<ICustomDetailPresenter>{
         void InitView(CustomDetailBean custom);
 
+        void changeRetryLayer(boolean isShow);
+
     }
 
     interface ICustomDetailPresenter extends IBasePresenter {

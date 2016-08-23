@@ -2,12 +2,9 @@ package haozuo.com.healthdoctor.framework;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import haozuo.com.healthdoctor.bean.ExpressionConst;
-import haozuo.com.healthdoctor.bean.UsefulExpressionBean;
 
 /**
  * Created by xiongwei on 16/5/19.
@@ -22,6 +19,7 @@ public class SysConfig {
 
     public static final String CONTROLLER_PRE_API_USER = "api/" + CURRENT_BASE_VERSION + "_User/";
     public static final String CONTROLLER_PRE_API_CONSULT = "api/" + CURRENT_BASE_VERSION + "_Consult/";
+    public static final String CONTROLLER_PRE_API_REPORT = "api/" + CURRENT_BASE_VERSION + "_Report/";
 
 
     public static List<ExpressionConst> getExpressionConstList(){

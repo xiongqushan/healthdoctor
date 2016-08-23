@@ -10,9 +10,13 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
+import haozuo.com.healthdoctor.bean.ReportDetailBean;
 import haozuo.com.healthdoctor.util.UIHelper;
 
 /**
@@ -24,7 +28,8 @@ public class ReportAllFragment extends Fragment {
     ListView mListView;
 
     private View rootView;
-//    private List<String> dataList = new ArrayList<String>();
+    private List<ReportDetailBean.SummaryInfo> dataList = new ArrayList<ReportDetailBean.SummaryInfo>();
+    private ListAdapter adapter;
 
     public ReportAllFragment() {
         // Required empty public constructor
@@ -33,6 +38,11 @@ public class ReportAllFragment extends Fragment {
     public static ReportAllFragment newInstance() {
         ReportAllFragment fragment = new ReportAllFragment();
         return fragment;
+    }
+
+    public void updateUI(ReportDetailBean bean) {
+        dataList = bean.GeneralSummarysForApp;
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -47,7 +57,7 @@ public class ReportAllFragment extends Fragment {
     }
 
     private void initView() {
-        ListAdapter adapter = new ListAdapter();
+        adapter = new ListAdapter();
         mListView.setAdapter(adapter);
     }
 
@@ -55,7 +65,7 @@ public class ReportAllFragment extends Fragment {
 
         @Override
         public int getCount() {
-            return 15;
+            return dataList.size();
         }
 
         @Override
@@ -69,12 +79,14 @@ public class ReportAllFragment extends Fragment {
         }
 
         @Override
-        public View getView(int i, View view, ViewGroup viewGroup) {
+        public View getView(int posistion, View view, ViewGroup viewGroup) {
             if (view == null) {
                 view = LayoutInflater.from(getActivity()).inflate(R.layout.lvitem_reportall_layout, null);
             }
             TextView tvTitle = UIHelper.getAdapterView(view, R.id.tvTitle);
             TextView tvSubtitle = UIHelper.getAdapterView(view, R.id.tvSubtitle);
+            tvTitle.setText(dataList.get(posistion).SummaryName);
+            tvSubtitle.setText(dataList.get(posistion).SummaryDescription);
             return view;
         }
     }

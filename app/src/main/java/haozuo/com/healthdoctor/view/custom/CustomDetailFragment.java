@@ -4,39 +4,56 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.CustomDetailBean;
+import haozuo.com.healthdoctor.contract.CustomDetailContract;
 import haozuo.com.healthdoctor.contract.IBasePresenter;
 import haozuo.com.healthdoctor.view.base.AbstractView;
-import haozuo.com.healthdoctor.contract.CustomDetailContract;
-import haozuo.com.healthdoctor.view.threePart.common.PageFragment;
 
 public class CustomDetailFragment extends AbstractView implements CustomDetailContract.ICustomDetailView{
-    private SimpleFragmentPagerAdapter pagerAdapter;
-
     Context mContext;
     View rootView;
     String Cphoto;
     CustomDetailContract.ICustomDetailPresenter mCustomDetailPresenter;
-    @Bind(R.id.customerName) TextView customerName;
-    @Bind(R.id.customerImg) SimpleDraweeView customerImg;
-    @Bind(R.id.customDetail_Tab) TabLayout tabLayout;
-    @Bind(R.id.customDetail_Vp) ViewPager viewPager;
+    @Bind(R.id.drawee_CPhoto) SimpleDraweeView CPhoto;
+    @Bind(R.id.tv_CName) TextView CName;
+    @Bind(R.id.tv_CGender) TextView CGender;
+    @Bind(R.id.tv_CAge) TextView CAge;
+    @Bind(R.id.tv_Cphone) TextView Cphone;
+    @Bind(R.id.btn_go_into) ImageView btn_go_into;
+    @Bind(R.id.lv_custom_report) ListView lv_custom_report;
+    @Bind(R.id.gv_PhotoReport) GridView gv_PhotoReport;
 
+    @OnClick(R.id.btn_show_Report)
+    public void showReport(){
+        if (lv_custom_report.getVisibility() == View.GONE){
+            lv_custom_report.setVisibility(View.VISIBLE);
+        }else {
+            lv_custom_report.setVisibility(View.GONE);
+        }
+    }
+
+    @OnClick(R.id.btn_show_PhotoReport)
+    public void showPhotoReport(){
+        if (gv_PhotoReport.getVisibility() == View.GONE){
+            gv_PhotoReport.setVisibility(View.VISIBLE);
+        }else {
+            gv_PhotoReport.setVisibility(View.GONE);
+        }
+    }
 
     public CustomDetailFragment(){
     }
@@ -85,6 +102,15 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
     }
 
     @Override
+    public void changeRetryLayer(boolean isShow) {
+        if (!isShow) {
+            showRetryLayer(R.id.rLayout);
+        } else {
+            hideRetryLayer(R.id.rLayout);
+        }
+    }
+
+    @Override
     public void InitView(CustomDetailBean custom) {
         final CustomDetailBean customInfo = custom;
         if (custom.PhotoUrl == null){
@@ -94,9 +120,12 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
             Cphoto = custom.PhotoUrl;
         }
         Uri uri = Uri.parse(Cphoto);
-        customerImg.setImageURI(uri);
-        customerName.setText(custom.Cname);
-        customerImg.setOnClickListener(new View.OnClickListener() {
+        CPhoto.setImageURI(uri);
+        CName.setText(custom.Cname);
+        CGender.setText(custom.Sex);
+        CAge.setText(String.valueOf(custom.Age));
+        Cphone.setText(custom.Mobile);
+        btn_go_into.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, CustomerInfoActivity.class);
@@ -106,41 +135,8 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
                 startActivity(intent);
             }
         });
-
-        CustomDetailFragment fragment = new CustomDetailFragment();
-        CustomDetailFragment.SimpleFragmentPagerAdapter pagerAdapter = fragment.new SimpleFragmentPagerAdapter(getActivity().getSupportFragmentManager(), mContext);
-        viewPager.setAdapter(pagerAdapter);
-        tabLayout.setupWithViewPager(viewPager);
-        tabLayout.setTabMode(TabLayout.MODE_FIXED);
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
     }
 
-    public class SimpleFragmentPagerAdapter extends FragmentPagerAdapter {
-
-        final int PAGE_COUNT = 4;
-        private String tabTitles[] = new String[]{"tab1","tab2","tab3","tab4"};
-        private Context context;
-
-        public SimpleFragmentPagerAdapter(FragmentManager fm, Context context) {
-            super(fm);
-            this.context = context;
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return PageFragment.newInstance(position + 1);
-        }
-
-        @Override
-        public int getCount() {
-            return PAGE_COUNT;
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return tabTitles[position];
-        }
-    }
 
 }
 

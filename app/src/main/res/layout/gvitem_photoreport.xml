@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView android:layout_height="73dp"
+        android:layout_width="90dp"
+        android:gravity="right|bottom"
+        tools:text="共5张"
+        android:textSize="@dimen/textsize_h5"
+        android:textColor="@color/white"
+        android:background="@drawable/bg_photo_report"/>
+    
+    <TextView
+        android:id="@+id/tv_PhotoReport_Date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/PhotoReport_margin"
+        tools:text="2016-08-07"/>
+
+    <TextView
+        android:id="@+id/tv_PhotoReport_Dept"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/PhotoReport_margin"
+        tools:text="河南省直三院"/>
+
+</LinearLayout>

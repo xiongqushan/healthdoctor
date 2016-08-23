@@ -30,18 +30,18 @@ public class CustomDetailBean implements Serializable{
     public int[] GroupIdList;
     public int DoctorID;
     public int Age;
-//    public String Sex = GenderConvert(Gender);
-//
-//    public String GenderConvert(String Gender){
-//        switch(Gender){
-//            case "0" :
-//                return "男";
-//            case "1":
-//                return "女";
-//            default:
-//                return "为知";
-//        }
-//    }
+    public String Sex;
+
+    public static String GenderConvert(String Gender){
+        switch(Gender){
+            case "0" :
+                return "男";
+            case "1":
+                return "女";
+            default:
+                return "未知";
+        }
+    }
 
 //    public int ComputeAge(){
 //        if (Certificate_Code == null){

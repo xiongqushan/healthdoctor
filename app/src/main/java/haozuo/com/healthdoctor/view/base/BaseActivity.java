@@ -2,6 +2,7 @@ package haozuo.com.healthdoctor.view.base;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.framework.HZApplication;
 import haozuo.com.healthdoctor.ioc.AppComponent;
 import haozuo.com.healthdoctor.util.SystemBarTintUtil;
+import haozuo.com.healthdoctor.view.consult.ConsultDetailActivity;
 
 /**
  * Created by xiongwei1 on 2016/7/8.
@@ -67,7 +69,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void setCustomerTitle(String title) {
         TextView textView = (TextView) findViewById(R.id.txt_TitleBar_title);
         textView.setText(title);
-        findViewById(R.id.btn_search).setVisibility(View.GONE);
+        findViewById(R.id.btn_search).setVisibility(View.INVISIBLE);
         findViewById(R.id.btn_go_back).setOnClickListener(finishActivity);
     }
 
@@ -78,7 +80,23 @@ public abstract class BaseActivity extends AppCompatActivity {
         findViewById(R.id.btn_search).setOnClickListener(showSearchbar);
     }
 
-    protected void setSearchBar() {
+    protected void setTitleWithConsult(String title,final int CustomID){
+        TextView textView = (TextView) findViewById(R.id.txt_TitleBar_title);
+        textView.setText(title);
+        findViewById(R.id.btn_go_back).setOnClickListener(finishActivity);
+        findViewById(R.id.btn_search).setVisibility(View.GONE);
+        findViewById(R.id.tv_Consult).setVisibility(View.VISIBLE);
+        findViewById(R.id.tv_Consult).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), ConsultDetailActivity.class);
+                intent.putExtra(ConsultDetailActivity.EXTRA_CONSULT_ITEM, CustomID);
+                startActivity(intent);
+            }
+        });
+    }
+
+    protected void setSearchBar(){
         findViewById(R.id.txt_TitleBar_title).setVisibility(View.GONE);
         findViewById(R.id.btn_search).setVisibility(View.GONE);
         findViewById(R.id.et_TitleBar_search).setVisibility(View.VISIBLE);
