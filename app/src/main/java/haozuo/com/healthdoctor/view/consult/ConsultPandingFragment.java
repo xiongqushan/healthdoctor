@@ -35,6 +35,7 @@ public class ConsultPandingFragment extends Fragment {
     private ConsultFragment mConsultFragment;
     private ConsultListAdapter adapter;
     private int mFlag;// TODO 3全部 2转入 1我的
+    private int pagerIndex = 1;
     private boolean initData = true;
     @Bind(R.id.consult_pull_to_refresh_layout)
     PullToRefreshLayout ptrLayout;
@@ -61,8 +62,9 @@ public class ConsultPandingFragment extends Fragment {
         return fragment;
     }
 
-    public void refreshConsultPendingList(List<ConsultItemBean> dataList) {
-        adapter.refresh(dataList);
+    public void refreshConsultPendingList(List<ConsultItemBean> dataList, boolean isRefresh) {
+        pagerIndex++;
+        adapter.refresh(dataList, isRefresh);
     }
 
     public void refreshFinish(int status, boolean isRefresh) {
@@ -120,8 +122,9 @@ public class ConsultPandingFragment extends Fragment {
             dataSource = new ArrayList<>();
         }
 
-        public void refresh(List<ConsultItemBean> dataList) {
-            dataSource.clear();
+        public void refresh(List<ConsultItemBean> dataList, boolean isRefresh) {
+            if (dataList == null) return;
+            if (isRefresh) dataSource.clear();
             dataSource.addAll(dataList);
             notifyDataSetChanged();
         }
@@ -182,16 +185,16 @@ public class ConsultPandingFragment extends Fragment {
 
     class PullListener implements PullToRefreshLayout.OnRefreshListener {
 
+
         @Override
         public void onRefresh() {
-            Log.e("onRefresh mFlag", mFlag + "");
+            pagerIndex = 1;
             mConsultFragment.refreshCustomList(mFlag, initData);
         }
 
         @Override
         public void onLoadMore() {
-            Log.e("onLoadMore mFlag", mFlag + "");
-            mConsultFragment.loadmoreCustomList(mFlag);
+            mConsultFragment.loadmoreCustomList(mFlag, pagerIndex);
         }
 
     }

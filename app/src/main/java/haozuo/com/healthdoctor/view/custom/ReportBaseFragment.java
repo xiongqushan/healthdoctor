@@ -43,6 +43,7 @@ public class ReportBaseFragment extends Fragment {
     }
 
     public void updateUI(ReportDetailBean bean) {
+        ((CustomerReportActivity) getActivity()).setCustomerTitle(bean.ReportInfoVM.CustomerName);
         tvName.setText(bean.ReportInfoVM.CustomerName);
         if (bean.ReportInfoVM.Sex == 0) {
             tvSex.setText("女");

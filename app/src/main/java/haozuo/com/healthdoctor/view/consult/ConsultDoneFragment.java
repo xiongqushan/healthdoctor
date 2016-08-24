@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +35,7 @@ public class ConsultDoneFragment extends Fragment {
     ConsultFragment mConsultFragment;
     ListAdapter adapter;
     private int mFlag = 1; // TODO  1当天  2本周 3本月
+    private int pagerIndex = 1;
     private boolean initData = true;
     @Bind(R.id.consult_pull_to_refresh_layout)
     PullToRefreshLayout ptrLayout;
@@ -53,8 +53,9 @@ public class ConsultDoneFragment extends Fragment {
         return fragment;
     }
 
-    public void refreshConsultDoneList(List<ConsultDoneItemBean> dataList) {
-        adapter.refresh(dataList);
+    public void refreshConsultDoneList(List<ConsultDoneItemBean> dataList, boolean isRefresh) {
+        adapter.refresh(dataList, isRefresh);
+        pagerIndex++;
     }
 
     public void refreshFinish(int status, boolean isRefresh) {
@@ -68,7 +69,6 @@ public class ConsultDoneFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Log.e("ConsultDoneFragment", "onResume");
     }
 
 
@@ -115,8 +115,9 @@ public class ConsultDoneFragment extends Fragment {
             dataSource = new ArrayList<>();
         }
 
-        public void refresh(List<ConsultDoneItemBean> dataList) {
-            dataSource.clear();
+        public void refresh(List<ConsultDoneItemBean> dataList, boolean isRefresh) {
+            if (dataList == null) return;
+            if (isRefresh) dataSource.clear();
             dataSource.addAll(dataList);
             notifyDataSetChanged();
         }
@@ -165,12 +166,13 @@ public class ConsultDoneFragment extends Fragment {
 
         @Override
         public void onRefresh() {
+            pagerIndex = 1;
             mConsultFragment.refreshConsultDoneList(mFlag, initData);
         }
 
         @Override
         public void onLoadMore() {
-            mConsultFragment.loadmoreConsultDoneList(mFlag);
+            mConsultFragment.loadmoreConsultDoneList(mFlag, pagerIndex);
         }
 
     }
