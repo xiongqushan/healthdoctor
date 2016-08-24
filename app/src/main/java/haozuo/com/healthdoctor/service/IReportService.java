@@ -17,13 +17,13 @@ import rx.Observable;
 public interface IReportService {
 
     @GET(SysConfig.CONTROLLER_PRE_API_REPORT + "GetReportParams")
-    Observable<BaseBean<List<ReportParamsBean>>> getReportParams(@Query("tag") String tag, @Query("customerId") int customerId);
+    Observable<BaseBean<List<ReportParamsBean>>> getReportParams(@Query("customerId") int customerId);
 
     @GET(SysConfig.CONTROLLER_PRE_API_REPORT + "RequestPhotoReportList")
-    Observable<BaseBean<List<RequestPhotoReportListBean>>> requestPhotoReportList(@Query("tag") String tag, @Query("accountID") String accountID);
+    Observable<BaseBean<List<RequestPhotoReportListBean>>> requestPhotoReportList(@Query("accountID") String accountID);
 
     @GET(SysConfig.CONTROLLER_PRE_API_REPORT + "GetHealthReport")
-    Observable<BaseBean<ReportDetailBean>> GetHealthReport(@Query("tag") String tag, @Query("customerId") int customerId,
+    Observable<BaseBean<ReportDetailBean>> GetHealthReport(@Query("customerId") int customerId,
                                                                  @Query("checkCode") String checkCode, @Query("workNo") String workNo);
 
 

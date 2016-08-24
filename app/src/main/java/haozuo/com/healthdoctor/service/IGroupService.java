@@ -14,8 +14,8 @@ import rx.Observable;
  */
 public interface IGroupService {
     @GET(SysConfig.CONTROLLER_PRE_API_USER + "GetCusGroupByDoctorId")
-    Observable<BaseBean<List<DoctorGroupBean>>> getGroup(@Query("tag") String tag,@Query("doctorId") int doctorId);
+    Observable<BaseBean<List<DoctorGroupBean>>> getGroup(@Query("doctorId") int doctorId);
 
     @GET(SysConfig.CONTROLLER_PRE_API_USER + "DeleteCustomerGroup")
-    Observable<BaseBean<Boolean>> DeleteGroup(@Query("tag") String tag,@Query("customerId") int customerId,@Query("curGroupId") int groupId,@Query("operateBy") String operateBy);
+    Observable<BaseBean<Boolean>> DeleteGroup(@Query("customerId") int customerId,@Query("curGroupId") int groupId,@Query("operateBy") String operateBy);
 }
