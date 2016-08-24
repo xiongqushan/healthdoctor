@@ -5,20 +5,15 @@ import android.support.annotation.NonNull;
 import com.squareup.okhttp.OkHttpClient;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
 
-import haozuo.com.healthdoctor.bean.CustomDetailBean;
 import haozuo.com.healthdoctor.bean.BaseBean;
+import haozuo.com.healthdoctor.bean.CustomDetailBean;
 import haozuo.com.healthdoctor.bean.DoctorBean;
-import haozuo.com.healthdoctor.bean.DoctorGroupBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
-import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
-import haozuo.com.healthdoctor.bean.PageBean;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
-import haozuo.com.healthdoctor.service.IGroupService;
 import haozuo.com.healthdoctor.service.IUserService;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;

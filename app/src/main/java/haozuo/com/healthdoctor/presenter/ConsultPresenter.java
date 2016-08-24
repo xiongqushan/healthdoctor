@@ -75,7 +75,6 @@ public class ConsultPresenter extends AbstractPresenter implements ConsultContra
             @Override
             public void handlerResult(GlobalShell<PageBean<ConsultItemBean>> resultData) {
                 if (resultData.LogicSuccess) {
-                    mIConsultView.hideDialog();
                     mConsultItemBeanList.clear();
                     if (resultData.Data.CurrentPageDataList != null) {
                         mConsultItemBeanList.addAll(resultData.Data.CurrentPageDataList);
@@ -84,9 +83,15 @@ public class ConsultPresenter extends AbstractPresenter implements ConsultContra
                     if (!initData) {
                         mIConsultView.refreshFinish(PullToRefreshLayout.SUCCEED, flag, true);
                     }
+                    // TODO 添加改变 资讯页面 消息数量
+                    if (flag == 3) {
+                        mIConsultView.updateMsgCounts(resultData.Data.Count);
+                    }
+                    if (!(flag == 2 && initData)) {
+                        mIConsultView.hideDialog();
+                    }
                 } else {
                     mIConsultView.hideDialog(resultData.Message);
-
                     if (!initData) {
                         mIConsultView.refreshFinish(PullToRefreshLayout.FAIL, flag, true);
                     }
@@ -148,9 +153,7 @@ public class ConsultPresenter extends AbstractPresenter implements ConsultContra
         Log.e("beginCommitOn", beginCommitOn);
         Log.e("endCommitOn", endCommitOn);
         mConssultDonePageIndex = 1;
-        if (!initData) {
-            mIConsultView.showDialog();
-        }
+        mIConsultView.showDialog();
         int doctorId = UserManager.getInstance().getDoctorInfo().Doctor_ID;
         mConsultModel.GetConsultDoneInfoList(doctorId, beginCommitOn, endCommitOn, mConssultDonePageIndex, PAGE_SIZE, new OnHandlerResultListener<GlobalShell<PageBean<ConsultDoneItemBean>>>() {
             @Override
@@ -163,8 +166,8 @@ public class ConsultPresenter extends AbstractPresenter implements ConsultContra
                     mIConsultView.refreshConsultDonePageList(mConsultDoneBeanList, flag);
                     if (!initData) {
                         mIConsultView.refreshConsultDonePageFinish(PullToRefreshLayout.SUCCEED, flag, true);
-                        mIConsultView.hideDialog();
                     }
+                    mIConsultView.hideDialog();
                     mConssultDonePageIndex++;
                 } else {
                     if (!initData) {

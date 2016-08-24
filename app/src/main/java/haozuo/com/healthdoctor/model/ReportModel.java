@@ -9,9 +9,11 @@ import java.util.List;
 import javax.inject.Inject;
 
 import haozuo.com.healthdoctor.bean.BaseBean;
-import haozuo.com.healthdoctor.bean.ReportParamsBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
+
 import haozuo.com.healthdoctor.bean.RequestPhotoReportListBean;
+import haozuo.com.healthdoctor.bean.ReportDetailBean;
+import haozuo.com.healthdoctor.bean.ReportParamsBean;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
 import haozuo.com.healthdoctor.service.IReportService;
 import rx.Subscriber;
@@ -21,7 +23,7 @@ import rx.schedulers.Schedulers;
 /**
  * Created by hzguest3 on 2016/8/22.
  */
-public class ReportModel extends AbstractModel{
+public class ReportModel extends AbstractModel {
     IReportService mIReportService;
 
     @Inject
@@ -37,7 +39,6 @@ public class ReportModel extends AbstractModel{
                 .subscribe(new Subscriber<BaseBean<List<ReportParamsBean>>>() {
                     @Override
                     public void onCompleted() {
-
                     }
 
                     @Override
@@ -58,7 +59,33 @@ public class ReportModel extends AbstractModel{
                         callbackListener.handlerResult(entity);
                     }
                 });
+    }
 
+    public void GetReportDetailInfo(int customerId, String checkCode, String workNo, final OnHandlerResultListener<GlobalShell<ReportDetailBean>> callbackListener) {
+        mIReportService.GetHealthReport(requestTag(), customerId, checkCode, workNo).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<BaseBean<ReportDetailBean>>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        GlobalShell<ReportDetailBean> entity = new GlobalShell<ReportDetailBean>(e.getMessage());
+                        callbackListener.handlerResult(entity);
+                    }
+
+                    @Override
+                    public void onNext(BaseBean<ReportDetailBean> resultBean) {
+                        GlobalShell<ReportDetailBean> entity = null;
+                        if (resultBean.state > 0) {
+                            ReportDetailBean result = resultBean.Data;
+                            entity = new GlobalShell<ReportDetailBean>(result);
+                        } else {
+                            entity = new GlobalShell<ReportDetailBean>(resultBean.message);
+                        }
+                        callbackListener.handlerResult(entity);
+                    }
+                });
     }
 
     public void requestPhotoReportList(String accountID, final OnHandlerResultListener<GlobalShell<List<RequestPhotoReportListBean>>> callbackListener) {

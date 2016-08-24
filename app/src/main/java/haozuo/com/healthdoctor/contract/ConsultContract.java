@@ -25,6 +25,8 @@ public interface ConsultContract {
 
         void refreshFeedbackPageFinish(int status, int flag, boolean isRefresh);
 
+        void updateMsgCounts(int newCount);
+
     }
 
     interface IConsultPresenter extends IBasePresenter {

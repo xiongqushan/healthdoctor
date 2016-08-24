@@ -22,8 +22,11 @@ public class ConsultDetailActivity extends BaseActivity {
 
     public static String EXTRA_CONSULT_ITEM = "CONSULT_ITEM";
     public static String EXTRA_ACCOUNT_ITEM = "ACCOUNT_ITEM";
+    public static String EXTRA_SHOW_EDITLAYOUT = "EXTRA_SHOW_EDITLAYOUT";
+
     private int mCustId;
     private String mAccountId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +50,7 @@ public class ConsultDetailActivity extends BaseActivity {
         }
     }
 
-    public void setCustomerTitle(CustomDetailBean customDetailBean){
+    public void setCustomerTitle(CustomDetailBean customDetailBean) {
         setCustomerTitle(customDetailBean.Cname);
     }
 }

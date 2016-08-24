@@ -9,14 +9,12 @@ import javax.inject.Inject;
 
 import haozuo.com.healthdoctor.bean.CustomDetailBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
-import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
 import haozuo.com.healthdoctor.bean.ReportParamsBean;
 import haozuo.com.healthdoctor.bean.RequestPhotoReportListBean;
+import haozuo.com.healthdoctor.contract.CustomDetailContract;
 import haozuo.com.healthdoctor.contract.IBaseModel;
 import haozuo.com.healthdoctor.contract.IBaseView;
-import haozuo.com.healthdoctor.contract.CustomDetailContract;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
-
 import haozuo.com.healthdoctor.model.ReportModel;
 import haozuo.com.healthdoctor.model.UserModel;
 

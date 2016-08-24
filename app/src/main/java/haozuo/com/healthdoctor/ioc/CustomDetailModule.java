@@ -1,4 +1,5 @@
 package haozuo.com.healthdoctor.ioc;
+
 import android.support.annotation.NonNull;
 
 import dagger.Module;
@@ -14,6 +15,7 @@ public class CustomDetailModule {
     CustomDetailContract.ICustomDetailView mICustomDetailView;
     int mCustomId;
     String mAccountId;
+
     public CustomDetailModule(@NonNull int customId, @NonNull String accountId){
         mCustomId=customId;
         mAccountId = accountId;
@@ -21,13 +23,13 @@ public class CustomDetailModule {
 
     @ScopeType.ActivityScope
     @Provides
-    CustomDetailContract.ICustomDetailView provideCustomDetailView(){
+    CustomDetailContract.ICustomDetailView provideCustomDetailView() {
         return CustomDetailFragment.newInstance();
     }
 
     @ScopeType.ActivityScope
     @Provides
-    int provideCustomId(){
+    int provideCustomId() {
         return mCustomId;
     }
 

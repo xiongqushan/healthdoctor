@@ -2,12 +2,9 @@ package haozuo.com.healthdoctor.framework;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import haozuo.com.healthdoctor.bean.ExpressionConst;
-import haozuo.com.healthdoctor.bean.UsefulExpressionBean;
 
 /**
  * Created by xiongwei on 16/5/19.

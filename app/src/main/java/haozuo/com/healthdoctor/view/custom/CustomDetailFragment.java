@@ -5,11 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
+
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -17,12 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -38,10 +31,10 @@ import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.CustomDetailBean;
 import haozuo.com.healthdoctor.bean.ReportParamsBean;
 import haozuo.com.healthdoctor.bean.RequestPhotoReportListBean;
+import haozuo.com.healthdoctor.contract.CustomDetailContract;
 import haozuo.com.healthdoctor.contract.IBasePresenter;
 import haozuo.com.healthdoctor.util.UIHelper;
 import haozuo.com.healthdoctor.view.base.AbstractView;
-import haozuo.com.healthdoctor.contract.CustomDetailContract;
 import haozuo.com.healthdoctor.view.threePart.common.PinchToZoomDraweeView;
 
 public class CustomDetailFragment extends AbstractView implements CustomDetailContract.ICustomDetailView{
@@ -279,7 +272,6 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
             tv_Count.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    showDialogPage(RequestPhotoReportEntity);
 
                 }
             });
@@ -288,27 +280,7 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
         }
     }
 
-    public void showDialogPage(RequestPhotoReportListBean RequestPhotoReportEntity) {
-        Dialog dialog = new Dialog(mContext, R.style.Dialog_Fullscreen);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_photoreport);
-        dialog.show();
 
-        Window win = dialog.getWindow();
-        win.getDecorView().setPadding(0, 0, 0, 0);
-        win.setGravity(Gravity.BOTTOM);
-        win.setWindowAnimations(R.style.Dialog_Fullscreen);
-        WindowManager.LayoutParams lp = win.getAttributes();
-        Display d = getActivity().getWindowManager().getDefaultDisplay();
-        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
-        win.setAttributes(lp);
-
-        Uri uri = Uri.parse(RequestPhotoReportEntity.ImageUrlList.get(0));
-        PinchToZoomDraweeView drawee_photoreport = (PinchToZoomDraweeView) dialog.findViewById(R.id.drawee_photoreport);
-        drawee_photoreport.setImageURI(uri);
-
-    }
 }
 
 

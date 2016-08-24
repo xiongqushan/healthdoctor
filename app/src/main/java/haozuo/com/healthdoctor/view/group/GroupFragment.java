@@ -3,7 +3,6 @@ package haozuo.com.healthdoctor.view.group;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,6 @@ import haozuo.com.healthdoctor.contract.GroupContract;
 import haozuo.com.healthdoctor.contract.IBasePresenter;
 import haozuo.com.healthdoctor.view.base.AbstractView;
 import haozuo.com.healthdoctor.view.custom.GroupCustomListActivity;
-import retrofit.http.HEAD;
 
 public class GroupFragment extends AbstractView implements GroupContract.IGroupView {
     Context mContext;
@@ -60,7 +58,6 @@ public class GroupFragment extends AbstractView implements GroupContract.IGroupV
     @Override
     public void onResume() {
         super.onResume();
-        Log.e("GroupFragment", "onResume");
         mGroupPresenter.start();
     }
 

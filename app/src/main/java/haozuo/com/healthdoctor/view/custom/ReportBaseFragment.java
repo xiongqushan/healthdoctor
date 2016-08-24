@@ -11,6 +11,7 @@ import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
+import haozuo.com.healthdoctor.bean.ReportDetailBean;
 
 /**
  * by zy 2016.08.22.
@@ -39,6 +40,20 @@ public class ReportBaseFragment extends Fragment {
     public static ReportBaseFragment newInstance() {
         ReportBaseFragment fragment = new ReportBaseFragment();
         return fragment;
+    }
+
+    public void updateUI(ReportDetailBean bean) {
+        tvName.setText(bean.ReportInfoVM.CustomerName);
+        if (bean.ReportInfoVM.Sex == 0) {
+            tvSex.setText("女");
+        } else {
+            tvSex.setText("男");
+        }
+        tvAge.setText(bean.ReportInfoVM.Age + "");
+        tvReportCenter.setText(bean.ReportInfoVM.CheckUnitName);
+        tvReportDate.setText(bean.ReportInfoVM.ReportDate);
+        tvReportCode.setText(bean.ReportInfoVM.WorkNo);
+//        tvWorkUnit.setText(bean.ReportInfoVM.WorkNo);
     }
 
 
