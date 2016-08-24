@@ -58,7 +58,7 @@
         <activity
             android:name=".view.consult.ConsultDetailActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustResize|stateHidden"
+            android:windowSoftInputMode="stateVisible|adjustResize"
             android:launchMode="singleTask"/>
         <activity
             android:name=".view.consult.UsefulMesasgeActivity"
@@ -72,7 +72,7 @@
             android:name=".view.custom.CustomerReportActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.threePart.common.PhotoPreview.ViewPagerActivity"
+            android:name=".view.custom.PhotoPreviewActivity"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 

@@ -1,18 +1,16 @@
 package haozuo.com.healthdoctor.view.custom;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
-import android.view.Display;
-import android.view.Gravity;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -21,6 +19,7 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +34,8 @@ import haozuo.com.healthdoctor.contract.CustomDetailContract;
 import haozuo.com.healthdoctor.contract.IBasePresenter;
 import haozuo.com.healthdoctor.util.UIHelper;
 import haozuo.com.healthdoctor.view.base.AbstractView;
-import haozuo.com.healthdoctor.view.threePart.common.PinchToZoomDraweeView;
+import haozuo.com.healthdoctor.view.consult.FeedbackFragment;
+import haozuo.com.healthdoctor.view.threePart.common.PageFragment;
 
 public class CustomDetailFragment extends AbstractView implements CustomDetailContract.ICustomDetailView{
     Context mContext;
@@ -272,13 +272,15 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
             tv_Count.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    startActivity(new Intent(mContext,PhotoPreviewActivity.class).putExtra(PhotoPreviewActivity.EXTRA_URL_LIST,(Serializable) RequestPhotoReportEntity.ImageUrlList));
                 }
             });
 
             return convertView;
         }
     }
+
+
 
 
 }

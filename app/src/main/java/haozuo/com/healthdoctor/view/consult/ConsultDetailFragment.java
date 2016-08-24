@@ -57,7 +57,6 @@ import haozuo.com.healthdoctor.view.custom.CustomDetailActivity;
 import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToLoadMoreLayout;
 import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullableListView;
 import haozuo.com.healthdoctor.view.threePart.common.FlowLayout;
-import haozuo.com.healthdoctor.view.threePart.common.PinchToZoomDraweeView;
 
 public class ConsultDetailFragment extends AbstractView implements ConsultDetailContract.IConsultDetailView {
     Context mContext;
@@ -440,7 +439,6 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
             TextView txt_consult_commiton;
 
             @Bind(R.id.drawee_consult_item_photo)
-//            PinchToZoomDraweeView drawee_consult_item_photo;
             SimpleDraweeView drawee_consult_item_photo;
 
             @Bind(R.id.txt_consult_item)

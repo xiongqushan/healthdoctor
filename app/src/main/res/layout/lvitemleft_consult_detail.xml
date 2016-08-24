@@ -7,7 +7,6 @@
     android:layout_height="wrap_content"
     android:paddingBottom="@dimen/consult_detail_paddingbottom">
 
-    <!--<haozuo.com.healthdoctor.view.threePart.common.PinchToZoomDraweeView-->
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/drawee_consult_item_photo"
         android:layout_width="@dimen/consult_photo_height"
