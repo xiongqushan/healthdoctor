@@ -71,7 +71,7 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
     @Override
     public void onResume() {
         super.onResume();
-        mGroupCustomListPresenter.start();
+//        mGroupCustomListPresenter.start();
     }
 
     @Override
@@ -124,6 +124,8 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
                 return false;
             }
         });
+
+        mGroupCustomListPresenter.start();
 
         return rootView;
     }

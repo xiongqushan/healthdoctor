@@ -184,6 +184,7 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
         dialog.setContentView(R.layout.dialog_usefulmessage);
         refreshExpressionContent(dialog);
         dialog.show();
+        dialog.hide();
 
         Window win = dialog.getWindow();
         win.getDecorView().setPadding(0, 0, 0, 0);

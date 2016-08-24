@@ -272,7 +272,10 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
             tv_Count.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(mContext,PhotoPreviewActivity.class).putExtra(PhotoPreviewActivity.EXTRA_URL_LIST,(Serializable) RequestPhotoReportEntity.ImageUrlList));
+                    startActivity(new Intent(mContext,PhotoPreviewActivity.class)
+                            .putExtra(PhotoPreviewActivity.EXTRA_URL_LIST,(String) RequestPhotoReportEntity.Content));
+//                    startActivity(new Intent(mContext,PhotoPreviewActivity.class)
+// .putExtra(PhotoPreviewActivity.EXTRA_URL_LIST,(Serializable) RequestPhotoReportEntity.ImageUrlList));
                 }
             });
 

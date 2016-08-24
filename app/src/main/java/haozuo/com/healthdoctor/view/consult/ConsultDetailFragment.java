@@ -167,7 +167,8 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
         mConsultListAdapter = new ConsultListAdapter(mContext);
         consult_detail_List.setAdapter(mConsultListAdapter);
         consult_detail_pull_to_refresh_layout.setOnRefreshListener(new PullListener());
-        mConsultDetailPresenter.refreshConsultList();
+//        mConsultDetailPresenter.refreshConsultList();
+        mConsultDetailPresenter.loadmoreConsultList();
         mConsultDetailPresenter.getUserDetail(mCustomerId);
 
         mIat = SpeechRecognizer.createRecognizer(mContext, mInitListener);
@@ -249,7 +250,6 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
     @Override
     public void setCustmoerInfo(CustomDetailBean customDetailItem) {
         mCustomDetailBean = customDetailItem;
-//        ConsultDetailActivity.setCustomerTitle(mCustomDetailBean);
         TextView textView = (TextView) getActivity().findViewById(R.id.txt_TitleBar_title);
         textView.setText(mCustomDetailBean.Cname);
         getActivity().findViewById(R.id.btn_search).setVisibility(View.INVISIBLE);
@@ -259,7 +259,6 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
                 getActivity().finish();
             }
         });
-//        getActivity().setTitle(mCustomDetailBean.Cname+"\b"+mCustomDetailBean.Sex+"\b"+mCustomDetailBean.Age);
 
         getActivity().findViewById(R.id.txt_TitleBar_title).setOnClickListener(new View.OnClickListener() {
             @Override

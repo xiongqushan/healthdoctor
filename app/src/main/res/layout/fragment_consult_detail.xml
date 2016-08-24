@@ -28,7 +28,7 @@
             android:layout_height="match_parent"
             android:divider="@null"
             android:listSelector="@android:color/transparent"
-            android:stackFromBottom="true"
+            android:stackFromBottom="false"
             android:overScrollMode="always"/>
         <!--<include layout="@layout/load_more" />-->
     </haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToLoadMoreLayout>

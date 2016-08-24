@@ -14,6 +14,7 @@ import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.contract.IBasePresenter;
 import haozuo.com.healthdoctor.view.base.AbstractView;
 import haozuo.com.healthdoctor.view.base.BaseFragment;
+import lib.lhh.fiv.library.FrescoZoomImageView;
 
 /**
  * Created by hzguest3 on 2016/8/24.
@@ -33,12 +34,15 @@ public class PhotoReportFragment extends BaseFragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.item_photo_preview, container, false);
-        SimpleDraweeView simpleDraweeView = (SimpleDraweeView) view;
-//        if (mURL == "") {
-//            mURL = "res://haozuo.com.healthdoctor/" + R.drawable.default_photourl;
-//        }
-        Uri uri = Uri.parse(mURL);
-        simpleDraweeView.setImageURI(uri);
+        FrescoZoomImageView frescoImageView = (FrescoZoomImageView) view;
+        frescoImageView.loadView(mURL+"!small200",mURL,R.color.black);
+        frescoImageView.setTapToRetryEnabled(true);//设置点击重新加载
+        frescoImageView.setOnDraweeClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().finish();
+            }
+        });
 
         return view;
     }

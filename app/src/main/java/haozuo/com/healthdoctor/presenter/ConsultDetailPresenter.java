@@ -47,6 +47,7 @@ public class ConsultDetailPresenter extends AbstractPresenter implements Consult
 //        mGroupModel = groupModel;
         mUserModel = userModel;
         mCustomerId=customerId;
+        mCommitOn = DateUtil.date2Str(new Date(),"yyyyMMddHHmmss");
         iConsultDetailView.setPresenter(this);
         consultReplyBean = new ConsultReplyBean();
     }
@@ -79,6 +80,7 @@ public class ConsultDetailPresenter extends AbstractPresenter implements Consult
                         Collections.sort(mConsultItemBeanList,consultReplyBean);
                         mIConsultDetailView.refreshCustomAdapter(mConsultItemBeanList);
                         mCommitOn =mConsultItemBeanList.get(0).CommitOn.replaceAll("(?:T|:|-)","");
+                        mIConsultDetailView.setListViewPosition(resultData.Data.size());
                     }
                 }
                 else{

@@ -5,7 +5,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="@dimen/consult_detail_paddingbottom">
+    android:paddingBottom="@dimen/consult_detail_paddingbottom"
+    android:paddingLeft="@dimen/consult_photo_height">
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/drawee_consult_item_photo"
@@ -23,7 +24,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:textSize="@dimen/textsize_h4"/>
+        android:textSize="@dimen/textsize_h4"
+        android:layout_marginBottom="@dimen/consult_detail_paddingbottom"/>
 
     <TextView
         android:id="@+id/txt_consult_item"
