@@ -39,186 +39,55 @@ public class ConsultModel extends AbstractModel {
     }
 
     public void GetGroupCustInfoList(int doctorId, int pageIndex, int pageSize, int flag, final OnHandlerResultListener<GlobalShell<PageBean<ConsultItemBean>>> callbackListener) {
-        mIConsultService.getPendingAskData(requestTag(), doctorId, pageIndex, pageSize, flag)
+        Subscriber subscriber=getSubscriber(callbackListener);
+        mIConsultService.getPendingAskData(doctorId, pageIndex, pageSize, flag)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<BaseBean<PageBean<ConsultItemBean>>>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        GlobalShell<PageBean<ConsultItemBean>> entity = new GlobalShell<PageBean<ConsultItemBean>>(e.getMessage());
-                        callbackListener.handlerResult(entity);
-                    }
-
-                    @Override
-                    public void onNext(BaseBean<PageBean<ConsultItemBean>> resultBean) {
-                        GlobalShell<PageBean<ConsultItemBean>> entity = null;
-                        if (resultBean.state > 0) {
-                            PageBean<ConsultItemBean> result = resultBean.Data;
-                            entity = new GlobalShell<PageBean<ConsultItemBean>>(result);
-                        } else {
-                            entity = new GlobalShell<PageBean<ConsultItemBean>>(resultBean.message);
-                        }
-                        callbackListener.handlerResult(entity);
-                    }
-                });
+                .subscribe(subscriber);
     }
 
     public void GetConsultDoneInfoList(int doctorId, String beginCommitOn, String endCommitOn, int pageIndex, int pageSize, final OnHandlerResultListener<GlobalShell<PageBean<ConsultDoneItemBean>>> callbackListener) {
-        mIConsultService.GetProcessedAskData(requestTag(), doctorId, beginCommitOn, endCommitOn, pageIndex, pageSize)
+        Subscriber subscriber=getSubscriber(callbackListener);
+        mIConsultService.GetProcessedAskData(doctorId, beginCommitOn, endCommitOn, pageIndex, pageSize)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<BaseBean<PageBean<ConsultDoneItemBean>>>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        GlobalShell<PageBean<ConsultDoneItemBean>> entity = new GlobalShell<PageBean<ConsultDoneItemBean>>(e.getMessage());
-                        callbackListener.handlerResult(entity);
-                    }
-
-                    @Override
-                    public void onNext(BaseBean<PageBean<ConsultDoneItemBean>> resultBean) {
-                        GlobalShell<PageBean<ConsultDoneItemBean>> entity = null;
-                        if (resultBean.state > 0) {
-                            PageBean<ConsultDoneItemBean> result = resultBean.Data;
-                            entity = new GlobalShell<PageBean<ConsultDoneItemBean>>(result);
-                        } else {
-                            entity = new GlobalShell<PageBean<ConsultDoneItemBean>>(resultBean.message);
-                        }
-                        callbackListener.handlerResult(entity);
-                    }
-                });
+                .subscribe(subscriber);
     }
 
     public void GetFeedbackInfoList(int flag, int doctorId, int pageIndex, int pageSize, final OnHandlerResultListener<GlobalShell<PageBean<FeedbackItemBean>>> callbackListener) {
-        mIConsultService.GetFeedbackAskData(requestTag(), flag, doctorId, pageIndex, pageSize)
+        Subscriber subscriber=getSubscriber(callbackListener);
+        mIConsultService.GetFeedbackAskData(flag, doctorId, pageIndex, pageSize)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<BaseBean<PageBean<FeedbackItemBean>>>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        GlobalShell<PageBean<FeedbackItemBean>> entity = new GlobalShell<PageBean<FeedbackItemBean>>(e.getMessage());
-                        callbackListener.handlerResult(entity);
-                    }
-
-                    @Override
-                    public void onNext(BaseBean<PageBean<FeedbackItemBean>> resultBean) {
-                        GlobalShell<PageBean<FeedbackItemBean>> entity = null;
-                        if (resultBean.state > 0) {
-                            PageBean<FeedbackItemBean> result = resultBean.Data;
-                            entity = new GlobalShell<PageBean<FeedbackItemBean>>(result);
-                        } else {
-                            entity = new GlobalShell<PageBean<FeedbackItemBean>>(resultBean.message);
-                        }
-                        callbackListener.handlerResult(entity);
-                    }
-                });
+                .subscribe(subscriber);
     }
 
     public void GetConsultReplyList(int customerId, String commitOn, final OnHandlerResultListener<GlobalShell<List<ConsultReplyBean>>> callbackListener) {
-        mIConsultService.getConsultReplyData(requestTag(), customerId, commitOn)
+        Subscriber subscriber=getSubscriber(callbackListener);
+        mIConsultService.getConsultReplyData(customerId, commitOn)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<BaseBean<List<ConsultReplyBean>>>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        GlobalShell<List<ConsultReplyBean>> entity = new GlobalShell<List<ConsultReplyBean>>(e.getMessage());
-                        callbackListener.handlerResult(entity);
-                    }
-
-                    @Override
-                    public void onNext(BaseBean<List<ConsultReplyBean>> resultBean) {
-                        GlobalShell<List<ConsultReplyBean>> entity = null;
-                        if (resultBean.state > 0) {
-                            List<ConsultReplyBean> result = resultBean.Data;
-                            entity = new GlobalShell<List<ConsultReplyBean>>(result);
-                        } else {
-                            entity = new GlobalShell<List<ConsultReplyBean>>(resultBean.message);
-                        }
-                        callbackListener.handlerResult(entity);
-                    }
-                });
+                .subscribe(subscriber);
     }
 
     public void getUsefulExpression(final OnHandlerResultListener<GlobalShell<List<UsefulExpressionBean>>> callbackListener) {
-        mIConsultService.getUsefulExpression(requestTag())
+        Subscriber subscriber=getSubscriber(callbackListener);
+        mIConsultService.getUsefulExpression()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<BaseBean<List<UsefulExpressionBean>>>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        GlobalShell<List<UsefulExpressionBean>> entity = new GlobalShell<List<UsefulExpressionBean>>(e.getMessage());
-                        callbackListener.handlerResult(entity);
-                    }
-
-                    @Override
-                    public void onNext(BaseBean<List<UsefulExpressionBean>> resultBean) {
-                        GlobalShell<List<UsefulExpressionBean>> entity = null;
-                        if (resultBean.state > 0) {
-                            List<UsefulExpressionBean> result = resultBean.Data;
-                            entity = new GlobalShell<List<UsefulExpressionBean>>(result);
-                        } else {
-                            entity = new GlobalShell<List<UsefulExpressionBean>>(resultBean.message);
-                        }
-                        callbackListener.handlerResult(entity);
-                    }
-                });
+                .subscribe(subscriber);
     }
 
     public void searchUsefulExpression(String keyWord, final OnHandlerResultListener<GlobalShell<List<UsefulExpressionBean>>> callbackListener) {
-        mIConsultService.searchUsefulExpression(requestTag(), keyWord)
+        Subscriber subscriber=getSubscriber(callbackListener);
+        mIConsultService.searchUsefulExpression(keyWord)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<BaseBean<List<UsefulExpressionBean>>>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        GlobalShell<List<UsefulExpressionBean>> entity = new GlobalShell<List<UsefulExpressionBean>>(e.getMessage());
-                        callbackListener.handlerResult(entity);
-                    }
-
-                    @Override
-                    public void onNext(BaseBean<List<UsefulExpressionBean>> resultBean) {
-                        GlobalShell<List<UsefulExpressionBean>> entity = null;
-                        if (resultBean.state > 0) {
-                            List<UsefulExpressionBean> result = resultBean.Data;
-                            entity = new GlobalShell<List<UsefulExpressionBean>>(result);
-                        } else {
-                            entity = new GlobalShell<List<UsefulExpressionBean>>(resultBean.message);
-                        }
-                        callbackListener.handlerResult(entity);
-                    }
-                });
+                .subscribe(subscriber);
     }
 
     public void addDoctorReply(int DoctorId,int ReDoctorId,String ReDoctorName,int CustomerId,String ReplyContent,String ReplyTime, final OnHandlerResultListener<GlobalShell<Boolean>> callbackListener) {
+        Subscriber subscriber=getSubscriber(callbackListener);
         Map<String, Object> params = new HashMap<>();
         params.put("DoctorId", DoctorId);
         params.put("ReDoctorId", ReDoctorId);
@@ -226,33 +95,9 @@ public class ConsultModel extends AbstractModel {
         params.put("CustomerId", CustomerId);
         params.put("ReplyContent", ReplyContent);
         params.put("ReplyTime", ReplyTime);
-        mIConsultService.addDoctorReply(requestTag(),params)
+        mIConsultService.addDoctorReply(params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<BaseBean<Boolean>>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        GlobalShell<Boolean> entity=new GlobalShell<Boolean>(e.getMessage());
-                        callbackListener.handlerResult(entity);
-                    }
-
-                    @Override
-                    public void onNext(BaseBean<Boolean> resultBean) {
-                        GlobalShell<Boolean> entity=null;
-                        if(resultBean.state>0) {
-                            Boolean result = resultBean.Data;
-                            entity=new GlobalShell<Boolean>(result);
-                        }
-                        else{
-                            entity=new GlobalShell<Boolean>(resultBean.message);
-                        }
-                        callbackListener.handlerResult(entity);
-                    }
-                });
+                .subscribe(subscriber);
     }
 }

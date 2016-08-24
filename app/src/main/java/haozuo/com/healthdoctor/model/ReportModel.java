@@ -33,89 +33,25 @@ public class ReportModel extends AbstractModel {
     }
 
     public void getReportParams(int customerId, final OnHandlerResultListener<GlobalShell<List<ReportParamsBean>>> callbackListener) {
-        mIReportService.getReportParams(requestTag(), customerId)
+        Subscriber subscriber=getSubscriber(callbackListener);
+        mIReportService.getReportParams(customerId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<BaseBean<List<ReportParamsBean>>>() {
-                    @Override
-                    public void onCompleted() {
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        GlobalShell<List<ReportParamsBean>> entity = new GlobalShell<List<ReportParamsBean>>(e.getMessage());
-                        callbackListener.handlerResult(entity);
-                    }
-
-                    @Override
-                    public void onNext(BaseBean<List<ReportParamsBean>> resultBean) {
-                        GlobalShell<List<ReportParamsBean>> entity = null;
-                        if (resultBean.state > 0) {
-                            List<ReportParamsBean> result = resultBean.Data;
-                            entity = new GlobalShell<List<ReportParamsBean>>(result);
-                        } else {
-                            entity = new GlobalShell<List<ReportParamsBean>>(resultBean.message);
-                        }
-                        callbackListener.handlerResult(entity);
-                    }
-                });
+                .subscribe(subscriber);
     }
 
     public void GetReportDetailInfo(int customerId, String checkCode, String workNo, final OnHandlerResultListener<GlobalShell<ReportDetailBean>> callbackListener) {
-        mIReportService.GetHealthReport(requestTag(), customerId, checkCode, workNo).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<BaseBean<ReportDetailBean>>() {
-                    @Override
-                    public void onCompleted() {
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        GlobalShell<ReportDetailBean> entity = new GlobalShell<ReportDetailBean>(e.getMessage());
-                        callbackListener.handlerResult(entity);
-                    }
-
-                    @Override
-                    public void onNext(BaseBean<ReportDetailBean> resultBean) {
-                        GlobalShell<ReportDetailBean> entity = null;
-                        if (resultBean.state > 0) {
-                            ReportDetailBean result = resultBean.Data;
-                            entity = new GlobalShell<ReportDetailBean>(result);
-                        } else {
-                            entity = new GlobalShell<ReportDetailBean>(resultBean.message);
-                        }
-                        callbackListener.handlerResult(entity);
-                    }
-                });
+        Subscriber subscriber=getSubscriber(callbackListener);
+        mIReportService.GetHealthReport(customerId, checkCode, workNo).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
     }
 
     public void requestPhotoReportList(String accountID, final OnHandlerResultListener<GlobalShell<List<RequestPhotoReportListBean>>> callbackListener) {
-        mIReportService.requestPhotoReportList(requestTag(), accountID)
+        Subscriber subscriber=getSubscriber(callbackListener);
+        mIReportService.requestPhotoReportList(accountID)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<BaseBean<List<RequestPhotoReportListBean>>>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        GlobalShell<List<RequestPhotoReportListBean>> entity = new GlobalShell<List<RequestPhotoReportListBean>>(e.getMessage());
-                        callbackListener.handlerResult(entity);
-                    }
-
-                    @Override
-                    public void onNext(BaseBean<List<RequestPhotoReportListBean>> resultBean) {
-                        GlobalShell<List<RequestPhotoReportListBean>> entity = null;
-                        if (resultBean.state > 0) {
-                            List<RequestPhotoReportListBean> result = resultBean.Data;
-                            entity = new GlobalShell<List<RequestPhotoReportListBean>>(result);
-                        } else {
-                            entity = new GlobalShell<List<RequestPhotoReportListBean>>(resultBean.message);
-                        }
-                        callbackListener.handlerResult(entity);
-                    }
-                });
+                .subscribe(subscriber);
 
     }
 
