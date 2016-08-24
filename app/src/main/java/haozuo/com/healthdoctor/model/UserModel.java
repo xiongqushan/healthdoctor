@@ -32,132 +32,39 @@ public class UserModel extends AbstractModel {
     }
 
     public void GetSMSCode(String mobile, final OnHandlerResultListener<GlobalShell<Boolean>> callbackListener){
-        mIUserService.getSMSCode(requestTag(),mobile)
+        Subscriber subscriber=getSubscriber(callbackListener);
+        mIUserService.getSMSCode(mobile)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<BaseBean<Boolean>>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        GlobalShell<Boolean> entity=new GlobalShell<Boolean>(e.getMessage());
-                        callbackListener.handlerResult(entity);
-                    }
-
-                    @Override
-                    public void onNext(BaseBean<Boolean> resultBean) {
-                        GlobalShell<Boolean> entity=null;
-                        if(resultBean.state>0) {
-                            boolean result = resultBean.Data;
-                            entity=new GlobalShell<Boolean>(result);
-                        }
-                        else{
-                            entity=new GlobalShell<Boolean>(resultBean.message);
-                        }
-                        callbackListener.handlerResult(entity);
-                    }
-                });
+                .subscribe(subscriber);
     }
 
     public void Login(String mobile,int smsCode, final OnHandlerResultListener<GlobalShell<DoctorBean>> callbackListener) {
         Map<String, Object> params = new HashMap<>();
         params.put("Mobile", mobile);
         params.put("SmsCode", smsCode);
-        mIUserService.login(requestTag(),params)
+        mIUserService.login(params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<BaseBean<DoctorBean>>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        GlobalShell<DoctorBean> entity=new GlobalShell<DoctorBean>(e.getMessage());
-                        callbackListener.handlerResult(entity);
-                    }
-
-                    @Override
-                    public void onNext(BaseBean<DoctorBean> resultBean) {
-                        GlobalShell<DoctorBean> entity=null;
-                        if(resultBean.state>0) {
-                            DoctorBean result = resultBean.Data;
-                            entity=new GlobalShell<DoctorBean>(result);
-                        }
-                        else{
-                            entity=new GlobalShell<DoctorBean>(resultBean.message);
-                        }
-                        callbackListener.handlerResult(entity);
-                    }
-                });
+                .subscribe(getSubscriber(callbackListener));
     }
 
     public void LoginValidate(String account,String password, final OnHandlerResultListener<GlobalShell<DoctorBean>> callbackListener) {
         Map<String, Object> params = new HashMap<>();
         params.put("Account", account);
         params.put("Password", password);
-        mIUserService.LoginValidate(requestTag(),params)
+        Subscriber subscriber=getSubscriber(callbackListener);
+        mIUserService.LoginValidate(params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<BaseBean<DoctorBean>>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        GlobalShell<DoctorBean> entity=new GlobalShell<DoctorBean>(e.getMessage());
-                        callbackListener.handlerResult(entity);
-                    }
-
-                    @Override
-                    public void onNext(BaseBean<DoctorBean> resultBean) {
-                        GlobalShell<DoctorBean> entity=null;
-                        if(resultBean.state>0) {
-                            DoctorBean result = resultBean.Data;
-                            entity=new GlobalShell<DoctorBean>(result);
-                        }
-                        else{
-                            entity=new GlobalShell<DoctorBean>(resultBean.message);
-                        }
-                        callbackListener.handlerResult(entity);
-                    }
-                });
+                .subscribe(subscriber);
     }
 
     public void GetUserDetail(int customerId, final OnHandlerResultListener<GlobalShell<CustomDetailBean>> callbackListener) {
-        mIUserService.GetCusInfo(requestTag(), customerId)
+        mIUserService.GetCusInfo(customerId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<BaseBean<CustomDetailBean>>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        GlobalShell<CustomDetailBean> entity = new GlobalShell<CustomDetailBean>(e.getMessage());
-                        callbackListener.handlerResult(entity);
-                    }
-
-                    @Override
-                    public void onNext(BaseBean<CustomDetailBean> resultBean) {
-                        GlobalShell<CustomDetailBean> entity = null;
-                        if (resultBean.state > 0) {
-                            CustomDetailBean result = resultBean.Data;
-                            entity = new GlobalShell<CustomDetailBean>(result);
-                        } else {
-                            entity = new GlobalShell<CustomDetailBean>(resultBean.message);
-                        }
-                        callbackListener.handlerResult(entity);
-                    }
-                });
+                .subscribe(getSubscriber(callbackListener));
     }
 
 }

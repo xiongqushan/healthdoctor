@@ -64,6 +64,8 @@
         <activity
             android:name=".view.custom.CustomDetailActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
+            <!--android:theme="@style/AppTheme.NoActionBar"-->
+            <!--android:launchMode="singleTask"/>-->
         <activity
             android:name=".view.custom.CustomerInfoActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
@@ -71,6 +73,8 @@
             android:name=".view.consult.ConsultDetailActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize|stateHidden"/>
+            <!--android:windowSoftInputMode="adjustResize|stateHidden"-->
+            <!--android:launchMode="singleTask"/>-->
         <activity
             android:name=".view.consult.UsefulMesasgeActivity"
             android:theme="@style/AppTheme.NoActionBar"
@@ -82,8 +86,11 @@
             android:name=".view.custom.CustomerReportActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".view.mine.DoctorInfoActivity"/>
-        <activity android:name=".view.mine.SettingsActivity">
-        </activity>
+        <activity android:name=".view.mine.SettingsActivity"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <!--<activity-->
+        <!--android:name=".view.threePart.common.PhotoPreview.ViewPagerActivity"-->
+        <!--android:theme="@style/AppTheme.NoActionBar" />-->
     </application>
 
 </manifest>

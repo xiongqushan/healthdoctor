@@ -21,8 +21,11 @@ public class ConsultDetailActivity extends BaseActivity {
     ConsultDetailContract.IConsultDetailView mIConsultDetailView;
 
     public static String EXTRA_CONSULT_ITEM = "CONSULT_ITEM";
+    public static String EXTRA_ACCOUNT_ITEM = "ACCOUNT_ITEM";
     public static String EXTRA_SHOW_EDITLAYOUT = "EXTRA_SHOW_EDITLAYOUT";
+
     private int mCustId;
+    private String mAccountId;
 
 
     @Override
@@ -30,11 +33,12 @@ public class ConsultDetailActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setTranslucentStatus(R.color.main_color_blue);
         setContentView(R.layout.activity_consult_detail);
-        mCustId = getIntent().getExtras().getInt(EXTRA_CONSULT_ITEM);
+        mCustId = getIntent().getIntExtra(EXTRA_CONSULT_ITEM,0);
+        mAccountId = getIntent().getStringExtra(EXTRA_ACCOUNT_ITEM);
 
         DaggerConsultDetailComponent.builder()
                 .appComponent(getAppComponent())
-                .consultDetailModule(new ConsultDetailModule(mCustId))
+                .consultDetailModule(new ConsultDetailModule(mCustId, mAccountId))
                 .build()
                 .inject(this);
 

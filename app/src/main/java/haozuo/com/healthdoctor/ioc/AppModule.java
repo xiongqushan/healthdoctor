@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Singleton;
 
@@ -94,12 +95,14 @@ public class AppModule {
     @Singleton
     OkHttpClient createHttpClient(){
         OkHttpClient httpClient = new OkHttpClient();
+        httpClient.setConnectTimeout(SysConfig.CONNECT_TIMEOUT, TimeUnit.SECONDS);
+        httpClient.setWriteTimeout(SysConfig.WRITE_TIMEOUT, TimeUnit.SECONDS);
+        httpClient.setReadTimeout(SysConfig.READ_TIMEOUT, TimeUnit.SECONDS);
         httpClient.interceptors().add(new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request request = chain.request();
                 String originUrl=request.urlString();
-                String tag=StringUtil.getUrlParam(originUrl,"tag");
                 long timespan=System.currentTimeMillis()/1000L;
                 if(originUrl.contains("?")){
                     originUrl+="&timespan="+timespan;
@@ -107,7 +110,7 @@ public class AppModule {
                 else{
                     originUrl+="?timespan="+timespan;
                 }
-                request= request.newBuilder().url(originUrl).tag(tag).build();
+                request= request.newBuilder().url(originUrl).build();
                 String sign ="";
                 if(request.method().toLowerCase().equals("get")) {
                     sign = request.urlString() + "|" + BASIC_SIGN_SECRET;

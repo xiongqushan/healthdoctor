@@ -15,14 +15,16 @@ import haozuo.com.healthdoctor.view.consult.ConsultDetailFragment;
 @Module
 public class ConsultDetailModule {
     int mCustomerId;
-    public ConsultDetailModule(int customerId ){
+    String mAccountId;
+    public ConsultDetailModule(int customerId, String accountId){
         mCustomerId=customerId;
+        mAccountId=accountId;
     }
 
     @ScopeType.ActivityScope
     @Provides
     ConsultDetailContract.IConsultDetailView provideConsultDetailView(){
-        return ConsultDetailFragment.newInstance(mCustomerId) ;
+        return ConsultDetailFragment.newInstance(mCustomerId,mAccountId) ;
     }
 
     @ScopeType.ActivityScope

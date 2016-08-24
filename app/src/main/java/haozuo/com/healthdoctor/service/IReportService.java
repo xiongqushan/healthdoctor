@@ -5,6 +5,7 @@ import java.util.List;
 import haozuo.com.healthdoctor.bean.BaseBean;
 import haozuo.com.healthdoctor.bean.ReportDetailBean;
 import haozuo.com.healthdoctor.bean.ReportParamsBean;
+import haozuo.com.healthdoctor.bean.RequestPhotoReportListBean;
 import haozuo.com.healthdoctor.framework.SysConfig;
 import retrofit.http.GET;
 import retrofit.http.Query;
@@ -16,10 +17,14 @@ import rx.Observable;
 public interface IReportService {
 
     @GET(SysConfig.CONTROLLER_PRE_API_REPORT + "GetReportParams")
-    Observable<BaseBean<List<ReportParamsBean>>> getReportParams(@Query("tag") String tag, @Query("customerId") int customerId);
+    Observable<BaseBean<List<ReportParamsBean>>> getReportParams(@Query("customerId") int customerId);
+
+    @GET(SysConfig.CONTROLLER_PRE_API_REPORT + "RequestPhotoReportList")
+    Observable<BaseBean<List<RequestPhotoReportListBean>>> requestPhotoReportList(@Query("accountID") String accountID);
 
     @GET(SysConfig.CONTROLLER_PRE_API_REPORT + "GetHealthReport")
-    Observable<BaseBean<ReportDetailBean>> GetHealthReport(@Query("tag") String tag, @Query("customerId") int customerId,
+    Observable<BaseBean<ReportDetailBean>> GetHealthReport(@Query("customerId") int customerId,
                                                                  @Query("checkCode") String checkCode, @Query("workNo") String workNo);
+
 
 }
