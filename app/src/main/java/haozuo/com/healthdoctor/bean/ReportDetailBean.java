@@ -73,6 +73,7 @@ public class ReportDetailBean {
         public boolean IsCalc;
         public String Unit;
         public String TextRef;
+        public boolean IsAnomaly;
         public boolean IsAbandon;
         public int ResultTypeID;
         public int ResultFlagID;

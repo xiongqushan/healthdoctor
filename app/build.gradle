@@ -69,4 +69,6 @@ dependencies {
     compile 'com.google.dagger:dagger:2.2'
     compile 'homhomlin.lib:frescoimageview:1.3.0'
     compile 'me.relex:circleindicator:1.2.1'
+    compile 'com.umeng.analytics:analytics:latest.integration'
+
 }
