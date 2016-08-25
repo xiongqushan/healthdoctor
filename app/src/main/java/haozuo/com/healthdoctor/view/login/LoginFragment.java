@@ -37,7 +37,7 @@ public class LoginFragment extends AbstractView implements ILoginView {
     @Bind(R.id.edit_code)
     EditText edit_code;
 
-    private LoginFragment() {
+    public LoginFragment() {
     }
 
     @Override
@@ -81,8 +81,6 @@ public class LoginFragment extends AbstractView implements ILoginView {
                 public void onClick(View v) {
                     final String mobile = edit_mobile.getText().toString();
                     final String code = edit_code.getText().toString();
-//                    final int code=Integer.parseInt(edit_code.getText().toString());
-//                    mILoginPresenter.requestLoginWithSMSCode(mobile,code);
                     mILoginPresenter.requestLoginWithPassWord(mobile, code);
                 }
             });

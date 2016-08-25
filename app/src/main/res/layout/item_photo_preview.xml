@@ -10,6 +10,4 @@
     fresco:failureImageScaleType="centerInside"
     fresco:placeholderImageScaleType="centerInside"
     fresco:progressBarAutoRotateInterval="1000"
-    fresco:progressBarImage="@drawable/loading"
-    fresco:retryImage="@drawable/reload_pic"
-    fresco:retryImageScaleType="centerInside" />
+    fresco:progressBarImage="@drawable/loading" />

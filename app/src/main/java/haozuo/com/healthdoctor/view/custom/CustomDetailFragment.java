@@ -273,7 +273,7 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
                 @Override
                 public void onClick(View v) {
                     startActivity(new Intent(mContext,PhotoPreviewActivity.class)
-                            .putExtra(PhotoPreviewActivity.EXTRA_URL_LIST,(String) RequestPhotoReportEntity.Content));
+                            .putExtra(PhotoPreviewActivity.EXTRA_URL_LIST,RequestPhotoReportEntity.Content));
 //                    startActivity(new Intent(mContext,PhotoPreviewActivity.class)
 // .putExtra(PhotoPreviewActivity.EXTRA_URL_LIST,(Serializable) RequestPhotoReportEntity.ImageUrlList));
                 }
@@ -282,10 +282,6 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
             return convertView;
         }
     }
-
-
-
-
 }
 
 

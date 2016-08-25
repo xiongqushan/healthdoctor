@@ -43,9 +43,11 @@ public class UsefulMessagePresenter extends AbstractPresenter implements UsefulM
     }
 
     @Override
-    public void start() {}
+    public void start() {
+        getDefaultUsefulExpression();
+    }
 
-    @Override
+//    @Override
     public void getDefaultUsefulExpression() {
         if (UserManager.getInstance().getDefaultExpression() != null){
             mIUsefulMessageView.refreshUsefulMessageAdapter(UserManager.getInstance().getDefaultExpression());

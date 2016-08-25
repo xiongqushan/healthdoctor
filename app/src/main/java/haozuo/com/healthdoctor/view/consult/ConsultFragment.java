@@ -233,15 +233,15 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
 
     // TODO 实现view接口
     @Override
-    public void refreshPendingPageList(List<ConsultItemBean> dataList, int flag) {
+    public void refreshPendingPageList(List<ConsultItemBean> dataList, int flag, boolean isRefresh) {
         if (flag == 3) {
-            pendingList.get(0).refreshConsultPendingList(dataList);
+            pendingList.get(0).refreshConsultPendingList(dataList, isRefresh);
         }
         if (flag == 2) {
-            pendingList.get(1).refreshConsultPendingList(dataList);
+            pendingList.get(1).refreshConsultPendingList(dataList, isRefresh);
         }
         if (flag == 1) {
-            pendingList.get(2).refreshConsultPendingList(dataList);
+            pendingList.get(2).refreshConsultPendingList(dataList, isRefresh);
         }
     }
 
@@ -259,8 +259,8 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
     }
 
     @Override
-    public void refreshConsultDonePageList(List<ConsultDoneItemBean> dataList, int flag) {
-        doneList.get(flag - 1).refreshConsultDoneList(dataList);
+    public void refreshConsultDonePageList(List<ConsultDoneItemBean> dataList, int flag, boolean isRefresh) {
+        doneList.get(flag - 1).refreshConsultDoneList(dataList, isRefresh);
     }
 
 
@@ -270,15 +270,15 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
     }
 
     @Override
-    public void refreshFeedbackPageList(List<FeedbackItemBean> dataList, int flag) {
+    public void refreshFeedbackPageList(List<FeedbackItemBean> dataList, int flag, boolean isRefresh) {
         if (flag == 1) {
-            feedbackList.get(2).refreshFeedbackList(dataList);
+            feedbackList.get(2).refreshFeedbackList(dataList, isRefresh);
         }
         if (flag == 2) {
-            feedbackList.get(1).refreshFeedbackList(dataList);
+            feedbackList.get(1).refreshFeedbackList(dataList, isRefresh);
         }
         if (flag == 3) {
-            feedbackList.get(0).refreshFeedbackList(dataList);
+            feedbackList.get(0).refreshFeedbackList(dataList, isRefresh);
         }
 
     }
@@ -316,24 +316,24 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
         mConsultPresenter.refreshFeedBackList(flag, initData);
     }
 
-    public void loadmoreFeedBackList(int flag) {
-        mConsultPresenter.loadmoreFeedBackList(flag);
+    public void loadmoreFeedBackList(int flag, int pageIndex) {
+        mConsultPresenter.loadmoreFeedBackList(flag, pageIndex);
     }
 
     public void refreshConsultDoneList(int flag, boolean initData) {
         mConsultPresenter.refreshConsultDoneList(flag, initData);
     }
 
-    public void loadmoreConsultDoneList(int flag) {
-        mConsultPresenter.loadmoreConsultDoneList(flag);
+    public void loadmoreConsultDoneList(int flag, int pageIndex) {
+        mConsultPresenter.loadmoreConsultDoneList(flag, pageIndex);
     }
 
     public void refreshCustomList(int flag, boolean initData) {
         mConsultPresenter.refreshCustomList(flag, initData);
     }
 
-    public void loadmoreCustomList(int flag) {
-        mConsultPresenter.loadmoreCustomList(flag);
+    public void loadmoreCustomList(int flag, int pageIndex) {
+        mConsultPresenter.loadmoreCustomList(flag, pageIndex);
     }
 
 }

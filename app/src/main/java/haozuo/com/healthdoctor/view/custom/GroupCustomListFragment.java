@@ -225,7 +225,6 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
             holder.Company.setText(groupCustInfoEntity.CompanyName);
 
             holder.CPhoto.setTag(new Object[]{groupCustInfoEntity.CustId,groupCustInfoEntity.AccountId});
-//            holder.CPhoto.setOnClickListener(clickListener);
 
             return convertView;
         }

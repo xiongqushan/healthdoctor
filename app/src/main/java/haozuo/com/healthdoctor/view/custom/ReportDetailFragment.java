@@ -1,6 +1,7 @@
 package haozuo.com.healthdoctor.view.custom;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -134,7 +135,36 @@ public class ReportDetailFragment extends Fragment {
                     view = LayoutInflater.from(getActivity()).inflate(R.layout.lvitem_reportbad_layout, null);
                 }
                 TextView tvTitle = UIHelper.getAdapterView(view, R.id.tvTitle);
+                TextView tvSubtitle = UIHelper.getAdapterView(view, R.id.tvSubtitle);
+                TextView tvValue = UIHelper.getAdapterView(view, R.id.tvResultValue);
+                TextView tvUnit = UIHelper.getAdapterView(view, R.id.tvUnit);
                 tvTitle.setText(childData.get(position).CheckIndexName);
+                if (childData.get(position).ResultFlagID > 1) {
+                    tvTitle.setTextColor(Color.parseColor("#FFFF0000"));
+                    tvValue.setTextColor(Color.parseColor("#FFFF0000"));
+                    tvSubtitle.setTextColor(Color.parseColor("#FFFF0000"));
+                    tvUnit.setTextColor(Color.parseColor("#FFFF0000"));
+                } else {
+                    tvTitle.setTextColor(Color.parseColor("#FF282828"));
+                    tvValue.setTextColor(Color.parseColor("#FF282828"));
+                    tvSubtitle.setTextColor(Color.parseColor("#FF666666"));
+                    tvUnit.setTextColor(Color.parseColor("#FF666666"));
+                }
+                String unit = childData.get(position).Unit;
+                if (unit.equals("") || unit == null) {
+                    tvValue.setVisibility(View.GONE);
+                    tvUnit.setVisibility(View.GONE);
+                    String resultValue = childData.get(position).ResultValue;
+                    if (resultValue.equals("")) resultValue = "正常";
+                    tvSubtitle.setText(resultValue);
+                } else {
+                    tvValue.setVisibility(View.VISIBLE);
+                    tvValue.setText(childData.get(position).ResultValue);
+                    tvUnit.setVisibility(View.VISIBLE);
+                    tvUnit.setText("单位:" + childData.get(position).Unit);
+                    tvSubtitle.setText("参考范围:" + childData.get(position).TextRef);
+                }
+
                 return view;
             }
 

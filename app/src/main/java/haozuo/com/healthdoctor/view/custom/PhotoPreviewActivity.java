@@ -22,7 +22,9 @@ import me.relex.circleindicator.CircleIndicator;
  */
 public class PhotoPreviewActivity extends BaseActivity {
     public static String EXTRA_URL_LIST = "EXTRA_URL_LIST";
+    public static String EXTRA_PAGER_INDEX = "EXTRA_PAGER_INDEX";
     private List<String> mPhotoUrlList;
+    private int mIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,7 @@ public class PhotoPreviewActivity extends BaseActivity {
 
 //        mPhotoUrlList = (List<String>) getIntent().getSerializableExtra(EXTRA_URL_LIST);
         String PhotoUrl = (String)getIntent().getStringExtra(EXTRA_URL_LIST);
+        mIndex= (int)getIntent().getIntExtra(EXTRA_PAGER_INDEX,0);
         mPhotoUrlList = (List<String>) Arrays.asList(PhotoUrl.split(","));
 
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -42,12 +45,7 @@ public class PhotoPreviewActivity extends BaseActivity {
         CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
         vp.setAdapter(photoPreviewAdapter);
         indicator.setViewPager(vp);
-//        vp.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
+        vp.setCurrentItem(mIndex);
     }
 
     class PhotoPreviewAdapter extends FragmentPagerAdapter {

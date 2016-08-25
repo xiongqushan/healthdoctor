@@ -18,17 +18,13 @@ public interface ConsultDetailContract {
 
         void setListViewPosition(int position);
 
-        void refreshFinish(int status);
-
-        void loadmoreFinish(int status);
+        void refreshFinish(int status, boolean isRefresh);
 
         void setCustmoerInfo(CustomDetailBean customDetailItem);
 
     }
 
     interface IConsultDetailPresenter extends IBasePresenter {
-
-        void refreshConsultList();
 
         void loadmoreConsultList();
 

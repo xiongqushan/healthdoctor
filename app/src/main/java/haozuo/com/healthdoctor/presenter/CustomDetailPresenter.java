@@ -62,7 +62,6 @@ public class CustomDetailPresenter extends AbstractPresenter implements CustomDe
             public void handlerResult(GlobalShell<CustomDetailBean> resultData) {
                 if(resultData.LogicSuccess) {
                     mICustomDetailView.hideDialog();
-//                    CustomDetailBean customBean = new CustomDetailBean();
                     CustomDetailBean customBean = resultData.Data;
                     customBean.Sex = CustomDetailBean.GenderConvert(customBean.Gender);
                     mICustomDetailView.InitView(customBean);

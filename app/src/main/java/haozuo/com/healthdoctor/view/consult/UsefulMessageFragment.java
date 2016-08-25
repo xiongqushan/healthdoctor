@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -85,8 +86,10 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
     @Override
     public void onResume(){
         super.onResume();
-        mIUsefulMessagePresenter.getDefaultUsefulExpression();
+        mIUsefulMessagePresenter.start();
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -146,6 +149,12 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
     }
 
     @Override
+    public void onStop() {
+        super.onStop();
+        mIUsefulMessagePresenter.cancelRequest();
+    }
+
+    @Override
     public void setPresenter(UsefulMessageContract.IUsefulMessagePresenter presenter) {
         mIUsefulMessagePresenter = presenter;
     }
@@ -176,9 +185,6 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
     }
 
     public void showDialogPage() {
-//        mExpressionConstList.clear();
-//        mExpressionConstList.addAll(SysConfig.getExpressionConstList());
-
         final Dialog dialog = new Dialog(mContext, R.style.Dialog_Fullscreen);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_usefulmessage);
@@ -208,14 +214,14 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
             checkBox.setCompoundDrawables(drawableLeft,null,null,null);
             checkBox.setCompoundDrawablePadding(5);
             checkBox.setChecked(mExpressionConstList.get(i).IsChecked);
-
-            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    mExpressionConstList.get(finalI).IsChecked =  !mExpressionConstList.get(finalI).IsChecked;
-                    refreshExpressionContent(dialog);
-                }
-            });
+            checkBox.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mExpressionConstList.get(finalI).IsChecked =  !mExpressionConstList.get(finalI).IsChecked;
+                        refreshExpressionContent(dialog);
+                    }
+            }
+            );
             cbgroup_expression.addView(checkBox);
         }
     }
@@ -319,16 +325,6 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
             }
             final UsefulExpressionBean usefulExpressionEntity = dataSource.get(position);
             holder.messageContent.setText((position + 1) + "." + usefulExpressionEntity.Content);
-//            holder.messageContent.setChecked(usefulExpressionEntity.IsChecked);
-//            for (String k : mSelectedExpressionMap.keySet()){
-//                if (k.equals(usefulExpressionEntity.Id)){
-//                    holder.messageContent.setChecked(true);
-//                    break;
-//                }
-//                else {
-//                    holder.messageContent.setChecked(false);
-//                }
-//            }
             for (int i = 0; i < mSelectedExpressionMap.size(); i++) {
                 if (mSelectedExpressionMap.get(i).Id.equals(usefulExpressionEntity.Id)) {
                     holder.messageContent.setChecked(true);
@@ -342,19 +338,11 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
                 public void onClick(View v) {
                     CheckBox checkBox = (CheckBox) v;
                     UsefulExpressionBean selectedExpression = new UsefulExpressionBean();
-//                    usefulExpressionEntity.IsChecked = checkBox.isChecked();
                     if (checkBox.isChecked()) {
-//                        mSelectedExpressionMap.put(usefulExpressionEntity.Id,usefulExpressionEntity.Content);
                         selectedExpression.Id = usefulExpressionEntity.Id;
                         selectedExpression.Content = usefulExpressionEntity.Content;
                         mSelectedExpressionMap.add(selectedExpression);
                     } else {
-//                        for(String id : mSelectedExpressionMap.keySet()){
-//                            if (usefulExpressionEntity.Id.equals(id)){
-//                                mSelectedExpressionMap.remove(id);
-//                            }
-//                        }
-
                         for (int i = 0; i < mSelectedExpressionMap.size(); i++) {
                             if (mSelectedExpressionMap.get(i).Id.equals(usefulExpressionEntity.Id)) {
                                 mSelectedExpressionMap.remove(i);

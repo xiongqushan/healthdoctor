@@ -21,11 +21,15 @@ public class CustomerReportActivity extends BaseActivity {
     CustomerReportPresenter mIReportPresenter;
 
     @Override
+    protected void setCustomerTitle(String title) {
+        super.setCustomerTitle(title);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTranslucentStatus(R.color.main_color_blue);
         setContentView(R.layout.activity_customer_report);
-        setCustomerTitle("阿斯蒂芬");
         DaggerCustomerReportComponent.builder()
                 .appComponent(getAppComponent())
                 .customerReportModule(new CustomerReportModule())

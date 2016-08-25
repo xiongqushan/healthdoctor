@@ -17,7 +17,7 @@ public interface UsefulMessageContract {
 
     interface IUsefulMessagePresenter extends IBasePresenter {
 
-        void getDefaultUsefulExpression();
+//        void getDefaultUsefulExpression();
 
         void searchUsefulExpression(String keyword);
 

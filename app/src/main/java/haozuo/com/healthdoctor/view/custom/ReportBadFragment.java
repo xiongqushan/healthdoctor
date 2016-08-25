@@ -1,6 +1,7 @@
 package haozuo.com.healthdoctor.view.custom;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,6 +10,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -25,6 +29,7 @@ public class ReportBadFragment extends Fragment {
     private View rootView;
 
     private TextView tvReportWarn;
+    private ListAdapter adapter;
 
     public ReportBadFragment() {
         // Required empty public constructor
@@ -36,14 +41,15 @@ public class ReportBadFragment extends Fragment {
     }
 
     public void updateUI(ReportDetailBean bean) {
-
+        dataList.addAll(bean.AnomalyCheckResult);
+        adapter.notifyDataSetChanged();
+        tvReportWarn.setText("上海美年友情提醒，您可能存在以下" + dataList.size() + "条异常项");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if (rootView == null) {
-
             rootView = inflater.inflate(R.layout.fragment_report_bad, container, false);
             ButterKnife.bind(this, rootView);
             initView();
@@ -56,15 +62,16 @@ public class ReportBadFragment extends Fragment {
         View header = LayoutInflater.from(getActivity()).inflate(R.layout.headerview_reportbadlv_layout, null);
         tvReportWarn = (TextView) header.findViewById(R.id.tvReportWarn);
         mListView.addHeaderView(header);
-        ListAdapter adapter = new ListAdapter();
+        adapter = new ListAdapter();
         mListView.setAdapter(adapter);
     }
 
+    List<ReportDetailBean.CheckResult> dataList = new ArrayList<ReportDetailBean.CheckResult>();
 
     class ListAdapter extends BaseAdapter {
         @Override
         public int getCount() {
-            return 15;
+            return dataList.size();
         }
 
         @Override
@@ -78,12 +85,30 @@ public class ReportBadFragment extends Fragment {
         }
 
         @Override
-        public View getView(int i, View view, ViewGroup viewGroup) {
+        public View getView(int position, View view, ViewGroup viewGroup) {
             if (view == null) {
                 view = LayoutInflater.from(getActivity()).inflate(R.layout.lvitem_reportbad_layout, null);
             }
             TextView tvTitle = UIHelper.getAdapterView(view, R.id.tvTitle);
             TextView tvSubtitle = UIHelper.getAdapterView(view, R.id.tvSubtitle);
+            TextView tvValue = UIHelper.getAdapterView(view, R.id.tvResultValue);
+            TextView tvUnit = UIHelper.getAdapterView(view, R.id.tvUnit);
+            tvTitle.setText(dataList.get(position).CheckIndexName);
+            tvValue.setTextColor(Color.parseColor("#FFFF0000"));
+            String unit = dataList.get(position).Unit;
+            if (unit.equals("") || unit == null) {
+                tvValue.setVisibility(View.GONE);
+                tvUnit.setVisibility(View.GONE);
+                String resultValue = dataList.get(position).ResultValue;
+                if (resultValue.equals("")) resultValue = "正常";
+                tvSubtitle.setText(resultValue);
+            } else {
+                tvValue.setVisibility(View.VISIBLE);
+                tvValue.setText(dataList.get(position).ResultValue);
+                tvUnit.setVisibility(View.VISIBLE);
+                tvUnit.setText("单位:" + dataList.get(position).Unit);
+                tvSubtitle.setText("参考范围:" + dataList.get(position).TextRef);
+            }
             return view;
         }
     }

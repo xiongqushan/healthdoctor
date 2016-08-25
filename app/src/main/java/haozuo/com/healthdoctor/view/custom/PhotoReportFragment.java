@@ -36,7 +36,8 @@ public class PhotoReportFragment extends BaseFragment{
         View view = inflater.inflate(R.layout.item_photo_preview, container, false);
         FrescoZoomImageView frescoImageView = (FrescoZoomImageView) view;
         frescoImageView.loadView(mURL+"!small200",mURL,R.color.black);
-        frescoImageView.setTapToRetryEnabled(true);//设置点击重新加载
+//        frescoImageView.setTapToRetryEnabled(true);//设置点击重新加载
+//        frescoImageView.setImageURI(Uri.parse(mURL));
         frescoImageView.setOnDraweeClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -59,7 +59,6 @@ public class CustomerReportFragment extends AbstractView implements CustomerRepo
     @Override
     public void onResume() {
         super.onResume();
-        mIReportPresenter.start();
     }
 
     @Override
@@ -69,6 +68,7 @@ public class CustomerReportFragment extends AbstractView implements CustomerRepo
             rootVeiw = inflater.inflate(R.layout.fragment_customer_report, container, false);
             ButterKnife.bind(this, rootVeiw);
             initView();
+            mIReportPresenter.start();
         }
         return rootVeiw;
     }
@@ -130,30 +130,6 @@ public class CustomerReportFragment extends AbstractView implements CustomerRepo
             titleList.add("体检详情");
         }
 
-        //        @Override
-//        public Fragment getItem(int position) {
-//
-//            switch (position) {
-//                case 1:
-//                    ReportAllFragment all = new ReportAllFragment();
-//                    fragmentList.add(all);
-//                    return all;
-//                case 2:
-//                    ReportBadFragment bad = new ReportBadFragment();
-//                    fragmentList.add(bad);
-//                    bad.updateUI(reportDetailBean);
-//                    return bad;
-//                case 3:
-//                    ReportDetailFragment detail = new ReportDetailFragment();
-//                    fragmentList.add(detail);
-//                    detail.updateUI(reportDetailBean);
-//                    return detail;
-//                default:
-//                    ReportBaseFragment base = new ReportBaseFragment();
-//                    fragmentList.add(base);
-//                    return base;
-//            }
-//        }
         @Override
         public Fragment getItem(int position) {
             return fragmentList.get(position);
