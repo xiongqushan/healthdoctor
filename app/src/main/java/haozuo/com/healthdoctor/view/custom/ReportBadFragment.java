@@ -18,6 +18,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.ReportDetailBean;
+import haozuo.com.healthdoctor.util.StringUtil;
 import haozuo.com.healthdoctor.util.UIHelper;
 
 /**
@@ -95,8 +96,8 @@ public class ReportBadFragment extends Fragment {
             TextView tvUnit = UIHelper.getAdapterView(view, R.id.tvUnit);
             tvTitle.setText(dataList.get(position).CheckIndexName);
             tvValue.setTextColor(Color.parseColor("#FFFF0000"));
-            String unit = dataList.get(position).Unit;
-            if (unit.equals("") || unit == null) {
+            boolean unitEmpty = StringUtil.isTrimEmpty(dataList.get(position).Unit);
+            if (unitEmpty) {
                 tvValue.setVisibility(View.GONE);
                 tvUnit.setVisibility(View.GONE);
                 String resultValue = dataList.get(position).ResultValue;
@@ -104,10 +105,15 @@ public class ReportBadFragment extends Fragment {
                 tvSubtitle.setText(resultValue);
             } else {
                 tvValue.setVisibility(View.VISIBLE);
-                tvValue.setText(dataList.get(position).ResultValue);
                 tvUnit.setVisibility(View.VISIBLE);
+                boolean subEmpty = StringUtil.isTrimEmpty(dataList.get(position).TextRef);
+                if (subEmpty) {
+                    tvSubtitle.setText("");
+                } else {
+                    tvSubtitle.setText("参考范围:" + dataList.get(position).TextRef);
+                }
+                tvValue.setText(dataList.get(position).ResultValue);
                 tvUnit.setText("单位:" + dataList.get(position).Unit);
-                tvSubtitle.setText("参考范围:" + dataList.get(position).TextRef);
             }
             return view;
         }

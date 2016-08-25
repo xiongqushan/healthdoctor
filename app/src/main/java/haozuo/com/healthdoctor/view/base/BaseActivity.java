@@ -33,6 +33,21 @@ public abstract class BaseActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
+    //必须调用 MobclickAgent.onResume() 和MobclickAgent.onPause()方法，才能够保证获取正确的新增用户、活跃用户、启动次数、使用时长等基本数据。
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+////        MobclickAgent.onPageStart(mPageName);
+//        MobclickAgent.onResume(this);
+//    }
+//
+//    @Override
+//    public void onPause() {
+//        super.onPause();
+////        MobclickAgent.onPageEnd(mPageName);
+//        MobclickAgent.onPause(this);
+//    }
+
     @Override
     public void finish() {
         super.finish();
@@ -80,13 +95,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         findViewById(R.id.btn_search).setOnClickListener(showSearchbar);
     }
 
-    protected void setTitleWithConsult(String title,final int CustomID){
+    protected void setTitleWithConsult(String title, final int CustomID) {
         TextView textView = (TextView) findViewById(R.id.txt_TitleBar_title);
         textView.setText(title);
         findViewById(R.id.btn_go_back).setOnClickListener(finishActivity);
         findViewById(R.id.btn_search).setVisibility(View.GONE);
         findViewById(R.id.tv_Consult).setVisibility(View.VISIBLE);
-        findViewById(R.id.tv_Consult).setOnClickListener(new View.OnClickListener(){
+        findViewById(R.id.tv_Consult).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), ConsultDetailActivity.class);
@@ -96,7 +111,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         });
     }
 
-    protected void setSearchBar(){
+    protected void setSearchBar() {
         findViewById(R.id.txt_TitleBar_title).setVisibility(View.GONE);
         findViewById(R.id.btn_search).setVisibility(View.GONE);
         findViewById(R.id.et_TitleBar_search).setVisibility(View.VISIBLE);
