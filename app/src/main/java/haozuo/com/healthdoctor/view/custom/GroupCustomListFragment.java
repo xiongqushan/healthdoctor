@@ -12,24 +12,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
-import haozuo.com.healthdoctor.contract.IBasePresenter;
+import haozuo.com.healthdoctor.presenter.IBasePresenter;
 import haozuo.com.healthdoctor.view.base.AbstractView;
 import haozuo.com.healthdoctor.contract.GroupCustomListContract;
 import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout;
@@ -71,7 +65,7 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
     @Override
     public void onResume() {
         super.onResume();
-//        mGroupCustomListPresenter.start();
+        mGroupCustomListPresenter.start();
     }
 
     @Override

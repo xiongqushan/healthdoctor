@@ -5,9 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +16,6 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,11 +27,9 @@ import haozuo.com.healthdoctor.bean.CustomDetailBean;
 import haozuo.com.healthdoctor.bean.ReportParamsBean;
 import haozuo.com.healthdoctor.bean.RequestPhotoReportListBean;
 import haozuo.com.healthdoctor.contract.CustomDetailContract;
-import haozuo.com.healthdoctor.contract.IBasePresenter;
+import haozuo.com.healthdoctor.presenter.IBasePresenter;
 import haozuo.com.healthdoctor.util.UIHelper;
 import haozuo.com.healthdoctor.view.base.AbstractView;
-import haozuo.com.healthdoctor.view.consult.FeedbackFragment;
-import haozuo.com.healthdoctor.view.threePart.common.PageFragment;
 
 public class CustomDetailFragment extends AbstractView implements CustomDetailContract.ICustomDetailView{
     Context mContext;

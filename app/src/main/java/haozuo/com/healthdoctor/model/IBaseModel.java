@@ -1,4 +1,4 @@
-package haozuo.com.healthdoctor.contract;
+package haozuo.com.healthdoctor.model;
 
 /**
  * Created by Administrator on 2016/6/19.

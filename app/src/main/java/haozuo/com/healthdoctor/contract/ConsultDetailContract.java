@@ -4,6 +4,8 @@ import java.util.List;
 
 import haozuo.com.healthdoctor.bean.ConsultReplyBean;
 import haozuo.com.healthdoctor.bean.CustomDetailBean;
+import haozuo.com.healthdoctor.presenter.IBasePresenter;
+import haozuo.com.healthdoctor.view.IBaseView;
 
 /**
  * Created by hzguest3 on 2016/8/3.

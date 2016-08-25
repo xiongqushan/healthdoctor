@@ -1,5 +1,6 @@
-package haozuo.com.healthdoctor.contract;
+package haozuo.com.healthdoctor.view;
 
+import haozuo.com.healthdoctor.presenter.IBasePresenter;
 import haozuo.com.healthdoctor.util.CustomDialog;
 
 /**

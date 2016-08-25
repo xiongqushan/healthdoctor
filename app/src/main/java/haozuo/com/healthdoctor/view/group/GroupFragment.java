@@ -15,7 +15,7 @@ import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.DoctorGroupBean;
 import haozuo.com.healthdoctor.contract.GroupContract;
-import haozuo.com.healthdoctor.contract.IBasePresenter;
+import haozuo.com.healthdoctor.presenter.IBasePresenter;
 import haozuo.com.healthdoctor.view.base.AbstractView;
 import haozuo.com.healthdoctor.view.custom.GroupCustomListActivity;
 

@@ -12,7 +12,7 @@ import java.util.Date;
 public class CustomDetailBean implements Serializable{
     public int Id;
     public String Cname;
-    public String Gender;
+    public static String Gender;
     public String Birthday;
     public String Certificate_Code;
     public String Mobile;
@@ -30,7 +30,7 @@ public class CustomDetailBean implements Serializable{
     public int[] GroupIdList;
     public int DoctorID;
     public int Age;
-    public String Sex;
+    public String Sex = GenderConvert(this.Gender);
 
     public static String GenderConvert(String Gender){
         switch(Gender){

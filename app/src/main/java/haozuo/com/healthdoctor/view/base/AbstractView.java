@@ -7,7 +7,7 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import haozuo.com.healthdoctor.R;
-import haozuo.com.healthdoctor.contract.IBasePresenter;
+import haozuo.com.healthdoctor.presenter.IBasePresenter;
 import haozuo.com.healthdoctor.util.CustomDialog;
 import haozuo.com.healthdoctor.util.LoadingDialog;
 import haozuo.com.healthdoctor.util.StringUtil;

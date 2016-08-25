@@ -1,7 +1,6 @@
 package haozuo.com.healthdoctor.presenter;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import java.util.List;
 
@@ -12,8 +11,8 @@ import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.bean.ReportParamsBean;
 import haozuo.com.healthdoctor.bean.RequestPhotoReportListBean;
 import haozuo.com.healthdoctor.contract.CustomDetailContract;
-import haozuo.com.healthdoctor.contract.IBaseModel;
-import haozuo.com.healthdoctor.contract.IBaseView;
+import haozuo.com.healthdoctor.model.IBaseModel;
+import haozuo.com.healthdoctor.view.IBaseView;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
 import haozuo.com.healthdoctor.model.ReportModel;
 import haozuo.com.healthdoctor.model.UserModel;

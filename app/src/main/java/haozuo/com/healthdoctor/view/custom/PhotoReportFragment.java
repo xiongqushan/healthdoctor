@@ -1,18 +1,12 @@
 package haozuo.com.healthdoctor.view.custom;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
-import com.facebook.drawee.view.SimpleDraweeView;
 
 import haozuo.com.healthdoctor.R;
-import haozuo.com.healthdoctor.contract.IBasePresenter;
-import haozuo.com.healthdoctor.view.base.AbstractView;
 import haozuo.com.healthdoctor.view.base.BaseFragment;
 import lib.lhh.fiv.library.FrescoZoomImageView;
 

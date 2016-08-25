@@ -9,8 +9,8 @@ import javax.inject.Inject;
 
 import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.bean.UsefulExpressionBean;
-import haozuo.com.healthdoctor.contract.IBaseModel;
-import haozuo.com.healthdoctor.contract.IBaseView;
+import haozuo.com.healthdoctor.model.IBaseModel;
+import haozuo.com.healthdoctor.view.IBaseView;
 import haozuo.com.healthdoctor.contract.UsefulMessageContract;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
 import haozuo.com.healthdoctor.manager.UserManager;

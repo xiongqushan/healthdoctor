@@ -47,13 +47,15 @@ import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.ConsultReplyBean;
 import haozuo.com.healthdoctor.bean.CustomDetailBean;
 import haozuo.com.healthdoctor.bean.DoctorBean;
+import haozuo.com.healthdoctor.bean.ReportParamsBean;
 import haozuo.com.healthdoctor.contract.ConsultDetailContract;
-import haozuo.com.healthdoctor.contract.IBasePresenter;
+import haozuo.com.healthdoctor.presenter.IBasePresenter;
 import haozuo.com.healthdoctor.manager.UserManager;
 import haozuo.com.healthdoctor.util.DateUtil;
 import haozuo.com.healthdoctor.util.JsonParser;
 import haozuo.com.healthdoctor.view.base.AbstractView;
 import haozuo.com.healthdoctor.view.custom.CustomDetailActivity;
+import haozuo.com.healthdoctor.view.custom.CustomerReportActivity;
 import haozuo.com.healthdoctor.view.custom.PhotoPreviewActivity;
 import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToLoadMoreLayout;
 import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullableListView;
@@ -122,8 +124,6 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
     public void getUsefulMessage(View v) {
         startActivityForResult(new Intent(mContext, UsefulMesasgeActivity.class).putExtra(UsefulMesasgeActivity.LAST_CONSULT_CONTENT, mConsultReplmyItem), RESULT_EXPRESSION);
     }
-
-    ;
 
     public ConsultDetailFragment() {
     }
@@ -198,11 +198,11 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
         return rootView;
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        mConsultDetailPresenter.cancelRequest();
-    }
+//    @Override
+//    public void onStop() {
+//        super.onStop();
+//        mConsultDetailPresenter.cancelRequest();
+//    }
 
     @Override
     public void onDestroy() {
@@ -388,7 +388,14 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
                         holder.txt_consult_item.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                showTip("异常项转跳逻辑");
+                                ReportParamsBean bean = new ReportParamsBean();
+                                bean.customerId = mCustomerId;
+                                bean.WorkNo = consultReplyEntity.AppendInfo.split(";")[0];
+                                bean.CheckUnitCode = consultReplyEntity.AppendInfo.split(";")[1];
+
+                                Intent intent = new Intent(getActivity(), CustomerReportActivity.class);
+//                                intent.putExtra(CustomerReportActivity.REPORTPARAMSBEAN, bean);
+                                startActivity(intent);
                             }
                         });
                         break;

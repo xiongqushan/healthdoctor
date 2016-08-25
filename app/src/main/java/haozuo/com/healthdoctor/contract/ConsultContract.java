@@ -5,6 +5,8 @@ import java.util.List;
 import haozuo.com.healthdoctor.bean.ConsultDoneItemBean;
 import haozuo.com.healthdoctor.bean.ConsultItemBean;
 import haozuo.com.healthdoctor.bean.FeedbackItemBean;
+import haozuo.com.healthdoctor.presenter.IBasePresenter;
+import haozuo.com.healthdoctor.view.IBaseView;
 
 /**
  * Created by hzguest3 on 2016/8/1.

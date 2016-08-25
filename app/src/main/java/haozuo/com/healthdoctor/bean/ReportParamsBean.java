@@ -17,4 +17,6 @@ public class ReportParamsBean {
     public String CustomerName;
     public String WorkNo;
     public String CheckDate;
+
+    public int customerId;
 }
