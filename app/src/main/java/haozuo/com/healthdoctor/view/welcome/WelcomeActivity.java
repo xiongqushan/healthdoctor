@@ -12,7 +12,9 @@ import java.util.TimerTask;
 
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.framework.SysConfig;
+import haozuo.com.healthdoctor.manager.UserManager;
 import haozuo.com.healthdoctor.view.base.BaseActivity;
+import haozuo.com.healthdoctor.view.home.HomeActivity;
 import haozuo.com.healthdoctor.view.login.LoginActivity;
 
 public class WelcomeActivity extends BaseActivity {
@@ -26,8 +28,15 @@ public class WelcomeActivity extends BaseActivity {
         setContentView(R.layout.activity_welcome);
         TimerTask task = new TimerTask() {
             public void run() {
-                startActivity(new Intent(getBaseContext(), LoginActivity.class));
-                finish();
+                if (UserManager.getInstance().exist()){
+                    startActivity(new Intent(getBaseContext(), HomeActivity.class));
+                    finish();
+                }else {
+                    startActivity(new Intent(getBaseContext(), LoginActivity.class));
+                    finish();
+                }
+
+
             }
         };
         Timer timer = new Timer();

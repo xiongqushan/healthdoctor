@@ -9,6 +9,7 @@ import javax.inject.Inject;
 
 import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.bean.UsefulExpressionBean;
+import haozuo.com.healthdoctor.manager.UsefulMessageManager;
 import haozuo.com.healthdoctor.model.IBaseModel;
 import haozuo.com.healthdoctor.view.IBaseView;
 import haozuo.com.healthdoctor.contract.UsefulMessageContract;
@@ -49,8 +50,8 @@ public class UsefulMessagePresenter extends AbstractPresenter implements UsefulM
 
 //    @Override
     public void getDefaultUsefulExpression() {
-        if (UserManager.getInstance().getDefaultExpression() != null){
-            mIUsefulMessageView.refreshUsefulMessageAdapter(UserManager.getInstance().getDefaultExpression());
+        if (UsefulMessageManager.getInstance().getDefaultExpression() != null){
+            mIUsefulMessageView.refreshUsefulMessageAdapter(UsefulMessageManager.getInstance().getDefaultExpression());
         }
         else {
             mIUsefulMessageView.showDialog();
@@ -58,7 +59,7 @@ public class UsefulMessagePresenter extends AbstractPresenter implements UsefulM
                 @Override
                 public void handlerResult(GlobalShell<List<UsefulExpressionBean>> resultData) {
                     if (resultData.LogicSuccess){
-                        UserManager.getInstance().setDefaultExpression(resultData.Data);
+                        UsefulMessageManager.getInstance().setDefaultExpression(resultData.Data);
                         mIUsefulMessageView.hideDialog();
                         mIUsefulMessageView.refreshUsefulMessageAdapter(resultData.Data);
                     }else {
