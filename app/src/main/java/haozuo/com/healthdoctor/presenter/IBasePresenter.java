@@ -1,4 +1,4 @@
-package haozuo.com.healthdoctor.contract;
+package haozuo.com.healthdoctor.presenter;
 
 /**
  * Created by xiongwei1 on 2016/7/4.

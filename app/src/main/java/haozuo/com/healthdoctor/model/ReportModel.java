@@ -8,12 +8,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import haozuo.com.healthdoctor.bean.BaseBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
-
-import haozuo.com.healthdoctor.bean.RequestPhotoReportListBean;
 import haozuo.com.healthdoctor.bean.ReportDetailBean;
 import haozuo.com.healthdoctor.bean.ReportParamsBean;
+import haozuo.com.healthdoctor.bean.RequestPhotoReportListBean;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
 import haozuo.com.healthdoctor.service.IReportService;
 import rx.Subscriber;
@@ -33,7 +31,7 @@ public class ReportModel extends AbstractModel {
     }
 
     public void getReportParams(int customerId, final OnHandlerResultListener<GlobalShell<List<ReportParamsBean>>> callbackListener) {
-        Subscriber subscriber=getSubscriber(callbackListener);
+        Subscriber subscriber = getSubscriber(callbackListener);
         mIReportService.getReportParams(customerId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -41,20 +39,19 @@ public class ReportModel extends AbstractModel {
     }
 
     public void GetReportDetailInfo(int customerId, String checkCode, String workNo, final OnHandlerResultListener<GlobalShell<ReportDetailBean>> callbackListener) {
-        Subscriber subscriber=getSubscriber(callbackListener);
+        Subscriber subscriber = getSubscriber(callbackListener);
         mIReportService.GetHealthReport(customerId, checkCode, workNo).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
 
     public void requestPhotoReportList(String accountID, final OnHandlerResultListener<GlobalShell<List<RequestPhotoReportListBean>>> callbackListener) {
-        Subscriber subscriber=getSubscriber(callbackListener);
+        Subscriber subscriber = getSubscriber(callbackListener);
         mIReportService.requestPhotoReportList(accountID)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
 
     }
-
 
 
 }

@@ -15,7 +15,6 @@ import haozuo.com.healthdoctor.presenter.CustomDetailPresenter;
 import haozuo.com.healthdoctor.util.ActivityUtils;
 
 
-
 public class CustomDetailActivity extends BaseActivity {
     @Inject
     CustomDetailPresenter mGroupPresenter;
@@ -31,12 +30,12 @@ public class CustomDetailActivity extends BaseActivity {
         setTranslucentStatus(R.color.main_color_blue);
         setContentView(R.layout.activity_custom_detail);
 
-        int customerId = getIntent().getIntExtra(EXTRA_CUSTOMER_ID,0);
+        int customerId = getIntent().getIntExtra(EXTRA_CUSTOMER_ID, 0);
         String accountId = getIntent().getStringExtra(EXTRA_ACCOUNT_ID);
 
         DaggerCustomDetailComponent.builder()
                 .appComponent(getAppComponent())
-                .customDetailModule(new CustomDetailModule(customerId,accountId))
+                .customDetailModule(new CustomDetailModule(customerId, accountId))
                 .build()
                 .inject(this);
 

@@ -6,29 +6,53 @@
               android:orientation="vertical"
     >
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:orientation="vertical"
         android:padding="12dp">
 
         <TextView
             android:id="@+id/tvTitle"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="甲状腺超声"
+            android:text="阿斯蒂芬"
+            android:textColor="@color/title_color28"
+            android:textSize="@dimen/txt_title_16sp"/>
+
+        <TextView
+            android:id="@+id/tvResultValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="12"
             android:textColor="@color/title_color28"
             android:textSize="@dimen/txt_title_16sp"/>
 
         <TextView
             android:id="@+id/tvSubtitle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvTitle"
+            android:layout_marginRight="12dp"
             android:layout_marginTop="8dp"
-            android:text="甲状腺大小、形态正常，包膜完整，实质回声均匀，其内未见明显异常回声。"
+            android:layout_toLeftOf="@+id/tvUnit"
+            android:text="金鳞岂是池中物"
             android:textColor="@color/subtitle_color66"
             android:textSize="@dimen/txt_subtitle_14sp"/>
-    </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvUnit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/tvResultValue"
+            android:layout_marginTop="8dp"
+            android:text="单位:uml/ml"
+            android:textColor="@color/subtitle_color66"
+            android:textSize="@dimen/txt_subtitle_14sp"/>
+    </RelativeLayout>
 
     <View
         android:layout_width="match_parent"

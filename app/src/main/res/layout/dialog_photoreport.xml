@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<haozuo.com.healthdoctor.view.threePart.common.PinchToZoomDraweeView
-    android:id="@+id/drawee_photoreport"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="@dimen/consult_photo_margintop"
-    android:layout_marginLeft="@dimen/consult_photot_marginleft"
-    xmlns:android="http://schemas.android.com/apk/res/android" />

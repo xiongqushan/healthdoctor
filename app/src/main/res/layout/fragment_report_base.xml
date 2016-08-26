@@ -36,7 +36,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="阿斯蒂芬"
             android:textColor="@color/subtitle_color66"
             android:textSize="@dimen/txt_title_16sp"/>
     </RelativeLayout>
@@ -68,7 +67,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="男"
             android:textColor="@color/subtitle_color66"
             android:textSize="@dimen/txt_title_16sp"/>
     </RelativeLayout>
@@ -100,7 +98,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="18"
             android:textColor="@color/subtitle_color66"
             android:textSize="@dimen/txt_title_16sp"/>
     </RelativeLayout>
@@ -128,7 +125,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="上海市第一医院"
             android:textColor="@color/subtitle_color66"
             android:textSize="@dimen/txt_title_16sp"/>
     </RelativeLayout>
@@ -160,7 +156,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="2016-08-22"
             android:textColor="@color/subtitle_color66"
             android:textSize="@dimen/txt_title_16sp"/>
     </RelativeLayout>
@@ -192,7 +187,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="1357902468"
             android:textColor="@color/subtitle_color66"
             android:textSize="@dimen/txt_title_16sp"/>
     </RelativeLayout>

@@ -25,6 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="8dp"
+            android:lineSpacingExtra="2dp"
             android:text="饥饿所致可能性大，请适当多饮水，择日复查尿常规结合临床（是否有代谢紊乱、糖尿病等），必要时进一步检查"
             android:textColor="@color/subtitle_color66"
             android:textSize="@dimen/txt_subtitle_14sp"/>

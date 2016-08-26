@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,16 +19,19 @@ import haozuo.com.healthdoctor.view.custom.CustomerReportActivity;
 public class MineFragment extends Fragment {
     private View rootView;
 
-    //    @Bind(R.id.layout_basedata)
-//    LinearLayout layout_basedata;
+    @OnClick(R.id.layout_doctor)
+    void clickLayoutoctor() {
+        getActivity().startActivity(new Intent(getActivity(), DoctorInfoActivity.class));
+    }
+
     @OnClick(R.id.layout_basedata)
     void clickLayoutBaseData() {
-        getActivity().startActivity(new Intent(getActivity(), BaseinfoActivity.class));
+        getActivity().startActivity(new Intent(getActivity(), CustomerReportActivity.class));
     }
 
     @OnClick(R.id.layout_set)
     void clickLayoutSet() {
-        getActivity().startActivity(new Intent(getActivity(), CustomerReportActivity.class));
+        getActivity().startActivity(new Intent(getActivity(), SettingsActivity.class));
     }
 
     public MineFragment() {
@@ -43,13 +45,11 @@ public class MineFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        Log.e("MineFragment", "onPause");
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        Log.e("MineFragment", "onResume");
     }
 
     @Nullable

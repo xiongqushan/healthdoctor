@@ -9,6 +9,8 @@ import android.widget.FrameLayout;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.umeng.analytics.MobclickAgent;
+
 import javax.inject.Inject;
 
 import butterknife.Bind;
@@ -66,6 +68,11 @@ public class HomeActivity extends BaseActivity {
                 .build()
                 .inject(this);
 
+        initView();
+    }
+
+
+    private void initView() {
         fragmentManager = getSupportFragmentManager();
         ConsultFragment consultFragment = (ConsultFragment) fragmentManager.findFragmentById(R.id.content_consult);
         if (consultFragment == null) {
@@ -103,7 +110,6 @@ public class HomeActivity extends BaseActivity {
                 }
             }
         });
-
     }
 
     // TODO 0811 添加双击退出  by zy
@@ -113,6 +119,7 @@ public class HomeActivity extends BaseActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if (isExit) {
+                MobclickAgent.onKillProcess(this);
                 System.exit(0);
                 return true;
             } else {

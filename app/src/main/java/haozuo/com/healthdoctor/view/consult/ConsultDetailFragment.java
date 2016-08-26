@@ -47,17 +47,19 @@ import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.ConsultReplyBean;
 import haozuo.com.healthdoctor.bean.CustomDetailBean;
 import haozuo.com.healthdoctor.bean.DoctorBean;
+import haozuo.com.healthdoctor.bean.ReportParamsBean;
 import haozuo.com.healthdoctor.contract.ConsultDetailContract;
-import haozuo.com.healthdoctor.contract.IBasePresenter;
+import haozuo.com.healthdoctor.presenter.IBasePresenter;
 import haozuo.com.healthdoctor.manager.UserManager;
 import haozuo.com.healthdoctor.util.DateUtil;
 import haozuo.com.healthdoctor.util.JsonParser;
 import haozuo.com.healthdoctor.view.base.AbstractView;
 import haozuo.com.healthdoctor.view.custom.CustomDetailActivity;
+import haozuo.com.healthdoctor.view.custom.CustomerReportActivity;
+import haozuo.com.healthdoctor.view.custom.PhotoPreviewActivity;
 import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToLoadMoreLayout;
 import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullableListView;
 import haozuo.com.healthdoctor.view.threePart.common.FlowLayout;
-import haozuo.com.healthdoctor.view.threePart.common.PinchToZoomDraweeView;
 
 public class ConsultDetailFragment extends AbstractView implements ConsultDetailContract.IConsultDetailView {
     Context mContext;
@@ -123,8 +125,6 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
         startActivityForResult(new Intent(mContext, UsefulMesasgeActivity.class).putExtra(UsefulMesasgeActivity.LAST_CONSULT_CONTENT, mConsultReplmyItem), RESULT_EXPRESSION);
     }
 
-    ;
-
     public ConsultDetailFragment() {
     }
 
@@ -168,7 +168,7 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
         mConsultListAdapter = new ConsultListAdapter(mContext);
         consult_detail_List.setAdapter(mConsultListAdapter);
         consult_detail_pull_to_refresh_layout.setOnRefreshListener(new PullListener());
-        mConsultDetailPresenter.refreshConsultList();
+        mConsultDetailPresenter.loadmoreConsultList();
         mConsultDetailPresenter.getUserDetail(mCustomerId);
 
         mIat = SpeechRecognizer.createRecognizer(mContext, mInitListener);
@@ -198,11 +198,11 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
         return rootView;
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        mConsultDetailPresenter.cancelRequest();
-    }
+//    @Override
+//    public void onStop() {
+//        super.onStop();
+//        mConsultDetailPresenter.cancelRequest();
+//    }
 
     @Override
     public void onDestroy() {
@@ -238,19 +238,15 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
     }
 
     @Override
-    public void refreshFinish(int status) {
-        consult_detail_pull_to_refresh_layout.refreshFinish(status);
-    }
-
-    @Override
-    public void loadmoreFinish(int status) {
-//        consult_detail_pull_to_refresh_layout.loadmoreFinish(status);
+    public void refreshFinish(int status, boolean isInit) {
+        if (!isInit) {
+            consult_detail_pull_to_refresh_layout.refreshFinish(status);
+        }
     }
 
     @Override
     public void setCustmoerInfo(CustomDetailBean customDetailItem) {
         mCustomDetailBean = customDetailItem;
-//        ConsultDetailActivity.setCustomerTitle(mCustomDetailBean);
         TextView textView = (TextView) getActivity().findViewById(R.id.txt_TitleBar_title);
         textView.setText(mCustomDetailBean.Cname);
         getActivity().findViewById(R.id.btn_search).setVisibility(View.INVISIBLE);
@@ -260,7 +256,6 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
                 getActivity().finish();
             }
         });
-//        getActivity().setTitle(mCustomDetailBean.Cname+"\b"+mCustomDetailBean.Sex+"\b"+mCustomDetailBean.Age);
 
         getActivity().findViewById(R.id.txt_TitleBar_title).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -345,7 +340,7 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
                 } else {
                     holder = (ViewHolderLeft) convertView.getTag();
                 }
-                ConsultReplyBean consultReplyEntity = dataSource.get(position);
+                final ConsultReplyBean consultReplyEntity = dataSource.get(position);
                 if (consultReplyEntity.PhotoUrl == null) {
                     mURI = "res://haozuo.com.healthdoctor/" + R.drawable.default_photourl;
                 } else {
@@ -367,11 +362,23 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
                         holder.flowLayout_consult_photo.setVisibility(View.VISIBLE);
                         String[] photoList = consultReplyEntity.AppendInfo.split(",");
                         holder.flowLayout_consult_photo.removeAllViews();
-                        for (String s : photoList) {
+//                        for (String s : photoList) {
+                        for (int i=0;i<photoList.length;i++){
                             SimpleDraweeView consult_photo = (SimpleDraweeView) LayoutInflater.from(mContext).inflate(R.layout.lvitemleft_consult_detail_photo, holder.flowLayout_consult_photo, false);
-                            Uri photoUri = Uri.parse(s+"!small200");
+                            Uri photoUri = Uri.parse(photoList[i]+"!small200");
+//                            Uri photoUri = Uri.parse(s+"!small200");
                             consult_photo.setImageURI(photoUri);
+                            final int finalI = i;
+                            consult_photo.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    startActivity(new Intent(mContext,PhotoPreviewActivity.class)
+                                            .putExtra(PhotoPreviewActivity.EXTRA_URL_LIST,(String) consultReplyEntity.AppendInfo)
+                                            .putExtra(PhotoPreviewActivity.EXTRA_PAGER_INDEX,(int) finalI));
+                                }
+                            });
                             holder.flowLayout_consult_photo.addView(consult_photo);
+
                         }
                         break;
                     case 3://体检异常项
@@ -381,7 +388,14 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
                         holder.txt_consult_item.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                showTip("异常项转跳逻辑");
+                                ReportParamsBean bean = new ReportParamsBean();
+                                bean.customerId = mCustomerId;
+                                bean.WorkNo = consultReplyEntity.AppendInfo.split(";")[0];
+                                bean.CheckUnitCode = consultReplyEntity.AppendInfo.split(";")[1];
+
+                                Intent intent = new Intent(getActivity(), CustomerReportActivity.class);
+//                                intent.putExtra(CustomerReportActivity.REPORTPARAMSBEAN, bean);
+                                startActivity(intent);
                             }
                         });
                         break;
@@ -440,7 +454,6 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
             TextView txt_consult_commiton;
 
             @Bind(R.id.drawee_consult_item_photo)
-//            PinchToZoomDraweeView drawee_consult_item_photo;
             SimpleDraweeView drawee_consult_item_photo;
 
             @Bind(R.id.txt_consult_item)

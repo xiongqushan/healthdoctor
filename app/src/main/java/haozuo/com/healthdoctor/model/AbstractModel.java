@@ -1,35 +1,15 @@
 package haozuo.com.healthdoctor.model;
 
 import android.support.annotation.NonNull;
-import android.util.Base64;
 
-import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
-import java.util.Map;
 
 import haozuo.com.healthdoctor.bean.BaseBean;
-import haozuo.com.healthdoctor.bean.DoctorBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
-import haozuo.com.healthdoctor.contract.IBaseModel;
-import haozuo.com.healthdoctor.framework.SysConfig;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
-import haozuo.com.healthdoctor.listener.OnSimpleRequestListener;
-import haozuo.com.healthdoctor.util.StringUtil;
-import okio.Buffer;
-import retrofit.GsonConverterFactory;
-import retrofit.Retrofit;
-import retrofit.RxJavaCallAdapterFactory;
 import rx.Subscriber;
 
 /**
