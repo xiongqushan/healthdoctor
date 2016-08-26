@@ -8,6 +8,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.lang.ref.SoftReference;
 import java.util.List;
 
 import haozuo.com.healthdoctor.bean.DoctorBean;
@@ -24,10 +25,11 @@ public class UserManager {
     private static final String USER_INFO_KEY = "User_Info_Key";
     private static final String DEFAULT_EXPRESSION_KEY = "Default_Expression_Key";
     private static UserManager _instance;
-    private static SharedPreferences sharedPreferences;
-    private static DoctorBean _currentEntity;
-    private static List<DoctorGroupBean> _currentGroupEntity;
-    private static List<UsefulExpressionBean> _usefulExpressionEntity;
+
+    private SharedPreferences sharedPreferences;
+    private SoftReference<DoctorBean> _currentEntity;
+    private List<DoctorGroupBean> _currentGroupEntity;
+    private List<UsefulExpressionBean> _usefulExpressionEntity;
 
     public static Activity testActivity;
     private UserManager() {
@@ -45,7 +47,7 @@ public class UserManager {
 
     public void setDoctorInfo(DoctorBean doctorEntity){
         try {
-            _currentEntity=doctorEntity;
+            _currentEntity=new SoftReference<DoctorBean>(doctorEntity);
             // 保存对象
             SharedPreferences.Editor sharedata =sharedPreferences.edit();
             ByteArrayOutputStream bos=new ByteArrayOutputStream();
@@ -54,42 +56,6 @@ public class UserManager {
             os.writeObject(doctorEntity);
             String bytesToHexString = StringUtil.bytesToHexString(bos.toByteArray());
             sharedata.putString(USER_INFO_KEY, bytesToHexString);
-            sharedata.apply();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void setGroupInfo(List<DoctorGroupBean> GroupEntity){
-        try {
-            _currentGroupEntity=GroupEntity;
-            // 保存对象
-            SharedPreferences.Editor sharedata =sharedPreferences.edit();
-            ByteArrayOutputStream bos=new ByteArrayOutputStream();
-            ObjectOutputStream os=new ObjectOutputStream(bos);
-            //将对象序列化写入byte缓存
-            os.writeObject(GroupEntity);
-            String bytesToHexString = StringUtil.bytesToHexString(bos.toByteArray());
-            sharedata.putString(USER_INFO_KEY, bytesToHexString);
-            sharedata.apply();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void setDefaultExpression(List<UsefulExpressionBean> usefulExpressionEntity){
-        try {
-            _usefulExpressionEntity=usefulExpressionEntity;
-            // 保存对象
-            SharedPreferences.Editor sharedata =sharedPreferences.edit();
-            ByteArrayOutputStream bos=new ByteArrayOutputStream();
-            ObjectOutputStream os=new ObjectOutputStream(bos);
-            //将对象序列化写入byte缓存
-            os.writeObject(usefulExpressionEntity);
-            String bytesToHexString = StringUtil.bytesToHexString(bos.toByteArray());
-            sharedata.putString(DEFAULT_EXPRESSION_KEY, bytesToHexString);
             sharedata.apply();
         }
         catch (IOException e) {
@@ -109,14 +75,43 @@ public class UserManager {
                         //返回反序列化得到的对象
                         Object localObject = is.readObject();
                         DoctorBean localInfo=(DoctorBean)localObject;
-                        _currentEntity=localInfo;
+                        _currentEntity=new SoftReference<DoctorBean>(localInfo);
                     }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        return _currentEntity;
+        if(_currentEntity!=null) {
+            return _currentEntity.get();
+        }
+        return null;
+    }
+
+    public boolean exist(){
+        return getDoctorInfo()!=null;
+    }
+
+    public void clear(){
+        sharedPreferences.edit().remove(USER_INFO_KEY).commit();
+    }
+
+    public void setGroupInfo(List<DoctorGroupBean> GroupEntity){
+        try {
+            _currentGroupEntity=GroupEntity;
+            // 保存对象
+            SharedPreferences.Editor sharedata =sharedPreferences.edit();
+            ByteArrayOutputStream bos=new ByteArrayOutputStream();
+            ObjectOutputStream os=new ObjectOutputStream(bos);
+            //将对象序列化写入byte缓存
+            os.writeObject(GroupEntity);
+            String bytesToHexString = StringUtil.bytesToHexString(bos.toByteArray());
+            sharedata.putString(USER_INFO_KEY, bytesToHexString);
+            sharedata.apply();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public List<DoctorGroupBean> getGroupInfo(){
@@ -141,6 +136,24 @@ public class UserManager {
         return  _currentGroupEntity;
     }
 
+    public void setDefaultExpression(List<UsefulExpressionBean> usefulExpressionEntity){
+        try {
+            _usefulExpressionEntity=usefulExpressionEntity;
+            // 保存对象
+            SharedPreferences.Editor sharedata =sharedPreferences.edit();
+            ByteArrayOutputStream bos=new ByteArrayOutputStream();
+            ObjectOutputStream os=new ObjectOutputStream(bos);
+            //将对象序列化写入byte缓存
+            os.writeObject(usefulExpressionEntity);
+            String bytesToHexString = StringUtil.bytesToHexString(bos.toByteArray());
+            sharedata.putString(DEFAULT_EXPRESSION_KEY, bytesToHexString);
+            sharedata.apply();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public List<UsefulExpressionBean> getDefaultExpression(){
         if(_usefulExpressionEntity==null){
             try {
@@ -161,11 +174,6 @@ public class UserManager {
             }
         }
         return  _usefulExpressionEntity;
-    }
-
-
-    public boolean exist(){
-        return getDoctorInfo()!=null;
     }
 
 }
