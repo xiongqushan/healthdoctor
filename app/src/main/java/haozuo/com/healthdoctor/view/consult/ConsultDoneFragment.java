@@ -105,6 +105,11 @@ public class ConsultDoneFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
+
     private List<ConsultDoneItemBean> dataSource;
 
     class ListAdapter extends BaseAdapter {

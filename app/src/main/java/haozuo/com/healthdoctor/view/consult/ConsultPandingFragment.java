@@ -112,6 +112,10 @@ public class ConsultPandingFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
 
     private List<ConsultItemBean> dataSource;
 

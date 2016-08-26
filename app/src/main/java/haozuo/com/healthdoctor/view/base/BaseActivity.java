@@ -35,6 +35,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
+
+//    @Override
+//    public void startActivity(Intent intent) {
+//        super.startActivity(intent);
+//        overridePendingTransition(R.anim.to_right_in, R.anim.to_right_out);
+
     //必须调用 MobclickAgent.onResume() 和MobclickAgent.onPause()方法，才能够保证获取正确的新增用户、活跃用户、启动次数、使用时长等基本数据。
     @Override
     public void onResume() {
@@ -54,7 +60,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     public void finish() {
         super.finish();
-        overridePendingTransition(R.anim.to_right_in, R.anim.to_right_out);
+//        overridePendingTransition(R.anim.to_right_in, R.anim.to_right_out);
     }
 
     @Override

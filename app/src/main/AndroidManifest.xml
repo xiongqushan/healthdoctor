@@ -74,6 +74,7 @@
             android:theme="@style/AppSplash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
@@ -116,10 +117,10 @@
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".view.consult.ConsultDetailActivity"
+            android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustResize|stateHidden"/>
-        <!--android:windowSoftInputMode="adjustResize|stateHidden"-->
-        <!--android:launchMode="singleTask"/>-->
+            android:windowSoftInputMode="stateHidden|adjustResize"/>
+
         <activity
             android:name=".view.consult.UsefulMesasgeActivity"
             android:theme="@style/AppTheme.NoActionBar"
@@ -131,6 +132,13 @@
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".view.mine.DoctorInfoActivity"/>
         <activity android:name=".view.mine.SettingsActivity"/>
+
+        <!--android:theme="@style/AppTheme.NoActionBar" />-->
+
+        <activity
+            android:name=".view.custom.PhotoPreviewActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <!--友盟统计 -->
         <meta-data
             android:name="UMENG_APPKEY"

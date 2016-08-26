@@ -1,5 +1,8 @@
 package haozuo.com.healthdoctor.contract;
 
+import haozuo.com.healthdoctor.presenter.IBasePresenter;
+import haozuo.com.healthdoctor.view.IBaseView;
+
 /**
  * Created by xiongwei1 on 2016/7/4.
  */

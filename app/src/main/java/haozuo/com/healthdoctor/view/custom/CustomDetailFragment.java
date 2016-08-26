@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +28,7 @@ import haozuo.com.healthdoctor.bean.CustomDetailBean;
 import haozuo.com.healthdoctor.bean.ReportParamsBean;
 import haozuo.com.healthdoctor.bean.RequestPhotoReportListBean;
 import haozuo.com.healthdoctor.contract.CustomDetailContract;
-import haozuo.com.healthdoctor.contract.IBasePresenter;
+import haozuo.com.healthdoctor.presenter.IBasePresenter;
 import haozuo.com.healthdoctor.util.UIHelper;
 import haozuo.com.healthdoctor.view.base.AbstractView;
 
@@ -288,15 +289,16 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
             tv_Count.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    startActivity(new Intent(mContext,PhotoPreviewActivity.class)
+                            .putExtra(PhotoPreviewActivity.EXTRA_URL_LIST,RequestPhotoReportEntity.Content));
+//                    startActivity(new Intent(mContext,PhotoPreviewActivity.class)
+// .putExtra(PhotoPreviewActivity.EXTRA_URL_LIST,(Serializable) RequestPhotoReportEntity.ImageUrlList));
                 }
             });
 
             return convertView;
         }
     }
-
-
 }
 
 

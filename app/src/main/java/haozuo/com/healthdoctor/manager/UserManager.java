@@ -24,12 +24,13 @@ public class UserManager {
     private static final String USER_INFO_KEY = "User_Info_Key";
     private static final String DEFAULT_EXPRESSION_KEY = "Default_Expression_Key";
     private static UserManager _instance;
-    private static SharedPreferences sharedPreferences;
-    private static DoctorBean _currentEntity;
-    private static List<DoctorGroupBean> _currentGroupEntity;
-    private static List<UsefulExpressionBean> _usefulExpressionEntity;
 
-    public static Activity testActivity;
+    private SharedPreferences sharedPreferences;
+    //    private SoftReference<DoctorBean> _currentEntity;
+    private DoctorBean _currentEntity;
+    private List<DoctorGroupBean> _currentGroupEntity;
+    private List<UsefulExpressionBean> _usefulExpressionEntity;
+
 
     private UserManager() {
         if (null == sharedPreferences) {
@@ -46,6 +47,7 @@ public class UserManager {
 
     public void setDoctorInfo(DoctorBean doctorEntity) {
         try {
+//            _currentEntity = new SoftReference<DoctorBean>(doctorEntity);
             _currentEntity = doctorEntity;
             // 保存对象
             SharedPreferences.Editor sharedata = sharedPreferences.edit();
@@ -60,6 +62,7 @@ public class UserManager {
             e.printStackTrace();
         }
     }
+
 
     public void setGroupInfo(List<DoctorGroupBean> GroupEntity) {
         try {
@@ -96,26 +99,38 @@ public class UserManager {
     }
 
     public DoctorBean getDoctorInfo() {
-        if (_currentEntity == null) {
-            try {
-                if (sharedPreferences.contains(USER_INFO_KEY)) {
-                    String localData = sharedPreferences.getString(USER_INFO_KEY, "");
-                    if (!StringUtil.isEmpty(localData)) {
-                        byte[] stringToBytes = StringUtil.StringToBytes(localData);
-                        ByteArrayInputStream bis = new ByteArrayInputStream(stringToBytes);
-                        ObjectInputStream is = new ObjectInputStream(bis);
-                        //返回反序列化得到的对象
-                        Object localObject = is.readObject();
-                        DoctorBean localInfo = (DoctorBean) localObject;
-                        _currentEntity = localInfo;
-                    }
+        try {
+            if (sharedPreferences.contains(USER_INFO_KEY)) {
+                String localData = sharedPreferences.getString(USER_INFO_KEY, "");
+                if (!StringUtil.isEmpty(localData)) {
+                    byte[] stringToBytes = StringUtil.StringToBytes(localData);
+                    ByteArrayInputStream bis = new ByteArrayInputStream(stringToBytes);
+                    ObjectInputStream is = new ObjectInputStream(bis);
+                    //返回反序列化得到的对象
+                    Object localObject = is.readObject();
+                    DoctorBean localInfo = (DoctorBean) localObject;
+//                    _currentEntity = new SoftReference<DoctorBean>(localInfo);
+                    _currentEntity = localInfo;
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
         return _currentEntity;
+//        if (_currentEntity != null)
+//            return _currentEntity.get();
+//        return null;
     }
+
+    public boolean exist() {
+        return getDoctorInfo() != null;
+    }
+
+    public void clear() {
+        sharedPreferences.edit().remove(USER_INFO_KEY).commit();
+    }
+
 
     public List<DoctorGroupBean> getGroupInfo() {
         if (_currentGroupEntity == null) {
@@ -139,6 +154,7 @@ public class UserManager {
         return _currentGroupEntity;
     }
 
+
     public List<UsefulExpressionBean> getDefaultExpression() {
         if (_usefulExpressionEntity == null) {
             try {
@@ -161,9 +177,5 @@ public class UserManager {
         return _usefulExpressionEntity;
     }
 
-
-    public boolean exist() {
-        return getDoctorInfo() != null;
-    }
 
 }

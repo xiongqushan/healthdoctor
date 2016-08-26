@@ -2,8 +2,8 @@ package haozuo.com.healthdoctor.presenter;
 
 import java.util.List;
 
-import haozuo.com.healthdoctor.contract.IBaseModel;
-import haozuo.com.healthdoctor.contract.IBaseView;
+import haozuo.com.healthdoctor.model.IBaseModel;
+import haozuo.com.healthdoctor.view.IBaseView;
 import haozuo.com.healthdoctor.listener.OnSimpleRequestListener;
 
 /**

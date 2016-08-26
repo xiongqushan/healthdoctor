@@ -99,6 +99,11 @@ public class FeedbackFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
+
     private List<FeedbackItemBean> dataSource;
 
     class ListAdapter extends BaseAdapter {

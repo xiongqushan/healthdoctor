@@ -12,7 +12,6 @@ import haozuo.com.healthdoctor.view.custom.CustomDetailFragment;
  */
 @Module
 public class CustomDetailModule {
-    CustomDetailContract.ICustomDetailView mICustomDetailView;
     int mCustomId;
     String mAccountId;
 

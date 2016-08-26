@@ -19,4 +19,5 @@ public class ReportParamsBean implements Serializable{
     public String CustomerName;
     public String WorkNo;
     public String CheckDate;
+
 }
