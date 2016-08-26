@@ -53,6 +53,8 @@ public class SettingsFragment extends BaseFragment {
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_settings, container, false);
             ButterKnife.bind(this, rootView);
+//                    JPushInterface.stopPush(getApplicationContext());
+//        JPushInterface.resumePush(getApplicationContext());
         }
         return rootView;
     }

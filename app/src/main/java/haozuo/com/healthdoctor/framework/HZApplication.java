@@ -7,6 +7,7 @@ import com.iflytek.cloud.SpeechUtility;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
+import cn.jpush.android.api.JPushInterface;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.ioc.AppComponent;
 import haozuo.com.healthdoctor.ioc.AppModule;
@@ -41,6 +42,10 @@ public class HZApplication extends Application {
         // 以下语句用于设置日志开关（默认开启），设置成false时关闭语音云SDK日志打印
         // Setting.setShowLog(false);
         Fresco.initialize(this);
+
+        JPushInterface.setDebugMode(SysConfig.DebugMode);    // 设置开启日志,发布时请关闭日志
+        JPushInterface.init(this);
+
     }
 
     public RefWatcher getRefWatcher() {
