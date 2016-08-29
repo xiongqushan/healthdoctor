@@ -138,7 +138,7 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
         return rootView;
     }
 
-    public static ConsultDetailFragment newInstance(int CustomerId, String AccountId){
+    public static ConsultDetailFragment newInstance(int CustomerId, String AccountId) {
         ConsultDetailFragment fragment = new ConsultDetailFragment();
         mDoctorEntity = UserManager.getInstance().getDoctorInfo();
         mCustomerId = CustomerId;
@@ -260,9 +260,9 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
         getActivity().findViewById(R.id.txt_TitleBar_title).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(mContext,CustomDetailActivity.class)
-                        .putExtra(CustomDetailActivity.EXTRA_ACCOUNT_ID,mCustomDetailBean.Account_Id)
-                        .putExtra(CustomDetailActivity.EXTRA_CUSTOMER_ID,mCustomDetailBean.Id));
+                startActivity(new Intent(mContext, CustomDetailActivity.class)
+                        .putExtra(CustomDetailActivity.EXTRA_ACCOUNT_ID, mCustomDetailBean.Account_Id)
+                        .putExtra(CustomDetailActivity.EXTRA_CUSTOMER_ID, mCustomDetailBean.Id));
             }
         });
     }
@@ -363,18 +363,18 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
                         String[] photoList = consultReplyEntity.AppendInfo.split(",");
                         holder.flowLayout_consult_photo.removeAllViews();
 //                        for (String s : photoList) {
-                        for (int i=0;i<photoList.length;i++){
+                        for (int i = 0; i < photoList.length; i++) {
                             SimpleDraweeView consult_photo = (SimpleDraweeView) LayoutInflater.from(mContext).inflate(R.layout.lvitemleft_consult_detail_photo, holder.flowLayout_consult_photo, false);
-                            Uri photoUri = Uri.parse(photoList[i]+"!small200");
+                            Uri photoUri = Uri.parse(photoList[i] + "!small200");
 //                            Uri photoUri = Uri.parse(s+"!small200");
                             consult_photo.setImageURI(photoUri);
                             final int finalI = i;
                             consult_photo.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    startActivity(new Intent(mContext,PhotoPreviewActivity.class)
-                                            .putExtra(PhotoPreviewActivity.EXTRA_URL_LIST,(String) consultReplyEntity.AppendInfo)
-                                            .putExtra(PhotoPreviewActivity.EXTRA_PAGER_INDEX,(int) finalI));
+                                    startActivity(new Intent(mContext, PhotoPreviewActivity.class)
+                                            .putExtra(PhotoPreviewActivity.EXTRA_URL_LIST, (String) consultReplyEntity.AppendInfo)
+                                            .putExtra(PhotoPreviewActivity.EXTRA_PAGER_INDEX, (int) finalI));
                                 }
                             });
                             holder.flowLayout_consult_photo.addView(consult_photo);
@@ -392,9 +392,8 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
                                 bean.customerId = mCustomerId;
                                 bean.WorkNo = consultReplyEntity.AppendInfo.split(";")[0];
                                 bean.CheckUnitCode = consultReplyEntity.AppendInfo.split(";")[1];
-
                                 Intent intent = new Intent(getActivity(), CustomerReportActivity.class);
-//                                intent.putExtra(CustomerReportActivity.REPORTPARAMSBEAN, bean);
+                                intent.putExtra(CustomerReportActivity.REPORTPARAMSBEAN, bean);
                                 startActivity(intent);
                             }
                         });

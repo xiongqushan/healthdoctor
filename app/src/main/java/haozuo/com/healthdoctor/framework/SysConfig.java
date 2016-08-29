@@ -10,7 +10,7 @@ import haozuo.com.healthdoctor.bean.ExpressionConst;
  * Created by xiongwei on 16/5/19.
  */
 public class SysConfig {
-    public static final boolean DebugMode = true;
+    public static final boolean DebugMode = false;
     public static final String CURRENT_BASE_VERSION = "V1";
     public static final String CURRENT_VERSION_TEXT = "V1.0";
     public static final int CURRENT_VERSION_VALUE = 10;

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -94,18 +95,29 @@ public class ReportBadFragment extends Fragment {
             TextView tvSubtitle = UIHelper.getAdapterView(view, R.id.tvSubtitle);
             TextView tvValue = UIHelper.getAdapterView(view, R.id.tvResultValue);
             TextView tvUnit = UIHelper.getAdapterView(view, R.id.tvUnit);
+            TextView lineCenter = UIHelper.getAdapterView(view, R.id.lineCenter);
+            ImageView imgFooter = UIHelper.getAdapterView(view, R.id.imgFooter);
+            if (position + 1 == dataList.size()) {
+                imgFooter.setVisibility(View.VISIBLE);
+            } else {
+                imgFooter.setVisibility(View.GONE);
+            }
             tvTitle.setText(dataList.get(position).CheckIndexName);
-            tvValue.setTextColor(Color.parseColor("#FFFF0000"));
+//            tvValue.setTextColor(Color.parseColor("#FFFF0000"));
             boolean unitEmpty = StringUtil.isTrimEmpty(dataList.get(position).Unit);
             if (unitEmpty) {
+                tvSubtitle.setTextColor(Color.parseColor("#FF666666"));
                 tvValue.setVisibility(View.GONE);
                 tvUnit.setVisibility(View.GONE);
+                lineCenter.setVisibility(View.GONE);
                 String resultValue = dataList.get(position).ResultValue;
                 if (resultValue.equals("")) resultValue = "正常";
                 tvSubtitle.setText(resultValue);
             } else {
+                tvSubtitle.setTextColor(Color.parseColor("#FFB2B2B2"));
                 tvValue.setVisibility(View.VISIBLE);
                 tvUnit.setVisibility(View.VISIBLE);
+                lineCenter.setVisibility(View.VISIBLE);
                 boolean subEmpty = StringUtil.isTrimEmpty(dataList.get(position).TextRef);
                 if (subEmpty) {
                     tvSubtitle.setText("");

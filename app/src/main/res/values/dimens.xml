@@ -66,6 +66,7 @@
 
 
     <dimen name="report_padding">12dp</dimen>
+    <dimen name="report_line">15dp</dimen>
     <dimen name="report_marginleft_25dp">25dp</dimen>
     <dimen name="report_marginleft_21dp">21.4dp</dimen>
     <dimen name="report_margin_16dp">16dp</dimen>
