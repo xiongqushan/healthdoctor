@@ -1,22 +1,27 @@
 package haozuo.com.healthdoctor.view.welcome;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.WindowManager;
 
 import com.umeng.analytics.MobclickAgent;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.framework.SysConfig;
-import haozuo.com.healthdoctor.manager.GroupInfoManager;
 import haozuo.com.healthdoctor.manager.UserManager;
 import haozuo.com.healthdoctor.view.base.BaseActivity;
-import haozuo.com.healthdoctor.view.custom.GroupCustomListActivity;
 import haozuo.com.healthdoctor.view.home.HomeActivity;
 import haozuo.com.healthdoctor.view.login.LoginActivity;
 
@@ -31,21 +36,23 @@ public class WelcomeActivity extends BaseActivity {
         setContentView(R.layout.activity_welcome);
         TimerTask task = new TimerTask() {
             public void run() {
-
-                if (UserManager.getInstance().exist()){
+                boolean exist = UserManager.getInstance().exist();
+                Log.e("WelcomeActivity", exist + "");
+                if (exist) {
                     startActivity(new Intent(getBaseContext(), HomeActivity.class));
-                    finish();
-                }else {
+                } else {
                     startActivity(new Intent(getBaseContext(), LoginActivity.class));
-                    finish();
                 }
-
-
+                finish();
             }
         };
         Timer timer = new Timer();
         timer.schedule(task, 2000);
         initUmeng();
+        if (SysConfig.DebugMode) {
+            String deviceInfo = getDeviceInfo(this);
+            Log.e("DeviceInfo", deviceInfo);
+        }
     }
 
     private void initUmeng() {
@@ -63,7 +70,63 @@ public class WelcomeActivity extends BaseActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
+            return false;
         }
         return super.onKeyDown(keyCode, event);
     }
+
+    public static String getDeviceInfo(Context context) {
+        try {
+            org.json.JSONObject json = new org.json.JSONObject();
+            android.telephony.TelephonyManager tm = (android.telephony.TelephonyManager) context
+                    .getSystemService(Context.TELEPHONY_SERVICE);
+            String device_id = null;
+            device_id = tm.getDeviceId();
+            String mac = null;
+            FileReader fstream = null;
+            try {
+                fstream = new FileReader("/sys/class/net/wlan0/address");
+            } catch (FileNotFoundException e) {
+                fstream = new FileReader("/sys/class/net/eth0/address");
+            }
+            BufferedReader in = null;
+            if (fstream != null) {
+                try {
+                    in = new BufferedReader(fstream, 1024);
+                    mac = in.readLine();
+                } catch (IOException e) {
+                } finally {
+                    if (fstream != null) {
+                        try {
+                            fstream.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    if (in != null) {
+                        try {
+                            in.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+            json.put("mac", mac);
+            if (TextUtils.isEmpty(device_id)) {
+                device_id = mac;
+            }
+            if (TextUtils.isEmpty(device_id)) {
+                device_id = android.provider.Settings.Secure.getString(context.getContentResolver(),
+                        android.provider.Settings.Secure.ANDROID_ID);
+            }
+            json.put("device_id", device_id);
+            return json.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 }

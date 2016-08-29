@@ -14,7 +14,7 @@
         app:tabIndicatorColor="@color/main_color_blue"
         app:tabSelectedTextColor="@color/main_color_blue"
         app:tabTextAppearance="@style/TabLayoutTextSize"
-        app:tabTextColor="@color/black"/>
+        app:tabTextColor="@color/subtitle_color66"/>
 
     <View
         android:layout_width="match_parent"

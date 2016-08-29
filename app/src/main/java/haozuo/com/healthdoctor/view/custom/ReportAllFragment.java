@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.ReportDetailBean;
+import haozuo.com.healthdoctor.util.StringUtil;
 import haozuo.com.healthdoctor.util.UIHelper;
 
 /**
@@ -30,6 +32,7 @@ public class ReportAllFragment extends Fragment {
     private View rootView;
     private List<ReportDetailBean.SummaryInfo> dataList = new ArrayList<ReportDetailBean.SummaryInfo>();
     private ListAdapter adapter;
+    private TextView tvFooter;
 
     public ReportAllFragment() {
         // Required empty public constructor
@@ -41,8 +44,14 @@ public class ReportAllFragment extends Fragment {
     }
 
     public void updateUI(ReportDetailBean bean) {
-        dataList = bean.GeneralSummarysForApp;
+        dataList.addAll(bean.GeneralSummarysForApp);
         adapter.notifyDataSetChanged();
+        String masterDotor = bean.MasterDotor;
+        if (StringUtil.isEmpty(masterDotor)) {
+            tvFooter.setText(bean.ReportInfoVM.CheckUnitName);
+        } else {
+            tvFooter.setText("主检医师:" + masterDotor);
+        }
     }
 
     @Override
@@ -58,6 +67,9 @@ public class ReportAllFragment extends Fragment {
 
     private void initView() {
         adapter = new ListAdapter();
+        View footer = getActivity().getLayoutInflater().from(getActivity()).inflate(R.layout.footer_reportall_layout, null);
+        tvFooter = (TextView) footer.findViewById(R.id.tvFooter);
+        mListView.addFooterView(footer);
         mListView.setAdapter(adapter);
     }
 
@@ -85,6 +97,18 @@ public class ReportAllFragment extends Fragment {
             }
             TextView tvTitle = UIHelper.getAdapterView(view, R.id.tvTitle);
             TextView tvSubtitle = UIHelper.getAdapterView(view, R.id.tvSubtitle);
+            ImageView imgCircle = UIHelper.getAdapterView(view, R.id.imgCircle);
+            ImageView imgDivider = UIHelper.getAdapterView(view, R.id.imgDivider);
+            if (posistion % 2 == 0) {
+                imgCircle.setBackgroundResource(R.drawable.circle_orange);
+            } else {
+                imgCircle.setBackgroundResource(R.drawable.circle_green);
+            }
+            if (posistion == 0) {
+                imgDivider.setVisibility(View.INVISIBLE);
+            } else {
+                imgDivider.setVisibility(View.VISIBLE);
+            }
             tvTitle.setText(dataList.get(posistion).SummaryName);
             tvSubtitle.setText(dataList.get(posistion).SummaryDescription);
             return view;

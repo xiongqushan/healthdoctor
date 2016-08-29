@@ -1,232 +1,138 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/gray_bg_ee"
-              android:orientation="vertical"
-              tools:context="haozuo.com.healthdoctor.view.custom.ReportBaseFragment">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            tools:context="haozuo.com.healthdoctor.view.custom.ReportBaseFragment">
 
-    <View
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/bg_gray_ee_high"
-        android:background="@color/gray_bg_ee"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dividerline"
-        android:background="@color/divider_d3"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:padding="@dimen/report_padding">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="姓名"
-            android:textColor="@color/subtitle_color66"
-            android:textSize="@dimen/txt_title_16sp"/>
-
-        <TextView
-            android:id="@+id/tvName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:textColor="@color/subtitle_color66"
-            android:textSize="@dimen/txt_title_16sp"/>
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dividerline"
-        android:layout_marginLeft="@dimen/report_padding"
-        android:layout_marginRight="@dimen/report_padding"
-        android:background="@color/divider_d3"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:padding="@dimen/report_padding">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="性别"
-            android:textColor="@color/subtitle_color66"
-            android:textSize="@dimen/txt_title_16sp"/>
-
-        <TextView
-            android:id="@+id/tvSex"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:textColor="@color/subtitle_color66"
-            android:textSize="@dimen/txt_title_16sp"/>
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dividerline"
-        android:layout_marginLeft="@dimen/report_padding"
-        android:layout_marginRight="@dimen/report_padding"
-        android:background="@color/divider_d3"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:padding="@dimen/report_padding">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="年龄"
-            android:textColor="@color/subtitle_color66"
-            android:textSize="@dimen/txt_title_16sp"/>
-
-        <TextView
-            android:id="@+id/tvAge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:textColor="@color/subtitle_color66"
-            android:textSize="@dimen/txt_title_16sp"/>
-    </RelativeLayout>
-
-    <include
-        layout="@layout/divider_12dp_gray_ee"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:padding="@dimen/report_padding">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="体检中心"
-            android:textColor="@color/subtitle_color66"
-            android:textSize="@dimen/txt_title_16sp"/>
-
-        <TextView
-            android:id="@+id/tvReportCenter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:textColor="@color/subtitle_color66"
-            android:textSize="@dimen/txt_title_16sp"/>
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dividerline"
-        android:layout_marginLeft="@dimen/report_padding"
-        android:layout_marginRight="@dimen/report_padding"
-        android:background="@color/divider_d3"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:padding="@dimen/report_padding">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="体检日期"
-            android:textColor="@color/subtitle_color66"
-            android:textSize="@dimen/txt_title_16sp"/>
-
-        <TextView
-            android:id="@+id/tvReportDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:textColor="@color/subtitle_color66"
-            android:textSize="@dimen/txt_title_16sp"/>
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dividerline"
-        android:layout_marginLeft="@dimen/report_padding"
-        android:layout_marginRight="@dimen/report_padding"
-        android:background="@color/divider_d3"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:padding="@dimen/report_padding">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="体检号"
-            android:textColor="@color/subtitle_color66"
-            android:textSize="@dimen/txt_title_16sp"/>
-
-        <TextView
-            android:id="@+id/tvReportCode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:textColor="@color/subtitle_color66"
-            android:textSize="@dimen/txt_title_16sp"/>
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dividerline"
-        android:layout_marginLeft="@dimen/report_padding"
-        android:layout_marginRight="@dimen/report_padding"
-        android:background="@color/divider_d3"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:padding="@dimen/report_padding">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="工作单位"
-            android:textColor="@color/subtitle_color66"
-            android:textSize="@dimen/txt_title_16sp"/>
-
-        <TextView
-            android:id="@+id/tvWorkUnit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:text="上海好卓数据服务有限公司"
-            android:textColor="@color/subtitle_color66"
-            android:textSize="@dimen/txt_title_16sp"/>
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dividerline"
-        android:background="@color/divider_d3"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
 
-</LinearLayout>
+        <View
+            android:layout_width="@dimen/report_circle_radius"
+            android:layout_height="@dimen/report_circle_radius"
+            android:layout_marginLeft="@dimen/report_marginleft_21dp"
+            android:layout_marginTop="@dimen/report_margin_16dp"
+            android:background="@drawable/circle_orange"/>
+
+        <View
+            android:layout_width="@dimen/dividerline"
+            android:layout_height="@dimen/report_margin_16dp"
+            android:layout_marginLeft="@dimen/report_marginleft_25dp"
+            android:background="@color/divider_d3"/>
+
+
+        <RelativeLayout style="@style/layout_report_base">
+
+            <TextView
+                style="@style/txt_report_titile"
+                android:text="姓名"/>
+
+            <TextView
+                android:id="@+id/tvName"
+                style="@style/txt_report_subtitile"/>
+        </RelativeLayout>
+
+        <View style="@style/divider_report_y"/>
+
+        <RelativeLayout style="@style/layout_report_base">
+
+            <TextView
+                style="@style/txt_report_titile"
+                android:text="性别"/>
+
+            <TextView
+                android:id="@+id/tvSex"
+                style="@style/txt_report_subtitile"/>
+        </RelativeLayout>
+
+        <View style="@style/divider_report_y"/>
+
+        <RelativeLayout style="@style/layout_report_base">
+
+
+            <TextView
+                style="@style/txt_report_titile"
+                android:text="年龄"/>
+
+            <TextView
+                android:id="@+id/tvAge"
+                style="@style/txt_report_subtitile"/>
+        </RelativeLayout>
+
+        <View style="@style/divider_report_y"/>
+
+        <RelativeLayout style="@style/layout_report_base">
+
+            <TextView
+                style="@style/txt_report_titile"
+                android:text="体检中心"/>
+
+            <TextView
+                android:id="@+id/tvReportCenter"
+                style="@style/txt_report_subtitile"/>
+        </RelativeLayout>
+
+        <View style="@style/divider_report_y"/>
+
+        <RelativeLayout style="@style/layout_report_base">
+
+
+            <TextView
+                style="@style/txt_report_titile"
+                android:text="体检日期"
+                />
+
+            <TextView
+                android:id="@+id/tvReportDate"
+                style="@style/txt_report_subtitile"/>
+        </RelativeLayout>
+
+        <View style="@style/divider_report_y"/>
+
+        <RelativeLayout style="@style/layout_report_base">
+
+
+            <TextView
+                style="@style/txt_report_titile"
+                android:text="体检号"/>
+
+            <TextView
+                android:id="@+id/tvReportCode"
+                style="@style/txt_report_subtitile"/>
+        </RelativeLayout>
+
+        <View style="@style/divider_report_y"/>
+
+        <RelativeLayout style="@style/layout_report_base">
+
+            <TextView
+                style="@style/txt_report_titile"
+                android:text="工作单位"/>
+
+            <TextView
+                android:id="@+id/tvWorkUnit"
+                style="@style/txt_report_subtitile"
+                android:text="上海好卓数据服务有限公司"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="@dimen/dividerline"
+            android:layout_height="@dimen/report_margin_16dp"
+            android:layout_marginLeft="@dimen/report_marginleft_25dp"
+            android:background="@color/divider_d3"/>
+
+        <View
+            android:layout_width="@dimen/report_circle_radius"
+            android:layout_height="@dimen/report_circle_radius"
+            android:layout_marginBottom="@dimen/report_margin_16dp"
+            android:layout_marginLeft="@dimen/report_marginleft_21dp"
+            android:background="@drawable/circle_green"/>
+    </LinearLayout>
+
+
+</ScrollView>
