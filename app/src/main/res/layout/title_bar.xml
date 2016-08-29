@@ -22,7 +22,6 @@
         android:layout_height="@dimen/actionbar_high"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="title"
         android:textColor="@color/white"
         android:textSize="@dimen/textsize_h1" />
 
