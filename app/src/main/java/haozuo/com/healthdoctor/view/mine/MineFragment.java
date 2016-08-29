@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import haozuo.com.healthdoctor.R;
+import haozuo.com.healthdoctor.bean.ReportParamsBean;
 import haozuo.com.healthdoctor.view.custom.CustomerReportActivity;
 
 /**
@@ -26,7 +27,13 @@ public class MineFragment extends Fragment {
 
     @OnClick(R.id.layout_basedata)
     void clickLayoutBaseData() {
-        getActivity().startActivity(new Intent(getActivity(), CustomerReportActivity.class));
+        Intent intent = new Intent(getActivity(), CustomerReportActivity.class);
+        ReportParamsBean bean = new ReportParamsBean();
+        bean.customerId = 138;
+        bean.CheckUnitCode = "bjbr002";
+        bean.WorkNo = "0000000081";
+        intent.putExtra(CustomerReportActivity.REPORTPARAMSBEAN, bean);
+        getActivity().startActivity(intent);
     }
 
     @OnClick(R.id.layout_set)

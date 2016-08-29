@@ -55,11 +55,44 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <style name="txt_report_titile">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/title_color28</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="txt_report_subtitile">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/subtitle_color66</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+    </style>
+
     <style name="layout_set">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/actionbar_high_44dp</item>
         <item name="android:background">@color/item_press_white_gray</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="layout_report_base">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/report_item_bg</item>
+        <item name="android:padding">@dimen/report_padding</item>
+        <item name="android:layout_marginRight">@dimen/report_padding</item>
+        <item name="android:layout_marginLeft">@dimen/report_padding</item>
+    </style>
+
+    <style name="divider_report_y">
+        <item name="android:layout_width">@dimen/dividerline</item>
+        <item name="android:layout_height">@dimen/report_padding</item>
+        <item name="android:layout_marginLeft">@dimen/report_marginleft_25dp</item>
+        <item name="android:background">@color/divider_d3</item>
     </style>
 </resources>

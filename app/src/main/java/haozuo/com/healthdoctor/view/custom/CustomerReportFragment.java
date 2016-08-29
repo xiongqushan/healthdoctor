@@ -124,10 +124,10 @@ public class CustomerReportFragment extends AbstractView implements CustomerRepo
             fragmentList.add(new ReportAllFragment());
             fragmentList.add(new ReportBadFragment());
             fragmentList.add(new ReportDetailFragment());
-            titleList.add("基本信息");
-            titleList.add("体检汇总");
-            titleList.add("体检异常");
-            titleList.add("体检详情");
+            titleList.add("概况");
+            titleList.add("汇总");
+            titleList.add("异常");
+            titleList.add("详情");
         }
 
         @Override

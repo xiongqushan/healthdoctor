@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/white"
+              android:orientation="vertical"
+              android:padding="@dimen/report_padding">
+
+
+    <TextView
+        android:id="@+id/tvFooter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="48dp"
+        android:layout_marginRight="48dp"
+        android:background="@drawable/report_item_bg"
+        android:gravity="center"
+        android:lineSpacingExtra="2dp"
+        android:padding="@dimen/report_padding"
+        android:text="主检医生:医师赵"
+        android:textColor="@color/title_color28"
+        android:textSize="@dimen/txt_title_16sp"/>
+
+
+</LinearLayout>
