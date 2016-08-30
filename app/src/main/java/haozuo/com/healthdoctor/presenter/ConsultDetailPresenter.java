@@ -64,30 +64,6 @@ public class ConsultDetailPresenter extends AbstractPresenter implements Consult
     @Override
     public void start() {}
 
-//    public void refreshConsultList() {
-//        mCommitOn = DateUtil.date2Str(new Date(),"yyyyMMddHHmmss");
-//        mIConsultDetailView.showDialog();
-//        mConsultModel.GetConsultReplyList(mCustomerId,mCommitOn, new OnHandlerResultListener<GlobalShell<List<ConsultReplyBean>>>() {
-//            @Override
-//            public void handlerResult(GlobalShell<List<ConsultReplyBean>> resultData) {
-//                if(resultData.LogicSuccess) {
-//                    mIConsultDetailView.hideDialog();
-//                    if ((List<ConsultReplyBean>) resultData.Data != null){
-//                        mConsultItemBeanList.clear();
-//                        mConsultItemBeanList.addAll(resultData.Data);
-//                        Collections.sort(mConsultItemBeanList,consultReplyBean);
-//                        mIConsultDetailView.refreshCustomAdapter(mConsultItemBeanList);
-//                        mCommitOn =mConsultItemBeanList.get(0).CommitOn.replaceAll("(?:T|:|-)","");
-//                        mIConsultDetailView.setListViewPosition(resultData.Data.size());
-//                    }
-//                }
-//                else{
-//                    mIConsultDetailView.hideDialog(resultData.Message);
-//                }
-//            }
-//        });
-//    }
-
     @Override
     public void loadmoreConsultList() {
         mIConsultDetailView.showDialog();

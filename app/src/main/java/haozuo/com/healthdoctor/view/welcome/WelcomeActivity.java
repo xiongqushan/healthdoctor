@@ -39,6 +39,7 @@ public class WelcomeActivity extends BaseActivity {
                 boolean exist = UserManager.getInstance().exist();
                 Log.e("WelcomeActivity", exist + "");
                 if (exist) {
+//                if (1==2){
                     startActivity(new Intent(getBaseContext(), HomeActivity.class));
                 } else {
                     startActivity(new Intent(getBaseContext(), LoginActivity.class));

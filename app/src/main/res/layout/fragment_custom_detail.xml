@@ -82,32 +82,80 @@
 
         </RelativeLayout>
 
-        <LinearLayout
-            android:id="@+id/Linear_ReportTitle"
+        <haozuo.com.healthdoctor.view.threePart.common.StickScrollView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/report_title_height"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/custom_padding"
-            android:paddingRight="@dimen/custom_padding"
-            android:background="@drawable/bg_report_title">
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/Linear_ReportTitle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/report_title_height"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/custom_padding"
+                android:paddingRight="@dimen/custom_padding"
+                android:background="@drawable/bg_report_title"
+                android:tag="sticky">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="体检报告"
+                    android:textColor="@color/textColor_light_blue"
+                    android:textSize="@dimen/textsize_h2"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/custom_padding"
+                    android:text="更新"
+                    android:textSize="@dimen/textsize_h5"
+                    android:textColor="@color/white"
+                    android:background="@drawable/report_title_shape"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:visibility="invisible"/>
+
+                <CheckBox
+                    android:id="@+id/btn_show_Report"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:button="@drawable/bg_report_title_selector"
+                    android:checked="true"/>
+
+        </LinearLayout>
+
+            <haozuo.com.healthdoctor.view.threePart.common.ChildListView
+                android:id="@+id/lv_custom_report"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@null"
+                android:visibility="visible"/>
+
+            <LinearLayout
+                android:id="@+id/linear_PhotoReport"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/report_title_height"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/custom_padding"
+                android:paddingRight="@dimen/custom_padding"
+                android:background="@drawable/bg_report_title"
+                android:tag="sticky">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:text="体检报告"
+                android:text="照片病例"
                 android:textColor="@color/textColor_light_blue"
                 android:textSize="@dimen/textsize_h2"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/custom_padding"
-                android:text="更新"
-                android:textSize="@dimen/textsize_h5"
-                android:textColor="@color/white"
-                android:background="@drawable/report_title_shape"/>
 
             <View
                 android:layout_width="0dp"
@@ -115,76 +163,25 @@
                 android:layout_weight="1"
                 android:visibility="invisible"/>
 
-            <ImageView
-                android:id="@+id/btn_show_Report"
+            <CheckBox
+                android:id="@+id/btn_show_PhotoReport"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:src="@drawable/btn_show_report"/>
+                android:button="@drawable/bg_report_title_selector"
+                android:checked="true"/>
 
-            <!--<CheckBox-->
-                <!--android:id="@+id/btn_show_Report"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:button="@null"-->
-                <!--android:checked="true"-->
-                <!--android:background="@drawable/bg_report_title_selector"/>-->
+        </LinearLayout>
 
-    </LinearLayout>
+            <haozuo.com.healthdoctor.view.threePart.common.ChildGridView
+                android:id="@+id/gv_PhotoReport"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:numColumns="3"
+                android:visibility="visible"/>
 
-    <ListView
-        android:id="@+id/lv_custom_report"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:divider="@null"
-        android:visibility="visible"/>
-
-
-    <LinearLayout
-        android:id="@+id/linear_PhotoReport"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/report_title_height"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/custom_padding"
-        android:paddingRight="@dimen/custom_padding"
-        android:background="@drawable/bg_report_title">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="照片病例"
-            android:textColor="@color/textColor_light_blue"
-            android:textSize="@dimen/textsize_h2"/>
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:visibility="invisible"/>
-
-        <ImageView
-            android:id="@+id/btn_show_PhotoReport"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/btn_show_report"/>
-
-        <!--<CheckBox-->
-            <!--android:id="@+id/btn_show_PhotoReport"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:button="@null"-->
-            <!--android:checked="true"-->
-            <!--android:background="@drawable/bg_report_title_selector"/>-->
+            </LinearLayout>
+        </haozuo.com.healthdoctor.view.threePart.common.StickScrollView>
 
     </LinearLayout>
-
-    <GridView
-        android:id="@+id/gv_PhotoReport"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:numColumns="3"
-        android:visibility="visible"/>
-
-</LinearLayout>
 
 </FrameLayout>

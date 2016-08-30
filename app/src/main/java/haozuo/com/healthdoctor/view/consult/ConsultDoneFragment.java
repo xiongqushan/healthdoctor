@@ -145,7 +145,8 @@ public class ConsultDoneFragment extends Fragment {
             Uri uri = Uri.parse(imgUrl);
             img.setImageURI(uri);
             tvTitle.setText(dataSource.get(position).CustName);
-            tvTime.setText(DateUtil.converTime(DateUtil.getStringToTimestamp(dataSource.get(position).CommitOn, "yyyy-MM-dd")));
+//            tvTime.setText(DateUtil.converTime(DateUtil.getStringToTimestamp(dataSource.get(position).CommitOn, "yyyy-MM-dd HH:mm:ss")));
+            tvTime.setText(DateUtil.converTimeByWeek(DateUtil.getStringToTimestamp(dataSource.get(position).CommitOn, "yyyy-MM-dd mm:HH:ss")));
             return convertView;
         }
 

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.DimenRes;
 import android.support.annotation.NonNull;
 import android.view.Display;
 import android.view.Gravity;
@@ -101,20 +102,6 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
         setConsultContent();
         mUsefulMessageAdapter = new UsefulMessageAdapter(mContext);
         usefulmessage_list.setAdapter(mUsefulMessageAdapter);
-//        usefulmessage_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                CheckBox checkBox = (CheckBox) view.findViewById(R.id.txt_message_content);
-//                UsefulExpressionBean selectedExpressionItem = mUsefulMessageAdapter.getDataSource().get(position);
-//                if(checkBox.isChecked()){
-//                    mSelectedExpressionList.add(selectedExpressionItem);
-//                }
-//                else {
-//                    mSelectedExpressionList.remove(selectedExpressionItem);
-//                }
-//            }
-//        });
-
         mExpressionConstList = new ArrayList<ExpressionConst>();
         mExpressionConstList.addAll(SysConfig.getExpressionConstList());
 
@@ -188,7 +175,6 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
         dialog.setContentView(R.layout.dialog_usefulmessage);
         refreshExpressionContent(dialog);
         dialog.show();
-        dialog.hide();
 
         Window win = dialog.getWindow();
         win.getDecorView().setPadding(0, 0, 0, 0);
@@ -207,10 +193,11 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
             checkBox.setText(mExpressionConstList.get(i).Content);
             checkBox.setBackgroundResource(0);
             checkBox.setButtonDrawable(0);
-            Drawable drawableLeft= getResources().getDrawable(R.drawable.bgcheckbox_usefulmessage);
-            drawableLeft.setBounds(0, 0, drawableLeft.getMinimumWidth(), drawableLeft.getMinimumHeight());
-            checkBox.setCompoundDrawables(drawableLeft,null,null,null);
-            checkBox.setCompoundDrawablePadding(5);
+            Drawable drawableRight = getResources().getDrawable(R.drawable.bgcb_dialog_usefulmessage_selector);
+            checkBox.setTextSize(16);
+            drawableRight.setBounds(0, 0, drawableRight.getMinimumWidth(), drawableRight.getMinimumHeight());
+            checkBox.setCompoundDrawables(drawableRight,null,null,null);
+            checkBox.setCompoundDrawablePadding(30);
             checkBox.setChecked(mExpressionConstList.get(i).IsChecked);
             checkBox.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -226,36 +213,70 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
 
     public String refreshExpressionContent(final Dialog dialog) {
         String Content = "";
-        for (ExpressionConst e : mExpressionConstList) {
-            if (e.Postion < 0 && e.IsChecked) {
-                if (!Content.equals("")){
-                    Content +="\n";
-                }
-                Content += e.Content;
+        TextView tv_greeting = (TextView) dialog.findViewById(R.id.tv_greeting);
+        TextView tv_thanks = (TextView) dialog.findViewById(R.id.tv_thanks);
+        TextView tv_blessing = (TextView) dialog.findViewById(R.id.tv_blessing);
+
+        for (ExpressionConst e :mExpressionConstList){
+            switch (e.ID){
+                case 0:
+                    if (e.IsChecked){
+                        tv_greeting.setVisibility(View.VISIBLE);
+                        tv_greeting.setText(e.Content);
+                    }else{
+                        tv_greeting.setVisibility(View.GONE);
+                    }
+                    break;
+                case 1:
+                    if (e.IsChecked){
+                        tv_thanks.setVisibility(View.VISIBLE);
+                        tv_thanks.setText(e.Content);
+                    }else{
+                        tv_thanks.setVisibility(View.GONE);
+                    }
+                    break;
+                case 2:
+                    if (e.IsChecked){
+                        tv_blessing.setVisibility(View.VISIBLE);
+                        tv_blessing.setText(e.Content);
+                    }else{
+                        tv_blessing.setVisibility(View.GONE);
+                    }
+                    break;
+                default:
+                    break;
             }
         }
+
+//        for (ExpressionConst e : mExpressionConstList) {
+//            if (e.Postion < 0 && e.IsChecked) {
+//                if (!Content.equals("")){
+//                    Content +="\n";
+//                }
+//                Content += e.Content;
+//            }
+//        }
         for (int i = 0; i < mSelectedExpressionMap.size(); i++) {
             if (!Content.equals("")){
                 Content +="\n";
             }
             Content += (i + 1) + "." + mSelectedExpressionMap.get(i).Content ;
         }
-        for (ExpressionConst e : mExpressionConstList) {
-            if (e.Postion > 0 && e.IsChecked) {
-                if (!Content.equals("")){
-                    Content +="\n";
-                }
-                Content += e.Content ;
-            }
-        }
+//        for (ExpressionConst e : mExpressionConstList) {
+//            if (e.Postion > 0 && e.IsChecked) {
+//                if (!Content.equals("")){
+//                    Content +="\n";
+//                }
+//                Content += e.Content ;
+//            }
+//        }
 
-        View.OnClickListener clickListener = new View.OnClickListener() {
+        View.OnClickListener DialogClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 switch (v.getId()) {
                     case R.id.btn_hideDialog:
                         dialog.dismiss();
-//                        dialog.hide();
                         break;
                     case R.id.btn_submit:
                         dialog.dismiss();
@@ -272,8 +293,8 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
 
         Button btn_hideDialog = (Button) dialog.findViewById(R.id.btn_hideDialog);
         Button btn_submit = (Button) dialog.findViewById(R.id.btn_submit);
-        btn_hideDialog.setOnClickListener(clickListener);
-        btn_submit.setOnClickListener(clickListener);
+        btn_hideDialog.setOnClickListener(DialogClickListener);
+        btn_submit.setOnClickListener(DialogClickListener);
         EditText et_Expression = (EditText) dialog.findViewById(R.id.et_Expression);
         et_Expression.setText(Content);
         return Content;
@@ -322,7 +343,7 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
                 holder = (ViewHolder) convertView.getTag();
             }
             final UsefulExpressionBean usefulExpressionEntity = dataSource.get(position);
-            holder.messageContent.setText((position + 1) + "." + usefulExpressionEntity.Content);
+            holder.messageContent.setText(usefulExpressionEntity.Content);
             for (int i = 0; i < mSelectedExpressionMap.size(); i++) {
                 if (mSelectedExpressionMap.get(i).Id.equals(usefulExpressionEntity.Id)) {
                     holder.messageContent.setChecked(true);

@@ -32,6 +32,7 @@ public class SysConfig {
         List<Integer> ExpressionPosition = new ArrayList(Arrays.asList(-1, 1, 1));
         for (int i = 0; i < 3; i++) {
             ExpressionConst expressionConst = new ExpressionConst();
+            expressionConst.ID = i;
             expressionConst.Content = ExpressionContent.get(i);
             expressionConst.Postion = ExpressionPosition.get(i);
             ExpressionConstList.add(expressionConst);

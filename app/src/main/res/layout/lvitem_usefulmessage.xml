@@ -4,8 +4,10 @@
     android:id="@+id/txt_message_content"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
+    android:padding="15dp"
+    android:drawablePadding="16dp"
     android:button="@null"
     android:background="@null"
-    android:drawableRight="@drawable/bgcheckbox_usefulmessage"
+    android:drawableLeft="@drawable/bgcheckbox_usefulmessage_selector"
+    android:textColor="@drawable/useful_textcolor_selector"
     tools:text="123456\n123123123" />

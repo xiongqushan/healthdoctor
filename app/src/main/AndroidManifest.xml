@@ -120,14 +120,11 @@
             android:name=".view.consult.ConsultDetailActivity"
             android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateHidden|adjustResize"/>
-
+            android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".view.consult.UsefulMesasgeActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustNothing|stateHidden"/>
-
-
         <activity
             android:name=".view.custom.CustomerReportActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
@@ -166,7 +163,6 @@
             android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
                 <action android:name="cn.jpush.android.ui.PushActivity"/>
-
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="haozuo.com.healthdoctor"/>
             </intent-filter>

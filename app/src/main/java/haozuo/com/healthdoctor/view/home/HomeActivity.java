@@ -36,6 +36,7 @@ import haozuo.com.healthdoctor.view.group.GroupFragment;
 import haozuo.com.healthdoctor.view.mine.MineFragment;
 
 public class HomeActivity extends BaseActivity {
+    public static final String FINISHACTIVITY ="FINISHACTIVITY";
     @Bind(R.id.tab_menu)
     RadioGroup rgTabhost;
     //    @Bind(R.id.rbGroup)

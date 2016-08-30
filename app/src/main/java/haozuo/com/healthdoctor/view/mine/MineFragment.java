@@ -1,6 +1,7 @@
 package haozuo.com.healthdoctor.view.mine;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,16 +9,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.facebook.drawee.view.SimpleDraweeView;
+
+import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.ReportParamsBean;
+import haozuo.com.healthdoctor.view.base.BaseFragment;
 import haozuo.com.healthdoctor.view.custom.CustomerReportActivity;
+import haozuo.com.healthdoctor.view.home.HomeActivity;
 
 /**
  * by zy  2016.08.15.
  */
-public class MineFragment extends Fragment {
+public class MineFragment extends BaseFragment {
     private View rootView;
 
     @OnClick(R.id.layout_doctor)
@@ -65,8 +71,16 @@ public class MineFragment extends Fragment {
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_mine, container, false);
             ButterKnife.bind(this, rootView);
+            registerCustomReceiver(HomeActivity.FINISHACTIVITY);
         }
         return rootView;
     }
 
+    @Override
+    protected void onReceiveBroadcast(String filterAction) {
+        super.onReceiveBroadcast(filterAction);
+        if (filterAction.equals(HomeActivity.FINISHACTIVITY)){
+            getActivity().finish();
+        }
+    }
 }

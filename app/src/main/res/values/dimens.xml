@@ -12,10 +12,13 @@
 
     <dimen name="radius_1">7dp</dimen>
 
+    <dimen name="logo_height">102dp</dimen>
+    <dimen name="login_et_paddingbottom">13dp</dimen>
+    <dimen name="login_drawablepadding">10dp</dimen>
     <dimen name="login_title">8dp</dimen>
     <dimen name="login_title_size">24dp</dimen>
     <dimen name="login_text_size">15sp</dimen>
-    <dimen name="login_submit">20dp</dimen>
+    <dimen name="login_submit">20sp</dimen>
     <dimen name="login_submit_padding">5dp</dimen>
 
     <dimen name="actionbar_high">48dp</dimen>
@@ -70,6 +73,8 @@
     <dimen name="report_marginleft_21dp">21.4dp</dimen>
     <dimen name="report_margin_16dp">16dp</dimen>
     <dimen name="report_circle_radius">8dp</dimen>
+
+    <dimen name="dialog_logo_height">47dp</dimen>
 
 
 </resources>

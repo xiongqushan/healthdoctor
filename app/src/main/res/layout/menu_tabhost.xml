@@ -2,17 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="48dp"
-    android:orientation="vertical">
-
-    <!--<ImageButton android:id="@+id/btn_menu_consult"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:background="@drawable/tabhost_consult_btn"/>-->
-
-    <!--<ImageButton android:id="@+id/btn_menu_my"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:background="@drawable/tabhost_my_btn"/>-->
+    android:orientation="vertical"
+    android:background="@color/white">
 
     <View
         android:layout_width="match_parent"

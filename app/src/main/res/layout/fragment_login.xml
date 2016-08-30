@@ -1,42 +1,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="311dp"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
+    android:layout_gravity="center"
+    android:gravity="center"
     tools:context="haozuo.com.healthdoctor.view.login.LoginFragment">
-
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:visibility="invisible" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3">
 
         <ImageView
             android:id="@+id/title"
-            android:layout_width="171dp"
-            android:layout_height="52dp"
-            android:layout_centerHorizontal="true"
+            android:layout_width="@dimen/logo_height"
+            android:layout_height="@dimen/logo_height"
             android:layout_gravity="center"
-            android:background="@drawable/logo"
+            android:background="@drawable/logo_v2"
             android:gravity="center" />
 
         <LinearLayout
             android:id="@+id/account"
-            android:layout_width="246dp"
+            android:layout_width="match_parent"
             android:layout_height="89dp"
-            android:layout_below="@id/title"
-            android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:gravity="bottom"
-            android:paddingBottom="13dp">
+            android:paddingBottom="@dimen/login_et_paddingbottom">
 
             <EditText
                 android:id="@+id/edit_mobile"
@@ -45,19 +30,19 @@
                 android:layout_weight="1"
                 android:background="@null"
                 android:digits="15601815186"
-                android:drawableLeft="@drawable/cellphone"
+                android:drawableLeft="@drawable/user_logo"
+                android:drawablePadding="@dimen/login_drawablepadding"
                 android:gravity="start|bottom"
                 android:hint="@string/login_mobile"
                 android:inputType="number"
                 android:singleLine="true"
-                android:textSize="@dimen/login_text_size" />
+                android:textSize="@dimen/login_text_size"
+                android:textColor="@color/textColor_lightgrey"/>
 
             <TextView
                 android:id="@+id/txt_GetCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/edit_mobile"
-                android:layout_toRightOf="@id/edit_mobile"
                 android:paddingLeft="30dp"
                 android:text="@string/login_get_code"
                 android:textColor="@color/lightgreen"
@@ -68,51 +53,34 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_alignEnd="@+id/account"
-            android:layout_alignLeft="@id/account"
-            android:layout_alignRight="@+id/account"
-            android:layout_alignStart="@id/account"
-            android:layout_below="@id/account"
             android:background="@color/gray" />
 
         <EditText
             android:id="@+id/edit_code"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:layout_alignEnd="@+id/account"
-            android:layout_alignLeft="@id/account"
-            android:layout_alignRight="@+id/account"
-            android:layout_alignStart="@id/account"
-            android:layout_below="@id/account"
             android:layout_marginTop="7dp"
             android:background="@null"
-            android:drawableLeft="@drawable/checkcode"
+            android:drawableLeft="@drawable/checkcode_v2"
+            android:drawablePadding="@dimen/login_drawablepadding"
             android:gravity="start|center_vertical"
             android:hint="请输入您的密码"
+            android:textColorHint="@color/lightgray"
             android:inputType="textPassword"
             android:singleLine="true"
             android:text="111111"
-            android:textSize="@dimen/login_text_size" />
+            android:textSize="@dimen/login_text_size"
+            android:textColor="@color/textColor_lightgrey"/>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_alignEnd="@+id/account"
-            android:layout_alignLeft="@id/account"
-            android:layout_alignRight="@+id/account"
-            android:layout_alignStart="@id/account"
-            android:layout_below="@id/edit_code"
             android:background="@color/gray" />
 
         <Button
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@id/account"
-            android:layout_alignLeft="@id/account"
-            android:layout_alignRight="@id/account"
-            android:layout_alignStart="@id/account"
-            android:layout_below="@id/edit_code"
             android:layout_marginTop="25dp"
             android:background="@drawable/shape"
             android:gravity="center"
@@ -121,7 +89,14 @@
             android:textColor="@color/white"
             android:textSize="@dimen/login_submit" />
 
-    </RelativeLayout>
+        <TextView
+            android:id="@+id/tv_warnning"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/textColor_lightgrey"
+            tools:text="点击“登录”即表示你同意并愿意遵优健管\n[用户协议]和[隐私政策]"/>
 
 
 </LinearLayout>

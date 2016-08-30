@@ -23,7 +23,7 @@ public class UserManager  {
     private static final String USER_INFO_KEY = "User_Info_Key";
     private static UserManager _instance;
 //    private DoctorBean doctorBean;
-    private Hashtable< String,SoftReference<DoctorBean>> doctorBeanRefs;
+//    private Hashtable< String,SoftReference<DoctorBean>> doctorBeanRefs;
 
     private SharedPreferences sharedPreferences;
     private SoftReference<DoctorBean> _currentEntity;
@@ -96,6 +96,7 @@ public class UserManager  {
 
     public void clear(){
         sharedPreferences.edit().remove(USER_INFO_KEY).commit();
+        _instance = null;
     }
 
 }

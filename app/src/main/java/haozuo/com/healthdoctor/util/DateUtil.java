@@ -1,11 +1,13 @@
 package haozuo.com.healthdoctor.util;
 
+import java.security.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -14,9 +16,11 @@ import java.util.Locale;
 public class DateUtil {
 
     private static final String FORMAT = "yyyy-MM-dd HH:mm:ss";
+    private static final String DATEFORMAT = "MM-dd HH:mm";
     private static final SimpleDateFormat datetimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     private static final SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+    public static String[] WEEK_LIST = {"星期天","星期一","星期二","星期三","星期四","星期五","星期六"};
 
     public static Date str2Date(String str) {
         return str2Date(str, null);
@@ -187,6 +191,42 @@ public class DateUtil {
         return timeStr;
     }
 
+    public static String converTimeByWeek(long timestamp) {
+        final Calendar mCalendar = Calendar.getInstance();
+        mCalendar.setTimeInMillis(timestamp);
+
+        int hour = mCalendar.get(Calendar.HOUR_OF_DAY);
+        int min = mCalendar.get(Calendar.MINUTE);
+        int apm = mCalendar.get(Calendar.AM_PM);
+        int weekday = mCalendar.get(Calendar.DAY_OF_WEEK);
+
+        String timeStr = null;
+        long currentSeconds = getDayBeginTimestamp();
+        if(timestamp >= currentSeconds){
+            if (apm == 0){
+                timeStr = "上午" + " "+hour+":"+min;
+            }else {
+                timeStr = "下午" + " "+hour+":"+min;
+            }
+        }else if(timestamp >= (currentSeconds-(7 * 24 * 60 * 60 * 1000))) {
+            timeStr = WEEK_LIST[weekday - 1] + " "+hour+":"+min;
+        } else{
+            timeStr = date2Str(new Date(timestamp),DATEFORMAT);
+        }
+        return timeStr;
+    }
+
+
+    public static Long getDayBeginTimestamp() {
+        Date date = new Date();
+        GregorianCalendar gc = new GregorianCalendar();
+        gc.setTime(date);
+        Date date2 = new Date(date.getTime() - gc.get(gc.HOUR_OF_DAY) * 60 * 60
+                * 1000 - gc.get(gc.MINUTE) * 60 * 1000 - gc.get(gc.SECOND)
+                * 1000);
+        return new Long(date2.getTime());
+    }
+
     /**
      * 把字符串转化为时间格式
      *
@@ -195,7 +235,8 @@ public class DateUtil {
      */
     public static String getStandardTime(long timestamp, String formatStr) {
         SimpleDateFormat sdf = new SimpleDateFormat(formatStr);
-        Date date = new Date(timestamp * 1000);
+        Date date = new Date(timestamp);
+//        Date date = new Date(timestamp * 1000);
         sdf.format(date);
         return sdf.format(date);
     }
@@ -481,6 +522,8 @@ public class DateUtil {
     }
 
 
+
+
     /**
      * 比较时间大小
      *
@@ -536,7 +579,7 @@ public class DateUtil {
      * @param date
      * @return
      */
-    public int getWeek(Date date) {
+    public static int getWeek(Date date) {
         Calendar c = Calendar.getInstance();
         c.setTime(date);
         return c.get(Calendar.WEEK_OF_YEAR);
@@ -574,7 +617,7 @@ public class DateUtil {
     }
 
     /*将字符串转为时间戳*/
-    public static long getStringToTimestamp(String time,String format) {
+    public static long getStringToTimestamp(String time, String format) {
         DateFormat sdf = new SimpleDateFormat(format);
         Date date = new Date();
         try {
@@ -596,6 +639,5 @@ public class DateUtil {
         }
         return diff;
     }
-
 
 }
