@@ -129,6 +129,7 @@
             android:name=".view.consult.UsefulMesasgeActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustNothing|stateHidden" />
+
         <activity
             android:name=".view.custom.CustomerReportActivity"
             android:theme="@style/AppTheme.NoActionBar" />

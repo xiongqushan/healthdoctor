@@ -36,6 +36,7 @@ import haozuo.com.healthdoctor.view.group.GroupFragment;
 import haozuo.com.healthdoctor.view.mine.MineFragment;
 
 public class HomeActivity extends BaseActivity {
+    public static final String FINISHACTIVITY ="FINISHACTIVITY";
     @Bind(R.id.tab_menu)
     RadioGroup rgTabhost;
     //    @Bind(R.id.rbGroup)
@@ -116,8 +117,8 @@ public class HomeActivity extends BaseActivity {
         //调用JPush API设置Alias
         String alias = UserManager.getInstance().getDoctorInfo().Account;
         int doctor_IDid = UserManager.getInstance().getDoctorInfo().Doctor_ID;
-        Log.e("Account", alias);
-        Log.e("doctor_IDid", doctor_IDid + "");
+        Log.e(alias, alias);
+        Log.e(alias, alias);
         mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, "2055"));
     }
 

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,12 +18,14 @@ import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.DoctorBean;
 import haozuo.com.healthdoctor.bean.ReportParamsBean;
 import haozuo.com.healthdoctor.manager.UserManager;
+import haozuo.com.healthdoctor.view.base.BaseFragment;
 import haozuo.com.healthdoctor.view.custom.CustomerReportActivity;
+import haozuo.com.healthdoctor.view.home.HomeActivity;
 
 /**
  * by zy  2016.08.15.
  */
-public class MineFragment extends Fragment {
+public class MineFragment extends BaseFragment {
     @Bind(R.id.img_doctorphoto)
     SimpleDraweeView imgPhoto;
     @Bind(R.id.tv_doctorname)
@@ -77,6 +78,7 @@ public class MineFragment extends Fragment {
             rootView = inflater.inflate(R.layout.fragment_mine, container, false);
             ButterKnife.bind(this, rootView);
             initView();
+            registerCustomReceiver(HomeActivity.FINISHACTIVITY);
         }
         return rootView;
     }
@@ -91,5 +93,13 @@ public class MineFragment extends Fragment {
         Uri uri = Uri.parse(imgUrl);
         imgPhoto.setImageURI(uri);
     }
+    @Override
+    protected void onReceiveBroadcast(String filterAction) {
+        super.onReceiveBroadcast(filterAction);
+        if (filterAction.equals(HomeActivity.FINISHACTIVITY)){
+            getActivity().finish();
+        }
+    }
 
 }
+

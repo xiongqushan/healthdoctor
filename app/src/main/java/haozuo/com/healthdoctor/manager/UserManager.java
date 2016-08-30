@@ -42,10 +42,10 @@ public class UserManager  {
         return _instance;
     }
 
-    public void setDoctorInfo(DoctorBean doctorEntity) {
+    public void setDoctorInfo(DoctorBean doctorEntity) throws CloneNotSupportedException{
         try {
-//            DoctorBean _doctorEntity = (DoctorBean) doctorEntity.clone();
-            _currentEntity=new SoftReference<DoctorBean>(doctorEntity);
+            DoctorBean _doctorEntity = (DoctorBean) doctorEntity.clone();
+            _currentEntity=new SoftReference<DoctorBean>(_doctorEntity);
 //            doctorBeanRefs.put("TEST",_currentEntity);
             // 保存对象
             SharedPreferences.Editor sharedata = sharedPreferences.edit();

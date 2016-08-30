@@ -13,24 +13,20 @@ import lib.lhh.fiv.library.FrescoZoomImageView;
 /**
  * Created by hzguest3 on 2016/8/24.
  */
-public class PhotoReportFragment extends BaseFragment {
+public class PhotoPreviewFragment extends BaseFragment{
     private static String URL_ADDRESS = "URL_ADDRESS";
     private String mURL;
 
-    public PhotoReportFragment() {
-    }
+    public PhotoPreviewFragment(){};
 
-    ;
-
-    public static PhotoReportFragment newInstance(String Url) {
-        PhotoReportFragment photoReportFragment = new PhotoReportFragment();
+    public static PhotoPreviewFragment newInstance(String Url){
+        PhotoPreviewFragment photoPreviewFragment = new PhotoPreviewFragment();
         Bundle args = new Bundle();
         args.putString(URL_ADDRESS, Url);
-        photoReportFragment.setArguments(args);
-        return photoReportFragment;
-    }
+        photoPreviewFragment.setArguments(args);
+        return photoPreviewFragment;
+    };
 
-    ;
 
     @Nullable
     @Override

@@ -6,7 +6,7 @@
     <string name="login_mobile">请输入手机号</string>
     <string name="login_code">请输入手机验证码</string>
     <string name="login_get_code">发送验证码</string>
-    <string name="login_submit">登录</string>
+    <string name="login_submit">登 录</string>
 
     <string name="group_serverCount">服务人数</string>
     <string name="pull_to_refresh">下拉刷新</string>

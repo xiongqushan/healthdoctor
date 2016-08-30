@@ -10,7 +10,7 @@ import haozuo.com.healthdoctor.bean.ExpressionConst;
  * Created by xiongwei on 16/5/19.
  */
 public class SysConfig {
-    public static final boolean DebugMode = false;
+    public static final boolean DebugMode = true;
     public static final String CURRENT_BASE_VERSION = "V1";
     public static final String CURRENT_VERSION_TEXT = "V1.0";
     public static final int CURRENT_VERSION_VALUE = 10;
@@ -32,6 +32,7 @@ public class SysConfig {
         List<Integer> ExpressionPosition = new ArrayList(Arrays.asList(-1, 1, 1));
         for (int i = 0; i < 3; i++) {
             ExpressionConst expressionConst = new ExpressionConst();
+            expressionConst.ID = i;
             expressionConst.Content = ExpressionContent.get(i);
             expressionConst.Postion = ExpressionPosition.get(i);
             ExpressionConstList.add(expressionConst);

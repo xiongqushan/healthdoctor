@@ -12,6 +12,8 @@
     <color name="gray_bg_ee">#EEEEEE</color>
     <color name="gray_itemclick">#F6F6F6</color>
 
+    <color name="useful_orange">#FF9500</color>
+
     <color name="report_circle_orange">#FFBB5C</color>
     <color name="report_circle_green">#9BCB65</color>
 
@@ -170,4 +172,5 @@
     <color name="black">#000000</color><!--黑色 -->
     <color name="light_blue">#6593cb</color>
 </resources>
+
 

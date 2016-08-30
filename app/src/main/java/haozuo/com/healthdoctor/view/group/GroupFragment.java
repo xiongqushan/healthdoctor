@@ -102,7 +102,6 @@ public class GroupFragment extends AbstractView implements GroupContract.IGroupV
                     mContext.startActivity(intent);
                 }
             });
-
         }
     }
 
