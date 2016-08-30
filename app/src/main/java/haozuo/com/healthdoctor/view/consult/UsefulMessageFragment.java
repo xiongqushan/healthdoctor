@@ -384,5 +384,4 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
             }
         }
     }
-
 }

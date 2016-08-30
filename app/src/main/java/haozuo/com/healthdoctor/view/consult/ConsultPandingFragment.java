@@ -1,5 +1,6 @@
 package haozuo.com.healthdoctor.view.consult;
 
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -174,7 +175,8 @@ public class ConsultPandingFragment extends Fragment {
             holder.Cname.setText(doctorGroupEntity.CustName);
             holder.ConsultContent.setText(doctorGroupEntity.ConsultTitele);
 //            holder.LastConsult.setText(DateUtil.converTime(DateUtil.getStringToTimestamp(doctorGroupEntity.CommitOn, "yyyy-MM-dd HH:mm:ss")));
-            holder.LastConsult.setText(DateUtil.converTimeByWeek(DateUtil.getStringToTimestamp(doctorGroupEntity.CommitOn, "yyyy-MM-dd HH:mm")));
+//            holder.LastConsult.setText(DateUtil.converTimeByWeek(DateUtil.getStringToTimestamp(doctorGroupEntity.CommitOn, "yyyy-MM-dd HH:mm")));
+            holder.LastConsult.setText(DateUtil.TimeFormatByWeek(dataSource.get(position).CommitOn, "yyyy-MM-dd HH:mm"));
 
             holder.Cphoto.setTag(new Object[]{doctorGroupEntity});
             return convertView;

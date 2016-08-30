@@ -1,44 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/white"
-              android:orientation="vertical"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
 
 
     <TextView
         android:id="@+id/tvMainItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/main_color_blue"
-        android:paddingBottom="8dp"
-        android:paddingLeft="12dp"
-        android:paddingTop="8dp"
+        android:layout_marginLeft="@dimen/report_padding"
+        android:layout_marginRight="@dimen/report_padding"
+        android:background="@drawable/report_item_bg_blue"
+        android:gravity="right"
+        android:paddingBottom="10dp"
+        android:paddingRight="12dp"
+        android:paddingTop="10dp"
         android:text="一般检查"
         android:textColor="@color/white"
         android:textSize="16sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="@dimen/dividerline"
+        android:layout_height="@dimen/report_padding"
+        android:layout_marginLeft="@dimen/report_marginleft_25dp"
+        android:background="@color/divider_d3" />
 
     <TextView
         android:id="@+id/tvCheckItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/lightblue"
-        android:paddingBottom="8dp"
-        android:paddingLeft="12dp"
-        android:paddingTop="8dp"
+        android:layout_marginLeft="@dimen/report_padding"
+        android:layout_marginRight="@dimen/report_padding"
+        android:background="@drawable/report_item_bg"
+        android:gravity="right"
+        android:paddingBottom="10dp"
+        android:paddingRight="12dp"
+        android:paddingTop="10dp"
         android:text="血常规"
-        android:textColor="@color/subtitle_color66"
-        android:textSize="16sp"
-        />
+        android:textColor="@color/main_color_blue"
+        android:textSize="16sp" />
 
-    <haozuo.com.healthdoctor.view.threePart.common.ChildListView
-    android:id="@+id/listView_report_detail_child"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:divider="@null"
-    android:scrollbars="none"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="@dimen/dividerline"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/report_marginleft_25dp"
+            android:background="@color/divider_d3" />
+
+        <haozuo.com.healthdoctor.view.threePart.common.ChildListView
+            android:id="@+id/listView_report_detail_child"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:divider="@null"
+            android:scrollbars="none" />
+
+        <View
+            android:layout_width="@dimen/dividerline"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/report_marginleft_25dp"
+            android:background="@color/divider_d3" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="@dimen/dividerline"
+        android:layout_height="@dimen/report_line"
+        android:layout_marginLeft="@dimen/report_marginleft_25dp"
+        android:background="@color/divider_d3" />
+
+    <LinearLayout
+        android:id="@+id/layoutFooter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imgFooter"
+            android:layout_width="@dimen/report_circle_radius"
+            android:layout_height="@dimen/report_circle_radius"
+            android:layout_marginLeft="@dimen/report_marginleft_21dp"
+            android:background="@drawable/circle_green" />
+
+        <View
+            android:layout_width="@dimen/dividerline"
+            android:layout_height="16dp" />
+
+    </LinearLayout>
 
 
 </LinearLayout>

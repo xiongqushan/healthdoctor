@@ -1,3 +1,4 @@
+
 package haozuo.com.healthdoctor.view.custom;
 
 import android.content.Context;
@@ -287,7 +288,6 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
                 public void onClick(View v) {
                     startActivity(new Intent(mContext,PhotoPreviewActivity.class)
                             .putExtra(PhotoPreviewActivity.EXTRA_URL_LIST,RequestPhotoReportEntity.Content));
-
                 }
             });
 

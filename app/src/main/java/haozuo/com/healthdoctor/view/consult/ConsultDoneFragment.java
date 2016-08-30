@@ -1,5 +1,6 @@
 package haozuo.com.healthdoctor.view.consult;
 
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -145,8 +146,8 @@ public class ConsultDoneFragment extends Fragment {
             Uri uri = Uri.parse(imgUrl);
             img.setImageURI(uri);
             tvTitle.setText(dataSource.get(position).CustName);
-//            tvTime.setText(DateUtil.converTime(DateUtil.getStringToTimestamp(dataSource.get(position).CommitOn, "yyyy-MM-dd HH:mm:ss")));
-            tvTime.setText(DateUtil.converTimeByWeek(DateUtil.getStringToTimestamp(dataSource.get(position).CommitOn, "yyyy-MM-dd mm:HH:ss")));
+//            tvTime.setText(DateUtil.converTimeByWeek(DateUtil.getStringToTimestamp(dataSource.get(position).CommitOn, "yyyy-MM-dd HH:mm")));
+            tvTime.setText(DateUtil.TimeFormatByWeek(dataSource.get(position).CommitOn, "yyyy-MM-dd HH:mm"));
             return convertView;
         }
 

@@ -11,12 +11,12 @@ import haozuo.com.healthdoctor.bean.DoctorGroupBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.contract.GroupContract;
 import haozuo.com.healthdoctor.contract.GroupContract.IGroupPresenter;
-import haozuo.com.healthdoctor.manager.GroupInfoManager;
-import haozuo.com.healthdoctor.model.IBaseModel;
-import haozuo.com.healthdoctor.view.IBaseView;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
+import haozuo.com.healthdoctor.manager.GroupInfoManager;
 import haozuo.com.healthdoctor.manager.UserManager;
 import haozuo.com.healthdoctor.model.GroupModel;
+import haozuo.com.healthdoctor.model.IBaseModel;
+import haozuo.com.healthdoctor.view.IBaseView;
 
 /**
  * Created by xiongwei1 on 2016/7/7.

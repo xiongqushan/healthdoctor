@@ -98,8 +98,4 @@
             android:textColor="@color/textColor_lightgrey"
             tools:text="点击“登录”即表示你同意并愿意遵优健管\n[用户协议]和[隐私政策]"/>
 
-
 </LinearLayout>
-
-
-

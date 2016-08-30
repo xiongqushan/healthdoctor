@@ -1,25 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:background="@color/white"
-              android:orientation="vertical"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:layout_marginLeft="@dimen/report_padding"
+        android:layout_marginRight="@dimen/report_padding"
+        android:background="@drawable/report_item_bg"
         android:orientation="vertical"
-        android:padding="12dp">
+        android:paddingBottom="8dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingTop="8dp">
+
+        <TextView
+            android:id="@+id/lineCenter"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dividerline"
+            android:layout_below="@+id/tvTitle"
+            android:layout_marginBottom="8dp"
+            android:background="@color/divider_d3"
+            android:visibility="visible" />
 
         <TextView
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:text="阿斯蒂芬"
             android:textColor="@color/title_color28"
-            android:textSize="@dimen/txt_title_16sp"/>
+            android:textSize="@dimen/txt_title_16sp" />
 
         <TextView
             android:id="@+id/tvResultValue"
@@ -27,37 +41,43 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:text="12"
-            android:textColor="@color/title_color28"
-            android:textSize="@dimen/txt_title_16sp"/>
+            android:textColor="#FFFA7981"
+            android:textSize="@dimen/txt_title_16sp" />
 
         <TextView
             android:id="@+id/tvSubtitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvTitle"
+            android:layout_below="@+id/lineCenter"
             android:layout_marginRight="12dp"
-            android:layout_marginTop="8dp"
             android:layout_toLeftOf="@+id/tvUnit"
             android:text="金鳞岂是池中物"
-            android:textColor="@color/subtitle_color66"
-            android:textSize="@dimen/txt_subtitle_14sp"/>
+            android:textColor="@color/subtitle_colorb2"
+            android:textSize="@dimen/txt_subtitle_14sp" />
 
         <TextView
             android:id="@+id/tvUnit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/tvResultValue"
-            android:layout_marginTop="8dp"
+            android:layout_below="@+id/lineCenter"
             android:text="单位:uml/ml"
-            android:textColor="@color/subtitle_color66"
-            android:textSize="@dimen/txt_subtitle_14sp"/>
+            android:textColor="@color/subtitle_colorb2"
+            android:textSize="@dimen/txt_subtitle_14sp" />
     </RelativeLayout>
 
     <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dividerline"
-        android:background="@color/divider_d3"/>
+        android:layout_width="@dimen/dividerline"
+        android:layout_height="@dimen/report_line"
+        android:layout_marginLeft="@dimen/report_marginleft_25dp"
+        android:background="@color/divider_d3" />
+
+    <ImageView
+        android:id="@+id/imgFooter"
+        android:layout_width="@dimen/report_circle_radius"
+        android:layout_height="@dimen/report_circle_radius"
+        android:layout_marginLeft="@dimen/report_marginleft_21dp"
+        android:background="@drawable/circle_green" />
 
 
 </LinearLayout>

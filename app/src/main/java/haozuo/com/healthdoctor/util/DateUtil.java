@@ -1,3 +1,4 @@
+
 package haozuo.com.healthdoctor.util;
 
 import java.security.Timestamp;
@@ -208,7 +209,7 @@ public class DateUtil {
             }else {
                 timeStr = "下午" + " "+hour+":"+min;
             }
-        }else if(timestamp >= (currentSeconds-(7 * 24 * 60 * 60 * 1000))) {
+        }else if(timestamp >= (currentSeconds-(6 * 24 * 60 * 60 * 1000))) {
             timeStr = WEEK_LIST[weekday - 1] + " "+hour+":"+min;
         } else{
             timeStr = date2Str(new Date(timestamp),DATEFORMAT);
@@ -216,6 +217,10 @@ public class DateUtil {
         return timeStr;
     }
 
+    public static String TimeFormatByWeek(String time, String format){
+        Long timestamp = (Long)getStringToTimestamp(time, format);
+        return converTimeByWeek(timestamp);
+    }
 
     public static Long getDayBeginTimestamp() {
         Date date = new Date();

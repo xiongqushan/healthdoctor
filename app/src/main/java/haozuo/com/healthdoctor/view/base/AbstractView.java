@@ -57,11 +57,13 @@ public abstract class AbstractView extends BaseFragment {
         }
     }
 
+
     public void showConfirmDialog(String string, CustomDialog.OnDialogListener onConfirmDialogListener) {
         comfirmDialog = new CustomDialog(getContext(), onConfirmDialogListener);
         comfirmDialog.setContentText(string);
         comfirmDialog.show();
     }
+
 
     public void showConfirmDialog(String content, String confirmText, String cancelText, CustomDialog.OnDialogListener onConfirmDialogListener) {
         comfirmDialog = new CustomDialog(getContext(), onConfirmDialogListener);

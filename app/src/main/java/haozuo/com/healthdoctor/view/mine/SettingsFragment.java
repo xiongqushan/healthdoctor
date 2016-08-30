@@ -5,26 +5,43 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.jpush.android.api.JPushInterface;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.manager.GroupInfoManager;
-import haozuo.com.healthdoctor.manager.InternalStorageManager;
 import haozuo.com.healthdoctor.manager.UserManager;
 import haozuo.com.healthdoctor.view.base.BaseFragment;
 import haozuo.com.healthdoctor.view.home.HomeActivity;
 import haozuo.com.healthdoctor.view.login.LoginActivity;
+import haozuo.com.healthdoctor.view.threePart.switchbutton.SwitchButton;
 
 
 /**
  * by zy 2016.08.24
  */
 public class SettingsFragment extends BaseFragment {
+    private static long lastClickTime;
     private Context mContext;
+
+    public static boolean isFastDoubleClick() {
+        long time = System.currentTimeMillis();
+        if (time - lastClickTime < 800) {
+            return true;
+        }
+        lastClickTime = time;
+        return false;
+    }
+
+    @Bind(R.id.btn_push)
+    SwitchButton btnPush;
 
     @OnClick(R.id.layout_aboutus)
     void aboutusClick() {
@@ -46,6 +63,12 @@ public class SettingsFragment extends BaseFragment {
     void clearcacheClick() {
     }
 
+    @OnClick(R.id.layout_push)
+    void changePushState() {
+        if (isFastDoubleClick()) return;
+        btnPush.setChecked(!btnPush.isChecked());
+    }
+
     @OnClick(R.id.btnSignOut)
     void btnSignOut() {
         ShowSignOutDialog();
@@ -57,13 +80,31 @@ public class SettingsFragment extends BaseFragment {
         // Required empty public constructor
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mContext = getContext();
         if (rootView == null) {
-            rootView = inflater.inflate(R.layout.fragment_settings_v2, container, false);
+            rootView = inflater.inflate(R.layout.fragment_settings, container, false);
             ButterKnife.bind(this, rootView);
+            btnPush.setChecked(!JPushInterface.isPushStopped(getActivity()));
+            btnPush.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        JPushInterface.resumePush(getActivity());
+                        Log.e("Jpush", "resumePush");
+                    } else {
+                        JPushInterface.stopPush(getActivity());
+                        Log.e("Jpush", "stopPush");
+                    }
+                    boolean pushStopped = JPushInterface.isPushStopped(getActivity());
+                    Log.e("pushStopped", "" + pushStopped);
+                    // PreferenceManager.getInstance().writeJpush(isChecked);
+                    // Toast.makeText(getContext(), "消息推送:" + (isChecked ? "on" : "off"), Toast.LENGTH_SHORT).show();
+                }
+            });
         }
         return rootView;
     }
@@ -87,5 +128,6 @@ public class SettingsFragment extends BaseFragment {
             getActivity().finish();
         }
     };
+
 
 }

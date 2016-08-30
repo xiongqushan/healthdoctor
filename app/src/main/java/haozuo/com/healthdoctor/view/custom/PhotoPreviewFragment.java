@@ -27,6 +27,7 @@ public class PhotoPreviewFragment extends BaseFragment{
         return photoPreviewFragment;
     };
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -34,7 +35,7 @@ public class PhotoPreviewFragment extends BaseFragment{
 
         View view = inflater.inflate(R.layout.item_photo_preview, container, false);
         FrescoZoomImageView frescoImageView = (FrescoZoomImageView) view;
-        frescoImageView.loadView(mURL+"!small200",mURL,R.color.black);
+        frescoImageView.loadView(mURL + "!small200", mURL, R.color.black);
 //        frescoImageView.setTapToRetryEnabled(true);//设置点击重新加载
 //        frescoImageView.setImageURI(Uri.parse(mURL));
         frescoImageView.setOnDraweeClickListener(new View.OnClickListener() {

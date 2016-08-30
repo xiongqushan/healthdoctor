@@ -1,5 +1,4 @@
 package haozuo.com.healthdoctor.presenter;
-
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.widget.Toast;
@@ -9,13 +8,16 @@ import javax.inject.Inject;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.DoctorBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
-import haozuo.com.healthdoctor.model.IBaseModel;
-import haozuo.com.healthdoctor.view.IBaseView;
 import haozuo.com.healthdoctor.contract.LoginContract;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
+import haozuo.com.healthdoctor.manager.GroupInfoManager;
 import haozuo.com.healthdoctor.manager.UserManager;
+import haozuo.com.healthdoctor.model.IBaseModel;
 import haozuo.com.healthdoctor.model.UserModel;
+import haozuo.com.healthdoctor.presenter.AbstractPresenter;
 import haozuo.com.healthdoctor.util.StringUtil;
+import haozuo.com.healthdoctor.view.IBaseView;
+
 
 /**
  * Created by xiongwei1 on 2016/7/4.
@@ -121,3 +123,4 @@ public class LoginPresenter extends AbstractPresenter implements LoginContract.I
         return new IBaseModel[]{mUserModel};
     }
 }
+
