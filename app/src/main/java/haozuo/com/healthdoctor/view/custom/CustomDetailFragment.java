@@ -1,3 +1,4 @@
+
 package haozuo.com.healthdoctor.view.custom;
 
 import android.content.Context;
@@ -58,7 +59,6 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
     GridView gv_PhotoReport;
 
     @OnClick(R.id.btn_show_Report)
-
     public void showReport() {
         if (lv_custom_report.getVisibility() == View.GONE) {
             lv_custom_report.setVisibility(View.VISIBLE);
@@ -289,10 +289,8 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
             tv_Count.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(mContext,PhotoPreviewActivity.class)
-                            .putExtra(PhotoPreviewActivity.EXTRA_URL_LIST,RequestPhotoReportEntity.Content));
-//                    startActivity(new Intent(mContext,PhotoPreviewActivity.class)
-// .putExtra(PhotoPreviewActivity.EXTRA_URL_LIST,(Serializable) RequestPhotoReportEntity.ImageUrlList));
+                    startActivity(new Intent(mContext, PhotoPreviewActivity.class)
+                            .putExtra(PhotoPreviewActivity.EXTRA_URL_LIST, RequestPhotoReportEntity.Content));
                 }
             });
 

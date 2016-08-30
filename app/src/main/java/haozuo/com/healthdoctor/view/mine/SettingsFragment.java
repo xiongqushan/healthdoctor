@@ -2,11 +2,11 @@ package haozuo.com.healthdoctor.view.mine;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
-import android.widget.Toast;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -78,17 +78,21 @@ public class SettingsFragment extends BaseFragment {
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_settings, container, false);
             ButterKnife.bind(this, rootView);
-            btnPush.setChecked(JPushInterface.isPushStopped(getActivity()));
+            btnPush.setChecked(!JPushInterface.isPushStopped(getActivity()));
             btnPush.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
                         JPushInterface.resumePush(getActivity());
+                        Log.e("Jpush", "resumePush");
                     } else {
                         JPushInterface.stopPush(getActivity());
+                        Log.e("Jpush", "stopPush");
                     }
+                    boolean pushStopped = JPushInterface.isPushStopped(getActivity());
+                    Log.e("pushStopped", "" + pushStopped);
                     // PreferenceManager.getInstance().writeJpush(isChecked);
-                    Toast.makeText(getContext(), "消息推送:" + (isChecked ? "on" : "off"), Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(getContext(), "消息推送:" + (isChecked ? "on" : "off"), Toast.LENGTH_SHORT).show();
                 }
             });
         }

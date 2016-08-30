@@ -1,3 +1,4 @@
+
 package haozuo.com.healthdoctor.presenter;
 
 import android.support.annotation.NonNull;
@@ -10,6 +11,7 @@ import javax.inject.Inject;
 import haozuo.com.healthdoctor.bean.CustomDetailBean;
 import haozuo.com.healthdoctor.bean.DoctorGroupBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
+import haozuo.com.healthdoctor.manager.GroupInfoManager;
 import haozuo.com.healthdoctor.model.IBaseModel;
 import haozuo.com.healthdoctor.view.IBaseView;
 import haozuo.com.healthdoctor.contract.CustomerInfoContract;
@@ -75,7 +77,7 @@ public class CustomerInfoPresenter extends AbstractPresenter implements Customer
 
     public void InitGroupLabel() {
         //遍历标签名称数组
-        List<DoctorGroupBean> GroupInfo =(List<DoctorGroupBean>) UserManager.getInstance().getGroupInfo();
+        List<DoctorGroupBean> GroupInfo =(List<DoctorGroupBean>) GroupInfoManager.getInstance().getGroupInfo();
         mGroups.clear();
         for (int s: mCustomInfo.GroupIdList){
             for (int i=0; i<GroupInfo.size();i++){

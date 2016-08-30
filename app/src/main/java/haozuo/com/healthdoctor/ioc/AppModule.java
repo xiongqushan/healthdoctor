@@ -11,19 +11,12 @@ import com.squareup.okhttp.Response;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import haozuo.com.healthdoctor.bean.BaseBean;
-import haozuo.com.healthdoctor.bean.CustomDetailBean;
-import haozuo.com.healthdoctor.bean.DoctorBean;
-import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
-import haozuo.com.healthdoctor.bean.PageBean;
 import haozuo.com.healthdoctor.framework.HZApplication;
 import haozuo.com.healthdoctor.framework.SysConfig;
 import haozuo.com.healthdoctor.service.IConsultService;
@@ -35,9 +28,6 @@ import okio.Buffer;
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 import retrofit.RxJavaCallAdapterFactory;
-import retrofit.http.Body;
-import retrofit.http.Query;
-import rx.Observable;
 
 /**
  * Created by xiongwei1 on 2016/8/5.

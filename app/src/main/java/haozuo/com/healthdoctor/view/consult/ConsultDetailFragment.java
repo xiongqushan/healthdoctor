@@ -392,9 +392,8 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
                                 bean.customerId = mCustomerId;
                                 bean.WorkNo = consultReplyEntity.AppendInfo.split(";")[0];
                                 bean.CheckUnitCode = consultReplyEntity.AppendInfo.split(";")[1];
-                                Intent intent = new Intent(getActivity(), CustomerReportActivity.class);
-                                intent.putExtra(CustomerReportActivity.REPORTPARAMSBEAN, bean);
-                                startActivity(intent);
+                                startActivity(new Intent(mContext, CustomerReportActivity.class)
+                                        .putExtra(CustomerReportActivity.REPORTPARAMSBEAN, bean));
                             }
                         });
                         break;

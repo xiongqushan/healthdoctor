@@ -52,21 +52,23 @@ public class MyJpushReceiver extends BroadcastReceiver {
 
         } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent
                 .getAction())) {
-            Intent i = new Intent();
+            Intent intentPush = new Intent();
             // TODO 打开自定义的Activity
             boolean exist = UserManager.getInstance().exist();
-            Log.e(TAG, "" + exist);
+            Log.e(TAG, "getInstance:" + exist);
             if (exist) {
-                i.setClass(context, HomeActivity.class);
+                Log.e(TAG, "HomeActivity:");
+                intentPush.setClass(context, HomeActivity.class);
             } else {
-                i.setClass(context, WelcomeActivity.class);
+                Log.e(TAG, "WelcomeActivity:");
+                intentPush.setClass(context, WelcomeActivity.class);
             }
-            i.putExtras(bundle);
+            intentPush.putExtras(bundle);
+//            intentPush.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intentPush.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                    | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            context.startActivity(intentPush);
             Log.e(TAG, "[MyReceiver] 用户点击打开了通知" + printBundle(bundle));
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-//                    | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            context.startActivity(i);
 
         } else if (JPushInterface.ACTION_RICHPUSH_CALLBACK.equals(intent
                 .getAction())) {
