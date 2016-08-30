@@ -36,7 +36,6 @@ public class WelcomeActivity extends BaseActivity {
         TimerTask task = new TimerTask() {
             public void run() {
                 boolean exist = UserManager.getInstance().exist();
-                Log.e("WelcomeActivity", exist + "");
                 if (exist) {
                     startActivity(new Intent(getBaseContext(), HomeActivity.class));
                 } else {

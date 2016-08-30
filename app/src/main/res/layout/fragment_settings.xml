@@ -130,7 +130,7 @@
     <include layout="@layout/divider_12dp_gray_ee" />
 
 
-    <TextView
+    <Button
         android:id="@+id/btnSignOut"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

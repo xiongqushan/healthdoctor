@@ -1,23 +1,34 @@
 package haozuo.com.healthdoctor.view.mine;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
+
+import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import haozuo.com.healthdoctor.R;
+import haozuo.com.healthdoctor.bean.DoctorBean;
 import haozuo.com.healthdoctor.bean.ReportParamsBean;
+import haozuo.com.healthdoctor.manager.UserManager;
 import haozuo.com.healthdoctor.view.custom.CustomerReportActivity;
 
 /**
  * by zy  2016.08.15.
  */
 public class MineFragment extends Fragment {
+    @Bind(R.id.img_doctorphoto)
+    SimpleDraweeView imgPhoto;
+    @Bind(R.id.tv_doctorname)
+    TextView tvName;
     private View rootView;
 
     @OnClick(R.id.layout_doctor)
@@ -65,8 +76,20 @@ public class MineFragment extends Fragment {
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_mine, container, false);
             ButterKnife.bind(this, rootView);
+            initView();
         }
         return rootView;
+    }
+
+    private void initView() {
+        DoctorBean doctorInfo = UserManager.getInstance().getDoctorInfo();
+        tvName.setText(doctorInfo.Name);
+        String imgUrl = doctorInfo.PhotoUrl;
+        if (imgUrl == null || imgUrl.equals("")) {
+            imgUrl = "res://haozuo.com.healthdoctor.view.custom/" + R.drawable.default_photourl;
+        }
+        Uri uri = Uri.parse(imgUrl);
+        imgPhoto.setImageURI(uri);
     }
 
 }
