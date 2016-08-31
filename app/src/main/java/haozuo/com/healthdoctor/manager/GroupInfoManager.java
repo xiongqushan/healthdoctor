@@ -81,4 +81,10 @@ public class GroupInfoManager {
     public boolean exist(){
         return getGroupInfo()!=null;
     }
+
+
+    public void clear(){
+        sharedPreferences.edit().remove(GROUP_INFO_KEY).commit();
+        _currentGroupEntity=null;
+    }
 }

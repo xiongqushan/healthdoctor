@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -121,7 +122,7 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
         });
 
         mGroupCustomListPresenter.start();
-
+        getActivity().findViewById(R.id.ID_SEARCHFAIL);
         return rootView;
     }
 
@@ -138,6 +139,11 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
 
     @Override
     public void refreshCustomAdapter(List<GroupCustInfoBean> dataList) {
+        if (dataList.size()==0){
+            mShowFailLayer(R.id.rLayout);
+        }else {
+            mHideFailLayer(R.id.rLayout);
+        }
         mGroupCustInfoAdapter.refresh(dataList);
         mGroupCustInfoAdapter.notifyDataSetChanged();
     }
@@ -245,4 +251,25 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
             }
         }
     }
+
+    private static final int ID_SEARCHFAIL = 1357902499;
+
+    private void mShowFailLayer(int frameLayoutContainerId) {
+        FrameLayout rLayout = (FrameLayout) getRootView().findViewById(frameLayoutContainerId);
+        View btnReload = getRootView().findViewById(ID_SEARCHFAIL);
+        if (btnReload == null) {
+            btnReload = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_customlist_search_fail, null);
+            btnReload.setId(ID_SEARCHFAIL);
+            rLayout.addView(btnReload);
+        }
+    }
+
+    private void mHideFailLayer(int frameLayoutContainerId) {
+        final FrameLayout rLayout = (FrameLayout) getRootView().findViewById(frameLayoutContainerId);
+        View btnReload = getRootView().findViewById(ID_SEARCHFAIL);
+        if (btnReload != null) {
+            rLayout.removeView(btnReload);
+        }
+    }
+
 }

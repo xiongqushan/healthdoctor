@@ -1,18 +1,16 @@
+
 package haozuo.com.healthdoctor.view.custom;
 
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -31,6 +29,8 @@ import haozuo.com.healthdoctor.contract.CustomDetailContract;
 import haozuo.com.healthdoctor.presenter.IBasePresenter;
 import haozuo.com.healthdoctor.util.UIHelper;
 import haozuo.com.healthdoctor.view.base.AbstractView;
+import haozuo.com.healthdoctor.view.threePart.common.ChildGridView;
+import haozuo.com.healthdoctor.view.threePart.common.ChildListView;
 
 public class CustomDetailFragment extends AbstractView implements CustomDetailContract.ICustomDetailView {
     Context mContext;
@@ -40,22 +40,14 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
     private ReportParamsAdapter mReportParamsAdapter;
     private PhotoReportAdapter mPhotoReportAdapter;
     private CustomDetailBean mCustomInfo;
-    @Bind(R.id.drawee_CPhoto)
-    SimpleDraweeView CPhoto;
-    @Bind(R.id.tv_CName)
-    TextView CName;
-    @Bind(R.id.tv_CGender)
-    TextView CGender;
-    @Bind(R.id.tv_CAge)
-    TextView CAge;
-    @Bind(R.id.tv_Cphone)
-    TextView Cphone;
-    @Bind(R.id.btn_go_into)
-    ImageView btn_go_into;
-    @Bind(R.id.lv_custom_report)
-    ListView lv_custom_report;
-    @Bind(R.id.gv_PhotoReport)
-    GridView gv_PhotoReport;
+    @Bind(R.id.drawee_CPhoto) SimpleDraweeView CPhoto;
+    @Bind(R.id.tv_CName) TextView CName;
+    @Bind(R.id.tv_CGender) TextView CGender;
+    @Bind(R.id.tv_CAge) TextView CAge;
+    @Bind(R.id.tv_Cphone) TextView Cphone;
+    @Bind(R.id.btn_go_into) ImageView btn_go_into;
+    @Bind(R.id.lv_custom_report) ChildListView lv_custom_report;
+    @Bind(R.id.gv_PhotoReport) ChildGridView gv_PhotoReport;
 
     @OnClick(R.id.btn_show_Report)
     public void showReport() {
@@ -290,14 +282,13 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
                 public void onClick(View v) {
                     startActivity(new Intent(mContext,PhotoPreviewActivity.class)
                             .putExtra(PhotoPreviewActivity.EXTRA_URL_LIST,RequestPhotoReportEntity.Content));
-//                    startActivity(new Intent(mContext,PhotoPreviewActivity.class)
-// .putExtra(PhotoPreviewActivity.EXTRA_URL_LIST,(Serializable) RequestPhotoReportEntity.ImageUrlList));
                 }
             });
 
             return convertView;
         }
     }
+
 }
 
 

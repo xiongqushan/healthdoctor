@@ -9,9 +9,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.lang.ref.SoftReference;
-import java.util.HashSet;
-import java.util.Hashtable;
-
 import haozuo.com.healthdoctor.bean.DoctorBean;
 import haozuo.com.healthdoctor.framework.HZApplication;
 import haozuo.com.healthdoctor.util.StringUtil;
@@ -92,6 +89,7 @@ public class UserManager  {
 
     public void clear(){
         sharedPreferences.edit().remove(USER_INFO_KEY).commit();
+        _instance = null;
     }
 
 }

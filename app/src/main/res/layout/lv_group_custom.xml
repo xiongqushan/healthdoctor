@@ -1,5 +1,6 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="haozuo.com.healthdoctor.view.custom.GroupCustomListFragment">
@@ -21,3 +22,4 @@
     </haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout>
 
 </FrameLayout>
+

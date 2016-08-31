@@ -1,7 +1,6 @@
 package haozuo.com.healthdoctor.bean;
 
 import java.io.Serializable;
-import java.util.Comparator;
 
 /**
  * Created by xiongwei1 on 2016/6/1.

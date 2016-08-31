@@ -12,6 +12,7 @@ import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.ioc.AppComponent;
 import haozuo.com.healthdoctor.ioc.AppModule;
 import haozuo.com.healthdoctor.ioc.DaggerAppComponent;
+import haozuo.com.healthdoctor.manager.PreferenceManager;
 
 
 /**
@@ -45,6 +46,7 @@ public class HZApplication extends Application {
 
         JPushInterface.setDebugMode(SysConfig.DebugMode);    // 设置开启日志,发布时请关闭日志
         JPushInterface.init(this);
+        PreferenceManager.init(this);
 
     }
 

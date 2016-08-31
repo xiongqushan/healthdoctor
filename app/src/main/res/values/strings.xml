@@ -6,7 +6,7 @@
     <string name="login_mobile">请输入手机号</string>
     <string name="login_code">请输入手机验证码</string>
     <string name="login_get_code">发送验证码</string>
-    <string name="login_submit">登录</string>
+    <string name="login_submit">登 录</string>
 
     <string name="group_serverCount">服务人数</string>
     <string name="pull_to_refresh">下拉刷新</string>
@@ -21,9 +21,7 @@
     <string name="load_fail">加载失败</string>
 
     <!--语音听写APP_ID-->
-    <!--<string name="app_id">57ac1f0a</string>个人账号-->
-    <string name="app_id">57bf998f</string>
-
+    <string name="app_id">57ac1f0a</string>
     <!-- 听写 -->
     <string name="text_begin">请开始说话…</string>
     <string name="text_begin_recognizer">开始音频流识别</string>
@@ -38,4 +36,5 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

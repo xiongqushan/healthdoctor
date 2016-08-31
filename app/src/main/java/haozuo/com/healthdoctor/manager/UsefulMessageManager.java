@@ -38,4 +38,9 @@ public class UsefulMessageManager {
     public List<UsefulExpressionBean> getDefaultExpression(){
         return  _usefulExpressionEntity;
     }
+
+    public void clear(){
+        _usefulExpressionEntity=null;
+    }
+
 }

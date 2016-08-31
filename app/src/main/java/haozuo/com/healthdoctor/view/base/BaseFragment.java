@@ -12,7 +12,7 @@ import haozuo.com.healthdoctor.framework.HZApplication;
  * Created by xiongwei1 on 2016/8/1.
  */
 public class BaseFragment extends Fragment {
-    public static final String BROADFILTER_CONSULT_REPLAY ="BROADFILTER_CONSULT_REPLAY";
+    public static final String BROADFILTER_CONSULT_REPLAY = "BROADFILTER_CONSULT_REPLAY";
 
     BroadcastReceiver receiver;
 
@@ -23,7 +23,7 @@ public class BaseFragment extends Fragment {
 
     protected void registerCustomReceiver(String[] filterActiveNames) {
         if (receiver != null) {
-           getContext().unregisterReceiver(receiver);
+            getContext().unregisterReceiver(receiver);
         }
         receiver = new BroadcastReceiver() {
             @Override

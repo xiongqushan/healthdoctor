@@ -10,8 +10,6 @@ import android.widget.FrameLayout;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.umeng.analytics.MobclickAgent;
-
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -36,6 +34,7 @@ import haozuo.com.healthdoctor.view.group.GroupFragment;
 import haozuo.com.healthdoctor.view.mine.MineFragment;
 
 public class HomeActivity extends BaseActivity {
+    public static final String FINISHACTIVITY = "FINISHACTIVITY";
     @Bind(R.id.tab_menu)
     RadioGroup rgTabhost;
     //    @Bind(R.id.rbGroup)
@@ -117,7 +116,7 @@ public class HomeActivity extends BaseActivity {
         String alias = UserManager.getInstance().getDoctorInfo().Account;
         int doctor_IDid = UserManager.getInstance().getDoctorInfo().Doctor_ID;
         Log.e(alias, alias);
-        Log.e(alias, alias);
+        Log.e("doctor_IDid", doctor_IDid + "");
         mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, "2055"));
     }
 
@@ -170,7 +169,6 @@ public class HomeActivity extends BaseActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if (isExit) {
-                MobclickAgent.onKillProcess(this);
                 System.exit(0);
                 return true;
             } else {

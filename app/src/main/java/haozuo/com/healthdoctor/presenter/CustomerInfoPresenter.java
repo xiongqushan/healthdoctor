@@ -1,3 +1,4 @@
+
 package haozuo.com.healthdoctor.presenter;
 
 import android.support.annotation.NonNull;
@@ -10,14 +11,14 @@ import javax.inject.Inject;
 import haozuo.com.healthdoctor.bean.CustomDetailBean;
 import haozuo.com.healthdoctor.bean.DoctorGroupBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
-import haozuo.com.healthdoctor.manager.GroupInfoManager;
-import haozuo.com.healthdoctor.model.IBaseModel;
-import haozuo.com.healthdoctor.view.IBaseView;
 import haozuo.com.healthdoctor.contract.CustomerInfoContract;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
+import haozuo.com.healthdoctor.manager.GroupInfoManager;
 import haozuo.com.healthdoctor.manager.UserManager;
 import haozuo.com.healthdoctor.model.GroupModel;
+import haozuo.com.healthdoctor.model.IBaseModel;
 import haozuo.com.healthdoctor.model.UserModel;
+import haozuo.com.healthdoctor.view.IBaseView;
 
 /**
  * Created by xiongwei1 on 2016/7/25.
@@ -32,10 +33,10 @@ public class CustomerInfoPresenter extends AbstractPresenter implements Customer
     private List<DoctorGroupBean> mGroups = new ArrayList<DoctorGroupBean>();
 
     @Inject
-    public CustomerInfoPresenter(@NonNull CustomerInfoContract.ICustomerInfoView iCustomerInfoView,@NonNull UserModel userModel,@NonNull CustomDetailBean customInfo){
-        mCustomInfo=customInfo;
-        mICustomerInfoView=iCustomerInfoView;
-        mUserModel=userModel;
+    public CustomerInfoPresenter(@NonNull CustomerInfoContract.ICustomerInfoView iCustomerInfoView, @NonNull UserModel userModel, @NonNull CustomDetailBean customInfo) {
+        mCustomInfo = customInfo;
+        mICustomerInfoView = iCustomerInfoView;
+        mUserModel = userModel;
         mICustomerInfoView.setPresenter(this);
     }
 
@@ -62,11 +63,10 @@ public class CustomerInfoPresenter extends AbstractPresenter implements Customer
         mGroupModel.DeleteCustomerGroup(mCustomInfo.Id, DeleteGroupId, mOperateBy, new OnHandlerResultListener<GlobalShell<Boolean>>() {
             @Override
             public void handlerResult(GlobalShell<Boolean> resultData) {
-                if(resultData.LogicSuccess) {
+                if (resultData.LogicSuccess) {
                     mICustomerInfoView.hideDialog();
                     mICustomerInfoView.refreshLabelView(mGroups);
-                }
-                else{
+                } else {
                     mICustomerInfoView.hideDialog(resultData.Message);
                 }
 
@@ -74,13 +74,14 @@ public class CustomerInfoPresenter extends AbstractPresenter implements Customer
         });
     }
 
+    @Override
     public void InitGroupLabel() {
         //遍历标签名称数组
-        List<DoctorGroupBean> GroupInfo =(List<DoctorGroupBean>) GroupInfoManager.getInstance().getGroupInfo();
+        List<DoctorGroupBean> GroupInfo = (List<DoctorGroupBean>) GroupInfoManager.getInstance().getGroupInfo();
         mGroups.clear();
-        for (int s: mCustomInfo.GroupIdList){
-            for (int i=0; i<GroupInfo.size();i++){
-                if (s == GroupInfo.get(i).id){
+        for (int s : mCustomInfo.GroupIdList) {
+            for (int i = 0; i < GroupInfo.size(); i++) {
+                if (s == GroupInfo.get(i).id) {
                     mGroups.add(GroupInfo.get(i));
                 }
             }
@@ -91,10 +92,7 @@ public class CustomerInfoPresenter extends AbstractPresenter implements Customer
             int groupId = Integer.parseInt(String.valueOf(entry.id));
             mICustomerInfoView.addLabelView(entry);
         }
-
-
     }
-
 
 
 }

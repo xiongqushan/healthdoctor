@@ -16,8 +16,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.umeng.analytics.MobclickAgent;
-
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.framework.HZApplication;
 import haozuo.com.healthdoctor.ioc.AppComponent;
@@ -41,21 +39,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 //        super.startActivity(intent);
 //        overridePendingTransition(R.anim.to_right_in, R.anim.to_right_out);
 
-    //必须调用 MobclickAgent.onResume() 和MobclickAgent.onPause()方法，才能够保证获取正确的新增用户、活跃用户、启动次数、使用时长等基本数据。
-    @Override
-    public void onResume() {
-        super.onResume();
-//        MobclickAgent.onPageStart(mPageName);
-        MobclickAgent.onResume(this);
-    }
-
-    //
-    @Override
-    public void onPause() {
-        super.onPause();
-//        MobclickAgent.onPageEnd(mPageName);
-        MobclickAgent.onPause(this);
-    }
 
     @Override
     public void finish() {

@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -49,11 +48,11 @@ public class PhotoPreviewActivity extends BaseActivity {
     }
 
     class PhotoPreviewAdapter extends FragmentPagerAdapter {
-        private List<PhotoReportFragment> feedbackList = new ArrayList<PhotoReportFragment>();
+        private List<PhotoPreviewFragment> feedbackList = new ArrayList<PhotoPreviewFragment>();
         public PhotoPreviewAdapter(FragmentManager fm, List<String> PhotoUrlList) {
             super(fm);
             for (int i=0;i<PhotoUrlList.size();i++){
-                feedbackList.add(PhotoReportFragment.newInstance(PhotoUrlList.get(i)));
+                feedbackList.add(PhotoPreviewFragment.newInstance(PhotoUrlList.get(i)));
             }
         }
 
@@ -68,3 +67,4 @@ public class PhotoPreviewActivity extends BaseActivity {
         }
     }
 }
+

@@ -1,9 +1,10 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".view.custom.CustomDetailFragment">
 
     <LinearLayout
@@ -14,15 +15,15 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="85dp"
-            android:orientation="vertical"
-            android:background="@drawable/bg_custom_info">
+            android:background="@color/white"
+            android:orientation="vertical">
 
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/drawee_CPhoto"
                 android:layout_width="@dimen/custom_url_height"
                 android:layout_height="@dimen/custom_url_height"
-                android:padding="@dimen/custom_padding"
                 android:layout_centerVertical="true"
+                android:padding="@dimen/custom_padding"
                 fresco:roundAsCircle="true" />
 
             <TextView
@@ -31,32 +32,32 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="17dp"
                 android:layout_toRightOf="@id/drawee_CPhoto"
-                android:textSize="@dimen/textsize_h2"
                 android:textColor="@color/textColor_black"
+                android:textSize="@dimen/textsize_h2"
                 tools:text="张三" />
 
             <TextView
                 android:id="@+id/tv_CGender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/drawee_CPhoto"
                 android:layout_below="@id/tv_CName"
-                android:layout_marginTop="@dimen/custom_gender_margintop"
                 android:layout_marginRight="@dimen/custom_gender_marginright"
-                android:textSize="@dimen/textsize_h4"
+                android:layout_marginTop="@dimen/custom_gender_margintop"
+                android:layout_toRightOf="@id/drawee_CPhoto"
                 android:textColor="@color/textColor_dirtygrey"
-                tools:text="男"/>
+                android:textSize="@dimen/textsize_h4"
+                tools:text="男" />
 
             <TextView
                 android:id="@+id/tv_CAge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@id/tv_CGender"
-                android:layout_toRightOf="@id/tv_CGender"
                 android:layout_marginRight="@dimen/custom_gender_marginright"
-                android:textSize="@dimen/textsize_h4"
+                android:layout_toRightOf="@id/tv_CGender"
                 android:textColor="@color/textColor_dirtygrey"
-                tools:text="35"/>
+                android:textSize="@dimen/textsize_h4"
+                tools:text="35" />
 
             <TextView
                 android:id="@+id/tv_Cphone"
@@ -64,127 +65,180 @@
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@id/tv_CAge"
                 android:layout_toRightOf="@id/tv_CAge"
-                android:textSize="@dimen/textsize_h4"
                 android:textColor="@color/textColor_dirtygrey"
-                tools:text="1388888888"/>
+                android:textSize="@dimen/textsize_h4"
+                tools:text="1388888888" />
 
             <ImageView
                 android:id="@+id/btn_go_into"
                 android:layout_width="48dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/btn_go_into"
-                android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
-                android:paddingRight="@dimen/custom_padding"
+                android:layout_centerVertical="true"
+                android:paddingBottom="33dp"
                 android:paddingLeft="20dp"
+                android:paddingRight="@dimen/custom_padding"
                 android:paddingTop="33dp"
-                android:paddingBottom="33dp"/>
+                android:src="@drawable/btn_go_into" />
 
         </RelativeLayout>
 
-        <LinearLayout
-            android:id="@+id/Linear_ReportTitle"
+        <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/report_title_height"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/custom_padding"
-            android:paddingRight="@dimen/custom_padding"
-            android:background="@drawable/bg_report_title">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="体检报告"
-                android:textColor="@color/textColor_light_blue"
-                android:textSize="@dimen/textsize_h2"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/custom_padding"
-                android:text="更新"
-                android:textSize="@dimen/textsize_h5"
-                android:textColor="@color/white"
-                android:background="@drawable/report_title_shape"/>
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:visibility="invisible"/>
-
-            <ImageView
-                android:id="@+id/btn_show_Report"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/btn_show_report"/>
-
-            <!--<CheckBox-->
-                <!--android:id="@+id/btn_show_Report"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:button="@null"-->
-                <!--android:checked="true"-->
-                <!--android:background="@drawable/bg_report_title_selector"/>-->
-
-    </LinearLayout>
-
-    <ListView
-        android:id="@+id/lv_custom_report"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:divider="@null"
-        android:visibility="visible"/>
-
-
-    <LinearLayout
-        android:id="@+id/linear_PhotoReport"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/report_title_height"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/custom_padding"
-        android:paddingRight="@dimen/custom_padding"
-        android:background="@drawable/bg_report_title">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="照片病例"
-            android:textColor="@color/textColor_light_blue"
-            android:textSize="@dimen/textsize_h2"/>
+            android:layout_height="@dimen/dividerline"
+            android:background="@color/divider_d3" />
 
         <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:visibility="invisible"/>
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:background="@color/gray_bg_ee" />
 
-        <ImageView
-            android:id="@+id/btn_show_PhotoReport"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/btn_show_report"/>
 
-        <!--<CheckBox-->
-            <!--android:id="@+id/btn_show_PhotoReport"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:button="@null"-->
-            <!--android:checked="true"-->
-            <!--android:background="@drawable/bg_report_title_selector"/>-->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dividerline"
+            android:background="@color/divider_d3" />
+
+
+        <haozuo.com.healthdoctor.view.threePart.common.StickScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingBottom="12dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:tag="sticky">
+
+                    <LinearLayout
+                        android:id="@+id/Linear_ReportTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/report_title_height"
+                        android:background="@color/white"
+                        android:orientation="horizontal"
+                        android:paddingLeft="@dimen/custom_padding"
+                        android:paddingRight="@dimen/custom_padding">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="体检报告"
+                            android:textColor="@color/textColor_light_blue"
+                            android:textSize="@dimen/textsize_h2" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/custom_padding"
+                            android:background="@drawable/report_title_shape"
+                            android:text="更新"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/textsize_h5" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:visibility="invisible" />
+
+                        <CheckBox
+                            android:id="@+id/btn_show_Report"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:button="@drawable/bg_report_title_selector"
+                            android:checked="true" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dividerline"
+                        android:background="@color/divider_d3" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:background="@color/gray_bg_ee" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dividerline"
+                    android:background="@color/divider_d3" />
+
+                <haozuo.com.healthdoctor.view.threePart.common.ChildListView
+                    android:id="@+id/lv_custom_report"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:divider="@null"
+                    android:visibility="visible" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:tag="sticky">
+
+                    <LinearLayout
+                        android:id="@+id/linear_PhotoReport"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/report_title_height"
+                        android:orientation="horizontal"
+                        android:paddingLeft="@dimen/custom_padding"
+                        android:paddingRight="@dimen/custom_padding">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="照片病例"
+                            android:textColor="@color/textColor_light_blue"
+                            android:textSize="@dimen/textsize_h2" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:visibility="invisible" />
+
+                        <CheckBox
+                            android:id="@+id/btn_show_PhotoReport"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:button="@drawable/bg_report_title_selector"
+                            android:checked="true" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dividerline"
+                        android:background="@color/divider_d3" />
+                </LinearLayout>
+
+
+                <haozuo.com.healthdoctor.view.threePart.common.ChildGridView
+                    android:id="@+id/gv_PhotoReport"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:numColumns="3"
+                    android:visibility="visible" />
+
+            </LinearLayout>
+        </haozuo.com.healthdoctor.view.threePart.common.StickScrollView>
+
 
     </LinearLayout>
-
-    <GridView
-        android:id="@+id/gv_PhotoReport"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:numColumns="3"
-        android:visibility="visible"/>
-
-</LinearLayout>
 
 </FrameLayout>
