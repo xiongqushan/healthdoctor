@@ -50,7 +50,7 @@
     <dimen name="custom_padding">10dp</dimen>
     <dimen name="custom_gender_margintop">19dp</dimen>
     <dimen name="custom_gender_marginright">40dp</dimen>
-    <dimen name="report_title_height">40dp</dimen>
+    <dimen name="report_title_height">44dp</dimen>
     <dimen name="report_title_paddingleft">5dp</dimen>
     <dimen name="report_title_paddingTop">2dp</dimen>
     <dimen name="report_btn_height">48dp</dimen>

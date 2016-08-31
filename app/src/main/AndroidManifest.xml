@@ -29,11 +29,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <!-- 友盟权限 -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
 
     <!-- Jpush权限 -->
     <!-- 自定义权限 -->
@@ -134,22 +129,12 @@
             android:name=".view.custom.CustomerReportActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".view.mine.DoctorInfoActivity" />
-        <activity android:name=".view.mine.SettingsActivity" />
-
-        <!-- android:theme="@style/AppTheme.NoActionBar" /> -->
-
+        <activity
+            android:name=".view.mine.SettingsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.custom.PhotoPreviewActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
-        <!-- 友盟统计 -->
-        <meta-data
-            android:name="UMENG_APPKEY"
-            android:value="57be474667e58ef053000087" />
-        <meta-data
-            android:name="UMENG_CHANNEL"
-            android:value="Umeng" />
-
         <!-- 极光推送 -->
         <!-- Rich push 核心功能 since 2.0.6 -->
         <activity
@@ -165,6 +150,7 @@
             android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
                 <action android:name="cn.jpush.android.ui.PushActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="haozuo.com.healthdoctor" />
             </intent-filter>
@@ -235,8 +221,8 @@
         <!-- User defined.  For test only  用户自定义的广播接收器 -->
         <receiver
             android:name=".view.threePart.MyJpushReceiver"
-            android:enabled="true"
-            android:exported="false">
+            android:enabled="true">
+            <!--android:exported="false"-->
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.REGISTRATION" />
                 <!-- Required  用户注册SDK的intent -->
@@ -265,7 +251,7 @@
         <activity android:name=".view.mine.AboutUsActivity" />
         <activity
             android:name=".view.mine.AdviceActivity"
-            android:windowSoftInputMode="adjustPan" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".view.mine.HelpActivity" />
         <activity android:name=".view.mine.StatementActivity"></activity>
     </application>
