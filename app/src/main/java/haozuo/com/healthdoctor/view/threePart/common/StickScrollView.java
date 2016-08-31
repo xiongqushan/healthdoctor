@@ -316,28 +316,28 @@ public class StickScrollView extends ScrollView {
 		return super.onTouchEvent(ev);
 	}
 
-	@Override
-	public boolean onInterceptTouchEvent(MotionEvent event) {
-
-		// TODO 0413首页截处理日期选择手势
-		boolean value = super.onInterceptTouchEvent(event);
-		if (value) {
-			float startx = 0;
-			float starty = 0;
-			if (event.getAction() == MotionEvent.ACTION_DOWN) {
-				startx = event.getX();
-				starty = event.getY();
-			}
-			if (event.getAction() == MotionEvent.ACTION_MOVE) {
-				float deltax = event.getX() - startx;
-				float deltay = event.getY() - starty;
-				if (Math.abs(deltay) > Math.abs(deltax)) {// 说明确实是上下滑动的
-					return true;
-				}
-				return false;
-			}
-		}
-		return super.onInterceptTouchEvent(event);
-	}
+//	@Override
+//	public boolean onInterceptTouchEvent(MotionEvent event) {
+//
+//		// TODO 0413首页截处理日期选择手势
+//		boolean value = super.onInterceptTouchEvent(event);
+//		if (value) {
+//			float startx = 0;
+//			float starty = 0;
+//			if (event.getAction() == MotionEvent.ACTION_DOWN) {
+//				startx = event.getX();
+//				starty = event.getY();
+//			}
+//			if (event.getAction() == MotionEvent.ACTION_MOVE) {
+//				float deltax = event.getX() - startx;
+//				float deltay = event.getY() - starty;
+//				if (Math.abs(deltay) > Math.abs(deltax)) {// 说明确实是上下滑动的
+//					return true;
+//				}
+//				return false;
+//			}
+//		}
+//		return super.onInterceptTouchEvent(event);
+//	}
 
 }

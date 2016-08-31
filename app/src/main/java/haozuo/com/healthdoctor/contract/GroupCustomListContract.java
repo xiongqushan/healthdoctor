@@ -11,6 +11,7 @@ import haozuo.com.healthdoctor.view.IBaseView;
  */
 public interface GroupCustomListContract {
     interface IGroupCustomListView extends IBaseView<IGroupCustomListPresenter> {
+
         void refreshCustomAdapter(List<GroupCustInfoBean> dataList);
 
         void refreshFinish(int status);
@@ -18,6 +19,7 @@ public interface GroupCustomListContract {
     }
 
     interface IGroupCustomListPresenter extends IBasePresenter {
+
         void refreshCustomList(String customNameOrMobile);
 
         void loadmoreCustomList(String customNameOrMobile);

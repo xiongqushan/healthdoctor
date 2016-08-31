@@ -3,6 +3,9 @@ package haozuo.com.healthdoctor.framework;
 import android.app.Application;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.core.ImagePipelineConfig;
+import com.facebook.imagepipeline.decoder.SimpleProgressiveJpegConfig;
+import com.iflytek.cloud.Setting;
 import com.iflytek.cloud.SpeechUtility;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
@@ -41,8 +44,12 @@ public class HZApplication extends Application {
 
         SpeechUtility.createUtility(this, "appid=" + getString(R.string.app_id));
         // 以下语句用于设置日志开关（默认开启），设置成false时关闭语音云SDK日志打印
-        // Setting.setShowLog(false);
-        Fresco.initialize(this);
+         Setting.setShowLog(true);
+
+        ImagePipelineConfig config = ImagePipelineConfig.newBuilder(this)
+                .setProgressiveJpegConfig(new SimpleProgressiveJpegConfig())
+                .build();
+        Fresco.initialize(this,config);
 
         JPushInterface.setDebugMode(SysConfig.DebugMode);    // 设置开启日志,发布时请关闭日志
         JPushInterface.init(this);

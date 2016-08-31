@@ -1,34 +1,39 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context="haozuo.com.healthdoctor.view.custom.CustomerInfoFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingRight="12dp"
         android:paddingLeft="12dp"
-        android:paddingBottom="12dp">
+        android:paddingRight="12dp"
+        android:background="@color/white">
+
         <LinearLayout
             android:id="@+id/userPhoto"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:orientation="horizontal">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="22dp"
                 android:layout_marginLeft="12dp"
+                android:layout_marginTop="22dp"
                 android:gravity="center"
-                android:text="头像"/>
+                android:text="头像" />
+
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:visibility="invisible"/>
+                android:visibility="invisible" />
+
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/CPhoto"
                 android:layout_width="40dp"
@@ -39,27 +44,27 @@
         </LinearLayout>
 
         <View
-            android:layout_height="1px"
             android:layout_width="match_parent"
+            android:layout_height="1px"
             android:background="@color/gray" />
 
         <LinearLayout
             android:id="@+id/userName"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="40dp">
+            android:layout_height="40dp"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="13dp"
-                android:text="姓名"/>
+                android:text="姓名" />
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/Cname"
@@ -67,31 +72,31 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="12dp"
                 android:layout_marginTop="13dp"
-                tools:text="张三"/>
+                tools:text="张三" />
         </LinearLayout>
 
         <View
-            android:layout_height="1px"
             android:layout_width="match_parent"
+            android:layout_height="1px"
             android:background="@color/gray" />
 
         <LinearLayout
             android:id="@+id/userAge"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="40dp">
+            android:layout_height="40dp"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="13dp"
-                android:text="年龄"/>
+                android:text="年龄" />
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/CAge"
@@ -99,31 +104,31 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="12dp"
                 android:layout_marginTop="13dp"
-                tools:text="57"/>
+                tools:text="57" />
         </LinearLayout>
 
         <View
-            android:layout_height="1px"
             android:layout_width="match_parent"
+            android:layout_height="1px"
             android:background="@color/gray" />
 
         <LinearLayout
             android:id="@+id/userHeight"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="40dp">
+            android:layout_height="40dp"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="13dp"
-                android:text="身高"/>
+                android:text="身高" />
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/CHeight"
@@ -131,37 +136,36 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="12dp"
                 android:layout_marginTop="13dp"
-                tools:text="57"/>
+                tools:text="57" />
         </LinearLayout>
+    </LinearLayout>
 
-        <View
-            android:layout_height="1px"
-            android:layout_width="match_parent"
-            android:background="@color/gray" />
-
-        <View
-            android:layout_height="1px"
-            android:layout_width="match_parent"
-            android:background="@color/gray"
-            android:layout_marginTop="10dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white">
 
         <LinearLayout
             android:id="@+id/userPosition"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="40dp">
+            android:layout_height="40dp"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="13dp"
-                android:text="职业"/>
+                android:text="职业" />
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/CPosition"
@@ -169,31 +173,31 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="12dp"
                 android:layout_marginTop="13dp"
-                tools:text="高级工程师"/>
+                tools:text="高级工程师" />
         </LinearLayout>
 
         <View
-            android:layout_height="1px"
             android:layout_width="match_parent"
+            android:layout_height="1px"
             android:background="@color/gray" />
 
         <LinearLayout
             android:id="@+id/userMobile"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="40dp">
+            android:layout_height="40dp"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="13dp"
-                android:text="手机号"/>
+                android:text="手机号" />
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/CMobile"
@@ -201,31 +205,31 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="12dp"
                 android:layout_marginTop="13dp"
-                tools:text="13888888888"/>
+                tools:text="13888888888" />
         </LinearLayout>
 
         <View
-            android:layout_height="1px"
             android:layout_width="match_parent"
+            android:layout_height="1px"
             android:background="@color/gray" />
 
         <LinearLayout
             android:id="@+id/userCompany"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="40dp">
+            android:layout_height="40dp"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="13dp"
-                android:text="单位"/>
+                android:text="单位" />
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/CCompany"
@@ -233,37 +237,37 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="12dp"
                 android:layout_marginTop="13dp"
-                tools:text="上海好卓"/>
+                tools:text="上海好卓" />
         </LinearLayout>
 
-        <View
-            android:layout_height="1px"
-            android:layout_width="match_parent"
-            android:background="@color/gray" />
+    </LinearLayout>
 
-        <View
-            android:layout_height="1px"
-            android:layout_width="match_parent"
-            android:background="@color/gray"
-            android:layout_marginTop="10dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white">
 
         <LinearLayout
             android:id="@+id/userConnect"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="40dp">
+            android:layout_height="40dp"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="13dp"
-                android:text="第一联系人"/>
+                android:text="第一联系人" />
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/CConnect"
@@ -271,31 +275,31 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="12dp"
                 android:layout_marginTop="13dp"
-                tools:text="张三"/>
+                tools:text="张三" />
         </LinearLayout>
 
         <View
-            android:layout_height="1px"
             android:layout_width="match_parent"
+            android:layout_height="1px"
             android:background="@color/gray" />
 
         <LinearLayout
             android:id="@+id/userConnectPhone"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="40dp">
+            android:layout_height="40dp"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="13dp"
-                android:text="第一联系人电话"/>
+                android:text="第一联系人电话" />
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/CConnectPhone"
@@ -303,48 +307,42 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="12dp"
                 android:layout_marginTop="13dp"
-                tools:text="1388888888"/>
-        </LinearLayout>
-
-        <View
-            android:layout_height="1px"
-            android:layout_width="match_parent"
-            android:background="@color/gray" />
-
-        <View
-            android:layout_height="1px"
-            android:layout_width="match_parent"
-            android:background="@color/gray"
-            android:layout_marginTop="10dp"/>
-
-        <LinearLayout
-            android:id="@+id/userGroup"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="13dp"
-                android:text="分组"/>
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-                <haozuo.com.healthdoctor.view.threePart.common.FlowLayout
-                    android:id="@+id/flow_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="10dp" >
-                </haozuo.com.healthdoctor.view.threePart.common.FlowLayout>
-            </ScrollView>
-
+                tools:text="1388888888" />
         </LinearLayout>
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/userGroup"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="12dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:background="@color/white">
 
-</FrameLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="13dp"
+            android:text="分组" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <haozuo.com.healthdoctor.view.threePart.common.FlowLayout
+                android:id="@+id/flow_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"/>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</LinearLayout>

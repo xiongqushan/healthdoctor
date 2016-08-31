@@ -27,7 +27,6 @@ public class ConsultDetailActivity extends BaseActivity {
     private int mCustId;
     private String mAccountId;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,8 +49,5 @@ public class ConsultDetailActivity extends BaseActivity {
         }
     }
 
-    public void setCustomerTitle(CustomDetailBean customDetailBean) {
-        setCustomerTitle(customDetailBean.Cname);
-    }
 }
 

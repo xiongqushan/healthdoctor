@@ -2,11 +2,13 @@ package haozuo.com.healthdoctor.view.custom;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.view.View;
 
 import java.io.Serializable;
 
 import javax.inject.Inject;
 
+import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.DoctorGroupBean;
 import haozuo.com.healthdoctor.contract.GroupCustomListContract;
@@ -38,7 +40,6 @@ public class GroupCustomListActivity extends BaseActivity {
             groupName = doctorGroupBean.name;
             groupId = doctorGroupBean.id;
         }
-//        setCustomerTitle(groupName);
         setTitleWithSearch(groupName);
 
         DaggerGroupCustomListComponent.builder()

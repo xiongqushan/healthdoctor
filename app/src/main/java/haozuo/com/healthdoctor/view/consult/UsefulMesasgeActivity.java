@@ -31,7 +31,6 @@ public class UsefulMesasgeActivity extends BaseActivity {
 
     public static String LAST_CONSULT_CONTENT="LAST_CONSULT_CONTENT";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

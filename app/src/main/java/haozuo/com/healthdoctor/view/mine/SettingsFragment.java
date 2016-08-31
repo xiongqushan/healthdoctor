@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.Toast;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -99,10 +100,8 @@ public class SettingsFragment extends BaseFragment {
                         JPushInterface.stopPush(getActivity());
                         Log.e("Jpush", "stopPush");
                     }
-                    boolean pushStopped = JPushInterface.isPushStopped(getActivity());
-                    Log.e("pushStopped", "" + pushStopped);
                     // PreferenceManager.getInstance().writeJpush(isChecked);
-                    // Toast.makeText(getContext(), "消息推送:" + (isChecked ? "on" : "off"), Toast.LENGTH_SHORT).show();
+                     Toast.makeText(getContext(), "消息推送:" + (isChecked ? "on" : "off"), Toast.LENGTH_SHORT).show();
                 }
             });
         }

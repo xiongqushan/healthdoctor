@@ -20,6 +20,7 @@ import haozuo.com.healthdoctor.model.ConsultModel;
 import haozuo.com.healthdoctor.model.GroupModel;
 import haozuo.com.healthdoctor.model.UserModel;
 import haozuo.com.healthdoctor.util.DateUtil;
+import haozuo.com.healthdoctor.view.consult.ConsultDetailFragment;
 import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout;
 
 /**
@@ -91,7 +92,7 @@ public class ConsultDetailPresenter extends AbstractPresenter implements Consult
                         mConsultItemBeanList.addAll(0,loadmoreConsultResults);
                         mIConsultDetailView.refreshCustomAdapter(mConsultItemBeanList);
                         mCommitOn =mConsultItemBeanList.get(0).CommitOn.replaceAll("(?:T|:|-)","");
-                        mIConsultDetailView.setListViewPosition(loadmoreConsultResults.size());
+                        mIConsultDetailView.setListViewPosition(loadmoreConsultResults.size(), ConsultDetailFragment.SELECT_POSITION_DIRECT);
 
                     }
                 }
@@ -105,15 +106,18 @@ public class ConsultDetailPresenter extends AbstractPresenter implements Consult
     }
 
     @Override
-    public void addDoctorReply(int DoctorId,int ReDoctorId,String ReDoctorName,int CustomerId,String ReplyContent,String ReplyTime) {
+    public void addDoctorReply(int DoctorId, final int ReDoctorId, String ReDoctorName, int CustomerId, final String ReplyContent, final String ReplyTime) {
         mIConsultDetailView.showDialog();
         mConsultModel.addDoctorReply(DoctorId,ReDoctorId,ReDoctorName,CustomerId,ReplyContent,ReplyTime ,new OnHandlerResultListener<GlobalShell<Boolean>>() {
             @Override
             public void handlerResult(GlobalShell<Boolean> resultData) {
                 if (resultData.LogicSuccess) {
-//                    mIConsultDetailView.hideDialog();
+                    mIConsultDetailView.hideDialog();
+                    mIConsultDetailView.RefreshConsultPage(getAddConsultReply(ReDoctorId, ReplyContent, ReplyTime));
+                    mIConsultDetailView.setListViewPosition(mConsultItemBeanList.size(),ConsultDetailFragment.SELECT_POSITION_SMOOTH);
+//                    mIConsultDetailView.RefreshConsultPage(ReplyContent);
                     mCommitOn = DateUtil.date2Str(new Date(),"yyyyMMddHHmmss");
-                    loadmoreConsultList();
+//                    loadmoreConsultList();
                 } else {
                     mIConsultDetailView.hideDialog(resultData.Message);
                     mIConsultDetailView.hideDialog();
@@ -140,6 +144,16 @@ public class ConsultDetailPresenter extends AbstractPresenter implements Consult
             }
         });
 
+    }
+
+    public List<ConsultReplyBean> getAddConsultReply(int ReDoctorId, String ReplyContent, String ReplyTime){
+        ConsultReplyBean consultReplyBean = new ConsultReplyBean();
+        consultReplyBean.ReDoctorId =  ReDoctorId;
+        consultReplyBean.Content =  ReplyContent;
+        consultReplyBean.IsDoctorReply = 1;
+        consultReplyBean.CommitOn =  ReplyTime;
+        mConsultItemBeanList.add(consultReplyBean);
+        return mConsultItemBeanList;
     }
 
 }

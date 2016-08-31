@@ -38,6 +38,6 @@
         android:padding="@dimen/consult_textview_padding"
         android:gravity="left"
         android:textSize="@dimen/textsize_h4"
-        android:background="@drawable/consult_item_bg" />
-
+        android:background="@drawable/consult_item_bg"/>
+    <!--android:background="@drawable/chat_icon_bubble_right" />-->
 </RelativeLayout>

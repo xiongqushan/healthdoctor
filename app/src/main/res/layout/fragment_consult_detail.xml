@@ -8,13 +8,6 @@
     android:focusableInTouchMode="true"
     tools:context="haozuo.com.healthdoctor.view.consult.ConsultDetailFragment">
 
-    <!--<ListView-->
-        <!--android:id="@+id/consult_detail_List"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_weight="1"-->
-        <!--android:divider="@null"-->
-        <!--android:listSelector="@android:color/transparent"/>-->
 
     <haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToLoadMoreLayout
         android:id="@+id/consult_detail_pull_to_refresh_layout"

@@ -134,7 +134,6 @@ public class ConsultPandingFragment extends Fragment {
             notifyDataSetChanged();
         }
 
-
         @Override
         public int getCount() {
             return dataSource.size();
@@ -174,8 +173,6 @@ public class ConsultPandingFragment extends Fragment {
             holder.Cphoto.setImageURI(uri);
             holder.Cname.setText(doctorGroupEntity.CustName);
             holder.ConsultContent.setText(doctorGroupEntity.ConsultTitele);
-//            holder.LastConsult.setText(DateUtil.converTime(DateUtil.getStringToTimestamp(doctorGroupEntity.CommitOn, "yyyy-MM-dd HH:mm:ss")));
-//            holder.LastConsult.setText(DateUtil.converTimeByWeek(DateUtil.getStringToTimestamp(doctorGroupEntity.CommitOn, "yyyy-MM-dd HH:mm")));
             holder.LastConsult.setText(DateUtil.TimeFormatByWeek(dataSource.get(position).CommitOn, "yyyy-MM-dd HH:mm"));
 
             holder.Cphoto.setTag(new Object[]{doctorGroupEntity});
@@ -191,7 +188,6 @@ public class ConsultPandingFragment extends Fragment {
     }
 
     class PullListener implements PullToRefreshLayout.OnRefreshListener {
-
 
         @Override
         public void onRefresh() {

@@ -3,8 +3,10 @@ package haozuo.com.healthdoctor.bean;
 import android.text.format.DateUtils;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by hzguest3 on 2016/7/27.
@@ -27,7 +29,8 @@ public class CustomDetailBean implements Serializable{
     public String PhotoUrl;
     public String Company_Name;
     public String Cust_Code;
-    public int[] GroupIdList;
+//    public int[] GroupIdList;
+    public List<Integer> GroupIdList;
     public int DoctorID;
     public int Age;
     public String Sex;
