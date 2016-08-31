@@ -58,7 +58,6 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
     GridView gv_PhotoReport;
 
     @OnClick(R.id.btn_show_Report)
-
     public void showReport() {
         if (lv_custom_report.getVisibility() == View.GONE) {
             lv_custom_report.setVisibility(View.VISIBLE);

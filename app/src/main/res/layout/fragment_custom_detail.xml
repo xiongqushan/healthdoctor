@@ -121,54 +121,70 @@
                 android:layout_height="match_parent"
                 android:src="@drawable/btn_show_report"/>
 
-        </LinearLayout>
-
-        <ListView
-            android:id="@+id/lv_custom_report"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:divider="@null"
-            android:visibility="visible"/>
-
-
-        <LinearLayout
-            android:id="@+id/linear_PhotoReport"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/report_title_height"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/custom_padding"
-            android:paddingRight="@dimen/custom_padding"
-            android:background="@drawable/bg_report_title">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="照片病例"
-                android:textColor="@color/textColor_light_blue"
-                android:textSize="@dimen/textsize_h2"/>
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:visibility="invisible"/>
-
-            <ImageView
-                android:id="@+id/btn_show_PhotoReport"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/btn_show_report"/>
-
-        </LinearLayout>
-
-        <GridView
-            android:id="@+id/gv_PhotoReport"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:numColumns="3"
-            android:visibility="visible"/>
+            <!--<CheckBox-->
+                <!--android:id="@+id/btn_show_Report"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:button="@null"-->
+                <!--android:checked="true"-->
+                <!--android:background="@drawable/bg_report_title_selector"/>-->
 
     </LinearLayout>
+
+    <ListView
+        android:id="@+id/lv_custom_report"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@null"
+        android:visibility="visible"/>
+
+
+    <LinearLayout
+        android:id="@+id/linear_PhotoReport"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/report_title_height"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/custom_padding"
+        android:paddingRight="@dimen/custom_padding"
+        android:background="@drawable/bg_report_title">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="照片病例"
+            android:textColor="@color/textColor_light_blue"
+            android:textSize="@dimen/textsize_h2"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:visibility="invisible"/>
+
+        <ImageView
+            android:id="@+id/btn_show_PhotoReport"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/btn_show_report"/>
+
+        <!--<CheckBox-->
+            <!--android:id="@+id/btn_show_PhotoReport"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:button="@null"-->
+            <!--android:checked="true"-->
+            <!--android:background="@drawable/bg_report_title_selector"/>-->
+
+    </LinearLayout>
+
+    <GridView
+        android:id="@+id/gv_PhotoReport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="3"
+        android:visibility="visible"/>
+
+</LinearLayout>
 
 </FrameLayout>

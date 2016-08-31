@@ -3,6 +3,7 @@ package haozuo.com.healthdoctor.view.home;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -11,18 +12,24 @@ import android.widget.Toast;
 
 import com.umeng.analytics.MobclickAgent;
 
+import java.util.Set;
+
 import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.contract.ConsultContract;
 import haozuo.com.healthdoctor.contract.GroupContract;
 import haozuo.com.healthdoctor.ioc.DaggerHomeComponent;
 import haozuo.com.healthdoctor.ioc.HomeModule;
+import haozuo.com.healthdoctor.manager.UserManager;
 import haozuo.com.healthdoctor.presenter.ConsultPresenter;
 import haozuo.com.healthdoctor.presenter.GroupPresenter;
 import haozuo.com.healthdoctor.util.ActivityUtils;
+import haozuo.com.healthdoctor.util.ConnectedUtils;
 import haozuo.com.healthdoctor.view.base.BaseActivity;
 import haozuo.com.healthdoctor.view.consult.ConsultFragment;
 import haozuo.com.healthdoctor.view.group.GroupFragment;
@@ -56,6 +63,43 @@ public class HomeActivity extends BaseActivity {
 
     private FragmentManager fragmentManager;
 
+
+    private final TagAliasCallback mAliasCallback = new TagAliasCallback() {
+        @Override
+        public void gotResult(int code, String alias, Set<String> tags) {
+            String logs;
+            switch (code) {
+                case 0:
+                    logs = "Set tag and alias success";
+                    Log.e("mAliasCallback", logs);
+                    break;
+
+                case 6002:
+                    if (ConnectedUtils.isConnected(getApplicationContext())) {
+                        mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_SET_ALIAS, alias), 1000 * 60);
+                    }
+                    break;
+                default:
+            }
+
+        }
+
+    };
+
+    private static final int MSG_SET_ALIAS = 1001;
+    private final Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(android.os.Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case MSG_SET_ALIAS:
+                    JPushInterface.setAliasAndTags(getApplicationContext(), (String) msg.obj, null, mAliasCallback);
+                    break;
+                default:
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +113,12 @@ public class HomeActivity extends BaseActivity {
                 .inject(this);
 
         initView();
+        //调用JPush API设置Alias
+        String alias = UserManager.getInstance().getDoctorInfo().Account;
+        int doctor_IDid = UserManager.getInstance().getDoctorInfo().Doctor_ID;
+        Log.e(alias, alias);
+        Log.e(alias, alias);
+        mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, "2055"));
     }
 
 
@@ -111,6 +161,7 @@ public class HomeActivity extends BaseActivity {
             }
         });
     }
+
 
     // TODO 0811 添加双击退出  by zy
     private boolean isExit;

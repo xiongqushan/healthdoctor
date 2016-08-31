@@ -57,7 +57,11 @@ public class LoginPresenter extends AbstractPresenter implements LoginContract.I
             @Override
             public void handlerResult(GlobalShell<DoctorBean> resultData) {
                 if (resultData.LogicSuccess) {
-                    UserManager.getInstance().setDoctorInfo(resultData.Data);
+                    try {
+                        UserManager.getInstance().setDoctorInfo(resultData.Data);
+                    } catch (CloneNotSupportedException e) {
+                        e.printStackTrace();
+                    }
                     mILoginView.hideDialog();
                     mILoginView.toHomeActivity();
                 } else {
@@ -87,7 +91,11 @@ public class LoginPresenter extends AbstractPresenter implements LoginContract.I
                     if (resultData.Data.PhotoUrl == null) {
                         resultData.Data.PhotoUrl = "res://haozuo.com.healthdoctor.view.custom/" + R.drawable.doctor_default_photourl;
                     }
-                    UserManager.getInstance().setDoctorInfo(resultData.Data);
+                    try {
+                        UserManager.getInstance().setDoctorInfo(resultData.Data);
+                    } catch (CloneNotSupportedException e) {
+                        e.printStackTrace();
+                    }
                     mILoginView.hideDialog();
                     mILoginView.toHomeActivity();
                 } else {

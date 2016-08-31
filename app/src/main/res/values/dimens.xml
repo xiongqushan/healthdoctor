@@ -57,14 +57,19 @@
     <dimen name="report_item_margin">10dp</dimen>
     <dimen name="PhotoReport_margin">9dp</dimen>
 
-    <dimen name="dividerline">0.5dp</dimen>
+    <dimen name="dividerline">0.8dp</dimen>
     <dimen name="txt_title_16sp">16sp</dimen>
     <dimen name="txt_subtitle_14sp">14sp</dimen>
     <dimen name="img_high">40dp</dimen>
-    <dimen name="tablayout_txtsize">17sp</dimen>
+    <dimen name="tablayout_txtsize">16sp</dimen>
     <dimen name="bg_gray_ee_high">12dp</dimen>
 
+
     <dimen name="report_padding">12dp</dimen>
+    <dimen name="report_marginleft_25dp">25dp</dimen>
+    <dimen name="report_marginleft_21dp">21.4dp</dimen>
+    <dimen name="report_margin_16dp">16dp</dimen>
+    <dimen name="report_circle_radius">8dp</dimen>
 
 
 </resources>

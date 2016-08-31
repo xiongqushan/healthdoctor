@@ -7,7 +7,7 @@ import java.util.Comparator;
  * Created by xiongwei1 on 2016/6/1.
  */
 
-public class DoctorBean implements Cloneable {
+public class DoctorBean implements Cloneable, Serializable {
     public String Account;
     public int Doctor_ID;
     public String Name;
@@ -19,7 +19,7 @@ public class DoctorBean implements Cloneable {
     public String PhotoUrl;
 
     @Override
-    protected Object clone() throws CloneNotSupportedException {
+    public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
 }
