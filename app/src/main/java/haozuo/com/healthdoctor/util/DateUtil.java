@@ -1,14 +1,12 @@
 
 package haozuo.com.healthdoctor.util;
 
-import java.security.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.List;
 import java.util.Locale;
 
 /**
@@ -21,7 +19,9 @@ public class DateUtil {
     private static final SimpleDateFormat datetimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     private static final SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
-    public static String[] WEEK_LIST = {"星期天","星期一","星期二","星期三","星期四","星期五","星期六"};
+    private static final SimpleDateFormat HMFormat = new SimpleDateFormat("HH:mm");
+    public static String[] WEEK_LIST = {"星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
+    private static String hmTime;
 
     public static Date str2Date(String str) {
         return str2Date(str, null);
@@ -196,29 +196,29 @@ public class DateUtil {
         final Calendar mCalendar = Calendar.getInstance();
         mCalendar.setTimeInMillis(timestamp);
 
-        int hour = mCalendar.get(Calendar.HOUR_OF_DAY);
-        int min = mCalendar.get(Calendar.MINUTE);
+//        int hour = mCalendar.get(Calendar.HOUR_OF_DAY);
+//        int min = mCalendar.get(Calendar.MINUTE);
         int apm = mCalendar.get(Calendar.AM_PM);
         int weekday = mCalendar.get(Calendar.DAY_OF_WEEK);
 
         String timeStr = null;
         long currentSeconds = getDayBeginTimestamp();
-        if(timestamp >= currentSeconds){
-            if (apm == 0){
-                timeStr = "上午" + " "+hour+":"+min;
-            }else {
-                timeStr = "下午" + " "+hour+":"+min;
+        if (timestamp >= currentSeconds) {
+            if (apm == 0) {
+                timeStr = "上午" + " " + hmTime;
+            } else {
+                timeStr = "下午" + " " + hmTime;
             }
-        }else if(timestamp >= (currentSeconds-(6 * 24 * 60 * 60 * 1000))) {
-            timeStr = WEEK_LIST[weekday - 1] + " "+hour+":"+min;
-        } else{
-            timeStr = date2Str(new Date(timestamp),DATEFORMAT);
+        } else if (timestamp >= (currentSeconds - (6 * 24 * 60 * 60 * 1000))) {
+            timeStr = WEEK_LIST[weekday - 1] + " " + hmTime;
+        } else {
+            timeStr = date2Str(new Date(timestamp), DATEFORMAT);
         }
         return timeStr;
     }
 
-    public static String TimeFormatByWeek(String time, String format){
-        Long timestamp = (Long)getStringToTimestamp(time, format);
+    public static String TimeFormatByWeek(String time, String format) {
+        Long timestamp = (Long) getStringToTimestamp(time, format);
         return converTimeByWeek(timestamp);
     }
 
@@ -527,8 +527,6 @@ public class DateUtil {
     }
 
 
-
-
     /**
      * 比较时间大小
      *
@@ -628,19 +626,22 @@ public class DateUtil {
         try {
             time = time.replace('T', ' ');
             date = sdf.parse(time);
+            hmTime = HMFormat.format(date);
+//            Log.e("HMFormat.format", hm);
+
         } catch (ParseException e) {
             e.printStackTrace();
         }
         return date.getTime();
     }
 
-    public static int getSecondDiff(String sBegin, String sEnd){
+    public static int getSecondDiff(String sBegin, String sEnd) {
         int diff = 0;
-        long lBegin = getStringToTimestamp(sBegin,"yyyy-MM-dd HH:mm:ss");
-        long lEnd = getStringToTimestamp(sEnd,"yyyy-MM-dd HH:mm:ss");
+        long lBegin = getStringToTimestamp(sBegin, "yyyy-MM-dd HH:mm:ss");
+        long lEnd = getStringToTimestamp(sEnd, "yyyy-MM-dd HH:mm:ss");
 
-        if (lBegin<=lEnd){
-            diff = (int) (lEnd - lBegin)/1000;
+        if (lBegin <= lEnd) {
+            diff = (int) (lEnd - lBegin) / 1000;
         }
         return diff;
     }

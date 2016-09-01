@@ -15,11 +15,11 @@ import haozuo.com.healthdoctor.bean.FeedbackItemBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.bean.PageBean;
 import haozuo.com.healthdoctor.contract.ConsultContract;
-import haozuo.com.healthdoctor.model.IBaseModel;
-import haozuo.com.healthdoctor.view.IBaseView;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
 import haozuo.com.healthdoctor.manager.UserManager;
 import haozuo.com.healthdoctor.model.ConsultModel;
+import haozuo.com.healthdoctor.model.IBaseModel;
+import haozuo.com.healthdoctor.view.IBaseView;
 import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout;
 
 /**
@@ -27,6 +27,7 @@ import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout;
  */
 
 public class ConsultPresenter extends AbstractPresenter implements ConsultContract.IConsultPresenter {
+
     private int PAGE_SIZE = 20;
     //    private int mCurrentPageIndex = 1;
 //    private int mConssultDonePageIndex = 1;

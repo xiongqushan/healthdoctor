@@ -1,8 +1,5 @@
 package haozuo.com.healthdoctor.view.threePart.common;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Rect;
@@ -14,307 +11,311 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ScrollView;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import haozuo.com.healthdoctor.R;
 
 
 public class StickScrollView extends ScrollView {
-	// TODO 0329
-	private static final long DELAY = 100;
-	private int currentScroll;
-	private Runnable scrollCheckTask;
 
-	private void init() {
-		scrollCheckTask = new Runnable() {
-			@Override
-			public void run() {
-				int newScroll = getScrollY();
-				if (currentScroll == newScroll) {
-					if (onScrollListener != null) {
-						onScrollListener.onScrollStopped();
-					}
-				} else {
-					if (onScrollListener != null) {
-						onScrollListener.onScrolling();
-					}
-					currentScroll = getScrollY();
-					postDelayed(scrollCheckTask, DELAY);
-				}
-			}
-		};
-		setOnTouchListener(new OnTouchListener() {
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				if (event.getAction() == MotionEvent.ACTION_UP) {
-					currentScroll = getScrollY();
-					postDelayed(scrollCheckTask, DELAY);
-				}
-				return false;
+    // TODO 0329
+    private static final long DELAY = 100;
+    private int currentScroll;
+    private Runnable scrollCheckTask;
 
-			}
-		});
-	}
+    private void init() {
+        scrollCheckTask = new Runnable() {
+            @Override
+            public void run() {
+                int newScroll = getScrollY();
+                if (currentScroll == newScroll) {
+                    if (onScrollListener != null) {
+                        onScrollListener.onScrollStopped();
+                    }
+                } else {
+                    if (onScrollListener != null) {
+                        onScrollListener.onScrolling();
+                    }
+                    currentScroll = getScrollY();
+                    postDelayed(scrollCheckTask, DELAY);
+                }
+            }
+        };
+        setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    currentScroll = getScrollY();
+                    postDelayed(scrollCheckTask, DELAY);
+                }
+                return false;
 
-	public interface OnScrollListener {
-		public void onScrollChanged(int x, int y, int oldX, int oldY);
+            }
+        });
+    }
 
-		public void onScrollStopped();
+    public interface OnScrollListener {
+        public void onScrollChanged(int x, int y, int oldX, int oldY);
 
-		public void onScrolling();
-	}
+        public void onScrollStopped();
 
-	private OnScrollListener onScrollListener;
+        public void onScrolling();
+    }
 
-	/**
-	 * @param onScrollListener
-	 */
-	public void setOnScrollListener(OnScrollListener onScrollListener) {
-		this.onScrollListener = onScrollListener;
-	}
+    private OnScrollListener onScrollListener;
 
-	public boolean isChildVisible(View child) {
-		if (child == null) {
-			return false;
-		}
-		Rect scrollBounds = new Rect();
-		getHitRect(scrollBounds);
-		return child.getLocalVisibleRect(scrollBounds);
-	}
+    /**
+     * @param onScrollListener
+     */
+    public void setOnScrollListener(OnScrollListener onScrollListener) {
+        this.onScrollListener = onScrollListener;
+    }
 
-	public boolean isAtTop() {
-		return getScrollY() <= 0;
-	}
+    public boolean isChildVisible(View child) {
+        if (child == null) {
+            return false;
+        }
+        Rect scrollBounds = new Rect();
+        getHitRect(scrollBounds);
+        return child.getLocalVisibleRect(scrollBounds);
+    }
 
-	public boolean isAtBottom() {
-		return getChildAt(getChildCount() - 1).getBottom() + getPaddingBottom() == getHeight()
-				+ getScrollY();
-	}
+    public boolean isAtTop() {
+        return getScrollY() <= 0;
+    }
 
-	// ============================
-	private static final String STICKY = "sticky";
-	private View mCurrentStickyView;
-	private Drawable mShadowDrawable;
-	private List<View> mStickyViews;
-	private int mStickyViewTopOffset;
-	private int defaultShadowHeight = 4;// 阴影高度
-	private float density;
-	private boolean redirectTouchToStickyView;
-	private GestureDetector gestureDetector = null;
+    public boolean isAtBottom() {
+        return getChildAt(getChildCount() - 1).getBottom() + getPaddingBottom() == getHeight()
+                + getScrollY();
+    }
 
-	public void setGestureDetector(GestureDetector gestureDetector) {
-		this.gestureDetector = gestureDetector;
-	}
+    // ============================
+    private static final String STICKY = "sticky";
+    private View mCurrentStickyView;
+    private Drawable mShadowDrawable;
+    private List<View> mStickyViews;
+    private int mStickyViewTopOffset;
+    private int defaultShadowHeight = 0;// 阴影高度
+    private float density;
+    private boolean redirectTouchToStickyView;
+    private GestureDetector gestureDetector = null;
 
-	/**
-	 * 当点击Sticky的时候，实现某些背景的渐�?
-	 */
-	private Runnable mInvalidataRunnable = new Runnable() {
+    public void setGestureDetector(GestureDetector gestureDetector) {
+        this.gestureDetector = gestureDetector;
+    }
 
-		@Override
-		public void run() {
-			if (mCurrentStickyView != null) {
-				int left = mCurrentStickyView.getLeft();
-				int top = mCurrentStickyView.getTop();
-				int right = mCurrentStickyView.getRight();
-				int bottom = getScrollY()
-						+ (mCurrentStickyView.getHeight() + mStickyViewTopOffset);
+    /**
+     * 当点击Sticky的时候，实现某些背景的渐�?
+     */
+    private Runnable mInvalidataRunnable = new Runnable() {
 
-				invalidate(left, top, right, bottom);
-			}
+        @Override
+        public void run() {
+            if (mCurrentStickyView != null) {
+                int left = mCurrentStickyView.getLeft();
+                int top = mCurrentStickyView.getTop();
+                int right = mCurrentStickyView.getRight();
+                int bottom = getScrollY()
+                        + (mCurrentStickyView.getHeight() + mStickyViewTopOffset);
 
-			postDelayed(this, 16);
+                invalidate(left, top, right, bottom);
+            }
 
-		}
-	};
+            postDelayed(this, 16);
 
-	public StickScrollView(Context context, AttributeSet attrs) {
-		this(context, attrs, 0);
-		init();
-	}
+        }
+    };
 
-	public StickScrollView(Context context, AttributeSet attrs, int defStyle) {
-		super(context, attrs, defStyle);
-		mShadowDrawable = context.getResources().getDrawable(
-				R.drawable.sticky_shadow_default);
-		mStickyViews = new LinkedList<View>();
-		density = context.getResources().getDisplayMetrics().density;
-		init();
-	}
+    public StickScrollView(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+        init();
+    }
 
-	/**
-	 * 找到设置tag的View
-	 * 
-	 * @param viewGroup
-	 */
-	private void findViewByStickyTag(ViewGroup viewGroup) {
-		int childCount = ((ViewGroup) viewGroup).getChildCount();
-		for (int i = 0; i < childCount; i++) {
-			View child = viewGroup.getChildAt(i);
+    public StickScrollView(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+        mShadowDrawable = context.getResources().getDrawable(
+                R.drawable.sticky_shadow_default);
+        mStickyViews = new LinkedList<View>();
+        density = context.getResources().getDisplayMetrics().density;
+        init();
+    }
 
-			if (getStringTagForView(child).contains(STICKY)) {
-				mStickyViews.add(child);
-			}
+    /**
+     * 找到设置tag的View
+     *
+     * @param viewGroup
+     */
+    private void findViewByStickyTag(ViewGroup viewGroup) {
+        int childCount = ((ViewGroup) viewGroup).getChildCount();
+        for (int i = 0; i < childCount; i++) {
+            View child = viewGroup.getChildAt(i);
 
-			if (child instanceof ViewGroup) {
-				findViewByStickyTag((ViewGroup) child);
-			}
-		}
+            if (getStringTagForView(child).contains(STICKY)) {
+                mStickyViews.add(child);
+            }
 
-	}
+            if (child instanceof ViewGroup) {
+                findViewByStickyTag((ViewGroup) child);
+            }
+        }
 
-	@Override
-	protected void onLayout(boolean changed, int l, int t, int r, int b) {
-		super.onLayout(changed, l, t, r, b);
-		if (changed) {
-			findViewByStickyTag((ViewGroup) getChildAt(0));
-		}
-		showStickyView();
-	}
+    }
 
-	@Override
-	protected void onScrollChanged(int l, int t, int oldl, int oldt) {
-		super.onScrollChanged(l, t, oldl, oldt);
-		showStickyView();
-		// TODO 0329
-		if (onScrollListener != null) {
-			onScrollListener.onScrollChanged(l, t, oldl, oldt);
-		}
-	}
+    @Override
+    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        super.onLayout(changed, l, t, r, b);
+        if (changed) {
+            findViewByStickyTag((ViewGroup) getChildAt(0));
+        }
+        showStickyView();
+    }
 
-	/**
-		 * 
-		 */
-	private void showStickyView() {
-		View curStickyView = null;
-		View nextStickyView = null;
+    @Override
+    protected void onScrollChanged(int l, int t, int oldl, int oldt) {
+        super.onScrollChanged(l, t, oldl, oldt);
+        showStickyView();
+        // TODO 0329
+        if (onScrollListener != null) {
+            onScrollListener.onScrollChanged(l, t, oldl, oldt);
+        }
+    }
 
-		for (View v : mStickyViews) {
-			int topOffset = v.getTop() - getScrollY();
+    /**
+     *
+     */
+    private void showStickyView() {
+        View curStickyView = null;
+        View nextStickyView = null;
 
-			if (topOffset <= 0) {
-				if (curStickyView == null
-						|| topOffset > curStickyView.getTop() - getScrollY()) {
-					curStickyView = v;
-				}
-			} else {
-				if (nextStickyView == null
-						|| topOffset < nextStickyView.getTop() - getScrollY()) {
-					nextStickyView = v;
-				}
-			}
-		}
+        for (View v : mStickyViews) {
+            int topOffset = v.getTop() - getScrollY();
 
-		if (curStickyView != null) {
-			mStickyViewTopOffset = nextStickyView == null ? 0 : Math.min(
-					0,
-					nextStickyView.getTop() - getScrollY()
-							- curStickyView.getHeight());
-			mCurrentStickyView = curStickyView;
-			post(mInvalidataRunnable);
-		} else {
-			mCurrentStickyView = null;
-			removeCallbacks(mInvalidataRunnable);
+            if (topOffset <= 0) {
+                if (curStickyView == null
+                        || topOffset > curStickyView.getTop() - getScrollY()) {
+                    curStickyView = v;
+                }
+            } else {
+                if (nextStickyView == null
+                        || topOffset < nextStickyView.getTop() - getScrollY()) {
+                    nextStickyView = v;
+                }
+            }
+        }
 
-		}
+        if (curStickyView != null) {
+            mStickyViewTopOffset = nextStickyView == null ? 0 : Math.min(
+                    0,
+                    nextStickyView.getTop() - getScrollY()
+                            - curStickyView.getHeight());
+            mCurrentStickyView = curStickyView;
+            post(mInvalidataRunnable);
+        } else {
+            mCurrentStickyView = null;
+            removeCallbacks(mInvalidataRunnable);
 
-	}
+        }
 
-	private String getStringTagForView(View v) {
-		Object tag = v.getTag();
-		return String.valueOf(tag);
-	}
+    }
 
-	/**
-	 * 将sticky画出�?
-	 */
-	@Override
-	protected void dispatchDraw(Canvas canvas) {
-		super.dispatchDraw(canvas);
-		if (mCurrentStickyView != null) {
-			// 先保存起�?
-			canvas.save();
-			// 将坐标原点移动到(0, getScrollY() + mStickyViewTopOffset)
-			canvas.translate(0, getScrollY() + mStickyViewTopOffset);
+    private String getStringTagForView(View v) {
+        Object tag = v.getTag();
+        return String.valueOf(tag);
+    }
 
-			if (mShadowDrawable != null) {
-				int left = 0;
-				int top = mCurrentStickyView.getHeight() + mStickyViewTopOffset;
-				int right = mCurrentStickyView.getWidth();
-				int bottom = top + (int) (density * defaultShadowHeight + 0.5f);
-				mShadowDrawable.setBounds(left, top, right, bottom);
-				mShadowDrawable.draw(canvas);
-			}
+    /**
+     * 将sticky画出�?
+     */
+    @Override
+    protected void dispatchDraw(Canvas canvas) {
+        super.dispatchDraw(canvas);
+        if (mCurrentStickyView != null) {
+            // 先保存起�?
+            canvas.save();
+            // 将坐标原点移动到(0, getScrollY() + mStickyViewTopOffset)
+            canvas.translate(0, getScrollY() + mStickyViewTopOffset);
 
-			canvas.clipRect(0, mStickyViewTopOffset,
-					mCurrentStickyView.getWidth(),
-					mCurrentStickyView.getHeight());
+            if (mShadowDrawable != null) {
+                int left = 0;
+                int top = mCurrentStickyView.getHeight() + mStickyViewTopOffset;
+                int right = mCurrentStickyView.getWidth();
+                int bottom = top + (int) (density * defaultShadowHeight + 0.5f);
+                mShadowDrawable.setBounds(left, top, right, bottom);
+                mShadowDrawable.draw(canvas);
+            }
 
-			mCurrentStickyView.draw(canvas);
+            canvas.clipRect(0, mStickyViewTopOffset,
+                    mCurrentStickyView.getWidth(),
+                    mCurrentStickyView.getHeight());
 
-			// 重置坐标原点参数
-			canvas.restore();
-		}
-	}
+            mCurrentStickyView.draw(canvas);
 
-	@Override
-	public boolean dispatchTouchEvent(MotionEvent ev) {
-		if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-			redirectTouchToStickyView = true;
-		}
+            // 重置坐标原点参数
+            canvas.restore();
+        }
+    }
 
-		if (redirectTouchToStickyView) {
-			redirectTouchToStickyView = mCurrentStickyView != null;
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+            redirectTouchToStickyView = true;
+        }
 
-			if (redirectTouchToStickyView) {
-				redirectTouchToStickyView = ev.getY() <= (mCurrentStickyView
-						.getHeight() + mStickyViewTopOffset)
-						&& ev.getX() >= mCurrentStickyView.getLeft()
-						&& ev.getX() <= mCurrentStickyView.getRight();
-			}
-		}
+        if (redirectTouchToStickyView) {
+            redirectTouchToStickyView = mCurrentStickyView != null;
 
-		if (redirectTouchToStickyView) {
-			ev.offsetLocation(
-					0,
-					-1
-							* ((getScrollY() + mStickyViewTopOffset) - mCurrentStickyView
-									.getTop()));
-		}
-		// return super.dispatchTouchEvent(ev);
-		if (gestureDetector != null) {
-			gestureDetector.onTouchEvent(ev);
-		}
+            if (redirectTouchToStickyView) {
+                redirectTouchToStickyView = ev.getY() <= (mCurrentStickyView
+                        .getHeight() + mStickyViewTopOffset)
+                        && ev.getX() >= mCurrentStickyView.getLeft()
+                        && ev.getX() <= mCurrentStickyView.getRight();
+            }
+        }
 
-		boolean stick = super.dispatchTouchEvent(ev);
-		return stick;
-	}
+        if (redirectTouchToStickyView) {
+            ev.offsetLocation(
+                    0,
+                    -1
+                            * ((getScrollY() + mStickyViewTopOffset) - mCurrentStickyView
+                            .getTop()));
+        }
+        // return super.dispatchTouchEvent(ev);
+        if (gestureDetector != null) {
+            gestureDetector.onTouchEvent(ev);
+        }
 
-	private boolean hasNotDoneActionDown = true;
+        boolean stick = super.dispatchTouchEvent(ev);
+        return stick;
+    }
 
-	@Override
-	public boolean onTouchEvent(MotionEvent ev) {
-		if (redirectTouchToStickyView) {
-			ev.offsetLocation(0,
-					((getScrollY() + mStickyViewTopOffset) - mCurrentStickyView
-							.getTop()));
-		}
+    private boolean hasNotDoneActionDown = true;
 
-		if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-			hasNotDoneActionDown = false;
-		}
+    @Override
+    public boolean onTouchEvent(MotionEvent ev) {
+        if (redirectTouchToStickyView) {
+            ev.offsetLocation(0,
+                    ((getScrollY() + mStickyViewTopOffset) - mCurrentStickyView
+                            .getTop()));
+        }
 
-		if (hasNotDoneActionDown) {
-			MotionEvent down = MotionEvent.obtain(ev);
-			down.setAction(MotionEvent.ACTION_DOWN);
-			super.onTouchEvent(down);
-			hasNotDoneActionDown = false;
-		}
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+            hasNotDoneActionDown = false;
+        }
 
-		if (ev.getAction() == MotionEvent.ACTION_UP
-				|| ev.getAction() == MotionEvent.ACTION_CANCEL) {
-			hasNotDoneActionDown = true;
-		}
-		return super.onTouchEvent(ev);
-	}
+        if (hasNotDoneActionDown) {
+            MotionEvent down = MotionEvent.obtain(ev);
+            down.setAction(MotionEvent.ACTION_DOWN);
+            super.onTouchEvent(down);
+            hasNotDoneActionDown = false;
+        }
+
+        if (ev.getAction() == MotionEvent.ACTION_UP
+                || ev.getAction() == MotionEvent.ACTION_CANCEL) {
+            hasNotDoneActionDown = true;
+        }
+        return super.onTouchEvent(ev);
+    }
 
 //	@Override
 //	public boolean onInterceptTouchEvent(MotionEvent event) {

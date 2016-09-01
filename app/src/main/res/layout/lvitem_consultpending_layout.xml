@@ -15,7 +15,7 @@
         fresco:roundAsCircle="true" />
 
     <TextView
-        android:id="@+id/txt_consult_Cname"
+        android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/drawee_consult_Cphoto"
@@ -25,10 +25,10 @@
         android:textSize="@dimen/txt_title_16sp" />
 
     <TextView
-        android:id="@+id/txt_consult_LastConsult"
+        android:id="@+id/tvTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/txt_consult_Cname"
+        android:layout_alignBottom="@id/tvTitle"
         android:layout_alignParentRight="true"
         android:layout_marginRight="12dp"
         android:text="2016-04-11 14:31"
@@ -37,24 +37,24 @@
 
 
     <TextView
-        android:id="@+id/txt_consult_ConsultContent"
-        android:layout_width="0dp"
+        android:id="@+id/tvSubtitle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/txt_consult_Cname"
-        android:layout_alignRight="@id/txt_consult_LastConsult"
-        android:layout_below="@id/txt_consult_Cname"
+        android:layout_alignLeft="@id/tvTitle"
+        android:layout_below="@id/tvTitle"
         android:layout_marginTop="8dp"
-        android:ellipsize="marquee"
-        android:singleLine="true"
-        android:text="张三这位客户咨询健管师的最后一个问题11111111111111111111111111111"
+        android:text="客户满意度"
         android:textColor="@color/subtitle_color66"
         android:textSize="@dimen/txt_subtitle_14sp" />
 
+
     <View
+        android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dividerline"
-        android:layout_alignLeft="@id/txt_consult_Cname"
+        android:layout_alignLeft="@id/tvTitle"
         android:layout_alignParentBottom="true"
         android:background="@color/divider_d3" />
+
 
 </RelativeLayout>

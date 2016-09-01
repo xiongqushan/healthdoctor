@@ -21,8 +21,8 @@
         <ImageView
             android:layout_width="@dimen/actionbar_high"
             android:layout_height="match_parent"
-            android:padding="10dp"
-            android:src="@drawable/ic_launcher" />
+            android:padding="12dp"
+            android:src="@drawable/aboutus" />
 
         <TextView
             style="@style/txt_set"
@@ -38,8 +38,8 @@
         <ImageView
             android:layout_width="@dimen/actionbar_high"
             android:layout_height="match_parent"
-            android:padding="10dp"
-            android:src="@drawable/ic_launcher" />
+            android:padding="12dp"
+            android:src="@drawable/help" />
 
         <TextView
             style="@style/txt_set"
@@ -55,8 +55,8 @@
         <ImageView
             android:layout_width="@dimen/actionbar_high"
             android:layout_height="match_parent"
-            android:padding="10dp"
-            android:src="@drawable/ic_launcher" />
+            android:padding="12dp"
+            android:src="@drawable/feedback" />
 
         <TextView
             style="@style/txt_set"
@@ -72,8 +72,8 @@
         <ImageView
             android:layout_width="@dimen/actionbar_high"
             android:layout_height="match_parent"
-            android:padding="10dp"
-            android:src="@drawable/ic_launcher" />
+            android:padding="12dp"
+            android:src="@drawable/disclaimer" />
 
         <TextView
             style="@style/txt_set"
@@ -89,8 +89,8 @@
         <ImageView
             android:layout_width="@dimen/actionbar_high"
             android:layout_height="match_parent"
-            android:padding="10dp"
-            android:src="@drawable/ic_launcher" />
+            android:padding="12dp"
+            android:src="@drawable/clearcache" />
 
         <TextView
             style="@style/txt_set"
@@ -106,7 +106,7 @@
         <ImageView
             android:layout_width="@dimen/actionbar_high"
             android:layout_height="match_parent"
-            android:padding="10dp"
+            android:padding="8dp"
             android:src="@drawable/ic_launcher" />
 
         <TextView
@@ -130,7 +130,7 @@
     <include layout="@layout/divider_12dp_gray_ee" />
 
 
-    <TextView
+    <Button
         android:id="@+id/btnSignOut"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

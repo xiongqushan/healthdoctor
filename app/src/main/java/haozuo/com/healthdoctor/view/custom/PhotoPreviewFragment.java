@@ -16,6 +16,7 @@ import com.facebook.imagepipeline.request.ImageRequest;
 
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.view.base.BaseFragment;
+import me.relex.photodraweeview.OnPhotoTapListener;
 import me.relex.photodraweeview.PhotoDraweeView;
 
 /**
@@ -57,6 +58,12 @@ public class PhotoPreviewFragment extends BaseFragment{
             }
         });
         photoDraweeView.setController(controller.build());
+        photoDraweeView.setOnPhotoTapListener(new OnPhotoTapListener() {
+            @Override
+            public void onPhotoTap(View view, float x, float y) {
+                getActivity().finish();
+            }
+        });
 
         return view;
     }

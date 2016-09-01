@@ -1,30 +1,27 @@
 package haozuo.com.healthdoctor.view.welcome;
 
-import android.content.Context;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
+import android.os.Handler;
 import android.view.KeyEvent;
 import android.view.WindowManager;
 
-import com.umeng.analytics.MobclickAgent;
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import haozuo.com.healthdoctor.R;
-import haozuo.com.healthdoctor.framework.SysConfig;
 import haozuo.com.healthdoctor.manager.UserManager;
+import haozuo.com.healthdoctor.util.StringUtil;
+import haozuo.com.healthdoctor.util.UHealthUtils;
 import haozuo.com.healthdoctor.view.base.BaseActivity;
 import haozuo.com.healthdoctor.view.home.HomeActivity;
 import haozuo.com.healthdoctor.view.login.LoginActivity;
 
 public class WelcomeActivity extends BaseActivity {
+    private final long turnTimeDelay = 2000;
+    private static long lastTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +33,7 @@ public class WelcomeActivity extends BaseActivity {
         TimerTask task = new TimerTask() {
             public void run() {
                 boolean exist = UserManager.getInstance().exist();
-                Log.e("WelcomeActivity", exist + "");
                 if (exist) {
-//                if (1==2){
                     startActivity(new Intent(getBaseContext(), HomeActivity.class));
                 } else {
                     startActivity(new Intent(getBaseContext(), LoginActivity.class));
@@ -47,25 +42,82 @@ public class WelcomeActivity extends BaseActivity {
                 finish();
             }
         };
-        Timer timer = new Timer();
-        timer.schedule(task, 2000);
-        initUmeng();
-        if (SysConfig.DebugMode) {
-            String deviceInfo = getDeviceInfo(this);
-            Log.e("DeviceInfo", deviceInfo);
-        }
+        lastTime = System.currentTimeMillis();
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                Intent intent = new Intent();
+//                intent.setAction("android.intent.action.VIEW");
+//                Uri url = Uri.parse("http://sj.qq.com/myapp/detail.htm?apkName=com.todayonhistory.toh");
+//                intent.setData(url);
+//                startActivity(intent);
+//            }
+//        }, 2500);
+        //getUpdateTime(task);
+        new Timer().schedule(task, turnTimeDelay);
     }
 
-    private void initUmeng() {
-        MobclickAgent.setDebugMode(SysConfig.DebugMode);
-        // SDK在统计Fragment时，需要关闭Activity自带的页面统计，
-        // 然后在每个页面中重新集成页面统计的代码(包括调用了 onResume 和 onPause 的Activity)。
-//        MobclickAgent.openActivityDurationTrack(false);
-        MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
 
-//        Android统计SDK从V4.6版本开始内建错误统计，不需要开发者再手动集成。
-//        SDK通过Thread.UncaughtExceptionHandler  捕获程序崩溃日志，并在程序下次启动时发送到服务器。 如不需要错误统计功能，可通过此方法关闭
-//        MobclickAgent.setCatchUncaughtExceptions(false);
+    private void getUpdateTime(final TimerTask task) {
+        new Handler().postDelayed(new Runnable() {
+            private String notifycation = "asdf";
+            private boolean isValid = true;
+            private int lastVersion = 11;
+
+            @Override
+            public void run() {
+                int currVersion = UHealthUtils
+                        .getCurrVersion(WelcomeActivity.this);
+                final Timer timer = new Timer();
+                if (currVersion >= lastVersion) {//TODO 不需要更新
+                    long time = System.currentTimeMillis();
+                    long requestTime = time - lastTime;
+                    if (requestTime < turnTimeDelay) {
+                        timer.schedule(task, turnTimeDelay - requestTime);
+                    } else {
+                        timer.schedule(task, 0);
+                    }
+                } else {//TODO 需要更新
+                    if (isValid) {//TODO 还能用
+                        if (StringUtil.isTrimEmpty(notifycation)) {
+                            long time = System.currentTimeMillis();
+                            long requestTime = time - lastTime;
+                            if (requestTime < turnTimeDelay) {
+                                timer.schedule(task, turnTimeDelay - requestTime);
+                            } else {
+                                timer.schedule(task, 0);
+                            }
+                        } else {
+                            AlertDialog.Builder dialog = new AlertDialog.Builder(WelcomeActivity.this);
+                            dialog.setTitle("检测到更新")
+                                    .setCancelable(false)
+                                    .setMessage(notifycation)
+                                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            timer.schedule(task, 0);
+                                        }
+                                    }).show();
+                        }
+
+                    } else {//TODO 不能用
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(WelcomeActivity.this);
+                        dialog.setTitle("检测到更新，当前版本不再维护")
+                                .setCancelable(false)
+                                .setMessage(notifycation)
+                                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        //TODO 跳AppStore，没有就关闭
+                                        if (!UHealthUtils.turnStore(WelcomeActivity.this)) {
+                                            WelcomeActivity.this.finish();
+                                        }
+                                    }
+                                }).show();
+                    }
+                }
+            }
+        }, 5000);
     }
 
     @Override
@@ -74,59 +126,6 @@ public class WelcomeActivity extends BaseActivity {
             return false;
         }
         return super.onKeyDown(keyCode, event);
-    }
-
-    public static String getDeviceInfo(Context context) {
-        try {
-            org.json.JSONObject json = new org.json.JSONObject();
-            android.telephony.TelephonyManager tm = (android.telephony.TelephonyManager) context
-                    .getSystemService(Context.TELEPHONY_SERVICE);
-            String device_id = null;
-            device_id = tm.getDeviceId();
-            String mac = null;
-            FileReader fstream = null;
-            try {
-                fstream = new FileReader("/sys/class/net/wlan0/address");
-            } catch (FileNotFoundException e) {
-                fstream = new FileReader("/sys/class/net/eth0/address");
-            }
-            BufferedReader in = null;
-            if (fstream != null) {
-                try {
-                    in = new BufferedReader(fstream, 1024);
-                    mac = in.readLine();
-                } catch (IOException e) {
-                } finally {
-                    if (fstream != null) {
-                        try {
-                            fstream.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    if (in != null) {
-                        try {
-                            in.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }
-            json.put("mac", mac);
-            if (TextUtils.isEmpty(device_id)) {
-                device_id = mac;
-            }
-            if (TextUtils.isEmpty(device_id)) {
-                device_id = android.provider.Settings.Secure.getString(context.getContentResolver(),
-                        android.provider.Settings.Secure.ANDROID_ID);
-            }
-            json.put("device_id", device_id);
-            return json.toString();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
 

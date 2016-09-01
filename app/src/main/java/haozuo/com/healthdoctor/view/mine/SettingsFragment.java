@@ -1,3 +1,4 @@
+
 package haozuo.com.healthdoctor.view.mine;
 
 
@@ -5,7 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +19,7 @@ import cn.jpush.android.api.JPushInterface;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.manager.GroupInfoManager;
 import haozuo.com.healthdoctor.manager.UserManager;
+import haozuo.com.healthdoctor.util.UHealthUtils;
 import haozuo.com.healthdoctor.view.base.BaseFragment;
 import haozuo.com.healthdoctor.view.home.HomeActivity;
 import haozuo.com.healthdoctor.view.login.LoginActivity;
@@ -29,35 +30,29 @@ import haozuo.com.healthdoctor.view.threePart.switchbutton.SwitchButton;
  * by zy 2016.08.24
  */
 public class SettingsFragment extends BaseFragment {
-    private static long lastClickTime;
     private Context mContext;
-
-    public static boolean isFastDoubleClick() {
-        long time = System.currentTimeMillis();
-        if (time - lastClickTime < 800) {
-            return true;
-        }
-        lastClickTime = time;
-        return false;
-    }
 
     @Bind(R.id.btn_push)
     SwitchButton btnPush;
 
     @OnClick(R.id.layout_aboutus)
     void aboutusClick() {
+        getActivity().startActivity(new Intent(getActivity(), AboutUsActivity.class));
     }
 
     @OnClick(R.id.layout_help)
     void helpClick() {
+        getActivity().startActivity(new Intent(getActivity(), HelpActivity.class));
     }
 
     @OnClick(R.id.layout_feedback)
     void feedbackClick() {
+        getActivity().startActivity(new Intent(getActivity(), AdviceActivity.class));
     }
 
     @OnClick(R.id.layout_disclaimer)
     void disclaimerClick() {
+        getActivity().startActivity(new Intent(getActivity(), StatementActivity.class));
     }
 
     @OnClick(R.id.layout_clearcache)
@@ -66,9 +61,10 @@ public class SettingsFragment extends BaseFragment {
 
     @OnClick(R.id.layout_push)
     void changePushState() {
-        if (isFastDoubleClick()) return;
+        if (UHealthUtils.isFastDoubleClick()) return;
         btnPush.setChecked(!btnPush.isChecked());
     }
+
 
     @OnClick(R.id.btnSignOut)
     void btnSignOut() {
@@ -95,20 +91,19 @@ public class SettingsFragment extends BaseFragment {
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
                         JPushInterface.resumePush(getActivity());
-                        Log.e("Jpush", "resumePush");
                     } else {
                         JPushInterface.stopPush(getActivity());
-                        Log.e("Jpush", "stopPush");
                     }
                     // PreferenceManager.getInstance().writeJpush(isChecked);
                      Toast.makeText(getContext(), "消息推送:" + (isChecked ? "on" : "off"), Toast.LENGTH_SHORT).show();
+
                 }
             });
         }
         return rootView;
     }
 
-    public void ShowSignOutDialog(){
+    public void ShowSignOutDialog() {
         android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(mContext);
         builder.setTitle("退出当前账号");
         builder.setMessage("退出当前账号，你可能不能及时回复客户咨询，确认退出？");
@@ -117,7 +112,7 @@ public class SettingsFragment extends BaseFragment {
         builder.show();
     }
 
-    DialogInterface.OnClickListener SignOut = new DialogInterface.OnClickListener(){
+    DialogInterface.OnClickListener SignOut = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
             UserManager.getInstance().clear();

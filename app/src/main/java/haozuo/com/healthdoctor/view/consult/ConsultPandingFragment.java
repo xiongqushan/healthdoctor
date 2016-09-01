@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +25,7 @@ import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.ConsultItemBean;
 import haozuo.com.healthdoctor.util.DateUtil;
+import haozuo.com.healthdoctor.util.UIHelper;
 import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout;
 
 
@@ -41,7 +41,7 @@ public class ConsultPandingFragment extends Fragment {
     @Bind(R.id.consult_pull_to_refresh_layout)
     PullToRefreshLayout ptrLayout;
     @Bind(R.id.consult_detail_List)
-    ListView consult_detail_List;
+    ListView mListView;
 
     public ConsultPandingFragment() {
     }
@@ -79,7 +79,6 @@ public class ConsultPandingFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Log.e("ConsultPandingFragment", "onResume");
     }
 
     @Override
@@ -97,8 +96,8 @@ public class ConsultPandingFragment extends Fragment {
             rootView = inflater.inflate(R.layout.fragment_consult_panding_list, container, false);
             ButterKnife.bind(this, rootView);
             adapter = new ConsultListAdapter();
-            consult_detail_List.setAdapter(adapter);
-            consult_detail_List.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            mListView.setAdapter(adapter);
+            mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                     Intent intent = new Intent(mContext, ConsultDetailActivity.class);
@@ -151,18 +150,13 @@ public class ConsultPandingFragment extends Fragment {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            ViewHolder holder = null;
             if (convertView == null) {
-                holder = new ViewHolder();
-                convertView = LayoutInflater.from(getActivity()).inflate(R.layout.lvitem_consultpanding_layout, parent, false);
-                holder.Cphoto = (SimpleDraweeView) convertView.findViewById(R.id.drawee_consult_Cphoto);
-                holder.Cname = (TextView) convertView.findViewById(R.id.txt_consult_Cname);
-                holder.LastConsult = (TextView) convertView.findViewById(R.id.txt_consult_LastConsult);
-                holder.ConsultContent = (TextView) convertView.findViewById(R.id.txt_consult_ConsultContent);
-                convertView.setTag(holder);
-            } else {
-                holder = (ViewHolder) convertView.getTag();
+                convertView = LayoutInflater.from(getActivity()).inflate(R.layout.lvitem_consultpending_layout, null);
             }
+            SimpleDraweeView img = UIHelper.getAdapterView(convertView, R.id.drawee_consult_Cphoto);
+            TextView tvTitle = UIHelper.getAdapterView(convertView, R.id.tvTitle);
+            TextView tvTime = UIHelper.getAdapterView(convertView, R.id.tvTime);
+            TextView tvSubtitle = UIHelper.getAdapterView(convertView, R.id.tvSubtitle);
             ConsultItemBean doctorGroupEntity = dataSource.get(position);
             if (doctorGroupEntity.PhotoUrl == null) {
                 Cphoto = "res://haozuo.com.healthdoctor.view.custom/" + R.drawable.default_photourl;
@@ -170,21 +164,13 @@ public class ConsultPandingFragment extends Fragment {
                 Cphoto = doctorGroupEntity.PhotoUrl;
             }
             Uri uri = Uri.parse(Cphoto);
-            holder.Cphoto.setImageURI(uri);
-            holder.Cname.setText(doctorGroupEntity.CustName);
-            holder.ConsultContent.setText(doctorGroupEntity.ConsultTitele);
-            holder.LastConsult.setText(DateUtil.TimeFormatByWeek(dataSource.get(position).CommitOn, "yyyy-MM-dd HH:mm"));
-
-            holder.Cphoto.setTag(new Object[]{doctorGroupEntity});
+            img.setImageURI(uri);
+            tvTitle.setText(doctorGroupEntity.CustName);
+            tvSubtitle.setText(doctorGroupEntity.ConsultTitele);
+            tvTime.setText(DateUtil.TimeFormatByWeek(dataSource.get(position).CommitOn, "yyyy-MM-dd HH:mm"));
             return convertView;
         }
 
-        public class ViewHolder {
-            public SimpleDraweeView Cphoto;
-            public TextView Cname;
-            public TextView LastConsult;
-            public TextView ConsultContent;
-        }
     }
 
     class PullListener implements PullToRefreshLayout.OnRefreshListener {
