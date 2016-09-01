@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +19,7 @@ import cn.jpush.android.api.JPushInterface;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.manager.GroupInfoManager;
 import haozuo.com.healthdoctor.manager.UserManager;
+import haozuo.com.healthdoctor.util.UHealthUtils;
 import haozuo.com.healthdoctor.view.base.BaseFragment;
 import haozuo.com.healthdoctor.view.home.HomeActivity;
 import haozuo.com.healthdoctor.view.login.LoginActivity;
@@ -30,17 +30,7 @@ import haozuo.com.healthdoctor.view.threePart.switchbutton.SwitchButton;
  * by zy 2016.08.24
  */
 public class SettingsFragment extends BaseFragment {
-    private static long lastClickTime;
     private Context mContext;
-
-    public static boolean isFastDoubleClick() {
-        long time = System.currentTimeMillis();
-        if (time - lastClickTime < 800) {
-            return true;
-        }
-        lastClickTime = time;
-        return false;
-    }
 
     @Bind(R.id.btn_push)
     SwitchButton btnPush;
@@ -71,7 +61,7 @@ public class SettingsFragment extends BaseFragment {
 
     @OnClick(R.id.layout_push)
     void changePushState() {
-        if (isFastDoubleClick()) return;
+        if (UHealthUtils.isFastDoubleClick()) return;
         btnPush.setChecked(!btnPush.isChecked());
     }
 

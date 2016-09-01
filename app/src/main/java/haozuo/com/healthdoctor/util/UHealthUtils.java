@@ -2,6 +2,11 @@ package haozuo.com.healthdoctor.util;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.net.Uri;
 import android.os.Environment;
 import android.text.Selection;
 import android.text.Spannable;
@@ -15,6 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,6 +29,7 @@ import java.util.regex.Pattern;
  */
 public class UHealthUtils {
     private static final String DIR_CACHE = "UhealthCache";
+
     private static long lastClickTime;
 
     public static boolean isFastDoubleClick() {
@@ -178,6 +185,41 @@ public class UHealthUtils {
             flag = false;
         }
         return flag;
+    }
+
+    public static int getCurrVersion(Context context) {
+        PackageManager pm = context.getPackageManager();
+        try {
+            PackageInfo info = pm.getPackageInfo(context.getPackageName(), 0);
+            return info.versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    /**
+     * 启动软件商店，同时定位到包名对应的页面
+     *
+     * @param context
+     * @return true 如果当前设备中存在软件商店软件，否则返回false
+     */
+    public static boolean turnStore(Context context) {
+
+        Uri uri = Uri.parse("market://details?id=" +
+                context.getPackageName());
+//        Uri uri = Uri.parse("market://details?id=" +
+//                "com.todayonhistory.toh");
+        Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+        List<ResolveInfo> activities =
+                context.getPackageManager().queryIntentActivities(
+                        goToMarket, 0);
+        if (activities != null && activities.size() > 0) {
+            context.startActivity(goToMarket);
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }
