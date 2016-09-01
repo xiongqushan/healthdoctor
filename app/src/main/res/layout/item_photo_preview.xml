@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:background="@color/black"
     fresco:progressBarAutoRotateInterval="1000"
-    fresco:progressBarImage="@drawable/loading">
+    fresco:progressBarImage="@drawable/loading"
+    fresco:fadeDuration="300">
     
 </me.relex.photodraweeview.PhotoDraweeView>
 

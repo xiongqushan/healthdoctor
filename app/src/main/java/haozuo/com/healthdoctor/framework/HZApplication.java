@@ -50,21 +50,22 @@ public class HZApplication extends Application {
          Setting.setShowLog(true);
 
         //FRESCO 配置渐进式加载JPEG图片
-        ProgressiveJpegConfig pjpegConfig = new ProgressiveJpegConfig() {
-            @Override
-            public int getNextScanNumberToDecode(int scanNumber) {
-                return scanNumber + 2;
-            }
-
-            public QualityInfo getQualityInfo(int scanNumber) {
-                boolean isGoodEnough = (scanNumber >= 5);
-                return ImmutableQualityInfo.of(scanNumber, isGoodEnough, false);
-            }
-        };
-        ImagePipelineConfig config = ImagePipelineConfig.newBuilder(this)
-                .setProgressiveJpegConfig(pjpegConfig)
-                .build();
-        Fresco.initialize(this,config);
+//        ProgressiveJpegConfig pjpegConfig = new ProgressiveJpegConfig() {
+//            @Override
+//            public int getNextScanNumberToDecode(int scanNumber) {
+//                return scanNumber + 2;
+//            }
+//
+//            public QualityInfo getQualityInfo(int scanNumber) {
+//                boolean isGoodEnough = (scanNumber >= 5);
+//                return ImmutableQualityInfo.of(scanNumber, isGoodEnough, false);
+//            }
+//        };
+//        ImagePipelineConfig config = ImagePipelineConfig.newBuilder(this)
+//                .setProgressiveJpegConfig(pjpegConfig)
+//                .build();
+//        Fresco.initialize(this,config);
+        Fresco.initialize(this);
 
         JPushInterface.setDebugMode(SysConfig.DebugMode);    // 设置开启日志,发布时请关闭日志
         JPushInterface.init(this);

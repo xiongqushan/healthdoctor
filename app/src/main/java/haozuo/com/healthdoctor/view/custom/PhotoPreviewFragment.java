@@ -1,17 +1,22 @@
 package haozuo.com.healthdoctor.view.custom;
 
+import android.graphics.drawable.Animatable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.backends.pipeline.PipelineDraweeControllerBuilder;
+import com.facebook.drawee.controller.BaseControllerListener;
+import com.facebook.imagepipeline.image.ImageInfo;
+import com.facebook.imagepipeline.request.ImageRequest;
 
 import haozuo.com.healthdoctor.R;
-import haozuo.com.healthdoctor.util.UIHelper;
 import haozuo.com.healthdoctor.view.base.BaseFragment;
-import lib.lhh.fiv.library.FrescoZoomImageView;
+import me.relex.photodraweeview.PhotoDraweeView;
 
 /**
  * Created by hzguest3 on 2016/8/24.
@@ -30,23 +35,28 @@ public class PhotoPreviewFragment extends BaseFragment{
         return photoPreviewFragment;
     };
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mURL = getArguments().getString(URL_ADDRESS);
-
         View view = inflater.inflate(R.layout.item_photo_preview, container, false);
-        FrescoZoomImageView frescoImageView = (FrescoZoomImageView) view;
-        frescoImageView.loadView(mURL + "!small200", mURL, R.color.black);
-//        frescoImageView.setTapToRetryEnabled(true);//设置点击重新加载
+        final PhotoDraweeView photoDraweeView = (PhotoDraweeView) view;
 
-        frescoImageView.setOnDraweeClickListener(new View.OnClickListener() {
+        PipelineDraweeControllerBuilder controller = Fresco.newDraweeControllerBuilder();
+        controller.setOldController(photoDraweeView.getController());
+        controller.setImageRequest(ImageRequest.fromUri(Uri.parse(mURL)));
+        controller.setLowResImageRequest(ImageRequest.fromUri(Uri.parse(mURL+"!small200")));
+        controller.setControllerListener(new BaseControllerListener<ImageInfo>() {
             @Override
-            public void onClick(View v) {
-                getActivity().finish();
+            public void onFinalImageSet(String id, ImageInfo imageInfo, Animatable animatable) {
+                super.onFinalImageSet(id, imageInfo, animatable);
+                if (imageInfo == null) {
+                    return;
+                }
+                photoDraweeView.update(imageInfo.getWidth(), imageInfo.getHeight());
             }
         });
+        photoDraweeView.setController(controller.build());
 
         return view;
     }
