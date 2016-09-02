@@ -7,9 +7,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -23,6 +26,7 @@ import butterknife.OnClick;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.ReportDetailBean;
 import haozuo.com.healthdoctor.util.StringUtil;
+import haozuo.com.healthdoctor.util.UHealthUtils;
 import haozuo.com.healthdoctor.util.UIHelper;
 import haozuo.com.healthdoctor.view.threePart.common.ChildListView;
 
@@ -38,16 +42,41 @@ public class ReportDetailFragment extends Fragment {
     @Bind(R.id.divider_report_detail)
     View dividerList;
 
+
+    @Bind(R.id.imgShowHideList)
+    ImageView imgShowHideList;
+
     @OnClick(R.id.imgShowHideList)
     void showHideList() {
+        if (UHealthUtils.isFastDoubleClick()) return;
         if (lvHide.getVisibility() == View.GONE) {
             lvHide.setVisibility(View.VISIBLE);
             dividerList.setVisibility(View.VISIBLE);
+            showListAnima();
         } else {
             lvHide.setVisibility(View.GONE);
             dividerList.setVisibility(View.GONE);
+            hideListAnima();
         }
     }
+
+    private void showListAnima() {
+        if (mAnimaRotateShow == null) {
+            mAnimaRotateShow = AnimationUtils.loadAnimation(getActivity(), R.anim.rotating_show);
+        }
+        imgShowHideList.startAnimation(mAnimaRotateShow);
+
+    }
+
+    private void hideListAnima() {
+        if (mAnimaRotateHide == null) {
+            mAnimaRotateHide = AnimationUtils.loadAnimation(getActivity(), R.anim.rotating_hide);
+        }
+        imgShowHideList.startAnimation(mAnimaRotateHide);
+    }
+
+    private Animation mAnimaRotateShow = null;
+    private Animation mAnimaRotateHide = null;
 
     private ListAdapter adapter;
     private View rootView;

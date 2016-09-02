@@ -1,82 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="70dp"
-    android:background="@color/white"
-    android:descendantFocusability="blocksDescendants">
-
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/drawee_consult_Cphoto"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_centerVertical="true"
-        android:layout_margin="12dp"
-        fresco:roundAsCircle="true" />
-
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/drawee_consult_Cphoto"
-        android:layout_toRightOf="@+id/drawee_consult_Cphoto"
-        android:text="张三"
-        android:textColor="@color/title_color28"
-        android:textSize="@dimen/txt_title_16sp" />
-
-    <TextView
-        android:id="@+id/tvTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/tvTitle"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="12dp"
-        android:text="2016-04-11 14:31"
-        android:textColor="@color/subtitle_colorb2"
-        android:textSize="@dimen/txt_subtitle_14sp" />
+    android:layout_height="wrap_content"
+    android:background="@color/item_press_white_gray"
+    android:orientation="vertical">
 
 
-    <TextView
-        android:id="@+id/tvSubtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/tvTitle"
-        android:layout_below="@id/tvTitle"
-        android:layout_marginTop="8dp"
-        android:text="客户满意度："
-        android:textColor="@color/subtitle_color66"
-        android:textSize="@dimen/txt_subtitle_14sp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <RatingBar
-        android:id="@+id/RatingBar"
-        android:layout_width="wrap_content"
-        android:layout_height="16dp"
-        android:layout_alignBottom="@id/tvSubtitle"
-        android:layout_toRightOf="@id/tvSubtitle"
-        android:indeterminateDrawable="@drawable/ratingbar_full"
-        android:isIndicator="true"
-        android:progressDrawable="@drawable/ratingbar_full"
-        android:rating="3.0" />
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/drawee_consult_Cphoto"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_margin="12dp"
+            fresco:roundAsCircle="true" />
 
-    <TextView
-        android:id="@+id/tvReDoctor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/tvSubtitle"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="12dp"
-        android:text="医师赵"
-        android:textColor="@color/subtitle_color66"
-        android:textSize="@dimen/txt_subtitle_14sp"
-        android:visibility="gone" />
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_toRightOf="@+id/drawee_consult_Cphoto"
+            android:text="张三"
+            android:textColor="@color/title_color28"
+            android:textSize="@dimen/txt_title_16sp" />
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tvTitle"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="12dp"
+            android:text="2016-04-11 14:31"
+            android:textColor="@color/subtitle_colorb2"
+            android:textSize="@dimen/txt_subtitle_14sp" />
+
+
+        <TextView
+            android:id="@+id/tvSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tvTitle"
+            android:layout_below="@id/tvTitle"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:text="客户满意度："
+            android:textColor="@color/subtitle_color66"
+            android:textSize="@dimen/txt_subtitle_14sp" />
+
+        <RatingBar
+            android:id="@+id/RatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:layout_alignTop="@id/tvSubtitle"
+            android:layout_toRightOf="@id/tvSubtitle"
+            android:indeterminateDrawable="@drawable/ratingbar_full"
+            android:isIndicator="true"
+            android:paddingTop="2dp"
+            android:progressDrawable="@drawable/ratingbar_full"
+            android:rating="3.0" />
+
+        <TextView
+            android:id="@+id/tvReDoctor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tvSubtitle"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="12dp"
+            android:text="医师赵"
+            android:textColor="@color/subtitle_color66"
+            android:textSize="@dimen/txt_subtitle_14sp"
+            android:visibility="gone" />
+
+
+    </RelativeLayout>
 
     <View
-        android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dividerline"
-        android:layout_alignLeft="@id/tvTitle"
-        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="64dp"
         android:background="@color/divider_d3" />
-
-
-</RelativeLayout>
+</LinearLayout>
