@@ -8,6 +8,8 @@ import android.os.Handler;
 import android.view.KeyEvent;
 import android.view.WindowManager;
 
+import com.umeng.analytics.MobclickAgent;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -55,6 +57,11 @@ public class WelcomeActivity extends BaseActivity {
 //        }, 2500);
         //getUpdateTime(task);
         new Timer().schedule(task, turnTimeDelay);
+        initUmeng();
+    }
+
+    private void initUmeng() {
+        MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
     }
 
 
