@@ -45,9 +45,7 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
     @Bind(R.id.list_group_customlist)PullableListView list_group_customlist;
     @Bind(R.id.pull_to_refresh_layout)PullToRefreshLayout pull_to_refresh_layout;
 
-    public GroupCustomListFragment(){
-
-    }
+    public GroupCustomListFragment(){}
 
     @Override
     protected IBasePresenter getPresenter() {
@@ -79,7 +77,6 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
             rootView= inflater.inflate(R.layout.lv_group_custom, container, false);
             ButterKnife.bind(this,rootView);
         }
-
         mGroupCustInfoAdapter=new GroupCustInfoAdapter(mContext,new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,11 +94,23 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
 
         final DrawableClickableEditText et_TitleBar_search = (DrawableClickableEditText) getActivity().findViewById(R.id.et_TitleBar_search);
         //搜索框按钮监听
+        et_TitleBar_search.setDrawableLeftListener(new DrawableClickableEditText.DrawableLeftListener() {
+            @Override
+            public void onDrawableLeftClick(View view) {
+                customNameOrMobile = et_TitleBar_search.getText().toString();
+                mGroupCustomListPresenter.refreshCustomList(customNameOrMobile);
+            }
+        });
+        //搜索框取消按钮监听
         et_TitleBar_search.setDrawableRightListener(new DrawableClickableEditText.DrawableRightListener() {
             @Override
             public void onDrawableRightClick(View view) {
+                et_TitleBar_search.setText("");
                 customNameOrMobile = et_TitleBar_search.getText().toString();
                 mGroupCustomListPresenter.refreshCustomList(customNameOrMobile);
+                getActivity().findViewById(R.id.txt_TitleBar_title).setVisibility(View.VISIBLE);
+                getActivity().findViewById(R.id.btn_search).setVisibility(View.VISIBLE);
+                getActivity().findViewById(R.id.et_TitleBar_search).setVisibility(View.GONE);
             }
         });
         //搜索框回车监听
@@ -122,7 +131,6 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
         });
 
         mGroupCustomListPresenter.start();
-        getActivity().findViewById(R.id.ID_SEARCHFAIL);
         return rootView;
     }
 
@@ -222,7 +230,9 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
             holder.CPhoto.setImageURI(uri);
             holder.Cname.setText(groupCustInfoEntity.Cname);
             holder.NickName.setText(groupCustInfoEntity.NickName);
-            holder.CBirthday.setText(groupCustInfoEntity.Birthday);
+            if (groupCustInfoEntity.Birthday != null){
+                holder.CBirthday.setText(groupCustInfoEntity.Birthday.split("T")[0]);
+            }
             holder.Company.setText(groupCustInfoEntity.CompanyName);
 
             holder.CPhoto.setTag(new Object[]{groupCustInfoEntity.CustId,groupCustInfoEntity.AccountId});
@@ -253,7 +263,7 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
     }
 
     private static final int ID_SEARCHFAIL = 1357902499;
-
+    //搜索结果为空时用默认页面覆盖
     private void mShowFailLayer(int frameLayoutContainerId) {
         FrameLayout rLayout = (FrameLayout) getRootView().findViewById(frameLayoutContainerId);
         View btnReload = getRootView().findViewById(ID_SEARCHFAIL);
@@ -263,7 +273,7 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
             rLayout.addView(btnReload);
         }
     }
-
+    //隐藏默认覆盖页面
     private void mHideFailLayer(int frameLayoutContainerId) {
         final FrameLayout rLayout = (FrameLayout) getRootView().findViewById(frameLayoutContainerId);
         View btnReload = getRootView().findViewById(ID_SEARCHFAIL);

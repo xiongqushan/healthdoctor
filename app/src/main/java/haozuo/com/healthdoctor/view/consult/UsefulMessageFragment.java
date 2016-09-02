@@ -48,7 +48,7 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
     View rootView;
     private UsefulMessageContract.IUsefulMessagePresenter mIUsefulMessagePresenter;
     private UsefulMessageAdapter mUsefulMessageAdapter;
-    private static ConsultReplyBean mConsultReplyBean;
+    private static ConsultReplyBean mLastConsultReplyBean;
     private List<UsefulExpressionBean> mSelectedExpressionMap;
     private List<ExpressionConst> mExpressionConstList;
     private String mReplyContent;
@@ -78,17 +78,15 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
 
     public static UsefulMessageFragment newInstance(@NonNull ConsultReplyBean consultReplyItem) {
         UsefulMessageFragment fragment = new UsefulMessageFragment();
-        mConsultReplyBean = consultReplyItem;
+        mLastConsultReplyBean = consultReplyItem;
         return fragment;
     }
 
     @Override
     public void onResume(){
         super.onResume();
-        mIUsefulMessagePresenter.start();
+//        mIUsefulMessagePresenter.start();
     }
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -107,11 +105,19 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
 
         final DrawableClickableEditText et_TitleBar_search = (DrawableClickableEditText) getActivity().findViewById(R.id.et_TitleBar_search);
         //搜索框按钮监听
+        et_TitleBar_search.setDrawableLeftListener(new DrawableClickableEditText.DrawableLeftListener() {
+            @Override
+            public void onDrawableLeftClick(View view) {
+                String keyword = et_TitleBar_search.getText().toString();
+                mIUsefulMessagePresenter.searchUsefulExpression(keyword);
+            }
+        });
+        //搜索框取消按钮监听
         et_TitleBar_search.setDrawableRightListener(new DrawableClickableEditText.DrawableRightListener() {
             @Override
             public void onDrawableRightClick(View view) {
-                String keyword = et_TitleBar_search.getText().toString();
-                mIUsefulMessagePresenter.searchUsefulExpression(keyword);
+                et_TitleBar_search.setText("");
+                mIUsefulMessagePresenter.start();
             }
         });
         //搜索框回车监听
@@ -130,6 +136,8 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
                 return false;
             }
         });
+
+        mIUsefulMessagePresenter.start();
         return rootView;
     }
 
@@ -155,10 +163,10 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
     }
 
     public void setConsultContent() {
-        switch (mConsultReplyBean.ConsultType) {
+        switch (mLastConsultReplyBean.ConsultType) {
             case 1:
             case 3:
-                txt_reportdetail_content.setText(mConsultReplyBean.Content);
+                txt_reportdetail_content.setText(mLastConsultReplyBean.Content);
                 break;
             case 2:
                 break;
@@ -183,7 +191,7 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
         WindowManager.LayoutParams lp = win.getAttributes();
         Display d = getActivity().getWindowManager().getDefaultDisplay();
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        lp.height = (int) (d.getHeight() * 0.8);
+        lp.height = (int) (d.getHeight() * 0.9);
         win.setAttributes(lp);
 
         LinearLayout cbgroup_expression = (LinearLayout)dialog.findViewById(R.id.cbgroup_expression);
@@ -200,11 +208,11 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
             checkBox.setCompoundDrawablePadding(30);
             checkBox.setChecked(mExpressionConstList.get(i).IsChecked);
             checkBox.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mExpressionConstList.get(finalI).IsChecked =  !mExpressionConstList.get(finalI).IsChecked;
-                        refreshExpressionContent(dialog);
-                    }
+                @Override
+                public void onClick(View v) {
+                    mExpressionConstList.get(finalI).IsChecked =  !mExpressionConstList.get(finalI).IsChecked;
+                    refreshExpressionContent(dialog);
+                }
             }
             );
             cbgroup_expression.addView(checkBox);
@@ -282,6 +290,13 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
                         dialog.dismiss();
                         EditText et_Expression = (EditText) dialog.findViewById(R.id.et_Expression);
                         mReplyContent = (String) et_Expression.getText().toString();
+                        for (ExpressionConst e : mExpressionConstList) {
+                            if (e.Postion < 0 && e.IsChecked) {
+                                mReplyContent = e.Content + "\n" +mReplyContent;
+                            }else if (e.Postion>0 && e.IsChecked){
+                                mReplyContent = mReplyContent + "\n" +e.Content;
+                            }
+                        }
                         Intent intent = new Intent();
                         intent.putExtra(String.valueOf(ConsultDetailFragment.RESULT_EXPRESSION), mReplyContent);
                         getActivity().setResult(ConsultDetailFragment.RESULT_EXPRESSION, intent);

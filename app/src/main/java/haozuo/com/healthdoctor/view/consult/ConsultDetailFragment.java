@@ -65,7 +65,6 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
     Context mContext;
     View rootView;
     ConsultListAdapter mConsultListAdapter;
-    ConsultDetailActivity mActivity;
     public ConsultDetailContract.IConsultDetailPresenter mConsultDetailPresenter;
     public static int RESULT_EXPRESSION = 0;
     private String mURI;
@@ -73,13 +72,16 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
     private CustomDetailBean mCustomDetailBean;
     private static DoctorBean mDoctorEntity;
     private static int mCustomerId;
-    private static String mAccountId;
+    private List<ConsultReplyBean> mConsultReplyList;
+    private List<ConsultReplyBean> mAddReplyList;
 
     public static final String PREFER_NAME = "com.iflytek.setting";
+    public static final String SELECT_POSITION_SMOOTH = "SELECT_POSITION_SMOOTH";
+    public static final String SELECT_POSITION_DIRECT = "SELECT_POSITION_DIRECT";
     private static String TAG = ConsultDetailFragment.class.getSimpleName();
     private SpeechRecognizer mIat;                                                              // 语音听写对象
     private RecognizerDialog mIatDialog;                                                       // 语音听写UI
-    private HashMap<String, String> mIatResults = new LinkedHashMap<String, String>();                     // 用HashMap存储听写结果
+    private HashMap<String, String> mIatResults = new LinkedHashMap<String, String>();        // 用HashMap存储听写结果
     private String mEngineType = SpeechConstant.TYPE_CLOUD;                                  // 引擎类型
     int ret = 0;                                                                                // 函数调用返回值
     private Toast mToast;
@@ -122,11 +124,11 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
 
     @OnClick(R.id.btn_usually_message)
     public void getUsefulMessage(View v) {
-        startActivityForResult(new Intent(mContext, UsefulMesasgeActivity.class).putExtra(UsefulMesasgeActivity.LAST_CONSULT_CONTENT, mConsultReplmyItem), RESULT_EXPRESSION);
+        startActivityForResult(new Intent(mContext, UsefulMesasgeActivity.class)
+                .putExtra(UsefulMesasgeActivity.LAST_CONSULT_CONTENT, mConsultReplmyItem), RESULT_EXPRESSION);
     }
 
-    public ConsultDetailFragment() {
-    }
+    public ConsultDetailFragment() {}
 
     @Override
     protected IBasePresenter getPresenter() {
@@ -142,7 +144,7 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
         ConsultDetailFragment fragment = new ConsultDetailFragment();
         mDoctorEntity = UserManager.getInstance().getDoctorInfo();
         mCustomerId = CustomerId;
-        mAccountId = AccountId;
+//        mAccountId = AccountId;
         return fragment;
     }
 
@@ -186,11 +188,11 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
                     if (imm.isActive()) {
                         imm.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0);
                         String replyContent = edittxt_message.getText().toString();
-                        addDpctorReply(replyContent);
-                        sendCustomBroadcast(BROADFILTER_CONSULT_REPLAY);
+                        addDoctorReply(replyContent);
+//                        sendCustomBroadcast(BROADFILTER_CONSULT_REPLAY);
                     }
                     return true;
-                }
+            }
                 return false;
             }
         });
@@ -198,11 +200,11 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
         return rootView;
     }
 
-//    @Override
-//    public void onStop() {
-//        super.onStop();
-//        mConsultDetailPresenter.cancelRequest();
-//    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        mConsultDetailPresenter.cancelRequest();
+    }
 
     @Override
     public void onDestroy() {
@@ -218,7 +220,7 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
             return;
         }
         String replyContent = data.getExtras().getString(String.valueOf(RESULT_EXPRESSION));
-        addDpctorReply(replyContent);
+        addDoctorReply(replyContent);
     }
 
     @Override
@@ -232,9 +234,17 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
     }
 
     @Override
-    public void setListViewPosition(int position) {
-//        consult_detail_List.smoothScrollToPosition(position);
-        consult_detail_List.setSelection(position);
+    public void setListViewPosition(int position, String SELECT_POSITION_TYPE) {
+        switch(SELECT_POSITION_TYPE){
+            case SELECT_POSITION_SMOOTH:
+                consult_detail_List.smoothScrollToPosition(position);
+                break;
+            case SELECT_POSITION_DIRECT:
+                consult_detail_List.setSelection(position);
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
@@ -267,6 +277,12 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
         });
     }
 
+    @Override
+    public void RefreshConsultPage(List<ConsultReplyBean> mConsultReplyBeanList){
+        mConsultListAdapter.refresh(mConsultReplyBeanList);
+        sendCustomBroadcast(BROADFILTER_CONSULT_REPLAY);
+    }
+
     class PullListener implements PullToLoadMoreLayout.OnRefreshListener {
 
         @Override
@@ -278,7 +294,7 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
 
     class ConsultListAdapter extends BaseAdapter {
         LayoutInflater myInflater;
-        List<ConsultReplyBean> dataSource;
+//        List<ConsultReplyBean> dataSource;
         private String mCommitOn = "";
         private static final int TYPE_COSTUMER = 0;
         private static final int TYPE_DOCTOR = 1;
@@ -287,19 +303,24 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
 
         public ConsultListAdapter(Context context) {
             this.myInflater = LayoutInflater.from(context);
-            dataSource = new ArrayList<>();
+            mConsultReplyList = new ArrayList<>();
         }
 
         public void refresh(List<ConsultReplyBean> dataList) {
-            dataSource.clear();
-            dataSource.addAll(dataList);
-            mConsultReplmyItem = dataSource.get(dataSource.size() - 1);
+            mConsultReplyList.clear();
+            mConsultReplyList.addAll(dataList);
+            for (int i= mConsultReplyList.size()-1;i>0;i--){
+                if (mConsultReplyList.get(i).IsDoctorReply == 0){ //客户回复内容
+                    mConsultReplmyItem = mConsultReplyList.get(i);
+                    break;
+                }
+            }
             notifyDataSetChanged();
         }
 
         @Override
         public int getCount() {
-            return dataSource.size();
+            return mConsultReplyList.size();
         }
 
         @Override
@@ -314,9 +335,9 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
 
         @Override
         public int getItemViewType(int position) {
-            if (dataSource.get(position).IsDoctorReply == 0) {
+            if (mConsultReplyList.get(position).IsDoctorReply == 0) {
                 return TYPE_COSTUMER;
-            } else if (dataSource.get(position).IsDoctorReply == 1) {
+            } else if (mConsultReplyList.get(position).IsDoctorReply == 1) {
                 return TYPE_DOCTOR;
             } else {
                 return 100;
@@ -340,7 +361,7 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
                 } else {
                     holder = (ViewHolderLeft) convertView.getTag();
                 }
-                final ConsultReplyBean consultReplyEntity = dataSource.get(position);
+                final ConsultReplyBean consultReplyEntity = mConsultReplyList.get(position);
                 if (consultReplyEntity.PhotoUrl == null) {
                     mURI = "res://haozuo.com.healthdoctor/" + R.drawable.default_photourl;
                 } else {
@@ -362,11 +383,9 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
                         holder.flowLayout_consult_photo.setVisibility(View.VISIBLE);
                         String[] photoList = consultReplyEntity.AppendInfo.split(",");
                         holder.flowLayout_consult_photo.removeAllViews();
-//                        for (String s : photoList) {
                         for (int i = 0; i < photoList.length; i++) {
                             SimpleDraweeView consult_photo = (SimpleDraweeView) LayoutInflater.from(mContext).inflate(R.layout.lvitemleft_consult_detail_photo, holder.flowLayout_consult_photo, false);
                             Uri photoUri = Uri.parse(photoList[i] + "!small200");
-//                            Uri photoUri = Uri.parse(s+"!small200");
                             consult_photo.setImageURI(photoUri);
                             final int finalI = i;
                             consult_photo.setOnClickListener(new View.OnClickListener() {
@@ -406,7 +425,7 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
                     holder.txt_consult_commiton.setVisibility(View.VISIBLE);
                     holder.txt_consult_commiton.setText(mCommitOn);
                 } else {//与列表中上一条数据的时间相比较，若间隔时间小于30s则展示时间
-                    if (DateUtil.getSecondDiff(dataSource.get(position - 1).CommitOn, consultReplyEntity.CommitOn) >= 30) {
+                    if (DateUtil.getSecondDiff(mConsultReplyList.get(position - 1).CommitOn, consultReplyEntity.CommitOn) >= 30) {
                         holder.txt_consult_commiton.setVisibility(View.VISIBLE);
                         holder.txt_consult_commiton.setText(mCommitOn);
                     } else {
@@ -423,7 +442,7 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
                 } else {
                     holder = (ViewHolderRight) convertView.getTag();
                 }
-                ConsultReplyBean consultReplyEntity = dataSource.get(position);
+                ConsultReplyBean consultReplyEntity = mConsultReplyList.get(position);
                 Uri uri = Uri.parse(mDoctorEntity.PhotoUrl);
                 holder.drawee_consult_item_photo.setImageURI(uri);
                 holder.txt_consult_item.setText(consultReplyEntity.Content);
@@ -435,7 +454,7 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
                     holder.txt_consult_commiton.setVisibility(View.VISIBLE);
                     holder.txt_consult_commiton.setText(mCommitOn);
                 } else {//与列表中上一条数据的时间相比较，若间隔时间小于30s则展示时间
-                    if (DateUtil.getSecondDiff(dataSource.get(position - 1).CommitOn, consultReplyEntity.CommitOn) >= 30) {
+                    if (DateUtil.getSecondDiff(mConsultReplyList.get(position - 1).CommitOn, consultReplyEntity.CommitOn) >= 30) {
                         holder.txt_consult_commiton.setVisibility(View.VISIBLE);
                         holder.txt_consult_commiton.setText(mCommitOn);
                     } else {
@@ -464,7 +483,6 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
                 ButterKnife.bind(this, convertView);
             }
         }
-
         public class ViewHolderRight {
 
             @Bind(R.id.txt_consult_commiton)
@@ -480,10 +498,9 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
                 ButterKnife.bind(this, convertView);
             }
         }
-
     }
 
-    public void addDpctorReply(String replyContent) {
+    public void addDoctorReply(String replyContent) {
         if (replyContent.equals("")) {
             showTip("请输入需要回复的内容");
             return;
@@ -491,7 +508,10 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
         String CommitOn = DateUtil.date2Str(new Date(), "yyyy-MM-dd'T'HH:mm:ss");
         mConsultDetailPresenter.addDoctorReply(mCustomDetailBean.DoctorID, mDoctorEntity.Doctor_ID, mDoctorEntity.Name, mCustomerId, replyContent, CommitOn);
         edittxt_message.setText("");
+//        sendCustomBroadcast(BROADFILTER_CONSULT_REPLAY);
     }
+
+
 
 
     /**

@@ -95,7 +95,8 @@ public class SettingsFragment extends BaseFragment {
                         JPushInterface.stopPush(getActivity());
                     }
                     // PreferenceManager.getInstance().writeJpush(isChecked);
-                    Toast.makeText(getContext(), "消息推送:" + (isChecked ? "on" : "off"), Toast.LENGTH_SHORT).show();
+                     Toast.makeText(getContext(), "消息推送:" + (isChecked ? "on" : "off"), Toast.LENGTH_SHORT).show();
+
                 }
             });
         }

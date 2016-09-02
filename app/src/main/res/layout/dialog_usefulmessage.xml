@@ -95,17 +95,19 @@
            android:layout_width="0dp"
            android:layout_height="match_parent"
            android:layout_weight="1"
-           android:background="@drawable/shape"
+           android:background="@drawable/useful_btn_unpressed_shape"
            android:layout_margin="5dp"
            android:text="上一页"
-           android:textColor="@color/white"/>
+           android:textColor="@color/useful_orange"/>
+
+        <!--android:background="@drawable/shape"-->
 
         <Button
             android:id="@+id/btn_submit"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/shape"
+            android:background="@drawable/useful_btn_pressed_shape"
             android:layout_margin="5dp"
             android:text="确定"
             android:textColor="@color/white"/>

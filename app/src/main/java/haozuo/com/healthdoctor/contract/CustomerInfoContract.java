@@ -17,7 +17,7 @@ public interface CustomerInfoContract {
 
         void addLabelView(DoctorGroupBean groupBean);
 
-        void refreshLabelView(List<DoctorGroupBean> mGroups);
+        void refreshLabelView(CustomDetailBean customInfo);
     }
 
     interface ICustomerInfoPresenter extends IBasePresenter {

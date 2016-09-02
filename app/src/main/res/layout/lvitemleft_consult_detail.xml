@@ -38,6 +38,7 @@
         android:padding="@dimen/consult_textview_padding"
         android:textSize="@dimen/textsize_h4"
         android:background="@drawable/consult_item_bg"/>
+        <!--android:background="@drawable/chat_icon_bubble_left"/>-->
 
     <haozuo.com.healthdoctor.view.threePart.common.FlowLayout
         android:id="@+id/flowLayout_consult_photo"

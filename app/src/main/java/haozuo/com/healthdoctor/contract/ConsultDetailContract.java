@@ -18,12 +18,13 @@ public interface ConsultDetailContract {
 
         void refreshCustomAdapter(List<ConsultReplyBean> dataList);
 
-        void setListViewPosition(int position);
+        void setListViewPosition(int position, String SELECT_POSITION_TYPE);
 
         void refreshFinish(int status, boolean isRefresh);
 
         void setCustmoerInfo(CustomDetailBean customDetailItem);
 
+        void RefreshConsultPage(List<ConsultReplyBean> mConsultReplyBeanList);
     }
 
     interface IConsultDetailPresenter extends IBasePresenter {

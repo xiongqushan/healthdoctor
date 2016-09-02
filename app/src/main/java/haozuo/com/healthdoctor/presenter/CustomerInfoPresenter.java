@@ -25,7 +25,6 @@ import haozuo.com.healthdoctor.view.IBaseView;
  */
 public class CustomerInfoPresenter extends AbstractPresenter implements CustomerInfoContract.ICustomerInfoPresenter {
     private CustomDetailBean mCustomInfo;
-
     private CustomerInfoContract.ICustomerInfoView mICustomerInfoView;
     private UserModel mUserModel;
     private GroupModel mGroupModel;
@@ -33,10 +32,11 @@ public class CustomerInfoPresenter extends AbstractPresenter implements Customer
     private List<DoctorGroupBean> mGroups = new ArrayList<DoctorGroupBean>();
 
     @Inject
-    public CustomerInfoPresenter(@NonNull CustomerInfoContract.ICustomerInfoView iCustomerInfoView, @NonNull UserModel userModel, @NonNull CustomDetailBean customInfo) {
+    public CustomerInfoPresenter(@NonNull CustomerInfoContract.ICustomerInfoView iCustomerInfoView, @NonNull UserModel userModel, @NonNull GroupModel groupModel, @NonNull CustomDetailBean customInfo) {
         mCustomInfo = customInfo;
         mICustomerInfoView = iCustomerInfoView;
         mUserModel = userModel;
+        mGroupModel = groupModel;
         mICustomerInfoView.setPresenter(this);
     }
 
@@ -58,15 +58,21 @@ public class CustomerInfoPresenter extends AbstractPresenter implements Customer
     @Override
     public void DeleteCustomerGroup(final DoctorGroupBean groupBean) {
         mICustomerInfoView.showDialog();
-        int DeleteGroupId = groupBean.id;
+        final int DeleteGroupId = groupBean.id;
         mOperateBy = (String) UserManager.getInstance().getDoctorInfo().Name;
         mGroupModel.DeleteCustomerGroup(mCustomInfo.Id, DeleteGroupId, mOperateBy, new OnHandlerResultListener<GlobalShell<Boolean>>() {
             @Override
             public void handlerResult(GlobalShell<Boolean> resultData) {
                 if (resultData.LogicSuccess) {
                     mICustomerInfoView.hideDialog();
-                    mICustomerInfoView.refreshLabelView(mGroups);
+                    for (int i = 0; i < mCustomInfo.GroupIdList.size(); i++) {
+                        if (mCustomInfo.GroupIdList.get(i) == DeleteGroupId) {
+                            mCustomInfo.GroupIdList.remove(i);
+                        }
+                    }
+                    mICustomerInfoView.refreshLabelView(mCustomInfo);
                 } else {
+
                     mICustomerInfoView.hideDialog(resultData.Message);
                 }
 
@@ -92,7 +98,7 @@ public class CustomerInfoPresenter extends AbstractPresenter implements Customer
             int groupId = Integer.parseInt(String.valueOf(entry.id));
             mICustomerInfoView.addLabelView(entry);
         }
-    }
 
+    }
 
 }

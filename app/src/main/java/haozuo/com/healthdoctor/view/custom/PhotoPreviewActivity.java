@@ -67,4 +67,3 @@ public class PhotoPreviewActivity extends BaseActivity {
         }
     }
 }
-

@@ -120,7 +120,8 @@ public class ConsultPresenter extends AbstractPresenter implements ConsultContra
     }
 
     private String getEndDate() {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd 23:59:59");
+//        return format.format(new Date());
         return format.format(new Date());
     }
 

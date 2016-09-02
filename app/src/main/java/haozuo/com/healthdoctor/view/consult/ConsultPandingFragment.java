@@ -133,7 +133,6 @@ public class ConsultPandingFragment extends Fragment {
             notifyDataSetChanged();
         }
 
-
         @Override
         public int getCount() {
             return dataSource.size();
@@ -175,7 +174,6 @@ public class ConsultPandingFragment extends Fragment {
     }
 
     class PullListener implements PullToRefreshLayout.OnRefreshListener {
-
 
         @Override
         public void onRefresh() {

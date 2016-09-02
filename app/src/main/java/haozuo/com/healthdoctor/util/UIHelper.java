@@ -2,8 +2,15 @@ package haozuo.com.healthdoctor.util;
 
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.net.Uri;
 import android.util.SparseArray;
 import android.view.View;
+
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.backends.pipeline.PipelineDraweeController;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.request.ImageRequest;
+import com.facebook.imagepipeline.request.ImageRequestBuilder;
 
 /**
  * Created by xiongwei on 16/5/17.
@@ -42,4 +49,15 @@ public class UIHelper {
         return (T) childView;
     }
 
+    public static void setFrescoURL(SimpleDraweeView simpleDraweeView, String URL,String DefaultURL){
+
+        ImageRequest request = ImageRequestBuilder.newBuilderWithSource(Uri.parse(URL))
+                .setAutoRotateEnabled(true)
+                .build();
+
+        PipelineDraweeController controller = (PipelineDraweeController) Fresco.newDraweeControllerBuilder()
+                .setImageRequest(request)
+                .build();
+        simpleDraweeView.setController(controller);
+    }
 }

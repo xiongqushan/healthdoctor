@@ -18,6 +18,7 @@ import haozuo.com.healthdoctor.R;
 
 
 public class StickScrollView extends ScrollView {
+
     // TODO 0329
     private static final long DELAY = 100;
     private int currentScroll;

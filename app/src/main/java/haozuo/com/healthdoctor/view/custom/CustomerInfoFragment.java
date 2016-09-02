@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
@@ -34,6 +35,7 @@ public class CustomerInfoFragment extends AbstractView implements CustomerInfoCo
     Context mContext;
     View rootView;
     CustomerInfoContract.ICustomerInfoPresenter mPresenter;
+    private CustomDetailBean mCustomInfo;
     String photoUri;
     List<String> mTvNames = new ArrayList<String>();
     List<DoctorGroupBean> mGroups = new ArrayList<DoctorGroupBean>();
@@ -97,11 +99,11 @@ public class CustomerInfoFragment extends AbstractView implements CustomerInfoCo
     }
 
     @Override
-    public void onDrawableRightClick(View view) {
-    }
+    public void onDrawableRightClick(View view) {}
 
     @Override
     public void InitView(CustomDetailBean customInfo) {
+        mCustomInfo = customInfo;
         if (customInfo.PhotoUrl == null){
 //            photoUri = "http://pic002.cnblogs.com/images/2011/103608/2011062022023456.jpg";
             photoUri = "res://haozuo.com.healthdoctor.view.custom/"+R.drawable.default_photourl;
@@ -128,6 +130,10 @@ public class CustomerInfoFragment extends AbstractView implements CustomerInfoCo
         tvGroupName.setDrawableRightListener(new DrawableClickableTextView.DrawableRightListener() {
             @Override
             public void onDrawableRightClick(View view) {
+                if (mCustomInfo.GroupIdList.size() == 1){
+                    Toast.makeText(mContext,"该客户至少需要保留一个分组", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 mPresenter.DeleteCustomerGroup(groupBean);
             }
         });
@@ -136,7 +142,8 @@ public class CustomerInfoFragment extends AbstractView implements CustomerInfoCo
     }
 
     @Override
-    public void refreshLabelView(List<DoctorGroupBean> mGroups) {
+    public void refreshLabelView(CustomDetailBean customInfo) {
+        mCustomInfo = customInfo;
         mFlowLayout.removeAllViews();
         mPresenter.InitGroupLabel();
     }
