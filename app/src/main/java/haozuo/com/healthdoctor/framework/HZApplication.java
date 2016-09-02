@@ -37,7 +37,6 @@ public class HZApplication extends Application {
                 .build();
 
         applictaion = this;
-        Fresco.initialize(this);
         mRefWatcher = LeakCanary.install(this);
 
         SpeechUtility.createUtility(this, "appid=" + getString(R.string.app_id));
@@ -62,6 +61,10 @@ public class HZApplication extends Application {
 //                .build();
 //        Fresco.initialize(this,config);
         Fresco.initialize(this);
+
+        SpeechUtility.createUtility(this, "appid=" + getString(R.string.app_id));
+        // 以下语句用于设置日志开关（默认开启），设置成false时关闭语音云SDK日志打印
+        Setting.setShowLog(true);
 
         JPushInterface.setDebugMode(SysConfig.DebugMode);    // 设置开启日志,发布时请关闭日志
         JPushInterface.init(this);

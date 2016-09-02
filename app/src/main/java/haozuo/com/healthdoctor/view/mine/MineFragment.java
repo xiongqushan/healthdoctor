@@ -18,6 +18,7 @@ import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.DoctorBean;
 import haozuo.com.healthdoctor.bean.ReportParamsBean;
 import haozuo.com.healthdoctor.manager.UserManager;
+import haozuo.com.healthdoctor.util.UIHelper;
 import haozuo.com.healthdoctor.view.base.BaseFragment;
 import haozuo.com.healthdoctor.view.custom.CustomerReportActivity;
 import haozuo.com.healthdoctor.view.home.HomeActivity;
@@ -87,11 +88,13 @@ public class MineFragment extends BaseFragment {
         DoctorBean doctorInfo = UserManager.getInstance().getDoctorInfo();
         tvName.setText(doctorInfo.Name);
         String imgUrl = doctorInfo.PhotoUrl;
-        if (imgUrl == null || imgUrl.equals("")) {
-            imgUrl = "res://haozuo.com.healthdoctor.view.custom/" + R.drawable.default_photourl;
-        }
-        Uri uri = Uri.parse(imgUrl);
-        imgPhoto.setImageURI(uri);
+//        if (imgUrl == null || imgUrl.equals("")) {
+//            imgUrl = "res://haozuo.com.healthdoctor.view.custom/" + R.drawable.doctor_default_photourl;
+//        }
+//        Uri uri = Uri.parse(imgUrl);
+//        imgPhoto.setImageURI(uri);
+        UIHelper.setFrescoURL(imgPhoto,imgUrl
+                ,"res://haozuo.com.healthdoctor.view.custom/" + R.drawable.doctor_default_photourl);
     }
     @Override
     protected void onReceiveBroadcast(String filterAction) {

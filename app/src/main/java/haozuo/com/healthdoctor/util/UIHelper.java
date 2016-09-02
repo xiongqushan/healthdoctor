@@ -50,8 +50,16 @@ public class UIHelper {
     }
 
     public static void setFrescoURL(SimpleDraweeView simpleDraweeView, String URL,String DefaultURL){
+        String URIString;
+        if (URL == null){
+            URIString = DefaultURL;
+//            URIString = "res://haozuo.com.healthdoctor.view.custom/"+R.drawable.default_photourl;
+        }
+        else {
+            URIString = URL;
+        }
 
-        ImageRequest request = ImageRequestBuilder.newBuilderWithSource(Uri.parse(URL))
+        ImageRequest request = ImageRequestBuilder.newBuilderWithSource(Uri.parse(URIString))
                 .setAutoRotateEnabled(true)
                 .build();
 
@@ -59,5 +67,9 @@ public class UIHelper {
                 .setImageRequest(request)
                 .build();
         simpleDraweeView.setController(controller);
+    }
+
+    public static void setFrescoURL(SimpleDraweeView simpleDraweeView, String URL){
+        setFrescoURL(simpleDraweeView,URL,null);
     }
 }

@@ -158,13 +158,8 @@ public class ConsultPandingFragment extends Fragment {
             TextView tvTime = UIHelper.getAdapterView(convertView, R.id.tvTime);
             TextView tvSubtitle = UIHelper.getAdapterView(convertView, R.id.tvSubtitle);
             ConsultItemBean doctorGroupEntity = dataSource.get(position);
-            if (doctorGroupEntity.PhotoUrl == null) {
-                Cphoto = "res://haozuo.com.healthdoctor.view.custom/" + R.drawable.default_photourl;
-            } else {
-                Cphoto = doctorGroupEntity.PhotoUrl;
-            }
-            Uri uri = Uri.parse(Cphoto);
-            img.setImageURI(uri);
+            UIHelper.setFrescoURL(img,Cphoto
+                    ,"res://haozuo.com.healthdoctor.view.custom/" + R.drawable.user_default_url);
             tvTitle.setText(doctorGroupEntity.CustName);
             tvSubtitle.setText(doctorGroupEntity.ConsultTitele);
             tvTime.setText(DateUtil.TimeFormatByWeek(dataSource.get(position).CommitOn, "yyyy-MM-dd HH:mm"));

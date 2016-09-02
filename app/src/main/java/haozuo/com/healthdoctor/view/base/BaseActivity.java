@@ -16,7 +16,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.umeng.analytics.MobclickAgent;
+//import com.umeng.analytics.MobclickAgent;
 
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.framework.HZApplication;
@@ -36,20 +36,15 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
 
-//    @Override
-//    public void startActivity(Intent intent) {
-//        super.startActivity(intent);
-//        overridePendingTransition(R.anim.to_right_in, R.anim.to_right_out);
-
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-    }
-
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-    }
+//    public void onResume() {
+//        super.onResume();
+//        MobclickAgent.onResume(this);
+//    }
+//
+//    public void onPause() {
+//        super.onPause();
+//        MobclickAgent.onPause(this);
+//    }
 
     @Override
     public void finish() {

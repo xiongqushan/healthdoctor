@@ -14,6 +14,7 @@ import java.util.List;
 
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.view.base.BaseActivity;
+import haozuo.com.healthdoctor.view.threePart.common.ViewPagerFixed;
 import me.relex.circleindicator.CircleIndicator;
 
 /**
@@ -40,7 +41,8 @@ public class PhotoPreviewActivity extends BaseActivity {
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         PhotoPreviewAdapter photoPreviewAdapter =new PhotoPreviewAdapter(fragmentManager, mPhotoUrlList);
-        ViewPager vp =(ViewPager) findViewById(R.id.vp_photopreview);
+//        ViewPager vp =(ViewPager) findViewById(R.id.vp_photopreview);
+        ViewPagerFixed vp = (ViewPagerFixed) findViewById(R.id.vp_photopreview);
         CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
         vp.setAdapter(photoPreviewAdapter);
         indicator.setViewPager(vp);
