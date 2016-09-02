@@ -159,8 +159,7 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
     }
 
     @Override
-    public void onDrawableRightClick(View view) {
-    }
+    public void onDrawableRightClick(View view) {}
 
     public void setConsultContent() {
         switch (mLastConsultReplyBean.ConsultType) {
@@ -169,10 +168,9 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
                 txt_reportdetail_content.setText(mLastConsultReplyBean.Content);
                 break;
             case 2:
-                break;
             case 4:
-                break;
             default:
+                txt_reportdetail_content.setText(getText(R.string.usefulmessage_default_lastconsult));
                 break;
         }
     }

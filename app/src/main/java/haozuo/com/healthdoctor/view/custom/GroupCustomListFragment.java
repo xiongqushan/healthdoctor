@@ -85,7 +85,7 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
                 String accountId = (String)(((Object[])tag.CPhoto.getTag())[1]);
                 Intent intent = new Intent(mContext,CustomDetailActivity.class);
                 intent.putExtra(CustomDetailActivity.EXTRA_CUSTOMER_ID, customerId);
-                intent.putExtra(CustomDetailActivity.EXTRA_ACCOUNT_ID,accountId);
+                intent.putExtra(CustomDetailActivity.EXTRA_ACCOUNT_ID, accountId);
                 mContext.startActivity(intent);
             }
         });
@@ -219,15 +219,9 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
             }
 
             GroupCustInfoBean groupCustInfoEntity = dataSource.get(position);
-            if (groupCustInfoEntity.PhotoUrl == null){
-//                photoUri = "http://pic002.cnblogs.com/images/2011/103608/2011062022023456.jpg";
-                photoUri = "res://haozuo.com.healthdoctor.view.custom/"+R.drawable.default_photourl;
-            }
-            else {
-                photoUri = groupCustInfoEntity.PhotoUrl;
-            }
-            Uri uri = Uri.parse(photoUri);
-            holder.CPhoto.setImageURI(uri);
+
+            UIHelper.setFrescoURL(holder.CPhoto,photoUri
+                    ,"res://haozuo.com.healthdoctor.view.custom/"+R.drawable.user_default_url);
             holder.Cname.setText(groupCustInfoEntity.Cname);
             holder.NickName.setText(groupCustInfoEntity.NickName);
             if (groupCustInfoEntity.Birthday != null){

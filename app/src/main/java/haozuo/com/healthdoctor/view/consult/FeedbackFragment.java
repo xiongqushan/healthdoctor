@@ -137,14 +137,10 @@ public class FeedbackFragment extends Fragment {
             tvName.setText(dataSource.get(position).ReDoctor);
             tvName.setVisibility(View.VISIBLE);
             String imgUrl = dataSource.get(position).PhotoUrl;
-            if (imgUrl == null || imgUrl.equals("")) {
-                imgUrl = "res://haozuo.com.healthdoctor.view.custom/" + R.drawable.default_photourl;
-            }
 
-//            tvTime.setText(DateUtil.converTimeByWeek(DateUtil.getStringToTimestamp(dataSource.get(position).CommitOn, "yyyy-MM-dd HH:mm")));
+            UIHelper.setFrescoURL(img,imgUrl
+                    ,"res://haozuo.com.healthdoctor.view.custom/" + R.drawable.user_default_url);
             tvTime.setText(DateUtil.TimeFormatByWeek(dataSource.get(position).CommitOn, "yyyy-MM-dd HH:mm"));
-            Uri uri = Uri.parse(imgUrl);
-            img.setImageURI(uri);
             return convertView;
         }
 

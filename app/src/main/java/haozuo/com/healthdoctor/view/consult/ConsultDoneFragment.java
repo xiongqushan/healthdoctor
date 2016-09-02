@@ -128,7 +128,6 @@ public class ConsultDoneFragment extends Fragment {
             notifyDataSetChanged();
         }
 
-
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             if (convertView == null) {
@@ -140,17 +139,12 @@ public class ConsultDoneFragment extends Fragment {
             RatingBar ratingBar = UIHelper.getAdapterView(convertView, R.id.RatingBar);
             ratingBar.setRating(dataSource.get(position).Score);
             String imgUrl = dataSource.get(position).PhotoUrl;
-            if (imgUrl == null || imgUrl.equals("")) {
-                imgUrl = "res://haozuo.com.healthdoctor.view.custom/" + R.drawable.default_photourl;
-            }
-            Uri uri = Uri.parse(imgUrl);
-            img.setImageURI(uri);
+            UIHelper.setFrescoURL(img,imgUrl
+                    ,"res://haozuo.com.healthdoctor.view.custom/" + R.drawable.user_default_url);
             tvTitle.setText(dataSource.get(position).CustName);
-//            tvTime.setText(DateUtil.converTimeByWeek(DateUtil.getStringToTimestamp(dataSource.get(position).CommitOn, "yyyy-MM-dd HH:mm")));
             tvTime.setText(DateUtil.TimeFormatByWeek(dataSource.get(position).CommitOn, "yyyy-MM-dd HH:mm"));
             return convertView;
         }
-
 
         @Override
         public Object getItem(int arg0) {

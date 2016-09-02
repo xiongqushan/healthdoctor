@@ -53,6 +53,7 @@ import haozuo.com.healthdoctor.presenter.IBasePresenter;
 import haozuo.com.healthdoctor.manager.UserManager;
 import haozuo.com.healthdoctor.util.DateUtil;
 import haozuo.com.healthdoctor.util.JsonParser;
+import haozuo.com.healthdoctor.util.UIHelper;
 import haozuo.com.healthdoctor.view.base.AbstractView;
 import haozuo.com.healthdoctor.view.custom.CustomDetailActivity;
 import haozuo.com.healthdoctor.view.custom.CustomerReportActivity;
@@ -73,7 +74,6 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
     private static DoctorBean mDoctorEntity;
     private static int mCustomerId;
     private List<ConsultReplyBean> mConsultReplyList;
-    private List<ConsultReplyBean> mAddReplyList;
 
     public static final String PREFER_NAME = "com.iflytek.setting";
     public static final String SELECT_POSITION_SMOOTH = "SELECT_POSITION_SMOOTH";
@@ -144,7 +144,6 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
         ConsultDetailFragment fragment = new ConsultDetailFragment();
         mDoctorEntity = UserManager.getInstance().getDoctorInfo();
         mCustomerId = CustomerId;
-//        mAccountId = AccountId;
         return fragment;
     }
 
@@ -189,7 +188,6 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
                         imm.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0);
                         String replyContent = edittxt_message.getText().toString();
                         addDoctorReply(replyContent);
-//                        sendCustomBroadcast(BROADFILTER_CONSULT_REPLAY);
                     }
                     return true;
             }
@@ -294,7 +292,6 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
 
     class ConsultListAdapter extends BaseAdapter {
         LayoutInflater myInflater;
-//        List<ConsultReplyBean> dataSource;
         private String mCommitOn = "";
         private static final int TYPE_COSTUMER = 0;
         private static final int TYPE_DOCTOR = 1;
@@ -308,13 +305,21 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
 
         public void refresh(List<ConsultReplyBean> dataList) {
             mConsultReplyList.clear();
+            mConsultReplmyItem = new ConsultReplyBean();
             mConsultReplyList.addAll(dataList);
-            for (int i= mConsultReplyList.size()-1;i>0;i--){
-                if (mConsultReplyList.get(i).IsDoctorReply == 0){ //客户回复内容
+            for (int i= mConsultReplyList.size()-1;i>=0;i--){
+                if (mConsultReplyList.get(i).IsDoctorReply == 0 &&mConsultReplyList.get(i).ConsultType == 1){ //客户回复内容
                     mConsultReplmyItem = mConsultReplyList.get(i);
                     break;
                 }
             }
+            for (int i= mConsultReplyList.size()-1;i>=0;i--){
+                if (mConsultReplyList.get(i).IsDoctorReply == 0 &&mConsultReplyList.get(i).ConsultType == 3){ //客户回复内容
+                    mConsultReplmyItem = mConsultReplyList.get(i);
+                    break;
+                }
+            }
+
             notifyDataSetChanged();
         }
 
@@ -362,13 +367,8 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
                     holder = (ViewHolderLeft) convertView.getTag();
                 }
                 final ConsultReplyBean consultReplyEntity = mConsultReplyList.get(position);
-                if (consultReplyEntity.PhotoUrl == null) {
-                    mURI = "res://haozuo.com.healthdoctor/" + R.drawable.default_photourl;
-                } else {
-                    mURI = consultReplyEntity.PhotoUrl;
-                }
-                Uri uri = Uri.parse(mURI);
-                holder.drawee_consult_item_photo.setImageURI(uri);
+                UIHelper.setFrescoURL(holder.drawee_consult_item_photo,consultReplyEntity.PhotoUrl
+                        ,"res://haozuo.com.healthdoctor.view.custom/"+R.drawable.user_default_url);
 
                 switch (consultReplyEntity.ConsultType) {
                     case 1://纯文本
@@ -419,8 +419,7 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
                     default:
                         break;
                 }
-                mCommitOn = consultReplyEntity.CommitOn.replace("T", " ");
-//                mCommitOn = DateUtil.converTime(DateUtil.getStringToTimestamp(consultReplyEntity.CommitOn,"yyyy-MM-dd"));
+                mCommitOn = DateUtil.TimeFormatByWeek(consultReplyEntity.CommitOn,"yyyy-MM-dd HH:mm:ss");
                 if (position == 0) {//如果是列表中的第一条数据则直接展示时间
                     holder.txt_consult_commiton.setVisibility(View.VISIBLE);
                     holder.txt_consult_commiton.setText(mCommitOn);
@@ -432,7 +431,6 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
                         holder.txt_consult_commiton.setVisibility(View.GONE);
                     }
                 }
-
             } else if (currentType == TYPE_DOCTOR) {
                 ViewHolderRight holder = null;
                 if (convertView == null) {
@@ -443,14 +441,11 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
                     holder = (ViewHolderRight) convertView.getTag();
                 }
                 ConsultReplyBean consultReplyEntity = mConsultReplyList.get(position);
-                Uri uri = Uri.parse(mDoctorEntity.PhotoUrl);
-                holder.drawee_consult_item_photo.setImageURI(uri);
+                UIHelper.setFrescoURL(holder.drawee_consult_item_photo,mDoctorEntity.PhotoUrl
+                        ,"res://haozuo.com.healthdoctor.view.custom/"+R.drawable.user_default_url);
                 holder.txt_consult_item.setText(consultReplyEntity.Content);
-
-                mCommitOn = consultReplyEntity.CommitOn.replace("T", " ");
-//                    mCommitOn = DateUtil.converTime(DateUtil.getStringToTimestamp(consultReplyEntity.CommitOn,"yyyy-MM-dd"));
+                mCommitOn = DateUtil.TimeFormatByWeek(consultReplyEntity.CommitOn,"yyyy-MM-dd HH:mm:ss");
                 if (position == 0) {//如果是列表中的第一条数据则直接展示时间
-
                     holder.txt_consult_commiton.setVisibility(View.VISIBLE);
                     holder.txt_consult_commiton.setText(mCommitOn);
                 } else {//与列表中上一条数据的时间相比较，若间隔时间小于30s则展示时间

@@ -1,13 +1,21 @@
 package haozuo.com.healthdoctor.view.custom;
 
 
+import android.app.Dialog;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.Display;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +30,7 @@ import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.CustomDetailBean;
 import haozuo.com.healthdoctor.bean.DoctorGroupBean;
 import haozuo.com.healthdoctor.presenter.IBasePresenter;
+import haozuo.com.healthdoctor.util.UIHelper;
 import haozuo.com.healthdoctor.view.base.AbstractView;
 import haozuo.com.healthdoctor.contract.CustomerInfoContract;
 import haozuo.com.healthdoctor.view.threePart.common.FlowLayout;
@@ -104,15 +113,8 @@ public class CustomerInfoFragment extends AbstractView implements CustomerInfoCo
     @Override
     public void InitView(CustomDetailBean customInfo) {
         mCustomInfo = customInfo;
-        if (customInfo.PhotoUrl == null){
-//            photoUri = "http://pic002.cnblogs.com/images/2011/103608/2011062022023456.jpg";
-            photoUri = "res://haozuo.com.healthdoctor.view.custom/"+R.drawable.default_photourl;
-        }
-        else {
-            photoUri = customInfo.PhotoUrl;
-        }
-        Uri uri = Uri.parse(photoUri);
-        CPhoto.setImageURI(uri);
+        UIHelper.setFrescoURL(CPhoto,photoUri,
+                "res://haozuo.com.healthdoctor.view.custom/"+R.drawable.user_default_url);
         Cname.setText(customInfo.Cname);
         CHeight.setText(customInfo.Gender);
         CMobile.setText(customInfo.Mobile);

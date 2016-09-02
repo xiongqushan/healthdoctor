@@ -43,6 +43,7 @@ public class PhotoPreviewFragment extends BaseFragment{
         View view = inflater.inflate(R.layout.item_photo_preview, container, false);
         final PhotoDraweeView photoDraweeView = (PhotoDraweeView) view;
 
+
         PipelineDraweeControllerBuilder controller = Fresco.newDraweeControllerBuilder();
         controller.setOldController(photoDraweeView.getController());
         controller.setImageRequest(ImageRequest.fromUri(Uri.parse(mURL)));

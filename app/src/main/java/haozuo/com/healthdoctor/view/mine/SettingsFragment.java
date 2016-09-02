@@ -6,11 +6,15 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Toast;
+
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.core.ImagePipeline;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -57,6 +61,10 @@ public class SettingsFragment extends BaseFragment {
 
     @OnClick(R.id.layout_clearcache)
     void clearcacheClick() {
+        //清理图片缓存
+        Fresco.getImagePipeline().clearCaches();
+        GroupInfoManager.getInstance().clear();
+        UserManager.getInstance().clear();
     }
 
     @OnClick(R.id.layout_push)
@@ -96,7 +104,6 @@ public class SettingsFragment extends BaseFragment {
                     }
                     // PreferenceManager.getInstance().writeJpush(isChecked);
                      Toast.makeText(getContext(), "消息推送:" + (isChecked ? "on" : "off"), Toast.LENGTH_SHORT).show();
-
                 }
             });
         }
@@ -104,12 +111,12 @@ public class SettingsFragment extends BaseFragment {
     }
 
     public void ShowSignOutDialog() {
-        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(mContext);
-        builder.setTitle("退出当前账号");
-        builder.setMessage("退出当前账号，你可能不能及时回复客户咨询，确认退出？");
-        builder.setNegativeButton("取消", null);
-        builder.setPositiveButton("确定退出", SignOut);
-        builder.show();
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        builder.setTitle("退出当前账号")
+                .setMessage("退出当前账号，你可能不能及时回复客户咨询，确认退出？")
+                .setNegativeButton("取消", null)
+                .setPositiveButton("确定退出", SignOut)
+                .show();
     }
 
     DialogInterface.OnClickListener SignOut = new DialogInterface.OnClickListener() {

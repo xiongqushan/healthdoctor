@@ -34,6 +34,10 @@
     <string name="pref_title_iat_show">显示听写界面</string>
     <string name="pref_title_iat_dwa">结果动态修正</string>
 
+    <string name="usefulmessage_default_lastconsult">未获取客户咨询记录</string>
+    <string name="usefulmessage_laseconsult_title">咨询内容</string>
+    <string name="usefulmessage_btn_nextstep">下一步</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

@@ -33,7 +33,7 @@
         android:layout_width="@dimen/actionbar_high"
         android:layout_height="match_parent"
         android:padding="@dimen/actionbar_padding"
-        android:src="@drawable/search" />
+        android:src="@drawable/search_white" />
 
     <TextView
         android:id="@+id/tv_Consult"

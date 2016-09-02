@@ -34,12 +34,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
 
-//    @Override
-//    public void startActivity(Intent intent) {
-//        super.startActivity(intent);
-//        overridePendingTransition(R.anim.to_right_in, R.anim.to_right_out);
-
-
     @Override
     public void finish() {
         super.finish();
