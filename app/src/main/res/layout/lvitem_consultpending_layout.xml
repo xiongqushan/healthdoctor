@@ -43,7 +43,7 @@
         android:layout_alignLeft="@id/tvTitle"
         android:layout_below="@id/tvTitle"
         android:layout_marginTop="8dp"
-        android:singleLine="true"
+        android:maxLines="1"
         android:text="客户满意度"
         android:textColor="@color/subtitle_color66"
         android:textSize="@dimen/txt_subtitle_14sp" />
