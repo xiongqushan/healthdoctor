@@ -64,6 +64,7 @@ public class SettingsFragment extends BaseFragment {
         Fresco.getImagePipeline().clearCaches();
         GroupInfoManager.getInstance().clear();
         //UserManager.getInstance().clear();
+        Toast.makeText(getActivity(), "缓存清理成功", Toast.LENGTH_SHORT).show();
     }
 
     @OnClick(R.id.layout_push)
@@ -102,7 +103,7 @@ public class SettingsFragment extends BaseFragment {
                         JPushInterface.stopPush(getActivity());
                     }
                     // PreferenceManager.getInstance().writeJpush(isChecked);
-                     Toast.makeText(getContext(), "消息推送:" + (isChecked ? "on" : "off"), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "消息推送:" + (isChecked ? "on" : "off"), Toast.LENGTH_SHORT).show();
                 }
             });
         }

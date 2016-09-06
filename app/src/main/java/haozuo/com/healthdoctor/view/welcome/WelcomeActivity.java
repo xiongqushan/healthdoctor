@@ -31,7 +31,6 @@ import haozuo.com.healthdoctor.view.login.LoginActivity;
 public class WelcomeActivity extends BaseActivity implements WelcomeContract.IWelcomeView {
     private final long turnTimeDelay = 2000;
     private static long lastTime;
-
     @Inject
     WelcomePresenter mWelcomePresenter;
 
@@ -96,7 +95,6 @@ public class WelcomeActivity extends BaseActivity implements WelcomeContract.IWe
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setTranslucentStatus(0);
         setContentView(R.layout.activity_welcome);
-
         DaggerWelcomeComponent.builder()
                 .welcomeModule(new WelcomeModule(this))
                 .appComponent(getAppComponent())

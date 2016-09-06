@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/item_press_white_gray"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/item_press_white_gray">
 
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:drawablePadding="8dp"
+        android:drawableTop="@drawable/default_photourl"
         android:gravity="center"
         android:text="轻触屏幕重新连接"
-        android:textColor="@color/subtitle_color66"
-        android:textSize="18sp"/>
+        android:textColor="@color/main_color_blue"
+        android:textSize="18sp" />
 
 
 </RelativeLayout>
