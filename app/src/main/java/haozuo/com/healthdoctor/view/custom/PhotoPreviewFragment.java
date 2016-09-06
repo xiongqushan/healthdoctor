@@ -13,7 +13,6 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.backends.pipeline.PipelineDraweeControllerBuilder;
 import com.facebook.drawee.controller.BaseControllerListener;
 import com.facebook.drawee.drawable.ScalingUtils;
-import com.facebook.drawee.generic.GenericDraweeHierarchy;
 import com.facebook.imagepipeline.common.ResizeOptions;
 import com.facebook.imagepipeline.image.ImageInfo;
 import com.facebook.imagepipeline.request.ImageRequest;
@@ -68,17 +67,18 @@ public class PhotoPreviewFragment extends BaseFragment{
                 if (imageInfo == null) {
                     return;
                 }
-                photoDraweeView.update(imageInfo.getWidth(), imageInfo.getHeight());
                 photoDraweeView.setEnableDraweeMatrix(true);
+                photoDraweeView.update(imageInfo.getWidth(), imageInfo.getHeight());
+                photoDraweeView.getHierarchy().setActualImageScaleType(ScalingUtils.ScaleType.FIT_CENTER);
             }
-
         });
         photoDraweeView.setController(controller.build());
 
-        GenericDraweeHierarchy draweeHierarchy = photoDraweeView.getHierarchy();
-        draweeHierarchy.setActualImageScaleType(ScalingUtils.ScaleType.CENTER_INSIDE);
-        photoDraweeView.setHierarchy(draweeHierarchy);
-
+//        GenericDraweeHierarchy draweeHierarchy = photoDraweeView.getHierarchy();
+//        draweeHierarchy.setActualImageScaleType(ScalingUtils.ScaleType.CENTER_INSIDE);
+//        photoDraweeView.setHierarchy(draweeHierarchy);
+        photoDraweeView.getHierarchy().setActualImageScaleType(ScalingUtils.ScaleType.CENTER_INSIDE);
+        
         photoDraweeView.setOnViewTapListener(new OnViewTapListener() {
             @Override
             public void onViewTap(View view, float x, float y) {

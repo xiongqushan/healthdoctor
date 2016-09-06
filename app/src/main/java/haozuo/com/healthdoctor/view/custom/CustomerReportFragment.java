@@ -73,6 +73,11 @@ public class CustomerReportFragment extends AbstractView implements CustomerRepo
         return rootVeiw;
     }
 
+    @Override
+    protected void onReceiveBroadcast(String filterAction) {
+        super.onReceiveBroadcast(filterAction);
+    }
+
     private void initView() {
         PagerAdapter pagerAdapter = new ReportPagerAdapter(getChildFragmentManager());
         mViewPager.setAdapter(pagerAdapter);

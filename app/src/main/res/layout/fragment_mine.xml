@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/gray_bg_ee"
     android:orientation="vertical">
 
@@ -20,16 +20,15 @@
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <com.facebook.drawee.view.SimpleDraweeView
-                xmlns:fresco="http://schemas.android.com/apk/res-auto"
+            <com.facebook.drawee.view.SimpleDraweeView xmlns:fresco="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/img_doctorphoto"
                 android:layout_width="96dp"
                 android:layout_height="96dp"
+                android:src="@drawable/ic_launcher"
+                fresco:failureImage="@drawable/doctor_default_photourl"
                 fresco:roundAsCircle="true"
                 fresco:roundingBorderColor="@color/white"
-                fresco:roundingBorderWidth="1dp" />
-            <!--fresco:placeholderImage="@drawable/doctor_default_photourl"-->
-            <!--fresco:placeholderImageScaleType="fitCenter"-->
+                fresco:roundingBorderWidth="2dp" />
 
             <!--<ImageView-->
             <!--android:layout_width="96dp"-->
@@ -42,9 +41,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                tools:text="医师赵"
                 android:textColor="@color/white"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                tools:text="医师赵" />
 
         </LinearLayout>
     </RelativeLayout>
@@ -60,7 +59,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="@dimen/actionbar_high"
+            android:layout_width="@dimen/actionbar_high_44dp"
             android:layout_height="match_parent"
             android:padding="12dp"
             android:src="@drawable/personal_info" />
@@ -76,13 +75,13 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:visibility="invisible"/>
+            android:visibility="invisible" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginRight="10dp"
-            android:src="@drawable/btn_go_into"/>
+            android:src="@drawable/btn_go_into" />
 
 
     </LinearLayout>
@@ -98,9 +97,9 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="@dimen/actionbar_high"
+            android:layout_width="@dimen/actionbar_high_44dp"
             android:layout_height="match_parent"
-            android:padding="10dp"
+            android:padding="12dp"
             android:src="@drawable/setting" />
 
         <TextView
@@ -114,13 +113,13 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:visibility="invisible"/>
+            android:visibility="invisible" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginRight="10dp"
-            android:src="@drawable/btn_go_into"/>
+            android:src="@drawable/btn_go_into" />
 
     </LinearLayout>
 

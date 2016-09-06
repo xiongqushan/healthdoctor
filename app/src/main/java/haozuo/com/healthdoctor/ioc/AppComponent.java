@@ -11,6 +11,7 @@ import haozuo.com.healthdoctor.framework.HZApplication;
 import haozuo.com.healthdoctor.service.IConsultService;
 import haozuo.com.healthdoctor.service.IGroupService;
 import haozuo.com.healthdoctor.service.IReportService;
+import haozuo.com.healthdoctor.service.ISystemService;
 import haozuo.com.healthdoctor.service.IUserService;
 
 /**
@@ -31,6 +32,8 @@ public interface AppComponent {
     IConsultService getConsultService();
 
     IReportService getReportService();
+
+    ISystemService getSystemService();
 
     OkHttpClient getOkHttpClient();
 }

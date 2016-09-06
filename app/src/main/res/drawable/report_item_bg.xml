@@ -10,6 +10,6 @@
     <!--&lt;!&ndash; 描边 &ndash;&gt;-->
     <stroke
         android:width="@dimen/dividerline"
-        android:color="@color/divider_d3"/>
+        android:color="@color/divider_cc"/>
 
 </shape>

@@ -6,7 +6,7 @@
         android:width="16dp"
         android:height="16dp"/>
     <!-- 填充 -->
-    <solid android:color="@color/main_color_blue"/>
+    <solid android:color="@color/report_circle_orange"/>
 
 
 </shape>

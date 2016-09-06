@@ -16,13 +16,15 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
-//import com.umeng.analytics.MobclickAgent;
+import com.umeng.analytics.MobclickAgent;
 
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.framework.HZApplication;
 import haozuo.com.healthdoctor.ioc.AppComponent;
 import haozuo.com.healthdoctor.util.SystemBarTintUtil;
 import haozuo.com.healthdoctor.view.consult.ConsultDetailActivity;
+
+//import com.umeng.analytics.MobclickAgent;
 
 /**
  * Created by xiongwei1 on 2016/7/8.
@@ -36,15 +38,15 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
 
-//    public void onResume() {
-//        super.onResume();
-//        MobclickAgent.onResume(this);
-//    }
-//
-//    public void onPause() {
-//        super.onPause();
-//        MobclickAgent.onPause(this);
-//    }
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
 
     @Override
     public void finish() {

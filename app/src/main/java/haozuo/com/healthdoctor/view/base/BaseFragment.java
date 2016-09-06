@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.v4.app.Fragment;
 
+import haozuo.com.healthdoctor.BuildConfig;
 import haozuo.com.healthdoctor.framework.HZApplication;
 
 /**
@@ -54,6 +55,8 @@ public class BaseFragment extends Fragment {
         if (receiver != null) {
             getContext().unregisterReceiver(receiver);
         }
-        HZApplication.shareApplication().getRefWatcher().watch(this);
+        if (BuildConfig.DEBUG) {
+            HZApplication.shareApplication().getRefWatcher().watch(this);
+        }
     }
 }

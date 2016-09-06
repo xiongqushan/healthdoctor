@@ -65,6 +65,7 @@ public class SettingsFragment extends BaseFragment {
         Fresco.getImagePipeline().clearCaches();
         GroupInfoManager.getInstance().clear();
         UsefulMessageManager.getInstance().clear();
+
     }
 
     @OnClick(R.id.layout_push)

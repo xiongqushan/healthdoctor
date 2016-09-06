@@ -28,6 +28,7 @@
             android:layout_marginLeft="@dimen/consult_photot_marginleft"
             android:layout_marginTop="@dimen/consult_photo_margintop"
             fresco:placeholderImage="@drawable/user_default_url"
+            fresco:placeholderImageScaleType="fitXY"
             fresco:roundAsCircle="true" />
         <!--fresco:roundingBorderColor="@color/black"-->
         <!--fresco:roundingBorderWidth="1dp"-->
