@@ -646,4 +646,54 @@ public class DateUtil {
         return diff;
     }
 
+
+    public static int getAge(String ID,String birthday){
+        if (ID != null){
+            return DateUtil.getAgeBaseID(ID);
+        }else if (birthday != null){
+            return DateUtil.getAgeBaseDate(birthday);
+        }
+        return 0;
+    }
+
+    public static int getAgeBaseID(String ID) {
+        int age = 0;
+        Date now = new Date();
+        SimpleDateFormat format_y = new SimpleDateFormat("yyyy");
+        SimpleDateFormat format_M = new SimpleDateFormat("MM");
+        String this_year = format_y.format(now);
+        String this_month = format_M.format(now);
+
+        if (ID.length() == 18) {
+            String birth_year = ID.substring(6, 10);
+            String birth_month = ID.substring(11, 12);
+
+            age = Integer.parseInt(this_year) - Integer.parseInt(birth_year) + 1;
+            if (this_month.compareTo(birth_month) < 0) age -= 1;
+            if (age < 0) age = 0;
+            return age;
+        }
+        return 0;
+    }
+
+    public static int getAgeBaseDate(String birthday) {
+        if (birthday == null) {
+            return 0;
+        }
+        int age = 0;
+        Date now = new Date();
+        SimpleDateFormat format_y = new SimpleDateFormat("yyyy");
+        SimpleDateFormat format_M = new SimpleDateFormat("MM");
+        String birth_year = birthday.split("-")[0];
+        String this_year = format_y.format(now);
+        String birth_month = birthday.split("-")[1];
+        String this_month = format_M.format(now);
+
+        age = Integer.parseInt(this_year) - Integer.parseInt(birth_year);
+
+        if (this_month.compareTo(birth_month) < 0) age -= 1;
+        if (age < 0) age = 0;
+        return age;
+    }
+
 }

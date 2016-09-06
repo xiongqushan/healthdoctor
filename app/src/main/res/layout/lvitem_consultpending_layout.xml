@@ -6,7 +6,6 @@
     android:background="@color/item_press_white_gray"
     android:orientation="vertical">
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -17,6 +16,7 @@
             android:layout_height="40dp"
             android:layout_centerVertical="true"
             android:layout_margin="12dp"
+            fresco:placeholderImage="@drawable/user_default_url"
             fresco:roundAsCircle="true" />
 
         <TextView

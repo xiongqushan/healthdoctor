@@ -41,7 +41,7 @@ public class LoadingDialog extends Dialog {
             }
         });
         tvTip = (TextView) vContent.findViewById(R.id.tvTip);// 提示文字
-        setCancelable(false);
+        setCancelable(false); //不可以使用返回键取消
     }
 
     public void setMessage(String msg) {

@@ -6,7 +6,6 @@
     android:background="@color/item_press_white_gray"
     android:orientation="vertical">
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -17,6 +16,7 @@
             android:layout_height="40dp"
             android:layout_centerVertical="true"
             android:layout_margin="12dp"
+            fresco:placeholderImage="@drawable/user_default_url"
             fresco:roundAsCircle="true" />
 
         <TextView
@@ -40,7 +40,6 @@
             android:textColor="@color/subtitle_colorb2"
             android:textSize="@dimen/txt_subtitle_14sp" />
 
-
         <TextView
             android:id="@+id/tvSubtitle"
             android:layout_width="wrap_content"
@@ -63,7 +62,7 @@
             android:isIndicator="true"
             android:paddingTop="2dp"
             android:progressDrawable="@drawable/ratingbar_full"
-            android:rating="3.0" />
+            android:rating="3.5" />
 
         <TextView
             android:id="@+id/tvReDoctor"
