@@ -40,14 +40,22 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
     private ReportParamsAdapter mReportParamsAdapter;
     private PhotoReportAdapter mPhotoReportAdapter;
     private CustomDetailBean mCustomInfo;
-    @Bind(R.id.drawee_CPhoto) SimpleDraweeView CPhoto;
-    @Bind(R.id.tv_CName) TextView CName;
-    @Bind(R.id.tv_CGender) TextView CGender;
-    @Bind(R.id.tv_CAge) TextView CAge;
-    @Bind(R.id.tv_Cphone) TextView Cphone;
-    @Bind(R.id.btn_go_into) ImageView btn_go_into;
-    @Bind(R.id.lv_custom_report) ChildListView lv_custom_report;
-    @Bind(R.id.gv_PhotoReport) ChildGridView gv_PhotoReport;
+    @Bind(R.id.drawee_CPhoto)
+    SimpleDraweeView CPhoto;
+    @Bind(R.id.tv_CName)
+    TextView CName;
+    @Bind(R.id.tv_CGender)
+    TextView CGender;
+    @Bind(R.id.tv_CAge)
+    TextView CAge;
+    @Bind(R.id.tv_Cphone)
+    TextView Cphone;
+    @Bind(R.id.btn_go_into)
+    ImageView btn_go_into;
+    @Bind(R.id.lv_custom_report)
+    ChildListView lv_custom_report;
+    @Bind(R.id.gv_PhotoReport)
+    ChildGridView gv_PhotoReport;
 
     @OnClick(R.id.btn_show_Report)
     public void showReport() {
@@ -93,26 +101,26 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mContext = getContext();
         if (rootView == null) {
+            mContext = getContext();
             rootView = inflater.inflate(R.layout.fragment_custom_detail, container, false);
             ButterKnife.bind(this, rootView);
+            mReportParamsAdapter = new ReportParamsAdapter(mContext);
+            lv_custom_report.setAdapter(mReportParamsAdapter);
+            lv_custom_report.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                    ReportParamsBean bean = mReportParamsAdapter.getDataSource().get(position);
+                    bean.customerId = getActivity().getIntent().getIntExtra(CustomDetailActivity.EXTRA_CUSTOMER_ID, 0);
+                    Intent intent = new Intent(getActivity(), CustomerReportActivity.class);
+                    intent.putExtra(CustomerReportActivity.REPORTPARAMSBEAN, bean);
+                    startActivity(intent);
+                }
+            });
+            mPhotoReportAdapter = new PhotoReportAdapter(mContext);
+            gv_PhotoReport.setAdapter(mPhotoReportAdapter);
+            mCustomDetailPresenter.start();
         }
-        mReportParamsAdapter = new ReportParamsAdapter(mContext);
-        lv_custom_report.setAdapter(mReportParamsAdapter);
-        lv_custom_report.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                ReportParamsBean bean = mReportParamsAdapter.getDataSource().get(position);
-                bean.customerId = getActivity().getIntent().getIntExtra(CustomDetailActivity.EXTRA_CUSTOMER_ID, 0);
-                Intent intent = new Intent(getActivity(), CustomerReportActivity.class);
-                intent.putExtra(CustomerReportActivity.REPORTPARAMSBEAN, bean);
-                startActivity(intent);
-            }
-        });
-        mPhotoReportAdapter = new PhotoReportAdapter(mContext);
-        gv_PhotoReport.setAdapter(mPhotoReportAdapter);
-        mCustomDetailPresenter.start();
 
         return rootView;
     }
@@ -280,8 +288,8 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
             tv_Count.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(mContext,PhotoPreviewActivity.class)
-                            .putExtra(PhotoPreviewActivity.EXTRA_URL_LIST,RequestPhotoReportEntity.Content));
+                    startActivity(new Intent(mContext, PhotoPreviewActivity.class)
+                            .putExtra(PhotoPreviewActivity.EXTRA_URL_LIST, RequestPhotoReportEntity.Content));
                 }
             });
 

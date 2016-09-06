@@ -1,7 +1,6 @@
 package haozuo.com.healthdoctor.view.mine;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -85,6 +84,7 @@ public class MineFragment extends BaseFragment {
     }
 
     private void initView() {
+
         DoctorBean doctorInfo = UserManager.getInstance().getDoctorInfo();
         tvName.setText(doctorInfo.Name);
         String imgUrl = doctorInfo.PhotoUrl;
@@ -93,13 +93,14 @@ public class MineFragment extends BaseFragment {
 //        }
 //        Uri uri = Uri.parse(imgUrl);
 //        imgPhoto.setImageURI(uri);
-        UIHelper.setFrescoURL(imgPhoto,imgUrl
-                ,"res://haozuo.com.healthdoctor.view.custom/" + R.drawable.doctor_default_photourl);
+        UIHelper.setFrescoURL(imgPhoto, imgUrl
+                , "res://haozuo.com.healthdoctor.view.custom/" + R.drawable.doctor_default_photourl);
     }
+
     @Override
     protected void onReceiveBroadcast(String filterAction) {
         super.onReceiveBroadcast(filterAction);
-        if (filterAction.equals(HomeActivity.FINISHACTIVITY)){
+        if (filterAction.equals(HomeActivity.FINISHACTIVITY)) {
             getActivity().finish();
         }
     }

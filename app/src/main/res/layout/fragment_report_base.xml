@@ -26,7 +26,8 @@
             android:background="@color/divider_d3"/>
 
 
-        <RelativeLayout style="@style/layout_report_base">
+        <RelativeLayout
+            style="@style/layout_report_base">
 
             <TextView
                 style="@style/txt_report_titile"

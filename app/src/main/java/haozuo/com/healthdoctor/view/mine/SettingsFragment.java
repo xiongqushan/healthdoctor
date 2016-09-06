@@ -14,7 +14,6 @@ import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.imagepipeline.core.ImagePipeline;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -64,7 +63,7 @@ public class SettingsFragment extends BaseFragment {
         //清理图片缓存
         Fresco.getImagePipeline().clearCaches();
         GroupInfoManager.getInstance().clear();
-        UserManager.getInstance().clear();
+        //UserManager.getInstance().clear();
     }
 
     @OnClick(R.id.layout_push)
