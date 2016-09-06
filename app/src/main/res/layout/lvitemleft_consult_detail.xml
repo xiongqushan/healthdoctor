@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:textSize="@dimen/textsize_h4"
-        tools:text="1234"/>
+        tools:text="上午 11:40"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -27,6 +27,7 @@
             android:layout_height="@dimen/consult_photo_height"
             android:layout_marginLeft="@dimen/consult_photot_marginleft"
             android:layout_marginTop="@dimen/consult_photo_margintop"
+            fresco:placeholderImage="@drawable/user_default_url"
             fresco:roundAsCircle="true" />
         <!--fresco:roundingBorderColor="@color/black"-->
         <!--fresco:roundingBorderWidth="1dp"-->

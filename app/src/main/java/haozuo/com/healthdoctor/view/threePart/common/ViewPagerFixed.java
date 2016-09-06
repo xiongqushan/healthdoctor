@@ -23,7 +23,7 @@ public class ViewPagerFixed extends ViewPager {
         try {
             return super.onTouchEvent(ev);
         } catch (IllegalArgumentException ex) {
-            ex.printStackTrace();
+//            ex.printStackTrace();
         }
         return false;
     }
@@ -33,8 +33,13 @@ public class ViewPagerFixed extends ViewPager {
         try {
             return super.onInterceptTouchEvent(ev);
         } catch (IllegalArgumentException ex) {
-            ex.printStackTrace();
+//            ex.printStackTrace();
         }
         return false;
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        return super.dispatchTouchEvent(ev);
     }
 }

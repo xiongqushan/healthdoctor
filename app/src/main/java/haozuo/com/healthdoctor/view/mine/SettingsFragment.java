@@ -14,7 +14,6 @@ import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.imagepipeline.core.ImagePipeline;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -22,6 +21,7 @@ import butterknife.OnClick;
 import cn.jpush.android.api.JPushInterface;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.manager.GroupInfoManager;
+import haozuo.com.healthdoctor.manager.UsefulMessageManager;
 import haozuo.com.healthdoctor.manager.UserManager;
 import haozuo.com.healthdoctor.util.UHealthUtils;
 import haozuo.com.healthdoctor.view.base.BaseFragment;
@@ -64,7 +64,7 @@ public class SettingsFragment extends BaseFragment {
         //清理图片缓存
         Fresco.getImagePipeline().clearCaches();
         GroupInfoManager.getInstance().clear();
-        UserManager.getInstance().clear();
+        UsefulMessageManager.getInstance().clear();
     }
 
     @OnClick(R.id.layout_push)

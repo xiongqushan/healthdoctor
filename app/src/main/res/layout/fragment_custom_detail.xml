@@ -23,6 +23,8 @@
                 android:layout_height="@dimen/custom_url_height"
                 android:layout_centerVertical="true"
                 android:padding="@dimen/custom_padding"
+                fresco:placeholderImage="@drawable/user_default_url"
+                fresco:placeholderImageScaleType="fitXY"
                 fresco:roundAsCircle="true" />
 
             <TextView

@@ -1,22 +1,27 @@
 package haozuo.com.healthdoctor.view.custom;
 
+import android.content.Context;
 import android.graphics.drawable.Animatable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.backends.pipeline.PipelineDraweeControllerBuilder;
 import com.facebook.drawee.controller.BaseControllerListener;
+import com.facebook.drawee.drawable.ScalingUtils;
+import com.facebook.drawee.generic.GenericDraweeHierarchy;
+import com.facebook.imagepipeline.common.ResizeOptions;
 import com.facebook.imagepipeline.image.ImageInfo;
 import com.facebook.imagepipeline.request.ImageRequest;
+import com.facebook.imagepipeline.request.ImageRequestBuilder;
 
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.view.base.BaseFragment;
-import me.relex.photodraweeview.OnPhotoTapListener;
+import me.relex.photodraweeview.OnViewTapListener;
 import me.relex.photodraweeview.PhotoDraweeView;
 
 /**
@@ -25,6 +30,7 @@ import me.relex.photodraweeview.PhotoDraweeView;
 public class PhotoPreviewFragment extends BaseFragment{
     private static String URL_ADDRESS = "URL_ADDRESS";
     private String mURL;
+    private PhotoDraweeView photoDraweeView;
 
     public PhotoPreviewFragment(){};
 
@@ -36,17 +42,24 @@ public class PhotoPreviewFragment extends BaseFragment{
         return photoPreviewFragment;
     };
 
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mURL = getArguments().getString(URL_ADDRESS);
         View view = inflater.inflate(R.layout.item_photo_preview, container, false);
-        final PhotoDraweeView photoDraweeView = (PhotoDraweeView) view;
+        photoDraweeView = (PhotoDraweeView) view;
+        WindowManager wm = (WindowManager) getContext()
+                .getSystemService(Context.WINDOW_SERVICE);
 
+        photoDraweeView.setPhotoUri(Uri.parse(mURL));
+        photoDraweeView.setEnableDraweeMatrix(false);
+
+        ImageRequest resRequest = ImageRequestBuilder.newBuilderWithSource(Uri.parse(mURL))
+                .setResizeOptions(new ResizeOptions(wm.getDefaultDisplay().getWidth(),wm.getDefaultDisplay().getHeight()))
+                .build();
 
         PipelineDraweeControllerBuilder controller = Fresco.newDraweeControllerBuilder();
         controller.setOldController(photoDraweeView.getController());
-        controller.setImageRequest(ImageRequest.fromUri(Uri.parse(mURL)));
+        controller.setImageRequest(resRequest);
         controller.setLowResImageRequest(ImageRequest.fromUri(Uri.parse(mURL+"!small200")));
         controller.setControllerListener(new BaseControllerListener<ImageInfo>() {
             @Override
@@ -56,12 +69,19 @@ public class PhotoPreviewFragment extends BaseFragment{
                     return;
                 }
                 photoDraweeView.update(imageInfo.getWidth(), imageInfo.getHeight());
+                photoDraweeView.setEnableDraweeMatrix(true);
             }
+
         });
         photoDraweeView.setController(controller.build());
-        photoDraweeView.setOnPhotoTapListener(new OnPhotoTapListener() {
+
+        GenericDraweeHierarchy draweeHierarchy = photoDraweeView.getHierarchy();
+        draweeHierarchy.setActualImageScaleType(ScalingUtils.ScaleType.CENTER_INSIDE);
+        photoDraweeView.setHierarchy(draweeHierarchy);
+
+        photoDraweeView.setOnViewTapListener(new OnViewTapListener() {
             @Override
-            public void onPhotoTap(View view, float x, float y) {
+            public void onViewTap(View view, float x, float y) {
                 getActivity().finish();
             }
         });

@@ -30,7 +30,6 @@ import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout;
 public class ConsultDetailPresenter extends AbstractPresenter implements ConsultDetailContract.IConsultDetailPresenter {
     private ConsultDetailContract.IConsultDetailView mIConsultDetailView;
     private ConsultModel mConsultModel;
-//    private GroupModel mGroupModel;
     private UserModel mUserModel;
     private ConsultReplyBean consultReplyBean;
     private List<ConsultReplyBean> mConsultItemBeanList;
@@ -43,7 +42,6 @@ public class ConsultDetailPresenter extends AbstractPresenter implements Consult
         mConsultItemBeanList = new ArrayList<ConsultReplyBean>();
         mIConsultDetailView=iConsultDetailView;
         mConsultModel=consultModel;
-//        mGroupModel = groupModel;
         mUserModel = userModel;
         mCustomerId=customerId;
         isInit = true;
@@ -115,7 +113,6 @@ public class ConsultDetailPresenter extends AbstractPresenter implements Consult
                     mIConsultDetailView.hideDialog();
                     mIConsultDetailView.RefreshConsultPage(getAddConsultReply(ReDoctorId, ReplyContent, ReplyTime));
                     mIConsultDetailView.setListViewPosition(mConsultItemBeanList.size(),ConsultDetailFragment.SELECT_POSITION_SMOOTH);
-//                    mIConsultDetailView.RefreshConsultPage(ReplyContent);
                     mCommitOn = DateUtil.date2Str(new Date(),"yyyyMMddHHmmss");
 //                    loadmoreConsultList();
                 } else {

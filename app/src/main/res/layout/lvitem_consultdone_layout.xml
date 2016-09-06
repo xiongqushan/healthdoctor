@@ -12,6 +12,7 @@
         android:layout_height="40dp"
         android:layout_centerVertical="true"
         android:layout_margin="12dp"
+        fresco:placeholderImage="@drawable/user_default_url"
         fresco:roundAsCircle="true" />
 
     <TextView
@@ -34,7 +35,6 @@
         android:text="2016-04-11 14:31"
         android:textColor="@color/subtitle_colorb2"
         android:textSize="@dimen/txt_subtitle_14sp" />
-
 
     <TextView
         android:id="@+id/tvSubtitle"

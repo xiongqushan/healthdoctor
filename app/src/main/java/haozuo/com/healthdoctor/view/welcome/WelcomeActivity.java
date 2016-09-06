@@ -40,7 +40,6 @@ public class WelcomeActivity extends BaseActivity {
                 } else {
                     startActivity(new Intent(getBaseContext(), LoginActivity.class));
                 }
-
                 finish();
             }
         };
@@ -126,6 +125,7 @@ public class WelcomeActivity extends BaseActivity {
             }
         }, 5000);
     }
+
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

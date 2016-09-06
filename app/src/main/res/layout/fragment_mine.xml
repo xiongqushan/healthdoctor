@@ -25,12 +25,11 @@
                 android:id="@+id/img_doctorphoto"
                 android:layout_width="96dp"
                 android:layout_height="96dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_launcher"
                 fresco:roundAsCircle="true"
                 fresco:roundingBorderColor="@color/white"
-                fresco:roundingBorderWidth="2dp"
-                fresco:failureImage="@drawable/doctor_default_photourl" />
+                fresco:roundingBorderWidth="1dp" />
+            <!--fresco:placeholderImage="@drawable/doctor_default_photourl"-->
+            <!--fresco:placeholderImageScaleType="fitCenter"-->
 
             <!--<ImageView-->
             <!--android:layout_width="96dp"-->

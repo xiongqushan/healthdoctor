@@ -62,7 +62,7 @@ public class CustomDetailPresenter extends AbstractPresenter implements CustomDe
                 if(resultData.LogicSuccess) {
                     mICustomDetailView.hideDialog();
                     CustomDetailBean customBean = resultData.Data;
-                    customBean.Sex = CustomDetailBean.GenderConvert(customBean.Gender);
+//                    customBean.Sex = CustomDetailBean.GenderConvert(customBean.Gender);
                     mICustomDetailView.InitView(customBean);
                     mICustomDetailView.changeRetryLayer(true);
                 }
