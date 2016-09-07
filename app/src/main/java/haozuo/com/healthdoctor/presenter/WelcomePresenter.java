@@ -32,7 +32,7 @@ public class WelcomePresenter {
                     mIWelcomeView.updateInfo(resultData.Data);
 //                    mIWelcomeView = null;
                 } else {
-                    // start(currVersion);
+                    start(currVersion);
                 }
             }
         });

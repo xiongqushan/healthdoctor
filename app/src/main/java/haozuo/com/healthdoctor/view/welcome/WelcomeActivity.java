@@ -102,7 +102,7 @@ public class WelcomeActivity extends BaseActivity implements WelcomeContract.IWe
                 .inject(this);
 
         lastTime = System.currentTimeMillis();
-        mWelcomePresenter.start(UHealthUtils.getCurrVersion(getApplicationContext()));
+        // mWelcomePresenter.start(UHealthUtils.getCurrVersion(getApplicationContext()));
 
         initUmeng();
         final TimerTask task = new TimerTask() {

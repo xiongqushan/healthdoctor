@@ -1,6 +1,5 @@
 package haozuo.com.healthdoctor.view.base;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -15,6 +14,7 @@ import haozuo.com.healthdoctor.util.StringUtil;
 /**
  * Created by Administrator on 2016/7/5.
  */
+@SuppressWarnings("ResourceType")
 public abstract class AbstractView extends BaseFragment {
     private LoadingDialog loadingDialog;
     private CustomDialog comfirmDialog;
@@ -83,11 +83,11 @@ public abstract class AbstractView extends BaseFragment {
 
     private static final int ID_BTNRELOAD = 1357902468;
 
+
     public void showRetryLayer(int frameLayoutContainerId) {
         FrameLayout rLayout = (FrameLayout) getRootView().findViewById(frameLayoutContainerId);
         View btnReload = getRootView().findViewById(ID_BTNRELOAD);
 //        ImageView btnReload = (ImageView) getRootView().findViewById(ID_BTNRELOAD);
-        Log.e("show==btnReload", btnReload + "");
         if (btnReload == null) {
 //            btnReload = new ImageView(getActivity());
             btnReload = LayoutInflater.from(getActivity()).inflate(R.layout.retrylayer_layout, null);
@@ -111,7 +111,6 @@ public abstract class AbstractView extends BaseFragment {
         final FrameLayout rLayout = (FrameLayout) getRootView().findViewById(frameLayoutContainerId);
 //        ImageView btnReload = (ImageView) getRootView().findViewById(ID_BTNRELOAD);
         View btnReload = getRootView().findViewById(ID_BTNRELOAD);
-        Log.e("hide==btnReload", btnReload + "");
         if (btnReload != null) {
             rLayout.removeView(btnReload);
         }
