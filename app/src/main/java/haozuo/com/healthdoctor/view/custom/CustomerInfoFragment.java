@@ -1,21 +1,12 @@
 package haozuo.com.healthdoctor.view.custom;
 
 
-import android.app.Dialog;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.Display;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.CheckBox;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,12 +20,12 @@ import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.CustomDetailBean;
 import haozuo.com.healthdoctor.bean.DoctorGroupBean;
+import haozuo.com.healthdoctor.contract.CustomerInfoContract;
 import haozuo.com.healthdoctor.presenter.IBasePresenter;
 import haozuo.com.healthdoctor.util.UIHelper;
 import haozuo.com.healthdoctor.view.base.AbstractView;
-import haozuo.com.healthdoctor.contract.CustomerInfoContract;
-import haozuo.com.healthdoctor.view.threePart.common.FlowLayout;
 import haozuo.com.healthdoctor.view.threePart.common.DrawableClickableTextView;
+import haozuo.com.healthdoctor.view.threePart.common.FlowLayout;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -52,7 +43,7 @@ public class CustomerInfoFragment extends AbstractView implements CustomerInfoCo
     @Bind(R.id.CPhoto)SimpleDraweeView CPhoto;
     @Bind(R.id.Cname)TextView Cname;
     @Bind(R.id.CAge)TextView CAge;
-    @Bind(R.id.CHeight)TextView CHeight;
+    @Bind(R.id.CGender)TextView CGender;
     @Bind(R.id.CPosition)TextView CPosition;
     @Bind(R.id.CMobile)TextView CMobile;
     @Bind(R.id.CCompany)TextView CCompany;
@@ -113,10 +104,10 @@ public class CustomerInfoFragment extends AbstractView implements CustomerInfoCo
     @Override
     public void InitView(CustomDetailBean customInfo) {
         mCustomInfo = customInfo;
-        UIHelper.setFrescoURL(CPhoto,photoUri,
+        UIHelper.setFrescoURL(CPhoto,mCustomInfo.PhotoUrl,
                 "res://haozuo.com.healthdoctor.view.custom/"+R.drawable.user_default_url);
         Cname.setText(customInfo.Cname);
-        CHeight.setText(customInfo.Gender);
+        CGender.setText(customInfo.GetSex());
         CMobile.setText(customInfo.Mobile);
         CCompany.setText(customInfo.Company_Name);
         CConnect.setText(customInfo.Contact_Name);

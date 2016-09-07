@@ -124,7 +124,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="13dp"
-                android:text="身高" />
+                android:text="性别" />
 
             <View
                 android:layout_width="0dp"
@@ -132,12 +132,12 @@
                 android:layout_weight="1" />
 
             <TextView
-                android:id="@+id/CHeight"
+                android:id="@+id/CGender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="12dp"
                 android:layout_marginTop="13dp"
-                tools:text="57" />
+                tools:text="男" />
         </LinearLayout>
     </LinearLayout>
 

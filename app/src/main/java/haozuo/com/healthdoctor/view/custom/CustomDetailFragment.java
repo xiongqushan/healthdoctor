@@ -287,6 +287,7 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
                 public void onClick(View v) {
                     startActivity(new Intent(mContext, PhotoPreviewActivity.class)
                             .putExtra(PhotoPreviewActivity.EXTRA_URL_LIST, RequestPhotoReportEntity.Content));
+                    getActivity().overridePendingTransition(R.anim.photopreview_enter_anim, R.anim.photopreview_exit_anim);
                 }
             });
 

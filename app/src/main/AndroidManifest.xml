@@ -134,13 +134,15 @@
         <activity
             android:name=".view.custom.CustomerReportActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity android:name=".view.mine.DoctorInfoActivity" />
+
         <activity
             android:name=".view.mine.SettingsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.custom.PhotoPreviewActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:name=".view.custom.PhotoPreviewActivity"/>
+            <!--android:theme="@style/AppTheme.NoActionBar" />-->
         <!-- 极光推送 -->
         <!-- Rich push 核心功能 since 2.0.6 -->
         <activity

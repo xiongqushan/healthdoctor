@@ -256,7 +256,7 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
     public void setCustmoerInfo(CustomDetailBean customDetailItem) {
         mCustomDetailBean = customDetailItem;
         TextView textView = (TextView) getActivity().findViewById(R.id.txt_TitleBar_title);
-        textView.setText(mCustomDetailBean.Cname + mCustomDetailBean.GetSex() + mCustomDetailBean.GetAge() );
+        textView.setText(mCustomDetailBean.Cname + " " + mCustomDetailBean.GetSex() + " " + mCustomDetailBean.GetAge() );
         getActivity().findViewById(R.id.btn_search).setVisibility(View.INVISIBLE);
         getActivity().findViewById(R.id.btn_go_back).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -394,6 +394,7 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
                                     startActivity(new Intent(mContext, PhotoPreviewActivity.class)
                                             .putExtra(PhotoPreviewActivity.EXTRA_URL_LIST, (String) consultReplyEntity.AppendInfo)
                                             .putExtra(PhotoPreviewActivity.EXTRA_PAGER_INDEX, (int) finalI));
+                                    getActivity().overridePendingTransition(R.anim.photopreview_enter_anim, R.anim.photopreview_exit_anim);
                                 }
                             });
                             holder.flowLayout_consult_photo.addView(consult_photo);
