@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -67,5 +66,12 @@ public class PhotoPreviewActivity extends BaseActivity {
         public int getCount() {
             return feedbackList.size();
         }
+
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.photopreview_enter_anim, R.anim.photopreview_exit_anim);
     }
 }

@@ -89,7 +89,7 @@ public class ConsultPresenter extends AbstractPresenter implements ConsultContra
                         mIConsultView.hideDialog();
                     }
                 } else {
-                    mIConsultView.hideDialog(resultData.Message);
+//                    mIConsultView.hideDialog(resultData.Message);
                     if (!initData) {
                         mIConsultView.refreshFinish(PullToRefreshLayout.FAIL, flag, true);
                     }

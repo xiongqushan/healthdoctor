@@ -3,6 +3,7 @@ package haozuo.com.healthdoctor.view.custom;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -116,12 +117,13 @@ public class CustomerInfoFragment extends AbstractView implements CustomerInfoCo
     }
 
     @Override
-    public void InitView(CustomDetailBean customInfo) {
-        UIHelper.setFrescoURL(CPhoto, photoUri,
-                "res://haozuo.com.healthdoctor.view.custom/" + R.drawable.user_default_url);
-        mCustomInfo = customInfo;
+    public void InitView(@NonNull CustomDetailBean customInfo) {
+
+        UIHelper.setFrescoURL(CPhoto,customInfo.PhotoUrl,
+                "res://haozuo.com.healthdoctor.view.custom/"+R.drawable.user_default_url);
         Cname.setText(customInfo.Cname);
         CSex.setText(customInfo.GetSex());
+        CAge.setText(customInfo.GetAge()+"岁");
         CuserID.setText(customInfo.Certificate_Code);
         CHeight.setText(customInfo.GetSex());
         CMobile.setText(customInfo.Mobile);
@@ -129,7 +131,6 @@ public class CustomerInfoFragment extends AbstractView implements CustomerInfoCo
         CConnect.setText(customInfo.Contact_Name);
         CConnectPhone.setText(customInfo.Contact_Mobile);
         mPresenter.InitGroupLabel();
-
     }
 
     public void addLabelView(final DoctorGroupBean groupBean) {

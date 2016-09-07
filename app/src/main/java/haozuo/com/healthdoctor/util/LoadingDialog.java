@@ -8,7 +8,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import haozuo.com.healthdoctor.R;
@@ -19,18 +18,21 @@ import haozuo.com.healthdoctor.R;
 public class LoadingDialog extends Dialog {
 
     TextView tvTip;
-    ImageView ivLoading;
+    View ivLoading;
     ObjectAnimator animator;
 
     public LoadingDialog(Context context) {
         super(context, R.style.dialog_loading);
+
         LayoutInflater inflater = LayoutInflater.from(context);
         View vContent = inflater.inflate(R.layout.dialog_loading, null);
-        UIHelper.CreateShape(vContent, 2, "#000000", 150);
+        UIHelper.CreateShape(vContent, 20, "#ffffff", 255);
         setContentView(vContent);
 
-        ivLoading = (ImageView) vContent.findViewById(R.id.ivLoading);
-        animator = ObjectAnimator.ofFloat(ivLoading, "rotation", 0, 360).setDuration(800);
+        ivLoading = (View) vContent.findViewById(R.id.ivLoading);
+        UIHelper.CreateShape(ivLoading,0,"#ffffff",150);
+        animator = ObjectAnimator.ofFloat(ivLoading, "translationY", 0, -150).setDuration(2000);
+//        animator = ObjectAnimator.ofFloat(ivLoading, "rotation", 0, 360).setDuration(800);
         animator.setInterpolator(new LinearInterpolator());
         animator.setRepeatCount(-1);
         animator.addListener(new AnimatorListenerAdapter() {
@@ -63,4 +65,5 @@ public class LoadingDialog extends Dialog {
         } catch (Exception e) {
         }
     }
+
 }
