@@ -41,10 +41,14 @@
             android:layout_marginRight="@dimen/consult_textview_marginleft"
             android:layout_marginTop="@dimen/consult_textview_margintop"
             android:layout_toLeftOf="@id/drawee_consult_item_photo"
-            android:background="@drawable/chat_icon_bubble_right"
-            android:gravity="left"
-            android:padding="@dimen/consult_textview_padding"
-            android:textSize="@dimen/textsize_h4" />
+            android:background="@drawable/chat_icon_bubble_right_v2"
+            android:gravity="left|center_vertical"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:paddingLeft="6dp"
+            android:paddingRight="@dimen/consult_textview_padding_left"
+            android:textSize="@dimen/textsize_h4"
+            tools:text="1234\n1234123\23124\2"/>
         <!--android:background="@drawable/consult_item_bg"/>-->
     </RelativeLayout>
 </LinearLayout>

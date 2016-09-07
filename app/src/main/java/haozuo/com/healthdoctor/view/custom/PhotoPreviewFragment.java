@@ -73,12 +73,8 @@ public class PhotoPreviewFragment extends BaseFragment{
             }
         });
         photoDraweeView.setController(controller.build());
-
-//        GenericDraweeHierarchy draweeHierarchy = photoDraweeView.getHierarchy();
-//        draweeHierarchy.setActualImageScaleType(ScalingUtils.ScaleType.CENTER_INSIDE);
-//        photoDraweeView.setHierarchy(draweeHierarchy);
         photoDraweeView.getHierarchy().setActualImageScaleType(ScalingUtils.ScaleType.CENTER_INSIDE);
-        
+
         photoDraweeView.setOnViewTapListener(new OnViewTapListener() {
             @Override
             public void onViewTap(View view, float x, float y) {
