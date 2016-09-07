@@ -1,349 +1,249 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context="haozuo.com.healthdoctor.view.custom.CustomerInfoFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingLeft="12dp"
-        android:paddingRight="12dp"
-        android:background="@color/white">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/divider_12dp_gray_ee" />
 
         <LinearLayout
-            android:id="@+id/userPhoto"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="22dp"
-                android:gravity="center"
-                android:text="头像" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:visibility="invisible" />
-
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/CPhoto"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginRight="12dp"
-                android:layout_marginTop="10dp"
-                fresco:placeholderImage="@drawable/user_default_url"
-                fresco:roundAsCircle="true" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/gray" />
-
-        <LinearLayout
-            android:id="@+id/userName"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="13dp"
-                android:text="姓名" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-
-            <TextView
-                android:id="@+id/Cname"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="12dp"
-                android:layout_marginTop="13dp"
-                tools:text="张三" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/gray" />
-
-        <LinearLayout
-            android:id="@+id/userAge"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="13dp"
-                android:text="年龄" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-
-            <TextView
-                android:id="@+id/CAge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="12dp"
-                android:layout_marginTop="13dp"
-                tools:text="57" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/gray" />
-
-        <LinearLayout
-            android:id="@+id/userHeight"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="13dp"
-                android:text="性别" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-
-            <TextView
-                android:id="@+id/CGender"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="12dp"
-                android:layout_marginTop="13dp"
-                tools:text="男" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingLeft="12dp"
-        android:paddingRight="12dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/white">
-
-        <LinearLayout
-            android:id="@+id/userPosition"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="13dp"
-                android:text="职业" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-
-            <TextView
-                android:id="@+id/CPosition"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="12dp"
-                android:layout_marginTop="13dp"
-                tools:text="高级工程师" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/gray" />
-
-        <LinearLayout
-            android:id="@+id/userMobile"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="13dp"
-                android:text="手机号" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-
-            <TextView
-                android:id="@+id/CMobile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="12dp"
-                android:layout_marginTop="13dp"
-                tools:text="13888888888" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/gray" />
-
-        <LinearLayout
-            android:id="@+id/userCompany"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="13dp"
-                android:text="单位" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-
-            <TextView
-                android:id="@+id/CCompany"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="12dp"
-                android:layout_marginTop="13dp"
-                tools:text="上海好卓" />
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingLeft="12dp"
-        android:paddingRight="12dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/white">
-
-        <LinearLayout
-            android:id="@+id/userConnect"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="13dp"
-                android:text="第一联系人" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-
-            <TextView
-                android:id="@+id/CConnect"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="12dp"
-                android:layout_marginTop="13dp"
-                tools:text="张三" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/gray" />
-
-        <LinearLayout
-            android:id="@+id/userConnectPhone"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="13dp"
-                android:text="第一联系人电话" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-
-            <TextView
-                android:id="@+id/CConnectPhone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="12dp"
-                android:layout_marginTop="13dp"
-                tools:text="1388888888" />
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/userGroup"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:paddingLeft="12dp"
-        android:paddingRight="12dp"
-        android:paddingBottom="12dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        android:background="@color/white">
-
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="13dp"
-            android:text="分组" />
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/customerinfo_padding_12dp"
+            android:paddingRight="@dimen/customerinfo_padding_12dp">
 
-        <ScrollView
+            <RelativeLayout
+                android:id="@+id/userPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/customerinfo_padding_8dp"
+                android:paddingTop="@dimen/customerinfo_padding_8dp">
+
+                <TextView
+                    style="@style/customerinfo_label"
+                    android:text="头像" />
+
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/CPhoto"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    fresco:placeholderImage="@drawable/user_default_url"
+                    fresco:roundAsCircle="true" />
+            </RelativeLayout>
+
+            <View style="@style/diverder_d3" />
+
+            <RelativeLayout
+                android:id="@+id/userName"
+                style="@style/customerinfo_layout">
+
+                <TextView
+                    style="@style/customerinfo_label"
+                    android:text="姓名" />
+
+
+                <TextView
+                    android:id="@+id/Cname"
+                    style="@style/customerinfo_label_content"
+                    tools:text="张三" />
+            </RelativeLayout>
+
+            <View style="@style/diverder_d3" />
+
+            <RelativeLayout
+                android:id="@+id/userSex"
+                style="@style/customerinfo_layout">
+
+                <TextView
+                    style="@style/customerinfo_label"
+                    android:text="性别" />
+
+                <TextView
+                    android:id="@+id/CSex"
+                    style="@style/customerinfo_label_content"
+                    tools:text="男" />
+            </RelativeLayout>
+
+            <View style="@style/diverder_d3" />
+
+            <RelativeLayout
+                android:id="@+id/userAge"
+                style="@style/customerinfo_layout">
+
+                <TextView
+                    style="@style/customerinfo_label"
+                    android:text="年龄" />
+
+                <TextView
+                    android:id="@+id/CAge"
+                    style="@style/customerinfo_label_content"
+                    tools:text="57" />
+            </RelativeLayout>
+
+            <View style="@style/diverder_d3" />
+
+            <RelativeLayout
+                android:id="@+id/userHeight"
+                style="@style/customerinfo_layout">
+
+                <TextView
+                    style="@style/customerinfo_label"
+                    android:text="身高" />
+
+                <TextView
+                    android:id="@+id/CHeight"
+                    style="@style/customerinfo_label_content"
+                    tools:text="57" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <include layout="@layout/divider_12dp_gray_ee" />
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/customerinfo_padding_12dp"
+            android:paddingRight="@dimen/customerinfo_padding_12dp">
+
+            <RelativeLayout
+                android:id="@+id/userPosition"
+                style="@style/customerinfo_layout">
+
+                <TextView
+                    style="@style/customerinfo_label"
+                    android:text="职业" />
+
+
+                <TextView
+                    android:id="@+id/CPosition"
+                    style="@style/customerinfo_label_content"
+                    tools:text="高级工程师" />
+            </RelativeLayout>
+
+            <View style="@style/diverder_d3" />
+
+            <RelativeLayout
+                android:id="@+id/userMobile"
+                style="@style/customerinfo_layout">
+
+                <TextView
+                    style="@style/customerinfo_label"
+                    android:text="手机号" />
+
+
+                <TextView
+                    android:id="@+id/CMobile"
+                    style="@style/customerinfo_label_content"
+                    tools:text="13888888888" />
+            </RelativeLayout>
+
+            <View style="@style/diverder_d3" />
+
+            <RelativeLayout
+                android:id="@+id/userID"
+                style="@style/customerinfo_layout">
+
+                <TextView
+                    style="@style/customerinfo_label"
+                    android:text="身份证号" />
+
+
+                <TextView
+                    android:id="@+id/CuserID"
+                    style="@style/customerinfo_label_content"
+                    tools:text="350175425688741589x" />
+            </RelativeLayout>
+
+            <View style="@style/diverder_d3" />
+
+            <RelativeLayout
+                android:id="@+id/userCompany"
+                style="@style/customerinfo_layout">
+
+                <TextView
+                    style="@style/customerinfo_label"
+                    android:text="单位" />
+
+
+                <TextView
+                    android:id="@+id/CCompany"
+                    style="@style/customerinfo_label_content"
+                    tools:text="上海好卓" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <include layout="@layout/divider_12dp_gray_ee" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/customerinfo_padding_12dp"
+            android:paddingRight="@dimen/customerinfo_padding_12dp">
+
+            <RelativeLayout
+                android:id="@+id/userConnect"
+                style="@style/customerinfo_layout">
+
+                <TextView
+                    style="@style/customerinfo_label"
+                    android:text="第一联系人" />
+
+
+                <TextView
+                    android:id="@+id/CConnect"
+                    style="@style/customerinfo_label_content"
+                    tools:text="张三" />
+            </RelativeLayout>
+
+            <View style="@style/diverder_d3" />
+
+            <RelativeLayout
+                android:id="@+id/userConnectPhone"
+                style="@style/customerinfo_layout">
+
+                <TextView
+                    style="@style/customerinfo_label"
+                    android:text="第一联系人电话" />
+
+                <TextView
+                    android:id="@+id/CConnectPhone"
+                    style="@style/customerinfo_label_content"
+                    tools:text="1388888888" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <include layout="@layout/divider_12dp_gray_ee" />
+
+        <LinearLayout
+            android:id="@+id/userGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/customerinfo_padding_12dp">
+
+            <TextView
+                style="@style/customerinfo_label"
+                android:layout_marginRight="@dimen/customerinfo_padding_12dp"
+                android:text="分组" />
 
             <haozuo.com.healthdoctor.view.threePart.common.FlowLayout
                 android:id="@+id/flow_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="10dp"/>
-
-        </ScrollView>
-
+                android:layout_height="match_parent" />
+        </LinearLayout>
     </LinearLayout>
-
-</LinearLayout>
+</ScrollView>

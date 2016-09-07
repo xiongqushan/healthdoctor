@@ -3,6 +3,7 @@ package haozuo.com.healthdoctor.view.custom;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,19 +41,32 @@ public class CustomerInfoFragment extends AbstractView implements CustomerInfoCo
     List<String> mTvNames = new ArrayList<String>();
     List<DoctorGroupBean> mGroups = new ArrayList<DoctorGroupBean>();
 
-    @Bind(R.id.CPhoto)SimpleDraweeView CPhoto;
-    @Bind(R.id.Cname)TextView Cname;
-    @Bind(R.id.CAge)TextView CAge;
-    @Bind(R.id.CGender)TextView CGender;
-    @Bind(R.id.CPosition)TextView CPosition;
-    @Bind(R.id.CMobile)TextView CMobile;
-    @Bind(R.id.CCompany)TextView CCompany;
-    @Bind(R.id.CConnect)TextView CConnect;
-    @Bind(R.id.CConnectPhone)TextView CConnectPhone;
+    @Bind(R.id.CPhoto)
+    SimpleDraweeView CPhoto;
+    @Bind(R.id.Cname)
+    TextView Cname;
+    @Bind(R.id.CSex)
+    TextView CSex;
+    @Bind(R.id.CuserID)
+    TextView CuserID;
+    @Bind(R.id.CAge)
+    TextView CAge;
+    @Bind(R.id.CHeight)
+    TextView CHeight;
+    @Bind(R.id.CPosition)
+    TextView CPosition;
+    @Bind(R.id.CMobile)
+    TextView CMobile;
+    @Bind(R.id.CCompany)
+    TextView CCompany;
+    @Bind(R.id.CConnect)
+    TextView CConnect;
+    @Bind(R.id.CConnectPhone)
+    TextView CConnectPhone;
     @Bind(R.id.flow_layout)
     FlowLayout mFlowLayout;
 
-    public CustomerInfoFragment(){
+    public CustomerInfoFragment() {
     }
 
     @Override
@@ -78,10 +92,10 @@ public class CustomerInfoFragment extends AbstractView implements CustomerInfoCo
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mContext=getContext();
-        if(rootView==null){
-            rootView= inflater.inflate(R.layout.fragment_customer_info, container, false);
-            ButterKnife.bind(this,rootView);
+        mContext = getContext();
+        if (rootView == null) {
+            rootView = inflater.inflate(R.layout.fragment_customer_info, container, false);
+            ButterKnife.bind(this, rootView);
         }
         mPresenter.start();
         return rootView;
@@ -95,19 +109,23 @@ public class CustomerInfoFragment extends AbstractView implements CustomerInfoCo
 
     @Override
     public void setPresenter(CustomerInfoContract.ICustomerInfoPresenter presenter) {
-        mPresenter=presenter;
+        mPresenter = presenter;
     }
 
     @Override
-    public void onDrawableRightClick(View view) {}
+    public void onDrawableRightClick(View view) {
+    }
 
     @Override
-    public void InitView(CustomDetailBean customInfo) {
-        mCustomInfo = customInfo;
-        UIHelper.setFrescoURL(CPhoto,mCustomInfo.PhotoUrl,
+    public void InitView(@NonNull CustomDetailBean customInfo) {
+
+        UIHelper.setFrescoURL(CPhoto,customInfo.PhotoUrl,
                 "res://haozuo.com.healthdoctor.view.custom/"+R.drawable.user_default_url);
         Cname.setText(customInfo.Cname);
-        CGender.setText(customInfo.GetSex());
+        CSex.setText(customInfo.GetSex());
+        CAge.setText(customInfo.GetAge()+"岁");
+        CuserID.setText(customInfo.Certificate_Code);
+        CHeight.setText(customInfo.GetSex());
         CMobile.setText(customInfo.Mobile);
         CCompany.setText(customInfo.Company_Name);
         CConnect.setText(customInfo.Contact_Name);
@@ -123,8 +141,8 @@ public class CustomerInfoFragment extends AbstractView implements CustomerInfoCo
         tvGroupName.setDrawableRightListener(new DrawableClickableTextView.DrawableRightListener() {
             @Override
             public void onDrawableRightClick(View view) {
-                if (mCustomInfo.GroupIdList.size() == 1){
-                    Toast.makeText(mContext,"该客户至少需要保留一个分组", Toast.LENGTH_SHORT).show();
+                if (mCustomInfo.GroupIdList.size() == 1) {
+                    Toast.makeText(mContext, "该客户至少需要保留一个分组", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 mPresenter.DeleteCustomerGroup(groupBean);

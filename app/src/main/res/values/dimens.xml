@@ -79,6 +79,10 @@
 
     <dimen name="dialog_logo_height">47dp</dimen>
 
+    <dimen name="customerinfo_padding_12dp">12dp</dimen>
+    <dimen name="customerinfo_padding_16dp">16dp</dimen>
+    <dimen name="customerinfo_padding_8dp">8dp</dimen>
+
 
 </resources>
 

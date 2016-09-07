@@ -141,21 +141,51 @@
         <item name="android:gravity">center</item>
     </style>
 
-    <style name="custom_dialog" parent="@android:style/Theme.Dialog">
-        <item name="android:windowFrame">@null</item>
-        <!-- Dialog的windowFrame框为无 -->
-        <item name="android:windowIsFloating">true</item>
-        <!-- 是否漂现在activity上 -->
-        <item name="android:windowIsTranslucent">true</item>
-        <!-- 是否半透明 -->
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:background">@android:color/transparent</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <!-- 去除黑色边框的关键设置项 -->
-        <item name="android:backgroundDimEnabled">true</item>
-        <!-- 屏幕背景是否变暗 -->
-        <item name="android:backgroundDimAmount">0.6</item>
+    <!--<style name="custom_dialog" parent="@android:style/Theme.Dialog">-->
+        <!--<item name="android:windowFrame">@null</item>-->
+        <!--&lt;!&ndash; Dialog的windowFrame框为无 &ndash;&gt;-->
+        <!--<item name="android:windowIsFloating">true</item>-->
+        <!--&lt;!&ndash; 是否漂现在activity上 &ndash;&gt;-->
+        <!--<item name="android:windowIsTranslucent">true</item>-->
+        <!--&lt;!&ndash; 是否半透明 &ndash;&gt;-->
+        <!--<item name="android:windowNoTitle">true</item>-->
+        <!--<item name="android:background">@android:color/transparent</item>-->
+        <!--<item name="android:windowBackground">@android:color/transparent</item>-->
+        <!--<item name="android:windowContentOverlay">@null</item>-->
+        <!--&lt;!&ndash; 去除黑色边框的关键设置项 &ndash;&gt;-->
+        <!--<item name="android:backgroundDimEnabled">true</item>-->
+        <!--&lt;!&ndash; 屏幕背景是否变暗 &ndash;&gt;-->
+        <!--<item name="android:backgroundDimAmount">0.6</item>-->
+    <!--</style>-->
+
+    <style name="customerinfo_label">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:textColor">@color/title_color28</item>
+        <item name="android:textSize">@dimen/txt_title_16sp</item>
+    </style>
+
+    <style name="diverder_d3">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/dividerline</item>
+        <item name="android:background">@color/divider_d3</item>
+    </style>
+
+    <style name="customerinfo_label_content">
+        <item name="android:textSize">@dimen/txt_subtitle_14sp</item>
+        <item name="android:textColor">@color/subtitle_color66</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="customerinfo_layout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingBottom">@dimen/customerinfo_padding_12dp</item>
+        <item name="android:paddingTop">@dimen/customerinfo_padding_12dp</item>
     </style>
 </resources>
 

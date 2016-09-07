@@ -222,4 +222,9 @@ public class UHealthUtils {
         }
     }
 
+    public static String checkNull(String object) {
+        if (object == null) return "未知";
+        return object;
+    }
+
 }
