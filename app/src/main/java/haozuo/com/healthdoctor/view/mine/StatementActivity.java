@@ -1,6 +1,7 @@
 package haozuo.com.healthdoctor.view.mine;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.webkit.WebView;
 
 import haozuo.com.healthdoctor.BuildConfig;
@@ -20,6 +21,7 @@ public class StatementActivity extends BaseActivity {
         setCustomerTitle("免责声明");
 
         mWebView = (WebView) findViewById(R.id.webView);
+        mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.loadUrl("https://www.baidu.com/");
     }
 
@@ -27,6 +29,7 @@ public class StatementActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         if (BuildConfig.DEBUG) {
+            Log.e("mWebView", mWebView.toString() + "");
             HZApplication.shareApplication().getRefWatcher().watch(this);
             HZApplication.shareApplication().getRefWatcher().watch(mWebView);
         }

@@ -30,7 +30,7 @@ public class WelcomePresenter {
             public void handlerResult(GlobalShell<UpdateInfoBean> resultData) {
                 if (resultData.LogicSuccess) {
                     mIWelcomeView.updateInfo(resultData.Data);
-//                    mIWelcomeView = null;
+                    // mIWelcomeView = null;
                 } else {
                     start(currVersion);
                 }

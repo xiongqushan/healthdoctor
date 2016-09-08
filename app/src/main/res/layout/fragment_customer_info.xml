@@ -105,7 +105,7 @@
                 <TextView
                     android:id="@+id/CHeight"
                     style="@style/customerinfo_label_content"
-                    tools:text="57" />
+                    android:text="暂无" />
             </RelativeLayout>
         </LinearLayout>
 

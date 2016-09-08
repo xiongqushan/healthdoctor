@@ -25,6 +25,7 @@ public class CustomDetailBean implements Serializable{
     public String Nickname;
     public String PhotoUrl;
     public String Company_Name;
+    public String Career;
     public String Cust_Code;
 //    public int[] GroupIdList;
     public List<Integer> GroupIdList;

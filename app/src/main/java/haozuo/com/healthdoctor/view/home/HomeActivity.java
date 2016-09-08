@@ -115,7 +115,7 @@ public class HomeActivity extends BaseActivity {
         //调用JPush API设置Alias
         String alias = UserManager.getInstance().getDoctorInfo().Account;
         int doctor_IDid = UserManager.getInstance().getDoctorInfo().Doctor_ID;
-        Log.e(alias, alias);
+        Log.e("doctor_Account", alias);
         Log.e("doctor_IDid", doctor_IDid + "");
         mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, "2055"));
     }

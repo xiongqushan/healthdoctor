@@ -10,6 +10,7 @@ import haozuo.com.healthdoctor.presenter.IBasePresenter;
 import haozuo.com.healthdoctor.util.CustomDialog;
 import haozuo.com.healthdoctor.util.LoadingDialog;
 import haozuo.com.healthdoctor.util.StringUtil;
+import haozuo.com.healthdoctor.util.UHealthUtils;
 
 /**
  * Created by Administrator on 2016/7/5.
@@ -87,19 +88,15 @@ public abstract class AbstractView extends BaseFragment {
     public void showRetryLayer(int frameLayoutContainerId) {
         FrameLayout rLayout = (FrameLayout) getRootView().findViewById(frameLayoutContainerId);
         View btnReload = getRootView().findViewById(ID_BTNRELOAD);
-//        ImageView btnReload = (ImageView) getRootView().findViewById(ID_BTNRELOAD);
         if (btnReload == null) {
-//            btnReload = new ImageView(getActivity());
             btnReload = LayoutInflater.from(getActivity()).inflate(R.layout.retrylayer_layout, null);
             btnReload.setId(ID_BTNRELOAD);
-//            btnReload.setImageResource(R.drawable.ic_launcher);
-//            btnReload.setBackgroundColor(Color.parseColor("#FFFFFFFF"));
             btnReload.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    if (UHealthUtils.isFastDoubleClick()) return;
                     IBasePresenter presenter = getPresenter();
                     presenter.start();
-                    //
                 }
             });
             rLayout.addView(btnReload);
@@ -109,7 +106,6 @@ public abstract class AbstractView extends BaseFragment {
 
     public void hideRetryLayer(int frameLayoutContainerId) {
         final FrameLayout rLayout = (FrameLayout) getRootView().findViewById(frameLayoutContainerId);
-//        ImageView btnReload = (ImageView) getRootView().findViewById(ID_BTNRELOAD);
         View btnReload = getRootView().findViewById(ID_BTNRELOAD);
         if (btnReload != null) {
             rLayout.removeView(btnReload);

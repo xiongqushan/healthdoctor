@@ -33,22 +33,14 @@ public class CustomerReportPresenter extends AbstractPresenter implements Custom
     @Override
     public void start() {
         mICustomerReportView.showDialog();
-//        if (logicSuccess) {
-//            mICustomerReportView.changeRetryLayer(false);
-//        } else {
-//            logicSuccess = true;
-//            mICustomerReportView.changeRetryLayer(true);
-//        }
-//        mReportModel.GetReportDetailInfo(138, "bjbr002", "0000000081", new OnHandlerResultListener<GlobalShell<ReportDetailBean>>() {
         mReportModel.GetReportDetailInfo(mReportParamsBean.customerId, mReportParamsBean.CheckUnitCode, mReportParamsBean.WorkNo, new OnHandlerResultListener<GlobalShell<ReportDetailBean>>() {
             @Override
             public void handlerResult(GlobalShell<ReportDetailBean> resultData) {
                 if (resultData.LogicSuccess) {
-                    mICustomerReportView.hideDialog();
                     ReportDetailBean bean = resultData.Data;
                     mICustomerReportView.updateChildUI(bean);
                     mICustomerReportView.changeRetryLayer(false);
-
+                    mICustomerReportView.hideDialog();
                 } else {
                     mICustomerReportView.hideDialog(resultData.Message);
                     mICustomerReportView.changeRetryLayer(true);

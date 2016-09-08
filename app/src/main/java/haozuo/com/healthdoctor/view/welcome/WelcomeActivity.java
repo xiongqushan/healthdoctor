@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.WindowManager;
 
@@ -36,16 +35,9 @@ public class WelcomeActivity extends BaseActivity implements WelcomeContract.IWe
 
     @Override
     public void updateInfo(final UpdateInfoBean bean) {
-        Log.e("WelcomeActivity", bean.toString());
         final TimerTask task = new TimerTask() {
             public void run() {
-                boolean exist = UserManager.getInstance().exist();
-                if (exist) {
-                    startActivity(new Intent(getBaseContext(), HomeActivity.class));
-                } else {
-                    startActivity(new Intent(getBaseContext(), LoginActivity.class));
-                }
-                finish();
+                turnNextAty();
             }
         };
 
@@ -57,7 +49,7 @@ public class WelcomeActivity extends BaseActivity implements WelcomeContract.IWe
                 if (requestTime < turnTimeDelay) {
                     timer.schedule(task, turnTimeDelay - requestTime);
                 } else {
-                    timer.schedule(task, 0);
+                    turnNextAty();
                 }
             } else {
                 AlertDialog.Builder dialog = new AlertDialog.Builder(WelcomeActivity.this);
@@ -67,7 +59,7 @@ public class WelcomeActivity extends BaseActivity implements WelcomeContract.IWe
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                timer.schedule(task, 0);
+                                turnNextAty();
                             }
                         }).show();
             }
@@ -88,6 +80,16 @@ public class WelcomeActivity extends BaseActivity implements WelcomeContract.IWe
         }
     }
 
+    private void turnNextAty() {
+        boolean exist = UserManager.getInstance().exist();
+        if (exist) {
+            startActivity(new Intent(getBaseContext(), HomeActivity.class));
+        } else {
+            startActivity(new Intent(getBaseContext(), LoginActivity.class));
+        }
+        finish();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,21 +104,21 @@ public class WelcomeActivity extends BaseActivity implements WelcomeContract.IWe
                 .inject(this);
 
         lastTime = System.currentTimeMillis();
-        // mWelcomePresenter.start(UHealthUtils.getCurrVersion(getApplicationContext()));
+        mWelcomePresenter.start(UHealthUtils.getCurrVersion(getApplicationContext()));
 
         initUmeng();
-        final TimerTask task = new TimerTask() {
-            public void run() {
-                boolean exist = UserManager.getInstance().exist();
-                if (exist) {
-                    startActivity(new Intent(getBaseContext(), HomeActivity.class));
-                } else {
-                    startActivity(new Intent(getBaseContext(), LoginActivity.class));
-                }
-                finish();
-            }
-        };
-        new Timer().schedule(task, turnTimeDelay);
+//        final TimerTask task = new TimerTask() {
+//            public void run() {
+//                boolean exist = UserManager.getInstance().exist();
+//                if (exist) {
+//                    startActivity(new Intent(getBaseContext(), HomeActivity.class));
+//                } else {
+//                    startActivity(new Intent(getBaseContext(), LoginActivity.class));
+//                }
+//                finish();
+//            }
+//        };
+//        new Timer().schedule(task, turnTimeDelay);
     }
 
     private void initUmeng() {

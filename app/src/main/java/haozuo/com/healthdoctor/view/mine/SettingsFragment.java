@@ -131,6 +131,4 @@ public class SettingsFragment extends BaseFragment {
             getActivity().finish();
         }
     };
-
-
 }
