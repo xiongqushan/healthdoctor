@@ -2,6 +2,7 @@ package haozuo.com.healthdoctor.view.custom;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -36,10 +37,12 @@ public class CustomerInfoFragment extends AbstractView implements CustomerInfoCo
     Context mContext;
     View rootView;
     CustomerInfoContract.ICustomerInfoPresenter mPresenter;
-    private CustomDetailBean mCustomInfo;
     String photoUri;
     List<String> mTvNames = new ArrayList<String>();
     List<DoctorGroupBean> mGroups = new ArrayList<DoctorGroupBean>();
+
+    private CustomDetailBean mCustomInfo;
+    public static String DELETED_GROUP_ID = "DELETED_GROUP_ID";
 
     @Bind(R.id.CPhoto)
     SimpleDraweeView CPhoto;
@@ -118,14 +121,15 @@ public class CustomerInfoFragment extends AbstractView implements CustomerInfoCo
 
     @Override
     public void InitView(@NonNull CustomDetailBean customInfo) {
+        mCustomInfo = customInfo;
 
         UIHelper.setFrescoURL(CPhoto, customInfo.PhotoUrl,
                 "res://haozuo.com.healthdoctor.view.custom/" + R.drawable.user_default_url);
         Cname.setText(customInfo.Cname);
         CSex.setText(customInfo.GetSex());
-        CAge.setText(customInfo.GetAge() + "岁");
-        CPosition.setText(customInfo.Career);
+        CAge.setText(customInfo.GetAge());
         CuserID.setText(customInfo.Certificate_Code);
+//        CHeight.setText(customInfo.GetSex());
         CMobile.setText(customInfo.Mobile);
         CCompany.setText(customInfo.Company_Name);
         CConnect.setText(customInfo.Contact_Name);
@@ -157,6 +161,13 @@ public class CustomerInfoFragment extends AbstractView implements CustomerInfoCo
         mCustomInfo = customInfo;
         mFlowLayout.removeAllViews();
         mPresenter.InitGroupLabel();
+        sendCustomBroadcast(BROADFILTER_CUSTOM_DELETEGROUP, customInfo);
     }
 
+    public synchronized void sendCustomBroadcast(String activeName, CustomDetailBean customInfo) {
+        Intent intent = new Intent();
+        intent.setAction(activeName);
+        intent.putExtra(DELETED_GROUP_ID, customInfo);
+        getActivity().sendBroadcast(intent);
+    }
 }

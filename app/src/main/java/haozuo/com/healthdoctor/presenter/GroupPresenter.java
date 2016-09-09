@@ -50,7 +50,6 @@ public class GroupPresenter extends AbstractPresenter implements IGroupPresenter
             @Override
             public void handlerResult(GlobalShell<List<DoctorGroupBean>> resultData) {
                 if (resultData.LogicSuccess) {
-                    mIGroupView.hideDialog();
                     DoctorGroupBean doctorGroupBean = new DoctorGroupBean();
                     Collections.sort(resultData.Data, doctorGroupBean);
                     if ((List<DoctorGroupBean>) resultData.Data != null) {
@@ -58,6 +57,7 @@ public class GroupPresenter extends AbstractPresenter implements IGroupPresenter
                         mIGroupView.setGroupInfo(resultData.Data);
                     }
                     mIGroupView.changeRetryLayer(false);
+                    mIGroupView.hideDialog();
                 } else {
                     mIGroupView.hideDialog(resultData.Message);
                     mIGroupView.changeRetryLayer(true);

@@ -54,6 +54,8 @@ public class PhotoPreviewFragment extends BaseFragment{
 
         ImageRequest resRequest = ImageRequestBuilder.newBuilderWithSource(Uri.parse(mURL))
                 .setResizeOptions(new ResizeOptions(wm.getDefaultDisplay().getWidth(),wm.getDefaultDisplay().getHeight()))
+                .setAutoRotateEnabled(true) //根据metadata记录的方向 图片自动旋转
+                .setProgressiveRenderingEnabled(true)//开启渐进式加载
                 .build();
 
         PipelineDraweeControllerBuilder controller = Fresco.newDraweeControllerBuilder();

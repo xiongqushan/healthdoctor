@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentManager;
 import javax.inject.Inject;
 
 import haozuo.com.healthdoctor.R;
-import haozuo.com.healthdoctor.bean.CustomDetailBean;
 import haozuo.com.healthdoctor.contract.ConsultDetailContract;
 import haozuo.com.healthdoctor.ioc.ConsultDetailModule;
 import haozuo.com.healthdoctor.ioc.DaggerConsultDetailComponent;

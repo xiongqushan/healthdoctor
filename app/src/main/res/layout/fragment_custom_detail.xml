@@ -89,26 +89,26 @@
             android:layout_height="@dimen/dividerline"
             android:background="@color/divider_d3" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:background="@color/gray_bg_ee" />
-
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dividerline"
-            android:background="@color/divider_d3" />
-
-
         <haozuo.com.healthdoctor.view.threePart.common.StickScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:background="@color/gray_bg_ee" />
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dividerline"
+                    android:background="@color/divider_d3" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -226,6 +226,13 @@
                         android:background="@color/divider_d3" />
                 </LinearLayout>
 
+                <!--<haozuo.com.healthdoctor.view.threePart.common.ChildListView-->
+                    <!--android:id="@+id/gv_PhotoReport"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:divider="@null"-->
+                    <!--android:visibility="visible"-->
+                    <!--android:listSelector="@android:color/transparent" />-->
 
                 <haozuo.com.healthdoctor.view.threePart.common.ChildGridView
                     android:id="@+id/gv_PhotoReport"

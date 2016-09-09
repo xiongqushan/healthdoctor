@@ -32,6 +32,9 @@ public class CustomDetailActivity extends BaseActivity {
 
         int customerId = getIntent().getIntExtra(EXTRA_CUSTOMER_ID, 0);
         String accountId = getIntent().getStringExtra(EXTRA_ACCOUNT_ID);
+        if (accountId.equals(null)){
+            accountId = "";
+        }
 
         DaggerCustomDetailComponent.builder()
                 .appComponent(getAppComponent())

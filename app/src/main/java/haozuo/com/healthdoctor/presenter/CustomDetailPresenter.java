@@ -28,7 +28,7 @@ public class CustomDetailPresenter extends AbstractPresenter implements CustomDe
     private String mAccountID;
 
     @Inject
-    public CustomDetailPresenter(@NonNull CustomDetailContract.ICustomDetailView iView,@NonNull UserModel userModel, @NonNull ReportModel reportModel,@NonNull int customerId,@NonNull String accountID){
+    public CustomDetailPresenter(@NonNull CustomDetailContract.ICustomDetailView iView,@NonNull UserModel userModel, @NonNull ReportModel reportModel,int customerId,@NonNull String accountID){
         mICustomDetailView=iView;
         mUserModel=userModel;
         mReportModel = reportModel;

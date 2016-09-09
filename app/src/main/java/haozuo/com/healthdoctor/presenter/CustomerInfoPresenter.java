@@ -72,7 +72,6 @@ public class CustomerInfoPresenter extends AbstractPresenter implements Customer
                     }
                     mICustomerInfoView.refreshLabelView(mCustomInfo);
                 } else {
-
                     mICustomerInfoView.hideDialog(resultData.Message);
                 }
 

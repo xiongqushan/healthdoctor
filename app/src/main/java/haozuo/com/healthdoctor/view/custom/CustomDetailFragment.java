@@ -39,6 +39,7 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
     private ReportParamsAdapter mReportParamsAdapter;
     private PhotoReportAdapter mPhotoReportAdapter;
     private CustomDetailBean mCustomInfo;
+    private List<RequestPhotoReportListBean> dataSource;
     @Bind(R.id.drawee_CPhoto)
     SimpleDraweeView CPhoto;
     @Bind(R.id.tv_CName)
@@ -55,6 +56,7 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
     ChildListView lv_custom_report;
     @Bind(R.id.gv_PhotoReport)
     ChildGridView gv_PhotoReport;
+//    ChildListView gv_PhotoReport;
 
     @OnClick(R.id.btn_show_Report)
     public void showReport() {
@@ -118,9 +120,17 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
             });
             mPhotoReportAdapter = new PhotoReportAdapter(mContext);
             gv_PhotoReport.setAdapter(mPhotoReportAdapter);
+            gv_PhotoReport.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    startActivity(new Intent(mContext, PhotoPreviewActivity.class)
+                            .putExtra(PhotoPreviewActivity.EXTRA_URL_LIST, dataSource.get(position).Content));
+                    getActivity().overridePendingTransition(R.anim.photopreview_enter_anim, R.anim.photopreview_exit_anim);
+                }
+            });
             mCustomDetailPresenter.start();
+            registerCustomReceiver(BROADFILTER_CUSTOM_DELETEGROUP);
         }
-
         return rootView;
     }
 
@@ -164,6 +174,7 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
 //        CAge.setText(DateUtil.getAge(custom.Certificate_Code,custom.Birthday)+"岁");
         CAge.setText(custom.GetAge() + "岁");
 //        CAge.setText(""+custom.Age);
+        CAge.setText(custom.GetAge());
         Cphone.setText(custom.Mobile);
         btn_go_into.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,6 +187,14 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
             }
         });
 
+    }
+
+    @Override
+    public void onReceiveBroadcast(String filterAction, Intent intent) {
+        if (filterAction.equals(BROADFILTER_CUSTOM_DELETEGROUP)) {
+            mCustomInfo = (CustomDetailBean) intent.getSerializableExtra(CustomerInfoFragment.DELETED_GROUP_ID);
+            InitView(mCustomInfo);
+        }
     }
 
     class ReportParamsAdapter extends BaseAdapter {
@@ -239,7 +258,6 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
         }
     }
 
-    private List<RequestPhotoReportListBean> dataSource;
 
     class PhotoReportAdapter extends BaseAdapter {
         private LayoutInflater mInflater;
@@ -273,7 +291,7 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             if (convertView == null) {
-                convertView = mInflater.inflate(R.layout.gvitem_photoreport, null);
+                convertView = mInflater.inflate(R.layout.gvitem_photoreport_v2, null);
             }
             TextView tv_Count = UIHelper.getAdapterView(convertView, R.id.tv_Count);
             TextView tv_PhotoReport_Date = UIHelper.getAdapterView(convertView, R.id.tv_PhotoReport_Date);
@@ -283,16 +301,121 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
             tv_Count.setText("共" + RequestPhotoReportEntity.ImageUrlList.size() + "张");
             tv_PhotoReport_Date.setText(RequestPhotoReportEntity.Date);
             tv_PhotoReport_Dept.setText(RequestPhotoReportEntity.HealthCompanyName);
-            tv_Count.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(mContext, PhotoPreviewActivity.class)
-                            .putExtra(PhotoPreviewActivity.EXTRA_URL_LIST, RequestPhotoReportEntity.Content));
-                    getActivity().overridePendingTransition(R.anim.photopreview_enter_anim, R.anim.photopreview_exit_anim);
-                }
-            });
             return convertView;
         }
+
+
+//    class PhotoReportAdapter extends BaseAdapter {
+//        private LayoutInflater mInflater;
+//        private List<RequestPhotoReportListBean> dataSource;
+//        private int currentPosition;
+//
+//        public PhotoReportAdapter(Context context) {
+//            this.mInflater = LayoutInflater.from(context);
+//            dataSource = new ArrayList<>();
+//        }
+//
+//        public void RefreshPhotoReportAdapter(List<RequestPhotoReportListBean> dataList) {
+//            dataSource.clear();
+//            dataSource.addAll(dataList);
+//            notifyDataSetChanged();
+//        }
+//
+//        @Override
+//        public int getCount() {
+//            if (dataSource.size() % 3 != 0) {
+//                return dataSource.size() / 3 + 1;
+//            } else {
+//                return dataSource.size() / 3;
+//            }
+////            return dataSource.size();
+//        }
+//
+//        @Override
+//        public Object getItem(int position) {
+//            return null;
+//        }
+//
+//        @Override
+//        public long getItemId(int position) {
+//            return 0;
+//        }
+//
+//        @Override
+//        public View getView(int position, View convertView, ViewGroup parent) {
+//            if (convertView == null) {
+//                convertView = mInflater.inflate(R.layout.gvitem_photoreport_v2, null);
+//            }
+//            LinearLayout layer_photoreport1 = UIHelper.getAdapterView(convertView, R.id.layer_photoreport1);
+//            TextView tv_Count1 = UIHelper.getAdapterView(convertView, R.id.tv_Count1);
+//            TextView tv_PhotoReport_Date1 = UIHelper.getAdapterView(convertView, R.id.tv_PhotoReport_Date1);
+//            TextView tv_PhotoReport_Dept1 = UIHelper.getAdapterView(convertView, R.id.tv_PhotoReport_Dept1);
+//
+//            LinearLayout layer_photoreport2 = UIHelper.getAdapterView(convertView, R.id.layer_photoreport2);
+//            TextView tv_Count2 = UIHelper.getAdapterView(convertView, R.id.tv_Count2);
+//            TextView tv_PhotoReport_Date2 = UIHelper.getAdapterView(convertView, R.id.tv_PhotoReport_Date2);
+//            TextView tv_PhotoReport_Dept2 = UIHelper.getAdapterView(convertView, R.id.tv_PhotoReport_Dept2);
+//
+//            LinearLayout layer_photoreport3 = UIHelper.getAdapterView(convertView, R.id.layer_photoreport3);
+//            TextView tv_Count3 = UIHelper.getAdapterView(convertView, R.id.tv_Count3);
+//            TextView tv_PhotoReport_Date3 = UIHelper.getAdapterView(convertView, R.id.tv_PhotoReport_Date3);
+//            TextView tv_PhotoReport_Dept3 = UIHelper.getAdapterView(convertView, R.id.tv_PhotoReport_Dept3);
+//
+//            currentPosition = position * 3;
+//            final RequestPhotoReportListBean RequestPhotoReportEntity1 = dataSource.get(currentPosition);
+//            tv_Count1.setText("共" + RequestPhotoReportEntity1.ImageUrlList.size() + "张");
+//            tv_PhotoReport_Date1.setText(RequestPhotoReportEntity1.Date);
+//            tv_PhotoReport_Dept1.setText(RequestPhotoReportEntity1.HealthCompanyName);
+//            tv_Count1.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    startActivity(new Intent(mContext, PhotoPreviewActivity.class)
+//                            .putExtra(PhotoPreviewActivity.EXTRA_URL_LIST, RequestPhotoReportEntity1.Content));
+//                    getActivity().overridePendingTransition(R.anim.photopreview_enter_anim, R.anim.photopreview_exit_anim);
+//                }
+//            });
+//
+//            currentPosition = position * 3 + 1;
+//            if (currentPosition < dataSource.size()) {
+//                layer_photoreport2.setVisibility(View.VISIBLE);
+//                final RequestPhotoReportListBean RequestPhotoReportEntity2 = dataSource.get(currentPosition);
+//                tv_Count2.setText("共" + RequestPhotoReportEntity2.ImageUrlList.size() + "张");
+//                tv_PhotoReport_Date2.setText(RequestPhotoReportEntity2.Date);
+//                tv_PhotoReport_Dept2.setText(RequestPhotoReportEntity2.HealthCompanyName);
+//                tv_Count2.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        startActivity(new Intent(mContext, PhotoPreviewActivity.class)
+//                                .putExtra(PhotoPreviewActivity.EXTRA_URL_LIST, RequestPhotoReportEntity2.Content));
+//                        getActivity().overridePendingTransition(R.anim.photopreview_enter_anim, R.anim.photopreview_exit_anim);
+//                    }
+//                });
+//            } else {
+//                layer_photoreport2.setVisibility(View.INVISIBLE);
+//            }
+//
+//            currentPosition = position * 3 + 2;
+//            if (currentPosition < dataSource.size()) {
+//                layer_photoreport3.setVisibility(View.VISIBLE);
+//                final RequestPhotoReportListBean RequestPhotoReportEntity3 = dataSource.get(currentPosition);
+//                tv_Count3.setText("共" + RequestPhotoReportEntity3.ImageUrlList.size() + "张");
+//                tv_PhotoReport_Date3.setText(RequestPhotoReportEntity3.Date);
+//                tv_PhotoReport_Dept3.setText(RequestPhotoReportEntity3.HealthCompanyName);
+//                tv_Count3.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        startActivity(new Intent(mContext, PhotoPreviewActivity.class)
+//                                .putExtra(PhotoPreviewActivity.EXTRA_URL_LIST, RequestPhotoReportEntity3.Content));
+//                        getActivity().overridePendingTransition(R.anim.photopreview_enter_anim, R.anim.photopreview_exit_anim);
+//                    }
+//                });
+//            } else {
+//                layer_photoreport3.setVisibility(View.GONE);
+//            }
+//            Log.e("convertView", convertView.toString());
+//            return convertView;
+//        }
+//
     }
 
 

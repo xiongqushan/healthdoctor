@@ -1,6 +1,8 @@
 package haozuo.com.healthdoctor.view.base;
 
 import android.util.Log;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -20,6 +22,9 @@ import haozuo.com.healthdoctor.util.UHealthUtils;
 public abstract class AbstractView extends BaseFragment {
     private LoadingDialog loadingDialog;
     private CustomDialog comfirmDialog;
+    private static SoundPool soundPool;
+    private static int soundId;
+
 
     protected AbstractView() {
     }
@@ -36,6 +41,7 @@ public abstract class AbstractView extends BaseFragment {
     public void showDialog(String msg) {
         if (loadingDialog == null) {
             loadingDialog = new LoadingDialog(getContext());
+//            loadingDialog = new LoadingDialog(HZApplication.shareApplication());
         }
         if (msg == null || msg.length() == 0) {
             msg = "数据加载中…";
@@ -53,8 +59,8 @@ public abstract class AbstractView extends BaseFragment {
     public void hideDialog(String msg) {
 
         if (loadingDialog != null) {
+//            loadingDialog.hide();
             loadingDialog.dismiss();
-            Log.e("loadingDialog", loadingDialog.toString() + "");
         }
         if (StringUtil.isNotTrimEmpty(msg)) {
             Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
@@ -113,5 +119,13 @@ public abstract class AbstractView extends BaseFragment {
         if (btnReload != null) {
             rLayout.removeView(btnReload);
         }
+    }
+
+    public void playSuccessSound() {
+        if (soundPool == null) {
+            soundPool = new SoundPool(10, AudioManager.STREAM_SYSTEM, 5);
+            soundId = soundPool.load(getContext(), R.raw.loadmore_success, 0);
+        }
+        soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 0);
     }
 }

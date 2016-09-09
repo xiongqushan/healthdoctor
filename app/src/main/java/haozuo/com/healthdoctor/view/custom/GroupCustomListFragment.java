@@ -130,7 +130,7 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
             }
         });
 
-        mGroupCustomListPresenter.start();
+//        mGroupCustomListPresenter.start();
         return rootView;
     }
 
@@ -159,6 +159,9 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
     @Override
     public void refreshFinish(int status) {
         pull_to_refresh_layout.refreshFinish(status);
+        if (status == PullToRefreshLayout.SUCCEED){
+            playSuccessSound();
+        }
     }
 
     class PullListener implements PullToRefreshLayout.OnRefreshListener {
@@ -188,7 +191,7 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
         public void refresh(List<GroupCustInfoBean> dataList){
             dataSource.clear();
             dataSource.addAll(dataList);
-            notifyDataSetChanged();
+             notifyDataSetChanged();
         }
 
         @Override

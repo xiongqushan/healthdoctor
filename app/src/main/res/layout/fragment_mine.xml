@@ -26,6 +26,7 @@
                 android:layout_height="96dp"
                 android:src="@drawable/ic_launcher"
                 fresco:failureImage="@drawable/doctor_default_photourl"
+                fresco:failureImageScaleType="fitXY"
                 fresco:roundAsCircle="true"
                 fresco:roundingBorderColor="@color/white"
                 fresco:roundingBorderWidth="2dp" />

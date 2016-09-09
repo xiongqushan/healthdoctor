@@ -3,10 +3,8 @@ package haozuo.com.healthdoctor.view.consult;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,12 +22,14 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.ConsultItemBean;
+import haozuo.com.healthdoctor.presenter.IBasePresenter;
 import haozuo.com.healthdoctor.util.DateUtil;
 import haozuo.com.healthdoctor.util.UIHelper;
+import haozuo.com.healthdoctor.view.base.AbstractView;
 import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout;
 
 
-public class ConsultPandingFragment extends Fragment {
+public class ConsultPandingFragment extends AbstractView {
     public static final String ARG_PAGE = "ARG_PAGE_CONSULTPANDINGFRAGMENT";
     Context mContext;
     View rootView;
@@ -44,6 +44,16 @@ public class ConsultPandingFragment extends Fragment {
     ListView mListView;
 
     public ConsultPandingFragment() {
+    }
+
+    @Override
+    protected IBasePresenter getPresenter() {
+        return null;
+    }
+
+    @Override
+    protected View getRootView() {
+        return null;
     }
 
 //    public ConsultPandingFragment(int tab) {
@@ -71,6 +81,9 @@ public class ConsultPandingFragment extends Fragment {
     public void refreshFinish(int status, boolean isRefresh) {
         if (isRefresh) {
             ptrLayout.refreshFinish(status);
+            if (status == PullToRefreshLayout.SUCCEED){
+                playSuccessSound();
+            }
         } else {
             ptrLayout.loadmoreFinish(status);
         }

@@ -445,4 +445,16 @@ public class PullToLoadMoreLayout extends RelativeLayout {
 
     }
 
+
+//    private static SoundPool soundPool;
+//    private static int soundId;
+//    public void playSuccessSound(){
+//        if (soundPool == null){
+//            soundPool= new SoundPool(10, AudioManager.STREAM_MUSIC, 5);
+//            soundId = soundPool.load(getContext(), R.raw.pull_refresh, 0);
+//        }
+//        soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 0);
+//    }
+
+
 }
