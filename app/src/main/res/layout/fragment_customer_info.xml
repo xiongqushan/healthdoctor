@@ -8,6 +8,7 @@
     tools:context="haozuo.com.healthdoctor.view.custom.CustomerInfoFragment">
 
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -104,7 +105,7 @@
                 <TextView
                     android:id="@+id/CHeight"
                     style="@style/customerinfo_label_content"
-                    tools:text="57" />
+                    android:text="暂无" />
             </RelativeLayout>
         </LinearLayout>
 
@@ -233,11 +234,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="@dimen/customerinfo_padding_12dp">
+            android:paddingBottom="@dimen/customerinfo_padding_12dp"
+            android:paddingLeft="@dimen/customerinfo_padding_12dp"
+            android:paddingRight="@dimen/customerinfo_padding_12dp">
 
             <TextView
                 style="@style/customerinfo_label"
                 android:layout_marginRight="@dimen/customerinfo_padding_12dp"
+                android:layout_marginTop="12dp"
                 android:text="分组" />
 
             <haozuo.com.healthdoctor.view.threePart.common.FlowLayout

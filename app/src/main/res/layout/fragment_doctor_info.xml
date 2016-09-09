@@ -1,122 +1,128 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical">
+    android:background="@color/white">
 
-    <View
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/divider_d3" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="12dp">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider_d3" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp">
+
+            <TextView
+                style="@style/txt_set"
+                android:text="姓名" />
+
+            <TextView
+                android:id="@+id/tvDoctorName"
+                style="@style/txt_set"
+                android:layout_alignParentRight="true"
+                android:text="医师赵" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dividerline"
+            android:background="@color/divider_d3" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#333AB4F1"
+            android:padding="12dp">
+
+            <TextView
+                style="@style/txt_set"
+                android:text="专长" />
+
+            <TextView
+                android:id="@+id/tvDoctorSkill"
+                style="@style/txt_set"
+                android:layout_alignParentRight="true"
+                android:text="内科" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dividerline"
+            android:background="@color/divider_d3" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp">
+
+            <TextView
+                style="@style/txt_set"
+                android:text="职称" />
+
+            <TextView
+                android:id="@+id/tvDoctorJob"
+                style="@style/txt_set"
+                android:layout_alignParentRight="true"
+                android:text="高级健管师" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dividerline"
+            android:background="@color/divider_d3" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#333AB4F1"
+            android:padding="12dp">
+
+            <TextView
+                style="@style/txt_set"
+                android:text="所属机构" />
+
+            <TextView
+                android:id="@+id/tvDoctorWorkUnit"
+                style="@style/txt_set"
+                android:layout_alignParentRight="true"
+                android:text="上海好卓" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dividerline"
+            android:background="@color/divider_d3" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp">
+
+            <TextView
+                style="@style/txt_set"
+                android:text="介绍" />
+        </RelativeLayout>
 
         <TextView
+            android:id="@+id/tvDoctorExplain"
             style="@style/txt_set"
-            android:text="姓名" />
-
-        <TextView
-            android:id="@+id/tvDoctorName"
-            style="@style/txt_set"
+            android:layout_width="match_parent"
             android:layout_alignParentRight="true"
-            android:text="医师赵" />
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dividerline"
-        android:background="@color/divider_d3" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#333AB4F1"
-        android:padding="12dp">
-
-        <TextView
-            style="@style/txt_set"
-            android:text="专长" />
-
-        <TextView
-            android:id="@+id/tvDoctorSkill"
-            style="@style/txt_set"
-            android:layout_alignParentRight="true"
-            android:text="内科" />
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dividerline"
-        android:background="@color/divider_d3" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="12dp">
-
-        <TextView
-            style="@style/txt_set"
-            android:text="职称" />
-
-        <TextView
-            android:id="@+id/tvDoctorJob"
-            style="@style/txt_set"
-            android:layout_alignParentRight="true"
-            android:text="高级健管师" />
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dividerline"
-        android:background="@color/divider_d3" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#333AB4F1"
-        android:padding="12dp">
-
-        <TextView
-            style="@style/txt_set"
-            android:text="所属机构" />
-
-        <TextView
-            android:id="@+id/tvDoctorWorkUnit"
-            style="@style/txt_set"
-            android:layout_alignParentRight="true"
-            android:text="上海好卓" />
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dividerline"
-        android:background="@color/divider_d3" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="12dp">
-
-        <TextView
-            style="@style/txt_set"
-            android:text="介绍" />
-    </RelativeLayout>
-
-    <TextView
-        android:id="@+id/tvDoctorExplain"
-        style="@style/txt_set"
-        android:layout_width="match_parent"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        android:background="@drawable/shape_line_corners_blue"
-        android:lineSpacingExtra="2dp"
-        android:padding="16dp"
-        android:text="王医生
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:background="@drawable/shape_line_corners_blue"
+            android:lineSpacingExtra="2dp"
+            android:padding="16dp"
+            android:text="王医生
 内科,高级健管师,上海好卓,内科医生，高级健管师。二级公共营养师,有丰富的慢病及企业健管经验。" />
 
 
-</LinearLayout>
+    </LinearLayout>
+</FrameLayout>

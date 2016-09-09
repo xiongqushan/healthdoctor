@@ -1,12 +1,15 @@
 package haozuo.com.healthdoctor.service;
 
+import java.util.List;
 import java.util.Map;
 
+import haozuo.com.healthdoctor.bean.BasConstBean;
 import haozuo.com.healthdoctor.bean.BaseBean;
 import haozuo.com.healthdoctor.bean.CustomDetailBean;
 import haozuo.com.healthdoctor.bean.DoctorBean;
 import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
 import haozuo.com.healthdoctor.bean.PageBean;
+import haozuo.com.healthdoctor.bean.ServiceDeptBean;
 import haozuo.com.healthdoctor.framework.SysConfig;
 import retrofit.http.Body;
 import retrofit.http.GET;
@@ -33,4 +36,10 @@ public interface IUserService {
 
     @GET(SysConfig.CONTROLLER_PRE_API_USER + "GetCusInfo")
     Observable<BaseBean<CustomDetailBean>> GetCusInfo(@Query("customerId") int customerId);
+
+    @GET(SysConfig.CONTROLLER_PRE_API_USER + "GetBasConstList")
+    Observable<BaseBean<List<BasConstBean>>> GetBasConstList();
+
+    @GET(SysConfig.CONTROLLER_PRE_API_USER + "GetServiceDeptList")
+    Observable<BaseBean<List<ServiceDeptBean>>> GetServiceDeptList();
 }

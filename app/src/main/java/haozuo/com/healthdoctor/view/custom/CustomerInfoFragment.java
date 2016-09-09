@@ -122,6 +122,7 @@ public class CustomerInfoFragment extends AbstractView implements CustomerInfoCo
     @Override
     public void InitView(@NonNull CustomDetailBean customInfo) {
         mCustomInfo = customInfo;
+
         UIHelper.setFrescoURL(CPhoto, customInfo.PhotoUrl,
                 "res://haozuo.com.healthdoctor.view.custom/" + R.drawable.user_default_url);
         Cname.setText(customInfo.Cname);

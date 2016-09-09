@@ -5,13 +5,16 @@ import android.support.annotation.NonNull;
 import com.squareup.okhttp.OkHttpClient;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
 
+import haozuo.com.healthdoctor.bean.BasConstBean;
 import haozuo.com.healthdoctor.bean.CustomDetailBean;
 import haozuo.com.healthdoctor.bean.DoctorBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
+import haozuo.com.healthdoctor.bean.ServiceDeptBean;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
 import haozuo.com.healthdoctor.service.IUserService;
 import rx.Subscriber;
@@ -25,20 +28,20 @@ public class UserModel extends AbstractModel {
     IUserService mIUserService;
 
     @Inject
-    public UserModel(@NonNull OkHttpClient okHttpClient, IUserService iUserService){
+    public UserModel(@NonNull OkHttpClient okHttpClient, IUserService iUserService) {
         super(okHttpClient);
-        mIUserService=iUserService;
+        mIUserService = iUserService;
     }
 
-    public void GetSMSCode(String mobile, final OnHandlerResultListener<GlobalShell<Boolean>> callbackListener){
-        Subscriber subscriber=getSubscriber(callbackListener);
+    public void GetSMSCode(String mobile, final OnHandlerResultListener<GlobalShell<Boolean>> callbackListener) {
+        Subscriber subscriber = getSubscriber(callbackListener);
         mIUserService.getSMSCode(mobile)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
 
-    public void Login(String mobile,int smsCode, final OnHandlerResultListener<GlobalShell<DoctorBean>> callbackListener) {
+    public void Login(String mobile, int smsCode, final OnHandlerResultListener<GlobalShell<DoctorBean>> callbackListener) {
         Map<String, Object> params = new HashMap<>();
         params.put("Mobile", mobile);
         params.put("SmsCode", smsCode);
@@ -48,11 +51,11 @@ public class UserModel extends AbstractModel {
                 .subscribe(getSubscriber(callbackListener));
     }
 
-    public void LoginValidate(String account,String password, final OnHandlerResultListener<GlobalShell<DoctorBean>> callbackListener) {
+    public void LoginValidate(String account, String password, final OnHandlerResultListener<GlobalShell<DoctorBean>> callbackListener) {
         Map<String, Object> params = new HashMap<>();
         params.put("Account", account);
         params.put("Password", password);
-        Subscriber subscriber=getSubscriber(callbackListener);
+        Subscriber subscriber = getSubscriber(callbackListener);
         mIUserService.LoginValidate(params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -64,6 +67,22 @@ public class UserModel extends AbstractModel {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(getSubscriber(callbackListener));
+    }
+
+    public void GetBasConstList(final OnHandlerResultListener<GlobalShell<List<BasConstBean>>> callbackListener) {
+        Subscriber subscriber = getSubscriber(callbackListener);
+        mIUserService.GetBasConstList()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    public void GetServiceDeptList(final OnHandlerResultListener<GlobalShell<List<ServiceDeptBean>>> callbackListener) {
+        Subscriber subscriber = getSubscriber(callbackListener);
+        mIUserService.GetServiceDeptList()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
     }
 
 }
