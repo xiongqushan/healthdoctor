@@ -45,7 +45,7 @@ public class ReportBadFragment extends Fragment {
     public void updateUI(ReportDetailBean bean) {
         dataList.addAll(bean.AnomalyCheckResult);
         adapter.notifyDataSetChanged();
-        tvReportWarn.setText("上海美年友情提醒，您可能存在以下" + dataList.size() + "条异常项");
+        tvReportWarn.setText(bean.ReportInfoVM.CheckUnitName + "友情提醒，您可能存在以下" + dataList.size() + "条异常项");
     }
 
     @Override
@@ -122,10 +122,10 @@ public class ReportBadFragment extends Fragment {
                 if (subEmpty) {
                     tvSubtitle.setText("");
                 } else {
-                    tvSubtitle.setText("参考范围:" + dataList.get(position).TextRef);
+                    tvSubtitle.setText("参考范围 : " + dataList.get(position).TextRef);
                 }
                 tvValue.setText(dataList.get(position).ResultValue);
-                tvUnit.setText("单位:" + dataList.get(position).Unit);
+                tvUnit.setText("单位 : " + dataList.get(position).Unit);
             }
             return view;
         }

@@ -298,10 +298,10 @@ public class ReportDetailFragment extends Fragment {
                     if (subEmpty) {
                         tvSubtitle.setText("");
                     } else {
-                        tvSubtitle.setText("参考范围:" + childData.get(position).TextRef);
+                        tvSubtitle.setText("参考范围 : " + childData.get(position).TextRef);
                     }
                     tvValue.setText(childData.get(position).ResultValue);
-                    tvUnit.setText("单位:" + childData.get(position).Unit);
+                    tvUnit.setText("单位 : " + childData.get(position).Unit);
                 }
                 return view;
             }

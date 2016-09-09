@@ -4,6 +4,7 @@
     android:id="@+id/rLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".view.custom.CustomDetailFragment">
 
     <LinearLayout
@@ -14,7 +15,6 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="85dp"
-            android:background="@color/white"
             android:orientation="vertical">
 
             <com.facebook.drawee.view.SimpleDraweeView
@@ -108,8 +108,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:paddingBottom="12dp">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -231,10 +230,9 @@
                 <haozuo.com.healthdoctor.view.threePart.common.ChildGridView
                     android:id="@+id/gv_PhotoReport"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:numColumns="3"
-                    android:visibility="visible"
-                    android:background="@color/white"/>
+                    android:visibility="visible" />
 
             </LinearLayout>
         </haozuo.com.healthdoctor.view.threePart.common.StickScrollView>

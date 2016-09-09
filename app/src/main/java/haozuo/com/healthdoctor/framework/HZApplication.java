@@ -7,6 +7,7 @@ import com.iflytek.cloud.Setting;
 import com.iflytek.cloud.SpeechUtility;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
+import com.umeng.analytics.MobclickAgent;
 
 import cn.jpush.android.api.JPushInterface;
 import haozuo.com.healthdoctor.BuildConfig;
@@ -68,6 +69,7 @@ public class HZApplication extends Application {
         JPushInterface.init(this);
         // JPushInterface.setLatestNotificationNumber(this, 3);//限制保留的通知条数。默认为保留最近 5 条通知。
         PreferenceManager.init(this);
+        MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
 
     }
 

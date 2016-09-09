@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingBottom="12dp"
     tools:context="haozuo.com.healthdoctor.view.custom.ReportBadFragment">
 
     <!-- TODO: Update blank fragment layout -->

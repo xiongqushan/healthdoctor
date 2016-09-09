@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="8dp">
 
     <TextView
         android:id="@+id/tv_Count"
-        android:layout_height="73dp"
         android:layout_width="90dp"
-        android:layout_gravity="center"
+        android:layout_height="73dp"
+        android:background="@drawable/bg_photo_report"
         android:gravity="right|bottom"
         android:padding="8dp"
-        tools:text="共5张"
-        android:textSize="@dimen/textsize_h5"
         android:textColor="@color/white"
-        android:background="@drawable/bg_photo_report"/>
-    
+        android:textSize="@dimen/textsize_h5"
+        tools:text="共5张" />
+
     <TextView
         android:id="@+id/tv_PhotoReport_Date"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
         android:layout_marginTop="@dimen/PhotoReport_margin"
-        tools:text="2016-08-07"/>
+        android:gravity="center"
+        tools:text="2016-08-07" />
 
     <TextView
         android:id="@+id/tv_PhotoReport_Dept"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
         android:layout_marginTop="@dimen/PhotoReport_margin"
-        tools:text="河南省直三院"/>
+        android:gravity="center"
+        tools:text="河南省直三院" />
 
 </LinearLayout>

@@ -157,12 +157,12 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
     @Override
     public void InitView(CustomDetailBean custom) {
         mCustomInfo = custom;
-        UIHelper.setFrescoURL(CPhoto,custom.PhotoUrl,
+        UIHelper.setFrescoURL(CPhoto, custom.PhotoUrl,
                 "res://haozuo.com.healthdoctor.view.custom/" + R.drawable.user_default_url);
         CName.setText(custom.Cname);
         CGender.setText(custom.GetSex());
 //        CAge.setText(DateUtil.getAge(custom.Certificate_Code,custom.Birthday)+"岁");
-        CAge.setText(custom.GetAge()+"岁");
+        CAge.setText(custom.GetAge() + "岁");
 //        CAge.setText(""+custom.Age);
         Cphone.setText(custom.Mobile);
         btn_go_into.setOnClickListener(new View.OnClickListener() {
@@ -229,7 +229,7 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
 
             tv_CName.setText(mCustomInfo.Cname);
             tv_CGender.setText(mCustomInfo.GetSex());
-            tv_CAge.setText(mCustomInfo.GetAge()+"岁");
+            tv_CAge.setText(mCustomInfo.GetAge() + "岁");
             tv_DeptName.setText(ReportParamsEntity.CheckUnitName);
             tv_ReportDate.setText(ReportParamsEntity.CheckDate);
             tv_ReportCode.setText(ReportParamsEntity.CheckUnitCode);
@@ -239,9 +239,10 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
         }
     }
 
+    private List<RequestPhotoReportListBean> dataSource;
+
     class PhotoReportAdapter extends BaseAdapter {
         private LayoutInflater mInflater;
-        private List<RequestPhotoReportListBean> dataSource;
 
         public PhotoReportAdapter(Context context) {
             this.mInflater = LayoutInflater.from(context);
@@ -290,10 +291,10 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
                     getActivity().overridePendingTransition(R.anim.photopreview_enter_anim, R.anim.photopreview_exit_anim);
                 }
             });
-
             return convertView;
         }
     }
+
 
 }
 

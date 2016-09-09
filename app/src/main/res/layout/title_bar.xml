@@ -23,10 +23,10 @@
         android:layout_height="@dimen/actionbar_high"
         android:layout_weight="1"
         android:gravity="center"
-        tools:text="title"
         android:textColor="@color/white"
         android:textSize="@dimen/textsize_h1"
-        android:visibility="visible"/>
+        android:visibility="visible"
+        tools:text="title" />
 
     <ImageView
         android:id="@+id/btn_search"
@@ -49,21 +49,20 @@
         android:id="@+id/et_TitleBar_search"
         android:layout_width="0dp"
         android:layout_height="31dp"
-        android:layout_weight="1"
         android:layout_gravity="center_vertical"
         android:layout_marginRight="10dp"
+        android:layout_weight="1"
         android:background="@drawable/editview_bg_selector"
         android:drawableLeft="@drawable/useful_search"
-        android:drawableRight="@drawable/useful_cancel"
         android:drawablePadding="8dp"
+        android:drawableRight="@drawable/useful_cancel"
+        android:hint="请搜索关键词"
         android:maxLines="1"
-        android:singleLine="true"
         android:paddingLeft="13dp"
         android:paddingRight="13dp"
-        android:hint="请搜索关键词"
+        android:singleLine="true"
         android:textSize="@dimen/textsize_h3"
-        android:visibility="gone"/>
-
+        android:visibility="gone" />
 
 
 </LinearLayout>

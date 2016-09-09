@@ -1,5 +1,6 @@
 package haozuo.com.healthdoctor.view.base;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -50,8 +51,10 @@ public abstract class AbstractView extends BaseFragment {
 
 
     public void hideDialog(String msg) {
+
         if (loadingDialog != null) {
             loadingDialog.dismiss();
+            Log.e("loadingDialog", loadingDialog.toString() + "");
         }
         if (StringUtil.isNotTrimEmpty(msg)) {
             Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
