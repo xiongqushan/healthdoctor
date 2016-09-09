@@ -3,7 +3,6 @@ package haozuo.com.healthdoctor.view.threePart.common;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.GridView;
-import android.widget.ListView;
 
 /**
  * by zy 2016.08.23

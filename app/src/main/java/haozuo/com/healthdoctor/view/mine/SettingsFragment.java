@@ -3,10 +3,8 @@ package haozuo.com.healthdoctor.view.mine;
 
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,8 +21,10 @@ import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.manager.GroupInfoManager;
 import haozuo.com.healthdoctor.manager.UsefulMessageManager;
 import haozuo.com.healthdoctor.manager.UserManager;
+import haozuo.com.healthdoctor.presenter.IBasePresenter;
+import haozuo.com.healthdoctor.util.CustomDialog;
 import haozuo.com.healthdoctor.util.UHealthUtils;
-import haozuo.com.healthdoctor.view.base.BaseFragment;
+import haozuo.com.healthdoctor.view.base.AbstractView;
 import haozuo.com.healthdoctor.view.home.HomeActivity;
 import haozuo.com.healthdoctor.view.login.LoginActivity;
 import haozuo.com.healthdoctor.view.threePart.switchbutton.SwitchButton;
@@ -33,7 +33,7 @@ import haozuo.com.healthdoctor.view.threePart.switchbutton.SwitchButton;
 /**
  * by zy 2016.08.24
  */
-public class SettingsFragment extends BaseFragment {
+public class SettingsFragment extends AbstractView {
     private Context mContext;
 
     @Bind(R.id.btn_push)
@@ -61,12 +61,16 @@ public class SettingsFragment extends BaseFragment {
 
     @OnClick(R.id.layout_clearcache)
     void clearcacheClick() {
-        //清理图片缓存
-        Fresco.getImagePipeline().clearCaches();
-        GroupInfoManager.getInstance().clear();
-        UsefulMessageManager.getInstance().clear();
-        Toast.makeText(getActivity(), "缓存清理成功", Toast.LENGTH_SHORT).show();
-
+        showConfirmDialog("确定需要清理缓存吗？", new CustomDialog.OnDialogListener() {
+            @Override
+            public void OnDialogConfirmListener() {
+                //清理图片缓存
+                Fresco.getImagePipeline().clearCaches();
+                GroupInfoManager.getInstance().clear();
+                UsefulMessageManager.getInstance().clear();
+                Toast.makeText(getActivity(), "缓存清理成功", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @OnClick(R.id.layout_push)
@@ -78,13 +82,34 @@ public class SettingsFragment extends BaseFragment {
 
     @OnClick(R.id.btnSignOut)
     void btnSignOut() {
-        ShowSignOutDialog();
+        showConfirmDialog("退出当前账号，你可能不能及时回复客户咨询，确认退出？", new CustomDialog.OnDialogListener() {
+            @Override
+            public void OnDialogConfirmListener() {
+                UserManager.getInstance().clear();
+                GroupInfoManager.getInstance().clear();
+                startActivity(new Intent(mContext, LoginActivity.class));
+                sendCustomBroadcast(HomeActivity.FINISHACTIVITY);
+                getActivity().finish();
+            }
+        });
+
+//        ShowSignOutDialog();
     }
 
     private View rootView;
 
     public SettingsFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    protected IBasePresenter getPresenter() {
+        return null;
+    }
+
+    @Override
+    protected View getRootView() {
+        return null;
     }
 
 
@@ -112,25 +137,25 @@ public class SettingsFragment extends BaseFragment {
         return rootView;
     }
 
-    public void ShowSignOutDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-        builder.setTitle("退出当前账号")
-                .setMessage("退出当前账号，你可能不能及时回复客户咨询，确认退出？")
-                .setNegativeButton("取消", null)
-                .setPositiveButton("确定退出", SignOut)
-                .show();
-    }
-
-    DialogInterface.OnClickListener SignOut = new DialogInterface.OnClickListener() {
-        @Override
-        public void onClick(DialogInterface dialog, int which) {
-            UserManager.getInstance().clear();
-            GroupInfoManager.getInstance().clear();
-            startActivity(new Intent(mContext, LoginActivity.class));
-            sendCustomBroadcast(HomeActivity.FINISHACTIVITY);
-            getActivity().finish();
-        }
-    };
+//    public void ShowSignOutDialog() {
+//        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+//        builder.setTitle("退出当前账号")
+//                .setMessage("退出当前账号，你可能不能及时回复客户咨询，确认退出？")
+//                .setNegativeButton("取消", null)
+//                .setPositiveButton("确定退出", SignOut)
+//                .show();
+//    }
+//
+//    DialogInterface.OnClickListener SignOut = new DialogInterface.OnClickListener() {
+//        @Override
+//        public void onClick(DialogInterface dialog, int which) {
+//            UserManager.getInstance().clear();
+//            GroupInfoManager.getInstance().clear();
+//            startActivity(new Intent(mContext, LoginActivity.class));
+//            sendCustomBroadcast(HomeActivity.FINISHACTIVITY);
+//            getActivity().finish();
+//        }
+//    };
 
 
 }

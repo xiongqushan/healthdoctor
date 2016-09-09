@@ -20,7 +20,7 @@ public interface ConsultDetailContract {
 
         void setListViewPosition(int position, String SELECT_POSITION_TYPE);
 
-        void refreshFinish(int status, boolean isRefresh);
+        void refreshFinish(int status);
 
         void setCustmoerInfo(CustomDetailBean customDetailItem);
 

@@ -14,6 +14,7 @@ import haozuo.com.healthdoctor.framework.HZApplication;
  */
 public class BaseFragment extends Fragment {
     public static final String BROADFILTER_CONSULT_REPLAY = "BROADFILTER_CONSULT_REPLAY";
+    public static final String BROADFILTER_CUSTOM_DELETEGROUP = "BROADFILTER_CUSTOM_DELETEGROUP";
 
     BroadcastReceiver receiver;
 
@@ -30,7 +31,7 @@ public class BaseFragment extends Fragment {
             @Override
             public void onReceive(Context context, Intent intent) {
                 String actionName = intent.getAction();
-                onReceiveBroadcast(actionName);
+                onReceiveBroadcast(actionName, intent);
             }
         };
         IntentFilter filter = new IntentFilter();
@@ -40,7 +41,7 @@ public class BaseFragment extends Fragment {
         getContext().registerReceiver(receiver, filter);
     }
 
-    protected void onReceiveBroadcast(String filterAction) {
+    protected void onReceiveBroadcast(String filterAction, Intent intent) {
 
     }
 
@@ -48,6 +49,7 @@ public class BaseFragment extends Fragment {
         Intent intent = new Intent(activeName);
         getContext().sendBroadcast(intent);
     }
+
 
     @Override
     public void onDestroy() {

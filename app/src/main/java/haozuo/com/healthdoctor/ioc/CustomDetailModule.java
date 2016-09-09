@@ -15,7 +15,7 @@ public class CustomDetailModule {
     int mCustomId;
     String mAccountId;
 
-    public CustomDetailModule(@NonNull int customId, @NonNull String accountId){
+    public CustomDetailModule(int customId, @NonNull String accountId){
         mCustomId=customId;
         mAccountId = accountId;
     }

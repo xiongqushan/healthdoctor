@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by hzguest3 on 2016/7/27.
  */
-public class CustomDetailBean implements Serializable{
+public class CustomDetailBean implements Serializable {
     public int Id;
     public String Cname;
     public int Gender;
@@ -26,15 +26,15 @@ public class CustomDetailBean implements Serializable{
     public String PhotoUrl;
     public String Company_Name;
     public String Cust_Code;
-//    public int[] GroupIdList;
+    //    public int[] GroupIdList;
     public List<Integer> GroupIdList;
     public int DoctorID;
     private String Sex;
     private int Age;
 
-    public String GetSex(){
-        switch(Gender){
-            case 0 :
+    public String GetSex() {
+        switch (Gender) {
+            case 0:
                 return "男";
             case 1:
                 return "女";
@@ -43,17 +43,17 @@ public class CustomDetailBean implements Serializable{
         }
     }
 
-    public int GetAge(){
-        if (Certificate_Code != null){
+    public String GetAge() {
+        if (Certificate_Code != null) {
             String birth_year = Certificate_Code.substring(6, 10);
             String birth_month = Certificate_Code.substring(11, 12);
             String birth_day = Certificate_Code.substring(13, 14);
-            String birthday = birth_year+"-"+birth_month+"-"+birth_day;
-            return getAgeBaseDate(birthday);
-        }else if (Birthday != null){
-            return getAgeBaseDate(Birthday.split("T")[0]);
+            String birthday = birth_year + "-" + birth_month + "-" + birth_day;
+            return getAgeBaseDate(birthday) + "岁";
+        } else if (Birthday != null) {
+            return getAgeBaseDate(Birthday.split("T")[0]) + "岁";
         }
-        return 0;
+        return "0岁";
     }
 
     public int getAgeBaseDate(String birthday) {

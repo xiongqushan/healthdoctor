@@ -1,6 +1,7 @@
 package haozuo.com.healthdoctor.view.consult;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -302,8 +303,8 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
     }
 
     @Override//TODO 添加返回信息
-    protected void onReceiveBroadcast(String filterAction) {
-        super.onReceiveBroadcast(filterAction);
+    protected void onReceiveBroadcast(String filterAction, Intent intent) {
+        super.onReceiveBroadcast(filterAction,intent );
         if (filterAction == BROADFILTER_CONSULT_REPLAY) {
             refreshCustomList(3, true);
             if (rbPending.isChecked()) {

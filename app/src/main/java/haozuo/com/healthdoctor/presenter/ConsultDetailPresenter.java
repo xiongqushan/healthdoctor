@@ -65,7 +65,9 @@ public class ConsultDetailPresenter extends AbstractPresenter implements Consult
 
     @Override
     public void loadmoreConsultList() {
-        mIConsultDetailView.showDialog();
+        if (isInit){
+            mIConsultDetailView.showDialog();
+        }
         mConsultModel.GetConsultReplyList(mCustomerId,mCommitOn, new OnHandlerResultListener<GlobalShell<List<ConsultReplyBean>>>() {
             @Override
             public void handlerResult(GlobalShell<List<ConsultReplyBean>> resultData) {
@@ -81,8 +83,11 @@ public class ConsultDetailPresenter extends AbstractPresenter implements Consult
                                 }
                             }
                         }
-                        mIConsultDetailView.refreshFinish(PullToRefreshLayout.SUCCEED,isInit);
-                        isInit = false;
+                        if (!isInit){
+                            mIConsultDetailView.refreshFinish(PullToRefreshLayout.SUCCEED);
+                        }
+
+
                         if(loadmoreConsultResults.size() == 0) {
                             return;
                         }
@@ -91,14 +96,17 @@ public class ConsultDetailPresenter extends AbstractPresenter implements Consult
                         mIConsultDetailView.refreshCustomAdapter(mConsultItemBeanList);
                         mCommitOn =mConsultItemBeanList.get(0).CommitOn.replaceAll("(?:T|:|-)","");
                         mIConsultDetailView.setListViewPosition(loadmoreConsultResults.size(), ConsultDetailFragment.SELECT_POSITION_DIRECT);
-
+//                        mIConsultDetailView.setListViewPosition(loadmoreConsultResults.size()-1, ConsultDetailFragment.SELECT_POSITION_SMOOTH);
                     }
                 }
                 else{
-                    mIConsultDetailView.hideDialog(resultData.Message);
-                    mIConsultDetailView.refreshFinish(PullToRefreshLayout.FAIL,isInit);
-                    isInit = false;
+//                    mIConsultDetailView.hideDialog(resultData.Message);
+                    if (!isInit){
+                        mIConsultDetailView.refreshFinish(PullToRefreshLayout.FAIL);
+                    }
+
                 }
+                isInit = false;
             }
         });
     }
@@ -130,7 +138,7 @@ public class ConsultDetailPresenter extends AbstractPresenter implements Consult
             @Override
             public void handlerResult(GlobalShell<CustomDetailBean> resultData) {
                 if (resultData.LogicSuccess) {
-//                    mIConsultDetailView.hideDialog();
+                    mIConsultDetailView.hideDialog();
                     if (resultData.Data != null){
                         mIConsultDetailView.setCustmoerInfo(resultData.Data);
                     }

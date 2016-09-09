@@ -98,8 +98,7 @@ public class MineFragment extends BaseFragment {
     }
 
     @Override
-    protected void onReceiveBroadcast(String filterAction) {
-        super.onReceiveBroadcast(filterAction);
+    protected void onReceiveBroadcast(String filterAction, Intent intent) {
         if (filterAction.equals(HomeActivity.FINISHACTIVITY)) {
             getActivity().finish();
         }

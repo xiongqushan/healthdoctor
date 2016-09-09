@@ -59,6 +59,7 @@ import haozuo.com.healthdoctor.view.custom.CustomDetailActivity;
 import haozuo.com.healthdoctor.view.custom.CustomerReportActivity;
 import haozuo.com.healthdoctor.view.custom.PhotoPreviewActivity;
 import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToLoadMoreLayout;
+import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout;
 import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullableListView;
 import haozuo.com.healthdoctor.view.threePart.common.FlowLayout;
 
@@ -169,8 +170,9 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
         mConsultListAdapter = new ConsultListAdapter(mContext);
         consult_detail_List.setAdapter(mConsultListAdapter);
         consult_detail_pull_to_refresh_layout.setOnRefreshListener(new PullListener());
-        mConsultDetailPresenter.loadmoreConsultList();
         mConsultDetailPresenter.getUserDetail(mCustomerId);
+        mConsultDetailPresenter.loadmoreConsultList();
+//        mConsultDetailPresenter.start(mCustomerId);
 
         mIat = SpeechRecognizer.createRecognizer(mContext, mInitListener);
         mIatDialog = new RecognizerDialog(mContext, mInitListener);
@@ -246,9 +248,10 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
     }
 
     @Override
-    public void refreshFinish(int status, boolean isInit) {
-        if (!isInit) {
-            consult_detail_pull_to_refresh_layout.refreshFinish(status);
+    public void refreshFinish(int status) {
+        consult_detail_pull_to_refresh_layout.refreshFinish(status);
+        if (status == PullToRefreshLayout.SUCCEED){
+            playSuccessSound();
         }
     }
 
