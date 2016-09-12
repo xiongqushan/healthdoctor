@@ -14,6 +14,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.umeng.analytics.MobclickAgent;
@@ -84,15 +85,16 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void setCustomerTitle(String title) {
         TextView textView = (TextView) findViewById(R.id.txt_TitleBar_title);
         textView.setText(title);
-        findViewById(R.id.btn_search).setVisibility(View.INVISIBLE);
         findViewById(R.id.btn_go_back).setOnClickListener(finishActivity);
     }
 
     protected void setTitleWithSearch(String title) {
         TextView textView = (TextView) findViewById(R.id.txt_TitleBar_title);
+        ImageView btn_search = (ImageView) findViewById(R.id.btn_search);
         textView.setText(title);
         findViewById(R.id.btn_go_back).setOnClickListener(finishActivity);
-        findViewById(R.id.btn_search).setOnClickListener(showSearchbar);
+        btn_search.setOnClickListener(showSearchbar);
+        btn_search.setVisibility(View.VISIBLE);
     }
 
     protected void setTitleWithConsult(String title, final int CustomID) {
@@ -123,7 +125,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     /**
-     * 根据EditText所在坐标和用户点击的坐标相对比，来判断是否隐藏键盘，因为当用户点击EditText时没必要隐藏
+     * 根据EditText所在坐标和用户点击的坐标相对比，来判断是否隐藏键盘
      */
     private boolean isShouldHideInput(View v, MotionEvent event) {
         if (v != null && (v instanceof EditText)) {

@@ -44,6 +44,10 @@ public class GroupPresenter extends AbstractPresenter implements IGroupPresenter
 
     @Override
     public void start() {
+        getGroupInfo();
+    }
+
+    public void getGroupInfo(){
         int doctorId = UserManager.getInstance().getDoctorInfo().Doctor_ID;
         mIGroupView.showDialog();
         mGroupModel.GetGroup(doctorId, new OnHandlerResultListener<GlobalShell<List<DoctorGroupBean>>>() {

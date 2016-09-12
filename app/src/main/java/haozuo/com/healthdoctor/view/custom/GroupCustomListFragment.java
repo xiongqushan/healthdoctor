@@ -3,7 +3,6 @@ package haozuo.com.healthdoctor.view.custom;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
@@ -12,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -24,10 +22,10 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
+import haozuo.com.healthdoctor.contract.GroupCustomListContract;
 import haozuo.com.healthdoctor.presenter.IBasePresenter;
 import haozuo.com.healthdoctor.util.UIHelper;
 import haozuo.com.healthdoctor.view.base.AbstractView;
-import haozuo.com.healthdoctor.contract.GroupCustomListContract;
 import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToRefreshLayout;
 import haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullableListView;
 import haozuo.com.healthdoctor.view.threePart.common.DrawableClickableEditText;
@@ -35,6 +33,7 @@ import haozuo.com.healthdoctor.view.threePart.common.DrawableClickableEditText;
 /**
  * A simple {@link Fragment} subclass.
  */
+@SuppressWarnings("ResourceType")
 public class GroupCustomListFragment extends AbstractView implements GroupCustomListContract.IGroupCustomListView {
     Context mContext;
     View rootView;
@@ -98,7 +97,7 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
             @Override
             public void onDrawableLeftClick(View view) {
                 customNameOrMobile = et_TitleBar_search.getText().toString();
-                mGroupCustomListPresenter.refreshCustomList(customNameOrMobile);
+                mGroupCustomListPresenter.refreshCustomList(customNameOrMobile, true);
             }
         });
         //搜索框取消按钮监听
@@ -107,7 +106,7 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
             public void onDrawableRightClick(View view) {
                 et_TitleBar_search.setText("");
                 customNameOrMobile = et_TitleBar_search.getText().toString();
-                mGroupCustomListPresenter.refreshCustomList(customNameOrMobile);
+                mGroupCustomListPresenter.refreshCustomList(customNameOrMobile, true);
                 getActivity().findViewById(R.id.txt_TitleBar_title).setVisibility(View.VISIBLE);
                 getActivity().findViewById(R.id.btn_search).setVisibility(View.VISIBLE);
                 getActivity().findViewById(R.id.et_TitleBar_search).setVisibility(View.GONE);
@@ -122,7 +121,7 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
                     if (imm.isActive()) {
                         imm.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0);
                         customNameOrMobile = et_TitleBar_search.getText().toString();
-                        mGroupCustomListPresenter.refreshCustomList(customNameOrMobile);
+                        mGroupCustomListPresenter.refreshCustomList(customNameOrMobile, true);
                     }
                     return true;
                 }
@@ -130,7 +129,6 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
             }
         });
 
-//        mGroupCustomListPresenter.start();
         return rootView;
     }
 
@@ -148,9 +146,11 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
     @Override
     public void refreshCustomAdapter(List<GroupCustInfoBean> dataList) {
         if (dataList.size()==0){
-            mShowFailLayer(R.id.rLayout);
+//            mShowFailLayer(R.id.rLayout);
+            showRetryLayer(R.id.rLayout,getString(R.string.customList_search_fail));
         }else {
-            mHideFailLayer(R.id.rLayout);
+//            mHideFailLayer(R.id.rLayout);
+            hideRetryLayer(R.id.rLayout);
         }
         mGroupCustInfoAdapter.refresh(dataList);
         mGroupCustInfoAdapter.notifyDataSetChanged();
@@ -168,7 +168,7 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
 
         @Override
         public void onRefresh() {
-            mGroupCustomListPresenter.refreshCustomList(customNameOrMobile);
+            mGroupCustomListPresenter.refreshCustomList(customNameOrMobile, false);
         }
 
         @Override
@@ -256,26 +256,6 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
             public ViewHolder(View convertView) {
                 ButterKnife.bind(this, convertView);
             }
-        }
-    }
-
-    private static final int ID_SEARCHFAIL = 1357902499;
-    //搜索结果为空时用默认页面覆盖
-    private void mShowFailLayer(int frameLayoutContainerId) {
-        FrameLayout rLayout = (FrameLayout) getRootView().findViewById(frameLayoutContainerId);
-        View btnReload = getRootView().findViewById(ID_SEARCHFAIL);
-        if (btnReload == null) {
-            btnReload = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_customlist_search_fail, null);
-            btnReload.setId(ID_SEARCHFAIL);
-            rLayout.addView(btnReload);
-        }
-    }
-    //隐藏默认覆盖页面
-    private void mHideFailLayer(int frameLayoutContainerId) {
-        final FrameLayout rLayout = (FrameLayout) getRootView().findViewById(frameLayoutContainerId);
-        View btnReload = getRootView().findViewById(ID_SEARCHFAIL);
-        if (btnReload != null) {
-            rLayout.removeView(btnReload);
         }
     }
 

@@ -26,6 +26,7 @@ public class ConsultDetailActivity extends BaseActivity {
     private int mCustId;
     private String mAccountId;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +47,14 @@ public class ConsultDetailActivity extends BaseActivity {
             consultDetailfragment = (ConsultDetailFragment) mIConsultDetailView;
             ActivityUtils.addFragmentToActivity(fragmentManager, consultDetailfragment, R.id.frameContent);
         }
+//        setCustomerTitle("");
     }
+
+    @Override
+    public void setCustomerTitle(String customerInfo){
+        super.setCustomerTitle(customerInfo);
+    }
+
 
 }
 

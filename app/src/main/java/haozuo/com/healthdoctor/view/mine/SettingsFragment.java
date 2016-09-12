@@ -66,8 +66,8 @@ public class SettingsFragment extends AbstractView {
             public void OnDialogConfirmListener() {
                 //清理图片缓存
                 Fresco.getImagePipeline().clearCaches();
-                GroupInfoManager.getInstance().clear();
-                UsefulMessageManager.getInstance().clear();
+//                GroupInfoManager.getInstance().clear();
+//                UsefulMessageManager.getInstance().clear();
                 Toast.makeText(getActivity(), "缓存清理成功", Toast.LENGTH_SHORT).show();
             }
         });
@@ -79,7 +79,6 @@ public class SettingsFragment extends AbstractView {
         btnPush.setChecked(!btnPush.isChecked());
     }
 
-
     @OnClick(R.id.btnSignOut)
     void btnSignOut() {
         showConfirmDialog("退出当前账号，你可能不能及时回复客户咨询，确认退出？", new CustomDialog.OnDialogListener() {
@@ -88,7 +87,7 @@ public class SettingsFragment extends AbstractView {
                 UserManager.getInstance().clear();
                 GroupInfoManager.getInstance().clear();
                 UsefulMessageManager.getInstance().clear();
-                //PreferenceManager.getInstance().clear();
+//                PreferenceManager.getInstance().clear();
                 startActivity(new Intent(mContext, LoginActivity.class));
                 sendCustomBroadcast(HomeActivity.FINISHACTIVITY);
                 getActivity().finish();

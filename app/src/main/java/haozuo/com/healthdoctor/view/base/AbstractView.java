@@ -1,11 +1,11 @@
 package haozuo.com.healthdoctor.view.base;
 
-import android.util.Log;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import haozuo.com.healthdoctor.R;
@@ -37,11 +37,9 @@ public abstract class AbstractView extends BaseFragment {
         showDialog(null);
     }
 
-
     public void showDialog(String msg) {
         if (loadingDialog == null) {
             loadingDialog = new LoadingDialog(getContext());
-//            loadingDialog = new LoadingDialog(HZApplication.shareApplication());
         }
         if (msg == null || msg.length() == 0) {
             msg = "数据加载中…";
@@ -59,14 +57,12 @@ public abstract class AbstractView extends BaseFragment {
     public void hideDialog(String msg) {
 
         if (loadingDialog != null) {
-//            loadingDialog.hide();
             loadingDialog.dismiss();
         }
         if (StringUtil.isNotTrimEmpty(msg)) {
             Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
         }
     }
-
 
     public void showConfirmDialog(String string, CustomDialog.OnDialogListener onConfirmDialogListener) {
         comfirmDialog = new CustomDialog(getContext(), onConfirmDialogListener);
@@ -93,6 +89,23 @@ public abstract class AbstractView extends BaseFragment {
 
     private static final int ID_BTNRELOAD = 1357902468;
 
+//    public void showRetryLayer(int frameLayoutContainerId) {
+//        showRetryLayer(frameLayoutContainerId,true,getString(R.string.connect_fail));
+////        showRetryLayer(frameLayoutContainerId);
+//    }
+
+    public void showRetryLayer(int frameLayoutContainerId, String reloadTips) {
+        FrameLayout rLayout = (FrameLayout) getRootView().findViewById(frameLayoutContainerId);
+        View btnReload = getRootView().findViewById(ID_BTNRELOAD);
+        if (btnReload == null) {
+            btnReload = LayoutInflater.from(getActivity()).inflate(R.layout.retrylayer_layout, null);
+            btnReload.setId(ID_BTNRELOAD);
+            TextView tv_reloadTips = (TextView) btnReload.findViewById(R.id.tv_reloadTips);
+            tv_reloadTips.setText(reloadTips);
+            btnReload.setBackground(null);
+            rLayout.addView(btnReload);
+        }
+    }
 
     public void showRetryLayer(int frameLayoutContainerId) {
         FrameLayout rLayout = (FrameLayout) getRootView().findViewById(frameLayoutContainerId);
@@ -110,7 +123,6 @@ public abstract class AbstractView extends BaseFragment {
             });
             rLayout.addView(btnReload);
         }
-
     }
 
     public void hideRetryLayer(int frameLayoutContainerId) {
@@ -121,11 +133,14 @@ public abstract class AbstractView extends BaseFragment {
         }
     }
 
+
+//    pulltorefresh成功播放提示音
     public void playSuccessSound() {
         if (soundPool == null) {
-            soundPool = new SoundPool(10, AudioManager.STREAM_SYSTEM, 5);
+            soundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 5);
             soundId = soundPool.load(getContext(), R.raw.loadmore_success, 0);
         }
-        soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 0);
+        soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f);
+//        play(int soundID, float leftVolume, float rightVolume, int priority //优先级, int loop//0 循环 -1不循环, float rate)
     }
 }

@@ -19,5 +19,15 @@ public class ReportParamsBean implements Serializable{
     public String CustomerName;
     public String WorkNo;
     public String CheckDate;
+    private String formedDate;
 
+    public String getFormedDate(){
+        if (CheckDate.length()>=8){
+            String year = CheckDate.substring(0,3);
+            String month = CheckDate.substring(4,5);
+            String day = CheckDate.substring(6,7);
+            formedDate = year+"年"+month+"月"+day+"日" ;
+        }
+        return formedDate;
+    }
 }

@@ -98,6 +98,7 @@ public class CustomerReportFragment extends AbstractView implements CustomerRepo
     public void changeRetryLayer(boolean isShow) {
         if (isShow) {
             showRetryLayer(R.id.layerLayout);
+//            showRetryLayer(R.id.layerLayout,true,getString(R.string.connect_fail));
         } else {
             hideRetryLayer(R.id.layerLayout);
         }

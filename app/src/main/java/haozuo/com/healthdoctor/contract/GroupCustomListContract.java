@@ -20,7 +20,7 @@ public interface GroupCustomListContract {
 
     interface IGroupCustomListPresenter extends IBasePresenter {
 
-        void refreshCustomList(String customNameOrMobile);
+        void refreshCustomList(String customNameOrMobile, Boolean isInit);
 
         void loadmoreCustomList(String customNameOrMobile);
     }
