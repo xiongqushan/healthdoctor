@@ -19,6 +19,7 @@ import butterknife.OnClick;
 import cn.jpush.android.api.JPushInterface;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.manager.GroupInfoManager;
+import haozuo.com.healthdoctor.manager.UsefulMessageManager;
 import haozuo.com.healthdoctor.manager.UserManager;
 import haozuo.com.healthdoctor.presenter.IBasePresenter;
 import haozuo.com.healthdoctor.util.CustomDialog;
@@ -85,6 +86,8 @@ public class SettingsFragment extends AbstractView {
             public void OnDialogConfirmListener() {
                 UserManager.getInstance().clear();
                 GroupInfoManager.getInstance().clear();
+                UsefulMessageManager.getInstance().clear();
+//                PreferenceManager.getInstance().clear();
                 startActivity(new Intent(mContext, LoginActivity.class));
                 sendCustomBroadcast(HomeActivity.FINISHACTIVITY);
                 getActivity().finish();

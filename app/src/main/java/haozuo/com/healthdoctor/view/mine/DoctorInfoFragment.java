@@ -69,16 +69,20 @@ public class DoctorInfoFragment extends AbstractView implements DoctorInfoContra
             ButterKnife.bind(this, rootView);
             doctorInfo = UserManager.getInstance().getDoctorInfo();
             initView();
-            mIDoctorInfoPresenter.start();
         }
         return rootView;
     }
 
     private void initView() {
-
         tvName.setText(doctorInfo.Name);
         tvSkill.setText(doctorInfo.Expertise);
         tvExplain.setText(doctorInfo.Introduce);
+//        if (PreferenceManager.getInstance().readDoctorDept() == null || PreferenceManager.getInstance().readDoctorDept() == null) {
+        mIDoctorInfoPresenter.start();
+//        } else {
+//            tvJob.setText(PreferenceManager.getInstance().readDoctorJob());
+//            tvWorkUnit.setText(PreferenceManager.getInstance().readDoctorDept());
+//        }
 
     }
 
@@ -92,16 +96,22 @@ public class DoctorInfoFragment extends AbstractView implements DoctorInfoContra
                 break;
             }
         }
-        if (StringUtil.isTrimEmpty(job)) job = "暂无";
+        if (StringUtil.isTrimEmpty(job)) {
+            job = "暂无";
+        }
         for (int i = 0; i < listDept.size(); i++) {
             if (listDept.get(i).Id == (doctorInfo.Dept)) {
                 dept = listDept.get(i).Name;
                 break;
             }
         }
-        if (StringUtil.isTrimEmpty(dept)) dept = "暂无";
+        if (StringUtil.isTrimEmpty(dept)) {
+            dept = "暂无";
+        }
         tvJob.setText(job);
         tvWorkUnit.setText(dept);
+//        PreferenceManager.getInstance().writeDoctorJob(job);
+//        PreferenceManager.getInstance().writeDoctorDept(dept);
     }
 
     @Override

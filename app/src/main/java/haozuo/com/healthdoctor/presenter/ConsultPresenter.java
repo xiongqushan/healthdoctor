@@ -82,7 +82,7 @@ public class ConsultPresenter extends AbstractPresenter implements ConsultContra
                     if (flag == 3 && initData) mIConsultView.hideDialog();
 
                 } else {
-//                    mIConsultView.hideDialog(resultData.Message);
+                    mIConsultView.hideDialog(resultData.Message);
                     if (!initData) {
                         mIConsultView.refreshFinish(PullToRefreshLayout.FAIL, flag, true);
                     }
@@ -105,7 +105,7 @@ public class ConsultPresenter extends AbstractPresenter implements ConsultContra
                     mIConsultView.refreshPendingPageList(resultData.Data.CurrentPageDataList, flag, false);
                     mIConsultView.refreshFinish(PullToRefreshLayout.SUCCEED, flag, false);
                 } else {
-                    //mIConsultView.hideDialog(resultData.Message);
+                    mIConsultView.hideDialog(resultData.Message);
                     mIConsultView.refreshFinish(PullToRefreshLayout.FAIL, flag, false);
                 }
             }
@@ -185,7 +185,7 @@ public class ConsultPresenter extends AbstractPresenter implements ConsultContra
                     mIConsultView.refreshConsultDonePageList(resultData.Data.CurrentPageDataList, flag, false);
                     mIConsultView.refreshConsultDonePageFinish(PullToRefreshLayout.SUCCEED, flag, false);
                 } else {
-//                    mIConsultView.hideDialog(resultData.Message);
+                    mIConsultView.hideDialog(resultData.Message);
                     mIConsultView.refreshConsultDonePageFinish(PullToRefreshLayout.FAIL, flag, false);
                 }
             }
@@ -236,7 +236,7 @@ public class ConsultPresenter extends AbstractPresenter implements ConsultContra
                     mIConsultView.refreshFeedbackPageList(resultData.Data.CurrentPageDataList, flag, false);
                     mIConsultView.refreshFeedbackPageFinish(PullToRefreshLayout.SUCCEED, flag, false);
                 } else {
-                    // mIConsultView.hideDialog(resultData.Message);
+                    mIConsultView.hideDialog(resultData.Message);
                     mIConsultView.refreshFeedbackPageFinish(PullToRefreshLayout.FAIL, flag, false);
                 }
             }

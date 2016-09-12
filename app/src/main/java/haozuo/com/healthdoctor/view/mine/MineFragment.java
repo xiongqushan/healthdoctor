@@ -46,6 +46,7 @@ public class MineFragment extends BaseFragment {
         bean.WorkNo = "0000000081";
         intent.putExtra(CustomerReportActivity.REPORTPARAMSBEAN, bean);
         getActivity().startActivity(intent);
+//        getActivity().startActivity(new Intent(getActivity(), DoctorInfoActivity.class));
     }
 
     @OnClick(R.id.layout_set)

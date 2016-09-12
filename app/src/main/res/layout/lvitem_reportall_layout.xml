@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:background="@color/white"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,20 +21,20 @@
                 android:layout_width="@dimen/dividerline"
                 android:layout_height="20dp"
                 android:layout_marginLeft="@dimen/report_marginleft_25dp"
-                android:background="@color/divider_d3"/>
+                android:background="@color/divider_d3" />
 
             <ImageView
                 android:id="@+id/imgCircle"
                 android:layout_width="@dimen/report_circle_radius"
                 android:layout_height="@dimen/report_circle_radius"
                 android:layout_marginLeft="@dimen/report_marginleft_21dp"
-                android:background="@drawable/circle_orange"/>
+                android:background="@drawable/circle_orange" />
 
             <View
                 android:layout_width="@dimen/dividerline"
                 android:layout_height="@dimen/report_padding"
                 android:layout_marginLeft="@dimen/report_marginleft_25dp"
-                android:background="@color/divider_d3"/>
+                android:background="@color/divider_d3" />
 
         </LinearLayout>
 
@@ -44,10 +44,11 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/report_padding"
             android:gravity="bottom"
+            android:maxLines="1"
             android:paddingBottom="6dp"
             android:text="*血小板计数（PLT）增多"
             android:textColor="@color/main_color_blue"
-            android:textSize="@dimen/txt_title_16sp"/>
+            android:textSize="@dimen/txt_title_16sp" />
 
 
     </LinearLayout>
@@ -64,7 +65,7 @@
         android:padding="8dp"
         android:text="饥饿所致可能性大，请适当多饮水，择日复查尿常规结合临床（是否有代谢紊乱、糖尿病等），必要时进一步检查"
         android:textColor="@color/subtitle_color66"
-        android:textSize="@dimen/txt_subtitle_14sp"/>
+        android:textSize="@dimen/txt_subtitle_14sp" />
 
 
 </LinearLayout>

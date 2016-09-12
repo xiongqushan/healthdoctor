@@ -55,6 +55,7 @@ public abstract class AbstractView extends BaseFragment {
 
 
     public void hideDialog(String msg) {
+
         if (loadingDialog != null) {
             loadingDialog.dismiss();
         }
@@ -62,7 +63,6 @@ public abstract class AbstractView extends BaseFragment {
             Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
         }
     }
-
 
     public void showConfirmDialog(String string, CustomDialog.OnDialogListener onConfirmDialogListener) {
         comfirmDialog = new CustomDialog(getContext(), onConfirmDialogListener);
@@ -132,6 +132,7 @@ public abstract class AbstractView extends BaseFragment {
             rLayout.removeView(btnReload);
         }
     }
+
 
 //    pulltorefresh成功播放提示音
     public void playSuccessSound() {

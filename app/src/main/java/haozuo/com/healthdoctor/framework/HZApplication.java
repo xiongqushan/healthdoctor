@@ -1,6 +1,7 @@
 package haozuo.com.healthdoctor.framework;
 
 import android.app.Application;
+import android.util.Log;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
@@ -11,6 +12,7 @@ import com.iflytek.cloud.Setting;
 import com.iflytek.cloud.SpeechUtility;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
+import com.umeng.analytics.MobclickAgent;
 
 import cn.jpush.android.api.JPushInterface;
 import haozuo.com.healthdoctor.BuildConfig;
@@ -66,13 +68,14 @@ public class HZApplication extends Application {
                 .setProgressiveJpegConfig(pjpegConfig)
                 .setDownsampleEnabled(true) //图片代替resizeoption 向下采样  支持PNG和WebP
                 .build();
-        Fresco.initialize(this,config);
+        Fresco.initialize(this, config);
 //        Fresco.initialize(this);
-
+        Log.e("BuildConfig.DEBUG", BuildConfig.DEBUG + "");
         JPushInterface.setDebugMode(BuildConfig.DEBUG);    // 设置开启日志,发布时请关闭日志
         JPushInterface.init(this);
         // JPushInterface.setLatestNotificationNumber(this, 3);//限制保留的通知条数。默认为保留最近 5 条通知。
         PreferenceManager.init(this);
+        MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
 
     }
 

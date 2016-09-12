@@ -3,24 +3,31 @@ package haozuo.com.healthdoctor.ioc;
 import dagger.Module;
 import dagger.Provides;
 import haozuo.com.healthdoctor.contract.WelcomeContract;
-import haozuo.com.healthdoctor.view.welcome.WelcomeActivity;
+import haozuo.com.healthdoctor.view.welcome.WelcomeFragment;
 
 
 @Module
 public class WelcomeModule {
-
-    private WelcomeActivity activity;
+    int currVersion;
 
     public WelcomeModule() {
     }
 
-    public WelcomeModule(WelcomeActivity activity) {
-        this.activity = activity;
+    public WelcomeModule(int currVersion) {
+        this.currVersion = currVersion;
     }
+
 
     @Provides
     @ScopeType.ActivityScope
     WelcomeContract.IWelcomeView provideWelcomeView() {
-        return activity;
+        return WelcomeFragment.getInstance();
+    }
+
+
+    @Provides
+    @ScopeType.ActivityScope
+    int provideCurrVersion() {
+        return currVersion;
     }
 }

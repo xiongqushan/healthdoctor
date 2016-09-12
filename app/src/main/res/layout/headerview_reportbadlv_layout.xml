@@ -18,12 +18,14 @@
         android:textSize="14sp" />
 
     <ImageView
+        android:id="@+id/img_header_reportbad"
         android:layout_width="@dimen/report_circle_radius"
         android:layout_height="@dimen/report_circle_radius"
         android:layout_marginLeft="@dimen/report_marginleft_21dp"
         android:background="@drawable/circle_orange" />
 
     <View
+        android:id="@+id/line_header_reportbad"
         android:layout_width="@dimen/dividerline"
         android:layout_height="@dimen/report_line"
         android:layout_marginLeft="@dimen/report_marginleft_25dp"

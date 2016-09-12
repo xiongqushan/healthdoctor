@@ -128,8 +128,8 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
                 }
             });
             mCustomDetailPresenter.start();
+            registerCustomReceiver(BROADFILTER_CUSTOM_DELETEGROUP);
         }
-        registerCustomReceiver(BROADFILTER_CUSTOM_DELETEGROUP);
         return rootView;
     }
 
@@ -171,6 +171,9 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
                 "res://haozuo.com.healthdoctor.view.custom/" + R.drawable.user_default_url);
         CName.setText(custom.Cname);
         CGender.setText(custom.GetSex());
+//        CAge.setText(DateUtil.getAge(custom.Certificate_Code,custom.Birthday)+"岁");
+        CAge.setText(custom.GetAge() + "岁");
+//        CAge.setText(""+custom.Age);
         CAge.setText(custom.GetAge());
         Cphone.setText(custom.Mobile);
         btn_go_into.setOnClickListener(new View.OnClickListener() {
@@ -240,10 +243,8 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
             TextView tv_ReportDate = UIHelper.getAdapterView(convertView, R.id.tv_ReportDate);
             TextView tv_ReportCode = UIHelper.getAdapterView(convertView, R.id.tv_ReportCode);
             TextView tv_CCompany = UIHelper.getAdapterView(convertView, R.id.tv_CCompany);
-
             ReportParamsBean ReportParamsEntity = dataSource.get(position);
-
-            tv_CName.setText(mCustomInfo.Cname);
+            tv_CName.setText(ReportParamsEntity.CustomerName);
             tv_CGender.setText(mCustomInfo.GetSex());
             tv_CAge.setText(mCustomInfo.GetAge());
             tv_DeptName.setText(ReportParamsEntity.CheckUnitName);
@@ -251,14 +252,13 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
             tv_ReportDate.setText(ReportParamsEntity.getFormedDate());
             tv_ReportCode.setText(ReportParamsEntity.CheckUnitCode);
             tv_CCompany.setText(ReportParamsEntity.WorkNo);
-
             return convertView;
         }
     }
 
-        class PhotoReportAdapter extends BaseAdapter {
+
+    class PhotoReportAdapter extends BaseAdapter {
         private LayoutInflater mInflater;
-//        private List<RequestPhotoReportListBean> dataSource;
 
         public PhotoReportAdapter(Context context) {
             this.mInflater = LayoutInflater.from(context);
@@ -304,6 +304,7 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
         }
 
     }
+
 
 }
 

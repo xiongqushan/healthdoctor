@@ -2,7 +2,6 @@ package haozuo.com.healthdoctor.view.threePart.common;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
@@ -20,75 +19,75 @@ import haozuo.com.healthdoctor.R;
 public class StickScrollView extends ScrollView {
 
     // TODO 0329
-    private static final long DELAY = 100;
-    private int currentScroll;
-    private Runnable scrollCheckTask;
+//    private static final long DELAY = 100;
+//    private int currentScroll;
+//    private Runnable scrollCheckTask;
+//
+//    private void init() {
+//        scrollCheckTask = new Runnable() {
+//            @Override
+//            public void run() {
+//                int newScroll = getScrollY();
+//                if (currentScroll == newScroll) {
+//                    if (onScrollListener != null) {
+//                        onScrollListener.onScrollStopped();
+//                    }
+//                } else {
+//                    if (onScrollListener != null) {
+//                        onScrollListener.onScrolling();
+//                    }
+//                    currentScroll = getScrollY();
+//                    postDelayed(scrollCheckTask, DELAY);
+//                }
+//            }
+//        };
+//        setOnTouchListener(new OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                if (event.getAction() == MotionEvent.ACTION_UP) {
+//                    currentScroll = getScrollY();
+//                    postDelayed(scrollCheckTask, DELAY);
+//                }
+//                return false;
+//
+//            }
+//        });
+//    }
+//
+//    public interface OnScrollListener {
+//        public void onScrollChanged(int x, int y, int oldX, int oldY);
+//
+//        public void onScrollStopped();
+//
+//        public void onScrolling();
+//    }
+//
+//    private OnScrollListener onScrollListener;
+//
+//    /**
+//     * @param onScrollListener
+//     */
+//    public void setOnScrollListener(OnScrollListener onScrollListener) {
+//        this.onScrollListener = onScrollListener;
+//    }
 
-    private void init() {
-        scrollCheckTask = new Runnable() {
-            @Override
-            public void run() {
-                int newScroll = getScrollY();
-                if (currentScroll == newScroll) {
-                    if (onScrollListener != null) {
-                        onScrollListener.onScrollStopped();
-                    }
-                } else {
-                    if (onScrollListener != null) {
-                        onScrollListener.onScrolling();
-                    }
-                    currentScroll = getScrollY();
-                    postDelayed(scrollCheckTask, DELAY);
-                }
-            }
-        };
-        setOnTouchListener(new OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    currentScroll = getScrollY();
-                    postDelayed(scrollCheckTask, DELAY);
-                }
-                return false;
-
-            }
-        });
-    }
-
-    public interface OnScrollListener {
-        public void onScrollChanged(int x, int y, int oldX, int oldY);
-
-        public void onScrollStopped();
-
-        public void onScrolling();
-    }
-
-    private OnScrollListener onScrollListener;
-
-    /**
-     * @param onScrollListener
-     */
-    public void setOnScrollListener(OnScrollListener onScrollListener) {
-        this.onScrollListener = onScrollListener;
-    }
-
-    public boolean isChildVisible(View child) {
-        if (child == null) {
-            return false;
-        }
-        Rect scrollBounds = new Rect();
-        getHitRect(scrollBounds);
-        return child.getLocalVisibleRect(scrollBounds);
-    }
-
-    public boolean isAtTop() {
-        return getScrollY() <= 0;
-    }
-
-    public boolean isAtBottom() {
-        return getChildAt(getChildCount() - 1).getBottom() + getPaddingBottom() == getHeight()
-                + getScrollY();
-    }
+//    public boolean isChildVisible(View child) {
+//        if (child == null) {
+//            return false;
+//        }
+//        Rect scrollBounds = new Rect();
+//        getHitRect(scrollBounds);
+//        return child.getLocalVisibleRect(scrollBounds);
+//    }
+//
+//    public boolean isAtTop() {
+//        return getScrollY() <= 0;
+//    }
+//
+//    public boolean isAtBottom() {
+//        return getChildAt(getChildCount() - 1).getBottom() + getPaddingBottom() == getHeight()
+//                + getScrollY();
+//    }
 
     // ============================
     private static final String STICKY = "sticky";
@@ -129,7 +128,7 @@ public class StickScrollView extends ScrollView {
 
     public StickScrollView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
-        init();
+        //init();
     }
 
     public StickScrollView(Context context, AttributeSet attrs, int defStyle) {
@@ -138,7 +137,7 @@ public class StickScrollView extends ScrollView {
                 R.drawable.sticky_shadow_default);
         mStickyViews = new LinkedList<View>();
         density = context.getResources().getDisplayMetrics().density;
-        init();
+      //  init();
     }
 
     /**
@@ -176,9 +175,9 @@ public class StickScrollView extends ScrollView {
         super.onScrollChanged(l, t, oldl, oldt);
         showStickyView();
         // TODO 0329
-        if (onScrollListener != null) {
-            onScrollListener.onScrollChanged(l, t, oldl, oldt);
-        }
+//        if (onScrollListener != null) {
+//            onScrollListener.onScrollChanged(l, t, oldl, oldt);
+//        }
     }
 
     /**
