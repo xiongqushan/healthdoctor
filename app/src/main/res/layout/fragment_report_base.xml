@@ -1,9 +1,9 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            tools:context="haozuo.com.healthdoctor.view.custom.ReportBaseFragment">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="haozuo.com.healthdoctor.view.custom.ReportBaseFragment">
 
 
     <LinearLayout
@@ -17,122 +17,120 @@
             android:layout_height="@dimen/report_circle_radius"
             android:layout_marginLeft="@dimen/report_marginleft_21dp"
             android:layout_marginTop="@dimen/report_margin_16dp"
-            android:background="@drawable/circle_orange"/>
+            android:background="@drawable/circle_orange" />
 
         <View
             android:layout_width="@dimen/dividerline"
             android:layout_height="@dimen/report_margin_16dp"
             android:layout_marginLeft="@dimen/report_marginleft_25dp"
-            android:background="@color/divider_d3"/>
+            android:background="@color/divider_d3" />
 
 
-        <RelativeLayout
-            style="@style/layout_report_base">
+        <RelativeLayout style="@style/layout_report_base">
 
             <TextView
                 style="@style/txt_report_titile"
-                android:text="姓名"/>
+                android:text="姓名" />
 
             <TextView
                 android:id="@+id/tvName"
-                style="@style/txt_report_subtitile"/>
+                style="@style/txt_report_subtitile" />
         </RelativeLayout>
 
-        <View style="@style/divider_report_y"/>
+        <View style="@style/divider_report_y" />
 
         <RelativeLayout style="@style/layout_report_base">
 
             <TextView
                 style="@style/txt_report_titile"
-                android:text="性别"/>
+                android:text="性别" />
 
             <TextView
                 android:id="@+id/tvSex"
-                style="@style/txt_report_subtitile"/>
+                style="@style/txt_report_subtitile" />
         </RelativeLayout>
 
-        <View style="@style/divider_report_y"/>
+        <View style="@style/divider_report_y" />
 
         <RelativeLayout style="@style/layout_report_base">
 
 
             <TextView
                 style="@style/txt_report_titile"
-                android:text="年龄"/>
+                android:text="年龄" />
 
             <TextView
                 android:id="@+id/tvAge"
-                style="@style/txt_report_subtitile"/>
+                style="@style/txt_report_subtitile" />
         </RelativeLayout>
 
-        <View style="@style/divider_report_y"/>
+        <View style="@style/divider_report_y" />
 
         <RelativeLayout style="@style/layout_report_base">
 
             <TextView
                 style="@style/txt_report_titile"
-                android:text="体检中心"/>
+                android:text="体检中心" />
 
             <TextView
                 android:id="@+id/tvReportCenter"
-                style="@style/txt_report_subtitile"/>
+                style="@style/txt_report_subtitile" />
         </RelativeLayout>
 
-        <View style="@style/divider_report_y"/>
+        <View style="@style/divider_report_y" />
 
         <RelativeLayout style="@style/layout_report_base">
 
 
             <TextView
                 style="@style/txt_report_titile"
-                android:text="体检日期"
-                />
+                android:text="体检日期" />
 
             <TextView
                 android:id="@+id/tvReportDate"
-                style="@style/txt_report_subtitile"/>
+                style="@style/txt_report_subtitile" />
         </RelativeLayout>
 
-        <View style="@style/divider_report_y"/>
+        <View style="@style/divider_report_y" />
 
         <RelativeLayout style="@style/layout_report_base">
 
 
             <TextView
                 style="@style/txt_report_titile"
-                android:text="体检号"/>
+                android:text="体检号" />
 
             <TextView
                 android:id="@+id/tvReportCode"
-                style="@style/txt_report_subtitile"/>
+                style="@style/txt_report_subtitile" />
         </RelativeLayout>
 
-        <View style="@style/divider_report_y"/>
+        <View style="@style/divider_report_y" />
 
         <RelativeLayout style="@style/layout_report_base">
 
             <TextView
                 style="@style/txt_report_titile"
-                android:text="工作单位"/>
+                android:text="工作单位" />
 
             <TextView
                 android:id="@+id/tvWorkUnit"
                 style="@style/txt_report_subtitile"
-                android:text="上海好卓数据服务有限公司"/>
+                android:text="暂无" />
         </RelativeLayout>
 
         <View
             android:layout_width="@dimen/dividerline"
             android:layout_height="@dimen/report_margin_16dp"
             android:layout_marginLeft="@dimen/report_marginleft_25dp"
-            android:background="@color/divider_d3"/>
+            android:background="@color/divider_d3" />
 
         <View
             android:layout_width="@dimen/report_circle_radius"
             android:layout_height="@dimen/report_circle_radius"
             android:layout_marginBottom="@dimen/report_margin_16dp"
             android:layout_marginLeft="@dimen/report_marginleft_21dp"
-            android:background="@drawable/circle_green"/>
+            android:background="@drawable/circle_green" />
     </LinearLayout>
 
 

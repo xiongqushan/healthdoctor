@@ -65,7 +65,7 @@
     <application
         android:name=".framework.HZApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -140,9 +140,8 @@
         <activity
             android:name=".view.mine.SettingsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".view.custom.PhotoPreviewActivity"/>
-            <!--android:theme="@style/AppTheme.NoActionBar" />-->
+        <activity android:name=".view.custom.PhotoPreviewActivity" />
+        <!--android:theme="@style/AppTheme.NoActionBar" />-->
         <!-- 极光推送 -->
         <!-- Rich push 核心功能 since 2.0.6 -->
         <activity

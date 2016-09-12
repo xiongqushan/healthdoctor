@@ -243,17 +243,14 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
             TextView tv_ReportDate = UIHelper.getAdapterView(convertView, R.id.tv_ReportDate);
             TextView tv_ReportCode = UIHelper.getAdapterView(convertView, R.id.tv_ReportCode);
             TextView tv_CCompany = UIHelper.getAdapterView(convertView, R.id.tv_CCompany);
-
             ReportParamsBean ReportParamsEntity = dataSource.get(position);
-
-            tv_CName.setText(mCustomInfo.Cname);
+            tv_CName.setText(ReportParamsEntity.CustomerName);
             tv_CGender.setText(mCustomInfo.GetSex());
-            tv_CAge.setText(mCustomInfo.GetAge() + "岁");
+            tv_CAge.setText(mCustomInfo.GetAge());
             tv_DeptName.setText(ReportParamsEntity.CheckUnitName);
             tv_ReportDate.setText(ReportParamsEntity.CheckDate);
             tv_ReportCode.setText(ReportParamsEntity.CheckUnitCode);
             tv_CCompany.setText(ReportParamsEntity.WorkNo);
-
             return convertView;
         }
     }

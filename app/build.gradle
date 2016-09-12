@@ -34,20 +34,6 @@ android {
         }
     }
 
-//    productFlavors {
-//        xiaomi {}
-//        qq {}
-//        baidu {}
-//        wandoujia {}
-//        _360 {}
-//        oppo {}
-//        vivo {}
-//        meizu {}
-//    }
-
-//    productFlavors.all {
-//        flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
-//    }
 
 
     packagingOptions {

@@ -36,8 +36,12 @@ public class DoctorInfoPresenter extends AbstractPresenter implements DoctorInfo
     @Override
     public void start() {
         mIDoctorInfoView.showDialog();
-        if (jobList == null) GetBasConstList();
-        if (deptList == null) GetServiceDeptList();
+        if (jobList == null) {
+            GetBasConstList();
+        }
+        if (deptList == null) {
+            GetServiceDeptList();
+        }
     }
 
     @Override
@@ -64,7 +68,7 @@ public class DoctorInfoPresenter extends AbstractPresenter implements DoctorInfo
                     }
                 } else {
                     mIDoctorInfoView.changeRetryLayer(true);
-                    mIDoctorInfoView.hideDialog();
+                    mIDoctorInfoView.hideDialog(resultData.Message);
                 }
             }
         });
@@ -84,7 +88,7 @@ public class DoctorInfoPresenter extends AbstractPresenter implements DoctorInfo
                     }
                 } else {
                     mIDoctorInfoView.changeRetryLayer(true);
-                    mIDoctorInfoView.hideDialog();
+                    mIDoctorInfoView.hideDialog(resultData.Message);
                 }
             }
         });

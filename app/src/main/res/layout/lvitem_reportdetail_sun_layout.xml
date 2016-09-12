@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="horizontal">
+
+    <View
+        android:layout_width="@dimen/dividerline"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/report_marginleft_25dp"
+        android:background="@color/divider_d3" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="#FFF3F5F7"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_toLeftOf="@+id/tvResultValue"
+                android:maxLines="1"
+                android:text="阿斯蒂芬"
+                android:textColor="@color/subtitle_color66"
+                android:textSize="@dimen/txt_subtitle_14sp" />
+
+            <TextView
+                android:id="@+id/tvResultValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="8dp"
+                android:text="156"
+                android:textColor="@color/subtitle_color66"
+                android:textSize="@dimen/txt_subtitle_14sp" />
+
+            <TextView
+                android:id="@+id/tvSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvTitle"
+                android:layout_marginRight="8dp"
+                android:layout_toLeftOf="@+id/tvUnit"
+                android:text="金鳞岂是池中物"
+                android:textColor="#FF999999"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tvUnit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/tvResultValue"
+                android:text="单位:uml/ml"
+                android:textColor="#FF999999"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dividerline"
+            android:background="@color/divider_d3" />
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="@dimen/dividerline"
+        android:layout_height="match_parent"
+        android:layout_marginRight="@dimen/report_marginleft_25dp"
+        android:background="@color/divider_d3" />
+</LinearLayout>

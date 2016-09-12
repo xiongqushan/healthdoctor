@@ -94,6 +94,10 @@ public class ReportDetailFragment extends Fragment {
 
     public void updateUI(ReportDetailBean bean) {
         dataList = bean.DepartmentCheck;
+        if (dataList.size() == 0) {
+            mListView.setVisibility(View.INVISIBLE);
+            return;
+        }
         adapter.notifyDataSetChanged();
         adapterHide.refresh(bean.DepartmentCheck);
     }
@@ -216,7 +220,7 @@ public class ReportDetailFragment extends Fragment {
                 view = LayoutInflater.from(getActivity()).inflate(R.layout.lvitem_reportdetail_layout, null);
             }
             TextView tvMainItem = UIHelper.getAdapterView(view, R.id.tvMainItem);
-            TextView tvCheckItem = UIHelper.getAdapterView(view, R.id.tvCheckItem);
+//            TextView tvCheckItem = UIHelper.getAdapterView(view, R.id.tvCheckItem);
             LinearLayout layoutFooter = UIHelper.getAdapterView(view, R.id.layoutFooter);
 
             if (position + 1 == dataList.size()) {
@@ -225,30 +229,30 @@ public class ReportDetailFragment extends Fragment {
                 layoutFooter.setVisibility(View.GONE);
             }
             tvMainItem.setText(dataList.get(position).DepartmentName);
-            StringBuffer CheckItem = new StringBuffer();
-            for (int i = 0; i < dataList.get(position).CheckItems.size() - 1; i++) {
-                CheckItem.append(dataList.get(position).CheckItems.get(i).CheckItemName + "、");
-            }
-            CheckItem.append(dataList.get(position).CheckItems.get(dataList.get(position).CheckItems.size() - 1).CheckItemName);
-            tvCheckItem.setText(CheckItem.toString());
+//            StringBuffer CheckItem = new StringBuffer();
+//            for (int i = 0; i < dataList.get(position).CheckItems.size() - 1; i++) {
+//                CheckItem.append(dataList.get(position).CheckItems.get(i).CheckItemName + "、");
+//            }
+//            CheckItem.append(dataList.get(position).CheckItems.get(dataList.get(position).CheckItems.size() - 1).CheckItemName);
+//            tvCheckItem.setText(CheckItem.toString());
             initChildList(view, position);
             return view;
         }
 
         private void initChildList(View view, int position) {
             ChildListView mChildList = UIHelper.getAdapterView(view, R.id.listView_report_detail_child);
-            List<ReportDetailBean.CheckResult> childData = new ArrayList<ReportDetailBean.CheckResult>();
-            for (int i = 0; i < dataList.get(position).CheckItems.size(); i++) {
-                childData.addAll(dataList.get(position).CheckItems.get(i).CheckResults);
-            }
+            List<ReportDetailBean.CheckItem> childData = dataList.get(position).CheckItems;
+//            for (int i = 0; i < dataList.get(position).CheckItems.size(); i++) {
+//                childData.addAll(dataList.get(position).CheckItems.get(i).CheckResults);
+//            }
             ChildListAdapter childAdapter = new ChildListAdapter(childData);
             mChildList.setAdapter(childAdapter);
         }
 
         class ChildListAdapter extends BaseAdapter {
-            private List<ReportDetailBean.CheckResult> childData;
+            private List<ReportDetailBean.CheckItem> childData;
 
-            public ChildListAdapter(List<ReportDetailBean.CheckResult> childData) {
+            public ChildListAdapter(List<ReportDetailBean.CheckItem> childData) {
                 this.childData = childData;
             }
 
@@ -272,41 +276,84 @@ public class ReportDetailFragment extends Fragment {
                 if (view == null) {
                     view = LayoutInflater.from(getActivity()).inflate(R.layout.lvitem_reportdetail_child_layout, null);
                 }
-                TextView tvTitle = UIHelper.getAdapterView(view, R.id.tvTitle);
-                TextView tvSubtitle = UIHelper.getAdapterView(view, R.id.tvSubtitle);
-                TextView tvValue = UIHelper.getAdapterView(view, R.id.tvResultValue);
-                TextView tvUnit = UIHelper.getAdapterView(view, R.id.tvUnit);
-                tvTitle.setText(childData.get(position).CheckIndexName);
-                if (childData.get(position).IsAnomaly) {
-                    tvTitle.setTextColor(Color.parseColor("#FFFA7981"));
-                    tvValue.setTextColor(Color.parseColor("#FFFA7981"));
-                } else {
-                    tvTitle.setTextColor(Color.parseColor("#FF666666"));
-                    tvValue.setTextColor(Color.parseColor("#FF666666"));
-                }
-                boolean unitEmpty = StringUtil.isTrimEmpty(childData.get(position).Unit);
-                if (unitEmpty) {
-                    tvValue.setVisibility(View.GONE);
-                    tvUnit.setVisibility(View.GONE);
-                    String resultValue = childData.get(position).ResultValue;
-                    if (resultValue.equals("")) resultValue = "正常";
-                    tvSubtitle.setText(resultValue);
-                } else {
-                    tvValue.setVisibility(View.VISIBLE);
-                    tvUnit.setVisibility(View.VISIBLE);
-                    boolean subEmpty = StringUtil.isTrimEmpty(childData.get(position).TextRef);
-                    if (subEmpty) {
-                        tvSubtitle.setText("");
-                    } else {
-                        tvSubtitle.setText("参考范围 : " + childData.get(position).TextRef);
-                    }
-                    tvValue.setText(childData.get(position).ResultValue);
-                    tvUnit.setText("单位 : " + childData.get(position).Unit);
-                }
+                TextView tvCheckItem = UIHelper.getAdapterView(view, R.id.tvCheckItem);
+                tvCheckItem.setText(childData.get(position).CheckItemName);
+                initSunList(view, position);
                 return view;
             }
 
+            private void initSunList(View view, int position) {
+                ChildListView sunList = UIHelper.getAdapterView(view, R.id.listView_report_detail_sun);
+                List<ReportDetailBean.CheckResult> sunData = childData.get(position).CheckResults;
+                SunListAdapter sunAdapter = new SunListAdapter(sunData);
+                sunList.setAdapter(sunAdapter);
+            }
+
+            class SunListAdapter extends BaseAdapter {
+                private List<ReportDetailBean.CheckResult> sunData;
+
+                public SunListAdapter(List<ReportDetailBean.CheckResult> sunData) {
+                    this.sunData = sunData;
+                }
+
+                @Override
+                public int getCount() {
+                    return sunData.size();
+                }
+
+                @Override
+                public Object getItem(int i) {
+                    return null;
+                }
+
+                @Override
+                public long getItemId(int i) {
+                    return 0;
+                }
+
+                @Override
+                public View getView(int position, View view, ViewGroup viewGroup) {
+                    if (view == null) {
+                        view = LayoutInflater.from(getActivity()).inflate(R.layout.lvitem_reportdetail_sun_layout, null);
+                    }
+                    TextView tvTitle = UIHelper.getAdapterView(view, R.id.tvTitle);
+                    TextView tvSubtitle = UIHelper.getAdapterView(view, R.id.tvSubtitle);
+                    TextView tvValue = UIHelper.getAdapterView(view, R.id.tvResultValue);
+                    TextView tvUnit = UIHelper.getAdapterView(view, R.id.tvUnit);
+                    tvTitle.setText(sunData.get(position).CheckIndexName);
+                    if (sunData.get(position).IsAnomaly) {
+                        tvTitle.setTextColor(Color.parseColor("#FFFA7981"));
+                        tvValue.setTextColor(Color.parseColor("#FFFA7981"));
+                    } else {
+                        tvTitle.setTextColor(Color.parseColor("#FF666666"));
+                        tvValue.setTextColor(Color.parseColor("#FF666666"));
+                    }
+                    boolean unitEmpty = StringUtil.isTrimEmpty(sunData.get(position).Unit);
+                    if (unitEmpty) {
+                        tvValue.setVisibility(View.GONE);
+                        tvUnit.setVisibility(View.GONE);
+                        String resultValue = sunData.get(position).ResultValue;
+                        if (resultValue.equals("")) resultValue = "正常";
+                        tvSubtitle.setText(resultValue);
+                    } else {
+                        tvValue.setVisibility(View.VISIBLE);
+                        tvUnit.setVisibility(View.VISIBLE);
+                        boolean subEmpty = StringUtil.isTrimEmpty(sunData.get(position).TextRef);
+                        if (subEmpty) {
+                            tvSubtitle.setText("");
+                        } else {
+                            tvSubtitle.setText("参考范围 : " + sunData.get(position).TextRef);
+                        }
+                        tvValue.setText(sunData.get(position).ResultValue);
+                        tvUnit.setText("单位 : " + sunData.get(position).Unit);
+                    }
+                    return view;
+                }
+
+            }
+
         }
+
 
     }
 

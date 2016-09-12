@@ -72,12 +72,22 @@
         android:layout_marginLeft="@dimen/report_marginleft_25dp"
         android:background="@color/divider_d3" />
 
-    <ImageView
-        android:id="@+id/imgFooter"
-        android:layout_width="@dimen/report_circle_radius"
-        android:layout_height="@dimen/report_circle_radius"
-        android:layout_marginLeft="@dimen/report_marginleft_21dp"
-        android:background="@drawable/circle_green" />
+    <LinearLayout
+        android:id="@+id/footer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="@dimen/report_circle_radius"
+            android:layout_height="@dimen/report_circle_radius"
+            android:layout_marginLeft="@dimen/report_marginleft_21dp"
+            android:background="@drawable/circle_green" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="32dp" />
+
+    </LinearLayout>
 
 
 </LinearLayout>

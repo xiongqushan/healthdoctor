@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -32,6 +32,7 @@ public class ReportBadFragment extends Fragment {
 
     private TextView tvReportWarn;
     private ListAdapter adapter;
+    private View header;
 
     public ReportBadFragment() {
         // Required empty public constructor
@@ -46,6 +47,10 @@ public class ReportBadFragment extends Fragment {
         dataList.addAll(bean.AnomalyCheckResult);
         adapter.notifyDataSetChanged();
         tvReportWarn.setText(bean.ReportInfoVM.CheckUnitName + "友情提醒，您可能存在以下" + dataList.size() + "条异常项");
+        if (dataList.size() == 0) {
+            header.findViewById(R.id.img_header_reportbad).setVisibility(View.GONE);
+            header.findViewById(R.id.line_header_reportbad).setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -61,7 +66,7 @@ public class ReportBadFragment extends Fragment {
 
 
     private void initView() {
-        View header = LayoutInflater.from(getActivity()).inflate(R.layout.headerview_reportbadlv_layout, null);
+        header = LayoutInflater.from(getActivity()).inflate(R.layout.headerview_reportbadlv_layout, null);
         tvReportWarn = (TextView) header.findViewById(R.id.tvReportWarn);
         mListView.addHeaderView(header);
         adapter = new ListAdapter();
@@ -96,11 +101,11 @@ public class ReportBadFragment extends Fragment {
             TextView tvValue = UIHelper.getAdapterView(view, R.id.tvResultValue);
             TextView tvUnit = UIHelper.getAdapterView(view, R.id.tvUnit);
             TextView lineCenter = UIHelper.getAdapterView(view, R.id.lineCenter);
-            ImageView imgFooter = UIHelper.getAdapterView(view, R.id.imgFooter);
+            LinearLayout footer = UIHelper.getAdapterView(view, R.id.footer_layout);
             if (position + 1 == dataList.size()) {
-                imgFooter.setVisibility(View.VISIBLE);
+                footer.setVisibility(View.VISIBLE);
             } else {
-                imgFooter.setVisibility(View.GONE);
+                footer.setVisibility(View.GONE);
             }
             tvTitle.setText(dataList.get(position).CheckIndexName);
 //            tvValue.setTextColor(Color.parseColor("#FFFF0000"));

@@ -41,7 +41,7 @@ public class WelcomeFragment extends AbstractView implements WelcomeContract.IWe
 
     @Override
     protected IBasePresenter getPresenter() {
-        return null;
+        return mWelcomePresenter;
     }
 
     @Override

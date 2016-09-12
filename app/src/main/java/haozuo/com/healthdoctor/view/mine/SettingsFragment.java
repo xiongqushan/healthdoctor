@@ -87,6 +87,8 @@ public class SettingsFragment extends AbstractView {
             public void OnDialogConfirmListener() {
                 UserManager.getInstance().clear();
                 GroupInfoManager.getInstance().clear();
+                UsefulMessageManager.getInstance().clear();
+                //PreferenceManager.getInstance().clear();
                 startActivity(new Intent(mContext, LoginActivity.class));
                 sendCustomBroadcast(HomeActivity.FINISHACTIVITY);
                 getActivity().finish();
