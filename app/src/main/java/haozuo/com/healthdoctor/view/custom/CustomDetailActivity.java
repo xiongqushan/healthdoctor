@@ -32,7 +32,7 @@ public class CustomDetailActivity extends BaseActivity {
 
         int customerId = getIntent().getIntExtra(EXTRA_CUSTOMER_ID, 0);
         String accountId = getIntent().getStringExtra(EXTRA_ACCOUNT_ID);
-        if (accountId.equals(null)){
+        if (accountId.equals(null)) {
             accountId = "";
         }
 
@@ -49,6 +49,7 @@ public class CustomDetailActivity extends BaseActivity {
             ActivityUtils.addFragmentToActivity(fragmentManager, fragment, R.id.frameContent);
         }
         setTitleWithConsult("客户详情", customerId);
+        ActivityUtils.getInstance().addActivity(this);
     }
 
 }

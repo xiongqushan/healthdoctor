@@ -50,12 +50,12 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <!-- Optional for location  Jpush非必要权限 -->
-    <!--<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />-->
-    <!--<uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />-->
-    <!--<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />-->
-    <!--<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />-->
-    <!--<uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />-->
-    <!--<uses-permission android:name="android.permission.GET_TASKS" />-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
     <!--友盟权限-->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -85,22 +85,17 @@
             android:name=".view.login.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden">
-            <intent-filter>
-                <action android:name="jpush.testAction" />
-
-                <category android:name="jpush.testCategory" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".view.home.HomeActivity"
             android:exported="false"
             android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="jpush.testAction" />
+            <!--<intent-filter>-->
+            <!--<action android:name="jpush.testAction" />-->
 
-                <category android:name="jpush.testCategory" />
-            </intent-filter>
+            <!--<category android:name="jpush.testCategory" />-->
+            <!--</intent-filter>-->
         </activity>
         <activity
             android:name=".view.custom.GroupCustomListActivity"
@@ -225,27 +220,27 @@
             android:name="cn.jpush.android.service.AlarmReceiver"
             android:exported="false" />
 
-        <!-- User defined.  For test only  用户自定义的广播接收器 -->
-        <receiver
-            android:name=".view.threePart.MyJpushReceiver"
-            android:enabled="true">
-            <!--android:exported="false"-->
-            <intent-filter>
-                <action android:name="cn.jpush.android.intent.REGISTRATION" />
-                <!-- Required  用户注册SDK的intent -->
-                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" />
-                <!-- Required  用户接收SDK消息的intent -->
-                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" />
-                <!-- Required  用户接收SDK通知栏信息的intent -->
-                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
-                <!-- Required  用户打开自定义通知栏的intent -->
-                <action android:name="cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK" />
-                <!-- Optional 用户接受Rich Push Javascript 回调函数的intent -->
-                <action android:name="cn.jpush.android.intent.CONNECTION" />
-                <!-- 接收网络变化 连接/断开 since 1.6.3 -->
-                <category android:name="haozuo.com.healthdoctor" />
-            </intent-filter>
-        </receiver>
+        <!-- User defined.   用户自定义的广播接收器 -->
+        <!--<receiver-->
+        <!--android:name=".view.threePart.MyJpushReceiver"-->
+        <!--android:enabled="true">-->
+        <!--android:exported="false"-->
+        <!--<intent-filter>-->
+        <!--<action android:name="cn.jpush.android.intent.REGISTRATION" />-->
+        <!--&lt;!&ndash; Required  用户注册SDK的intent &ndash;&gt;-->
+        <!--<action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" />-->
+        <!--&lt;!&ndash; Required  用户接收SDK消息的intent &ndash;&gt;-->
+        <!--<action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" />-->
+        <!--&lt;!&ndash; Required  用户接收SDK通知栏信息的intent &ndash;&gt;-->
+        <!--<action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />-->
+        <!--&lt;!&ndash; Required  用户打开自定义通知栏的intent &ndash;&gt;-->
+        <!--<action android:name="cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK" />-->
+        <!--&lt;!&ndash; Optional 用户接受Rich Push Javascript 回调函数的intent &ndash;&gt;-->
+        <!--<action android:name="cn.jpush.android.intent.CONNECTION" />-->
+        <!--&lt;!&ndash; 接收网络变化 连接/断开 since 1.6.3 &ndash;&gt;-->
+        <!--<category android:name="haozuo.com.healthdoctor" />-->
+        <!--</intent-filter>-->
+        <!--</receiver>-->
 
         <!-- Required  . Enable it you can get statistics data with channel -->
         <!-- <meta-data -->

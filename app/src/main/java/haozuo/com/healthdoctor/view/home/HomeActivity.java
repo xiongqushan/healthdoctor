@@ -1,5 +1,6 @@
 package haozuo.com.healthdoctor.view.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentManager;
@@ -98,6 +99,12 @@ public class HomeActivity extends BaseActivity {
             }
         }
     };
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
