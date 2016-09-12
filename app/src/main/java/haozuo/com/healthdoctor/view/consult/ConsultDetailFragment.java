@@ -170,9 +170,7 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
         mConsultListAdapter = new ConsultListAdapter(mContext);
         consult_detail_List.setAdapter(mConsultListAdapter);
         consult_detail_pull_to_refresh_layout.setOnRefreshListener(new PullListener());
-        mConsultDetailPresenter.getUserDetail(mCustomerId);
-        mConsultDetailPresenter.loadmoreConsultList();
-//        mConsultDetailPresenter.start(mCustomerId);
+        mConsultDetailPresenter.start();
 
         mIat = SpeechRecognizer.createRecognizer(mContext, mInitListener);
         mIatDialog = new RecognizerDialog(mContext, mInitListener);
@@ -258,16 +256,8 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
     @Override
     public void setCustmoerInfo(CustomDetailBean customDetailItem) {
         mCustomDetailBean = customDetailItem;
-        TextView textView = (TextView) getActivity().findViewById(R.id.txt_TitleBar_title);
-        textView.setText(mCustomDetailBean.Cname + " " + mCustomDetailBean.GetSex() + " " + mCustomDetailBean.GetAge() );
-        getActivity().findViewById(R.id.btn_search).setVisibility(View.INVISIBLE);
-        getActivity().findViewById(R.id.btn_go_back).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().finish();
-            }
-        });
-
+        String customInfo = mCustomDetailBean.Cname + " " + mCustomDetailBean.GetSex() + " " + mCustomDetailBean.GetAge();
+        ((ConsultDetailActivity)getActivity()).setCustomerTitle(customInfo);
         getActivity().findViewById(R.id.txt_TitleBar_title).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -282,6 +272,16 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
     public void RefreshConsultPage(List<ConsultReplyBean> mConsultReplyBeanList){
         mConsultListAdapter.refresh(mConsultReplyBeanList);
         sendCustomBroadcast(BROADFILTER_CONSULT_REPLAY);
+    }
+
+    @Override
+    public void changeRetryLayer(boolean isShow) {
+        if (isShow) {
+//            showRetryLayer(R.id.rLayout,true,getString(R.string.connect_fail));
+            showRetryLayer(R.id.rLayout);
+        } else {
+            hideRetryLayer(R.id.rLayout);
+        }
     }
 
     class PullListener implements PullToLoadMoreLayout.OnRefreshListener {

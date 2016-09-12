@@ -25,6 +25,8 @@ public interface ConsultDetailContract {
         void setCustmoerInfo(CustomDetailBean customDetailItem);
 
         void RefreshConsultPage(List<ConsultReplyBean> mConsultReplyBeanList);
+
+        void changeRetryLayer(boolean isShow);
     }
 
     interface IConsultDetailPresenter extends IBasePresenter {
@@ -33,7 +35,6 @@ public interface ConsultDetailContract {
 
         void addDoctorReply(int DoctorId,int ReDoctorId,String ReDoctorName,int CustomerId,String ReplyContent,String ReplyTime);
 
-        void getUserDetail(int CustomID);
     }
 
 }

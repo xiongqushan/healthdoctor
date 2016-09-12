@@ -31,20 +31,24 @@ public class ConsultDetailPresenter extends AbstractPresenter implements Consult
     private ConsultDetailContract.IConsultDetailView mIConsultDetailView;
     private ConsultModel mConsultModel;
     private UserModel mUserModel;
+    private CustomDetailBean mCustomDetail;
     private ConsultReplyBean consultReplyBean;
-    private List<ConsultReplyBean> mConsultItemBeanList;
+    private List<ConsultReplyBean> mConsultReplyList;
     private String mCommitOn;
     private int mCustomerId;
     private boolean isInit;
+    private boolean loadmoreSuccess;
+
 
     @Inject
     public ConsultDetailPresenter(@NonNull ConsultDetailContract.IConsultDetailView iConsultDetailView, @NonNull ConsultModel consultModel,@NonNull GroupModel groupModel,@NonNull UserModel userModel, @NonNull int customerId){
-        mConsultItemBeanList = new ArrayList<ConsultReplyBean>();
+        mConsultReplyList = new ArrayList<ConsultReplyBean>();
         mIConsultDetailView=iConsultDetailView;
         mConsultModel=consultModel;
         mUserModel = userModel;
         mCustomerId=customerId;
         isInit = true;
+        loadmoreSuccess = false;
         mCommitOn = DateUtil.date2Str(new Date(),"yyyyMMddHHmmss");
         iConsultDetailView.setPresenter(this);
         consultReplyBean = new ConsultReplyBean();
@@ -61,55 +65,87 @@ public class ConsultDetailPresenter extends AbstractPresenter implements Consult
     }
 
     @Override
-    public void start() {}
+    public void start() {
+        if (mCustomDetail==null)getUserDetail();
+        loadmoreConsultList();
+    }
+
+    public void getUserDetail(){
+        mIConsultDetailView.showDialog();
+        mUserModel.GetUserDetail(mCustomerId, new OnHandlerResultListener<GlobalShell<CustomDetailBean>>() {
+            @Override
+            public void handlerResult(GlobalShell<CustomDetailBean> resultData) {
+                if (resultData.LogicSuccess) {
+                    if(loadmoreSuccess){
+                        mIConsultDetailView.hideDialog();
+                        mIConsultDetailView.changeRetryLayer(false);
+                    }
+                    if (resultData.Data != null){
+                        mCustomDetail = resultData.Data;
+                        mIConsultDetailView.setCustmoerInfo(mCustomDetail);
+                    }
+                } else {
+                    mIConsultDetailView.hideDialog(resultData.Message);
+                    mIConsultDetailView.changeRetryLayer(true);
+                }
+            }
+        });
+    }
 
     @Override
     public void loadmoreConsultList() {
-        if (isInit){
+        if (isInit){ //是否通过pull刷新页面
             mIConsultDetailView.showDialog();
         }
         mConsultModel.GetConsultReplyList(mCustomerId,mCommitOn, new OnHandlerResultListener<GlobalShell<List<ConsultReplyBean>>>() {
             @Override
             public void handlerResult(GlobalShell<List<ConsultReplyBean>> resultData) {
                 if(resultData.LogicSuccess) {
-                    mIConsultDetailView.hideDialog();
+                    if (isInit){
+                        mIConsultDetailView.hideDialog();
+                    }else{
+                        mIConsultDetailView.refreshFinish(PullToRefreshLayout.SUCCEED);
+                    }
+                    loadmoreSuccess = true;
+                    isInit = false;
+                    if(mCustomDetail != null){ //若存在客户信息、则展示页面
+                        mIConsultDetailView.changeRetryLayer(false);
+                    }
                     if ((List<ConsultReplyBean>) resultData.Data != null){
                         List<ConsultReplyBean> loadmoreConsultResults = new ArrayList<ConsultReplyBean>();
                         loadmoreConsultResults.addAll(resultData.Data);
                         for (int i=0;i<resultData.Data.size();i++){
-                            for (int j=0;j<mConsultItemBeanList.size();j++){
-                                if (resultData.Data.get(i).Id == mConsultItemBeanList.get(j).Id){
+                            for (int j=0;j<mConsultReplyList.size();j++){
+                                if (resultData.Data.get(i).Id == mConsultReplyList.get(j).Id){
                                     loadmoreConsultResults.remove(resultData.Data.get(i));
                                 }
                             }
                         }
-                        if (!isInit){
-                            mIConsultDetailView.refreshFinish(PullToRefreshLayout.SUCCEED);
-                        }
-
-
                         if(loadmoreConsultResults.size() == 0) {
                             return;
                         }
                         Collections.sort(loadmoreConsultResults,consultReplyBean);
-                        mConsultItemBeanList.addAll(0,loadmoreConsultResults);
-                        mIConsultDetailView.refreshCustomAdapter(mConsultItemBeanList);
-                        mCommitOn =mConsultItemBeanList.get(0).CommitOn.replaceAll("(?:T|:|-)","");
+                        mConsultReplyList.addAll(0,loadmoreConsultResults);
+                        mIConsultDetailView.refreshCustomAdapter(mConsultReplyList);
+                        mCommitOn =mConsultReplyList.get(0).CommitOn.replaceAll("(?:T|:|-)","");
                         mIConsultDetailView.setListViewPosition(loadmoreConsultResults.size(), ConsultDetailFragment.SELECT_POSITION_DIRECT);
 //                        mIConsultDetailView.setListViewPosition(loadmoreConsultResults.size()-1, ConsultDetailFragment.SELECT_POSITION_SMOOTH);
                     }
                 }
                 else{
-//                    mIConsultDetailView.hideDialog(resultData.Message);
-                    if (!isInit){
+                    isInit = false;
+                    loadmoreSuccess = false;
+                    if (isInit){
+                        mIConsultDetailView.hideDialog(resultData.Message);
+                    }else {
                         mIConsultDetailView.refreshFinish(PullToRefreshLayout.FAIL);
                     }
-
+                    mIConsultDetailView.changeRetryLayer(true);
                 }
-                isInit = false;
             }
         });
     }
+
 
     @Override
     public void addDoctorReply(int DoctorId, final int ReDoctorId, String ReDoctorName, int CustomerId, final String ReplyContent, final String ReplyTime) {
@@ -120,35 +156,14 @@ public class ConsultDetailPresenter extends AbstractPresenter implements Consult
                 if (resultData.LogicSuccess) {
                     mIConsultDetailView.hideDialog();
                     mIConsultDetailView.RefreshConsultPage(getAddConsultReply(ReDoctorId, ReplyContent, ReplyTime));
-                    mIConsultDetailView.setListViewPosition(mConsultItemBeanList.size(),ConsultDetailFragment.SELECT_POSITION_SMOOTH);
+                    mIConsultDetailView.setListViewPosition(mConsultReplyList.size(),ConsultDetailFragment.SELECT_POSITION_SMOOTH);
                     mCommitOn = DateUtil.date2Str(new Date(),"yyyyMMddHHmmss");
-//                    loadmoreConsultList();
                 } else {
                     mIConsultDetailView.hideDialog(resultData.Message);
                     mIConsultDetailView.hideDialog();
                 }
             }
         });
-    }
-
-    @Override
-    public void getUserDetail(int customerId){
-        mIConsultDetailView.showDialog();
-        mUserModel.GetUserDetail(customerId, new OnHandlerResultListener<GlobalShell<CustomDetailBean>>() {
-            @Override
-            public void handlerResult(GlobalShell<CustomDetailBean> resultData) {
-                if (resultData.LogicSuccess) {
-                    mIConsultDetailView.hideDialog();
-                    if (resultData.Data != null){
-                        mIConsultDetailView.setCustmoerInfo(resultData.Data);
-                    }
-//                     refreshConsultList();
-                } else {
-                    mIConsultDetailView.hideDialog(resultData.Message);
-                }
-            }
-        });
-
     }
 
     public List<ConsultReplyBean> getAddConsultReply(int ReDoctorId, String ReplyContent, String ReplyTime){
@@ -157,9 +172,7 @@ public class ConsultDetailPresenter extends AbstractPresenter implements Consult
         consultReplyBean.Content =  ReplyContent;
         consultReplyBean.IsDoctorReply = 1;
         consultReplyBean.CommitOn =  ReplyTime;
-        mConsultItemBeanList.add(consultReplyBean);
-        return mConsultItemBeanList;
+        mConsultReplyList.add(consultReplyBean);
+        return mConsultReplyList;
     }
-
 }
-

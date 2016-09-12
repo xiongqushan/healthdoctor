@@ -64,7 +64,7 @@ public class DoctorInfoPresenter extends AbstractPresenter implements DoctorInfo
                     }
                 } else {
                     mIDoctorInfoView.changeRetryLayer(true);
-                    mIDoctorInfoView.hideDialog();
+                    mIDoctorInfoView.hideDialog(resultData.Message);
                 }
             }
         });
@@ -84,7 +84,7 @@ public class DoctorInfoPresenter extends AbstractPresenter implements DoctorInfo
                     }
                 } else {
                     mIDoctorInfoView.changeRetryLayer(true);
-                    mIDoctorInfoView.hideDialog();
+                    mIDoctorInfoView.hideDialog(resultData.Message);
                 }
             }
         });

@@ -1,65 +1,72 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/white"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
+
     tools:context="haozuo.com.healthdoctor.view.consult.ConsultDetailFragment">
 
-
-    <haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToLoadMoreLayout
-        android:id="@+id/consult_detail_pull_to_refresh_layout"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-        <include layout="@layout/refresh_head" />
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
 
-        <haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullableListView
-            android:id="@+id/consult_detail_ListView"
+        <haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToLoadMoreLayout
+            android:id="@+id/consult_detail_pull_to_refresh_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:divider="@null"
-            android:listSelector="@android:color/transparent"
-            android:stackFromBottom="false"
-            android:overScrollMode="always"/>
-        <!--<include layout="@layout/load_more" />-->
-    </haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToLoadMoreLayout>
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
-    <RelativeLayout
-        android:id="@+id/edit_area"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/consult_tab_height">
+            <include layout="@layout/refresh_head" />
 
-        <ImageView
-            android:id="@+id/btn_sound_message"
-            android:layout_width="@dimen/consult_customer_usuallymessage_height"
-            android:layout_height="@dimen/consult_customer_usuallymessage_height"
-            android:layout_marginTop="@dimen/consult_customer_usuallymessage_margintop"
-            android:layout_marginLeft="@dimen/consult_customer_usuallymessage_marginleft"
-            android:background="@drawable/sound_message" />
+            <haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullableListView
+                android:id="@+id/consult_detail_ListView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@null"
+                android:listSelector="@android:color/transparent"
+                android:overScrollMode="always"
+                android:stackFromBottom="false" />
+            <!--<include layout="@layout/load_more" />-->
+        </haozuo.com.healthdoctor.view.threePart.PullToRefresh.PullToLoadMoreLayout>
 
-        <ImageView
-            android:id="@+id/btn_usually_message"
-            android:layout_width="@dimen/consult_customer_usuallymessage_height"
-            android:layout_height="@dimen/consult_customer_usuallymessage_height"
-            android:layout_alignTop="@id/btn_sound_message"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/consult_customer_usuallymessage_marginright"
-            android:background="@drawable/usually_message" />
+        <RelativeLayout
+            android:id="@+id/edit_area"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/consult_tab_height">
 
-        <EditText
-            android:id="@+id/edittxt_message"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_toRightOf="@id/btn_sound_message"
-            android:layout_toLeftOf="@id/btn_usually_message"
-            android:layout_marginLeft="@dimen/consult_customer_edittext_marginleft"
-            android:layout_marginRight="@dimen/consult_customer_edittext_marginleft"
-            android:layout_marginBottom="@dimen/consult_customer_edittext_marginbottom"
-            android:minLines="3"
-            android:background="@drawable/editview_bg_selector" />
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/btn_sound_message"
+                android:layout_width="@dimen/consult_customer_usuallymessage_height"
+                android:layout_height="@dimen/consult_customer_usuallymessage_height"
+                android:layout_marginLeft="@dimen/consult_customer_usuallymessage_marginleft"
+                android:layout_marginTop="@dimen/consult_customer_usuallymessage_margintop"
+                android:background="@drawable/sound_message" />
 
-</LinearLayout>
+            <ImageView
+                android:id="@+id/btn_usually_message"
+                android:layout_width="@dimen/consult_customer_usuallymessage_height"
+                android:layout_height="@dimen/consult_customer_usuallymessage_height"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@id/btn_sound_message"
+                android:layout_marginRight="@dimen/consult_customer_usuallymessage_marginright"
+                android:background="@drawable/usually_message" />
+
+            <EditText
+                android:id="@+id/edittxt_message"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/consult_customer_edittext_marginbottom"
+                android:layout_marginLeft="@dimen/consult_customer_edittext_marginleft"
+                android:layout_marginRight="@dimen/consult_customer_edittext_marginleft"
+                android:layout_toLeftOf="@id/btn_usually_message"
+                android:layout_toRightOf="@id/btn_sound_message"
+                android:background="@drawable/editview_bg_selector"
+                android:minLines="3" />
+        </RelativeLayout>
+    </LinearLayout>
+</FrameLayout>
+

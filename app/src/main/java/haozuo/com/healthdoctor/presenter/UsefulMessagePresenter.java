@@ -10,13 +10,12 @@ import javax.inject.Inject;
 
 import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.bean.UsefulExpressionBean;
-import haozuo.com.healthdoctor.manager.UsefulMessageManager;
-import haozuo.com.healthdoctor.model.IBaseModel;
-import haozuo.com.healthdoctor.view.IBaseView;
 import haozuo.com.healthdoctor.contract.UsefulMessageContract;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
-import haozuo.com.healthdoctor.manager.UserManager;
+import haozuo.com.healthdoctor.manager.UsefulMessageManager;
 import haozuo.com.healthdoctor.model.ConsultModel;
+import haozuo.com.healthdoctor.model.IBaseModel;
+import haozuo.com.healthdoctor.view.IBaseView;
 
 /**
  * Created by hzguest3 on 2016/8/9.
@@ -69,7 +68,6 @@ public class UsefulMessagePresenter extends AbstractPresenter implements UsefulM
                 }
             });
         }
-
     }
 
     @Override

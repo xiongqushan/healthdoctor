@@ -30,7 +30,7 @@ public class GroupCustomListPresenter extends AbstractPresenter implements Group
     private List<GroupCustInfoBean>mGroupCustInfoBeanList;
     private GroupCustomListContract.IGroupCustomListView mGroupCustomListView;
     private GroupModel mGroupModel;
-    private boolean isInit;
+//    private boolean isInit;
 
 
     @Inject
@@ -40,7 +40,7 @@ public class GroupCustomListPresenter extends AbstractPresenter implements Group
         mGroupCustomListView=iGroupCustomListView;
         mGroupModel=groupModel;
         mGroupCustomListView.setPresenter(this);
-        isInit = true;
+//        isInit = true;
     }
 
     @Override
@@ -55,11 +55,11 @@ public class GroupCustomListPresenter extends AbstractPresenter implements Group
 
     @Override
     public void start() {
-        refreshCustomList("");
+        refreshCustomList("",true);
     }
 
     @Override
-    public void refreshCustomList(String customNameOrMobile) {
+    public void refreshCustomList(String customNameOrMobile,final Boolean isInit) {
         if (isInit){
             mGroupCustomListView.showDialog();
         }
@@ -93,7 +93,7 @@ public class GroupCustomListPresenter extends AbstractPresenter implements Group
                         mGroupCustomListView.hideDialog(resultData.Message);
                     }
                 }
-                isInit = false;
+//                isInit = false;
             }
         });
     }

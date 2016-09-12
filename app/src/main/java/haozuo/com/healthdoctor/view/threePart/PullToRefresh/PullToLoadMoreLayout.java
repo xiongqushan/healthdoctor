@@ -179,7 +179,7 @@ public class PullToLoadMoreLayout extends RelativeLayout {
             case SUCCEED:
                 // 刷新成功
                 refreshStateImageView.setVisibility(View.VISIBLE);
-                refreshStateTextView.setText(R.string.refresh_succeed);
+                refreshStateTextView.setText(R.string.load_succeed);
                 refreshStateImageView
                         .setBackgroundResource(R.drawable.refresh_succeed);
                 break;
@@ -187,7 +187,7 @@ public class PullToLoadMoreLayout extends RelativeLayout {
             default:
                 // 刷新失败
                 refreshStateImageView.setVisibility(View.VISIBLE);
-                refreshStateTextView.setText(R.string.refresh_fail);
+                refreshStateTextView.setText(R.string.load_fail);
                 refreshStateImageView
                         .setBackgroundResource(R.drawable.refresh_failed);
                 break;
@@ -208,13 +208,13 @@ public class PullToLoadMoreLayout extends RelativeLayout {
             case INIT:
                 // 下拉布局初始状态
                 refreshStateImageView.setVisibility(View.GONE);
-                refreshStateTextView.setText(R.string.pull_to_refresh);
+                refreshStateTextView.setText(R.string.pull_to_loadmore);
                 pullView.clearAnimation();
                 pullView.setVisibility(View.VISIBLE);
                 break;
             case RELEASE_TO_REFRESH:
                 // 释放刷新状态
-                refreshStateTextView.setText(R.string.release_to_refresh);
+                refreshStateTextView.setText(R.string.release_to_load);
                 pullView.startAnimation(rotateAnimation);
                 break;
             case REFRESHING:
@@ -223,7 +223,7 @@ public class PullToLoadMoreLayout extends RelativeLayout {
                 refreshingView.setVisibility(View.VISIBLE);
                 pullView.setVisibility(View.INVISIBLE);
                 refreshingView.startAnimation(refreshingAnimation);
-                refreshStateTextView.setText(R.string.refreshing);
+                refreshStateTextView.setText(R.string.loading);
                 break;
             case DONE:
                 // 刷新或加载完毕，啥都不做

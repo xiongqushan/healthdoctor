@@ -19,7 +19,6 @@ import butterknife.OnClick;
 import cn.jpush.android.api.JPushInterface;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.manager.GroupInfoManager;
-import haozuo.com.healthdoctor.manager.UsefulMessageManager;
 import haozuo.com.healthdoctor.manager.UserManager;
 import haozuo.com.healthdoctor.presenter.IBasePresenter;
 import haozuo.com.healthdoctor.util.CustomDialog;
@@ -66,8 +65,8 @@ public class SettingsFragment extends AbstractView {
             public void OnDialogConfirmListener() {
                 //清理图片缓存
                 Fresco.getImagePipeline().clearCaches();
-                GroupInfoManager.getInstance().clear();
-                UsefulMessageManager.getInstance().clear();
+//                GroupInfoManager.getInstance().clear();
+//                UsefulMessageManager.getInstance().clear();
                 Toast.makeText(getActivity(), "缓存清理成功", Toast.LENGTH_SHORT).show();
             }
         });
@@ -78,7 +77,6 @@ public class SettingsFragment extends AbstractView {
         if (UHealthUtils.isFastDoubleClick()) return;
         btnPush.setChecked(!btnPush.isChecked());
     }
-
 
     @OnClick(R.id.btnSignOut)
     void btnSignOut() {

@@ -79,7 +79,6 @@ public class GroupFragment extends AbstractView implements GroupContract.IGroupV
         mGroupPresenter.cancelRequest();
     }
 
-
     @Override
     public void setPresenter(GroupContract.IGroupPresenter presenter) {
         mGroupPresenter = presenter;

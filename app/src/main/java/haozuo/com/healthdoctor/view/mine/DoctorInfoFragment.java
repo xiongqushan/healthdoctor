@@ -107,6 +107,7 @@ public class DoctorInfoFragment extends AbstractView implements DoctorInfoContra
     @Override
     public void changeRetryLayer(boolean isShow) {
         if (isShow) {
+//            showRetryLayer(R.id.rLayout,true,getString(R.string.connect_fail));
             showRetryLayer(R.id.rLayout);
         } else {
             hideRetryLayer(R.id.rLayout);

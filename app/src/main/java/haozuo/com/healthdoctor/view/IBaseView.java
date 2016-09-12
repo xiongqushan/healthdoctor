@@ -23,6 +23,8 @@ public interface IBaseView<T extends IBasePresenter> {
 
     void showRetryLayer(int frameLayoutContainerId);
 
+    void showRetryLayer(int frameLayoutContainerId, String reloadTips);
+
     void hideRetryLayer(int frameLayoutContainerId);
 
     void setPresenter(T presenter);
