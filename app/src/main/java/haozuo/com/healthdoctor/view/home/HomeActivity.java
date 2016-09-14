@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
+import haozuo.com.healthdoctor.BuildConfig;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.contract.ConsultContract;
 import haozuo.com.healthdoctor.contract.GroupContract;
@@ -40,9 +42,9 @@ public class HomeActivity extends BaseActivity {
     RadioGroup rgTabhost;
     //    @Bind(R.id.rbGroup)
 //    RadioButton rbGroup;
-//    @Bind(R.id.rbConsult)
-//    RadioButton rbConsult;
-//    @Bind(R.id.rbMine)
+    @Bind(R.id.rbConsult)
+    RadioButton rbConsult;
+    //    @Bind(R.id.rbMine)
 //    RadioButton rbMine;
     @Bind(R.id.content_group)
     FrameLayout layoutGroup;
@@ -70,8 +72,10 @@ public class HomeActivity extends BaseActivity {
             String logs;
             switch (code) {
                 case 0:
-                    logs = "Set tag and alias success";
-                    Log.e("mAliasCallback", logs);
+                    if (BuildConfig.DEBUG) {
+                        logs = "Set tag and alias success";
+                        Log.e("mAliasCallback", logs);
+                    }
                     break;
 
                 case 6002:
@@ -103,7 +107,9 @@ public class HomeActivity extends BaseActivity {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-
+        if (!rbConsult.isChecked()) {
+            rbConsult.setChecked(true);
+        }
     }
 
     @Override
@@ -120,7 +126,7 @@ public class HomeActivity extends BaseActivity {
 
         initView();
         //调用JPush API设置Alias
-        String alias = UserManager.getInstance().getDoctorInfo().Account;
+        //String alias = UserManager.getInstance().getDoctorInfo().Account;
         int doctor_IDid = UserManager.getInstance().getDoctorInfo().Doctor_ID;
         mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, doctor_IDid + ""));
     }

@@ -41,10 +41,13 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
     GroupCustInfoAdapter mGroupCustInfoAdapter;
     String photoUri;
     String customNameOrMobile;
-    @Bind(R.id.list_group_customlist)PullableListView list_group_customlist;
-    @Bind(R.id.pull_to_refresh_layout)PullToRefreshLayout pull_to_refresh_layout;
+    @Bind(R.id.list_group_customlist)
+    PullableListView list_group_customlist;
+    @Bind(R.id.pull_to_refresh_layout)
+    PullToRefreshLayout pull_to_refresh_layout;
 
-    public GroupCustomListFragment(){}
+    public GroupCustomListFragment() {
+    }
 
     @Override
     protected IBasePresenter getPresenter() {
@@ -70,19 +73,19 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mContext=getContext();
+        mContext = getContext();
         customNameOrMobile = "";
-        if(rootView==null){
-            rootView= inflater.inflate(R.layout.lv_group_custom, container, false);
-            ButterKnife.bind(this,rootView);
+        if (rootView == null) {
+            rootView = inflater.inflate(R.layout.lv_group_custom, container, false);
+            ButterKnife.bind(this, rootView);
         }
-        mGroupCustInfoAdapter=new GroupCustInfoAdapter(mContext,new View.OnClickListener() {
+        mGroupCustInfoAdapter = new GroupCustInfoAdapter(mContext, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GroupCustInfoAdapter.ViewHolder tag=( GroupCustInfoAdapter.ViewHolder)v.getTag();
-                int customerId = (int)(((Object[])tag.CPhoto.getTag())[0]);
-                String accountId = (String)(((Object[])tag.CPhoto.getTag())[1]);
-                Intent intent = new Intent(mContext,CustomDetailActivity.class);
+                GroupCustInfoAdapter.ViewHolder tag = (GroupCustInfoAdapter.ViewHolder) v.getTag();
+                int customerId = (int) (((Object[]) tag.CPhoto.getTag())[0]);
+                String accountId = (String) (((Object[]) tag.CPhoto.getTag())[1]);
+                Intent intent = new Intent(mContext, CustomDetailActivity.class);
                 intent.putExtra(CustomDetailActivity.EXTRA_CUSTOMER_ID, customerId);
                 intent.putExtra(CustomDetailActivity.EXTRA_ACCOUNT_ID, accountId);
                 mContext.startActivity(intent);
@@ -116,7 +119,7 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
         et_TitleBar_search.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_ENTER&& event.getAction() == KeyEvent.ACTION_UP) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_UP) {
                     InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                     if (imm.isActive()) {
                         imm.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0);
@@ -140,16 +143,14 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
 
     @Override
     public void setPresenter(GroupCustomListContract.IGroupCustomListPresenter presenter) {
-        mGroupCustomListPresenter=presenter;
+        mGroupCustomListPresenter = presenter;
     }
 
     @Override
     public void refreshCustomAdapter(List<GroupCustInfoBean> dataList) {
-        if (dataList.size()==0){
-//            mShowFailLayer(R.id.rLayout);
-            showRetryLayer(R.id.rLayout,getString(R.string.customList_search_fail));
-        }else {
-//            mHideFailLayer(R.id.rLayout);
+        if (dataList.size() == 0) {
+            showRetryLayer(R.id.rLayout, getString(R.string.customList_search_fail));
+        } else {
             hideRetryLayer(R.id.rLayout);
         }
         mGroupCustInfoAdapter.refresh(dataList);
@@ -157,9 +158,14 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
     }
 
     @Override
-    public void refreshFinish(int status) {
-        pull_to_refresh_layout.refreshFinish(status);
-        if (status == PullToRefreshLayout.SUCCEED){
+    public void refreshFinish(int status, boolean isRefresh) {
+        if (isRefresh) {
+
+            pull_to_refresh_layout.refreshFinish(status);
+        } else {
+            pull_to_refresh_layout.loadmoreFinish(status);
+        }
+        if (status == PullToRefreshLayout.SUCCEED) {
             playSuccessSound();
         }
     }
@@ -182,16 +188,16 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
         List<GroupCustInfoBean> dataSource;
         View.OnClickListener clickListener = null;
 
-        public GroupCustInfoAdapter(Context context,View.OnClickListener onClickListener) {
+        public GroupCustInfoAdapter(Context context, View.OnClickListener onClickListener) {
             this.myInflater = LayoutInflater.from(context);
-            dataSource =new ArrayList<>();
+            dataSource = new ArrayList<>();
             clickListener = onClickListener;
         }
 
-        public void refresh(List<GroupCustInfoBean> dataList){
+        public void refresh(List<GroupCustInfoBean> dataList) {
             dataSource.clear();
             dataSource.addAll(dataList);
-             notifyDataSetChanged();
+            notifyDataSetChanged();
         }
 
         @Override
@@ -211,7 +217,7 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            ViewHolder holder =  null;
+            ViewHolder holder = null;
             if (convertView == null) {
                 convertView = myInflater.inflate(R.layout.lvitem_group_custinfo, parent, false);
                 holder = new ViewHolder(convertView);
@@ -223,16 +229,16 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
 
             GroupCustInfoBean groupCustInfoEntity = dataSource.get(position);
 
-            UIHelper.setFrescoURL(holder.CPhoto,photoUri
-                    ,"res://haozuo.com.healthdoctor.view.custom/"+R.drawable.user_default_url);
+            UIHelper.setFrescoURL(holder.CPhoto, photoUri
+                    , "res://haozuo.com.healthdoctor.view.custom/" + R.drawable.user_default_url);
             holder.Cname.setText(groupCustInfoEntity.Cname);
             holder.NickName.setText(groupCustInfoEntity.NickName);
-            if (groupCustInfoEntity.Birthday != null){
+            if (groupCustInfoEntity.Birthday != null) {
                 holder.CBirthday.setText(groupCustInfoEntity.Birthday.split("T")[0]);
             }
             holder.Company.setText(groupCustInfoEntity.CompanyName);
 
-            holder.CPhoto.setTag(new Object[]{groupCustInfoEntity.CustId,groupCustInfoEntity.AccountId});
+            holder.CPhoto.setTag(new Object[]{groupCustInfoEntity.CustId, groupCustInfoEntity.AccountId});
 
             return convertView;
         }

@@ -75,7 +75,9 @@ public class SettingsFragment extends AbstractView {
 
     @OnClick(R.id.layout_push)
     void changePushState() {
-        if (UHealthUtils.isFastDoubleClick()) return;
+        if (UHealthUtils.isFastDoubleClick()) {
+            return;
+        }
         btnPush.setChecked(!btnPush.isChecked());
     }
 
@@ -93,8 +95,6 @@ public class SettingsFragment extends AbstractView {
                 getActivity().finish();
             }
         });
-
-//        ShowSignOutDialog();
     }
 
     private View rootView;

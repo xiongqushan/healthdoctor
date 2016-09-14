@@ -7,9 +7,10 @@ android {
     defaultConfig {
         applicationId "haozuo.com.healthdoctor"
         minSdkVersion 16
-        targetSdkVersion 23
+        targetSdkVersion 22
         versionCode 10
         versionName "v1.0"
+        multiDexEnabled false
         ndk {
             //选择要添加的对应cpu类型的.so库。
             abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a'

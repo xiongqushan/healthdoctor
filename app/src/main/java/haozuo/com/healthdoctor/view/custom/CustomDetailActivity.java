@@ -49,7 +49,9 @@ public class CustomDetailActivity extends BaseActivity {
             ActivityUtils.addFragmentToActivity(fragmentManager, fragment, R.id.frameContent);
         }
         setTitleWithConsult("客户详情", customerId);
-        ActivityUtils.getInstance().addActivity(this);
+//        if (BuildConfig.DEBUG) {
+//            ActivityUtils.getInstance().addActivity(this);
+//        }
     }
 
 }

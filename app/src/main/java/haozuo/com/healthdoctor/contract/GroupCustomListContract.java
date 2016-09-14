@@ -14,7 +14,7 @@ public interface GroupCustomListContract {
 
         void refreshCustomAdapter(List<GroupCustInfoBean> dataList);
 
-        void refreshFinish(int status);
+        void refreshFinish(int status,boolean isRefresh);
 
     }
 
