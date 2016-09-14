@@ -2,21 +2,19 @@ package haozuo.com.healthdoctor.view.custom;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-import android.view.View;
 
 import java.io.Serializable;
 
 import javax.inject.Inject;
 
-import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.DoctorGroupBean;
 import haozuo.com.healthdoctor.contract.GroupCustomListContract;
 import haozuo.com.healthdoctor.ioc.DaggerGroupCustomListComponent;
 import haozuo.com.healthdoctor.ioc.GroupCustomListModule;
-import haozuo.com.healthdoctor.view.base.BaseActivity;
 import haozuo.com.healthdoctor.presenter.GroupCustomListPresenter;
 import haozuo.com.healthdoctor.util.ActivityUtils;
+import haozuo.com.healthdoctor.view.base.BaseActivity;
 
 public class GroupCustomListActivity extends BaseActivity {
     @Inject
@@ -55,4 +53,5 @@ public class GroupCustomListActivity extends BaseActivity {
             ActivityUtils.addFragmentToActivity(fragmentManager, groupCustomListFragment, R.id.frameContent);
         }
     }
+
 }

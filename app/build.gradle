@@ -34,8 +34,6 @@ android {
         }
     }
 
-
-
     packagingOptions {
         exclude('META-INF/services/javax.annotation.processing.Processor')
         exclude('META-INF/maven/com.google.guava/guava/pom.xml')
@@ -46,6 +44,10 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
+//    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.1'
+//    androidTestCompile 'com.android.support.test:runner:0.4.1'
+//    androidTestCompile 'com.android.support.test:rules:0.4.1'
+
     /*compile files('libs/okhttp-2.4.0.jar')
                                     compile files('libs/okhttp-urlconnection-2.0.0.jar')
                                     compile files('libs/okio-1.4.0.jar')*/

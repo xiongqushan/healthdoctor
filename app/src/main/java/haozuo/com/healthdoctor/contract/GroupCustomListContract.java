@@ -16,6 +16,7 @@ public interface GroupCustomListContract {
 
         void refreshFinish(int status);
 
+        void changeRetryLayer(boolean isShow);
     }
 
     interface IGroupCustomListPresenter extends IBasePresenter {

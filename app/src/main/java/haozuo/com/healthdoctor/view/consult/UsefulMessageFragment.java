@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.annotation.DimenRes;
 import android.support.annotation.NonNull;
 import android.view.Display;
 import android.view.Gravity;
@@ -23,8 +22,10 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.Bind;
@@ -32,11 +33,15 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.ConsultReplyBean;
+import haozuo.com.healthdoctor.bean.CustomDetailBean;
+import haozuo.com.healthdoctor.bean.DoctorBean;
 import haozuo.com.healthdoctor.bean.ExpressionConst;
 import haozuo.com.healthdoctor.bean.UsefulExpressionBean;
-import haozuo.com.healthdoctor.presenter.IBasePresenter;
 import haozuo.com.healthdoctor.contract.UsefulMessageContract;
 import haozuo.com.healthdoctor.framework.SysConfig;
+import haozuo.com.healthdoctor.manager.UserManager;
+import haozuo.com.healthdoctor.presenter.IBasePresenter;
+import haozuo.com.healthdoctor.util.DateUtil;
 import haozuo.com.healthdoctor.view.base.AbstractView;
 import haozuo.com.healthdoctor.view.threePart.common.DrawableClickableEditText;
 
@@ -49,9 +54,12 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
     private UsefulMessageContract.IUsefulMessagePresenter mIUsefulMessagePresenter;
     private UsefulMessageAdapter mUsefulMessageAdapter;
     private static ConsultReplyBean mLastConsultReplyBean;
+    private static CustomDetailBean mCustomDetailBean;
+    private static DoctorBean mDoctorEntity;
     private List<UsefulExpressionBean> mSelectedExpressionMap;
     private List<ExpressionConst> mExpressionConstList;
     private String mReplyContent;
+    private Dialog dialog;
 
     @Bind(R.id.txt_reportdetail_content)
     TextView txt_reportdetail_content;
@@ -76,9 +84,11 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
         return rootView;
     }
 
-    public static UsefulMessageFragment newInstance(@NonNull ConsultReplyBean consultReplyItem) {
+    public static UsefulMessageFragment newInstance(@NonNull ConsultReplyBean consultReplyItem, @NonNull CustomDetailBean customDetailBean) {
         UsefulMessageFragment fragment = new UsefulMessageFragment();
         mLastConsultReplyBean = consultReplyItem;
+        mCustomDetailBean = customDetailBean;
+        mDoctorEntity = UserManager.getInstance().getDoctorInfo();
         return fragment;
     }
 
@@ -148,6 +158,16 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
     }
 
     @Override
+    public void refreshConsultList(ConsultReplyBean addConsultReplyBean){
+        dialog.dismiss();
+        Intent intent = new Intent();
+        intent.putExtra(String.valueOf(ConsultDetailFragment.RESULT_EXPRESSION), addConsultReplyBean);
+        getActivity().setResult(ConsultDetailFragment.RESULT_EXPRESSION, intent);
+        getActivity().finish();
+//        getActivity().overridePendingTransition(0,0);
+    }
+
+    @Override
     public void setPresenter(UsefulMessageContract.IUsefulMessagePresenter presenter) {
         mIUsefulMessagePresenter = presenter;
     }
@@ -176,7 +196,8 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
     }
 
     public void showDialogPage() {
-        final Dialog dialog = new Dialog(mContext, R.style.Dialog_Fullscreen);
+//        final Dialog
+        dialog = new Dialog(mContext, R.style.Dialog_Fullscreen);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_usefulmessage);
         refreshExpressionContent(dialog);
@@ -285,7 +306,7 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
                         dialog.dismiss();
                         break;
                     case R.id.btn_submit:
-                        dialog.dismiss();
+//                        dialog.dismiss();
                         EditText et_Expression = (EditText) dialog.findViewById(R.id.et_Expression);
                         mReplyContent = (String) et_Expression.getText().toString();
                         for (ExpressionConst e : mExpressionConstList) {
@@ -295,10 +316,12 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
                                 mReplyContent = mReplyContent + "\n" +e.Content;
                             }
                         }
-                        Intent intent = new Intent();
-                        intent.putExtra(String.valueOf(ConsultDetailFragment.RESULT_EXPRESSION), mReplyContent);
-                        getActivity().setResult(ConsultDetailFragment.RESULT_EXPRESSION, intent);
-                        getActivity().finish();
+//                        Intent intent = new Intent();
+//                        intent.putExtra(String.valueOf(ConsultDetailFragment.RESULT_EXPRESSION), mReplyContent);
+//                        getActivity().setResult(ConsultDetailFragment.RESULT_EXPRESSION, intent);
+//                        getActivity().finish();
+
+                        addDoctorReply(mReplyContent);
                         break;
                 }
             }
@@ -311,6 +334,16 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
         EditText et_Expression = (EditText) dialog.findViewById(R.id.et_Expression);
         et_Expression.setText(Content);
         return Content;
+    }
+
+    public void addDoctorReply(String replyContent) {
+        if (replyContent.equals("")) {
+            Toast.makeText(mContext, "请输入需要回复的内容", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String CommitOn = DateUtil.date2Str(new Date(), "yyyy-MM-dd'T'HH:mm:ss");
+        mIUsefulMessagePresenter.addDoctorReply(mCustomDetailBean.DoctorID, mDoctorEntity.Doctor_ID, mDoctorEntity.Name, mCustomDetailBean.Id, replyContent, CommitOn);
+//        sendCustomBroadcast(BROADFILTER_CONSULT_REPLAY);
     }
 
     class UsefulMessageAdapter extends BaseAdapter {

@@ -33,7 +33,6 @@ import haozuo.com.healthdoctor.view.threePart.common.DrawableClickableEditText;
 /**
  * A simple {@link Fragment} subclass.
  */
-@SuppressWarnings("ResourceType")
 public class GroupCustomListFragment extends AbstractView implements GroupCustomListContract.IGroupCustomListView {
     Context mContext;
     View rootView;
@@ -46,6 +45,11 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
 
     public GroupCustomListFragment(){}
 
+    public static GroupCustomListFragment newInstance() {
+        GroupCustomListFragment fragment = new GroupCustomListFragment();
+        return fragment;
+    }
+
     @Override
     protected IBasePresenter getPresenter() {
         return mGroupCustomListPresenter;
@@ -54,11 +58,6 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
     @Override
     protected View getRootView() {
         return rootView;
-    }
-
-    public static GroupCustomListFragment newInstance() {
-        GroupCustomListFragment fragment = new GroupCustomListFragment();
-        return fragment;
     }
 
     @Override
@@ -146,10 +145,8 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
     @Override
     public void refreshCustomAdapter(List<GroupCustInfoBean> dataList) {
         if (dataList.size()==0){
-//            mShowFailLayer(R.id.rLayout);
             showRetryLayer(R.id.rLayout,getString(R.string.customList_search_fail));
         }else {
-//            mHideFailLayer(R.id.rLayout);
             hideRetryLayer(R.id.rLayout);
         }
         mGroupCustInfoAdapter.refresh(dataList);
@@ -161,6 +158,15 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
         pull_to_refresh_layout.refreshFinish(status);
         if (status == PullToRefreshLayout.SUCCEED){
             playSuccessSound();
+        }
+    }
+
+    @Override
+    public void changeRetryLayer(boolean isShow) {
+        if (isShow) {
+            showRetryLayer(R.id.rLayout);
+        } else {
+            hideRetryLayer(R.id.rLayout);
         }
     }
 

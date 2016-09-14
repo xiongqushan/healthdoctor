@@ -26,11 +26,9 @@ public class GroupCustomListPresenter extends AbstractPresenter implements Group
     private int mCurrentPageIndex=1;
     private int mLeastPageIndex=1;
     private int mGroupId;
-//    private String mCustomNameOrMobile;
     private List<GroupCustInfoBean>mGroupCustInfoBeanList;
     private GroupCustomListContract.IGroupCustomListView mGroupCustomListView;
     private GroupModel mGroupModel;
-//    private boolean isInit;
 
 
     @Inject
@@ -40,7 +38,6 @@ public class GroupCustomListPresenter extends AbstractPresenter implements Group
         mGroupCustomListView=iGroupCustomListView;
         mGroupModel=groupModel;
         mGroupCustomListView.setPresenter(this);
-//        isInit = true;
     }
 
     @Override
@@ -66,11 +63,12 @@ public class GroupCustomListPresenter extends AbstractPresenter implements Group
         mLeastPageIndex=mCurrentPageIndex;
         mCurrentPageIndex=1;
         int doctorId= UserManager.getInstance().getDoctorInfo().Doctor_ID;
-        int departId= UserManager.getInstance().getDoctorInfo().Dept;
-        mGroupModel.GetGroupCustInfoList(departId, mGroupId, doctorId, customNameOrMobile,mCurrentPageIndex, PAGE_SIZE, new OnHandlerResultListener<GlobalShell<PageBean<GroupCustInfoBean>>>() {
+        int deptId= UserManager.getInstance().getDoctorInfo().Dept;
+        mGroupModel.GetGroupCustInfoList(deptId, mGroupId, doctorId, customNameOrMobile,mCurrentPageIndex, PAGE_SIZE, new OnHandlerResultListener<GlobalShell<PageBean<GroupCustInfoBean>>>() {
             @Override
             public void handlerResult(GlobalShell<PageBean<GroupCustInfoBean>> resultData) {
                 if(resultData.LogicSuccess) {
+                    mGroupCustomListView.changeRetryLayer(false);
                     mGroupCustInfoBeanList.clear();
                     if (resultData.Data.CurrentPageDataList != null){
                         mGroupCustInfoBeanList.addAll(resultData.Data.CurrentPageDataList);
@@ -78,22 +76,19 @@ public class GroupCustomListPresenter extends AbstractPresenter implements Group
                     mGroupCustomListView.refreshCustomAdapter(mGroupCustInfoBeanList);
                     if (!isInit) {
                         mGroupCustomListView.refreshFinish(PullToRefreshLayout.SUCCEED);
-
-                    }
-                    if (isInit){
+                    }else {
                         mGroupCustomListView.hideDialog();
                     }
                 }
                 else{
                     if (!isInit) {
                         mGroupCustomListView.refreshFinish(PullToRefreshLayout.FAIL);
-                    }
-                    mCurrentPageIndex=mLeastPageIndex;
-                    if (isInit){
+                    }else {
                         mGroupCustomListView.hideDialog(resultData.Message);
                     }
+                    mCurrentPageIndex=mLeastPageIndex;
+                    mGroupCustomListView.changeRetryLayer(true);
                 }
-//                isInit = false;
             }
         });
     }
@@ -104,7 +99,6 @@ public class GroupCustomListPresenter extends AbstractPresenter implements Group
         mCurrentPageIndex++;
         int doctorId= UserManager.getInstance().getDoctorInfo().Doctor_ID;
         int departId= UserManager.getInstance().getDoctorInfo().Dept;
-//        mGroupCustomListView.showDialog();
         mGroupModel.GetGroupCustInfoList(departId, mGroupId, doctorId, customNameOrMobile,mCurrentPageIndex, PAGE_SIZE, new OnHandlerResultListener<GlobalShell<PageBean<GroupCustInfoBean>>>() {
             @Override
             public void handlerResult(GlobalShell<PageBean<GroupCustInfoBean>> resultData) {
@@ -112,12 +106,10 @@ public class GroupCustomListPresenter extends AbstractPresenter implements Group
                     mGroupCustInfoBeanList.addAll(resultData.Data.CurrentPageDataList);
                     mGroupCustomListView.refreshCustomAdapter(mGroupCustInfoBeanList);
                     mGroupCustomListView.refreshFinish(PullToRefreshLayout.SUCCEED);
-//                    mGroupCustomListView.hideDialog();
                 }
                 else{
                     mGroupCustomListView.refreshFinish(PullToRefreshLayout.FAIL);
                     mCurrentPageIndex=mLeastPageIndex;
-//                    mGroupCustomListView.hideDialog(resultData.Message);
                 }
             }
         });

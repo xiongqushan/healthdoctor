@@ -23,9 +23,9 @@ public class ReportParamsBean implements Serializable{
 
     public String getFormedDate(){
         if (CheckDate.length()>=8){
-            String year = CheckDate.substring(0,3);
-            String month = CheckDate.substring(4,5);
-            String day = CheckDate.substring(6,7);
+            String year = CheckDate.substring(0,4);
+            String month = CheckDate.substring(4,6);
+            String day = CheckDate.substring(6,8);
             formedDate = year+"年"+month+"月"+day+"日" ;
         }
         return formedDate;

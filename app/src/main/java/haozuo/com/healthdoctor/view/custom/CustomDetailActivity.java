@@ -52,5 +52,6 @@ public class CustomDetailActivity extends BaseActivity {
         ActivityUtils.getInstance().addActivity(this);
     }
 
+
 }
 
