@@ -225,6 +225,7 @@
             android:name=".view.threePart.MyJpushReceiver"
             android:enabled="true">
             android:exported="false"
+
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.REGISTRATION" />
                 <!-- Required  用户注册SDK的intent -->

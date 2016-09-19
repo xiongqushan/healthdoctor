@@ -126,6 +126,7 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
     @OnClick(R.id.btn_usually_message)
     public void getUsefulMessage(View v) {
         startActivityForResult(new Intent(mContext, UsefulMesasgeActivity.class)
+                .putExtra(UsefulMesasgeActivity.CUSTOM_DETAIL_INFO,mCustomDetailBean)
                 .putExtra(UsefulMesasgeActivity.LAST_CONSULT_CONTENT, mConsultReplmyItem), RESULT_EXPRESSION);
     }
 
@@ -217,8 +218,10 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
         if (data == null) {
             return;
         }
-        String replyContent = data.getExtras().getString(String.valueOf(RESULT_EXPRESSION));
-        addDoctorReply(replyContent);
+        ConsultReplyBean replyContent = (ConsultReplyBean) data.getExtras().getSerializable(String.valueOf(RESULT_EXPRESSION));
+        mConsultListAdapter.addDoctorReply(replyContent);
+        setListViewPosition(mConsultReplyList.size(),SELECT_POSITION_SMOOTH);
+//        addDoctorReply(replyContent);
     }
 
     @Override
@@ -274,6 +277,11 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
         sendCustomBroadcast(BROADFILTER_CONSULT_REPLAY);
     }
 
+//    @Override
+//    public void LoadmoreConsultPage(List<ConsultReplyBean> mConsultReplyBeanList){
+//        mConsultListAdapter.loadmore(mConsultReplyBeanList);
+//    }
+
     @Override
     public void changeRetryLayer(boolean isShow) {
         if (isShow) {
@@ -308,8 +316,9 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
 
         public void refresh(List<ConsultReplyBean> dataList) {
             mConsultReplyList.clear();
-            mConsultReplmyItem = new ConsultReplyBean();
             mConsultReplyList.addAll(dataList);
+            mConsultReplmyItem = new ConsultReplyBean();
+            //获取最后一条客户回复异常项，若不存在异常项则取客户咨询
             for (int i= mConsultReplyList.size()-1;i>=0;i--){
                 if (mConsultReplyList.get(i).IsDoctorReply == 0 &&mConsultReplyList.get(i).ConsultType == 1){ //客户回复内容
                     mConsultReplmyItem = mConsultReplyList.get(i);
@@ -322,7 +331,25 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
                     break;
                 }
             }
+            notifyDataSetChanged();
+        }
 
+        public void addDoctorReply(ConsultReplyBean consultReplyBean){
+            mConsultReplyList.add(consultReplyBean);
+            mConsultReplmyItem = new ConsultReplyBean();
+            //获取最后一条客户回复异常项，若不存在异常项则取客户咨询
+            for (int i= mConsultReplyList.size()-1;i>=0;i--){
+                if (mConsultReplyList.get(i).IsDoctorReply == 0 &&mConsultReplyList.get(i).ConsultType == 1){ //客户回复内容
+                    mConsultReplmyItem = mConsultReplyList.get(i);
+                    break;
+                }
+            }
+            for (int i= mConsultReplyList.size()-1;i>=0;i--){
+                if (mConsultReplyList.get(i).IsDoctorReply == 0 &&mConsultReplyList.get(i).ConsultType == 3){ //客户回复内容
+                    mConsultReplmyItem = mConsultReplyList.get(i);
+                    break;
+                }
+            }
             notifyDataSetChanged();
         }
 

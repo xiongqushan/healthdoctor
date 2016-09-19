@@ -7,9 +7,6 @@ import dagger.Provides;
 import haozuo.com.healthdoctor.contract.CustomDetailContract;
 import haozuo.com.healthdoctor.view.custom.CustomDetailFragment;
 
-/**
- * Created by xiongwei1 on 2016/8/8.
- */
 @Module
 public class CustomDetailModule {
     int mCustomId;
@@ -38,3 +35,4 @@ public class CustomDetailModule {
         return mAccountId;
     }
 }
+

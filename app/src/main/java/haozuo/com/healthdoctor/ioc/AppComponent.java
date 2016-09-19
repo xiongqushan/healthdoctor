@@ -36,4 +36,5 @@ public interface AppComponent {
     ISystemService getSystemService();
 
     OkHttpClient getOkHttpClient();
+
 }

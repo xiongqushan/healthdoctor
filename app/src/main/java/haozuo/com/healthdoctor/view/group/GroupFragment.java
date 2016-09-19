@@ -45,20 +45,23 @@ public class GroupFragment extends AbstractView implements GroupContract.IGroupV
         return mGroupPresenter;
     }
 
-    @Override
-    protected View getRootView() {
-        return rootView;
-    }
-
-    public static GroupFragment newInstance() {
-        GroupFragment fragment = new GroupFragment();
-        return fragment;
-    }
 
     @Override
     public void onResume() {
         super.onResume();
         mGroupPresenter.start();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mGroupPresenter.cancelRequest();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
     }
 
 
@@ -73,10 +76,15 @@ public class GroupFragment extends AbstractView implements GroupContract.IGroupV
         return rootView;
     }
 
+
     @Override
-    public void onStop() {
-        super.onStop();
-        mGroupPresenter.cancelRequest();
+    protected View getRootView() {
+        return rootView;
+    }
+
+    public static GroupFragment newInstance() {
+        GroupFragment fragment = new GroupFragment();
+        return fragment;
     }
 
     @Override
@@ -112,6 +120,7 @@ public class GroupFragment extends AbstractView implements GroupContract.IGroupV
             hideRetryLayer(R.id.rLayout);
         }
     }
+
 
 }
 

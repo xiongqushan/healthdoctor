@@ -48,11 +48,9 @@ public abstract class AbstractView extends BaseFragment {
         loadingDialog.show();
     }
 
-
     public void hideDialog() {
         hideDialog(null);
     }
-
 
     public void hideDialog(String msg) {
 
@@ -135,14 +133,14 @@ public abstract class AbstractView extends BaseFragment {
         }
     }
 
+//    pulltorefresh成功播放提示音
 
-    //    pulltorefresh成功播放提示音
     public void playSuccessSound() {
         if (soundPool == null) {
             soundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 5);
             soundId = soundPool.load(getContext(), R.raw.loadmore_success, 0);
         }
         soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f);
-//        play(int soundID, float leftVolume, float rightVolume, int priority //优先级, int loop//0 循环 -1不循环, float rate)
+//        play(int soundID, float leftVolume, float rightVolume, int priority , int loop//0 循环 -1不循环, float rate)
     }
 }

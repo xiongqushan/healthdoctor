@@ -22,3 +22,5 @@ public interface ScopeType {
     public @interface FragmentScope {
     }
 }
+
+;

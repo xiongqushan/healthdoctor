@@ -65,7 +65,6 @@ public class HomeActivity extends BaseActivity {
 
     private FragmentManager fragmentManager;
 
-
     private final TagAliasCallback mAliasCallback = new TagAliasCallback() {
         @Override
         public void gotResult(int code, String alias, Set<String> tags) {
@@ -131,7 +130,6 @@ public class HomeActivity extends BaseActivity {
         int doctor_IDid = UserManager.getInstance().getDoctorInfo().Doctor_ID;
         mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, doctor_IDid + ""));
     }
-
 
     private void initView() {
         fragmentManager = getSupportFragmentManager();

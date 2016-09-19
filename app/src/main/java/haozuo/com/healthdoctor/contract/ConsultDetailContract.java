@@ -26,6 +26,8 @@ public interface ConsultDetailContract {
 
         void RefreshConsultPage(List<ConsultReplyBean> mConsultReplyBeanList);
 
+//        void LoadmoreConsultPage(List<ConsultReplyBean> mConsultReplyBeanList);
+
         void changeRetryLayer(boolean isShow);
     }
 

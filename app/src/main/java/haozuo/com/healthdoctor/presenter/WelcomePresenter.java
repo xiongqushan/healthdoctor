@@ -46,7 +46,6 @@ public class WelcomePresenter extends AbstractPresenter implements WelcomeContra
         mSystemModel.GetVersionStatus(currVersion, new OnHandlerResultListener<GlobalShell<UpdateInfoBean>>() {
             @Override
             public void handlerResult(GlobalShell<UpdateInfoBean> resultData) {
-
                 if (resultData.LogicSuccess) {
                     mIWelcomeView.updateInfo(resultData.Data);
                     // mIWelcomeView = null;

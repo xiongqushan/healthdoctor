@@ -50,7 +50,7 @@ public class ConsultDetailPresenter extends AbstractPresenter implements Consult
         isInit = true;
         loadmoreSuccess = false;
         mCommitOn = DateUtil.date2Str(new Date(),"yyyyMMddHHmmss");
-        iConsultDetailView.setPresenter(this);
+        mIConsultDetailView.setPresenter(this);
         consultReplyBean = new ConsultReplyBean();
     }
 

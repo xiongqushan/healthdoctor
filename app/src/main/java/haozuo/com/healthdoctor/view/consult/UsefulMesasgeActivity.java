@@ -1,21 +1,13 @@
 package haozuo.com.healthdoctor.view.consult;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.support.v4.app.FragmentManager;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
-
-import java.io.Serializable;
 
 import javax.inject.Inject;
 
-import butterknife.OnClick;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.ConsultReplyBean;
+import haozuo.com.healthdoctor.bean.CustomDetailBean;
 import haozuo.com.healthdoctor.contract.UsefulMessageContract;
 import haozuo.com.healthdoctor.ioc.DaggerUsefulMessageComponent;
 import haozuo.com.healthdoctor.ioc.UsefulMessageModule;
@@ -30,6 +22,7 @@ public class UsefulMesasgeActivity extends BaseActivity {
     UsefulMessageContract.IUsefulMessageView mIUsefulMessageView;
 
     public static String LAST_CONSULT_CONTENT="LAST_CONSULT_CONTENT";
+    public static String CUSTOM_DETAIL_INFO="CUSTOM_DETAIL_INFO";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +31,11 @@ public class UsefulMesasgeActivity extends BaseActivity {
         setContentView(R.layout.activity_useful_message);
 
         ConsultReplyBean consultReplyItem = (ConsultReplyBean) getIntent().getSerializableExtra(LAST_CONSULT_CONTENT);
+        CustomDetailBean customDetailBean = (CustomDetailBean) getIntent().getSerializableExtra(CUSTOM_DETAIL_INFO);
 
         DaggerUsefulMessageComponent.builder()
                 .appComponent(getAppComponent())
-                .usefulMessageModule(new UsefulMessageModule(consultReplyItem))
+                .usefulMessageModule(new UsefulMessageModule(consultReplyItem,customDetailBean))
                 .build()
                 .inject(this);
 

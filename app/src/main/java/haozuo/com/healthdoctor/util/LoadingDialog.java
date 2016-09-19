@@ -5,9 +5,11 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.app.Dialog;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import haozuo.com.healthdoctor.R;
@@ -29,10 +31,12 @@ public class LoadingDialog extends Dialog {
         UIHelper.CreateShape(vContent, 20, "#ffffff", 255);
         setContentView(vContent);
 
-        ivLoading = vContent.findViewById(R.id.ivLoading);
-        UIHelper.CreateShape(ivLoading, 0, "#ffffff", 150);
-        animator = ObjectAnimator.ofFloat(ivLoading, "translationY", 0, -150).setDuration(2000);
-//        animator = ObjectAnimator.ofFloat(ivLoading, "rotation", 0, 360).setDuration(800);
+        ImageView img = (ImageView) vContent.findViewById(R.id.ivbgLoading);
+        img.measure(0, 0);
+        int transformationY = -img.getMeasuredHeight();
+        ivLoading = (View) vContent.findViewById(R.id.ivLoading);
+        UIHelper.CreateShape(ivLoading,0,"#ffffff",150);
+        animator = ObjectAnimator.ofFloat(ivLoading, "translationY", 0, transformationY).setDuration(2000);
         animator.setInterpolator(new LinearInterpolator());
         animator.setRepeatCount(-1);
         animator.addListener(new AnimatorListenerAdapter() {

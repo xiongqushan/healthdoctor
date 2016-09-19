@@ -47,7 +47,7 @@ public class ConsultDetailActivity extends BaseActivity {
             consultDetailfragment = (ConsultDetailFragment) mIConsultDetailView;
             ActivityUtils.addFragmentToActivity(fragmentManager, consultDetailfragment, R.id.frameContent);
         }
-//        setCustomerTitle("");
+        setCustomerTitle("");
     }
 
     @Override

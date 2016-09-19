@@ -17,7 +17,7 @@ import haozuo.com.healthdoctor.view.base.BaseActivity;
 
 public class CustomDetailActivity extends BaseActivity {
     @Inject
-    CustomDetailPresenter mGroupPresenter;
+    CustomDetailPresenter mICustomDetailPresenter;
     @Inject
     CustomDetailContract.ICustomDetailView mICustomDetailView;
 
@@ -53,6 +53,7 @@ public class CustomDetailActivity extends BaseActivity {
 //            ActivityUtils.getInstance().addActivity(this);
 //        }
     }
+
 
 }
 

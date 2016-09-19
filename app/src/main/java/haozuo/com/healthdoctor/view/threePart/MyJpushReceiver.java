@@ -22,7 +22,7 @@ import haozuo.com.healthdoctor.view.welcome.WelcomeActivity;
  * 自定义接收器
  * 如果不定义这个 Receiver，则： 1) 默认用户会打开主界面 2) 接收不到自定义消息
  */
-public class MyJpushReceiver extends BroadcastReceiver {
+public class MyJpushReceiver extends BroadcastReceiver{
     private static final String TAG = "MyJpushReceiver";
 
     @Override
