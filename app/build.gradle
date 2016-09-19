@@ -7,9 +7,11 @@ android {
     defaultConfig {
         applicationId "haozuo.com.healthdoctor"
         minSdkVersion 16
-        targetSdkVersion 23
+        targetSdkVersion 22
         versionCode 10
         versionName "v1.0"
+        multiDexEnabled false
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
             //选择要添加的对应cpu类型的.so库。
             abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a'
@@ -20,6 +22,9 @@ android {
                 JPUSH_APPKEY : "330bf15f3128cf7802eb9921", //JPush上注册的包名对应的appkey.
                 JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
         ]
+    }
+    configurations.all {
+        resolutionStrategy.force 'com.google.code.findbugs:jsr305:1.3.9'
     }
     buildTypes {
         release {
@@ -38,15 +43,17 @@ android {
         exclude('META-INF/services/javax.annotation.processing.Processor')
         exclude('META-INF/maven/com.google.guava/guava/pom.xml')
         exclude('META-INF/maven/com.google.guava/guava/pom.properties')
+        exclude('LICENSE.txt')
     }
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-//    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.1'
-//    androidTestCompile 'com.android.support.test:runner:0.4.1'
-//    androidTestCompile 'com.android.support.test:rules:0.4.1'
+    androidTestCompile "com.android.support:support-annotations:23.4.0"
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.1'
+    androidTestCompile "com.android.support.test:runner:0.4.1"
+    androidTestCompile "com.android.support.test:rules:0.4.1"
 
     /*compile files('libs/okhttp-2.4.0.jar')
                                     compile files('libs/okhttp-urlconnection-2.0.0.jar')

@@ -10,14 +10,11 @@ import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.contract.CustomDetailContract;
 import haozuo.com.healthdoctor.ioc.CustomDetailModule;
 import haozuo.com.healthdoctor.ioc.DaggerCustomDetailComponent;
-import haozuo.com.healthdoctor.presenter.CustomDetailPresenter;
 import haozuo.com.healthdoctor.util.ActivityUtils;
 import haozuo.com.healthdoctor.view.base.BaseActivity;
 
 
 public class CustomDetailActivity extends BaseActivity {
-    @Inject
-    CustomDetailPresenter mGroupPresenter;
     @Inject
     CustomDetailContract.ICustomDetailView mICustomDetailView;
 
@@ -49,7 +46,9 @@ public class CustomDetailActivity extends BaseActivity {
             ActivityUtils.addFragmentToActivity(fragmentManager, fragment, R.id.frameContent);
         }
         setTitleWithConsult("客户详情", customerId);
-        ActivityUtils.getInstance().addActivity(this);
+//        if (BuildConfig.DEBUG) {
+//            ActivityUtils.getInstance().addActivity(this);
+//        }
     }
 
 

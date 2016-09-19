@@ -41,6 +41,36 @@ public class GroupFragment extends AbstractView implements GroupContract.IGroupV
     }
 
     @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        mContext = getContext();
+        if (rootView == null) {
+            rootView = inflater.inflate(R.layout.fragment_group, container, false);
+            ButterKnife.bind(this, rootView);
+        }
+        ButterKnife.bind(this, rootView);
+        return rootView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mGroupPresenter.start();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mGroupPresenter.cancelRequest();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
+    }
+
+    @Override
     protected IBasePresenter getPresenter() {
         return mGroupPresenter;
     }
@@ -53,30 +83,6 @@ public class GroupFragment extends AbstractView implements GroupContract.IGroupV
     public static GroupFragment newInstance() {
         GroupFragment fragment = new GroupFragment();
         return fragment;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mGroupPresenter.start();
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        mContext = getContext();
-        if (rootView == null) {
-            rootView = inflater.inflate(R.layout.fragment_group, container, false);
-            ButterKnife.bind(this, rootView);
-
-        }
-        return rootView;
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        mGroupPresenter.cancelRequest();
     }
 
     @Override
@@ -112,6 +118,7 @@ public class GroupFragment extends AbstractView implements GroupContract.IGroupV
             hideRetryLayer(R.id.rLayout);
         }
     }
+
 
 }
 

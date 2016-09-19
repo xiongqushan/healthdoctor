@@ -114,7 +114,9 @@ public abstract class AbstractView extends BaseFragment {
             btnReload.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (UHealthUtils.isFastDoubleClick()) return;
+                    if (UHealthUtils.isFastDoubleClick()) {
+                        return;
+                    }
                     IBasePresenter presenter = getPresenter();
                     presenter.start();
                 }
@@ -132,6 +134,7 @@ public abstract class AbstractView extends BaseFragment {
     }
 
 //    pulltorefresh成功播放提示音
+
     public void playSuccessSound() {
         if (soundPool == null) {
             soundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 5);

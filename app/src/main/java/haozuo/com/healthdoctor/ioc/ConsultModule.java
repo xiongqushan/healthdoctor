@@ -12,7 +12,6 @@ import haozuo.com.healthdoctor.view.consult.ConsultFragment;
 @Module
 public class ConsultModule {
     public ConsultModule(){
-
     }
 
     @ScopeType.ActivityScope

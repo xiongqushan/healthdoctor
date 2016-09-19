@@ -17,6 +17,8 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -56,6 +58,11 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
     ChildListView lv_custom_report;
     @Bind(R.id.gv_PhotoReport)
     ChildGridView gv_PhotoReport;
+
+    @Inject
+    CustomDetailContract.ICustomDetailView mICustomDetailView;
+    @Inject
+    CustomDetailContract.ICustomDetailView testView;
 
     @OnClick(R.id.btn_show_Report)
     public void showReport() {
