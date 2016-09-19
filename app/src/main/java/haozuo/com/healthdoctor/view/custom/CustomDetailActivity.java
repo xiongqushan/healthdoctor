@@ -10,11 +10,14 @@ import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.contract.CustomDetailContract;
 import haozuo.com.healthdoctor.ioc.CustomDetailModule;
 import haozuo.com.healthdoctor.ioc.DaggerCustomDetailComponent;
+import haozuo.com.healthdoctor.presenter.CustomDetailPresenter;
 import haozuo.com.healthdoctor.util.ActivityUtils;
 import haozuo.com.healthdoctor.view.base.BaseActivity;
 
 
 public class CustomDetailActivity extends BaseActivity {
+    @Inject
+    CustomDetailPresenter mICustomDetailPresenter;
     @Inject
     CustomDetailContract.ICustomDetailView mICustomDetailView;
 

@@ -64,6 +64,7 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
     @Inject
     CustomDetailContract.ICustomDetailView testView;
 
+
     @OnClick(R.id.btn_show_Report)
     public void showReport() {
         if (lv_custom_report.getVisibility() == View.GONE) {
@@ -178,9 +179,7 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
                 "res://haozuo.com.healthdoctor.view.custom/" + R.drawable.user_default_url);
         CName.setText(custom.Cname);
         CGender.setText(custom.GetSex());
-//        CAge.setText(DateUtil.getAge(custom.Certificate_Code,custom.Birthday)+"岁");
         CAge.setText(custom.GetAge() + "岁");
-//        CAge.setText(""+custom.Age);
         CAge.setText(custom.GetAge());
         Cphone.setText(custom.Mobile);
         btn_go_into.setOnClickListener(new View.OnClickListener() {
@@ -255,7 +254,6 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
             tv_CGender.setText(mCustomInfo.GetSex());
             tv_CAge.setText(mCustomInfo.GetAge());
             tv_DeptName.setText(ReportParamsEntity.CheckUnitName);
-//            tv_ReportDate.setText(ReportParamsEntity.CheckDate);
             tv_ReportDate.setText(ReportParamsEntity.getFormedDate());
             tv_ReportCode.setText(ReportParamsEntity.CheckUnitCode);
             tv_CCompany.setText(ReportParamsEntity.WorkNo);
@@ -303,7 +301,6 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
             TextView tv_PhotoReport_Dept = UIHelper.getAdapterView(convertView, R.id.tv_PhotoReport_Dept);
 
             final RequestPhotoReportListBean RequestPhotoReportEntity = dataSource.get(position);
-            tv_Count.setText("共" + RequestPhotoReportEntity.ImageUrlList.size() + "张");
             tv_PhotoReport_Date.setText(RequestPhotoReportEntity.Date);
             tv_PhotoReport_Dept.setText(RequestPhotoReportEntity.HealthCompanyName);
 
