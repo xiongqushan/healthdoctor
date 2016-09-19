@@ -18,7 +18,7 @@
         android:lineSpacingExtra="2dp"
         android:padding="@dimen/report_padding"
         android:text="主检医生:医师赵"
-        android:textColor="@color/title_color28"
+        android:textColor="@color/subtitle_color66"
         android:textSize="@dimen/txt_title_16sp"/>
 
 

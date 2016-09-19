@@ -29,8 +29,8 @@ public class LoadingDialog extends Dialog {
         UIHelper.CreateShape(vContent, 20, "#ffffff", 255);
         setContentView(vContent);
 
-        ivLoading = (View) vContent.findViewById(R.id.ivLoading);
-        UIHelper.CreateShape(ivLoading,0,"#ffffff",150);
+        ivLoading = vContent.findViewById(R.id.ivLoading);
+        UIHelper.CreateShape(ivLoading, 0, "#ffffff", 150);
         animator = ObjectAnimator.ofFloat(ivLoading, "translationY", 0, -150).setDuration(2000);
 //        animator = ObjectAnimator.ofFloat(ivLoading, "rotation", 0, 360).setDuration(800);
         animator.setInterpolator(new LinearInterpolator());

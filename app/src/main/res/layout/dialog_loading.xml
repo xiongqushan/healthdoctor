@@ -8,6 +8,7 @@
     android:orientation="vertical"
     android:padding="20dp">
 
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -16,18 +17,17 @@
             android:id="@+id/ivbgLoading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/loadingiocn" />
-            <!--android:src="@drawable/bg_dialog_loading" />-->
+            android:background="@drawable/loadingiocn" />
+        <!--android:src="@drawable/bg_dialog_loading" />-->
 
         <View
             android:id="@+id/ivLoading"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/ivbgLoading"
             android:layout_alignLeft="@id/ivbgLoading"
             android:layout_alignRight="@id/ivbgLoading"
-            android:layout_alignTop="@id/ivbgLoading"
-            android:layout_alignBottom="@id/ivbgLoading"/>
+            android:layout_alignTop="@id/ivbgLoading" />
 
     </RelativeLayout>
 
@@ -38,7 +38,7 @@
         android:layout_marginTop="10dp"
         android:text="数据加载中…"
         android:textColor="#000000"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 </LinearLayout>
 

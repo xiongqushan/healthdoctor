@@ -26,8 +26,7 @@
             <TextView
                 android:id="@+id/tvDoctorName"
                 style="@style/txt_set"
-                android:layout_alignParentRight="true"
-                android:text="医师赵" />
+                android:layout_alignParentRight="true" />
         </RelativeLayout>
 
         <View
@@ -48,8 +47,7 @@
             <TextView
                 android:id="@+id/tvDoctorSkill"
                 style="@style/txt_set"
-                android:layout_alignParentRight="true"
-                android:text="内科" />
+                android:layout_alignParentRight="true" />
         </RelativeLayout>
 
         <View
@@ -69,8 +67,7 @@
             <TextView
                 android:id="@+id/tvDoctorJob"
                 style="@style/txt_set"
-                android:layout_alignParentRight="true"
-                android:text="高级健管师" />
+                android:layout_alignParentRight="true" />
         </RelativeLayout>
 
         <View
@@ -91,8 +88,7 @@
             <TextView
                 android:id="@+id/tvDoctorWorkUnit"
                 style="@style/txt_set"
-                android:layout_alignParentRight="true"
-                android:text="上海好卓" />
+                android:layout_alignParentRight="true" />
         </RelativeLayout>
 
         <View
@@ -119,9 +115,7 @@
             android:layout_marginRight="12dp"
             android:background="@drawable/shape_line_corners_blue"
             android:lineSpacingExtra="2dp"
-            android:padding="16dp"
-            android:text="王医生
-内科,高级健管师,上海好卓,内科医生，高级健管师。二级公共营养师,有丰富的慢病及企业健管经验。" />
+            android:padding="16dp" />
 
 
     </LinearLayout>

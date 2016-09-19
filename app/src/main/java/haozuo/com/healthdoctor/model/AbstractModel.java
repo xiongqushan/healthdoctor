@@ -22,9 +22,20 @@ public abstract class AbstractModel implements IBaseModel {
         mOkHttpClient=okHttpClient;
         subscriberList=new ArrayList<>();
     }
+//    public static  <T> Observable.Transformer<T, T> applyAsySchedulers() {
+//        return new Observable.Transformer<T, T>() {
+//            @Override
+//            public Observable<T> call(Observable<T> observable) {
+//                return observable.subscribeOn(Schedulers.io())
+//                        .observeOn(AndroidSchedulers.mainThread());
+//            }
+//        };
+//    }
 
     protected <T> Subscriber<BaseBean<T>> getSubscriber(@NonNull final OnHandlerResultListener<GlobalShell<T>> callbackListener){
         Subscriber subscriber= new Subscriber<BaseBean<T>>() {
+
+
             @Override
             public void onCompleted() {
 
