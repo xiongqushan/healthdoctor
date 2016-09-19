@@ -50,7 +50,8 @@ public class ReportAllFragment extends Fragment {
         if (StringUtil.isEmpty(masterDotor)) {
             tvFooter.setText(bean.ReportInfoVM.CheckUnitName);
         } else {
-            tvFooter.setText("主检医师:" + masterDotor);
+//            tvFooter.setText("总检查师:" + masterDotor);
+            tvFooter.setText(masterDotor);
         }
     }
 

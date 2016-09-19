@@ -33,12 +33,14 @@ public class LoadingDialog extends Dialog {
 
         ImageView img = (ImageView) vContent.findViewById(R.id.ivbgLoading);
         img.measure(0, 0);
+<<<<<<< HEAD
 //        Log.e(" img.getMeasuredHeight",""+img.getMeasuredHeight());
+=======
+>>>>>>> fb15b9e1ba94d3aac8c8b76ec560d1ef5698cd0d
         int transformationY = -img.getMeasuredHeight();
         ivLoading = (View) vContent.findViewById(R.id.ivLoading);
         UIHelper.CreateShape(ivLoading,0,"#ffffff",150);
         animator = ObjectAnimator.ofFloat(ivLoading, "translationY", 0, transformationY).setDuration(2000);
-//        animator = ObjectAnimator.ofFloat(ivLoading, "rotation", 0, 360).setDuration(800);
         animator.setInterpolator(new LinearInterpolator());
         animator.setRepeatCount(-1);
         animator.addListener(new AnimatorListenerAdapter() {

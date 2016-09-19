@@ -41,16 +41,10 @@ public class GroupFragment extends AbstractView implements GroupContract.IGroupV
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        mContext = getContext();
-        if (rootView == null) {
-            rootView = inflater.inflate(R.layout.fragment_group, container, false);
-            ButterKnife.bind(this, rootView);
-        }
-        ButterKnife.bind(this, rootView);
-        return rootView;
+    protected IBasePresenter getPresenter() {
+        return mGroupPresenter;
     }
+
 
     @Override
     public void onResume() {
@@ -70,10 +64,18 @@ public class GroupFragment extends AbstractView implements GroupContract.IGroupV
         ButterKnife.unbind(this);
     }
 
+
     @Override
-    protected IBasePresenter getPresenter() {
-        return mGroupPresenter;
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        mContext = getContext();
+        if (rootView == null) {
+            rootView = inflater.inflate(R.layout.fragment_group, container, false);
+            ButterKnife.bind(this, rootView);
+        }
+        return rootView;
     }
+
 
     @Override
     protected View getRootView() {

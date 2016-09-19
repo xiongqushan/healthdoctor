@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import haozuo.com.healthdoctor.BuildConfig;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.contract.LoginContract;
 import haozuo.com.healthdoctor.contract.LoginContract.ILoginView;
@@ -82,7 +83,10 @@ public class LoginFragment extends AbstractView implements ILoginView {
             tv_warnning.setText(getClickableSpan());
             tv_warnning.setMovementMethod(LinkMovementMethod.getInstance());
 
-            edit_mobile.setText("15601815186");
+            if (BuildConfig.DEBUG) {
+                edit_code.setText("111111");
+                edit_mobile.setText("15601815186");
+            }
             txt_GetCode.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

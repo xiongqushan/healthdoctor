@@ -98,6 +98,24 @@ public class LoginPresenter extends AbstractPresenter implements LoginContract.I
         }
         password = StringUtil.encodeByMD5(password);
         mILoginView.showDialog();
+
+        //TODO rxjava
+//        mGroupModel.LoginRequestGroup(mobile, password, new OnHandlerResultListener<GlobalShell<List<DoctorGroupBean>>>() {
+//            @Override
+//            public void handlerResult(GlobalShell<List<DoctorGroupBean>> resultData) {
+//                if (resultData.LogicSuccess) {
+//                    DoctorGroupBean doctorGroupBean = new DoctorGroupBean();
+//                    Collections.sort(resultData.Data, doctorGroupBean);
+//                    if ((List<DoctorGroupBean>) resultData.Data != null) {
+//                        GroupInfoManager.getInstance().setGroupInfo((List<DoctorGroupBean>) resultData.Data);
+//                    }
+//                    mILoginView.hideDialog();
+//                    mILoginView.toHomeActivity();
+//                } else {
+//                    mILoginView.hideDialog(resultData.Message);
+//                }
+//            }
+//        });
         mUserModel.LoginValidate(mobile, password, new OnHandlerResultListener<GlobalShell<DoctorBean>>() {
             @Override
             public void handlerResult(GlobalShell<DoctorBean> resultData) {
@@ -146,5 +164,6 @@ public class LoginPresenter extends AbstractPresenter implements LoginContract.I
             }
         });
     }
+
 }
 
