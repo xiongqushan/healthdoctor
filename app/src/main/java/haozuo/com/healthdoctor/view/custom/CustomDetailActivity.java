@@ -42,6 +42,8 @@ public class CustomDetailActivity extends BaseActivity {
                 .build()
                 .inject(this);
 
+//        Log.e(getBaseContext()+"",mICustomDetailPresenter+"");
+//        Log.e(getBaseContext()+"",mICustomDetailView+"");
         FragmentManager fragmentManager = getSupportFragmentManager();
         CustomDetailFragment fragment = (CustomDetailFragment) fragmentManager.findFragmentById(R.id.frameContent);
         if (fragment == null) {

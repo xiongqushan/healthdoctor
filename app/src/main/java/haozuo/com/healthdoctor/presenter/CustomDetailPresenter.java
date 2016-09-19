@@ -11,11 +11,11 @@ import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.bean.ReportParamsBean;
 import haozuo.com.healthdoctor.bean.RequestPhotoReportListBean;
 import haozuo.com.healthdoctor.contract.CustomDetailContract;
-import haozuo.com.healthdoctor.model.IBaseModel;
-import haozuo.com.healthdoctor.view.IBaseView;
 import haozuo.com.healthdoctor.listener.OnHandlerResultListener;
+import haozuo.com.healthdoctor.model.IBaseModel;
 import haozuo.com.healthdoctor.model.ReportModel;
 import haozuo.com.healthdoctor.model.UserModel;
+import haozuo.com.healthdoctor.view.IBaseView;
 
 /**
  * Created by hzguest3 on 2016/7/22.
@@ -26,6 +26,9 @@ public class CustomDetailPresenter extends AbstractPresenter implements CustomDe
     private ReportModel mReportModel;
     private int mCustomerId;
     private String mAccountID;
+    private CustomDetailBean mCustomBean;
+    List<ReportParamsBean> mReportParamList;
+    List<RequestPhotoReportListBean> mRequestPhotoReportList;
 
     @Inject
     public CustomDetailPresenter(@NonNull CustomDetailContract.ICustomDetailView iView,@NonNull UserModel userModel, @NonNull ReportModel reportModel,int customerId,@NonNull String accountID){
@@ -39,9 +42,9 @@ public class CustomDetailPresenter extends AbstractPresenter implements CustomDe
 
     @Override
     public void start() {
-        GetUserDetail();
-        GetReportParams();
-        RequestPhotoReportList();
+        if (mCustomBean==null)GetUserDetail();
+        if (mReportParamList==null)GetReportParams();
+        if (mReportParamList==null)RequestPhotoReportList();
     }
 
     @Override
@@ -61,10 +64,12 @@ public class CustomDetailPresenter extends AbstractPresenter implements CustomDe
             public void handlerResult(GlobalShell<CustomDetailBean> resultData) {
                 if(resultData.LogicSuccess) {
                     mICustomDetailView.hideDialog();
-                    CustomDetailBean customBean = resultData.Data;
+                    mCustomBean = resultData.Data;
 //                    customBean.Sex = CustomDetailBean.GenderConvert(customBean.Gender);
-                    mICustomDetailView.InitView(customBean);
-                    mICustomDetailView.changeRetryLayer(true);
+                    mICustomDetailView.InitView(mCustomBean);
+                    if (mReportParamList!=null&&mReportParamList!=null){
+                        mICustomDetailView.changeRetryLayer(true);
+                    }
                 }
                 else{
                     mICustomDetailView.hideDialog(resultData.Message);
@@ -82,10 +87,12 @@ public class CustomDetailPresenter extends AbstractPresenter implements CustomDe
                 if(resultData.LogicSuccess) {
                     mICustomDetailView.hideDialog();
                     if (resultData.Data != null){
-                        List<ReportParamsBean> ReportParamList = resultData.Data;
-                        mICustomDetailView.RefreshReportParams(ReportParamList);
+                        mReportParamList = resultData.Data;
+                        mICustomDetailView.RefreshReportParams(mReportParamList);
                     }
-                    mICustomDetailView.changeRetryLayer(true);
+                    if (mCustomBean!=null&&mReportParamList!=null){
+                        mICustomDetailView.changeRetryLayer(true);
+                    }
                 }
                 else{
                     mICustomDetailView.hideDialog(resultData.Message);
@@ -103,10 +110,12 @@ public class CustomDetailPresenter extends AbstractPresenter implements CustomDe
                 if(resultData.LogicSuccess) {
                     mICustomDetailView.hideDialog();
                     if (resultData.Data != null) {
-                        List<RequestPhotoReportListBean> RequestPhotoReportList = resultData.Data;
-                        mICustomDetailView.RefreshPhotoReport(resultData.Data);
+                        mRequestPhotoReportList = resultData.Data;
+                        mICustomDetailView.RefreshPhotoReport(mRequestPhotoReportList);
                     }
-                    mICustomDetailView.changeRetryLayer(true);
+                    if (mCustomBean != null&& mReportParamList!=null){
+                        mICustomDetailView.changeRetryLayer(true);
+                    }
                 }
                 else{
                     mICustomDetailView.hideDialog(resultData.Message);
