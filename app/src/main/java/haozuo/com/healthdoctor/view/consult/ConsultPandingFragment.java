@@ -81,7 +81,7 @@ public class ConsultPandingFragment extends AbstractView {
     public void refreshFinish(int status, boolean isRefresh) {
         if (isRefresh) {
             ptrLayout.refreshFinish(status);
-            if (status == PullToRefreshLayout.SUCCEED){
+            if (status == PullToRefreshLayout.SUCCEED) {
                 playSuccessSound();
             }
         } else {
@@ -140,8 +140,14 @@ public class ConsultPandingFragment extends AbstractView {
         }
 
         public void refresh(List<ConsultItemBean> dataList, boolean isRefresh) {
-            if (dataList == null) return;
-            if (isRefresh) dataSource.clear();
+            if (dataList == null) {
+                dataSource.clear();
+                notifyDataSetChanged();
+                return;
+            }
+            if (isRefresh) {
+                dataSource.clear();
+            }
             dataSource.addAll(dataList);
             notifyDataSetChanged();
         }
@@ -171,8 +177,8 @@ public class ConsultPandingFragment extends AbstractView {
             TextView tvTime = UIHelper.getAdapterView(convertView, R.id.tvTime);
             TextView tvSubtitle = UIHelper.getAdapterView(convertView, R.id.tvSubtitle);
             ConsultItemBean doctorGroupEntity = dataSource.get(position);
-            UIHelper.setFrescoURL(img,Cphoto
-                    ,"res://haozuo.com.healthdoctor.view.custom/" + R.drawable.user_default_url);
+            UIHelper.setFrescoURL(img, Cphoto
+                    , "res://haozuo.com.healthdoctor.view.custom/" + R.drawable.user_default_url);
             tvTitle.setText(doctorGroupEntity.CustName);
             tvSubtitle.setText(doctorGroupEntity.ConsultTitele);
             tvTime.setText(DateUtil.TimeFormatByWeek(dataSource.get(position).CommitOn, "yyyy-MM-dd HH:mm"));
