@@ -37,7 +37,6 @@
                 android:textSize="@dimen/login_text_size"
                 android:text="15601815186"
                 android:textColor="@color/textColor_lightgrey"/>
-            <!--android:inputType="number"-->
 
             <TextView
                 android:id="@+id/txt_GetCode"

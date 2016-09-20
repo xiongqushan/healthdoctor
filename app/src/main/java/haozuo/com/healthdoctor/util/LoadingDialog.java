@@ -5,7 +5,6 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.app.Dialog;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
@@ -48,10 +47,9 @@ public class LoadingDialog extends Dialog {
             }
         });
         tvTip = (TextView) vContent.findViewById(R.id.tvTip);// 提示文字
-        setCancelable(false); //不可以使用返回键取消
-    }
+        setCancelable(true);//不可以使用返回键取消
 
-    public void setMessage(String msg) {
+    }  public void setMessage(String msg) {
         tvTip.setText(msg);
     }
 
