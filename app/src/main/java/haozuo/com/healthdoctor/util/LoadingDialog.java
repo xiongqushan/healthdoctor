@@ -32,7 +32,6 @@ public class LoadingDialog extends Dialog {
 
         ImageView img = (ImageView) vContent.findViewById(R.id.ivbgLoading);
         img.measure(0, 0);
-
         int transformationY = -img.getMeasuredHeight();
         ivLoading = (View) vContent.findViewById(R.id.ivLoading);
         UIHelper.CreateShape(ivLoading,0,"#ffffff",150);
