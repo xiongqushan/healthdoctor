@@ -33,11 +33,11 @@
                 android:drawableLeft="@drawable/user_logo"
                 android:drawablePadding="@dimen/login_drawablepadding"
                 android:gravity="start|bottom"
-                android:hint="@string/login_mobile"
-                android:inputType="number"
+                android:hint="@string/login_account"
                 android:singleLine="true"
                 android:textSize="@dimen/login_text_size"
                 android:textColor="@color/textColor_lightgrey"/>
+            <!--android:inputType="number"-->
 
             <TextView
                 android:id="@+id/txt_GetCode"

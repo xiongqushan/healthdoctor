@@ -244,6 +244,7 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
         if (flag == 1) {
             pendingList.get(2).refreshConsultPendingList(dataList, isRefresh);
         }
+
     }
 
     @Override
@@ -306,10 +307,13 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
     protected void onReceiveBroadcast(String filterAction, Intent intent) {
         super.onReceiveBroadcast(filterAction,intent );
         if (filterAction == BROADFILTER_CONSULT_REPLAY) {
-            refreshCustomList(3, true);
-            if (rbPending.isChecked()) {
-                pagerPending.setCurrentItem(0);
-            }
+          refreshCustomList(3, true);
+//            if (rbPending.isChecked()) {
+//                    pagerPending.setCurrentItem(0);
+//            }
+            int customID = intent.getIntExtra(ConsultDetailFragment.SELECTED_CUSTOMID,0);
+            int flag = tabLayout.getSelectedTabPosition();
+            pendingList.get(flag).removeConsultPendingList(customID);
         }
     }
 

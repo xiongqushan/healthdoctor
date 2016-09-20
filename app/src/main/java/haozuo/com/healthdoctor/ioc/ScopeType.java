@@ -21,6 +21,12 @@ public interface ScopeType {
     @Retention(RetentionPolicy.RUNTIME)
     public @interface FragmentScope {
     }
+
+    @Documented
+    @Scope
+    @Retention(RetentionPolicy.RUNTIME)
+    public @interface CustomScope {
+    }
 }
 
 ;

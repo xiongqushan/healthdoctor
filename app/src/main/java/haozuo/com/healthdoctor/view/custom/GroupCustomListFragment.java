@@ -81,6 +81,9 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
         mGroupCustInfoAdapter = new GroupCustInfoAdapter(mContext, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+
                 GroupCustInfoAdapter.ViewHolder tag = (GroupCustInfoAdapter.ViewHolder) v.getTag();
                 int customerId = (int) (((Object[]) tag.CPhoto.getTag())[0]);
                 String accountId = (String) (((Object[]) tag.CPhoto.getTag())[1]);
