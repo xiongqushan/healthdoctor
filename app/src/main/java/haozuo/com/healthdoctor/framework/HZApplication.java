@@ -82,4 +82,5 @@ public class HZApplication extends Application {
     public AppComponent getAppComponent() {
         return mAppComponent;
     }
+
 }

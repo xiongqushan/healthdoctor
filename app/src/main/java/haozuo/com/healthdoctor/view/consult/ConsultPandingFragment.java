@@ -78,6 +78,17 @@ public class ConsultPandingFragment extends AbstractView {
         adapter.refresh(dataList, isRefresh);
     }
 
+    //删除上一条已经回复的内容
+    public void removeConsultPendingList(int Id) {
+        for (ConsultItemBean customBean :dataSource){
+            if (customBean.CustId == Id){
+                dataSource.remove(customBean);
+                adapter.notifyDataSetChanged();
+                return;
+            }
+        }
+    }
+
     public void refreshFinish(int status, boolean isRefresh) {
         if (isRefresh) {
             ptrLayout.refreshFinish(status);

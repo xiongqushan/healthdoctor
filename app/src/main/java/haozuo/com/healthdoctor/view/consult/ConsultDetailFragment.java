@@ -49,8 +49,8 @@ import haozuo.com.healthdoctor.bean.CustomDetailBean;
 import haozuo.com.healthdoctor.bean.DoctorBean;
 import haozuo.com.healthdoctor.bean.ReportParamsBean;
 import haozuo.com.healthdoctor.contract.ConsultDetailContract;
-import haozuo.com.healthdoctor.presenter.IBasePresenter;
 import haozuo.com.healthdoctor.manager.UserManager;
+import haozuo.com.healthdoctor.presenter.IBasePresenter;
 import haozuo.com.healthdoctor.util.DateUtil;
 import haozuo.com.healthdoctor.util.JsonParser;
 import haozuo.com.healthdoctor.util.UIHelper;
@@ -79,6 +79,7 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
     public static final String PREFER_NAME = "com.iflytek.setting";
     public static final String SELECT_POSITION_SMOOTH = "SELECT_POSITION_SMOOTH";
     public static final String SELECT_POSITION_DIRECT = "SELECT_POSITION_DIRECT";
+    public static final String SELECTED_CUSTOMID = "SELECTED_CUSTOMID";
     private static String TAG = ConsultDetailFragment.class.getSimpleName();
     private SpeechRecognizer mIat;                                                              // 语音听写对象
     private RecognizerDialog mIatDialog;                                                       // 语音听写UI
@@ -88,6 +89,8 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
     private Toast mToast;
     private SharedPreferences mSharedPreferences;
 
+//    @Inject
+//    int customID;
     @Bind(R.id.consult_detail_ListView)
     PullableListView consult_detail_List;
     @Bind(R.id.consult_detail_pull_to_refresh_layout)
@@ -274,7 +277,9 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
     @Override
     public void RefreshConsultPage(List<ConsultReplyBean> mConsultReplyBeanList){
         mConsultListAdapter.refresh(mConsultReplyBeanList);
-        sendCustomBroadcast(BROADFILTER_CONSULT_REPLAY);
+        Intent intent = new Intent(BROADFILTER_CONSULT_REPLAY);
+        intent.putExtra(SELECTED_CUSTOMID, mCustomerId);
+        getContext().sendBroadcast(intent);
     }
 
 //    @Override

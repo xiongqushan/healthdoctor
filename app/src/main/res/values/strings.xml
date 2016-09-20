@@ -4,6 +4,7 @@
 
     <string name="login_title">优健管</string>
     <string name="login_mobile">请输入手机号</string>
+    <string name="login_account">请输入账号</string>
     <string name="login_code">请输入手机验证码</string>
     <string name="login_get_code">发送验证码</string>
     <string name="login_submit">登 录</string>

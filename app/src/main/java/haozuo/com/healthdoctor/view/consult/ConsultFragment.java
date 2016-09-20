@@ -244,6 +244,7 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
         if (flag == 1) {
             pendingList.get(2).refreshConsultPendingList(dataList, isRefresh);
         }
+
     }
 
     @Override
@@ -307,8 +308,18 @@ public class ConsultFragment extends AbstractView implements ConsultContract.ICo
         super.onReceiveBroadcast(filterAction,intent );
         if (filterAction == BROADFILTER_CONSULT_REPLAY) {
             refreshCustomList(3, true);
-            if (rbPending.isChecked()) {
-                pagerPending.setCurrentItem(0);
+            //            if (rbPending.isChecked()) {
+            //                    pagerPending.setCurrentItem(0);
+            //            }
+            int customID = intent.getIntExtra(ConsultDetailFragment.SELECTED_CUSTOMID,0);
+            int flag = tabLayout.getSelectedTabPosition();
+
+            //若返回至全部则刷新转入以及我的页面，否则刷新全部并且删除相应页面的该条数据
+            if (flag == 0){
+                refreshCustomList(1, true);
+                refreshCustomList(2, true);
+            }else {
+                pendingList.get(flag).removeConsultPendingList(customID);
             }
         }
     }
