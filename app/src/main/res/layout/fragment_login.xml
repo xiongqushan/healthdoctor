@@ -29,13 +29,13 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@null"
-                android:digits="15601815186"
                 android:drawableLeft="@drawable/user_logo"
                 android:drawablePadding="@dimen/login_drawablepadding"
                 android:gravity="start|bottom"
                 android:hint="@string/login_account"
                 android:singleLine="true"
                 android:textSize="@dimen/login_text_size"
+                android:text="15601815186"
                 android:textColor="@color/textColor_lightgrey"/>
             <!--android:inputType="number"-->
 
