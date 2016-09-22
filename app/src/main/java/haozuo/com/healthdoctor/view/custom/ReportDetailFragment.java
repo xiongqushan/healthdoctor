@@ -3,6 +3,7 @@ package haozuo.com.healthdoctor.view.custom;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +27,6 @@ import butterknife.OnClick;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.ReportDetailBean;
 import haozuo.com.healthdoctor.util.StringUtil;
-import haozuo.com.healthdoctor.util.UHealthUtils;
 import haozuo.com.healthdoctor.util.UIHelper;
 import haozuo.com.healthdoctor.view.threePart.common.ChildListView;
 
@@ -48,14 +48,23 @@ public class ReportDetailFragment extends Fragment {
 
     @OnClick(R.id.imgShowHideList)
     void showHideList() {
-        if (UHealthUtils.isFastDoubleClick()) return;
         if (lvHide.getVisibility() == View.GONE) {
-            lvHide.setVisibility(View.VISIBLE);
-            dividerList.setVisibility(View.VISIBLE);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    lvHide.setVisibility(View.VISIBLE);
+                    dividerList.setVisibility(View.VISIBLE);
+                }
+            }, 800);
             showListAnima();
         } else {
-            lvHide.setVisibility(View.GONE);
-            dividerList.setVisibility(View.GONE);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    lvHide.setVisibility(View.GONE);
+                    dividerList.setVisibility(View.GONE);
+                }
+            }, 800);
             hideListAnima();
         }
     }
@@ -65,7 +74,6 @@ public class ReportDetailFragment extends Fragment {
             mAnimaRotateShow = AnimationUtils.loadAnimation(getActivity(), R.anim.rotating_show);
         }
         imgShowHideList.startAnimation(mAnimaRotateShow);
-
     }
 
     private void hideListAnima() {
@@ -73,6 +81,11 @@ public class ReportDetailFragment extends Fragment {
             mAnimaRotateHide = AnimationUtils.loadAnimation(getActivity(), R.anim.rotating_hide);
         }
         imgShowHideList.startAnimation(mAnimaRotateHide);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 
     private Animation mAnimaRotateShow = null;

@@ -53,7 +53,6 @@ public class HomeActivity extends BaseActivity {
     @Bind(R.id.content_mine)
     FrameLayout layoutMine;
 
-
     @Inject
     GroupPresenter mGroupPresenter;
     @Inject
@@ -129,6 +128,26 @@ public class HomeActivity extends BaseActivity {
         //String alias = UserManager.getInstance().getDoctorInfo().Account;
         int doctor_IDid = UserManager.getInstance().getDoctorInfo().Doctor_ID;
         mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, doctor_IDid + ""));
+        //TODO  rxjava方式设置推送Alias
+//        Observable observable = Observable.just(doctor_IDid + "");
+//        Subscriber subscriber = new Subscriber<String>() {
+//            @Override
+//            public void onCompleted() {
+//            }
+//
+//            @Override
+//            public void onError(Throwable e) {
+//            }
+//
+//            @Override
+//            public void onNext(String s) {
+//                JPushInterface.setAliasAndTags(getApplicationContext(), s, null, mAliasCallback);
+//            }
+//        };
+//        observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(subscriber);
+//        observable.delay(1000 * 60, TimeUnit.MILLISECONDS).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(subscriber);
     }
 
     private void initView() {
@@ -172,7 +191,6 @@ public class HomeActivity extends BaseActivity {
     }
 
 
-    // TODO 0811 添加双击退出  by zy
     private boolean isExit;
 
     @Override

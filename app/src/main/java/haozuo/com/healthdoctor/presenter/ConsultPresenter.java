@@ -58,13 +58,14 @@ public class ConsultPresenter extends AbstractPresenter implements ConsultContra
     @Override
 
     public void refreshCustomList(final int flag, final boolean initData) {
-        if (flag == 3 && initData) mIConsultView.showDialog();
+        if (flag == 3 && initData) {
+            mIConsultView.showDialog();
+        }
         int doctorId = UserManager.getInstance().getDoctorInfo().Doctor_ID;
         mConsultModel.GetGroupCustInfoList(doctorId, 1, PAGE_SIZE, flag, new OnHandlerResultListener<GlobalShell<PageBean<ConsultItemBean>>>() {
             @Override
             public void handlerResult(GlobalShell<PageBean<ConsultItemBean>> resultData) {
                 if (resultData.LogicSuccess) {
-
                     mIConsultView.refreshPendingPageList(resultData.Data.CurrentPageDataList, flag, true);
                     if (!initData) {
                         mIConsultView.refreshFinish(PullToRefreshLayout.SUCCEED, flag, true);
@@ -94,7 +95,10 @@ public class ConsultPresenter extends AbstractPresenter implements ConsultContra
             @Override
             public void handlerResult(GlobalShell<PageBean<ConsultItemBean>> resultData) {
                 if (resultData.LogicSuccess) {
-                    mIConsultView.refreshPendingPageList(resultData.Data.CurrentPageDataList, flag, false);
+                    if (resultData.Data.CurrentPageDataList != null) {
+                        mIConsultView.refreshPendingPageList(resultData.Data.CurrentPageDataList, flag, false);
+                    }
+
                     mIConsultView.refreshFinish(PullToRefreshLayout.SUCCEED, flag, false);
                 } else {
                     mIConsultView.hideDialog(resultData.Message);
@@ -165,7 +169,9 @@ public class ConsultPresenter extends AbstractPresenter implements ConsultContra
             @Override
             public void handlerResult(GlobalShell<PageBean<ConsultDoneItemBean>> resultData) {
                 if (resultData.LogicSuccess) {
-                    mIConsultView.refreshConsultDonePageList(resultData.Data.CurrentPageDataList, flag, false);
+                    if (resultData.Data.CurrentPageDataList != null) {
+                        mIConsultView.refreshConsultDonePageList(resultData.Data.CurrentPageDataList, flag, false);
+                    }
                     mIConsultView.refreshConsultDonePageFinish(PullToRefreshLayout.SUCCEED, flag, false);
                 } else {
                     mIConsultView.hideDialog(resultData.Message);
@@ -210,7 +216,9 @@ public class ConsultPresenter extends AbstractPresenter implements ConsultContra
             @Override
             public void handlerResult(GlobalShell<PageBean<FeedbackItemBean>> resultData) {
                 if (resultData.LogicSuccess) {
-                    mIConsultView.refreshFeedbackPageList(resultData.Data.CurrentPageDataList, flag, false);
+                    if (resultData.Data.CurrentPageDataList != null) {
+                        mIConsultView.refreshFeedbackPageList(resultData.Data.CurrentPageDataList, flag, false);
+                    }
                     mIConsultView.refreshFeedbackPageFinish(PullToRefreshLayout.SUCCEED, flag, false);
                 } else {
                     mIConsultView.hideDialog(resultData.Message);

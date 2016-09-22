@@ -13,11 +13,14 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import haozuo.com.healthdoctor.BuildConfig;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.DoctorBean;
+import haozuo.com.healthdoctor.bean.ReportParamsBean;
 import haozuo.com.healthdoctor.manager.UserManager;
 import haozuo.com.healthdoctor.util.UIHelper;
 import haozuo.com.healthdoctor.view.base.BaseFragment;
+import haozuo.com.healthdoctor.view.custom.CustomerReportActivity;
 import haozuo.com.healthdoctor.view.home.HomeActivity;
 
 /**
@@ -37,14 +40,17 @@ public class MineFragment extends BaseFragment {
 
     @OnClick(R.id.layout_basedata)
     void clickLayoutBaseData() {
-//        Intent intent = new Intent(getActivity(), CustomerReportActivity.class);
-//        ReportParamsBean bean = new ReportParamsBean();
-//        bean.customerId = 138;
-//        bean.CheckUnitCode = "bjbr002";
-//        bean.WorkNo = "0000000081";
-//        intent.putExtra(CustomerReportActivity.REPORTPARAMSBEAN, bean);
-//        getActivity().startActivity(intent);
-        getActivity().startActivity(new Intent(getActivity(), DoctorInfoActivity.class));
+        if (BuildConfig.DEBUG) {
+            Intent intent = new Intent(getActivity(), CustomerReportActivity.class);
+            ReportParamsBean bean = new ReportParamsBean();
+            bean.customerId = 138;
+            bean.CheckUnitCode = "bjbr002";
+            bean.WorkNo = "0000000081";
+            intent.putExtra(CustomerReportActivity.REPORTPARAMSBEAN, bean);
+            getActivity().startActivity(intent);
+        } else {
+            getActivity().startActivity(new Intent(getActivity(), DoctorInfoActivity.class));
+        }
     }
 
     @OnClick(R.id.layout_set)
