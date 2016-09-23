@@ -162,7 +162,6 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
     @Override
     public void refreshFinish(int status, boolean isRefresh) {
         if (isRefresh) {
-
             pull_to_refresh_layout.refreshFinish(status);
         } else {
             pull_to_refresh_layout.loadmoreFinish(status);

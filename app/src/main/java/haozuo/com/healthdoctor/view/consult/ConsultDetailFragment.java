@@ -165,6 +165,7 @@ public class ConsultDetailFragment extends AbstractView implements ConsultDetail
             rootView = inflater.inflate(R.layout.fragment_consult_detail, container, false);
             ButterKnife.bind(this, rootView);
             if (!getActivity().getIntent().getBooleanExtra(ConsultDetailActivity.EXTRA_SHOW_EDITLAYOUT, true)) {
+                //如果是从反馈页面进入，则隐藏回复模块
                 layoutEditArea.setVisibility(View.GONE);
             }
         }

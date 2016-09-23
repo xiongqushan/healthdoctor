@@ -91,11 +91,12 @@ public class LoginPresenter extends AbstractPresenter implements LoginContract.I
             Toast.makeText(mContext, "用户名和密码不能为空!",
                     Toast.LENGTH_SHORT).show();
             return;
-        } else if (!StringUtil.isMobile(mobile)) {
-            Toast.makeText(mContext, "请输入正确的手机号!",
-                    Toast.LENGTH_SHORT).show();
-            return;
         }
+//        else if (!StringUtil.isMobile(mobile)) {
+//            Toast.makeText(mContext, "请输入正确的手机号!",
+//                    Toast.LENGTH_SHORT).show();
+//            return;
+//        }
         password = StringUtil.encodeByMD5(password);
         mILoginView.showDialog();
 

@@ -15,6 +15,7 @@
         android:layout_weight="1"
         android:background="@drawable/bg_layer_useful">
         <LinearLayout
+            android:id="@+id/layer_Content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">

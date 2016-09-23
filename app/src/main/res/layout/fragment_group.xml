@@ -81,7 +81,7 @@
 
 
                 <TextView
-                    android:id="@+id/secondGroupName"
+                    android:id="@+id/sixthGroupName"
                     style="@style/item_group"
                     android:layout_weight="3"
                     android:background="#61C8F1"
@@ -96,7 +96,7 @@
                     tools:text="高血压组\n服务人数:58" />
 
                 <TextView
-                    android:id="@+id/sixthGroupName"
+                    android:id="@+id/secondGroupName"
                     style="@style/item_group"
                     android:layout_marginTop="8dp"
                     android:layout_weight="2.5"

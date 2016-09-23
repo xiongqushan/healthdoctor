@@ -64,7 +64,6 @@ public class ConsultPresenter extends AbstractPresenter implements ConsultContra
             @Override
             public void handlerResult(GlobalShell<PageBean<ConsultItemBean>> resultData) {
                 if (resultData.LogicSuccess) {
-
                     mIConsultView.refreshPendingPageList(resultData.Data.CurrentPageDataList, flag, true);
                     if (!initData) {
                         mIConsultView.refreshFinish(PullToRefreshLayout.SUCCEED, flag, true);

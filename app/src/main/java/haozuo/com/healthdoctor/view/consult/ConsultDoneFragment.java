@@ -135,8 +135,18 @@ public class ConsultDoneFragment extends AbstractView {
         }
 
         public void refresh(List<ConsultDoneItemBean> dataList, boolean isRefresh) {
-            if (dataList == null) return;
-            if (isRefresh) dataSource.clear();
+//            if (dataList == null) return;
+//            if (isRefresh) dataSource.clear();
+//            dataSource.addAll(dataList);
+//            notifyDataSetChanged();
+            if (dataList == null) {
+                dataSource.clear();
+                notifyDataSetChanged();
+                return;
+            }
+            if (isRefresh) {
+                dataSource.clear();
+            }
             dataSource.addAll(dataList);
             notifyDataSetChanged();
         }
