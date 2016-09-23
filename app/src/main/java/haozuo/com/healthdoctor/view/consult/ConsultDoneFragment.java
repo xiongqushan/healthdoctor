@@ -72,7 +72,7 @@ public class ConsultDoneFragment extends AbstractView {
     public void refreshFinish(int status, boolean isRefresh) {
         if (isRefresh) {
             ptrLayout.refreshFinish(status);
-            if (status == PullToRefreshLayout.SUCCEED){
+            if (status == PullToRefreshLayout.SUCCEED) {
                 playSuccessSound();
             }
         } else {
@@ -135,10 +135,6 @@ public class ConsultDoneFragment extends AbstractView {
         }
 
         public void refresh(List<ConsultDoneItemBean> dataList, boolean isRefresh) {
-//            if (dataList == null) return;
-//            if (isRefresh) dataSource.clear();
-//            dataSource.addAll(dataList);
-//            notifyDataSetChanged();
             if (dataList == null) {
                 dataSource.clear();
                 notifyDataSetChanged();
@@ -162,8 +158,8 @@ public class ConsultDoneFragment extends AbstractView {
             RatingBar ratingBar = UIHelper.getAdapterView(convertView, R.id.RatingBar);
             ratingBar.setRating(dataSource.get(position).Score);
             String imgUrl = dataSource.get(position).PhotoUrl;
-            UIHelper.setFrescoURL(img,imgUrl
-                    ,"res://haozuo.com.healthdoctor.view.custom/" + R.drawable.user_default_url);
+            UIHelper.setFrescoURL(img, imgUrl
+                    , "res://haozuo.com.healthdoctor.view.custom/" + R.drawable.user_default_url);
             tvTitle.setText(dataSource.get(position).CustName);
             tvTime.setText(DateUtil.TimeFormatByWeek(dataSource.get(position).CommitOn, "yyyy-MM-dd HH:mm"));
             return convertView;

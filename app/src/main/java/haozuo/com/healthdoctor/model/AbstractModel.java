@@ -27,6 +27,7 @@ public abstract class AbstractModel implements IBaseModel {
 //            @Override
 //            public Observable<T> call(Observable<T> observable) {
 //                return observable.subscribeOn(Schedulers.io())
+//                        .unsubscribeOn(Schedulers.io())
 //                        .observeOn(AndroidSchedulers.mainThread());
 //            }
 //        };

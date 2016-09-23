@@ -20,6 +20,7 @@ import java.util.Random;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import haozuo.com.healthdoctor.BuildConfig;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.bean.FeedbackItemBean;
 import haozuo.com.healthdoctor.presenter.IBasePresenter;
@@ -72,7 +73,7 @@ public class FeedbackFragment extends AbstractView {
     public void refreshFinish(int status, boolean isRefresh) {
         if (isRefresh) {
             ptrLayout.refreshFinish(status);
-            if (status == PullToRefreshLayout.SUCCEED){
+            if (status == PullToRefreshLayout.SUCCEED) {
                 playSuccessSound();
             }
         } else {
@@ -128,7 +129,11 @@ public class FeedbackFragment extends AbstractView {
         }
 
         public void refresh(List<FeedbackItemBean> dataList, boolean isRefresh) {
-            if (dataList == null) return;
+            if (dataList == null) {
+                dataSource.clear();
+                notifyDataSetChanged();
+                return;
+            }
             if (isRefresh) dataSource.clear();
             dataSource.addAll(dataList);
             notifyDataSetChanged();
@@ -145,14 +150,16 @@ public class FeedbackFragment extends AbstractView {
             SimpleDraweeView img = UIHelper.getAdapterView(convertView, R.id.drawee_consult_Cphoto);
             RatingBar ratingBar = UIHelper.getAdapterView(convertView, R.id.RatingBar);
             ratingBar.setRating(dataSource.get(position).Score);
-            ratingBar.setRating(new Random().nextInt(6));
+            if (BuildConfig.DEBUG) {
+                ratingBar.setRating(new Random().nextInt(6));
+            }
             tvTitle.setText(dataSource.get(position).CustName);
             tvName.setText(dataSource.get(position).ReDoctor);
             tvName.setVisibility(View.VISIBLE);
             String imgUrl = dataSource.get(position).PhotoUrl;
 
-            UIHelper.setFrescoURL(img,imgUrl
-                    ,"res://haozuo.com.healthdoctor.view.custom/" + R.drawable.user_default_url);
+            UIHelper.setFrescoURL(img, imgUrl
+                    , "res://haozuo.com.healthdoctor.view.custom/" + R.drawable.user_default_url);
             tvTime.setText(DateUtil.TimeFormatByWeek(dataSource.get(position).CommitOn, "yyyy-MM-dd HH:mm"));
             return convertView;
         }
