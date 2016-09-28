@@ -19,6 +19,11 @@ import dagger.Module;
 import dagger.Provides;
 import haozuo.com.healthdoctor.framework.HZApplication;
 import haozuo.com.healthdoctor.framework.SysConfig;
+import haozuo.com.healthdoctor.model.ConsultModel;
+import haozuo.com.healthdoctor.model.GroupModel;
+import haozuo.com.healthdoctor.model.ReportModel;
+import haozuo.com.healthdoctor.model.SystemModel;
+import haozuo.com.healthdoctor.model.UserModel;
 import haozuo.com.healthdoctor.service.IConsultService;
 import haozuo.com.healthdoctor.service.IGroupService;
 import haozuo.com.healthdoctor.service.IReportService;
@@ -86,6 +91,34 @@ public class AppModule {
     @Singleton
     ISystemService provideSystemService(@NonNull Retrofit retrofit) {
         return retrofit.create(ISystemService.class);
+    }
+
+    @Provides
+    @Singleton
+    ConsultModel provideConsultModel(@NonNull OkHttpClient okHttpClient, @NonNull IConsultService iConsultService){
+        return new ConsultModel(okHttpClient,iConsultService);
+    }
+
+    @Provides
+    @Singleton
+    GroupModel provideGroupModel(@NonNull OkHttpClient okHttpClient, @NonNull IGroupService iGroupService, @NonNull IUserService iUserService){
+        return new GroupModel(okHttpClient,iGroupService,iUserService);
+    }
+    @Provides
+    @Singleton
+    ReportModel provideReportModel(@NonNull OkHttpClient okHttpClient, @NonNull IReportService iReportService){
+        return new ReportModel(okHttpClient,iReportService);
+    }
+    @Provides
+    @Singleton
+    UserModel provideUserModel(@NonNull OkHttpClient okHttpClient, IUserService iUserService){
+        return new UserModel(okHttpClient,iUserService);
+    }
+
+    @Provides
+    @Singleton
+    SystemModel provideSystemModel(@NonNull OkHttpClient okHttpClient, ISystemService mISystemService){
+        return new SystemModel(okHttpClient,mISystemService);
     }
 
     @Provides

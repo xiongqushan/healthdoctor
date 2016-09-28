@@ -2,17 +2,15 @@ package haozuo.com.healthdoctor.ioc;
 
 import android.content.Context;
 
-import com.squareup.okhttp.OkHttpClient;
-
 import javax.inject.Singleton;
 
 import dagger.Component;
 import haozuo.com.healthdoctor.framework.HZApplication;
-import haozuo.com.healthdoctor.service.IConsultService;
-import haozuo.com.healthdoctor.service.IGroupService;
-import haozuo.com.healthdoctor.service.IReportService;
-import haozuo.com.healthdoctor.service.ISystemService;
-import haozuo.com.healthdoctor.service.IUserService;
+import haozuo.com.healthdoctor.model.ConsultModel;
+import haozuo.com.healthdoctor.model.GroupModel;
+import haozuo.com.healthdoctor.model.ReportModel;
+import haozuo.com.healthdoctor.model.SystemModel;
+import haozuo.com.healthdoctor.model.UserModel;
 
 /**
  * Created by xiongwei1 on 2016/8/5.
@@ -25,16 +23,26 @@ public interface AppComponent {
 
     Context getContext();
 
-    IUserService getUserService();
+//    IUserService getUserService();
+//
+//    IGroupService getGroupService();
+//
+//    IConsultService getConsultService();
+//
+//    IReportService getReportService();
+//
+//    ISystemService getSystemService();
 
-    IGroupService getGroupService();
+    ConsultModel getConsultModel();
 
-    IConsultService getConsultService();
+    GroupModel getGroupModel();
 
-    IReportService getReportService();
+    ReportModel getReportModel();
 
-    ISystemService getSystemService();
+    UserModel getUserModel();
 
-    OkHttpClient getOkHttpClient();
+    SystemModel getSystemModel();
+
+//    OkHttpClient getOkHttpClient();
 
 }

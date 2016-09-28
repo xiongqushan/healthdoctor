@@ -7,6 +7,7 @@ import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.imagepipeline.decoder.ProgressiveJpegConfig;
 import com.facebook.imagepipeline.image.ImmutableQualityInfo;
 import com.facebook.imagepipeline.image.QualityInfo;
+import com.frogermcs.dagger2metrics.Dagger2Metrics;
 import com.iflytek.cloud.Setting;
 import com.iflytek.cloud.SpeechUtility;
 import com.squareup.leakcanary.LeakCanary;
@@ -38,16 +39,19 @@ public class HZApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        mAppComponent = DaggerAppComponent.builder()
-                .appModule(new AppModule(this))
-                .build();
         applictaion = this;
-        mRefWatcher = LeakCanary.install(this);
 
+
+        JPushInterface.setDebugMode(BuildConfig.DEBUG);    // 设置开启日志,发布时请关闭日志
+        JPushInterface.init(this);
+        // JPushInterface.setLatestNotificationNumber(this, 3);//限制保留的通知条数。默认为保留最近 5 条通知。
+        PreferenceManager.init(this);
+        MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
+
+        //讯飞语音转换
         SpeechUtility.createUtility(this, "appid=" + getString(R.string.app_id));
         // 以下语句用于设置日志开关（默认开启），设置成false时关闭语音云SDK日志打印
-        // Setting.setShowLog(false);
-        Setting.setShowLog(true);
+        Setting.setShowLog(BuildConfig.DEBUG);
 
         //FRESCO 配置渐进式加载JPEG图片
         ProgressiveJpegConfig pjpegConfig = new ProgressiveJpegConfig() {
@@ -67,12 +71,18 @@ public class HZApplication extends Application {
                 .build();
         Fresco.initialize(this, config);
 //        Fresco.initialize(this);
-        JPushInterface.setDebugMode(BuildConfig.DEBUG);    // 设置开启日志,发布时请关闭日志
-        JPushInterface.init(this);
-        // JPushInterface.setLatestNotificationNumber(this, 3);//限制保留的通知条数。默认为保留最近 5 条通知。
-        PreferenceManager.init(this);
-        MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
 
+        //leakcanary
+        mRefWatcher = LeakCanary.install(this);
+
+        //dagger2注入检查工具
+        if (BuildConfig.DEBUG){
+            Dagger2Metrics.enableCapturing(this);
+        }
+
+        mAppComponent = DaggerAppComponent.builder()
+                .appModule(new AppModule(this))
+                .build();
     }
 
     public RefWatcher getRefWatcher() {

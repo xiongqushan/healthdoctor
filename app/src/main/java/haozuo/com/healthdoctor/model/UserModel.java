@@ -27,7 +27,7 @@ import rx.schedulers.Schedulers;
 public class UserModel extends AbstractModel {
     IUserService mIUserService;
 
-    @Inject
+//    @Inject
     public UserModel(@NonNull OkHttpClient okHttpClient, IUserService iUserService) {
         super(okHttpClient);
         mIUserService = iUserService;

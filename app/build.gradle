@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'com.frogermcs.dagger2metrics'
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
@@ -43,6 +44,23 @@ android {
         exclude('META-INF/maven/com.google.guava/guava/pom.xml')
         exclude('META-INF/maven/com.google.guava/guava/pom.properties')
         exclude('LICENSE.txt')
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs =['libs']
+        }
+    }
+}
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:1.0.0'
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4' // 3
+        classpath 'com.frogermcs.dagger2metrics:dagger2metrics-plugin:0.2'
     }
 }
 

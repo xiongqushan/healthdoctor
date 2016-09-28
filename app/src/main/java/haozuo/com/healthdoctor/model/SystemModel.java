@@ -20,7 +20,7 @@ import rx.schedulers.Schedulers;
 public class SystemModel extends AbstractModel {
     ISystemService mISystemService;
 
-    @Inject
+//    @Inject
     public SystemModel(@NonNull OkHttpClient okHttpClient, ISystemService mISystemService) {
         super(okHttpClient);
         this.mISystemService = mISystemService;

@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
@@ -24,6 +23,7 @@ import haozuo.com.healthdoctor.bean.CustomDetailBean;
 import haozuo.com.healthdoctor.bean.DoctorGroupBean;
 import haozuo.com.healthdoctor.contract.CustomerInfoContract;
 import haozuo.com.healthdoctor.presenter.IBasePresenter;
+import haozuo.com.healthdoctor.util.CustomDialog;
 import haozuo.com.healthdoctor.util.UIHelper;
 import haozuo.com.healthdoctor.view.base.AbstractView;
 import haozuo.com.healthdoctor.view.threePart.common.DrawableClickableTextView;
@@ -146,10 +146,21 @@ public class CustomerInfoFragment extends AbstractView implements CustomerInfoCo
             @Override
             public void onDrawableRightClick(View view) {
                 if (mCustomInfo.GroupIdList.size() == 1) {
-                    Toast.makeText(mContext, "该客户至少需要保留一个分组", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(mContext, "该客户至少需要保留一个分组", Toast.LENGTH_SHORT).show();
+                    showConfirmDialog("该客户至少需要保留一个分组！", new CustomDialog.OnDialogListener() {
+                        @Override
+                        public void OnDialogConfirmListener() {
+
+                        }
+                    });
                     return;
                 }
-                mPresenter.DeleteCustomerGroup(groupBean);
+                showConfirmDialog("确认将该客户从"+groupBean.name+"中删除吗？", new CustomDialog.OnDialogListener() {
+                    @Override
+                    public void OnDialogConfirmListener() {
+                        mPresenter.DeleteCustomerGroup(groupBean);
+                    }
+                });
             }
         });
 

@@ -20,6 +20,9 @@ public class CustomDetailActivity extends BaseActivity {
     CustomDetailPresenter mICustomDetailPresenter;
     @Inject
     CustomDetailContract.ICustomDetailView mICustomDetailView;
+    @Inject
+    CustomDetailContract.ICustomDetailView mICustomDetailView2;
+
 
     public static String EXTRA_CUSTOMER_ID = "Customer_ID";
     public static String EXTRA_ACCOUNT_ID = "Account_ID";

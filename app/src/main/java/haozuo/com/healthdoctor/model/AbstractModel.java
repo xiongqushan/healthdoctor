@@ -16,11 +16,12 @@ import rx.Subscriber;
  * Created by xiongwei1 on 2016/7/27.
  */
 public abstract class AbstractModel implements IBaseModel {
-    OkHttpClient mOkHttpClient;
+    //    OkHttpClient mOkHttpClient;
     List<Subscriber> subscriberList;
-    public AbstractModel(@NonNull OkHttpClient okHttpClient){
-        mOkHttpClient=okHttpClient;
-        subscriberList=new ArrayList<>();
+
+    public AbstractModel(@NonNull OkHttpClient okHttpClient) {
+//        mOkHttpClient=okHttpClient;
+        subscriberList = new ArrayList<>();
     }
 //    public static  <T> Observable.Transformer<T, T> applyAsySchedulers() {
 //        return new Observable.Transformer<T, T>() {
@@ -33,13 +34,20 @@ public abstract class AbstractModel implements IBaseModel {
 //        };
 //    }
 
-    protected <T> Subscriber<BaseBean<T>> getSubscriber(@NonNull final OnHandlerResultListener<GlobalShell<T>> callbackListener){
-        Subscriber subscriber= new Subscriber<BaseBean<T>>() {
+    protected <T> Subscriber<BaseBean<T>> getSubscriber(@NonNull final OnHandlerResultListener<GlobalShell<T>> callbackListener) {
+         Subscriber subscriber =  new Subscriber<BaseBean<T>>() {
 
+           @Override
+           public void onStart() {
+//               boolean unsubscribed = isUnsubscribed();
+//               Log.e("onStart-unsubscribed",""+unsubscribed);
+//               if (!ConnectedUtils.isConnected(HZApplication.shareApplication())){
+//                   unsubscribe();
+//               }
+           }
 
-            @Override
+           @Override
             public void onCompleted() {
-
             }
 
             @Override
@@ -66,8 +74,13 @@ public abstract class AbstractModel implements IBaseModel {
 
     @Override
     public void cancelRequest() {
-        for (Subscriber subscriber:subscriberList){
-            subscriber.unsubscribe();
+        for (Subscriber subscriber : subscriberList) {
+//            boolean unsubscribed = subscriber.isUnsubscribed();
+//            Log.e("isUnsubscribed",""+unsubscribed);
+//            if (!unsubscribed) {
+                subscriber.unsubscribe();
+//                subscriberList.remove(subscriber);
+//            }
         }
     }
 }
