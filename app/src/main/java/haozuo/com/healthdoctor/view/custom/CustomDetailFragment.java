@@ -301,6 +301,7 @@ public class CustomDetailFragment extends AbstractView implements CustomDetailCo
             TextView tv_PhotoReport_Dept = UIHelper.getAdapterView(convertView, R.id.tv_PhotoReport_Dept);
 
             final RequestPhotoReportListBean RequestPhotoReportEntity = dataSource.get(position);
+            tv_Count.setText("共"+RequestPhotoReportEntity.ImageUrlList.size()+"页");
             tv_PhotoReport_Date.setText(RequestPhotoReportEntity.Date);
             tv_PhotoReport_Dept.setText(RequestPhotoReportEntity.HealthCompanyName);
 

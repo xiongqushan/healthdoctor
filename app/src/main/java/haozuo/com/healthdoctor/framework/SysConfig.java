@@ -24,8 +24,8 @@ public class SysConfig {
     public static final String CONTROLLER_PRE_API_REPORT = "api/" + CURRENT_BASE_VERSION + "_Report/";
     public static final String CONTROLLER_PRE_API_SYSTEM = "api/" + CURRENT_BASE_VERSION + "_System/";
 
-    public static final int CONNECT_TIMEOUT = 10;
-    public static final int WRITE_TIMEOUT = 10;
+    public static final int CONNECT_TIMEOUT = 15;
+    public static final int WRITE_TIMEOUT = 15;
     public static final int READ_TIMEOUT = 40;
 
     public static List<ExpressionConst> getExpressionConstList() {

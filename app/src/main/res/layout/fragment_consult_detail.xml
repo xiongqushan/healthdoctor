@@ -64,6 +64,9 @@
                 android:layout_toLeftOf="@id/btn_usually_message"
                 android:layout_toRightOf="@id/btn_sound_message"
                 android:background="@drawable/editview_bg_selector"
+                android:paddingRight="@dimen/consult_customer_edittext_padding"
+                android:paddingLeft="@dimen/consult_customer_edittext_padding"
+                tools:text="1234"
                 android:minLines="3" />
         </RelativeLayout>
     </LinearLayout>

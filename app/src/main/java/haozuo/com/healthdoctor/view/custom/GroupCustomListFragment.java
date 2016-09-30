@@ -66,7 +66,6 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
     @Override
     public void onResume() {
         super.onResume();
-        mGroupCustomListPresenter.start();
     }
 
     @Override
@@ -81,8 +80,6 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
         mGroupCustInfoAdapter = new GroupCustInfoAdapter(mContext, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
 
                 GroupCustInfoAdapter.ViewHolder tag = (GroupCustInfoAdapter.ViewHolder) v.getTag();
                 int customerId = (int) (((Object[]) tag.CPhoto.getTag())[0]);
@@ -133,14 +130,20 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
                 return false;
             }
         });
+        mGroupCustomListPresenter.start();
 
         return rootView;
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        mGroupCustomListPresenter.cancelRequest();
+    }
+
+    @Override
     public void onStop() {
         super.onStop();
-        mGroupCustomListPresenter.cancelRequest();
     }
 
     @Override
@@ -162,7 +165,6 @@ public class GroupCustomListFragment extends AbstractView implements GroupCustom
     @Override
     public void refreshFinish(int status, boolean isRefresh) {
         if (isRefresh) {
-
             pull_to_refresh_layout.refreshFinish(status);
         } else {
             pull_to_refresh_layout.loadmoreFinish(status);

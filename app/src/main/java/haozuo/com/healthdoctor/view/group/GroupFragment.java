@@ -53,9 +53,15 @@ public class GroupFragment extends AbstractView implements GroupContract.IGroupV
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        mGroupPresenter.cancelRequest();
+    }
+
+    @Override
     public void onStop() {
         super.onStop();
-        mGroupPresenter.cancelRequest();
+//        mGroupPresenter.cancelRequest();
     }
 
     @Override

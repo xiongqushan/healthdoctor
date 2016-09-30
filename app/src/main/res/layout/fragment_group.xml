@@ -48,13 +48,6 @@
                     android:background="#23CA9E"
                     tools:text="高血压组\n服务人数:58" />
 
-                <TextView
-                    android:id="@+id/fourthGroupName"
-                    style="@style/item_group"
-                    android:layout_marginTop="8dp"
-                    android:layout_weight="3"
-                    android:background="#B1E17F"
-                    tools:text="高血压组\n服务人数:58" />
 
                 <TextView
                     android:id="@+id/fifthGroupName"
@@ -62,6 +55,14 @@
                     android:layout_marginTop="8dp"
                     android:layout_weight="3"
                     android:background="#F6B6A9"
+                    tools:text="高血压组\n服务人数:58" />
+
+                <TextView
+                    android:id="@+id/fourthGroupName"
+                    style="@style/item_group"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="3"
+                    android:background="#B1E17F"
                     tools:text="高血压组\n服务人数:58" />
 
             </LinearLayout>
@@ -80,24 +81,24 @@
                 android:orientation="vertical">
 
 
-                <TextView
-                    android:id="@+id/sixthGroupName"
-                    style="@style/item_group"
-                    android:layout_weight="3"
-                    android:background="#61C8F1"
-                    tools:text="高血压组\n服务人数:58" />
 
                 <TextView
                     android:id="@+id/thirdGroupName"
                     style="@style/item_group"
-                    android:layout_marginTop="8dp"
                     android:layout_weight="3"
                     android:background="#FCCC97"
                     tools:text="高血压组\n服务人数:58" />
 
                 <TextView
-                    android:id="@+id/secondGroupName"
+                    android:id="@+id/sixthGroupName"
+                    style="@style/item_group"
+                    android:layout_weight="3"
+                    android:layout_marginTop="8dp"
+                    android:background="#61C8F1"
+                    tools:text="高血压组\n服务人数:58" />
 
+                <TextView
+                    android:id="@+id/secondGroupName"
                     style="@style/item_group"
                     android:layout_marginTop="8dp"
                     android:layout_weight="2.5"

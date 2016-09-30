@@ -195,7 +195,6 @@ public class ConsultPandingFragment extends AbstractView {
             tvTime.setText(DateUtil.TimeFormatByWeek(dataSource.get(position).CommitOn, "yyyy-MM-dd HH:mm"));
             return convertView;
         }
-
     }
 
     class PullListener implements PullToRefreshLayout.OnRefreshListener {

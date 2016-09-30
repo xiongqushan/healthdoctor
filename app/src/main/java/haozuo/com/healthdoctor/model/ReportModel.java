@@ -24,7 +24,7 @@ import rx.schedulers.Schedulers;
 public class ReportModel extends AbstractModel {
     IReportService mIReportService;
 
-    @Inject
+//    @Inject
     public ReportModel(@NonNull OkHttpClient okHttpClient, @NonNull IReportService iReportService) {
         super(okHttpClient);
         mIReportService = iReportService;

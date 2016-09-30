@@ -6,8 +6,6 @@ import com.squareup.okhttp.OkHttpClient;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 import haozuo.com.healthdoctor.bean.DoctorGroupBean;
 import haozuo.com.healthdoctor.bean.GlobalShell;
 import haozuo.com.healthdoctor.bean.GroupCustInfoBean;
@@ -26,7 +24,6 @@ public class GroupModel extends AbstractModel {
     IGroupService mIGroupService;
     IUserService mIUserService;
 
-    @Inject
     public GroupModel(@NonNull OkHttpClient okHttpClient, @NonNull IGroupService iGroupService, @NonNull IUserService userService) {
         super(okHttpClient);
         mIGroupService = iGroupService;

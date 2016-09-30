@@ -3,6 +3,8 @@ package haozuo.com.healthdoctor.view.consult;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -56,10 +58,11 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
     private static ConsultReplyBean mLastConsultReplyBean;
     private static CustomDetailBean mCustomDetailBean;
     private static DoctorBean mDoctorEntity;
-    private List<UsefulExpressionBean> mSelectedExpressionMap;
+    private List<UsefulExpressionBean> mSelectedExpressionList;
     private List<ExpressionConst> mExpressionConstList;
     private String mReplyContent;
     private Dialog dialog;
+    private String Content;
 
     @Bind(R.id.txt_reportdetail_content)
     TextView txt_reportdetail_content;
@@ -106,7 +109,7 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
             rootView = inflater.inflate(R.layout.lv_usefulmessage, container, false);
             ButterKnife.bind(this, rootView);
         }
-        mSelectedExpressionMap = new ArrayList<>();
+        mSelectedExpressionList = new ArrayList<>();
         setConsultContent();
         mUsefulMessageAdapter = new UsefulMessageAdapter(mContext);
         usefulmessage_list.setAdapter(mUsefulMessageAdapter);
@@ -164,7 +167,6 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
         intent.putExtra(String.valueOf(ConsultDetailFragment.RESULT_EXPRESSION), addConsultReplyBean);
         getActivity().setResult(ConsultDetailFragment.RESULT_EXPRESSION, intent);
         getActivity().finish();
-//        getActivity().overridePendingTransition(0,0);
     }
 
     @Override
@@ -196,7 +198,14 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
     }
 
     public void showDialogPage() {
-//        final Dialog
+        Content = "";
+        for (int i = 0; i < mSelectedExpressionList.size(); i++) {
+            if (!Content.equals("")){
+                Content +="\n";
+            }
+            Content += (i + 1) + "." + mSelectedExpressionList.get(i).Content ;
+        }
+
         dialog = new Dialog(mContext, R.style.Dialog_Fullscreen);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_usefulmessage);
@@ -213,33 +222,46 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
         lp.height = (int) (d.getHeight() * 0.9);
         win.setAttributes(lp);
 
+        LinearLayout layer_Content = (LinearLayout)dialog.findViewById(R.id.layer_Content);
         LinearLayout cbgroup_expression = (LinearLayout)dialog.findViewById(R.id.cbgroup_expression);
+        final EditText et_Expression = (EditText) dialog.findViewById(R.id.et_Expression);
+        layer_Content.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                et_Expression.requestFocus();
+                InputMethodManager imm = (InputMethodManager) et_Expression.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(0,InputMethodManager.SHOW_FORCED);
+            }
+        });
         for(int i=0;i<mExpressionConstList.size();i++){
             final int finalI = i;
             final CheckBox checkBox = new CheckBox(mContext);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            layoutParams.setMargins(5,0,0,0);
+            checkBox.setLayoutParams(layoutParams);
             checkBox.setText(mExpressionConstList.get(i).Content);
             checkBox.setBackgroundResource(0);
-            checkBox.setButtonDrawable(0);
-            Drawable drawableRight = getResources().getDrawable(R.drawable.bgcb_dialog_usefulmessage_selector);
+            checkBox.setButtonDrawable(new ColorDrawable(Color.TRANSPARENT));
             checkBox.setTextSize(16);
+            Drawable drawableRight = getResources().getDrawable(R.drawable.bgcb_dialog_usefulmessage_selector);
             drawableRight.setBounds(0, 0, drawableRight.getMinimumWidth(), drawableRight.getMinimumHeight());
             checkBox.setCompoundDrawables(drawableRight,null,null,null);
-            checkBox.setCompoundDrawablePadding(30);
+            checkBox.setCompoundDrawablePadding(10);
             checkBox.setChecked(mExpressionConstList.get(i).IsChecked);
             checkBox.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mExpressionConstList.get(finalI).IsChecked =  !mExpressionConstList.get(finalI).IsChecked;
+                    EditText et_Expression = (EditText) dialog.findViewById(R.id.et_Expression);
+                    Content = et_Expression.getText()+"";
                     refreshExpressionContent(dialog);
                 }
-            }
-            );
+            });
             cbgroup_expression.addView(checkBox);
         }
     }
 
     public String refreshExpressionContent(final Dialog dialog) {
-        String Content = "";
         TextView tv_greeting = (TextView) dialog.findViewById(R.id.tv_greeting);
         TextView tv_thanks = (TextView) dialog.findViewById(R.id.tv_thanks);
         TextView tv_blessing = (TextView) dialog.findViewById(R.id.tv_blessing);
@@ -283,12 +305,16 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
 //                Content += e.Content;
 //            }
 //        }
-        for (int i = 0; i < mSelectedExpressionMap.size(); i++) {
-            if (!Content.equals("")){
-                Content +="\n";
-            }
-            Content += (i + 1) + "." + mSelectedExpressionMap.get(i).Content ;
-        }
+
+
+//        for (int i = 0; i < mSelectedExpressionList.size(); i++) {
+//            if (!Content.equals("")){
+//                Content +="\n";
+//            }
+//            Content += (i + 1) + "." + mSelectedExpressionList.get(i).Content ;
+//        }
+
+
 //        for (ExpressionConst e : mExpressionConstList) {
 //            if (e.Postion > 0 && e.IsChecked) {
 //                if (!Content.equals("")){
@@ -390,8 +416,8 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
             }
             final UsefulExpressionBean usefulExpressionEntity = dataSource.get(position);
             holder.messageContent.setText(usefulExpressionEntity.Content);
-            for (int i = 0; i < mSelectedExpressionMap.size(); i++) {
-                if (mSelectedExpressionMap.get(i).Id.equals(usefulExpressionEntity.Id)) {
+            for (int i = 0; i < mSelectedExpressionList.size(); i++) {
+                if (mSelectedExpressionList.get(i).Id.equals(usefulExpressionEntity.Id)) {
                     holder.messageContent.setChecked(true);
                     break;
                 } else {
@@ -406,11 +432,11 @@ public class UsefulMessageFragment extends AbstractView implements UsefulMessage
                     if (checkBox.isChecked()) {
                         selectedExpression.Id = usefulExpressionEntity.Id;
                         selectedExpression.Content = usefulExpressionEntity.Content;
-                        mSelectedExpressionMap.add(selectedExpression);
+                        mSelectedExpressionList.add(selectedExpression);
                     } else {
-                        for (int i = 0; i < mSelectedExpressionMap.size(); i++) {
-                            if (mSelectedExpressionMap.get(i).Id.equals(usefulExpressionEntity.Id)) {
-                                mSelectedExpressionMap.remove(i);
+                        for (int i = 0; i < mSelectedExpressionList.size(); i++) {
+                            if (mSelectedExpressionList.get(i).Id.equals(usefulExpressionEntity.Id)) {
+                                mSelectedExpressionList.remove(i);
                             }
                         }
                     }

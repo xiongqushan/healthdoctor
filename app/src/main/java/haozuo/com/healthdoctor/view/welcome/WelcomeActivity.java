@@ -22,7 +22,6 @@ public class WelcomeActivity extends BaseActivity {
     @Inject
     WelcomeContract.IWelcomeView mIWelcomeView;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

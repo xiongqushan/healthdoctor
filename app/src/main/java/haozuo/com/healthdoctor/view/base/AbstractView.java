@@ -53,7 +53,6 @@ public abstract class AbstractView extends BaseFragment {
     }
 
     public void hideDialog(String msg) {
-
         if (loadingDialog != null) {
             loadingDialog.dismiss();
         }
@@ -134,7 +133,6 @@ public abstract class AbstractView extends BaseFragment {
     }
 
 //    pulltorefresh成功播放提示音
-
     public void playSuccessSound() {
         if (soundPool == null) {
             soundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 5);

@@ -32,7 +32,7 @@ import rx.schedulers.Schedulers;
 public class ConsultModel extends AbstractModel {
     IConsultService mIConsultService;
 
-    @Inject
+//    @Inject
     public ConsultModel(@NonNull OkHttpClient okHttpClient, @NonNull IConsultService iConsultService) {
         super(okHttpClient);
         mIConsultService = iConsultService;

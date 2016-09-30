@@ -29,6 +29,7 @@ import haozuo.com.healthdoctor.bean.ReportDetailBean;
 import haozuo.com.healthdoctor.util.StringUtil;
 import haozuo.com.healthdoctor.util.UIHelper;
 import haozuo.com.healthdoctor.view.threePart.common.ChildListView;
+import retrofit.http.HEAD;
 
 /**
  * by zy 2016.08.22.

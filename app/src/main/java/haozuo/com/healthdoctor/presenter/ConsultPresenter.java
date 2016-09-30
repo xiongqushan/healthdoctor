@@ -56,7 +56,6 @@ public class ConsultPresenter extends AbstractPresenter implements ConsultContra
     }
 
     @Override
-
     public void refreshCustomList(final int flag, final boolean initData) {
         if (flag == 3 && initData) {
             mIConsultView.showDialog();
@@ -109,8 +108,14 @@ public class ConsultPresenter extends AbstractPresenter implements ConsultContra
     }
 
     private String getEndDate() {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd 23:59:59");
-        return format.format(new Date());
+//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd 23:59:59");
+//        return format.format(new Date());
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar c = Calendar.getInstance();
+        c.add(Calendar.DATE, 1);
+        Date monday = c.getTime();
+        String preMonday = format.format(monday);
+        return preMonday;
     }
 
     private String getBeginDate(int type) {
