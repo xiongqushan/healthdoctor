@@ -33,9 +33,10 @@
                 android:drawablePadding="@dimen/login_drawablepadding"
                 android:gravity="start|bottom"
                 android:hint="@string/login_account"
+                android:textColorHint="@color/lightgray"
                 android:singleLine="true"
                 android:textSize="@dimen/login_text_size"
-                android:text="15601815186"
+                tools:text="15601815186"
                 android:textColor="@color/textColor_lightgrey"/>
 
             <TextView

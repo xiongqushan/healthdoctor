@@ -7,7 +7,6 @@ import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.imagepipeline.decoder.ProgressiveJpegConfig;
 import com.facebook.imagepipeline.image.ImmutableQualityInfo;
 import com.facebook.imagepipeline.image.QualityInfo;
-import com.frogermcs.dagger2metrics.Dagger2Metrics;
 import com.iflytek.cloud.Setting;
 import com.iflytek.cloud.SpeechUtility;
 import com.squareup.leakcanary.LeakCanary;
@@ -76,9 +75,9 @@ public class HZApplication extends Application {
         mRefWatcher = LeakCanary.install(this);
 
         //dagger2注入检查工具
-        if (BuildConfig.DEBUG){
-            Dagger2Metrics.enableCapturing(this);
-        }
+//        if (BuildConfig.DEBUG){
+//            Dagger2Metrics.enableCapturing(this);
+//        }
 
         mAppComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(this))

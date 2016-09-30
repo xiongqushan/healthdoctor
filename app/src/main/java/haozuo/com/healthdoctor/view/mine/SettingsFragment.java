@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 
+import java.text.DecimalFormat;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -39,6 +41,30 @@ public class SettingsFragment extends AbstractView {
     @Bind(R.id.btn_push)
     SwitchButton btnPush;
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        mContext = getContext();
+        if (rootView == null) {
+            rootView = inflater.inflate(R.layout.fragment_settings, container, false);
+            ButterKnife.bind(this, rootView);
+            btnPush.setChecked(!JPushInterface.isPushStopped(getActivity()));
+            btnPush.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        JPushInterface.resumePush(getActivity());
+                    } else {
+                        JPushInterface.stopPush(getActivity());
+                    }
+                    // PreferenceManager.getInstance().writeJpush(isChecked);
+                    Toast.makeText(getContext(), "消息推送:" + (isChecked ? "on" : "off"), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+        return rootView;
+    }
+
     @OnClick(R.id.layout_aboutus)
     void aboutusClick() {
         getActivity().startActivity(new Intent(getActivity(), AboutUsActivity.class));
@@ -64,11 +90,7 @@ public class SettingsFragment extends AbstractView {
         showConfirmDialog("确定需要清理缓存吗？", new CustomDialog.OnDialogListener() {
             @Override
             public void OnDialogConfirmListener() {
-                //清理图片缓存
-                Fresco.getImagePipeline().clearCaches();
-//                GroupInfoManager.getInstance().clear();
-//                UsefulMessageManager.getInstance().clear();
-                Toast.makeText(getActivity(), "缓存清理成功", Toast.LENGTH_SHORT).show();
+                clearCache();
             }
         });
     }
@@ -114,31 +136,7 @@ public class SettingsFragment extends AbstractView {
     }
 
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        mContext = getContext();
-        if (rootView == null) {
-            rootView = inflater.inflate(R.layout.fragment_settings, container, false);
-            ButterKnife.bind(this, rootView);
-            btnPush.setChecked(!JPushInterface.isPushStopped(getActivity()));
-            btnPush.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (isChecked) {
-                        JPushInterface.resumePush(getActivity());
-                    } else {
-                        JPushInterface.stopPush(getActivity());
-                    }
-                    // PreferenceManager.getInstance().writeJpush(isChecked);
-                    Toast.makeText(getContext(), "消息推送:" + (isChecked ? "on" : "off"), Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-        return rootView;
-    }
-
-//    public void ShowSignOutDialog() {
+    //    public void ShowSignOutDialog() {
 //        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
 //        builder.setTitle("退出当前账号")
 //                .setMessage("退出当前账号，你可能不能及时回复客户咨询，确认退出？")
@@ -157,6 +155,34 @@ public class SettingsFragment extends AbstractView {
 //            getActivity().finish();
 //        }
 //    };
+
+    private void clearCache() {
+        long cacheSize = Fresco.getImagePipelineFactory().getMainDiskStorageCache().getSize();
+        String toastMessage;
+        if (cacheSize <= 0) {
+            toastMessage = "无需清理缓存！";
+        } else {
+            Fresco.getImagePipeline().clearCaches();
+            toastMessage = "本次共清理了 ";
+            float cacheSizeTemp1 = changToTwoDecimal(Math.round(cacheSize / 1024));
+            float cacheSizeTemp2 = changToTwoDecimal(Math.round((cacheSize / 1024) / 1024));
+            if (cacheSizeTemp1 < 1) {
+                toastMessage += cacheSize + " B";
+            } else if (((cacheSizeTemp1 >= 1) && (cacheSizeTemp2 < 1))) {
+                toastMessage += cacheSizeTemp1 + " KB";
+            } else if (cacheSizeTemp2 >= 1) {
+                toastMessage += cacheSizeTemp2 + " MB";
+            }
+        }
+        Toast.makeText(getActivity(), toastMessage, Toast.LENGTH_SHORT).show();
+    }
+
+    static float changToTwoDecimal(float in) {
+        DecimalFormat df = new DecimalFormat("0.00");
+        String out = df.format(in);
+        float result = Float.parseFloat(out);
+        return result;
+    }
 
 
 }

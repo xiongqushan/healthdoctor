@@ -82,5 +82,6 @@ public abstract class AbstractModel implements IBaseModel {
 //                subscriberList.remove(subscriber);
 //            }
         }
+        subscriberList.clear();
     }
 }

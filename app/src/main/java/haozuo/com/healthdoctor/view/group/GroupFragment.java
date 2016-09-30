@@ -10,8 +10,6 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import haozuo.com.healthdoctor.R;
@@ -55,9 +53,15 @@ public class GroupFragment extends AbstractView implements GroupContract.IGroupV
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        mGroupPresenter.cancelRequest();
+    }
+
+    @Override
     public void onStop() {
         super.onStop();
-        mGroupPresenter.cancelRequest();
+//        mGroupPresenter.cancelRequest();
     }
 
     @Override
