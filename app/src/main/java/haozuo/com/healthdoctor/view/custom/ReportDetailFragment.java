@@ -271,6 +271,9 @@ public class ReportDetailFragment extends Fragment {
 
             @Override
             public int getCount() {
+                if (childData == null) {
+                    return 0;
+                }
                 return childData.size();
             }
 
@@ -311,6 +314,9 @@ public class ReportDetailFragment extends Fragment {
 
                 @Override
                 public int getCount() {
+                    if (sunData == null) {
+                        return 0;
+                    }
                     return sunData.size();
                 }
 

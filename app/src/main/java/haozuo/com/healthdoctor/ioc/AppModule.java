@@ -59,7 +59,7 @@ public class AppModule {
     }
 
     @Provides
-    @Singleton
+//    @Singleton
     IUserService provideUserService(@NonNull Retrofit retrofit) {
         return retrofit.create(IUserService.class);
     }

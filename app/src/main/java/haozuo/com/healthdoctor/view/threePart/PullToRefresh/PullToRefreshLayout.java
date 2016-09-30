@@ -155,6 +155,7 @@ public class PullToRefreshLayout extends RelativeLayout {
             requestLayout();
         }
 
+
     };
 
     public void setOnRefreshListener(OnRefreshListener listener) {
@@ -495,6 +496,8 @@ public class PullToRefreshLayout extends RelativeLayout {
         public void cancel() {
             if (mTask != null) {
                 mTask.cancel();
+                //TODO 0928
+                handler.removeCallbacksAndMessages(null);
                 mTask = null;
             }
         }

@@ -27,6 +27,7 @@ public class GroupPresenter extends AbstractPresenter implements IGroupPresenter
 
     @Inject
     public GroupPresenter(@NonNull GroupContract.IGroupView iGroupView, @NonNull GroupModel groupModel) {
+
         mIGroupView = iGroupView;
         mGroupModel = groupModel;
         iGroupView.setPresenter(this);

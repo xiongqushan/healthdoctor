@@ -8,7 +8,7 @@ import haozuo.com.healthdoctor.view.home.HomeActivity;
  */
 
 @ScopeType.ActivityScope
-@Component(modules = {HomeModule.class}, dependencies = AppComponent.class)
+@Component(modules = {ConsultModule.class, GroupModule.class}, dependencies = AppComponent.class)
 public interface HomeComponent {
     void inject(HomeActivity activity);
 }

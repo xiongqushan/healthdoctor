@@ -3,32 +3,22 @@
     package="haozuo.com.healthdoctor">
 
     <!-- 讯飞权限 -->
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <!--<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />-->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <!-- 读取手机信息权限 -->
     <!-- <uses-permission android:name="android.permission.READ_PHONE_STATE" /> -->
     <!-- 读取联系人权限 -->
     <!-- <uses-permission android:name="android.permission.READ_CONTACTS" /> -->
     <!-- <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <!-- Jpush权限 -->
     <!-- 自定义权限 -->
@@ -179,17 +169,15 @@
 
         <!-- since 1.8.0 option 可选项。用于同一设备中不同应用的JPush服务相互拉起的功能。 -->
         <!-- 若不启用该功能可删除该组件，将不拉起其他应用也不能被其他应用拉起 -->
-        <!-- <service -->
-        <!-- android:name="cn.jpush.android.service.DaemonService" -->
-        <!-- android:enabled="true" -->
-        <!-- android:exported="true" > -->
-        <!-- <intent-filter> -->
-        <!-- <action android:name="cn.jpush.android.intent.DaemonService" /> -->
-
-
-        <!-- <category android:name="haozuo.com.healthdoctor" /> -->
-        <!-- </intent-filter> -->
-        <!-- </service> -->
+         <service
+         android:name="cn.jpush.android.service.DaemonService"
+         android:enabled="true"
+         android:exported="true" >
+            <intent-filter>
+             <action android:name="cn.jpush.android.intent.DaemonService" />
+             <category android:name="haozuo.com.healthdoctor" />
+            </intent-filter>
+         </service>
 
 
         <!-- Required SDK核心功能 -->

@@ -24,8 +24,9 @@ import haozuo.com.healthdoctor.BuildConfig;
 import haozuo.com.healthdoctor.R;
 import haozuo.com.healthdoctor.contract.ConsultContract;
 import haozuo.com.healthdoctor.contract.GroupContract;
+import haozuo.com.healthdoctor.ioc.ConsultModule;
 import haozuo.com.healthdoctor.ioc.DaggerHomeComponent;
-import haozuo.com.healthdoctor.ioc.HomeModule;
+import haozuo.com.healthdoctor.ioc.GroupModule;
 import haozuo.com.healthdoctor.manager.UserManager;
 import haozuo.com.healthdoctor.presenter.ConsultPresenter;
 import haozuo.com.healthdoctor.presenter.GroupPresenter;
@@ -119,7 +120,8 @@ public class HomeActivity extends BaseActivity {
         ButterKnife.bind(this);
         DaggerHomeComponent.builder()
                 .appComponent(getAppComponent())
-                .homeModule(new HomeModule())
+                .consultModule(new ConsultModule())
+                .groupModule(new GroupModule())
                 .build()
                 .inject(this);
 
@@ -180,7 +182,7 @@ public class HomeActivity extends BaseActivity {
                 if (id == R.id.rbMine) {
                     MineFragment groupFragment = (MineFragment) fragmentManager.findFragmentById(R.id.content_mine);
                     if (groupFragment == null) {
-                        groupFragment = new MineFragment();
+                        groupFragment = MineFragment.newInstance();
                         ActivityUtils.addFragmentToActivity(fragmentManager, groupFragment, R.id.content_mine);
                     }
                     layoutMine.setVisibility(View.VISIBLE);
